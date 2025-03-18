@@ -116,8 +116,8 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
     for i in range(num_connections):
         connection = {
             "_key": f"connection{i+1}",
-            "_from": random.choice(devices)["_key"],
-            "_to": random.choice(devices)["_key"],
+            "_from": "Device/"+random.choice(devices)["_key"],
+            "_to": "Device/"+random.choice(devices)["_key"],
             "type": random.choice(["ethernet", "wifi", "fiber"]),
             "bandwidth": f"{random.randint(10, 1000)}Mbps",
             "latency": f"{random.randint(1, 10)}ms"
@@ -127,22 +127,22 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
     for i in range(num_runs_on):
         runs_on = {
             "_key": f"runsOn{i+1}",
-            "_from": random.choice(devices)["_key"],
-            "_to": random.choice(software)["_key"]
+            "_from": "Device/"+random.choice(devices)["_key"],
+            "_to": "Software/"+random.choice(software)["_key"]
         }
         runs_ons.append(runs_on)
 
     # Write to separate JSON files
-    with open("./data/locations.json", "w") as f:
+    with open("./data/Location.json", "w") as f:
         json.dump(locations, f, indent=2, default=lambda o: geojson.dumps(o) if isinstance(o, geojson.geometry.Geometry) else o)
-    with open("./data/devices.json", "w") as f:
+    with open("./data/Device.json", "w") as f:
         json.dump(devices, f, indent=2)
-    with open("./data/software.json", "w") as f:
+    with open("./data/Software.json", "w") as f:
         json.dump(software, f, indent=2)
-    with open("./data/connections.json", "w") as f:
+    with open("./data/hasConnection.json", "w") as f:
         json.dump(connections, f, indent=2)
-    with open("./data/runs_on.json", "w") as f:
-        json.dump(runs_on, f, indent=2)
+    with open("./data/hasSoftware.json", "w") as f:
+        json.dump(runs_ons, f, indent=2)
 
 if __name__ == "__main__":
     asset_data = generate_network_asset_data()
