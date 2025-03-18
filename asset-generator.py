@@ -133,15 +133,15 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
         runs_ons.append(runs_on)
 
     # Write to separate JSON files
-    with open("locations.json", "w") as f:
+    with open("./data/locations.json", "w") as f:
         json.dump(locations, f, indent=2, default=lambda o: geojson.dumps(o) if isinstance(o, geojson.geometry.Geometry) else o)
-    with open("devices.json", "w") as f:
+    with open("./data/devices.json", "w") as f:
         json.dump(devices, f, indent=2)
-    with open("software.json", "w") as f:
+    with open("./data/software.json", "w") as f:
         json.dump(software, f, indent=2)
-    with open("connections.json", "w") as f:
+    with open("./data/connections.json", "w") as f:
         json.dump(connections, f, indent=2)
-    with open("runs_on.json", "w") as f:
+    with open("./data/runs_on.json", "w") as f:
         json.dump(runs_on, f, indent=2)
 
 if __name__ == "__main__":
