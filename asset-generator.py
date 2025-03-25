@@ -4,7 +4,7 @@ import uuid
 import datetime
 import geojson
 
-def generateLocations():
+def generateLocations(num_locations=5):
     """Generates realistic Real Locations with GeoJSON and stores in Location.json."""
     locations = []
     locations_data = [
@@ -26,16 +26,10 @@ def generateLocations():
         json.dump(locations, f, indent=2, default=lambda o: geojson.dumps(o) if isinstance(o, geojson.geometry.Geometry) else o)
     return locations
 
-def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5):
-    locations = generateLocations()
+def generateDevices(locations, num_devices=20,num_config_changes=5):
+    """Generates realistic device data and stores in Device.json."""
     devices = []
-    software = []
-    connections = []
-    runs_ons = []
-
-
-
-    # Devices (with real OS and configuration history)
+   # Devices (with real OS and configuration history)
     device_types = ["server", "router", "laptop", "IoT", "firewall"]
     os_versions = {
         "server": ["CentOS 7.9.2009", "Ubuntu 20.04.3 LTS", "Windows Server 2019 Datacenter"],
@@ -84,7 +78,12 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
             new_config["timestamp"] = change_time.isoformat()
             device["configurationHistory"].append(new_config)
             current_config = new_config
+    with open("./data/Device.json", "w") as f:
+        json.dump(devices, f, indent=2)
+    return devices
 
+def generateSoftware(num_software=30, num_config_changes=5):
+    software = []
     # Software (with real software versions and configuration history)
     software_types = ["application", "database", "service"]
     software_versions = {
@@ -119,6 +118,16 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
             new_config["timestamp"] = change_time.isoformat()
             soft["configurationHistory"].append(new_config)
             current_config = new_config
+    with open("./data/Software.json", "w") as f:
+        json.dump(software, f, indent=2)
+    return software
+
+def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5):
+    locations = generateLocations(num_locations)
+    devices = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
+    software = generateSoftware(num_software=num_software, num_config_changes=num_config_changes)
+    connections = []
+    runs_ons = []
 
     # Connections and RunsOn (unchanged)
     # for i in range(num_connections):
@@ -139,7 +148,7 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
 
     for i in range(num_runs_on):
         runs_on = {
-            "_key": f"runsOn{i+1}",
+            "_key": f"hasSoftware{i+1}",
             "_from": "Device/"+random.choice(devices)["_key"],
             "_to": "Software/"+random.choice(software)["_key"]
         }
@@ -147,10 +156,6 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
 
     # Write to separate JSON files
 
-    with open("./data/Device.json", "w") as f:
-        json.dump(devices, f, indent=2)
-    with open("./data/Software.json", "w") as f:
-        json.dump(software, f, indent=2)
     with open("./data/hasConnection.json", "w") as f:
         json.dump(connections, f, indent=2)
     with open("./data/hasSoftware.json", "w") as f:
@@ -159,8 +164,8 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
 def main():
     """Generates data and stores in separate JSON files."""
     asset_data = generate_network_asset_data()
-    with open("network_assets.json", "w") as f:
-        json.dump(asset_data, f, indent=2, default=lambda o: geojson.dumps(o) if isinstance(o, geojson.geometry.Geometry) else o)
+    # with open("network_assets.json", "w") as f:
+    #     json.dump(asset_data, f, indent=2, default=lambda o: geojson.dumps(o) if isinstance(o, geojson.geometry.Geometry) else o)
     print("Data generated and saved to network_assets.json")
 
 if __name__ == "__main__":
