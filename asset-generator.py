@@ -4,14 +4,9 @@ import uuid
 import datetime
 import geojson
 
-def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5):
+def generateLocations():
+    """Generates realistic Real Locations with GeoJSON and stores in Location.json."""
     locations = []
-    devices = []
-    software = []
-    connections = []
-    runs_ons = []
-
-    # Real Locations with GeoJSON
     locations_data = [
         {"name": "New York Data Center", "address": "123 Broadway, New York, NY", "lat": 40.7128, "lon": -74.0060},
         {"name": "London Office", "address": "456 Oxford St, London", "lat": 51.5074, "lon": -0.1278},
@@ -19,7 +14,6 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
         {"name": "Sydney Warehouse", "address": "101 George St, Sydney", "lat": -33.8688, "lon": 151.2093},
         {"name": "Frankfurt Cloud Region", "address": "222 Mainzer Landstr, Frankfurt", "lat": 50.1109, "lon": 8.6821}
     ]
-
     for i, loc_data in enumerate(locations_data):
         location = {
             "_key": f"location{i+1}",
@@ -28,6 +22,18 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
             "geojson": geojson.Point((loc_data["lon"], loc_data["lat"]))
         }
         locations.append(location)
+    with open("./data/Location.json", "w") as f:
+        json.dump(locations, f, indent=2, default=lambda o: geojson.dumps(o) if isinstance(o, geojson.geometry.Geometry) else o)
+    return locations
+
+def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5):
+    locations = generateLocations()
+    devices = []
+    software = []
+    connections = []
+    runs_ons = []
+
+
 
     # Devices (with real OS and configuration history)
     device_types = ["server", "router", "laptop", "IoT", "firewall"]
@@ -140,8 +146,7 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
         runs_ons.append(runs_on)
 
     # Write to separate JSON files
-    with open("./data/Location.json", "w") as f:
-        json.dump(locations, f, indent=2, default=lambda o: geojson.dumps(o) if isinstance(o, geojson.geometry.Geometry) else o)
+
     with open("./data/Device.json", "w") as f:
         json.dump(devices, f, indent=2)
     with open("./data/Software.json", "w") as f:
@@ -151,8 +156,12 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
     with open("./data/hasSoftware.json", "w") as f:
         json.dump(runs_ons, f, indent=2)
 
-if __name__ == "__main__":
+def main():
+    """Generates data and stores in separate JSON files."""
     asset_data = generate_network_asset_data()
     with open("network_assets.json", "w") as f:
         json.dump(asset_data, f, indent=2, default=lambda o: geojson.dumps(o) if isinstance(o, geojson.geometry.Geometry) else o)
     print("Data generated and saved to network_assets.json")
+
+if __name__ == "__main__":
+    main()
