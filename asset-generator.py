@@ -42,10 +42,12 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
     for i in range(num_devices):
         device_type = random.choice(device_types)
         os_version = random.choice(os_versions[device_type])
+        model = f"{device_type.capitalize()} Model {random.randint(100, 999)}"
         device = {
             "_key": f"device{i+1}",
+            "name" : device_type+" "+model,
             "type": device_type,
-            "model": f"{device_type.capitalize()} Model {random.randint(100, 999)}",
+            "model": model,
             "serialNumber": str(uuid.uuid4()),
             "ipAddress": f"192.168.{random.randint(1, 254)}.{random.randint(1, 254)}",
             "macAddress": ":".join(f"{random.randint(0, 255):02x}" for _ in range(6)),
@@ -113,16 +115,21 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
             current_config = new_config
 
     # Connections and RunsOn (unchanged)
-    for i in range(num_connections):
-        connection = {
-            "_key": f"connection{i+1}",
-            "_from": "Device/"+random.choice(devices)["_key"],
-            "_to": "Device/"+random.choice(devices)["_key"],
-            "type": random.choice(["ethernet", "wifi", "fiber"]),
-            "bandwidth": f"{random.randint(10, 1000)}Mbps",
-            "latency": f"{random.randint(1, 10)}ms"
-        }
-        connections.append(connection)
+    # for i in range(num_connections):
+    while len(connections) < num_connections:
+        _from = "Device/"+random.choice(devices)["_key"]
+        _to = "Device/"+random.choice(devices)["_key"]
+        if _from != _to: # prevent self loops
+            connection = {
+                # "_key": f"connection{i+1}",
+                "_key": f"connection{len(connections) + 1}",
+                "_from": _from,
+                "_to": _to,
+                "type": random.choice(["ethernet", "wifi", "fiber"]),
+                "bandwidth": f"{random.randint(10, 1000)}Mbps",
+                "latency": f"{random.randint(1, 10)}ms"
+            }
+            connections.append(connection)
 
     for i in range(num_runs_on):
         runs_on = {
