@@ -3,6 +3,7 @@ import random
 import uuid
 import datetime
 import geojson
+import sys
 
 def generateLocations(num_locations=5):
     """Generate Real Locations with GeoJSON and store in Location.json."""
@@ -132,41 +133,45 @@ def generateConnections(devices,num_connections=30):
                 "_to": _to,
                 "type": random.choice(["ethernet", "wifi", "fiber"]),
                 "bandwidth": f"{random.randint(10, 1000)}Mbps",
-                "latency": f"{random.randint(1, 10)}ms"
+                "latency": f"{random.randint(1, 10)}ms",
+                "created" : datetime.datetime.now().timestamp(),
+                "expired": sys.maxsize
             }
             connections.append(connection)
     with open("./data/hasConnection.json", "w") as f:
         json.dump(connections, f, indent=2)
     return connections
 
-def generateHasSoftware(devices, software, num_runs_on=40):
+def generateHasSoftware(devices, software, num_hasSoftware=40):
     """Generate hasSoftware edge data and store in hasSoftware.json."""
     hasSoftwares = []
-    while len(hasSoftwares) < num_runs_on:
+    while len(hasSoftwares) < num_hasSoftware:
         device = random.choice(devices)
         if device["type"] != "router":
             _from = "Device/"+device["_key"]
             hasSoftware = {
                 "_key": f"hasSoftware{len(hasSoftwares) + 1}",
                 "_from": _from,
-                "_to": "Software/"+random.choice(software)["_key"]
+                "_to": "Software/"+random.choice(software)["_key"],
+                "created" : datetime.datetime.now().timestamp(),
+                "expired": sys.maxsize
             }
             hasSoftwares.append(hasSoftware)
     with open("./data/hasSoftware.json", "w") as f:
         json.dump(hasSoftwares, f, indent=2)
     return hasSoftwares
 
-def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5):
+def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_hasSoftware=40, num_config_changes=5):
     """Generate network asset data and store in individual vertex and edge .json files"""
     locations = generateLocations(num_locations)
     devices = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
     software = generateSoftware(num_software=num_software, num_config_changes=num_config_changes)
     connections = generateConnections(devices, num_connections=30)
-    runs_ons = generateHasSoftware(devices, software, num_runs_on=num_runs_on)
+    hasSoftware = generateHasSoftware(devices, software, num_hasSoftware=num_hasSoftware)
 
 def main():
     """Generates data and stores in separate JSON files."""
-    generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5)
+    generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_hasSoftware=40, num_config_changes=5)
 
 if __name__ == "__main__":
     main()
