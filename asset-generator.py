@@ -122,15 +122,9 @@ def generateSoftware(num_software=30, num_config_changes=5):
         json.dump(software, f, indent=2)
     return software
 
-def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5):
-    locations = generateLocations(num_locations)
-    devices = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
-    software = generateSoftware(num_software=num_software, num_config_changes=num_config_changes)
+def generateConnections(devices,num_connections=30):
     connections = []
-    runs_ons = []
-
-    # Connections and RunsOn (unchanged)
-    # for i in range(num_connections):
+    # Connections 
     while len(connections) < num_connections:
         _from = "Device/"+random.choice(devices)["_key"]
         _to = "Device/"+random.choice(devices)["_key"]
@@ -145,21 +139,33 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
                 "latency": f"{random.randint(1, 10)}ms"
             }
             connections.append(connection)
+    with open("./data/hasConnection.json", "w") as f:
+        json.dump(connections, f, indent=2)
+    return connections
 
+def generateHasSoftware(devices, software, num_runs_on=40):
+    hasSoftwares = []
     for i in range(num_runs_on):
-        runs_on = {
+        hasSoftware = {
             "_key": f"hasSoftware{i+1}",
             "_from": "Device/"+random.choice(devices)["_key"],
             "_to": "Software/"+random.choice(software)["_key"]
         }
-        runs_ons.append(runs_on)
-
-    # Write to separate JSON files
-
-    with open("./data/hasConnection.json", "w") as f:
-        json.dump(connections, f, indent=2)
+        hasSoftwares.append(hasSoftware)
     with open("./data/hasSoftware.json", "w") as f:
-        json.dump(runs_ons, f, indent=2)
+        json.dump(hasSoftwares, f, indent=2)
+    return hasSoftwares
+
+def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5):
+    locations = generateLocations(num_locations)
+    devices = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
+    software = generateSoftware(num_software=num_software, num_config_changes=num_config_changes)
+    connections = generateConnections(devices, num_connections=30)
+    runs_ons = generateHasSoftware(devices, software, num_runs_on=num_runs_on)
+
+
+
+
 
 def main():
     """Generates data and stores in separate JSON files."""
