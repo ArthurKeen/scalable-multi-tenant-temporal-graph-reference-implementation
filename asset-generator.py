@@ -5,7 +5,7 @@ import datetime
 import geojson
 
 def generateLocations(num_locations=5):
-    """Generates realistic Real Locations with GeoJSON and stores in Location.json."""
+    """Generate Real Locations with GeoJSON and store in Location.json."""
     locations = []
     locations_data = [
         {"name": "New York Data Center", "address": "123 Broadway, New York, NY", "lat": 40.7128, "lon": -74.0060},
@@ -19,7 +19,7 @@ def generateLocations(num_locations=5):
             "_key": f"location{i+1}",
             "name": loc_data["name"],
             "address": loc_data["address"],
-            "geojson": geojson.Point((loc_data["lon"], loc_data["lat"]))
+            "location": geojson.Point((loc_data["lon"], loc_data["lat"]))
         }
         locations.append(location)
     with open("./data/Location.json", "w") as f:
@@ -27,7 +27,7 @@ def generateLocations(num_locations=5):
     return locations
 
 def generateDevices(locations, num_devices=20,num_config_changes=5):
-    """Generates realistic device data and stores in Device.json."""
+    """Generate device data and store in Device.json."""
     devices = []
    # Devices (with real OS and configuration history)
     device_types = ["server", "router", "laptop", "IoT", "firewall"]
@@ -38,7 +38,6 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
         "IoT": ["Embedded Linux 4.14.247", "FreeRTOS 10.4.6"],
         "firewall": ["FortiOS 7.0.9", "pfSense 2.5.2"]
     }
-
     for i in range(num_devices):
         device_type = random.choice(device_types)
         os_version = random.choice(os_versions[device_type])
@@ -57,11 +56,9 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
             "configurationHistory": []
         }
         devices.append(device)
-
         # Generate configuration history
         current_config = {"hostname": f"device{i+1}", "firewallRules": ["allow 80", "allow 443"], "timestamp": datetime.datetime.now().isoformat()}
         device["configurationHistory"].append(current_config)
-
         for _ in range(num_config_changes):
             change_time = datetime.datetime.now() + datetime.timedelta(days=random.randint(1, 30))
             new_config = current_config.copy()
@@ -83,6 +80,7 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
     return devices
 
 def generateSoftware(num_software=30, num_config_changes=5):
+    """Generate software data and store in Software.json."""
     software = []
     # Software (with real software versions and configuration history)
     software_types = ["application", "database", "service"]
@@ -91,7 +89,6 @@ def generateSoftware(num_software=30, num_config_changes=5):
         "database": ["MySQL 8.0.30", "PostgreSQL 14.5", "MongoDB 6.0.2"],
         "service": ["OpenSSH 8.9p1", "Docker 20.10.17", "Kubernetes 1.25.2"]
     }
-
     for i in range(num_software):
         software_type = random.choice(software_types)
         software_version = random.choice(software_versions[software_type])
@@ -103,11 +100,9 @@ def generateSoftware(num_software=30, num_config_changes=5):
             "configurationHistory": []
         }
         software.append(soft)
-
         # Generate software configuration history
         current_config = {"port": random.randint(8000, 9000), "enabled": True, "timestamp": datetime.datetime.now().isoformat()}
         soft["configurationHistory"].append(current_config)
-
         for _ in range(num_config_changes):
             change_time = datetime.datetime.now() + datetime.timedelta(days=random.randint(1, 30))
             new_config = current_config.copy()
@@ -123,6 +118,7 @@ def generateSoftware(num_software=30, num_config_changes=5):
     return software
 
 def generateConnections(devices,num_connections=30):
+    """Generate connection data and store in connection.json."""
     connections = []
     # Connections 
     while len(connections) < num_connections:
@@ -144,35 +140,33 @@ def generateConnections(devices,num_connections=30):
     return connections
 
 def generateHasSoftware(devices, software, num_runs_on=40):
+    """Generate hasSoftware edge data and store in hasSoftware.json."""
     hasSoftwares = []
-    for i in range(num_runs_on):
-        hasSoftware = {
-            "_key": f"hasSoftware{i+1}",
-            "_from": "Device/"+random.choice(devices)["_key"],
-            "_to": "Software/"+random.choice(software)["_key"]
-        }
-        hasSoftwares.append(hasSoftware)
+    while len(hasSoftwares) < num_runs_on:
+        device = random.choice(devices)
+        if device["type"] != "router":
+            _from = "Device/"+device["_key"]
+            hasSoftware = {
+                "_key": f"hasSoftware{len(hasSoftwares) + 1}",
+                "_from": _from,
+                "_to": "Software/"+random.choice(software)["_key"]
+            }
+            hasSoftwares.append(hasSoftware)
     with open("./data/hasSoftware.json", "w") as f:
         json.dump(hasSoftwares, f, indent=2)
     return hasSoftwares
 
 def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5):
+    """Generate network asset data and store in individual vertex and edge .json files"""
     locations = generateLocations(num_locations)
     devices = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
     software = generateSoftware(num_software=num_software, num_config_changes=num_config_changes)
     connections = generateConnections(devices, num_connections=30)
     runs_ons = generateHasSoftware(devices, software, num_runs_on=num_runs_on)
 
-
-
-
-
 def main():
     """Generates data and stores in separate JSON files."""
-    asset_data = generate_network_asset_data()
-    # with open("network_assets.json", "w") as f:
-    #     json.dump(asset_data, f, indent=2, default=lambda o: geojson.dumps(o) if isinstance(o, geojson.geometry.Geometry) else o)
-    print("Data generated and saved to network_assets.json")
+    generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_runs_on=40, num_config_changes=5)
 
 if __name__ == "__main__":
     main()
