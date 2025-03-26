@@ -63,22 +63,24 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
         # Generate configuration history
         current_config = {"hostname": f"device{i+1}", "firewallRules": ["allow 80", "allow 443"], "created": datetime.datetime.now().isoformat(), "expired": notExpiredValue()}
         device["configurationHistory"].append(current_config)
-        for _ in range(num_config_changes):
-            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(1, 30))
-            new_config = current_config.copy()
+        for changeNo in range(num_config_changes):
+            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(changeNo*5+1, (changeNo+1)*5))
+            previous_config = current_config.copy()
             if random.random() < 0.5:
                 # Add/remove firewall rule
                 if random.random() < 0.5:
-                    new_config["firewallRules"].append(f"allow {random.randint(1000, 9000)}")
+                    previous_config["firewallRules"].append(f"allow {random.randint(1000, 9000)}")
                 else:
-                    if len(new_config["firewallRules"]) > 0:
-                        new_config["firewallRules"].pop(random.randint(0, len(new_config["firewallRules"]) - 1))
+                    if len(previous_config["firewallRules"]) > 0:
+                        previous_config["firewallRules"].pop(random.randint(0, len(previous_config["firewallRules"]) - 1))
             else:
                 # Change hostname
-                new_config["hostname"] = f"new-device-{random.randint(100, 999)}"
-            new_config["created"] = created.isoformat()
-            device["configurationHistory"].append(new_config)
-            current_config = new_config
+                previous_config["hostname"] = f"new-device-{random.randint(100, 999)}"
+            expired = previous_config["created"]
+            previous_config["expired"] = expired
+            previous_config["created"] = created.isoformat()
+            device["configurationHistory"].append(previous_config)
+            current_config = previous_config
     with open("./data/Device.json", "w") as f:
         json.dump(devices, f, indent=2)
     return devices
@@ -107,16 +109,19 @@ def generateSoftware(num_software=30, num_config_changes=5):
         # Generate software configuration history
         current_config = {"port": random.randint(8000, 9000), "enabled": True, "created": datetime.datetime.now().isoformat(), "expired": notExpiredValue()}
         soft["configurationHistory"].append(current_config)
-        for _ in range(num_config_changes):
-            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(1, 30))
-            new_config = current_config.copy()
+        for changeNo in range(num_config_changes):
+            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(changeNo*5+1, (changeNo+1)*5))
+            previous_config = current_config.copy()
             if random.random() < 0.5:
-                new_config["port"] = random.randint(8000, 9000)
+                previous_config["port"] = random.randint(8000, 9000)
             else:
-                new_config["enabled"] = not new_config["enabled"]
-            new_config["created"] = created.isoformat()
-            soft["configurationHistory"].append(new_config)
-            current_config = new_config
+                previous_config["enabled"] = not previous_config["enabled"]
+            expired = previous_config["created"]
+            previous_config["expired"] = expired
+            previous_config["created"] = created.isoformat()
+            soft["configurationHistory"].append(previous_config)
+            current_config = previous_config
+
     with open("./data/Software.json", "w") as f:
         json.dump(software, f, indent=2)
     return software
