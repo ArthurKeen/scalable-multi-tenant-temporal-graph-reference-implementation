@@ -34,7 +34,6 @@ def generateLocations(num_locations=5):
 def generateDevices(locations, num_devices=20,num_config_changes=5):
     """Generate device data and store in Device.json."""
     devices = []
-   # Devices (with real OS and configuration history)
     device_types = ["server", "router", "laptop", "IoT", "firewall"]
     os_versions = {
         "server": ["CentOS 7.9.2009", "Ubuntu 20.04.3 LTS", "Windows Server 2019 Datacenter"],
@@ -108,7 +107,6 @@ def generateHasLocation(devices):
 def generateSoftware(num_software=30, num_config_changes=5):
     """Generate software data and store in Software.json."""
     software = []
-    # Software (with real software versions and configuration history)
     software_types = ["application", "database", "service"]
     software_versions = {
         "application": ["Apache HTTP Server 2.4.53", "Nginx 1.22.0", "Python 3.10.6"],
