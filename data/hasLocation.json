@@ -1,0 +1,142 @@
+[
+  {
+    "_key": "hasLocation1",
+    "_from": "Device/device1",
+    "_to": "Location/location4",
+    "created": 1743020333.441313,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation2",
+    "_from": "Device/device2",
+    "_to": "Location/location4",
+    "created": 1743020355.767614,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation3",
+    "_from": "Device/device3",
+    "_to": "Location/location1",
+    "created": 1743020367.238301,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation4",
+    "_from": "Device/device4",
+    "_to": "Location/location4",
+    "created": 1743020367.238461,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation5",
+    "_from": "Device/device5",
+    "_to": "Location/location5",
+    "created": 1743020367.238468,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation6",
+    "_from": "Device/device6",
+    "_to": "Location/location1",
+    "created": 1743020367.23848,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation7",
+    "_from": "Device/device7",
+    "_to": "Location/location1",
+    "created": 1743020367.238486,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation8",
+    "_from": "Device/device8",
+    "_to": "Location/location5",
+    "created": 1743020367.238494,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation9",
+    "_from": "Device/device9",
+    "_to": "Location/location2",
+    "created": 1743020367.238501,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation10",
+    "_from": "Device/device10",
+    "_to": "Location/location5",
+    "created": 1743020367.238508,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation11",
+    "_from": "Device/device11",
+    "_to": "Location/location5",
+    "created": 1743020367.238514,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation12",
+    "_from": "Device/device12",
+    "_to": "Location/location5",
+    "created": 1743020367.238526,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation13",
+    "_from": "Device/device13",
+    "_to": "Location/location4",
+    "created": 1743020367.238533,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation14",
+    "_from": "Device/device14",
+    "_to": "Location/location4",
+    "created": 1743020367.238539,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation15",
+    "_from": "Device/device15",
+    "_to": "Location/location2",
+    "created": 1743020367.238545,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation16",
+    "_from": "Device/device16",
+    "_to": "Location/location1",
+    "created": 1743020367.238551,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation17",
+    "_from": "Device/device17",
+    "_to": "Location/location3",
+    "created": 1743020367.238557,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation18",
+    "_from": "Device/device18",
+    "_to": "Location/location4",
+    "created": 1743020367.238565,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation19",
+    "_from": "Device/device19",
+    "_to": "Location/location1",
+    "created": 1743020367.238572,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasLocation20",
+    "_from": "Device/device20",
+    "_to": "Location/location4",
+    "created": 1743020367.238578,
+    "expired": 9223372036854775807
+  }
+]
