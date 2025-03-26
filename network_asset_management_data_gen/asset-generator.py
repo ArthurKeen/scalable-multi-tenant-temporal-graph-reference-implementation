@@ -86,6 +86,25 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
         json.dump(devices, f, indent=2)
     return devices
 
+def generateHasLocation(devices):
+    """Generate hasLocation edge data and store in hasLocation.json."""
+    hasLocations = []
+    # Connections 
+    for device in devices:
+        _from = "Device/"+device["_key"]
+        _to = "Location/"+device["locationId"]
+        hasLocation = {
+            "_key": f"hasLocation{len(hasLocations) + 1}",
+            "_from": _from,
+            "_to": _to,
+            "created" : datetime.datetime.now().timestamp(),
+            "expired": notExpiredValue()
+        }
+        hasLocations.append(hasLocation)
+    with open("./data/hasLocation.json", "w") as f:
+        json.dump(hasLocations, f, indent=2)
+    return hasLocations
+
 def generateSoftware(num_software=30, num_config_changes=5):
     """Generate software data and store in Software.json."""
     software = []
@@ -177,6 +196,7 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
     software = generateSoftware(num_software=num_software, num_config_changes=num_config_changes)
     connections = generateConnections(devices, num_connections=30)
     hasSoftware = generateHasSoftware(devices, software, num_hasSoftware=num_hasSoftware)
+    hasLocation = generateHasLocation(devices)
 
 def main():
     """Generates data and stores in separate JSON files."""
