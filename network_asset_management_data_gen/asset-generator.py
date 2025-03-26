@@ -68,7 +68,6 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
             "macAddress": ":".join(f"{random.randint(0, 255):02x}" for _ in range(6)),
             "os": os_version.split(" ")[0],
             "osVersion": os_version,
-            "locationId": random.choice(locations)["_key"],
             "configurationHistory": []
         }
         devices.append(device)
@@ -103,13 +102,13 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
         json.dump(versions, f, indent=2)
     return devices, deviceIns, deviceOuts, versions
 
-def generateHasLocation(devices):
+def generateHasLocation(deviceOuts, locations):
     """Generate hasLocation edge data and store in hasLocation.json."""
     hasLocations = []
     # Connections 
-    for device in devices:
-        _from = "Device/"+device["_key"]
-        _to = "Location/"+device["locationId"]
+    for device in deviceOuts:
+        _from = "DeviceOut/"+device["_key"]
+        _to =   "Location/"+random.choice(locations)["_key"]
         hasLocation = {
             "_key": f"hasLocation{len(hasLocations) + 1}",
             "_from": _from,
@@ -162,14 +161,16 @@ def generateSoftware(num_software=30, num_config_changes=5):
         json.dump(software, f, indent=2)
     return software
 
-def generateConnections(devices,num_connections=30):
+def generateConnections(deviceIns, deviceOuts,num_connections=30):
     """Generate connection data and store in connection.json."""
     connections = []
     # Connections 
     while len(connections) < num_connections:
-        _from = "Device/"+random.choice(devices)["_key"]
-        _to = "Device/"+random.choice(devices)["_key"]
-        if _from != _to: # prevent self loops
+        fromKey = random.choice(deviceOuts)["_key"]
+        toKey  = random.choice(deviceIns)["_key"]
+        if fromKey != toKey: # prevent self loops
+            _from = "DeviceOut/"+fromKey
+            _to = "DeviceIn/"+toKey
             connection = {
                 # "_key": f"connection{i+1}",
                 "_key": f"connection{len(connections) + 1}",
@@ -186,13 +187,13 @@ def generateConnections(devices,num_connections=30):
         json.dump(connections, f, indent=2)
     return connections
 
-def generateHasSoftware(devices, software, num_hasSoftware=40):
+def generateHasSoftware(deviceOuts, software, num_hasSoftware=40):
     """Generate hasSoftware edge data and store in hasSoftware.json."""
     hasSoftwares = []
     while len(hasSoftwares) < num_hasSoftware:
-        device = random.choice(devices)
+        device = random.choice(deviceOuts)
         if device["type"] != "router":
-            _from = "Device/"+device["_key"]
+            _from = "DeviceOut/"+device["_key"]
             hasSoftware = {
                 "_key": f"hasSoftware{len(hasSoftwares) + 1}",
                 "_from": _from,
@@ -210,9 +211,9 @@ def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30
     locations = generateLocations(num_locations)
     devices, deviceIns, deviceOuts, versions = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
     software = generateSoftware(num_software=num_software, num_config_changes=num_config_changes)
-    connections = generateConnections(devices, num_connections=30)
-    hasSoftware = generateHasSoftware(devices, software, num_hasSoftware=num_hasSoftware)
-    hasLocation = generateHasLocation(devices)
+    connections = generateConnections(deviceIns, deviceOuts, num_connections=30)
+    hasSoftware = generateHasSoftware(deviceOuts, software, num_hasSoftware=num_hasSoftware)
+    hasLocation = generateHasLocation(deviceOuts, locations)
 
 def main():
     """Generates data and stores in separate JSON files."""
