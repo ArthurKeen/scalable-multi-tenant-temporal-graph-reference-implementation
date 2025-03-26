@@ -6,6 +6,7 @@ import geojson
 import sys
 
 def notExpiredValue():
+    """returns value to be as the default very large integer to be used for the expired property"""
     return sys.maxsize
 
 def generateLocations(num_locations=5):
@@ -61,7 +62,7 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
         }
         devices.append(device)
         # Generate configuration history
-        current_config = {"hostname": f"device{i+1}", "firewallRules": ["allow 80", "allow 443"], "created": datetime.datetime.now().isoformat(), "expired": notExpiredValue()}
+        current_config = {"hostname": f"device{i+1}", "firewallRules": ["allow 80", "allow 443"], "created": datetime.datetime.now().timestamp(), "expired": notExpiredValue()}
         device["configurationHistory"].append(current_config)
         for changeNo in range(num_config_changes):
             created = datetime.datetime.now() - datetime.timedelta(days=random.randint(changeNo*5+1, (changeNo+1)*5))
@@ -78,7 +79,7 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
                 previous_config["hostname"] = f"new-device-{random.randint(100, 999)}"
             expired = previous_config["created"]
             previous_config["expired"] = expired
-            previous_config["created"] = created.isoformat()
+            previous_config["created"] = created.timestamp()
             device["configurationHistory"].append(previous_config)
             current_config = previous_config
     with open("./data/Device.json", "w") as f:
@@ -107,7 +108,7 @@ def generateSoftware(num_software=30, num_config_changes=5):
         }
         software.append(soft)
         # Generate software configuration history
-        current_config = {"port": random.randint(8000, 9000), "enabled": True, "created": datetime.datetime.now().isoformat(), "expired": notExpiredValue()}
+        current_config = {"port": random.randint(8000, 9000), "enabled": True, "created": datetime.datetime.now().timestamp(), "expired": notExpiredValue()}
         soft["configurationHistory"].append(current_config)
         for changeNo in range(num_config_changes):
             created = datetime.datetime.now() - datetime.timedelta(days=random.randint(changeNo*5+1, (changeNo+1)*5))
@@ -118,7 +119,7 @@ def generateSoftware(num_software=30, num_config_changes=5):
                 previous_config["enabled"] = not previous_config["enabled"]
             expired = previous_config["created"]
             previous_config["expired"] = expired
-            previous_config["created"] = created.isoformat()
+            previous_config["created"] = created.timestamp()
             soft["configurationHistory"].append(previous_config)
             current_config = previous_config
 
