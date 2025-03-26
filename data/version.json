@@ -1,0 +1,202 @@
+[
+  {
+    "_key": "deviceIn1",
+    "_from": "DeviceIn/device1",
+    "_to": "Device/device1"
+  },
+  {
+    "_key": "deviceOut1",
+    "_from": "Device/device1",
+    "_to": "DeviceOut/device1"
+  },
+  {
+    "_key": "deviceIn2",
+    "_from": "DeviceIn/device2",
+    "_to": "Device/device2"
+  },
+  {
+    "_key": "deviceOut2",
+    "_from": "Device/device2",
+    "_to": "DeviceOut/device2"
+  },
+  {
+    "_key": "deviceIn3",
+    "_from": "DeviceIn/device3",
+    "_to": "Device/device3"
+  },
+  {
+    "_key": "deviceOut3",
+    "_from": "Device/device3",
+    "_to": "DeviceOut/device3"
+  },
+  {
+    "_key": "deviceIn4",
+    "_from": "DeviceIn/device4",
+    "_to": "Device/device4"
+  },
+  {
+    "_key": "deviceOut4",
+    "_from": "Device/device4",
+    "_to": "DeviceOut/device4"
+  },
+  {
+    "_key": "deviceIn5",
+    "_from": "DeviceIn/device5",
+    "_to": "Device/device5"
+  },
+  {
+    "_key": "deviceOut5",
+    "_from": "Device/device5",
+    "_to": "DeviceOut/device5"
+  },
+  {
+    "_key": "deviceIn6",
+    "_from": "DeviceIn/device6",
+    "_to": "Device/device6"
+  },
+  {
+    "_key": "deviceOut6",
+    "_from": "Device/device6",
+    "_to": "DeviceOut/device6"
+  },
+  {
+    "_key": "deviceIn7",
+    "_from": "DeviceIn/device7",
+    "_to": "Device/device7"
+  },
+  {
+    "_key": "deviceOut7",
+    "_from": "Device/device7",
+    "_to": "DeviceOut/device7"
+  },
+  {
+    "_key": "deviceIn8",
+    "_from": "DeviceIn/device8",
+    "_to": "Device/device8"
+  },
+  {
+    "_key": "deviceOut8",
+    "_from": "Device/device8",
+    "_to": "DeviceOut/device8"
+  },
+  {
+    "_key": "deviceIn9",
+    "_from": "DeviceIn/device9",
+    "_to": "Device/device9"
+  },
+  {
+    "_key": "deviceOut9",
+    "_from": "Device/device9",
+    "_to": "DeviceOut/device9"
+  },
+  {
+    "_key": "deviceIn10",
+    "_from": "DeviceIn/device10",
+    "_to": "Device/device10"
+  },
+  {
+    "_key": "deviceOut10",
+    "_from": "Device/device10",
+    "_to": "DeviceOut/device10"
+  },
+  {
+    "_key": "deviceIn11",
+    "_from": "DeviceIn/device11",
+    "_to": "Device/device11"
+  },
+  {
+    "_key": "deviceOut11",
+    "_from": "Device/device11",
+    "_to": "DeviceOut/device11"
+  },
+  {
+    "_key": "deviceIn12",
+    "_from": "DeviceIn/device12",
+    "_to": "Device/device12"
+  },
+  {
+    "_key": "deviceOut12",
+    "_from": "Device/device12",
+    "_to": "DeviceOut/device12"
+  },
+  {
+    "_key": "deviceIn13",
+    "_from": "DeviceIn/device13",
+    "_to": "Device/device13"
+  },
+  {
+    "_key": "deviceOut13",
+    "_from": "Device/device13",
+    "_to": "DeviceOut/device13"
+  },
+  {
+    "_key": "deviceIn14",
+    "_from": "DeviceIn/device14",
+    "_to": "Device/device14"
+  },
+  {
+    "_key": "deviceOut14",
+    "_from": "Device/device14",
+    "_to": "DeviceOut/device14"
+  },
+  {
+    "_key": "deviceIn15",
+    "_from": "DeviceIn/device15",
+    "_to": "Device/device15"
+  },
+  {
+    "_key": "deviceOut15",
+    "_from": "Device/device15",
+    "_to": "DeviceOut/device15"
+  },
+  {
+    "_key": "deviceIn16",
+    "_from": "DeviceIn/device16",
+    "_to": "Device/device16"
+  },
+  {
+    "_key": "deviceOut16",
+    "_from": "Device/device16",
+    "_to": "DeviceOut/device16"
+  },
+  {
+    "_key": "deviceIn17",
+    "_from": "DeviceIn/device17",
+    "_to": "Device/device17"
+  },
+  {
+    "_key": "deviceOut17",
+    "_from": "Device/device17",
+    "_to": "DeviceOut/device17"
+  },
+  {
+    "_key": "deviceIn18",
+    "_from": "DeviceIn/device18",
+    "_to": "Device/device18"
+  },
+  {
+    "_key": "deviceOut18",
+    "_from": "Device/device18",
+    "_to": "DeviceOut/device18"
+  },
+  {
+    "_key": "deviceIn19",
+    "_from": "DeviceIn/device19",
+    "_to": "Device/device19"
+  },
+  {
+    "_key": "deviceOut19",
+    "_from": "Device/device19",
+    "_to": "DeviceOut/device19"
+  },
+  {
+    "_key": "deviceIn20",
+    "_from": "DeviceIn/device20",
+    "_to": "Device/device20"
+  },
+  {
+    "_key": "deviceOut20",
+    "_from": "Device/device20",
+    "_to": "DeviceOut/device20"
+  }
+]

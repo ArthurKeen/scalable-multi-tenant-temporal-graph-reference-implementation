@@ -1,45 +1,45 @@
 [
   {
     "_key": "software1",
-    "name": "MongoDB",
-    "type": "database",
-    "softwareVersion": "MongoDB 6.0.2",
+    "name": "Kubernetes",
+    "type": "service",
+    "softwareVersion": "Kubernetes 1.25.2",
     "configurationHistory": [
       {
-        "port": 8802,
+        "port": 8000,
         "enabled": true,
-        "created": 1743020288.782283,
+        "created": 1743025371.727193,
         "expired": 9223372036854775807
       },
       {
-        "port": 8802,
+        "port": 8000,
         "enabled": false,
-        "created": 1742933888.782291,
-        "expired": 1743020288.782283
+        "created": 1742679771.727196,
+        "expired": 1743025371.727193
       },
       {
-        "port": 8945,
+        "port": 8772,
         "enabled": false,
-        "created": 1742329088.7823,
-        "expired": 1742933888.782291
+        "created": 1742247771.727201,
+        "expired": 1742679771.727196
       },
       {
-        "port": 8945,
+        "port": 8772,
         "enabled": true,
-        "created": 1741810688.782306,
-        "expired": 1742329088.7823
+        "created": 1741988571.727207,
+        "expired": 1742247771.727201
       },
       {
-        "port": 8945,
+        "port": 8772,
         "enabled": false,
-        "created": 1741295888.78231,
-        "expired": 1741810688.782306
+        "created": 1741300971.72721,
+        "expired": 1741988571.727207
       },
       {
-        "port": 8945,
+        "port": 8772,
         "enabled": true,
-        "created": 1741123088.782314,
-        "expired": 1741295888.78231
+        "created": 1741041771.727214,
+        "expired": 1741300971.72721
       }
     ]
   },
@@ -50,40 +50,40 @@
     "softwareVersion": "MongoDB 6.0.2",
     "configurationHistory": [
       {
-        "port": 8457,
+        "port": 8116,
         "enabled": true,
-        "created": 1743020288.782323,
+        "created": 1743025371.727222,
         "expired": 9223372036854775807
       },
       {
-        "port": 8457,
+        "port": 8116,
         "enabled": false,
-        "created": 1742674688.782324,
-        "expired": 1743020288.782323
+        "created": 1742938971.727223,
+        "expired": 1743025371.727222
       },
       {
-        "port": 8457,
+        "port": 8116,
         "enabled": true,
-        "created": 1742329088.78233,
-        "expired": 1742674688.782324
+        "created": 1742506971.727228,
+        "expired": 1742938971.727223
       },
       {
-        "port": 8457,
-        "enabled": false,
-        "created": 1741810688.782333,
-        "expired": 1742329088.78233
-      },
-      {
-        "port": 8457,
+        "port": 8197,
         "enabled": true,
-        "created": 1741637888.782337,
-        "expired": 1741810688.782333
+        "created": 1741988571.727232,
+        "expired": 1742506971.727228
       },
       {
-        "port": 8457,
+        "port": 8832,
+        "enabled": true,
+        "created": 1741473771.727236,
+        "expired": 1741988571.727232
+      },
+      {
+        "port": 8832,
         "enabled": false,
-        "created": 1740863888.782341,
-        "expired": 1741637888.782337
+        "created": 1741214571.727241,
+        "expired": 1741473771.727236
       }
     ]
   },
@@ -94,84 +94,84 @@
     "softwareVersion": "Docker 20.10.17",
     "configurationHistory": [
       {
-        "port": 8540,
+        "port": 8262,
         "enabled": true,
-        "created": 1743020288.782349,
+        "created": 1743025371.727248,
         "expired": 9223372036854775807
       },
       {
-        "port": 8893,
-        "enabled": true,
-        "created": 1742933888.782351,
-        "expired": 1743020288.782349
-      },
-      {
-        "port": 8669,
-        "enabled": true,
-        "created": 1742329088.782356,
-        "expired": 1742933888.782351
-      },
-      {
-        "port": 8669,
+        "port": 8262,
         "enabled": false,
-        "created": 1741724288.782362,
-        "expired": 1742329088.782356
+        "created": 1742766171.72725,
+        "expired": 1743025371.727248
       },
       {
-        "port": 8669,
-        "enabled": true,
-        "created": 1741637888.782366,
-        "expired": 1741724288.782362
+        "port": 8439,
+        "enabled": false,
+        "created": 1742420571.727253,
+        "expired": 1742766171.72725
       },
       {
-        "port": 8275,
+        "port": 8439,
         "enabled": true,
-        "created": 1741123088.782369,
-        "expired": 1741637888.782366
+        "created": 1742074971.727258,
+        "expired": 1742420571.727253
+      },
+      {
+        "port": 8868,
+        "enabled": true,
+        "created": 1741300971.727261,
+        "expired": 1742074971.727258
+      },
+      {
+        "port": 8503,
+        "enabled": true,
+        "created": 1741041771.727266,
+        "expired": 1741300971.727261
       }
     ]
   },
   {
     "_key": "software4",
-    "name": "Nginx",
-    "type": "application",
-    "softwareVersion": "Nginx 1.22.0",
+    "name": "OpenSSH",
+    "type": "service",
+    "softwareVersion": "OpenSSH 8.9p1",
     "configurationHistory": [
       {
-        "port": 8319,
+        "port": 8315,
         "enabled": true,
-        "created": 1743020288.782378,
+        "created": 1743025371.727274,
         "expired": 9223372036854775807
       },
       {
-        "port": 8319,
+        "port": 8315,
         "enabled": false,
-        "created": 1742847488.78238,
-        "expired": 1743020288.782378
+        "created": 1742766171.727276,
+        "expired": 1743025371.727274
       },
       {
-        "port": 8312,
+        "port": 8288,
         "enabled": false,
-        "created": 1742415488.782383,
-        "expired": 1742847488.78238
+        "created": 1742247771.727279,
+        "expired": 1742766171.727276
       },
       {
-        "port": 8688,
+        "port": 8029,
         "enabled": false,
-        "created": 1741810688.782388,
-        "expired": 1742415488.782383
+        "created": 1741729371.727284,
+        "expired": 1742247771.727279
       },
       {
-        "port": 8688,
+        "port": 8029,
         "enabled": true,
-        "created": 1741295888.782393,
-        "expired": 1741810688.782388
+        "created": 1741387371.727289,
+        "expired": 1741729371.727284
       },
       {
-        "port": 8314,
-        "enabled": true,
-        "created": 1741209488.782397,
-        "expired": 1741295888.782393
+        "port": 8029,
+        "enabled": false,
+        "created": 1741128171.727292,
+        "expired": 1741387371.727289
       }
     ]
   },
@@ -182,128 +182,128 @@
     "softwareVersion": "OpenSSH 8.9p1",
     "configurationHistory": [
       {
-        "port": 8154,
+        "port": 8067,
         "enabled": true,
-        "created": 1743020288.782406,
+        "created": 1743025371.727299,
         "expired": 9223372036854775807
       },
       {
-        "port": 8154,
-        "enabled": false,
-        "created": 1742761088.782408,
-        "expired": 1743020288.782406
-      },
-      {
-        "port": 8154,
+        "port": 8291,
         "enabled": true,
-        "created": 1742415488.782411,
-        "expired": 1742761088.782408
+        "created": 1742593371.727301,
+        "expired": 1743025371.727299
       },
       {
-        "port": 8154,
-        "enabled": false,
-        "created": 1741724288.782415,
-        "expired": 1742415488.782411
+        "port": 8703,
+        "enabled": true,
+        "created": 1742247771.727305,
+        "expired": 1742593371.727301
       },
       {
-        "port": 8890,
-        "enabled": false,
-        "created": 1741382288.782418,
-        "expired": 1741724288.782415
+        "port": 8206,
+        "enabled": true,
+        "created": 1741988571.72731,
+        "expired": 1742247771.727305
       },
       {
-        "port": 8918,
+        "port": 8206,
         "enabled": false,
-        "created": 1741209488.782423,
-        "expired": 1741382288.782418
+        "created": 1741387371.727314,
+        "expired": 1741988571.72731
+      },
+      {
+        "port": 8107,
+        "enabled": false,
+        "created": 1741128171.727317,
+        "expired": 1741387371.727314
       }
     ]
   },
   {
     "_key": "software6",
-    "name": "Kubernetes",
-    "type": "service",
-    "softwareVersion": "Kubernetes 1.25.2",
+    "name": "Apache",
+    "type": "application",
+    "softwareVersion": "Apache HTTP Server 2.4.53",
     "configurationHistory": [
       {
-        "port": 8645,
+        "port": 8124,
         "enabled": true,
-        "created": 1743020288.782431,
+        "created": 1743025371.727326,
         "expired": 9223372036854775807
       },
       {
-        "port": 8645,
+        "port": 8124,
         "enabled": false,
-        "created": 1742674688.782433,
-        "expired": 1743020288.782431
+        "created": 1742679771.727327,
+        "expired": 1743025371.727326
       },
       {
-        "port": 8645,
+        "port": 8124,
         "enabled": true,
-        "created": 1742156288.782436,
-        "expired": 1742674688.782433
+        "created": 1742420571.727331,
+        "expired": 1742679771.727327
       },
       {
-        "port": 8645,
+        "port": 8124,
         "enabled": false,
-        "created": 1741897088.782439,
-        "expired": 1742156288.782436
+        "created": 1741988571.727334,
+        "expired": 1742420571.727331
       },
       {
-        "port": 8517,
-        "enabled": false,
-        "created": 1741637888.782442,
-        "expired": 1741897088.782439
-      },
-      {
-        "port": 8517,
+        "port": 8124,
         "enabled": true,
-        "created": 1741123088.782447,
-        "expired": 1741637888.782442
+        "created": 1741556571.727337,
+        "expired": 1741988571.727334
+      },
+      {
+        "port": 8124,
+        "enabled": false,
+        "created": 1741041771.72734,
+        "expired": 1741556571.727337
       }
     ]
   },
   {
     "_key": "software7",
-    "name": "Python",
-    "type": "application",
-    "softwareVersion": "Python 3.10.6",
+    "name": "PostgreSQL",
+    "type": "database",
+    "softwareVersion": "PostgreSQL 14.5",
     "configurationHistory": [
       {
-        "port": 8603,
+        "port": 8346,
         "enabled": true,
-        "created": 1743020288.782455,
+        "created": 1743025371.727348,
         "expired": 9223372036854775807
       },
       {
-        "port": 8906,
-        "enabled": true,
-        "created": 1742761088.782456,
-        "expired": 1743020288.782455
-      },
-      {
-        "port": 8906,
+        "port": 8346,
         "enabled": false,
-        "created": 1742329088.782461,
-        "expired": 1742761088.782456
+        "created": 1742679771.727349,
+        "expired": 1743025371.727348
       },
       {
-        "port": 8906,
-        "enabled": true,
-        "created": 1741897088.782464,
-        "expired": 1742329088.782461
-      },
-      {
-        "port": 8236,
-        "enabled": true,
-        "created": 1741382288.782467,
-        "expired": 1741897088.782464
-      },
-      {
-        "port": 8236,
+        "port": 8353,
         "enabled": false,
-        "created": 1741209488.782472,
-        "expired": 1741382288.782467
+        "created": 1742334171.727352,
+        "expired": 1742679771.727349
+      },
+      {
+        "port": 8353,
+        "enabled": true,
+        "created": 1741815771.727357,
+        "expired": 1742334171.727352
+      },
+      {
+        "port": 8807,
+        "enabled": true,
+        "created": 1741556571.72736,
+        "expired": 1741815771.727357
+      },
+      {
+        "port": 8757,
+        "enabled": true,
+        "created": 1740868971.727365,
+        "expired": 1741556571.72736
       }
     ]
   },
@@ -314,700 +314,700 @@
     "softwareVersion": "MySQL 8.0.30",
     "configurationHistory": [
       {
-        "port": 8828,
+        "port": 8456,
         "enabled": true,
-        "created": 1743020288.782479,
+        "created": 1743025371.727374,
         "expired": 9223372036854775807
       },
       {
-        "port": 8828,
+        "port": 8827,
+        "enabled": true,
+        "created": 1742593371.727375,
+        "expired": 1743025371.727374
+      },
+      {
+        "port": 8048,
+        "enabled": true,
+        "created": 1742506971.72738,
+        "expired": 1742593371.727375
+      },
+      {
+        "port": 8138,
+        "enabled": true,
+        "created": 1742074971.727385,
+        "expired": 1742506971.72738
+      },
+      {
+        "port": 8138,
         "enabled": false,
-        "created": 1742761088.782481,
-        "expired": 1743020288.782479
+        "created": 1741300971.727389,
+        "expired": 1742074971.727385
       },
       {
-        "port": 8828,
+        "port": 8138,
         "enabled": true,
-        "created": 1742415488.782484,
-        "expired": 1742761088.782481
-      },
-      {
-        "port": 8828,
-        "enabled": false,
-        "created": 1741897088.782488,
-        "expired": 1742415488.782484
-      },
-      {
-        "port": 8828,
-        "enabled": true,
-        "created": 1741295888.782491,
-        "expired": 1741897088.782488
-      },
-      {
-        "port": 8252,
-        "enabled": true,
-        "created": 1740863888.782494,
-        "expired": 1741295888.782491
+        "created": 1741041771.727392,
+        "expired": 1741300971.727389
       }
     ]
   },
   {
     "_key": "software9",
-    "name": "PostgreSQL",
-    "type": "database",
-    "softwareVersion": "PostgreSQL 14.5",
-    "configurationHistory": [
-      {
-        "port": 8094,
-        "enabled": true,
-        "created": 1743020288.782503,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8094,
-        "enabled": false,
-        "created": 1742847488.782505,
-        "expired": 1743020288.782503
-      },
-      {
-        "port": 8094,
-        "enabled": true,
-        "created": 1742156288.782508,
-        "expired": 1742847488.782505
-      },
-      {
-        "port": 8384,
-        "enabled": true,
-        "created": 1741810688.782511,
-        "expired": 1742156288.782508
-      },
-      {
-        "port": 8384,
-        "enabled": false,
-        "created": 1741637888.782516,
-        "expired": 1741810688.782511
-      },
-      {
-        "port": 8384,
-        "enabled": true,
-        "created": 1740950288.782519,
-        "expired": 1741637888.782516
-      }
-    ]
-  },
-  {
-    "_key": "software10",
-    "name": "Kubernetes",
-    "type": "service",
-    "softwareVersion": "Kubernetes 1.25.2",
-    "configurationHistory": [
-      {
-        "port": 8521,
-        "enabled": true,
-        "created": 1743020288.782527,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8521,
-        "enabled": false,
-        "created": 1742761088.782528,
-        "expired": 1743020288.782527
-      },
-      {
-        "port": 8521,
-        "enabled": true,
-        "created": 1742415488.782532,
-        "expired": 1742761088.782528
-      },
-      {
-        "port": 8521,
-        "enabled": false,
-        "created": 1741724288.782535,
-        "expired": 1742415488.782532
-      },
-      {
-        "port": 8521,
-        "enabled": true,
-        "created": 1741382288.782538,
-        "expired": 1741724288.782535
-      },
-      {
-        "port": 8521,
-        "enabled": false,
-        "created": 1740950288.782542,
-        "expired": 1741382288.782538
-      }
-    ]
-  },
-  {
-    "_key": "software11",
-    "name": "MySQL",
-    "type": "database",
-    "softwareVersion": "MySQL 8.0.30",
-    "configurationHistory": [
-      {
-        "port": 8119,
-        "enabled": true,
-        "created": 1743020288.782549,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8228,
-        "enabled": true,
-        "created": 1742761088.782551,
-        "expired": 1743020288.782549
-      },
-      {
-        "port": 8146,
-        "enabled": true,
-        "created": 1742156288.782555,
-        "expired": 1742761088.782551
-      },
-      {
-        "port": 8904,
-        "enabled": true,
-        "created": 1741983488.78256,
-        "expired": 1742156288.782555
-      },
-      {
-        "port": 8904,
-        "enabled": false,
-        "created": 1741551488.782565,
-        "expired": 1741983488.78256
-      },
-      {
-        "port": 8904,
-        "enabled": true,
-        "created": 1740863888.782568,
-        "expired": 1741551488.782565
-      }
-    ]
-  },
-  {
-    "_key": "software12",
-    "name": "MySQL",
-    "type": "database",
-    "softwareVersion": "MySQL 8.0.30",
-    "configurationHistory": [
-      {
-        "port": 8992,
-        "enabled": true,
-        "created": 1743020288.782575,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8992,
-        "enabled": false,
-        "created": 1742588288.782577,
-        "expired": 1743020288.782575
-      },
-      {
-        "port": 8904,
-        "enabled": false,
-        "created": 1742242688.78258,
-        "expired": 1742588288.782577
-      },
-      {
-        "port": 8123,
-        "enabled": false,
-        "created": 1741810688.782585,
-        "expired": 1742242688.78258
-      },
-      {
-        "port": 8123,
-        "enabled": true,
-        "created": 1741551488.78259,
-        "expired": 1741810688.782585
-      },
-      {
-        "port": 8123,
-        "enabled": false,
-        "created": 1741036688.782593,
-        "expired": 1741551488.78259
-      }
-    ]
-  },
-  {
-    "_key": "software13",
-    "name": "PostgreSQL",
-    "type": "database",
-    "softwareVersion": "PostgreSQL 14.5",
-    "configurationHistory": [
-      {
-        "port": 8387,
-        "enabled": true,
-        "created": 1743020288.7826,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8387,
-        "enabled": false,
-        "created": 1742933888.782602,
-        "expired": 1743020288.7826
-      },
-      {
-        "port": 8724,
-        "enabled": false,
-        "created": 1742156288.782605,
-        "expired": 1742933888.782602
-      },
-      {
-        "port": 8465,
-        "enabled": false,
-        "created": 1742069888.78261,
-        "expired": 1742156288.782605
-      },
-      {
-        "port": 8465,
-        "enabled": true,
-        "created": 1741551488.782616,
-        "expired": 1742069888.78261
-      },
-      {
-        "port": 8265,
-        "enabled": true,
-        "created": 1740863888.782619,
-        "expired": 1741551488.782616
-      }
-    ]
-  },
-  {
-    "_key": "software14",
-    "name": "MongoDB",
-    "type": "database",
-    "softwareVersion": "MongoDB 6.0.2",
-    "configurationHistory": [
-      {
-        "port": 8154,
-        "enabled": true,
-        "created": 1743020288.782628,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8154,
-        "enabled": false,
-        "created": 1742933888.782629,
-        "expired": 1743020288.782628
-      },
-      {
-        "port": 8154,
-        "enabled": true,
-        "created": 1742501888.782632,
-        "expired": 1742933888.782629
-      },
-      {
-        "port": 8154,
-        "enabled": false,
-        "created": 1741724288.782636,
-        "expired": 1742501888.782632
-      },
-      {
-        "port": 8821,
-        "enabled": false,
-        "created": 1741637888.782639,
-        "expired": 1741724288.782636
-      },
-      {
-        "port": 8659,
-        "enabled": false,
-        "created": 1741209488.782644,
-        "expired": 1741637888.782639
-      }
-    ]
-  },
-  {
-    "_key": "software15",
-    "name": "Apache",
-    "type": "application",
-    "softwareVersion": "Apache HTTP Server 2.4.53",
-    "configurationHistory": [
-      {
-        "port": 8996,
-        "enabled": true,
-        "created": 1743020288.782652,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8996,
-        "enabled": false,
-        "created": 1742588288.782654,
-        "expired": 1743020288.782652
-      },
-      {
-        "port": 8996,
-        "enabled": true,
-        "created": 1742329088.782657,
-        "expired": 1742588288.782654
-      },
-      {
-        "port": 8290,
-        "enabled": true,
-        "created": 1742069888.78266,
-        "expired": 1742329088.782657
-      },
-      {
-        "port": 8290,
-        "enabled": false,
-        "created": 1741295888.782665,
-        "expired": 1742069888.78266
-      },
-      {
-        "port": 8290,
-        "enabled": true,
-        "created": 1740950288.782668,
-        "expired": 1741295888.782665
-      }
-    ]
-  },
-  {
-    "_key": "software16",
-    "name": "MongoDB",
-    "type": "database",
-    "softwareVersion": "MongoDB 6.0.2",
-    "configurationHistory": [
-      {
-        "port": 8818,
-        "enabled": true,
-        "created": 1743020288.782675,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8570,
-        "enabled": true,
-        "created": 1742588288.782676,
-        "expired": 1743020288.782675
-      },
-      {
-        "port": 8570,
-        "enabled": false,
-        "created": 1742329088.782681,
-        "expired": 1742588288.782676
-      },
-      {
-        "port": 8570,
-        "enabled": true,
-        "created": 1741724288.782684,
-        "expired": 1742329088.782681
-      },
-      {
-        "port": 8856,
-        "enabled": true,
-        "created": 1741468688.782687,
-        "expired": 1741724288.782684
-      },
-      {
-        "port": 8856,
-        "enabled": false,
-        "created": 1741036688.782692,
-        "expired": 1741468688.782687
-      }
-    ]
-  },
-  {
-    "_key": "software17",
-    "name": "MongoDB",
-    "type": "database",
-    "softwareVersion": "MongoDB 6.0.2",
-    "configurationHistory": [
-      {
-        "port": 8457,
-        "enabled": true,
-        "created": 1743020288.782699,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8998,
-        "enabled": true,
-        "created": 1742588288.782701,
-        "expired": 1743020288.782699
-      },
-      {
-        "port": 8498,
-        "enabled": true,
-        "created": 1742329088.782706,
-        "expired": 1742588288.782701
-      },
-      {
-        "port": 8304,
-        "enabled": true,
-        "created": 1741897088.78271,
-        "expired": 1742329088.782706
-      },
-      {
-        "port": 8134,
-        "enabled": true,
-        "created": 1741382288.782715,
-        "expired": 1741897088.78271
-      },
-      {
-        "port": 8134,
-        "enabled": false,
-        "created": 1741209488.78272,
-        "expired": 1741382288.782715
-      }
-    ]
-  },
-  {
-    "_key": "software18",
-    "name": "Kubernetes",
-    "type": "service",
-    "softwareVersion": "Kubernetes 1.25.2",
-    "configurationHistory": [
-      {
-        "port": 8841,
-        "enabled": true,
-        "created": 1743020288.782727,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8231,
-        "enabled": true,
-        "created": 1742761088.782728,
-        "expired": 1743020288.782727
-      },
-      {
-        "port": 8668,
-        "enabled": true,
-        "created": 1742501888.782733,
-        "expired": 1742761088.782728
-      },
-      {
-        "port": 8241,
-        "enabled": true,
-        "created": 1741810688.782738,
-        "expired": 1742501888.782733
-      },
-      {
-        "port": 8241,
-        "enabled": false,
-        "created": 1741382288.782742,
-        "expired": 1741810688.782738
-      },
-      {
-        "port": 8241,
-        "enabled": true,
-        "created": 1741036688.782746,
-        "expired": 1741382288.782742
-      }
-    ]
-  },
-  {
-    "_key": "software19",
-    "name": "MySQL",
-    "type": "database",
-    "softwareVersion": "MySQL 8.0.30",
-    "configurationHistory": [
-      {
-        "port": 8214,
-        "enabled": true,
-        "created": 1743020288.782753,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8863,
-        "enabled": true,
-        "created": 1742588288.782755,
-        "expired": 1743020288.782753
-      },
-      {
-        "port": 8050,
-        "enabled": true,
-        "created": 1742415488.782759,
-        "expired": 1742588288.782755
-      },
-      {
-        "port": 8050,
-        "enabled": false,
-        "created": 1741724288.782764,
-        "expired": 1742415488.782759
-      },
-      {
-        "port": 8266,
-        "enabled": false,
-        "created": 1741551488.782767,
-        "expired": 1741724288.782764
-      },
-      {
-        "port": 8266,
-        "enabled": true,
-        "created": 1740863888.782771,
-        "expired": 1741551488.782767
-      }
-    ]
-  },
-  {
-    "_key": "software20",
-    "name": "PostgreSQL",
-    "type": "database",
-    "softwareVersion": "PostgreSQL 14.5",
-    "configurationHistory": [
-      {
-        "port": 8876,
-        "enabled": true,
-        "created": 1743020288.782778,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8059,
-        "enabled": true,
-        "created": 1742761088.78278,
-        "expired": 1743020288.782778
-      },
-      {
-        "port": 8059,
-        "enabled": false,
-        "created": 1742415488.782785,
-        "expired": 1742761088.78278
-      },
-      {
-        "port": 8674,
-        "enabled": false,
-        "created": 1741897088.782788,
-        "expired": 1742415488.782785
-      },
-      {
-        "port": 8674,
-        "enabled": true,
-        "created": 1741295888.782793,
-        "expired": 1741897088.782788
-      },
-      {
-        "port": 8674,
-        "enabled": false,
-        "created": 1741036688.782796,
-        "expired": 1741295888.782793
-      }
-    ]
-  },
-  {
-    "_key": "software21",
-    "name": "Nginx",
-    "type": "application",
-    "softwareVersion": "Nginx 1.22.0",
-    "configurationHistory": [
-      {
-        "port": 8350,
-        "enabled": true,
-        "created": 1743020288.782803,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8350,
-        "enabled": false,
-        "created": 1742674688.782805,
-        "expired": 1743020288.782803
-      },
-      {
-        "port": 8350,
-        "enabled": true,
-        "created": 1742156288.782808,
-        "expired": 1742674688.782805
-      },
-      {
-        "port": 8674,
-        "enabled": true,
-        "created": 1741983488.782811,
-        "expired": 1742156288.782808
-      },
-      {
-        "port": 8674,
-        "enabled": false,
-        "created": 1741637888.782816,
-        "expired": 1741983488.782811
-      },
-      {
-        "port": 8674,
-        "enabled": true,
-        "created": 1740950288.782819,
-        "expired": 1741637888.782816
-      }
-    ]
-  },
-  {
-    "_key": "software22",
-    "name": "MySQL",
-    "type": "database",
-    "softwareVersion": "MySQL 8.0.30",
-    "configurationHistory": [
-      {
-        "port": 8597,
-        "enabled": true,
-        "created": 1743020288.782826,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8424,
-        "enabled": true,
-        "created": 1742847488.782827,
-        "expired": 1743020288.782826
-      },
-      {
-        "port": 8069,
-        "enabled": true,
-        "created": 1742415488.782832,
-        "expired": 1742847488.782827
-      },
-      {
-        "port": 8569,
-        "enabled": true,
-        "created": 1742069888.782837,
-        "expired": 1742415488.782832
-      },
-      {
-        "port": 8569,
-        "enabled": false,
-        "created": 1741468688.782841,
-        "expired": 1742069888.782837
-      },
-      {
-        "port": 8569,
-        "enabled": true,
-        "created": 1740863888.782844,
-        "expired": 1741468688.782841
-      }
-    ]
-  },
-  {
-    "_key": "software23",
     "name": "OpenSSH",
     "type": "service",
     "softwareVersion": "OpenSSH 8.9p1",
     "configurationHistory": [
       {
-        "port": 8110,
+        "port": 8718,
         "enabled": true,
-        "created": 1743020288.782851,
+        "created": 1743025371.7274,
         "expired": 9223372036854775807
       },
       {
-        "port": 8471,
+        "port": 8127,
         "enabled": true,
-        "created": 1742588288.782853,
-        "expired": 1743020288.782851
+        "created": 1742593371.727401,
+        "expired": 1743025371.7274
       },
       {
-        "port": 8845,
+        "port": 8908,
         "enabled": true,
-        "created": 1742501888.782858,
-        "expired": 1742588288.782853
+        "created": 1742506971.727406,
+        "expired": 1742593371.727401
       },
       {
-        "port": 8096,
+        "port": 8426,
         "enabled": true,
-        "created": 1741724288.782862,
-        "expired": 1742501888.782858
+        "created": 1741815771.72741,
+        "expired": 1742506971.727406
       },
       {
-        "port": 8732,
-        "enabled": true,
-        "created": 1741468688.782867,
-        "expired": 1741724288.782862
-      },
-      {
-        "port": 8732,
+        "port": 8426,
         "enabled": false,
-        "created": 1741123088.782872,
-        "expired": 1741468688.782867
+        "created": 1741556571.727415,
+        "expired": 1741815771.72741
+      },
+      {
+        "port": 8426,
+        "enabled": true,
+        "created": 1741041771.727419,
+        "expired": 1741556571.727415
+      }
+    ]
+  },
+  {
+    "_key": "software10",
+    "name": "MySQL",
+    "type": "database",
+    "softwareVersion": "MySQL 8.0.30",
+    "configurationHistory": [
+      {
+        "port": 8201,
+        "enabled": true,
+        "created": 1743025371.727426,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8326,
+        "enabled": true,
+        "created": 1742938971.727428,
+        "expired": 1743025371.727426
+      },
+      {
+        "port": 8635,
+        "enabled": true,
+        "created": 1742420571.727432,
+        "expired": 1742938971.727428
+      },
+      {
+        "port": 8635,
+        "enabled": false,
+        "created": 1741729371.727437,
+        "expired": 1742420571.727432
+      },
+      {
+        "port": 8989,
+        "enabled": false,
+        "created": 1741300971.72744,
+        "expired": 1741729371.727437
+      },
+      {
+        "port": 8989,
+        "enabled": true,
+        "created": 1741041771.727445,
+        "expired": 1741300971.72744
+      }
+    ]
+  },
+  {
+    "_key": "software11",
+    "name": "MongoDB",
+    "type": "database",
+    "softwareVersion": "MongoDB 6.0.2",
+    "configurationHistory": [
+      {
+        "port": 8017,
+        "enabled": true,
+        "created": 1743025371.727452,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8017,
+        "enabled": false,
+        "created": 1742766171.727454,
+        "expired": 1743025371.727452
+      },
+      {
+        "port": 8017,
+        "enabled": true,
+        "created": 1742420571.727457,
+        "expired": 1742766171.727454
+      },
+      {
+        "port": 8251,
+        "enabled": true,
+        "created": 1741815771.72746,
+        "expired": 1742420571.727457
+      },
+      {
+        "port": 8251,
+        "enabled": false,
+        "created": 1741642971.727465,
+        "expired": 1741815771.72746
+      },
+      {
+        "port": 8251,
+        "enabled": true,
+        "created": 1741128171.727468,
+        "expired": 1741642971.727465
+      }
+    ]
+  },
+  {
+    "_key": "software12",
+    "name": "Apache",
+    "type": "application",
+    "softwareVersion": "Apache HTTP Server 2.4.53",
+    "configurationHistory": [
+      {
+        "port": 9000,
+        "enabled": true,
+        "created": 1743025371.727476,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8641,
+        "enabled": true,
+        "created": 1742593371.727477,
+        "expired": 1743025371.727476
+      },
+      {
+        "port": 8921,
+        "enabled": true,
+        "created": 1742161371.727482,
+        "expired": 1742593371.727477
+      },
+      {
+        "port": 8041,
+        "enabled": true,
+        "created": 1741988571.727486,
+        "expired": 1742161371.727482
+      },
+      {
+        "port": 8041,
+        "enabled": false,
+        "created": 1741300971.727491,
+        "expired": 1741988571.727486
+      },
+      {
+        "port": 8041,
+        "enabled": true,
+        "created": 1740868971.727494,
+        "expired": 1741300971.727491
+      }
+    ]
+  },
+  {
+    "_key": "software13",
+    "name": "Kubernetes",
+    "type": "service",
+    "softwareVersion": "Kubernetes 1.25.2",
+    "configurationHistory": [
+      {
+        "port": 8147,
+        "enabled": true,
+        "created": 1743025371.727501,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8527,
+        "enabled": true,
+        "created": 1742938971.727503,
+        "expired": 1743025371.727501
+      },
+      {
+        "port": 8876,
+        "enabled": true,
+        "created": 1742334171.727508,
+        "expired": 1742938971.727503
+      },
+      {
+        "port": 8375,
+        "enabled": true,
+        "created": 1741988571.727512,
+        "expired": 1742334171.727508
+      },
+      {
+        "port": 8375,
+        "enabled": false,
+        "created": 1741642971.727517,
+        "expired": 1741988571.727512
+      },
+      {
+        "port": 8375,
+        "enabled": true,
+        "created": 1741128171.72752,
+        "expired": 1741642971.727517
+      }
+    ]
+  },
+  {
+    "_key": "software14",
+    "name": "Kubernetes",
+    "type": "service",
+    "softwareVersion": "Kubernetes 1.25.2",
+    "configurationHistory": [
+      {
+        "port": 8928,
+        "enabled": true,
+        "created": 1743025371.727527,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8928,
+        "enabled": false,
+        "created": 1742766171.727529,
+        "expired": 1743025371.727527
+      },
+      {
+        "port": 8928,
+        "enabled": true,
+        "created": 1742334171.727532,
+        "expired": 1742766171.727529
+      },
+      {
+        "port": 8928,
+        "enabled": false,
+        "created": 1741988571.727535,
+        "expired": 1742334171.727532
+      },
+      {
+        "port": 8928,
+        "enabled": true,
+        "created": 1741387371.727538,
+        "expired": 1741988571.727535
+      },
+      {
+        "port": 8514,
+        "enabled": true,
+        "created": 1741041771.727542,
+        "expired": 1741387371.727538
+      }
+    ]
+  },
+  {
+    "_key": "software15",
+    "name": "MySQL",
+    "type": "database",
+    "softwareVersion": "MySQL 8.0.30",
+    "configurationHistory": [
+      {
+        "port": 9000,
+        "enabled": true,
+        "created": 1743025371.72755,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 9000,
+        "enabled": false,
+        "created": 1742679771.727551,
+        "expired": 1743025371.72755
+      },
+      {
+        "port": 9000,
+        "enabled": true,
+        "created": 1742334171.727555,
+        "expired": 1742679771.727551
+      },
+      {
+        "port": 8598,
+        "enabled": true,
+        "created": 1742074971.727558,
+        "expired": 1742334171.727555
+      },
+      {
+        "port": 8598,
+        "enabled": false,
+        "created": 1741556571.727562,
+        "expired": 1742074971.727558
+      },
+      {
+        "port": 8598,
+        "enabled": true,
+        "created": 1740868971.727566,
+        "expired": 1741556571.727562
+      }
+    ]
+  },
+  {
+    "_key": "software16",
+    "name": "Apache",
+    "type": "application",
+    "softwareVersion": "Apache HTTP Server 2.4.53",
+    "configurationHistory": [
+      {
+        "port": 8479,
+        "enabled": true,
+        "created": 1743025371.727573,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8479,
+        "enabled": false,
+        "created": 1742852571.727574,
+        "expired": 1743025371.727573
+      },
+      {
+        "port": 8397,
+        "enabled": false,
+        "created": 1742420571.727578,
+        "expired": 1742852571.727574
+      },
+      {
+        "port": 8397,
+        "enabled": true,
+        "created": 1741988571.727582,
+        "expired": 1742420571.727578
+      },
+      {
+        "port": 8397,
+        "enabled": false,
+        "created": 1741473771.727585,
+        "expired": 1741988571.727582
+      },
+      {
+        "port": 8926,
+        "enabled": false,
+        "created": 1740955371.727588,
+        "expired": 1741473771.727585
+      }
+    ]
+  },
+  {
+    "_key": "software17",
+    "name": "Docker",
+    "type": "service",
+    "softwareVersion": "Docker 20.10.17",
+    "configurationHistory": [
+      {
+        "port": 8819,
+        "enabled": true,
+        "created": 1743025371.727597,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8819,
+        "enabled": false,
+        "created": 1742593371.727598,
+        "expired": 1743025371.727597
+      },
+      {
+        "port": 8819,
+        "enabled": true,
+        "created": 1742161371.727602,
+        "expired": 1742593371.727598
+      },
+      {
+        "port": 8005,
+        "enabled": true,
+        "created": 1741815771.727605,
+        "expired": 1742161371.727602
+      },
+      {
+        "port": 8005,
+        "enabled": false,
+        "created": 1741473771.727609,
+        "expired": 1741815771.727605
+      },
+      {
+        "port": 8051,
+        "enabled": false,
+        "created": 1741128171.727613,
+        "expired": 1741473771.727609
+      }
+    ]
+  },
+  {
+    "_key": "software18",
+    "name": "Docker",
+    "type": "service",
+    "softwareVersion": "Docker 20.10.17",
+    "configurationHistory": [
+      {
+        "port": 8894,
+        "enabled": true,
+        "created": 1743025371.727621,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8894,
+        "enabled": false,
+        "created": 1742766171.727622,
+        "expired": 1743025371.727621
+      },
+      {
+        "port": 8446,
+        "enabled": false,
+        "created": 1742334171.727626,
+        "expired": 1742766171.727622
+      },
+      {
+        "port": 8446,
+        "enabled": true,
+        "created": 1741729371.72763,
+        "expired": 1742334171.727626
+      },
+      {
+        "port": 8799,
+        "enabled": true,
+        "created": 1741473771.727634,
+        "expired": 1741729371.72763
+      },
+      {
+        "port": 8404,
+        "enabled": true,
+        "created": 1741214571.727638,
+        "expired": 1741473771.727634
+      }
+    ]
+  },
+  {
+    "_key": "software19",
+    "name": "Nginx",
+    "type": "application",
+    "softwareVersion": "Nginx 1.22.0",
+    "configurationHistory": [
+      {
+        "port": 8687,
+        "enabled": true,
+        "created": 1743025371.727647,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8687,
+        "enabled": false,
+        "created": 1742938971.727648,
+        "expired": 1743025371.727647
+      },
+      {
+        "port": 8687,
+        "enabled": true,
+        "created": 1742334171.727652,
+        "expired": 1742938971.727648
+      },
+      {
+        "port": 8687,
+        "enabled": false,
+        "created": 1741902171.727655,
+        "expired": 1742334171.727652
+      },
+      {
+        "port": 8687,
+        "enabled": true,
+        "created": 1741642971.727658,
+        "expired": 1741902171.727655
+      },
+      {
+        "port": 8151,
+        "enabled": true,
+        "created": 1741041771.727661,
+        "expired": 1741642971.727658
+      }
+    ]
+  },
+  {
+    "_key": "software20",
+    "name": "Kubernetes",
+    "type": "service",
+    "softwareVersion": "Kubernetes 1.25.2",
+    "configurationHistory": [
+      {
+        "port": 8239,
+        "enabled": true,
+        "created": 1743025371.72767,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8239,
+        "enabled": false,
+        "created": 1742766171.727671,
+        "expired": 1743025371.72767
+      },
+      {
+        "port": 8278,
+        "enabled": false,
+        "created": 1742161371.727674,
+        "expired": 1742766171.727671
+      },
+      {
+        "port": 8955,
+        "enabled": false,
+        "created": 1741815771.727679,
+        "expired": 1742161371.727674
+      },
+      {
+        "port": 8996,
+        "enabled": false,
+        "created": 1741556571.727683,
+        "expired": 1741815771.727679
+      },
+      {
+        "port": 8409,
+        "enabled": false,
+        "created": 1741128171.727688,
+        "expired": 1741556571.727683
+      }
+    ]
+  },
+  {
+    "_key": "software21",
+    "name": "Docker",
+    "type": "service",
+    "softwareVersion": "Docker 20.10.17",
+    "configurationHistory": [
+      {
+        "port": 8768,
+        "enabled": true,
+        "created": 1743025371.727697,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8785,
+        "enabled": true,
+        "created": 1742593371.727698,
+        "expired": 1743025371.727697
+      },
+      {
+        "port": 8726,
+        "enabled": true,
+        "created": 1742334171.727703,
+        "expired": 1742593371.727698
+      },
+      {
+        "port": 8052,
+        "enabled": true,
+        "created": 1741902171.727708,
+        "expired": 1742334171.727703
+      },
+      {
+        "port": 8052,
+        "enabled": false,
+        "created": 1741556571.727712,
+        "expired": 1741902171.727708
+      },
+      {
+        "port": 8364,
+        "enabled": false,
+        "created": 1741214571.727716,
+        "expired": 1741556571.727712
+      }
+    ]
+  },
+  {
+    "_key": "software22",
+    "name": "PostgreSQL",
+    "type": "database",
+    "softwareVersion": "PostgreSQL 14.5",
+    "configurationHistory": [
+      {
+        "port": 8677,
+        "enabled": true,
+        "created": 1743025371.727724,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8677,
+        "enabled": false,
+        "created": 1742679771.727725,
+        "expired": 1743025371.727724
+      },
+      {
+        "port": 8216,
+        "enabled": false,
+        "created": 1742161371.727729,
+        "expired": 1742679771.727725
+      },
+      {
+        "port": 8216,
+        "enabled": true,
+        "created": 1741988571.727733,
+        "expired": 1742161371.727729
+      },
+      {
+        "port": 8216,
+        "enabled": true,
+        "created": 1741473771.727737,
+        "expired": 1741988571.727733
+      },
+      {
+        "port": 8140,
+        "enabled": true,
+        "created": 1740868971.727741,
+        "expired": 1741473771.727737
+      }
+    ]
+  },
+  {
+    "_key": "software23",
+    "name": "Python",
+    "type": "application",
+    "softwareVersion": "Python 3.10.6",
+    "configurationHistory": [
+      {
+        "port": 8207,
+        "enabled": true,
+        "created": 1743025371.72775,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8207,
+        "enabled": false,
+        "created": 1742938971.727751,
+        "expired": 1743025371.72775
+      },
+      {
+        "port": 8352,
+        "enabled": false,
+        "created": 1742420571.727755,
+        "expired": 1742938971.727751
+      },
+      {
+        "port": 8352,
+        "enabled": true,
+        "created": 1742074971.727759,
+        "expired": 1742420571.727755
+      },
+      {
+        "port": 8735,
+        "enabled": true,
+        "created": 1741556571.727763,
+        "expired": 1742074971.727759
+      },
+      {
+        "port": 8071,
+        "enabled": true,
+        "created": 1741128171.727768,
+        "expired": 1741556571.727763
       }
     ]
   },
@@ -1018,172 +1018,172 @@
     "softwareVersion": "MySQL 8.0.30",
     "configurationHistory": [
       {
-        "port": 8909,
+        "port": 8756,
         "enabled": true,
-        "created": 1743020288.782879,
+        "created": 1743025371.727776,
         "expired": 9223372036854775807
       },
       {
-        "port": 8684,
+        "port": 8092,
         "enabled": true,
-        "created": 1742674688.78288,
-        "expired": 1743020288.782879
+        "created": 1742766171.727778,
+        "expired": 1743025371.727776
       },
       {
-        "port": 8099,
+        "port": 8092,
+        "enabled": false,
+        "created": 1742161371.727782,
+        "expired": 1742766171.727778
+      },
+      {
+        "port": 8618,
+        "enabled": false,
+        "created": 1741902171.727786,
+        "expired": 1742161371.727782
+      },
+      {
+        "port": 8618,
         "enabled": true,
-        "created": 1742156288.782885,
-        "expired": 1742674688.78288
+        "created": 1741642971.72779,
+        "expired": 1741902171.727786
       },
       {
-        "port": 8099,
+        "port": 8618,
         "enabled": false,
-        "created": 1741983488.782889,
-        "expired": 1742156288.782885
-      },
-      {
-        "port": 8829,
-        "enabled": false,
-        "created": 1741637888.782893,
-        "expired": 1741983488.782889
-      },
-      {
-        "port": 8942,
-        "enabled": false,
-        "created": 1740950288.782897,
-        "expired": 1741637888.782893
+        "created": 1741214571.727794,
+        "expired": 1741642971.72779
       }
     ]
   },
   {
     "_key": "software25",
-    "name": "OpenSSH",
-    "type": "service",
-    "softwareVersion": "OpenSSH 8.9p1",
+    "name": "MongoDB",
+    "type": "database",
+    "softwareVersion": "MongoDB 6.0.2",
     "configurationHistory": [
       {
-        "port": 8572,
+        "port": 8753,
         "enabled": true,
-        "created": 1743020288.782906,
+        "created": 1743025371.727801,
         "expired": 9223372036854775807
       },
       {
-        "port": 8859,
+        "port": 8753,
+        "enabled": false,
+        "created": 1742766171.727803,
+        "expired": 1743025371.727801
+      },
+      {
+        "port": 8753,
         "enabled": true,
-        "created": 1742847488.782907,
-        "expired": 1743020288.782906
+        "created": 1742247771.727806,
+        "expired": 1742766171.727803
       },
       {
-        "port": 8859,
+        "port": 8753,
         "enabled": false,
-        "created": 1742501888.782912,
-        "expired": 1742847488.782907
+        "created": 1741902171.727809,
+        "expired": 1742247771.727806
       },
       {
-        "port": 8866,
+        "port": 8028,
         "enabled": false,
-        "created": 1741897088.782915,
-        "expired": 1742501888.782912
+        "created": 1741300971.727812,
+        "expired": 1741902171.727809
       },
       {
-        "port": 8903,
-        "enabled": false,
-        "created": 1741468688.78292,
-        "expired": 1741897088.782915
-      },
-      {
-        "port": 8548,
-        "enabled": false,
-        "created": 1740863888.782924,
-        "expired": 1741468688.78292
+        "port": 8028,
+        "enabled": true,
+        "created": 1741128171.727817,
+        "expired": 1741300971.727812
       }
     ]
   },
   {
     "_key": "software26",
-    "name": "OpenSSH",
-    "type": "service",
-    "softwareVersion": "OpenSSH 8.9p1",
-    "configurationHistory": [
-      {
-        "port": 8862,
-        "enabled": true,
-        "created": 1743020288.782933,
-        "expired": 9223372036854775807
-      },
-      {
-        "port": 8686,
-        "enabled": true,
-        "created": 1742847488.782934,
-        "expired": 1743020288.782933
-      },
-      {
-        "port": 8547,
-        "enabled": true,
-        "created": 1742242688.782939,
-        "expired": 1742847488.782934
-      },
-      {
-        "port": 8547,
-        "enabled": false,
-        "created": 1741724288.782944,
-        "expired": 1742242688.782939
-      },
-      {
-        "port": 8547,
-        "enabled": true,
-        "created": 1741637888.782947,
-        "expired": 1741724288.782944
-      },
-      {
-        "port": 8547,
-        "enabled": false,
-        "created": 1740950288.78295,
-        "expired": 1741637888.782947
-      }
-    ]
-  },
-  {
-    "_key": "software27",
     "name": "Python",
     "type": "application",
     "softwareVersion": "Python 3.10.6",
     "configurationHistory": [
       {
-        "port": 8229,
+        "port": 8582,
         "enabled": true,
-        "created": 1743020288.782957,
+        "created": 1743025371.727824,
         "expired": 9223372036854775807
       },
       {
-        "port": 8229,
-        "enabled": false,
-        "created": 1742761088.782959,
-        "expired": 1743020288.782957
+        "port": 8657,
+        "enabled": true,
+        "created": 1742679771.727826,
+        "expired": 1743025371.727824
       },
       {
-        "port": 8248,
+        "port": 8657,
         "enabled": false,
-        "created": 1742329088.782962,
-        "expired": 1742761088.782959
+        "created": 1742247771.72783,
+        "expired": 1742679771.727826
       },
       {
-        "port": 8166,
+        "port": 8130,
         "enabled": false,
-        "created": 1742069888.782967,
-        "expired": 1742329088.782962
+        "created": 1741729371.727833,
+        "expired": 1742247771.72783
       },
       {
-        "port": 8672,
+        "port": 8560,
         "enabled": false,
-        "created": 1741382288.782971,
-        "expired": 1742069888.782967
+        "created": 1741300971.727838,
+        "expired": 1741729371.727833
       },
       {
-        "port": 8335,
+        "port": 8560,
+        "enabled": true,
+        "created": 1741041771.727843,
+        "expired": 1741300971.727838
+      }
+    ]
+  },
+  {
+    "_key": "software27",
+    "name": "Apache",
+    "type": "application",
+    "softwareVersion": "Apache HTTP Server 2.4.53",
+    "configurationHistory": [
+      {
+        "port": 8381,
+        "enabled": true,
+        "created": 1743025371.72785,
+        "expired": 9223372036854775807
+      },
+      {
+        "port": 8838,
+        "enabled": true,
+        "created": 1742679771.727851,
+        "expired": 1743025371.72785
+      },
+      {
+        "port": 8177,
+        "enabled": true,
+        "created": 1742247771.727856,
+        "expired": 1742679771.727851
+      },
+      {
+        "port": 8177,
         "enabled": false,
-        "created": 1740863888.782976,
-        "expired": 1741382288.782971
+        "created": 1741815771.727861,
+        "expired": 1742247771.727856
+      },
+      {
+        "port": 8177,
+        "enabled": true,
+        "created": 1741300971.727864,
+        "expired": 1741815771.727861
+      },
+      {
+        "port": 8828,
+        "enabled": true,
+        "created": 1741214571.727867,
+        "expired": 1741300971.727864
       }
     ]
   },
@@ -1194,128 +1194,128 @@
     "softwareVersion": "Kubernetes 1.25.2",
     "configurationHistory": [
       {
-        "port": 8481,
+        "port": 8378,
         "enabled": true,
-        "created": 1743020288.782985,
+        "created": 1743025371.727876,
         "expired": 9223372036854775807
       },
       {
-        "port": 8481,
+        "port": 8378,
         "enabled": false,
-        "created": 1742588288.782986,
-        "expired": 1743020288.782985
+        "created": 1742938971.727878,
+        "expired": 1743025371.727876
       },
       {
-        "port": 8481,
-        "enabled": true,
-        "created": 1742329088.78299,
-        "expired": 1742588288.782986
+        "port": 8502,
+        "enabled": false,
+        "created": 1742247771.727881,
+        "expired": 1742938971.727878
       },
       {
-        "port": 8607,
+        "port": 8502,
         "enabled": true,
-        "created": 1741724288.782993,
-        "expired": 1742329088.78299
+        "created": 1741988571.727886,
+        "expired": 1742247771.727881
       },
       {
-        "port": 8735,
+        "port": 8043,
         "enabled": true,
-        "created": 1741468688.782997,
-        "expired": 1741724288.782993
+        "created": 1741300971.727889,
+        "expired": 1741988571.727886
       },
       {
-        "port": 8179,
-        "enabled": true,
-        "created": 1740863888.783002,
-        "expired": 1741468688.782997
+        "port": 8043,
+        "enabled": false,
+        "created": 1741041771.727893,
+        "expired": 1741300971.727889
       }
     ]
   },
   {
     "_key": "software29",
-    "name": "OpenSSH",
-    "type": "service",
-    "softwareVersion": "OpenSSH 8.9p1",
+    "name": "Apache",
+    "type": "application",
+    "softwareVersion": "Apache HTTP Server 2.4.53",
     "configurationHistory": [
       {
-        "port": 8452,
+        "port": 8794,
         "enabled": true,
-        "created": 1743020288.78301,
+        "created": 1743025371.7279,
         "expired": 9223372036854775807
       },
       {
-        "port": 8560,
+        "port": 8088,
         "enabled": true,
-        "created": 1742847488.783012,
-        "expired": 1743020288.78301
+        "created": 1742852571.727902,
+        "expired": 1743025371.7279
       },
       {
-        "port": 8560,
+        "port": 8088,
         "enabled": false,
-        "created": 1742501888.783017,
-        "expired": 1742847488.783012
+        "created": 1742420571.727906,
+        "expired": 1742852571.727902
       },
       {
-        "port": 8270,
-        "enabled": false,
-        "created": 1742069888.78302,
-        "expired": 1742501888.783017
-      },
-      {
-        "port": 8312,
-        "enabled": false,
-        "created": 1741551488.783025,
-        "expired": 1742069888.78302
-      },
-      {
-        "port": 8312,
+        "port": 8088,
         "enabled": true,
-        "created": 1740950288.78303,
-        "expired": 1741551488.783025
+        "created": 1741729371.727909,
+        "expired": 1742420571.727906
+      },
+      {
+        "port": 8706,
+        "enabled": true,
+        "created": 1741642971.727913,
+        "expired": 1741729371.727909
+      },
+      {
+        "port": 8706,
+        "enabled": false,
+        "created": 1741214571.727917,
+        "expired": 1741642971.727913
       }
     ]
   },
   {
     "_key": "software30",
-    "name": "PostgreSQL",
-    "type": "database",
-    "softwareVersion": "PostgreSQL 14.5",
+    "name": "Python",
+    "type": "application",
+    "softwareVersion": "Python 3.10.6",
     "configurationHistory": [
       {
-        "port": 8108,
+        "port": 8153,
         "enabled": true,
-        "created": 1743020288.783037,
+        "created": 1743025371.727924,
         "expired": 9223372036854775807
       },
       {
-        "port": 8527,
+        "port": 8794,
         "enabled": true,
-        "created": 1742761088.783038,
-        "expired": 1743020288.783037
+        "created": 1742766171.727926,
+        "expired": 1743025371.727924
       },
       {
-        "port": 8527,
+        "port": 8627,
+        "enabled": true,
+        "created": 1742247771.727931,
+        "expired": 1742766171.727926
+      },
+      {
+        "port": 8627,
         "enabled": false,
-        "created": 1742329088.783043,
-        "expired": 1742761088.783038
+        "created": 1742074971.727935,
+        "expired": 1742247771.727931
       },
       {
-        "port": 8527,
+        "port": 8627,
         "enabled": true,
-        "created": 1741897088.783046,
-        "expired": 1742329088.783043
+        "created": 1741300971.727938,
+        "expired": 1742074971.727935
       },
       {
-        "port": 8822,
-        "enabled": true,
-        "created": 1741468688.783049,
-        "expired": 1741897088.783046
-      },
-      {
-        "port": 8822,
+        "port": 8627,
         "enabled": false,
-        "created": 1740863888.783054,
-        "expired": 1741468688.783049
+        "created": 1741041771.727942,
+        "expired": 1741300971.727938
       }
     ]
   }

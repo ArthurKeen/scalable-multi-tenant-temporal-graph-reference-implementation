@@ -33,7 +33,6 @@ def generateLocations(num_locations=5):
 
 def generateDevices(locations, num_devices=20,num_config_changes=5):
     """Generate device data and store in Device.json."""
-    devices = []
     device_types = ["server", "router", "laptop", "IoT", "firewall"]
     os_versions = {
         "server": ["CentOS 7.9.2009", "Ubuntu 20.04.3 LTS", "Windows Server 2019 Datacenter"],
@@ -42,10 +41,23 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
         "IoT": ["Embedded Linux 4.14.247", "FreeRTOS 10.4.6"],
         "firewall": ["FortiOS 7.0.9", "pfSense 2.5.2"]
     }
+    devices = []
+    deviceIns = []
+    deviceOuts = []
+    versions = []
     for i in range(num_devices):
         device_type = random.choice(device_types)
         os_version = random.choice(os_versions[device_type])
         model = f"{device_type.capitalize()} Model {random.randint(100, 999)}"
+
+        deviceIn = {"_key": f"device{i+1}", "name": device_type+" "+model+" proxy in","type": device_type}
+        deviceIns.append(deviceIn)
+        deviceOut = {"_key": f"device{i+1}", "name": device_type+" "+model+" proxy out", "type": device_type}
+        deviceOuts.append(deviceOut)
+        versionIn = {"_key": f"deviceIn{i+1}", "_from": "DeviceIn/"+f"device{i+1}", "_to": "Device/"+f"device{i+1}"}
+        versions.append(versionIn)
+        versionOut = {"_key": f"deviceOut{i+1}", "_from": "Device/"+f"device{i+1}", "_to": "DeviceOut/"+f"device{i+1}"}
+        versions.append(versionOut)
         device = {
             "_key": f"device{i+1}",
             "name" : device_type+" "+model,
@@ -83,7 +95,13 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
             current_config = previous_config
     with open("./data/Device.json", "w") as f:
         json.dump(devices, f, indent=2)
-    return devices
+    with open("./data/DeviceIn.json", "w") as f:
+        json.dump(deviceIns, f, indent=2)
+    with open("./data/DeviceOut.json", "w") as f:
+        json.dump(deviceOuts, f, indent=2)
+    with open("./data/version.json", "w") as f:
+        json.dump(versions, f, indent=2)
+    return devices, deviceIns, deviceOuts, versions
 
 def generateHasLocation(devices):
     """Generate hasLocation edge data and store in hasLocation.json."""
@@ -190,7 +208,7 @@ def generateHasSoftware(devices, software, num_hasSoftware=40):
 def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_hasSoftware=40, num_config_changes=5):
     """Generate network asset data and store in individual vertex and edge .json files"""
     locations = generateLocations(num_locations)
-    devices = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
+    devices, deviceIns, deviceOuts, versions = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
     software = generateSoftware(num_software=num_software, num_config_changes=num_config_changes)
     connections = generateConnections(devices, num_connections=30)
     hasSoftware = generateHasSoftware(devices, software, num_hasSoftware=num_hasSoftware)
