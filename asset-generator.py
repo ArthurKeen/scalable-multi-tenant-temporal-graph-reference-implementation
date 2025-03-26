@@ -5,6 +5,9 @@ import datetime
 import geojson
 import sys
 
+def notExpiredValue():
+    return sys.maxsize
+
 def generateLocations(num_locations=5):
     """Generate Real Locations with GeoJSON and store in Location.json."""
     locations = []
@@ -58,10 +61,10 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
         }
         devices.append(device)
         # Generate configuration history
-        current_config = {"hostname": f"device{i+1}", "firewallRules": ["allow 80", "allow 443"], "timestamp": datetime.datetime.now().isoformat()}
+        current_config = {"hostname": f"device{i+1}", "firewallRules": ["allow 80", "allow 443"], "created": datetime.datetime.now().isoformat(), "expired": notExpiredValue()}
         device["configurationHistory"].append(current_config)
         for _ in range(num_config_changes):
-            change_time = datetime.datetime.now() + datetime.timedelta(days=random.randint(1, 30))
+            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(1, 30))
             new_config = current_config.copy()
             if random.random() < 0.5:
                 # Add/remove firewall rule
@@ -73,7 +76,7 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
             else:
                 # Change hostname
                 new_config["hostname"] = f"new-device-{random.randint(100, 999)}"
-            new_config["timestamp"] = change_time.isoformat()
+            new_config["created"] = created.isoformat()
             device["configurationHistory"].append(new_config)
             current_config = new_config
     with open("./data/Device.json", "w") as f:
@@ -102,16 +105,16 @@ def generateSoftware(num_software=30, num_config_changes=5):
         }
         software.append(soft)
         # Generate software configuration history
-        current_config = {"port": random.randint(8000, 9000), "enabled": True, "timestamp": datetime.datetime.now().isoformat()}
+        current_config = {"port": random.randint(8000, 9000), "enabled": True, "created": datetime.datetime.now().isoformat(), "expired": notExpiredValue()}
         soft["configurationHistory"].append(current_config)
         for _ in range(num_config_changes):
-            change_time = datetime.datetime.now() + datetime.timedelta(days=random.randint(1, 30))
+            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(1, 30))
             new_config = current_config.copy()
             if random.random() < 0.5:
                 new_config["port"] = random.randint(8000, 9000)
             else:
                 new_config["enabled"] = not new_config["enabled"]
-            new_config["timestamp"] = change_time.isoformat()
+            new_config["created"] = created.isoformat()
             soft["configurationHistory"].append(new_config)
             current_config = new_config
     with open("./data/Software.json", "w") as f:
@@ -135,7 +138,7 @@ def generateConnections(devices,num_connections=30):
                 "bandwidth": f"{random.randint(10, 1000)}Mbps",
                 "latency": f"{random.randint(1, 10)}ms",
                 "created" : datetime.datetime.now().timestamp(),
-                "expired": sys.maxsize
+                "expired": notExpiredValue()
             }
             connections.append(connection)
     with open("./data/hasConnection.json", "w") as f:
@@ -154,7 +157,7 @@ def generateHasSoftware(devices, software, num_hasSoftware=40):
                 "_from": _from,
                 "_to": "Software/"+random.choice(software)["_key"],
                 "created" : datetime.datetime.now().timestamp(),
-                "expired": sys.maxsize
+                "expired": notExpiredValue()
             }
             hasSoftwares.append(hasSoftware)
     with open("./data/hasSoftware.json", "w") as f:
