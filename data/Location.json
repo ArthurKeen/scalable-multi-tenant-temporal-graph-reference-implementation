@@ -1,0 +1,62 @@
+[
+  {
+    "_key": "location1",
+    "name": "New York Data Center",
+    "address": "123 Broadway, New York, NY",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    }
+  },
+  {
+    "_key": "location2",
+    "name": "London Office",
+    "address": "456 Oxford St, London",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    }
+  },
+  {
+    "_key": "location3",
+    "name": "Tokyo HQ",
+    "address": "789 Ginza, Tokyo",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    }
+  },
+  {
+    "_key": "location4",
+    "name": "Sydney Warehouse",
+    "address": "101 George St, Sydney",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    }
+  },
+  {
+    "_key": "location5",
+    "name": "Frankfurt Cloud Region",
+    "address": "222 Mainzer Landstr, Frankfurt",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    }
+  }
+]

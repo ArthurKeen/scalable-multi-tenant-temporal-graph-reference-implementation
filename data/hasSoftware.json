@@ -1,0 +1,282 @@
+[
+  {
+    "_key": "hasSoftware1",
+    "_from": "Device/device20",
+    "_to": "Software/software18",
+    "created": 1743019338.372242,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware2",
+    "_from": "Device/device20",
+    "_to": "Software/software25",
+    "created": 1743019338.372247,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware3",
+    "_from": "Device/device8",
+    "_to": "Software/software17",
+    "created": 1743019338.372251,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware4",
+    "_from": "Device/device20",
+    "_to": "Software/software22",
+    "created": 1743019338.372254,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware5",
+    "_from": "Device/device5",
+    "_to": "Software/software1",
+    "created": 1743019338.372258,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware6",
+    "_from": "Device/device15",
+    "_to": "Software/software9",
+    "created": 1743019338.372262,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware7",
+    "_from": "Device/device11",
+    "_to": "Software/software12",
+    "created": 1743019338.372267,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware8",
+    "_from": "Device/device4",
+    "_to": "Software/software7",
+    "created": 1743019338.372271,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware9",
+    "_from": "Device/device20",
+    "_to": "Software/software20",
+    "created": 1743019338.372275,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware10",
+    "_from": "Device/device12",
+    "_to": "Software/software29",
+    "created": 1743019338.372279,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware11",
+    "_from": "Device/device12",
+    "_to": "Software/software7",
+    "created": 1743019338.372282,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware12",
+    "_from": "Device/device9",
+    "_to": "Software/software6",
+    "created": 1743019338.372286,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware13",
+    "_from": "Device/device18",
+    "_to": "Software/software26",
+    "created": 1743019338.37229,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware14",
+    "_from": "Device/device19",
+    "_to": "Software/software17",
+    "created": 1743019338.372293,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware15",
+    "_from": "Device/device2",
+    "_to": "Software/software8",
+    "created": 1743019338.372297,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware16",
+    "_from": "Device/device9",
+    "_to": "Software/software14",
+    "created": 1743019338.372301,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware17",
+    "_from": "Device/device5",
+    "_to": "Software/software19",
+    "created": 1743019338.372305,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware18",
+    "_from": "Device/device12",
+    "_to": "Software/software1",
+    "created": 1743019338.372308,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware19",
+    "_from": "Device/device10",
+    "_to": "Software/software20",
+    "created": 1743019338.372312,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware20",
+    "_from": "Device/device16",
+    "_to": "Software/software8",
+    "created": 1743019338.372315,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware21",
+    "_from": "Device/device3",
+    "_to": "Software/software15",
+    "created": 1743019338.37232,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware22",
+    "_from": "Device/device10",
+    "_to": "Software/software17",
+    "created": 1743019338.372324,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware23",
+    "_from": "Device/device5",
+    "_to": "Software/software24",
+    "created": 1743019338.372328,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware24",
+    "_from": "Device/device19",
+    "_to": "Software/software26",
+    "created": 1743019338.372331,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware25",
+    "_from": "Device/device1",
+    "_to": "Software/software23",
+    "created": 1743019338.372337,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware26",
+    "_from": "Device/device20",
+    "_to": "Software/software3",
+    "created": 1743019338.37234,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware27",
+    "_from": "Device/device1",
+    "_to": "Software/software30",
+    "created": 1743019338.372344,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware28",
+    "_from": "Device/device9",
+    "_to": "Software/software20",
+    "created": 1743019338.372349,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware29",
+    "_from": "Device/device4",
+    "_to": "Software/software26",
+    "created": 1743019338.372352,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware30",
+    "_from": "Device/device18",
+    "_to": "Software/software19",
+    "created": 1743019338.372356,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware31",
+    "_from": "Device/device18",
+    "_to": "Software/software8",
+    "created": 1743019338.37236,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware32",
+    "_from": "Device/device12",
+    "_to": "Software/software21",
+    "created": 1743019338.372364,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware33",
+    "_from": "Device/device13",
+    "_to": "Software/software14",
+    "created": 1743019338.372367,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware34",
+    "_from": "Device/device3",
+    "_to": "Software/software11",
+    "created": 1743019338.372371,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware35",
+    "_from": "Device/device2",
+    "_to": "Software/software21",
+    "created": 1743019338.372375,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware36",
+    "_from": "Device/device18",
+    "_to": "Software/software20",
+    "created": 1743019338.372378,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware37",
+    "_from": "Device/device18",
+    "_to": "Software/software14",
+    "created": 1743019338.372383,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware38",
+    "_from": "Device/device1",
+    "_to": "Software/software29",
+    "created": 1743019338.372387,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware39",
+    "_from": "Device/device9",
+    "_to": "Software/software2",
+    "created": 1743019338.372391,
+    "expired": 9223372036854775807
+  },
+  {
+    "_key": "hasSoftware40",
+    "_from": "Device/device19",
+    "_to": "Software/software18",
+    "created": 1743019338.372394,
+    "expired": 9223372036854775807
+  }
+]

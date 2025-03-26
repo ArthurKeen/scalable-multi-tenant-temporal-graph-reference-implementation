@@ -1,0 +1,1380 @@
+[
+  {
+    "_key": "device1",
+    "name": "firewall Firewall Model 982",
+    "type": "firewall",
+    "model": "Firewall Model 982",
+    "serialNumber": "e1dd93bd-559a-4093-a62f-a0b72eacac4f",
+    "ipAddress": "192.168.148.201",
+    "macAddress": "82:18:d8:a1:03:77",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "locationId": "location5",
+    "configurationHistory": [
+      {
+        "hostname": "device1",
+        "firewallRules": [],
+        "created": 1743019338.353208,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device1",
+        "firewallRules": [],
+        "created": 1742587338.353222,
+        "expired": 1743019338.353208
+      },
+      {
+        "hostname": "device1",
+        "firewallRules": [],
+        "created": 1742414538.353234,
+        "expired": 1742587338.353222
+      },
+      {
+        "hostname": "new-device-109",
+        "firewallRules": [],
+        "created": 1741809738.35324,
+        "expired": 1742414538.353234
+      },
+      {
+        "hostname": "new-device-595",
+        "firewallRules": [],
+        "created": 1741294938.353246,
+        "expired": 1741809738.35324
+      },
+      {
+        "hostname": "new-device-455",
+        "firewallRules": [],
+        "created": 1740862938.353251,
+        "expired": 1741294938.353246
+      }
+    ]
+  },
+  {
+    "_key": "device2",
+    "name": "server Server Model 968",
+    "type": "server",
+    "model": "Server Model 968",
+    "serialNumber": "6f0dde34-8ba5-4891-a080-6967216be377",
+    "ipAddress": "192.168.140.172",
+    "macAddress": "6b:71:35:69:ba:42",
+    "os": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "locationId": "location2",
+    "configurationHistory": [
+      {
+        "hostname": "device2",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 1205"
+        ],
+        "created": 1743019338.353298,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "new-device-334",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 1205"
+        ],
+        "created": 1742673738.3533,
+        "expired": 1743019338.353298
+      },
+      {
+        "hostname": "new-device-334",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 1205"
+        ],
+        "created": 1742414538.353309,
+        "expired": 1742673738.3533
+      },
+      {
+        "hostname": "new-device-998",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 1205"
+        ],
+        "created": 1742068938.353314,
+        "expired": 1742414538.353309
+      },
+      {
+        "hostname": "new-device-466",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 1205"
+        ],
+        "created": 1741467738.35332,
+        "expired": 1742068938.353314
+      },
+      {
+        "hostname": "new-device-562",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 1205"
+        ],
+        "created": 1741035738.353325,
+        "expired": 1741467738.35332
+      }
+    ]
+  },
+  {
+    "_key": "device3",
+    "name": "server Server Model 133",
+    "type": "server",
+    "model": "Server Model 133",
+    "serialNumber": "dcbbdb71-d535-4466-98b8-9137f46de332",
+    "ipAddress": "192.168.135.88",
+    "macAddress": "20:1b:2a:de:02:cc",
+    "os": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "locationId": "location3",
+    "configurationHistory": [
+      {
+        "hostname": "device3",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8975",
+          "allow 5063"
+        ],
+        "created": 1743019338.35337,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device3",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8975",
+          "allow 5063"
+        ],
+        "created": 1742932938.353372,
+        "expired": 1743019338.35337
+      },
+      {
+        "hostname": "new-device-835",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8975",
+          "allow 5063"
+        ],
+        "created": 1742155338.353378,
+        "expired": 1742932938.353372
+      },
+      {
+        "hostname": "new-device-133",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8975",
+          "allow 5063"
+        ],
+        "created": 1741982538.353382,
+        "expired": 1742155338.353378
+      },
+      {
+        "hostname": "new-device-133",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8975",
+          "allow 5063"
+        ],
+        "created": 1741636938.353387,
+        "expired": 1741982538.353382
+      },
+      {
+        "hostname": "new-device-861",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8975",
+          "allow 5063"
+        ],
+        "created": 1741208538.353392,
+        "expired": 1741636938.353387
+      }
+    ]
+  },
+  {
+    "_key": "device4",
+    "name": "laptop Laptop Model 143",
+    "type": "laptop",
+    "model": "Laptop Model 143",
+    "serialNumber": "96c2ae10-358b-491e-a399-405566815e51",
+    "ipAddress": "192.168.223.24",
+    "macAddress": "ab:03:c2:04:37:78",
+    "os": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "locationId": "location2",
+    "configurationHistory": [
+      {
+        "hostname": "device4",
+        "firewallRules": [
+          "allow 4839"
+        ],
+        "created": 1743019338.35344,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device4",
+        "firewallRules": [
+          "allow 4839"
+        ],
+        "created": 1742760138.353442,
+        "expired": 1743019338.35344
+      },
+      {
+        "hostname": "new-device-604",
+        "firewallRules": [
+          "allow 4839"
+        ],
+        "created": 1742414538.353447,
+        "expired": 1742760138.353442
+      },
+      {
+        "hostname": "new-device-604",
+        "firewallRules": [
+          "allow 4839"
+        ],
+        "created": 1741896138.353452,
+        "expired": 1742414538.353447
+      },
+      {
+        "hostname": "new-device-604",
+        "firewallRules": [
+          "allow 4839"
+        ],
+        "created": 1741381338.353458,
+        "expired": 1741896138.353452
+      },
+      {
+        "hostname": "new-device-104",
+        "firewallRules": [
+          "allow 4839"
+        ],
+        "created": 1741208538.353463,
+        "expired": 1741381338.353458
+      }
+    ]
+  },
+  {
+    "_key": "device5",
+    "name": "firewall Firewall Model 297",
+    "type": "firewall",
+    "model": "Firewall Model 297",
+    "serialNumber": "04743169-0312-45cf-a031-47d80cdfe59b",
+    "ipAddress": "192.168.253.191",
+    "macAddress": "4c:72:78:02:d4:fe",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "locationId": "location1",
+    "configurationHistory": [
+      {
+        "hostname": "device5",
+        "firewallRules": [
+          "allow 443",
+          "allow 6861",
+          "allow 5704",
+          "allow 8963"
+        ],
+        "created": 1743019338.353505,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "new-device-426",
+        "firewallRules": [
+          "allow 443",
+          "allow 6861",
+          "allow 5704",
+          "allow 8963"
+        ],
+        "created": 1742760138.353507,
+        "expired": 1743019338.353505
+      },
+      {
+        "hostname": "new-device-426",
+        "firewallRules": [
+          "allow 443",
+          "allow 6861",
+          "allow 5704",
+          "allow 8963"
+        ],
+        "created": 1742414538.353512,
+        "expired": 1742760138.353507
+      },
+      {
+        "hostname": "new-device-426",
+        "firewallRules": [
+          "allow 443",
+          "allow 6861",
+          "allow 5704",
+          "allow 8963"
+        ],
+        "created": 1742068938.353517,
+        "expired": 1742414538.353512
+      },
+      {
+        "hostname": "new-device-426",
+        "firewallRules": [
+          "allow 443",
+          "allow 6861",
+          "allow 5704",
+          "allow 8963"
+        ],
+        "created": 1741467738.353522,
+        "expired": 1742068938.353517
+      },
+      {
+        "hostname": "new-device-426",
+        "firewallRules": [
+          "allow 443",
+          "allow 6861",
+          "allow 5704",
+          "allow 8963"
+        ],
+        "created": 1741035738.353528,
+        "expired": 1741467738.353522
+      }
+    ]
+  },
+  {
+    "_key": "device6",
+    "name": "router Router Model 129",
+    "type": "router",
+    "model": "Router Model 129",
+    "serialNumber": "1bc2ba0a-871d-43a0-a055-e1843f840550",
+    "ipAddress": "192.168.179.123",
+    "macAddress": "19:6d:ca:ba:8e:a4",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "locationId": "location4",
+    "configurationHistory": [
+      {
+        "hostname": "device6",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1743019338.353568,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "new-device-615",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1742760138.35357,
+        "expired": 1743019338.353568
+      },
+      {
+        "hostname": "new-device-775",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1742328138.353575,
+        "expired": 1742760138.35357
+      },
+      {
+        "hostname": "new-device-775",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1741809738.35358,
+        "expired": 1742328138.353575
+      },
+      {
+        "hostname": "new-device-271",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1741381338.353585,
+        "expired": 1741809738.35358
+      },
+      {
+        "hostname": "new-device-693",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1741122138.35359,
+        "expired": 1741381338.353585
+      }
+    ]
+  },
+  {
+    "_key": "device7",
+    "name": "router Router Model 670",
+    "type": "router",
+    "model": "Router Model 670",
+    "serialNumber": "f9a478cc-bf16-427a-837d-7eceb6b707df",
+    "ipAddress": "192.168.139.76",
+    "macAddress": "d0:27:1c:50:90:71",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "locationId": "location2",
+    "configurationHistory": [
+      {
+        "hostname": "device7",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1743019338.35363,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "new-device-282",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1742760138.353632,
+        "expired": 1743019338.35363
+      },
+      {
+        "hostname": "new-device-555",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1742328138.353637,
+        "expired": 1742760138.353632
+      },
+      {
+        "hostname": "new-device-206",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1741809738.353642,
+        "expired": 1742328138.353637
+      },
+      {
+        "hostname": "new-device-993",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1741294938.353647,
+        "expired": 1741809738.353642
+      },
+      {
+        "hostname": "new-device-993",
+        "firewallRules": [
+          "allow 443"
+        ],
+        "created": 1741122138.353652,
+        "expired": 1741294938.353647
+      }
+    ]
+  },
+  {
+    "_key": "device8",
+    "name": "laptop Laptop Model 290",
+    "type": "laptop",
+    "model": "Laptop Model 290",
+    "serialNumber": "f3f367b4-fc86-4dae-8660-75c93017d8e2",
+    "ipAddress": "192.168.195.191",
+    "macAddress": "47:fb:5a:5c:ba:ba",
+    "os": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "locationId": "location2",
+    "configurationHistory": [
+      {
+        "hostname": "device8",
+        "firewallRules": [
+          "allow 7874"
+        ],
+        "created": 1743019338.353692,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device8",
+        "firewallRules": [
+          "allow 7874"
+        ],
+        "created": 1742760138.353693,
+        "expired": 1743019338.353692
+      },
+      {
+        "hostname": "new-device-946",
+        "firewallRules": [
+          "allow 7874"
+        ],
+        "created": 1742500938.353699,
+        "expired": 1742760138.353693
+      },
+      {
+        "hostname": "new-device-946",
+        "firewallRules": [
+          "allow 7874"
+        ],
+        "created": 1742068938.353703,
+        "expired": 1742500938.353699
+      },
+      {
+        "hostname": "new-device-946",
+        "firewallRules": [
+          "allow 7874"
+        ],
+        "created": 1741381338.353709,
+        "expired": 1742068938.353703
+      },
+      {
+        "hostname": "new-device-350",
+        "firewallRules": [
+          "allow 7874"
+        ],
+        "created": 1740949338.353714,
+        "expired": 1741381338.353709
+      }
+    ]
+  },
+  {
+    "_key": "device9",
+    "name": "server Server Model 613",
+    "type": "server",
+    "model": "Server Model 613",
+    "serialNumber": "2f556f41-eb23-4970-8729-cbb14d0b1e08",
+    "ipAddress": "192.168.10.245",
+    "macAddress": "99:2c:d7:bc:fa:67",
+    "os": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "locationId": "location3",
+    "configurationHistory": [
+      {
+        "hostname": "device9",
+        "firewallRules": [],
+        "created": 1743019338.353754,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "new-device-626",
+        "firewallRules": [],
+        "created": 1742760138.353756,
+        "expired": 1743019338.353754
+      },
+      {
+        "hostname": "new-device-626",
+        "firewallRules": [],
+        "created": 1742414538.353761,
+        "expired": 1742760138.353756
+      },
+      {
+        "hostname": "new-device-626",
+        "firewallRules": [],
+        "created": 1741809738.353766,
+        "expired": 1742414538.353761
+      },
+      {
+        "hostname": "new-device-703",
+        "firewallRules": [],
+        "created": 1741636938.353771,
+        "expired": 1741809738.353766
+      },
+      {
+        "hostname": "new-device-791",
+        "firewallRules": [],
+        "created": 1741208538.353776,
+        "expired": 1741636938.353771
+      }
+    ]
+  },
+  {
+    "_key": "device10",
+    "name": "server Server Model 577",
+    "type": "server",
+    "model": "Server Model 577",
+    "serialNumber": "2ac5126a-7b77-4f8f-bb18-992f00e901f9",
+    "ipAddress": "192.168.81.97",
+    "macAddress": "d5:0b:b2:6a:ee:87",
+    "os": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "locationId": "location5",
+    "configurationHistory": [
+      {
+        "hostname": "device10",
+        "firewallRules": [
+          "allow 2715"
+        ],
+        "created": 1743019338.353817,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device10",
+        "firewallRules": [
+          "allow 2715"
+        ],
+        "created": 1742673738.353819,
+        "expired": 1743019338.353817
+      },
+      {
+        "hostname": "new-device-125",
+        "firewallRules": [
+          "allow 2715"
+        ],
+        "created": 1742500938.353824,
+        "expired": 1742673738.353819
+      },
+      {
+        "hostname": "new-device-125",
+        "firewallRules": [
+          "allow 2715"
+        ],
+        "created": 1741809738.353829,
+        "expired": 1742500938.353824
+      },
+      {
+        "hostname": "new-device-703",
+        "firewallRules": [
+          "allow 2715"
+        ],
+        "created": 1741381338.353835,
+        "expired": 1741809738.353829
+      },
+      {
+        "hostname": "new-device-703",
+        "firewallRules": [
+          "allow 2715"
+        ],
+        "created": 1740862938.35384,
+        "expired": 1741381338.353835
+      }
+    ]
+  },
+  {
+    "_key": "device11",
+    "name": "laptop Laptop Model 193",
+    "type": "laptop",
+    "model": "Laptop Model 193",
+    "serialNumber": "3f6e4500-72b2-43b4-9782-3ebee09ca695",
+    "ipAddress": "192.168.205.138",
+    "macAddress": "fc:e0:a8:e5:03:d1",
+    "os": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "locationId": "location3",
+    "configurationHistory": [
+      {
+        "hostname": "device11",
+        "firewallRules": [
+          "allow 7109"
+        ],
+        "created": 1743019338.353882,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device11",
+        "firewallRules": [
+          "allow 7109"
+        ],
+        "created": 1742846538.353883,
+        "expired": 1743019338.353882
+      },
+      {
+        "hostname": "device11",
+        "firewallRules": [
+          "allow 7109"
+        ],
+        "created": 1742328138.353889,
+        "expired": 1742846538.353883
+      },
+      {
+        "hostname": "device11",
+        "firewallRules": [
+          "allow 7109"
+        ],
+        "created": 1741809738.353894,
+        "expired": 1742328138.353889
+      },
+      {
+        "hostname": "device11",
+        "firewallRules": [
+          "allow 7109"
+        ],
+        "created": 1741381338.3539,
+        "expired": 1741809738.353894
+      },
+      {
+        "hostname": "device11",
+        "firewallRules": [
+          "allow 7109"
+        ],
+        "created": 1740862938.353906,
+        "expired": 1741381338.3539
+      }
+    ]
+  },
+  {
+    "_key": "device12",
+    "name": "laptop Laptop Model 183",
+    "type": "laptop",
+    "model": "Laptop Model 183",
+    "serialNumber": "9f91cf36-4c55-4db4-9b58-b08c0d5c7e88",
+    "ipAddress": "192.168.196.14",
+    "macAddress": "62:a9:49:25:f6:08",
+    "os": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "locationId": "location2",
+    "configurationHistory": [
+      {
+        "hostname": "device12",
+        "firewallRules": [
+          "allow 443",
+          "allow 7090"
+        ],
+        "created": 1743019338.353948,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device12",
+        "firewallRules": [
+          "allow 443",
+          "allow 7090"
+        ],
+        "created": 1742932938.353949,
+        "expired": 1743019338.353948
+      },
+      {
+        "hostname": "device12",
+        "firewallRules": [
+          "allow 443",
+          "allow 7090"
+        ],
+        "created": 1742155338.353955,
+        "expired": 1742932938.353949
+      },
+      {
+        "hostname": "device12",
+        "firewallRules": [
+          "allow 443",
+          "allow 7090"
+        ],
+        "created": 1741982538.353996,
+        "expired": 1742155338.353955
+      },
+      {
+        "hostname": "new-device-785",
+        "firewallRules": [
+          "allow 443",
+          "allow 7090"
+        ],
+        "created": 1741381338.354005,
+        "expired": 1741982538.353996
+      },
+      {
+        "hostname": "new-device-785",
+        "firewallRules": [
+          "allow 443",
+          "allow 7090"
+        ],
+        "created": 1741035738.354012,
+        "expired": 1741381338.354005
+      }
+    ]
+  },
+  {
+    "_key": "device13",
+    "name": "server Server Model 828",
+    "type": "server",
+    "model": "Server Model 828",
+    "serialNumber": "eceeef38-4cb3-4a70-9dfb-a738d2789f90",
+    "ipAddress": "192.168.88.118",
+    "macAddress": "03:5f:2e:d1:63:5a",
+    "os": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "locationId": "location4",
+    "configurationHistory": [
+      {
+        "hostname": "device13",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 5029",
+          "allow 3769"
+        ],
+        "created": 1743019338.354079,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device13",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 5029",
+          "allow 3769"
+        ],
+        "created": 1742932938.354082,
+        "expired": 1743019338.354079
+      },
+      {
+        "hostname": "new-device-592",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 5029",
+          "allow 3769"
+        ],
+        "created": 1742500938.354088,
+        "expired": 1742932938.354082
+      },
+      {
+        "hostname": "new-device-186",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 5029",
+          "allow 3769"
+        ],
+        "created": 1741723338.354093,
+        "expired": 1742500938.354088
+      },
+      {
+        "hostname": "new-device-186",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 5029",
+          "allow 3769"
+        ],
+        "created": 1741636938.354099,
+        "expired": 1741723338.354093
+      },
+      {
+        "hostname": "new-device-313",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 5029",
+          "allow 3769"
+        ],
+        "created": 1741122138.354104,
+        "expired": 1741636938.354099
+      }
+    ]
+  },
+  {
+    "_key": "device14",
+    "name": "router Router Model 556",
+    "type": "router",
+    "model": "Router Model 556",
+    "serialNumber": "a3320f2f-83f9-4a2e-a072-be19af071d29",
+    "ipAddress": "192.168.139.98",
+    "macAddress": "8c:b7:8a:18:ef:24",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "locationId": "location1",
+    "configurationHistory": [
+      {
+        "hostname": "device14",
+        "firewallRules": [
+          "allow 443",
+          "allow 6905",
+          "allow 2102"
+        ],
+        "created": 1743019338.354149,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device14",
+        "firewallRules": [
+          "allow 443",
+          "allow 6905",
+          "allow 2102"
+        ],
+        "created": 1742673738.354151,
+        "expired": 1743019338.354149
+      },
+      {
+        "hostname": "device14",
+        "firewallRules": [
+          "allow 443",
+          "allow 6905",
+          "allow 2102"
+        ],
+        "created": 1742155338.354157,
+        "expired": 1742673738.354151
+      },
+      {
+        "hostname": "device14",
+        "firewallRules": [
+          "allow 443",
+          "allow 6905",
+          "allow 2102"
+        ],
+        "created": 1741896138.354163,
+        "expired": 1742155338.354157
+      },
+      {
+        "hostname": "new-device-870",
+        "firewallRules": [
+          "allow 443",
+          "allow 6905",
+          "allow 2102"
+        ],
+        "created": 1741381338.354168,
+        "expired": 1741896138.354163
+      },
+      {
+        "hostname": "new-device-192",
+        "firewallRules": [
+          "allow 443",
+          "allow 6905",
+          "allow 2102"
+        ],
+        "created": 1741035738.354174,
+        "expired": 1741381338.354168
+      }
+    ]
+  },
+  {
+    "_key": "device15",
+    "name": "server Server Model 538",
+    "type": "server",
+    "model": "Server Model 538",
+    "serialNumber": "818c2172-3ca0-41ce-99e2-48919c2ff1f2",
+    "ipAddress": "192.168.85.224",
+    "macAddress": "bc:4c:d3:08:86:b4",
+    "os": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "locationId": "location3",
+    "configurationHistory": [
+      {
+        "hostname": "device15",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1743019338.354216,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "new-device-146",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1742587338.354218,
+        "expired": 1743019338.354216
+      },
+      {
+        "hostname": "new-device-750",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1742328138.354224,
+        "expired": 1742587338.354218
+      },
+      {
+        "hostname": "new-device-750",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1741896138.354229,
+        "expired": 1742328138.354224
+      },
+      {
+        "hostname": "new-device-750",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1741467738.354234,
+        "expired": 1741896138.354229
+      },
+      {
+        "hostname": "new-device-990",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1740949338.35424,
+        "expired": 1741467738.354234
+      }
+    ]
+  },
+  {
+    "_key": "device16",
+    "name": "IoT Iot Model 409",
+    "type": "IoT",
+    "model": "Iot Model 409",
+    "serialNumber": "15cdf134-0a7a-455b-9828-ac953ea55766",
+    "ipAddress": "192.168.4.88",
+    "macAddress": "87:36:94:58:db:77",
+    "os": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "locationId": "location4",
+    "configurationHistory": [
+      {
+        "hostname": "device16",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1743019338.354282,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "new-device-714",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1742760138.354283,
+        "expired": 1743019338.354282
+      },
+      {
+        "hostname": "new-device-858",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1742328138.354289,
+        "expired": 1742760138.354283
+      },
+      {
+        "hostname": "new-device-483",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1741723338.354294,
+        "expired": 1742328138.354289
+      },
+      {
+        "hostname": "new-device-831",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1741550538.354299,
+        "expired": 1741723338.354294
+      },
+      {
+        "hostname": "new-device-190",
+        "firewallRules": [
+          "allow 80",
+          "allow 443"
+        ],
+        "created": 1741035738.354304,
+        "expired": 1741550538.354299
+      }
+    ]
+  },
+  {
+    "_key": "device17",
+    "name": "router Router Model 951",
+    "type": "router",
+    "model": "Router Model 951",
+    "serialNumber": "d3411a96-771c-4a47-a11e-83d0431ad721",
+    "ipAddress": "192.168.18.108",
+    "macAddress": "51:a0:c1:07:7c:6f",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "locationId": "location1",
+    "configurationHistory": [
+      {
+        "hostname": "device17",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8127"
+        ],
+        "created": 1743019338.354345,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "new-device-220",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8127"
+        ],
+        "created": 1742587338.354346,
+        "expired": 1743019338.354345
+      },
+      {
+        "hostname": "new-device-204",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8127"
+        ],
+        "created": 1742328138.354351,
+        "expired": 1742587338.354346
+      },
+      {
+        "hostname": "new-device-738",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8127"
+        ],
+        "created": 1741896138.354356,
+        "expired": 1742328138.354351
+      },
+      {
+        "hostname": "new-device-738",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8127"
+        ],
+        "created": 1741294938.354361,
+        "expired": 1741896138.354356
+      },
+      {
+        "hostname": "new-device-679",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 8127"
+        ],
+        "created": 1741208538.354367,
+        "expired": 1741294938.354361
+      }
+    ]
+  },
+  {
+    "_key": "device18",
+    "name": "firewall Firewall Model 153",
+    "type": "firewall",
+    "model": "Firewall Model 153",
+    "serialNumber": "799af67a-2fbd-406f-b3cf-91ea18548c57",
+    "ipAddress": "192.168.28.231",
+    "macAddress": "bb:c3:3c:a1:97:0b",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "locationId": "location2",
+    "configurationHistory": [
+      {
+        "hostname": "device18",
+        "firewallRules": [
+          "allow 443",
+          "allow 4333",
+          "allow 1220",
+          "allow 4602"
+        ],
+        "created": 1743019338.354409,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device18",
+        "firewallRules": [
+          "allow 443",
+          "allow 4333",
+          "allow 1220",
+          "allow 4602"
+        ],
+        "created": 1742587338.354411,
+        "expired": 1743019338.354409
+      },
+      {
+        "hostname": "new-device-532",
+        "firewallRules": [
+          "allow 443",
+          "allow 4333",
+          "allow 1220",
+          "allow 4602"
+        ],
+        "created": 1742241738.354416,
+        "expired": 1742587338.354411
+      },
+      {
+        "hostname": "new-device-532",
+        "firewallRules": [
+          "allow 443",
+          "allow 4333",
+          "allow 1220",
+          "allow 4602"
+        ],
+        "created": 1741723338.354421,
+        "expired": 1742241738.354416
+      },
+      {
+        "hostname": "new-device-532",
+        "firewallRules": [
+          "allow 443",
+          "allow 4333",
+          "allow 1220",
+          "allow 4602"
+        ],
+        "created": 1741381338.354426,
+        "expired": 1741723338.354421
+      },
+      {
+        "hostname": "new-device-532",
+        "firewallRules": [
+          "allow 443",
+          "allow 4333",
+          "allow 1220",
+          "allow 4602"
+        ],
+        "created": 1740862938.354431,
+        "expired": 1741381338.354426
+      }
+    ]
+  },
+  {
+    "_key": "device19",
+    "name": "firewall Firewall Model 479",
+    "type": "firewall",
+    "model": "Firewall Model 479",
+    "serialNumber": "6c12233f-b91c-4b91-88d1-c6ec42ea9c77",
+    "ipAddress": "192.168.188.207",
+    "macAddress": "bf:ef:10:0b:37:41",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "locationId": "location1",
+    "configurationHistory": [
+      {
+        "hostname": "device19",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 4411",
+          "allow 2500",
+          "allow 4606"
+        ],
+        "created": 1743019338.354472,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "device19",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 4411",
+          "allow 2500",
+          "allow 4606"
+        ],
+        "created": 1742760138.354473,
+        "expired": 1743019338.354472
+      },
+      {
+        "hostname": "device19",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 4411",
+          "allow 2500",
+          "allow 4606"
+        ],
+        "created": 1742414538.354478,
+        "expired": 1742760138.354473
+      },
+      {
+        "hostname": "device19",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 4411",
+          "allow 2500",
+          "allow 4606"
+        ],
+        "created": 1742068938.354483,
+        "expired": 1742414538.354478
+      },
+      {
+        "hostname": "device19",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 4411",
+          "allow 2500",
+          "allow 4606"
+        ],
+        "created": 1741636938.354489,
+        "expired": 1742068938.354483
+      },
+      {
+        "hostname": "device19",
+        "firewallRules": [
+          "allow 80",
+          "allow 443",
+          "allow 4411",
+          "allow 2500",
+          "allow 4606"
+        ],
+        "created": 1741122138.354494,
+        "expired": 1741636938.354489
+      }
+    ]
+  },
+  {
+    "_key": "device20",
+    "name": "laptop Laptop Model 733",
+    "type": "laptop",
+    "model": "Laptop Model 733",
+    "serialNumber": "44dddabc-e8fc-4c20-8d4b-1d609bc42f88",
+    "ipAddress": "192.168.39.2",
+    "macAddress": "8b:40:63:fc:6e:ce",
+    "os": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "locationId": "location1",
+    "configurationHistory": [
+      {
+        "hostname": "device20",
+        "firewallRules": [
+          "allow 80",
+          "allow 5191",
+          "allow 8423"
+        ],
+        "created": 1743019338.354541,
+        "expired": 9223372036854775807
+      },
+      {
+        "hostname": "new-device-875",
+        "firewallRules": [
+          "allow 80",
+          "allow 5191",
+          "allow 8423"
+        ],
+        "created": 1742587338.354543,
+        "expired": 1743019338.354541
+      },
+      {
+        "hostname": "new-device-875",
+        "firewallRules": [
+          "allow 80",
+          "allow 5191",
+          "allow 8423"
+        ],
+        "created": 1742500938.354548,
+        "expired": 1742587338.354543
+      },
+      {
+        "hostname": "new-device-796",
+        "firewallRules": [
+          "allow 80",
+          "allow 5191",
+          "allow 8423"
+        ],
+        "created": 1742068938.354553,
+        "expired": 1742500938.354548
+      },
+      {
+        "hostname": "new-device-796",
+        "firewallRules": [
+          "allow 80",
+          "allow 5191",
+          "allow 8423"
+        ],
+        "created": 1741550538.354558,
+        "expired": 1742068938.354553
+      },
+      {
+        "hostname": "new-device-796",
+        "firewallRules": [
+          "allow 80",
+          "allow 5191",
+          "allow 8423"
+        ],
+        "created": 1741208538.354564,
+        "expired": 1741550538.354558
+      }
+    ]
+  }
+]
