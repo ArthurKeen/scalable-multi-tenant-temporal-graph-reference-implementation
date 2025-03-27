@@ -1,1288 +1,2018 @@
 [
   {
-    "_key": "device1",
-    "name": "router Router Model 855",
+    "_key": "device1-0",
+    "name": "router Router Model 899",
     "type": "router",
-    "model": "Router Model 855",
-    "serialNumber": "e4c12e8f-a1f3-49cb-bbf5-1a089c5e63da",
-    "ipAddress": "192.168.112.25",
-    "macAddress": "37:56:9b:24:9c:3f",
-    "os": "JUNOS",
-    "osVersion": "JUNOS 21.2R3-S1",
-    "configurationHistory": [
-      {
-        "hostname": "device1",
-        "firewallRules": [
-          "allow 443",
-          "allow 4445"
-        ],
-        "created": 1743028020.479999,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-191",
-        "firewallRules": [
-          "allow 443",
-          "allow 4445"
-        ],
-        "created": 1742768820.480041,
-        "expired": 1743028020.479999
-      },
-      {
-        "hostname": "new-device-205",
-        "firewallRules": [
-          "allow 443",
-          "allow 4445"
-        ],
-        "created": 1742423220.480056,
-        "expired": 1742768820.480041
-      },
-      {
-        "hostname": "new-device-205",
-        "firewallRules": [
-          "allow 443",
-          "allow 4445"
-        ],
-        "created": 1741732020.480062,
-        "expired": 1742423220.480056
-      },
-      {
-        "hostname": "new-device-484",
-        "firewallRules": [
-          "allow 443",
-          "allow 4445"
-        ],
-        "created": 1741303620.480068,
-        "expired": 1741732020.480062
-      },
-      {
-        "hostname": "new-device-484",
-        "firewallRules": [
-          "allow 443",
-          "allow 4445"
-        ],
-        "created": 1740958020.480074,
-        "expired": 1741303620.480068
-      }
-    ]
-  },
-  {
-    "_key": "device2",
-    "name": "IoT Iot Model 318",
-    "type": "IoT",
-    "model": "Iot Model 318",
-    "serialNumber": "f6f9302c-ce2f-459f-aaef-af6a49be4303",
-    "ipAddress": "192.168.193.207",
-    "macAddress": "31:52:05:21:ed:f1",
-    "os": "FreeRTOS",
-    "osVersion": "FreeRTOS 10.4.6",
-    "configurationHistory": [
-      {
-        "hostname": "device2",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 8668"
-        ],
-        "created": 1743028020.480138,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-411",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 8668"
-        ],
-        "created": 1742941620.48014,
-        "expired": 1743028020.480138
-      },
-      {
-        "hostname": "new-device-514",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 8668"
-        ],
-        "created": 1742423220.48015,
-        "expired": 1742941620.48014
-      },
-      {
-        "hostname": "new-device-514",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 8668"
-        ],
-        "created": 1741904820.480156,
-        "expired": 1742423220.48015
-      },
-      {
-        "hostname": "new-device-621",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 8668"
-        ],
-        "created": 1741559220.480161,
-        "expired": 1741904820.480156
-      },
-      {
-        "hostname": "new-device-372",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 8668"
-        ],
-        "created": 1741130820.480167,
-        "expired": 1741559220.480161
-      }
-    ]
-  },
-  {
-    "_key": "device3",
-    "name": "router Router Model 903",
-    "type": "router",
-    "model": "Router Model 903",
-    "serialNumber": "2e39bbd4-6663-444e-8b69-4c55cf821f2d",
-    "ipAddress": "192.168.161.29",
-    "macAddress": "d0:69:28:3f:93:e0",
+    "model": "Router Model 899",
+    "serialNumber": "598fb476-7ca9-4935-85d2-dd5fcac6bc39",
+    "ipAddress": "192.168.190.54",
+    "macAddress": "d2:33:78:a2:3d:fe",
     "os": "IOS",
     "osVersion": "IOS XE 17.6.4a",
-    "configurationHistory": [
-      {
-        "hostname": "device3",
-        "firewallRules": [],
-        "created": 1743028020.480215,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-837",
-        "firewallRules": [],
-        "created": 1742855220.480217,
-        "expired": 1743028020.480215
-      },
-      {
-        "hostname": "new-device-837",
-        "firewallRules": [],
-        "created": 1742164020.480223,
-        "expired": 1742855220.480217
-      },
-      {
-        "hostname": "new-device-960",
-        "firewallRules": [],
-        "created": 1741732020.480229,
-        "expired": 1742164020.480223
-      },
-      {
-        "hostname": "new-device-960",
-        "firewallRules": [],
-        "created": 1741559220.480234,
-        "expired": 1741732020.480229
-      },
-      {
-        "hostname": "new-device-633",
-        "firewallRules": [],
-        "created": 1741044420.480244,
-        "expired": 1741559220.480234
-      }
-    ]
+    "hostname": "device1",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4046",
+      "allow 2896"
+    ],
+    "created": 1743033168.040775
   },
   {
-    "_key": "device4",
-    "name": "firewall Firewall Model 750",
+    "_key": "device1-1",
+    "name": "router Router Model 899",
+    "type": "router",
+    "model": "Router Model 899",
+    "serialNumber": "598fb476-7ca9-4935-85d2-dd5fcac6bc39",
+    "ipAddress": "192.168.190.54",
+    "macAddress": "d2:33:78:a2:3d:fe",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-901",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4046",
+      "allow 2896"
+    ],
+    "created": 1742860368.040868
+  },
+  {
+    "_key": "device1-2",
+    "name": "router Router Model 899",
+    "type": "router",
+    "model": "Router Model 899",
+    "serialNumber": "598fb476-7ca9-4935-85d2-dd5fcac6bc39",
+    "ipAddress": "192.168.190.54",
+    "macAddress": "d2:33:78:a2:3d:fe",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-356",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4046",
+      "allow 2896"
+    ],
+    "created": 1742514768.04088
+  },
+  {
+    "_key": "device1-3",
+    "name": "router Router Model 899",
+    "type": "router",
+    "model": "Router Model 899",
+    "serialNumber": "598fb476-7ca9-4935-85d2-dd5fcac6bc39",
+    "ipAddress": "192.168.190.54",
+    "macAddress": "d2:33:78:a2:3d:fe",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-218",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4046",
+      "allow 2896"
+    ],
+    "created": 1741996368.040888
+  },
+  {
+    "_key": "device1-4",
+    "name": "router Router Model 899",
+    "type": "router",
+    "model": "Router Model 899",
+    "serialNumber": "598fb476-7ca9-4935-85d2-dd5fcac6bc39",
+    "ipAddress": "192.168.190.54",
+    "macAddress": "d2:33:78:a2:3d:fe",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-218",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4046",
+      "allow 2896"
+    ],
+    "created": 1741481568.040895
+  },
+  {
+    "_key": "device1-5",
+    "name": "router Router Model 899",
+    "type": "router",
+    "model": "Router Model 899",
+    "serialNumber": "598fb476-7ca9-4935-85d2-dd5fcac6bc39",
+    "ipAddress": "192.168.190.54",
+    "macAddress": "d2:33:78:a2:3d:fe",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-218",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4046",
+      "allow 2896"
+    ],
+    "created": 1741135968.040903
+  },
+  {
+    "_key": "device2-0",
+    "name": "firewall Firewall Model 645",
     "type": "firewall",
-    "model": "Firewall Model 750",
-    "serialNumber": "e5168eda-f158-4bdd-8c78-c385d33fd2d1",
-    "ipAddress": "192.168.110.20",
-    "macAddress": "bb:6f:26:eb:3d:14",
+    "model": "Firewall Model 645",
+    "serialNumber": "3eb0f4d1-6e98-4497-8719-6c3ac0196ddc",
+    "ipAddress": "192.168.37.169",
+    "macAddress": "65:a4:55:11:9b:9e",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "device2",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1743033168.040916
+  },
+  {
+    "_key": "device2-1",
+    "name": "firewall Firewall Model 645",
+    "type": "firewall",
+    "model": "Firewall Model 645",
+    "serialNumber": "3eb0f4d1-6e98-4497-8719-6c3ac0196ddc",
+    "ipAddress": "192.168.37.169",
+    "macAddress": "65:a4:55:11:9b:9e",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "new-device-988",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1742687568.040959
+  },
+  {
+    "_key": "device2-2",
+    "name": "firewall Firewall Model 645",
+    "type": "firewall",
+    "model": "Firewall Model 645",
+    "serialNumber": "3eb0f4d1-6e98-4497-8719-6c3ac0196ddc",
+    "ipAddress": "192.168.37.169",
+    "macAddress": "65:a4:55:11:9b:9e",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "new-device-988",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1742428368.040971
+  },
+  {
+    "_key": "device2-3",
+    "name": "firewall Firewall Model 645",
+    "type": "firewall",
+    "model": "Firewall Model 645",
+    "serialNumber": "3eb0f4d1-6e98-4497-8719-6c3ac0196ddc",
+    "ipAddress": "192.168.37.169",
+    "macAddress": "65:a4:55:11:9b:9e",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "new-device-988",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1741909968.040979
+  },
+  {
+    "_key": "device2-4",
+    "name": "firewall Firewall Model 645",
+    "type": "firewall",
+    "model": "Firewall Model 645",
+    "serialNumber": "3eb0f4d1-6e98-4497-8719-6c3ac0196ddc",
+    "ipAddress": "192.168.37.169",
+    "macAddress": "65:a4:55:11:9b:9e",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "new-device-252",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1741395168.040987
+  },
+  {
+    "_key": "device2-5",
+    "name": "firewall Firewall Model 645",
+    "type": "firewall",
+    "model": "Firewall Model 645",
+    "serialNumber": "3eb0f4d1-6e98-4497-8719-6c3ac0196ddc",
+    "ipAddress": "192.168.37.169",
+    "macAddress": "65:a4:55:11:9b:9e",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "new-device-252",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1740963168.040994
+  },
+  {
+    "_key": "device3-0",
+    "name": "firewall Firewall Model 391",
+    "type": "firewall",
+    "model": "Firewall Model 391",
+    "serialNumber": "69c9d5aa-0820-49f1-8535-968c7ae15f6f",
+    "ipAddress": "192.168.185.145",
+    "macAddress": "e3:51:8a:e9:6c:6d",
     "os": "FortiOS",
     "osVersion": "FortiOS 7.0.9",
-    "configurationHistory": [
-      {
-        "hostname": "device4",
-        "firewallRules": [
-          "allow 80",
-          "allow 3058",
-          "allow 4005",
-          "allow 3429"
-        ],
-        "created": 1743028020.480291,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "device4",
-        "firewallRules": [
-          "allow 80",
-          "allow 3058",
-          "allow 4005",
-          "allow 3429"
-        ],
-        "created": 1742768820.480293,
-        "expired": 1743028020.480291
-      },
-      {
-        "hostname": "device4",
-        "firewallRules": [
-          "allow 80",
-          "allow 3058",
-          "allow 4005",
-          "allow 3429"
-        ],
-        "created": 1742423220.480299,
-        "expired": 1742768820.480293
-      },
-      {
-        "hostname": "device4",
-        "firewallRules": [
-          "allow 80",
-          "allow 3058",
-          "allow 4005",
-          "allow 3429"
-        ],
-        "created": 1741732020.480304,
-        "expired": 1742423220.480299
-      },
-      {
-        "hostname": "new-device-376",
-        "firewallRules": [
-          "allow 80",
-          "allow 3058",
-          "allow 4005",
-          "allow 3429"
-        ],
-        "created": 1741303620.48031,
-        "expired": 1741732020.480304
-      },
-      {
-        "hostname": "new-device-376",
-        "firewallRules": [
-          "allow 80",
-          "allow 3058",
-          "allow 4005",
-          "allow 3429"
-        ],
-        "created": 1741217220.480315,
-        "expired": 1741303620.48031
-      }
-    ]
+    "hostname": "device3",
+    "firewallRules": [],
+    "created": 1743033168.041007
   },
   {
-    "_key": "device5",
-    "name": "laptop Laptop Model 458",
-    "type": "laptop",
-    "model": "Laptop Model 458",
-    "serialNumber": "7977bd19-ec25-44b0-a127-3f4e1d171232",
-    "ipAddress": "192.168.192.60",
-    "macAddress": "30:0a:25:ac:56:d2",
-    "os": "Ubuntu",
-    "osVersion": "Ubuntu 22.04 LTS",
-    "configurationHistory": [
-      {
-        "hostname": "device5",
-        "firewallRules": [],
-        "created": 1743028020.480359,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-511",
-        "firewallRules": [],
-        "created": 1742768820.48036,
-        "expired": 1743028020.480359
-      },
-      {
-        "hostname": "new-device-511",
-        "firewallRules": [],
-        "created": 1742164020.480366,
-        "expired": 1742768820.48036
-      },
-      {
-        "hostname": "new-device-606",
-        "firewallRules": [],
-        "created": 1741818420.480371,
-        "expired": 1742164020.480366
-      },
-      {
-        "hostname": "new-device-451",
-        "firewallRules": [],
-        "created": 1741476420.480376,
-        "expired": 1741818420.480371
-      },
-      {
-        "hostname": "new-device-451",
-        "firewallRules": [],
-        "created": 1740871620.480381,
-        "expired": 1741476420.480376
-      }
-    ]
+    "_key": "device3-1",
+    "name": "firewall Firewall Model 391",
+    "type": "firewall",
+    "model": "Firewall Model 391",
+    "serialNumber": "69c9d5aa-0820-49f1-8535-968c7ae15f6f",
+    "ipAddress": "192.168.185.145",
+    "macAddress": "e3:51:8a:e9:6c:6d",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "device3",
+    "firewallRules": [],
+    "created": 1742773968.041043
   },
   {
-    "_key": "device6",
-    "name": "router Router Model 148",
+    "_key": "device3-2",
+    "name": "firewall Firewall Model 391",
+    "type": "firewall",
+    "model": "Firewall Model 391",
+    "serialNumber": "69c9d5aa-0820-49f1-8535-968c7ae15f6f",
+    "ipAddress": "192.168.185.145",
+    "macAddress": "e3:51:8a:e9:6c:6d",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-434",
+    "firewallRules": [],
+    "created": 1742341968.041051
+  },
+  {
+    "_key": "device3-3",
+    "name": "firewall Firewall Model 391",
+    "type": "firewall",
+    "model": "Firewall Model 391",
+    "serialNumber": "69c9d5aa-0820-49f1-8535-968c7ae15f6f",
+    "ipAddress": "192.168.185.145",
+    "macAddress": "e3:51:8a:e9:6c:6d",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-648",
+    "firewallRules": [],
+    "created": 1741737168.041058
+  },
+  {
+    "_key": "device3-4",
+    "name": "firewall Firewall Model 391",
+    "type": "firewall",
+    "model": "Firewall Model 391",
+    "serialNumber": "69c9d5aa-0820-49f1-8535-968c7ae15f6f",
+    "ipAddress": "192.168.185.145",
+    "macAddress": "e3:51:8a:e9:6c:6d",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-648",
+    "firewallRules": [],
+    "created": 1741650768.041065
+  },
+  {
+    "_key": "device3-5",
+    "name": "firewall Firewall Model 391",
+    "type": "firewall",
+    "model": "Firewall Model 391",
+    "serialNumber": "69c9d5aa-0820-49f1-8535-968c7ae15f6f",
+    "ipAddress": "192.168.185.145",
+    "macAddress": "e3:51:8a:e9:6c:6d",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-200",
+    "firewallRules": [],
+    "created": 1740963168.041073
+  },
+  {
+    "_key": "device4-0",
+    "name": "router Router Model 342",
     "type": "router",
-    "model": "Router Model 148",
-    "serialNumber": "7d02ee38-2008-4486-8e5d-b57638effb7d",
-    "ipAddress": "192.168.162.50",
-    "macAddress": "2d:d7:10:80:75:93",
+    "model": "Router Model 342",
+    "serialNumber": "0075dd33-8903-4c60-978e-66b6628c361f",
+    "ipAddress": "192.168.184.47",
+    "macAddress": "76:ca:1d:b5:59:dc",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "device4",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4340",
+      "allow 1381"
+    ],
+    "created": 1743033168.041086
+  },
+  {
+    "_key": "device4-1",
+    "name": "router Router Model 342",
+    "type": "router",
+    "model": "Router Model 342",
+    "serialNumber": "0075dd33-8903-4c60-978e-66b6628c361f",
+    "ipAddress": "192.168.184.47",
+    "macAddress": "76:ca:1d:b5:59:dc",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "device4",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4340",
+      "allow 1381"
+    ],
+    "created": 1742946768.041124
+  },
+  {
+    "_key": "device4-2",
+    "name": "router Router Model 342",
+    "type": "router",
+    "model": "Router Model 342",
+    "serialNumber": "0075dd33-8903-4c60-978e-66b6628c361f",
+    "ipAddress": "192.168.184.47",
+    "macAddress": "76:ca:1d:b5:59:dc",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-445",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4340",
+      "allow 1381"
+    ],
+    "created": 1742341968.041132
+  },
+  {
+    "_key": "device4-3",
+    "name": "router Router Model 342",
+    "type": "router",
+    "model": "Router Model 342",
+    "serialNumber": "0075dd33-8903-4c60-978e-66b6628c361f",
+    "ipAddress": "192.168.184.47",
+    "macAddress": "76:ca:1d:b5:59:dc",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-445",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4340",
+      "allow 1381"
+    ],
+    "created": 1741909968.041139
+  },
+  {
+    "_key": "device4-4",
+    "name": "router Router Model 342",
+    "type": "router",
+    "model": "Router Model 342",
+    "serialNumber": "0075dd33-8903-4c60-978e-66b6628c361f",
+    "ipAddress": "192.168.184.47",
+    "macAddress": "76:ca:1d:b5:59:dc",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-445",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4340",
+      "allow 1381"
+    ],
+    "created": 1741650768.041147
+  },
+  {
+    "_key": "device4-5",
+    "name": "router Router Model 342",
+    "type": "router",
+    "model": "Router Model 342",
+    "serialNumber": "0075dd33-8903-4c60-978e-66b6628c361f",
+    "ipAddress": "192.168.184.47",
+    "macAddress": "76:ca:1d:b5:59:dc",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-445",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4340",
+      "allow 1381"
+    ],
+    "created": 1741222368.041154
+  },
+  {
+    "_key": "device5-0",
+    "name": "firewall Firewall Model 147",
+    "type": "firewall",
+    "model": "Firewall Model 147",
+    "serialNumber": "5ff773d5-ef0d-4dc6-a060-047226f8bc55",
+    "ipAddress": "192.168.28.104",
+    "macAddress": "a4:d0:be:92:4b:14",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "device5",
+    "firewallRules": [],
+    "created": 1743033168.041166
+  },
+  {
+    "_key": "device5-1",
+    "name": "firewall Firewall Model 147",
+    "type": "firewall",
+    "model": "Firewall Model 147",
+    "serialNumber": "5ff773d5-ef0d-4dc6-a060-047226f8bc55",
+    "ipAddress": "192.168.28.104",
+    "macAddress": "a4:d0:be:92:4b:14",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "device5",
+    "firewallRules": [],
+    "created": 1742946768.041202
+  },
+  {
+    "_key": "device5-2",
+    "name": "firewall Firewall Model 147",
+    "type": "firewall",
+    "model": "Firewall Model 147",
+    "serialNumber": "5ff773d5-ef0d-4dc6-a060-047226f8bc55",
+    "ipAddress": "192.168.28.104",
+    "macAddress": "a4:d0:be:92:4b:14",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-302",
+    "firewallRules": [],
+    "created": 1742169168.04121
+  },
+  {
+    "_key": "device5-3",
+    "name": "firewall Firewall Model 147",
+    "type": "firewall",
+    "model": "Firewall Model 147",
+    "serialNumber": "5ff773d5-ef0d-4dc6-a060-047226f8bc55",
+    "ipAddress": "192.168.28.104",
+    "macAddress": "a4:d0:be:92:4b:14",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-637",
+    "firewallRules": [],
+    "created": 1741996368.041217
+  },
+  {
+    "_key": "device5-4",
+    "name": "firewall Firewall Model 147",
+    "type": "firewall",
+    "model": "Firewall Model 147",
+    "serialNumber": "5ff773d5-ef0d-4dc6-a060-047226f8bc55",
+    "ipAddress": "192.168.28.104",
+    "macAddress": "a4:d0:be:92:4b:14",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-637",
+    "firewallRules": [],
+    "created": 1741308768.041224
+  },
+  {
+    "_key": "device5-5",
+    "name": "firewall Firewall Model 147",
+    "type": "firewall",
+    "model": "Firewall Model 147",
+    "serialNumber": "5ff773d5-ef0d-4dc6-a060-047226f8bc55",
+    "ipAddress": "192.168.28.104",
+    "macAddress": "a4:d0:be:92:4b:14",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-637",
+    "firewallRules": [],
+    "created": 1741135968.041232
+  },
+  {
+    "_key": "device6-0",
+    "name": "router Router Model 684",
+    "type": "router",
+    "model": "Router Model 684",
+    "serialNumber": "53e0f1d0-ab71-4cd7-9e5b-da4898bb939a",
+    "ipAddress": "192.168.67.191",
+    "macAddress": "2f:ee:c2:01:9e:93",
     "os": "JUNOS",
     "osVersion": "JUNOS 21.2R3-S1",
-    "configurationHistory": [
-      {
-        "hostname": "device6",
-        "firewallRules": [],
-        "created": 1743028020.480424,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "device6",
-        "firewallRules": [],
-        "created": 1742941620.480426,
-        "expired": 1743028020.480424
-      },
-      {
-        "hostname": "device6",
-        "firewallRules": [],
-        "created": 1742164020.480432,
-        "expired": 1742941620.480426
-      },
-      {
-        "hostname": "device6",
-        "firewallRules": [],
-        "created": 1741818420.480438,
-        "expired": 1742164020.480432
-      },
-      {
-        "hostname": "device6",
-        "firewallRules": [],
-        "created": 1741476420.480444,
-        "expired": 1741818420.480438
-      },
-      {
-        "hostname": "device6",
-        "firewallRules": [],
-        "created": 1741044420.48045,
-        "expired": 1741476420.480444
-      }
-    ]
+    "hostname": "device6",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1743033168.041245
   },
   {
-    "_key": "device7",
-    "name": "IoT Iot Model 362",
+    "_key": "device6-1",
+    "name": "router Router Model 684",
+    "type": "router",
+    "model": "Router Model 684",
+    "serialNumber": "53e0f1d0-ab71-4cd7-9e5b-da4898bb939a",
+    "ipAddress": "192.168.67.191",
+    "macAddress": "2f:ee:c2:01:9e:93",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-752",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1742946768.041279
+  },
+  {
+    "_key": "device6-2",
+    "name": "router Router Model 684",
+    "type": "router",
+    "model": "Router Model 684",
+    "serialNumber": "53e0f1d0-ab71-4cd7-9e5b-da4898bb939a",
+    "ipAddress": "192.168.67.191",
+    "macAddress": "2f:ee:c2:01:9e:93",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-611",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1742428368.041286
+  },
+  {
+    "_key": "device6-3",
+    "name": "router Router Model 684",
+    "type": "router",
+    "model": "Router Model 684",
+    "serialNumber": "53e0f1d0-ab71-4cd7-9e5b-da4898bb939a",
+    "ipAddress": "192.168.67.191",
+    "macAddress": "2f:ee:c2:01:9e:93",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-611",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1742082768.041294
+  },
+  {
+    "_key": "device6-4",
+    "name": "router Router Model 684",
+    "type": "router",
+    "model": "Router Model 684",
+    "serialNumber": "53e0f1d0-ab71-4cd7-9e5b-da4898bb939a",
+    "ipAddress": "192.168.67.191",
+    "macAddress": "2f:ee:c2:01:9e:93",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-278",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1741650768.041301
+  },
+  {
+    "_key": "device6-5",
+    "name": "router Router Model 684",
+    "type": "router",
+    "model": "Router Model 684",
+    "serialNumber": "53e0f1d0-ab71-4cd7-9e5b-da4898bb939a",
+    "ipAddress": "192.168.67.191",
+    "macAddress": "2f:ee:c2:01:9e:93",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-109",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1741222368.041308
+  },
+  {
+    "_key": "device7-0",
+    "name": "IoT Iot Model 415",
     "type": "IoT",
-    "model": "Iot Model 362",
-    "serialNumber": "640caac9-31a0-40d3-bc2d-aa7127f9859b",
-    "ipAddress": "192.168.161.29",
-    "macAddress": "8a:5a:14:a9:a2:68",
-    "os": "Embedded",
-    "osVersion": "Embedded Linux 4.14.247",
-    "configurationHistory": [
-      {
-        "hostname": "device7",
-        "firewallRules": [
-          "allow 2015"
-        ],
-        "created": 1743028020.48049,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "device7",
-        "firewallRules": [
-          "allow 2015"
-        ],
-        "created": 1742682420.480492,
-        "expired": 1743028020.48049
-      },
-      {
-        "hostname": "device7",
-        "firewallRules": [
-          "allow 2015"
-        ],
-        "created": 1742164020.480497,
-        "expired": 1742682420.480492
-      },
-      {
-        "hostname": "device7",
-        "firewallRules": [
-          "allow 2015"
-        ],
-        "created": 1742077620.480502,
-        "expired": 1742164020.480497
-      },
-      {
-        "hostname": "device7",
-        "firewallRules": [
-          "allow 2015"
-        ],
-        "created": 1741559220.480506,
-        "expired": 1742077620.480502
-      },
-      {
-        "hostname": "device7",
-        "firewallRules": [
-          "allow 2015"
-        ],
-        "created": 1741044420.480509,
-        "expired": 1741559220.480506
-      }
-    ]
-  },
-  {
-    "_key": "device8",
-    "name": "firewall Firewall Model 293",
-    "type": "firewall",
-    "model": "Firewall Model 293",
-    "serialNumber": "3159f95a-e828-4955-9fc9-8a9a7538749e",
-    "ipAddress": "192.168.233.69",
-    "macAddress": "ca:7b:d2:04:0f:3f",
-    "os": "FortiOS",
-    "osVersion": "FortiOS 7.0.9",
-    "configurationHistory": [
-      {
-        "hostname": "device8",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 1890",
-          "allow 1531"
-        ],
-        "created": 1743028020.480551,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-937",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 1890",
-          "allow 1531"
-        ],
-        "created": 1742855220.480553,
-        "expired": 1743028020.480551
-      },
-      {
-        "hostname": "new-device-924",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 1890",
-          "allow 1531"
-        ],
-        "created": 1742509620.480558,
-        "expired": 1742855220.480553
-      },
-      {
-        "hostname": "new-device-924",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 1890",
-          "allow 1531"
-        ],
-        "created": 1741904820.480563,
-        "expired": 1742509620.480558
-      },
-      {
-        "hostname": "new-device-924",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 1890",
-          "allow 1531"
-        ],
-        "created": 1741476420.480568,
-        "expired": 1741904820.480563
-      },
-      {
-        "hostname": "new-device-741",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 1890",
-          "allow 1531"
-        ],
-        "created": 1740958020.480573,
-        "expired": 1741476420.480568
-      }
-    ]
-  },
-  {
-    "_key": "device9",
-    "name": "server Server Model 936",
-    "type": "server",
-    "model": "Server Model 936",
-    "serialNumber": "ff103744-ce8a-40a7-950a-7b06e378d00e",
-    "ipAddress": "192.168.233.224",
-    "macAddress": "2b:6b:8b:33:50:8c",
-    "os": "Windows",
-    "osVersion": "Windows Server 2019 Datacenter",
-    "configurationHistory": [
-      {
-        "hostname": "device9",
-        "firewallRules": [
-          "allow 7986"
-        ],
-        "created": 1743028020.480613,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "device9",
-        "firewallRules": [
-          "allow 7986"
-        ],
-        "created": 1742941620.480615,
-        "expired": 1743028020.480613
-      },
-      {
-        "hostname": "new-device-769",
-        "firewallRules": [
-          "allow 7986"
-        ],
-        "created": 1742509620.48062,
-        "expired": 1742941620.480615
-      },
-      {
-        "hostname": "new-device-769",
-        "firewallRules": [
-          "allow 7986"
-        ],
-        "created": 1741818420.480625,
-        "expired": 1742509620.48062
-      },
-      {
-        "hostname": "new-device-458",
-        "firewallRules": [
-          "allow 7986"
-        ],
-        "created": 1741390020.480631,
-        "expired": 1741818420.480625
-      },
-      {
-        "hostname": "new-device-458",
-        "firewallRules": [
-          "allow 7986"
-        ],
-        "created": 1741217220.480636,
-        "expired": 1741390020.480631
-      }
-    ]
-  },
-  {
-    "_key": "device10",
-    "name": "IoT Iot Model 547",
-    "type": "IoT",
-    "model": "Iot Model 547",
-    "serialNumber": "a275b3fe-ef0c-4754-aaf4-d9a77eafc2c7",
-    "ipAddress": "192.168.108.144",
-    "macAddress": "90:5d:71:aa:ae:d5",
+    "model": "Iot Model 415",
+    "serialNumber": "0393cf81-ca1c-4461-922e-263151f3df15",
+    "ipAddress": "192.168.95.17",
+    "macAddress": "20:fc:55:f3:0c:82",
     "os": "FreeRTOS",
     "osVersion": "FreeRTOS 10.4.6",
-    "configurationHistory": [
-      {
-        "hostname": "device10",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1743028020.480677,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-839",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1742682420.480679,
-        "expired": 1743028020.480677
-      },
-      {
-        "hostname": "new-device-863",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1742509620.480684,
-        "expired": 1742682420.480679
-      },
-      {
-        "hostname": "new-device-863",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1741904820.480689,
-        "expired": 1742509620.480684
-      },
-      {
-        "hostname": "new-device-863",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1741303620.480694,
-        "expired": 1741904820.480689
-      },
-      {
-        "hostname": "new-device-863",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1740958020.4807,
-        "expired": 1741303620.480694
-      }
-    ]
+    "hostname": "device7",
+    "firewallRules": [
+      "allow 4012",
+      "allow 7415"
+    ],
+    "created": 1743033168.04132
   },
   {
-    "_key": "device11",
+    "_key": "device7-1",
+    "name": "IoT Iot Model 415",
+    "type": "IoT",
+    "model": "Iot Model 415",
+    "serialNumber": "0393cf81-ca1c-4461-922e-263151f3df15",
+    "ipAddress": "192.168.95.17",
+    "macAddress": "20:fc:55:f3:0c:82",
+    "os": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostname": "device7",
+    "firewallRules": [
+      "allow 4012",
+      "allow 7415"
+    ],
+    "created": 1742687568.041353
+  },
+  {
+    "_key": "device7-2",
+    "name": "IoT Iot Model 415",
+    "type": "IoT",
+    "model": "Iot Model 415",
+    "serialNumber": "0393cf81-ca1c-4461-922e-263151f3df15",
+    "ipAddress": "192.168.95.17",
+    "macAddress": "20:fc:55:f3:0c:82",
+    "os": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostname": "device7",
+    "firewallRules": [
+      "allow 4012",
+      "allow 7415"
+    ],
+    "created": 1742169168.04136
+  },
+  {
+    "_key": "device7-3",
+    "name": "IoT Iot Model 415",
+    "type": "IoT",
+    "model": "Iot Model 415",
+    "serialNumber": "0393cf81-ca1c-4461-922e-263151f3df15",
+    "ipAddress": "192.168.95.17",
+    "macAddress": "20:fc:55:f3:0c:82",
+    "os": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostname": "device7",
+    "firewallRules": [
+      "allow 4012",
+      "allow 7415"
+    ],
+    "created": 1742082768.041368
+  },
+  {
+    "_key": "device7-4",
+    "name": "IoT Iot Model 415",
+    "type": "IoT",
+    "model": "Iot Model 415",
+    "serialNumber": "0393cf81-ca1c-4461-922e-263151f3df15",
+    "ipAddress": "192.168.95.17",
+    "macAddress": "20:fc:55:f3:0c:82",
+    "os": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostname": "device7",
+    "firewallRules": [
+      "allow 4012",
+      "allow 7415"
+    ],
+    "created": 1741650768.041375
+  },
+  {
+    "_key": "device7-5",
+    "name": "IoT Iot Model 415",
+    "type": "IoT",
+    "model": "Iot Model 415",
+    "serialNumber": "0393cf81-ca1c-4461-922e-263151f3df15",
+    "ipAddress": "192.168.95.17",
+    "macAddress": "20:fc:55:f3:0c:82",
+    "os": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostname": "new-device-121",
+    "firewallRules": [
+      "allow 4012",
+      "allow 7415"
+    ],
+    "created": 1740876768.041385
+  },
+  {
+    "_key": "device8-0",
+    "name": "firewall Firewall Model 739",
+    "type": "firewall",
+    "model": "Firewall Model 739",
+    "serialNumber": "82de149e-6307-4593-8f9d-b085b5e5cddd",
+    "ipAddress": "192.168.115.156",
+    "macAddress": "b6:dc:a6:72:7e:02",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "device8",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4495",
+      "allow 8615",
+      "allow 2305",
+      "allow 4458"
+    ],
+    "created": 1743033168.041397
+  },
+  {
+    "_key": "device8-1",
+    "name": "firewall Firewall Model 739",
+    "type": "firewall",
+    "model": "Firewall Model 739",
+    "serialNumber": "82de149e-6307-4593-8f9d-b085b5e5cddd",
+    "ipAddress": "192.168.115.156",
+    "macAddress": "b6:dc:a6:72:7e:02",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "device8",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4495",
+      "allow 8615",
+      "allow 2305",
+      "allow 4458"
+    ],
+    "created": 1742860368.041431
+  },
+  {
+    "_key": "device8-2",
+    "name": "firewall Firewall Model 739",
+    "type": "firewall",
+    "model": "Firewall Model 739",
+    "serialNumber": "82de149e-6307-4593-8f9d-b085b5e5cddd",
+    "ipAddress": "192.168.115.156",
+    "macAddress": "b6:dc:a6:72:7e:02",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "device8",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4495",
+      "allow 8615",
+      "allow 2305",
+      "allow 4458"
+    ],
+    "created": 1742428368.041439
+  },
+  {
+    "_key": "device8-3",
+    "name": "firewall Firewall Model 739",
+    "type": "firewall",
+    "model": "Firewall Model 739",
+    "serialNumber": "82de149e-6307-4593-8f9d-b085b5e5cddd",
+    "ipAddress": "192.168.115.156",
+    "macAddress": "b6:dc:a6:72:7e:02",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "device8",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4495",
+      "allow 8615",
+      "allow 2305",
+      "allow 4458"
+    ],
+    "created": 1741737168.041446
+  },
+  {
+    "_key": "device8-4",
+    "name": "firewall Firewall Model 739",
+    "type": "firewall",
+    "model": "Firewall Model 739",
+    "serialNumber": "82de149e-6307-4593-8f9d-b085b5e5cddd",
+    "ipAddress": "192.168.115.156",
+    "macAddress": "b6:dc:a6:72:7e:02",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "new-device-723",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4495",
+      "allow 8615",
+      "allow 2305",
+      "allow 4458"
+    ],
+    "created": 1741650768.041453
+  },
+  {
+    "_key": "device8-5",
+    "name": "firewall Firewall Model 739",
+    "type": "firewall",
+    "model": "Firewall Model 739",
+    "serialNumber": "82de149e-6307-4593-8f9d-b085b5e5cddd",
+    "ipAddress": "192.168.115.156",
+    "macAddress": "b6:dc:a6:72:7e:02",
+    "os": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostname": "new-device-723",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4495",
+      "allow 8615",
+      "allow 2305",
+      "allow 4458"
+    ],
+    "created": 1740876768.04146
+  },
+  {
+    "_key": "device9-0",
+    "name": "router Router Model 157",
+    "type": "router",
+    "model": "Router Model 157",
+    "serialNumber": "44fe198c-498b-48f1-aa8c-e07a27a26de9",
+    "ipAddress": "192.168.53.50",
+    "macAddress": "1d:87:dd:b9:8b:29",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "device9",
+    "firewallRules": [],
+    "created": 1743033168.041472
+  },
+  {
+    "_key": "device9-1",
+    "name": "router Router Model 157",
+    "type": "router",
+    "model": "Router Model 157",
+    "serialNumber": "44fe198c-498b-48f1-aa8c-e07a27a26de9",
+    "ipAddress": "192.168.53.50",
+    "macAddress": "1d:87:dd:b9:8b:29",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "device9",
+    "firewallRules": [],
+    "created": 1742773968.041505
+  },
+  {
+    "_key": "device9-2",
+    "name": "router Router Model 157",
+    "type": "router",
+    "model": "Router Model 157",
+    "serialNumber": "44fe198c-498b-48f1-aa8c-e07a27a26de9",
+    "ipAddress": "192.168.53.50",
+    "macAddress": "1d:87:dd:b9:8b:29",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-991",
+    "firewallRules": [],
+    "created": 1742341968.041513
+  },
+  {
+    "_key": "device9-3",
+    "name": "router Router Model 157",
+    "type": "router",
+    "model": "Router Model 157",
+    "serialNumber": "44fe198c-498b-48f1-aa8c-e07a27a26de9",
+    "ipAddress": "192.168.53.50",
+    "macAddress": "1d:87:dd:b9:8b:29",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-991",
+    "firewallRules": [],
+    "created": 1741909968.04152
+  },
+  {
+    "_key": "device9-4",
+    "name": "router Router Model 157",
+    "type": "router",
+    "model": "Router Model 157",
+    "serialNumber": "44fe198c-498b-48f1-aa8c-e07a27a26de9",
+    "ipAddress": "192.168.53.50",
+    "macAddress": "1d:87:dd:b9:8b:29",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-280",
+    "firewallRules": [],
+    "created": 1741564368.041527
+  },
+  {
+    "_key": "device9-5",
+    "name": "router Router Model 157",
+    "type": "router",
+    "model": "Router Model 157",
+    "serialNumber": "44fe198c-498b-48f1-aa8c-e07a27a26de9",
+    "ipAddress": "192.168.53.50",
+    "macAddress": "1d:87:dd:b9:8b:29",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-373",
+    "firewallRules": [],
+    "created": 1740876768.041537
+  },
+  {
+    "_key": "device10-0",
+    "name": "laptop Laptop Model 265",
+    "type": "laptop",
+    "model": "Laptop Model 265",
+    "serialNumber": "c6df4cb0-d98f-4406-b87e-ba7116b32ebd",
+    "ipAddress": "192.168.253.126",
+    "macAddress": "2d:15:f2:a1:70:55",
+    "os": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostname": "device10",
+    "firewallRules": [],
+    "created": 1743033168.041549
+  },
+  {
+    "_key": "device10-1",
+    "name": "laptop Laptop Model 265",
+    "type": "laptop",
+    "model": "Laptop Model 265",
+    "serialNumber": "c6df4cb0-d98f-4406-b87e-ba7116b32ebd",
+    "ipAddress": "192.168.253.126",
+    "macAddress": "2d:15:f2:a1:70:55",
+    "os": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostname": "new-device-202",
+    "firewallRules": [],
+    "created": 1742601168.041583
+  },
+  {
+    "_key": "device10-2",
+    "name": "laptop Laptop Model 265",
+    "type": "laptop",
+    "model": "Laptop Model 265",
+    "serialNumber": "c6df4cb0-d98f-4406-b87e-ba7116b32ebd",
+    "ipAddress": "192.168.253.126",
+    "macAddress": "2d:15:f2:a1:70:55",
+    "os": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostname": "new-device-638",
+    "firewallRules": [],
+    "created": 1742514768.04159
+  },
+  {
+    "_key": "device10-3",
+    "name": "laptop Laptop Model 265",
+    "type": "laptop",
+    "model": "Laptop Model 265",
+    "serialNumber": "c6df4cb0-d98f-4406-b87e-ba7116b32ebd",
+    "ipAddress": "192.168.253.126",
+    "macAddress": "2d:15:f2:a1:70:55",
+    "os": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostname": "new-device-672",
+    "firewallRules": [],
+    "created": 1742082768.041597
+  },
+  {
+    "_key": "device10-4",
+    "name": "laptop Laptop Model 265",
+    "type": "laptop",
+    "model": "Laptop Model 265",
+    "serialNumber": "c6df4cb0-d98f-4406-b87e-ba7116b32ebd",
+    "ipAddress": "192.168.253.126",
+    "macAddress": "2d:15:f2:a1:70:55",
+    "os": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostname": "new-device-672",
+    "firewallRules": [],
+    "created": 1741650768.041604
+  },
+  {
+    "_key": "device10-5",
+    "name": "laptop Laptop Model 265",
+    "type": "laptop",
+    "model": "Laptop Model 265",
+    "serialNumber": "c6df4cb0-d98f-4406-b87e-ba7116b32ebd",
+    "ipAddress": "192.168.253.126",
+    "macAddress": "2d:15:f2:a1:70:55",
+    "os": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostname": "new-device-672",
+    "firewallRules": [],
+    "created": 1741049568.041611
+  },
+  {
+    "_key": "device11-0",
     "name": "router Router Model 909",
     "type": "router",
     "model": "Router Model 909",
-    "serialNumber": "d8d6aab3-c7f7-4d5e-b1b7-3f770e8486fc",
-    "ipAddress": "192.168.10.14",
-    "macAddress": "e6:fc:8e:24:e2:ad",
-    "os": "JUNOS",
-    "osVersion": "JUNOS 21.2R3-S1",
-    "configurationHistory": [
-      {
-        "hostname": "device11",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1743028020.480742,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-736",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1742768820.480743,
-        "expired": 1743028020.480742
-      },
-      {
-        "hostname": "new-device-644",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1742164020.480749,
-        "expired": 1742768820.480743
-      },
-      {
-        "hostname": "new-device-644",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1741818420.480754,
-        "expired": 1742164020.480749
-      },
-      {
-        "hostname": "new-device-644",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1741559220.480759,
-        "expired": 1741818420.480754
-      },
-      {
-        "hostname": "new-device-115",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1741217220.480765,
-        "expired": 1741559220.480759
-      }
-    ]
-  },
-  {
-    "_key": "device12",
-    "name": "laptop Laptop Model 347",
-    "type": "laptop",
-    "model": "Laptop Model 347",
-    "serialNumber": "f112e012-b4d3-41a3-bb74-e8183266f681",
-    "ipAddress": "192.168.246.63",
-    "macAddress": "d1:24:91:33:84:aa",
-    "os": "Windows",
-    "osVersion": "Windows 10 Pro 21H2",
-    "configurationHistory": [
-      {
-        "hostname": "device12",
-        "firewallRules": [
-          "allow 80"
-        ],
-        "created": 1743028020.480806,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-297",
-        "firewallRules": [
-          "allow 80"
-        ],
-        "created": 1742596020.480807,
-        "expired": 1743028020.480806
-      },
-      {
-        "hostname": "new-device-718",
-        "firewallRules": [
-          "allow 80"
-        ],
-        "created": 1742423220.480813,
-        "expired": 1742596020.480807
-      },
-      {
-        "hostname": "new-device-300",
-        "firewallRules": [
-          "allow 80"
-        ],
-        "created": 1741732020.480818,
-        "expired": 1742423220.480813
-      },
-      {
-        "hostname": "new-device-877",
-        "firewallRules": [
-          "allow 80"
-        ],
-        "created": 1741476420.480823,
-        "expired": 1741732020.480818
-      },
-      {
-        "hostname": "new-device-877",
-        "firewallRules": [
-          "allow 80"
-        ],
-        "created": 1741217220.480829,
-        "expired": 1741476420.480823
-      }
-    ]
-  },
-  {
-    "_key": "device13",
-    "name": "laptop Laptop Model 102",
-    "type": "laptop",
-    "model": "Laptop Model 102",
-    "serialNumber": "d2562ce9-574a-46ff-ae64-458daed1ab36",
-    "ipAddress": "192.168.121.103",
-    "macAddress": "d0:b0:88:4b:a3:b2",
-    "os": "Windows",
-    "osVersion": "Windows 10 Pro 21H2",
-    "configurationHistory": [
-      {
-        "hostname": "device13",
-        "firewallRules": [
-          "allow 3309"
-        ],
-        "created": 1743028020.48087,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "device13",
-        "firewallRules": [
-          "allow 3309"
-        ],
-        "created": 1742596020.480872,
-        "expired": 1743028020.48087
-      },
-      {
-        "hostname": "device13",
-        "firewallRules": [
-          "allow 3309"
-        ],
-        "created": 1742423220.480878,
-        "expired": 1742596020.480872
-      },
-      {
-        "hostname": "new-device-285",
-        "firewallRules": [
-          "allow 3309"
-        ],
-        "created": 1742077620.480883,
-        "expired": 1742423220.480878
-      },
-      {
-        "hostname": "new-device-285",
-        "firewallRules": [
-          "allow 3309"
-        ],
-        "created": 1741390020.480888,
-        "expired": 1742077620.480883
-      },
-      {
-        "hostname": "new-device-285",
-        "firewallRules": [
-          "allow 3309"
-        ],
-        "created": 1740958020.480892,
-        "expired": 1741390020.480888
-      }
-    ]
-  },
-  {
-    "_key": "device14",
-    "name": "firewall Firewall Model 935",
-    "type": "firewall",
-    "model": "Firewall Model 935",
-    "serialNumber": "038c1666-ca6d-442f-9f83-47ef3723339d",
-    "ipAddress": "192.168.79.181",
-    "macAddress": "15:3a:79:23:f5:00",
-    "os": "FortiOS",
-    "osVersion": "FortiOS 7.0.9",
-    "configurationHistory": [
-      {
-        "hostname": "device14",
-        "firewallRules": [
-          "allow 80",
-          "allow 8868",
-          "allow 3307"
-        ],
-        "created": 1743028020.480936,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-407",
-        "firewallRules": [
-          "allow 80",
-          "allow 8868",
-          "allow 3307"
-        ],
-        "created": 1742682420.480937,
-        "expired": 1743028020.480936
-      },
-      {
-        "hostname": "new-device-407",
-        "firewallRules": [
-          "allow 80",
-          "allow 8868",
-          "allow 3307"
-        ],
-        "created": 1742509620.480943,
-        "expired": 1742682420.480937
-      },
-      {
-        "hostname": "new-device-495",
-        "firewallRules": [
-          "allow 80",
-          "allow 8868",
-          "allow 3307"
-        ],
-        "created": 1741991220.480948,
-        "expired": 1742509620.480943
-      },
-      {
-        "hostname": "new-device-495",
-        "firewallRules": [
-          "allow 80",
-          "allow 8868",
-          "allow 3307"
-        ],
-        "created": 1741645620.480953,
-        "expired": 1741991220.480948
-      },
-      {
-        "hostname": "new-device-495",
-        "firewallRules": [
-          "allow 80",
-          "allow 8868",
-          "allow 3307"
-        ],
-        "created": 1741044420.480959,
-        "expired": 1741645620.480953
-      }
-    ]
-  },
-  {
-    "_key": "device15",
-    "name": "IoT Iot Model 514",
-    "type": "IoT",
-    "model": "Iot Model 514",
-    "serialNumber": "f4fb3e02-24ea-40b8-a7e9-4ee057222f64",
-    "ipAddress": "192.168.32.82",
-    "macAddress": "70:81:da:16:95:0b",
-    "os": "Embedded",
-    "osVersion": "Embedded Linux 4.14.247",
-    "configurationHistory": [
-      {
-        "hostname": "device15",
-        "firewallRules": [],
-        "created": 1743028020.480999,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-507",
-        "firewallRules": [],
-        "created": 1742941620.481001,
-        "expired": 1743028020.480999
-      },
-      {
-        "hostname": "new-device-507",
-        "firewallRules": [],
-        "created": 1742250420.481006,
-        "expired": 1742941620.481001
-      },
-      {
-        "hostname": "new-device-507",
-        "firewallRules": [],
-        "created": 1741818420.481011,
-        "expired": 1742250420.481006
-      },
-      {
-        "hostname": "new-device-568",
-        "firewallRules": [],
-        "created": 1741390020.481015,
-        "expired": 1741818420.481011
-      },
-      {
-        "hostname": "new-device-568",
-        "firewallRules": [],
-        "created": 1740958020.48102,
-        "expired": 1741390020.481015
-      }
-    ]
-  },
-  {
-    "_key": "device16",
-    "name": "router Router Model 855",
-    "type": "router",
-    "model": "Router Model 855",
-    "serialNumber": "96f8fd79-2547-4715-ba37-1fb4b8105d03",
-    "ipAddress": "192.168.238.26",
-    "macAddress": "4a:d2:f4:c1:db:8c",
+    "serialNumber": "a964c52f-0c95-447c-a7aa-c26d8f5d2583",
+    "ipAddress": "192.168.212.121",
+    "macAddress": "ad:36:ed:60:54:11",
     "os": "IOS",
     "osVersion": "IOS XE 17.6.4a",
-    "configurationHistory": [
-      {
-        "hostname": "device16",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 7404"
-        ],
-        "created": 1743028020.481057,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-453",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 7404"
-        ],
-        "created": 1742855220.481059,
-        "expired": 1743028020.481057
-      },
-      {
-        "hostname": "new-device-453",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 7404"
-        ],
-        "created": 1742423220.481064,
-        "expired": 1742855220.481059
-      },
-      {
-        "hostname": "new-device-504",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 7404"
-        ],
-        "created": 1741991220.481069,
-        "expired": 1742423220.481064
-      },
-      {
-        "hostname": "new-device-545",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 7404"
-        ],
-        "created": 1741559220.481073,
-        "expired": 1741991220.481069
-      },
-      {
-        "hostname": "new-device-472",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 7404"
-        ],
-        "created": 1741130820.481078,
-        "expired": 1741559220.481073
-      }
-    ]
+    "hostname": "device11",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6068",
+      "allow 6758"
+    ],
+    "created": 1743033168.041624
   },
   {
-    "_key": "device17",
-    "name": "router Router Model 862",
+    "_key": "device11-1",
+    "name": "router Router Model 909",
     "type": "router",
-    "model": "Router Model 862",
-    "serialNumber": "dcfb5a7f-6d50-4992-9868-0d72deea9b8c",
-    "ipAddress": "192.168.82.132",
-    "macAddress": "fb:9d:74:cb:cc:1a",
-    "os": "JUNOS",
-    "osVersion": "JUNOS 21.2R3-S1",
-    "configurationHistory": [
-      {
-        "hostname": "device17",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1743028020.481117,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-694",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1742768820.481119,
-        "expired": 1743028020.481117
-      },
-      {
-        "hostname": "new-device-583",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1742250420.481124,
-        "expired": 1742768820.481119
-      },
-      {
-        "hostname": "new-device-828",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1741991220.481129,
-        "expired": 1742250420.481124
-      },
-      {
-        "hostname": "new-device-524",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1741645620.481133,
-        "expired": 1741991220.481129
-      },
-      {
-        "hostname": "new-device-275",
-        "firewallRules": [
-          "allow 80",
-          "allow 443"
-        ],
-        "created": 1741217220.481138,
-        "expired": 1741645620.481133
-      }
-    ]
+    "model": "Router Model 909",
+    "serialNumber": "a964c52f-0c95-447c-a7aa-c26d8f5d2583",
+    "ipAddress": "192.168.212.121",
+    "macAddress": "ad:36:ed:60:54:11",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-394",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6068",
+      "allow 6758"
+    ],
+    "created": 1742687568.041656
   },
   {
-    "_key": "device18",
-    "name": "router Router Model 933",
+    "_key": "device11-2",
+    "name": "router Router Model 909",
     "type": "router",
-    "model": "Router Model 933",
-    "serialNumber": "6c6d3300-e437-451c-bea8-17f0c1b1b727",
-    "ipAddress": "192.168.76.230",
-    "macAddress": "01:bd:ef:18:10:ce",
-    "os": "JUNOS",
-    "osVersion": "JUNOS 21.2R3-S1",
-    "configurationHistory": [
-      {
-        "hostname": "device18",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 4191",
-          "allow 8665",
-          "allow 8830"
-        ],
-        "created": 1743028020.481176,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "device18",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 4191",
-          "allow 8665",
-          "allow 8830"
-        ],
-        "created": 1742855220.481178,
-        "expired": 1743028020.481176
-      },
-      {
-        "hostname": "new-device-792",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 4191",
-          "allow 8665",
-          "allow 8830"
-        ],
-        "created": 1742164020.481183,
-        "expired": 1742855220.481178
-      },
-      {
-        "hostname": "new-device-792",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 4191",
-          "allow 8665",
-          "allow 8830"
-        ],
-        "created": 1741991220.481188,
-        "expired": 1742164020.481183
-      },
-      {
-        "hostname": "new-device-792",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 4191",
-          "allow 8665",
-          "allow 8830"
-        ],
-        "created": 1741390020.481193,
-        "expired": 1741991220.481188
-      },
-      {
-        "hostname": "new-device-682",
-        "firewallRules": [
-          "allow 80",
-          "allow 443",
-          "allow 4191",
-          "allow 8665",
-          "allow 8830"
-        ],
-        "created": 1740871620.481198,
-        "expired": 1741390020.481193
-      }
-    ]
+    "model": "Router Model 909",
+    "serialNumber": "a964c52f-0c95-447c-a7aa-c26d8f5d2583",
+    "ipAddress": "192.168.212.121",
+    "macAddress": "ad:36:ed:60:54:11",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-394",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6068",
+      "allow 6758"
+    ],
+    "created": 1742514768.041663
   },
   {
-    "_key": "device19",
-    "name": "server Server Model 810",
+    "_key": "device11-3",
+    "name": "router Router Model 909",
+    "type": "router",
+    "model": "Router Model 909",
+    "serialNumber": "a964c52f-0c95-447c-a7aa-c26d8f5d2583",
+    "ipAddress": "192.168.212.121",
+    "macAddress": "ad:36:ed:60:54:11",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-365",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6068",
+      "allow 6758"
+    ],
+    "created": 1741996368.04167
+  },
+  {
+    "_key": "device11-4",
+    "name": "router Router Model 909",
+    "type": "router",
+    "model": "Router Model 909",
+    "serialNumber": "a964c52f-0c95-447c-a7aa-c26d8f5d2583",
+    "ipAddress": "192.168.212.121",
+    "macAddress": "ad:36:ed:60:54:11",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-365",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6068",
+      "allow 6758"
+    ],
+    "created": 1741564368.041677
+  },
+  {
+    "_key": "device11-5",
+    "name": "router Router Model 909",
+    "type": "router",
+    "model": "Router Model 909",
+    "serialNumber": "a964c52f-0c95-447c-a7aa-c26d8f5d2583",
+    "ipAddress": "192.168.212.121",
+    "macAddress": "ad:36:ed:60:54:11",
+    "os": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostname": "new-device-950",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6068",
+      "allow 6758"
+    ],
+    "created": 1740876768.041685
+  },
+  {
+    "_key": "device12-0",
+    "name": "server Server Model 399",
     "type": "server",
-    "model": "Server Model 810",
-    "serialNumber": "fbd7371f-f113-436a-a603-5082fa24be6d",
-    "ipAddress": "192.168.134.185",
-    "macAddress": "df:84:ad:98:5e:eb",
-    "os": "Windows",
-    "osVersion": "Windows Server 2019 Datacenter",
-    "configurationHistory": [
-      {
-        "hostname": "device19",
-        "firewallRules": [
-          "allow 8746"
-        ],
-        "created": 1743028020.481237,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-852",
-        "firewallRules": [
-          "allow 8746"
-        ],
-        "created": 1742855220.481239,
-        "expired": 1743028020.481237
-      },
-      {
-        "hostname": "new-device-852",
-        "firewallRules": [
-          "allow 8746"
-        ],
-        "created": 1742336820.481244,
-        "expired": 1742855220.481239
-      },
-      {
-        "hostname": "new-device-852",
-        "firewallRules": [
-          "allow 8746"
-        ],
-        "created": 1741732020.481249,
-        "expired": 1742336820.481244
-      },
-      {
-        "hostname": "new-device-567",
-        "firewallRules": [
-          "allow 8746"
-        ],
-        "created": 1741303620.481254,
-        "expired": 1741732020.481249
-      },
-      {
-        "hostname": "new-device-567",
-        "firewallRules": [
-          "allow 8746"
-        ],
-        "created": 1741130820.481259,
-        "expired": 1741303620.481254
-      }
-    ]
+    "model": "Server Model 399",
+    "serialNumber": "3bfc832f-b076-4ef7-9fb0-4f1a1e1b64ce",
+    "ipAddress": "192.168.39.235",
+    "macAddress": "4e:a9:84:83:56:88",
+    "os": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.3 LTS",
+    "hostname": "device12",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1743033168.041696
   },
   {
-    "_key": "device20",
-    "name": "IoT Iot Model 224",
+    "_key": "device12-1",
+    "name": "server Server Model 399",
+    "type": "server",
+    "model": "Server Model 399",
+    "serialNumber": "3bfc832f-b076-4ef7-9fb0-4f1a1e1b64ce",
+    "ipAddress": "192.168.39.235",
+    "macAddress": "4e:a9:84:83:56:88",
+    "os": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.3 LTS",
+    "hostname": "device12",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1742773968.041728
+  },
+  {
+    "_key": "device12-2",
+    "name": "server Server Model 399",
+    "type": "server",
+    "model": "Server Model 399",
+    "serialNumber": "3bfc832f-b076-4ef7-9fb0-4f1a1e1b64ce",
+    "ipAddress": "192.168.39.235",
+    "macAddress": "4e:a9:84:83:56:88",
+    "os": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.3 LTS",
+    "hostname": "device12",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1742428368.041735
+  },
+  {
+    "_key": "device12-3",
+    "name": "server Server Model 399",
+    "type": "server",
+    "model": "Server Model 399",
+    "serialNumber": "3bfc832f-b076-4ef7-9fb0-4f1a1e1b64ce",
+    "ipAddress": "192.168.39.235",
+    "macAddress": "4e:a9:84:83:56:88",
+    "os": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.3 LTS",
+    "hostname": "new-device-157",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1741909968.041743
+  },
+  {
+    "_key": "device12-4",
+    "name": "server Server Model 399",
+    "type": "server",
+    "model": "Server Model 399",
+    "serialNumber": "3bfc832f-b076-4ef7-9fb0-4f1a1e1b64ce",
+    "ipAddress": "192.168.39.235",
+    "macAddress": "4e:a9:84:83:56:88",
+    "os": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.3 LTS",
+    "hostname": "new-device-887",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1741650768.041751
+  },
+  {
+    "_key": "device12-5",
+    "name": "server Server Model 399",
+    "type": "server",
+    "model": "Server Model 399",
+    "serialNumber": "3bfc832f-b076-4ef7-9fb0-4f1a1e1b64ce",
+    "ipAddress": "192.168.39.235",
+    "macAddress": "4e:a9:84:83:56:88",
+    "os": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.3 LTS",
+    "hostname": "new-device-349",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1741135968.041758
+  },
+  {
+    "_key": "device13-0",
+    "name": "IoT Iot Model 384",
     "type": "IoT",
-    "model": "Iot Model 224",
-    "serialNumber": "928efcdb-034c-4220-9669-22dbdb5f8ede",
-    "ipAddress": "192.168.254.7",
-    "macAddress": "b9:24:60:25:87:d5",
+    "model": "Iot Model 384",
+    "serialNumber": "dd638bf1-20db-49f9-b888-8608d89dba98",
+    "ipAddress": "192.168.193.11",
+    "macAddress": "49:2e:f1:f7:7c:8e",
     "os": "Embedded",
     "osVersion": "Embedded Linux 4.14.247",
-    "configurationHistory": [
-      {
-        "hostname": "device20",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1743028020.481297,
-        "expired": 9223372036854775807
-      },
-      {
-        "hostname": "new-device-286",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1742855220.481299,
-        "expired": 1743028020.481297
-      },
-      {
-        "hostname": "new-device-556",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1742336820.481307,
-        "expired": 1742855220.481299
-      },
-      {
-        "hostname": "new-device-130",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1742077620.481312,
-        "expired": 1742336820.481307
-      },
-      {
-        "hostname": "new-device-584",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1741303620.481316,
-        "expired": 1742077620.481312
-      },
-      {
-        "hostname": "new-device-584",
-        "firewallRules": [
-          "allow 443"
-        ],
-        "created": 1740871620.481322,
-        "expired": 1741303620.481316
-      }
-    ]
+    "hostname": "device13",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7748"
+    ],
+    "created": 1743033168.04177
+  },
+  {
+    "_key": "device13-1",
+    "name": "IoT Iot Model 384",
+    "type": "IoT",
+    "model": "Iot Model 384",
+    "serialNumber": "dd638bf1-20db-49f9-b888-8608d89dba98",
+    "ipAddress": "192.168.193.11",
+    "macAddress": "49:2e:f1:f7:7c:8e",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-112",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7748"
+    ],
+    "created": 1742946768.041804
+  },
+  {
+    "_key": "device13-2",
+    "name": "IoT Iot Model 384",
+    "type": "IoT",
+    "model": "Iot Model 384",
+    "serialNumber": "dd638bf1-20db-49f9-b888-8608d89dba98",
+    "ipAddress": "192.168.193.11",
+    "macAddress": "49:2e:f1:f7:7c:8e",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-112",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7748"
+    ],
+    "created": 1742341968.041812
+  },
+  {
+    "_key": "device13-3",
+    "name": "IoT Iot Model 384",
+    "type": "IoT",
+    "model": "Iot Model 384",
+    "serialNumber": "dd638bf1-20db-49f9-b888-8608d89dba98",
+    "ipAddress": "192.168.193.11",
+    "macAddress": "49:2e:f1:f7:7c:8e",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-197",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7748"
+    ],
+    "created": 1741737168.041819
+  },
+  {
+    "_key": "device13-4",
+    "name": "IoT Iot Model 384",
+    "type": "IoT",
+    "model": "Iot Model 384",
+    "serialNumber": "dd638bf1-20db-49f9-b888-8608d89dba98",
+    "ipAddress": "192.168.193.11",
+    "macAddress": "49:2e:f1:f7:7c:8e",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-197",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7748"
+    ],
+    "created": 1741395168.041826
+  },
+  {
+    "_key": "device13-5",
+    "name": "IoT Iot Model 384",
+    "type": "IoT",
+    "model": "Iot Model 384",
+    "serialNumber": "dd638bf1-20db-49f9-b888-8608d89dba98",
+    "ipAddress": "192.168.193.11",
+    "macAddress": "49:2e:f1:f7:7c:8e",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-197",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7748"
+    ],
+    "created": 1741049568.041833
+  },
+  {
+    "_key": "device14-0",
+    "name": "IoT Iot Model 362",
+    "type": "IoT",
+    "model": "Iot Model 362",
+    "serialNumber": "c281e885-85ff-42fe-83bd-dc46293d6790",
+    "ipAddress": "192.168.87.33",
+    "macAddress": "4b:07:ef:ac:df:c0",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "device14",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3893"
+    ],
+    "created": 1743033168.041846
+  },
+  {
+    "_key": "device14-1",
+    "name": "IoT Iot Model 362",
+    "type": "IoT",
+    "model": "Iot Model 362",
+    "serialNumber": "c281e885-85ff-42fe-83bd-dc46293d6790",
+    "ipAddress": "192.168.87.33",
+    "macAddress": "4b:07:ef:ac:df:c0",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-503",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3893"
+    ],
+    "created": 1742860368.04188
+  },
+  {
+    "_key": "device14-2",
+    "name": "IoT Iot Model 362",
+    "type": "IoT",
+    "model": "Iot Model 362",
+    "serialNumber": "c281e885-85ff-42fe-83bd-dc46293d6790",
+    "ipAddress": "192.168.87.33",
+    "macAddress": "4b:07:ef:ac:df:c0",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-509",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3893"
+    ],
+    "created": 1742514768.041887
+  },
+  {
+    "_key": "device14-3",
+    "name": "IoT Iot Model 362",
+    "type": "IoT",
+    "model": "Iot Model 362",
+    "serialNumber": "c281e885-85ff-42fe-83bd-dc46293d6790",
+    "ipAddress": "192.168.87.33",
+    "macAddress": "4b:07:ef:ac:df:c0",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-473",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3893"
+    ],
+    "created": 1741909968.041894
+  },
+  {
+    "_key": "device14-4",
+    "name": "IoT Iot Model 362",
+    "type": "IoT",
+    "model": "Iot Model 362",
+    "serialNumber": "c281e885-85ff-42fe-83bd-dc46293d6790",
+    "ipAddress": "192.168.87.33",
+    "macAddress": "4b:07:ef:ac:df:c0",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-473",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3893"
+    ],
+    "created": 1741308768.041901
+  },
+  {
+    "_key": "device14-5",
+    "name": "IoT Iot Model 362",
+    "type": "IoT",
+    "model": "Iot Model 362",
+    "serialNumber": "c281e885-85ff-42fe-83bd-dc46293d6790",
+    "ipAddress": "192.168.87.33",
+    "macAddress": "4b:07:ef:ac:df:c0",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-323",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3893"
+    ],
+    "created": 1740876768.041908
+  },
+  {
+    "_key": "device15-0",
+    "name": "IoT Iot Model 177",
+    "type": "IoT",
+    "model": "Iot Model 177",
+    "serialNumber": "21f9a688-2798-4623-a88a-bb75395ecde3",
+    "ipAddress": "192.168.47.106",
+    "macAddress": "52:d6:2c:20:76:f7",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "device15",
+    "firewallRules": [],
+    "created": 1743033168.041921
+  },
+  {
+    "_key": "device15-1",
+    "name": "IoT Iot Model 177",
+    "type": "IoT",
+    "model": "Iot Model 177",
+    "serialNumber": "21f9a688-2798-4623-a88a-bb75395ecde3",
+    "ipAddress": "192.168.47.106",
+    "macAddress": "52:d6:2c:20:76:f7",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-997",
+    "firewallRules": [],
+    "created": 1742773968.041963
+  },
+  {
+    "_key": "device15-2",
+    "name": "IoT Iot Model 177",
+    "type": "IoT",
+    "model": "Iot Model 177",
+    "serialNumber": "21f9a688-2798-4623-a88a-bb75395ecde3",
+    "ipAddress": "192.168.47.106",
+    "macAddress": "52:d6:2c:20:76:f7",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-500",
+    "firewallRules": [],
+    "created": 1742255568.041971
+  },
+  {
+    "_key": "device15-3",
+    "name": "IoT Iot Model 177",
+    "type": "IoT",
+    "model": "Iot Model 177",
+    "serialNumber": "21f9a688-2798-4623-a88a-bb75395ecde3",
+    "ipAddress": "192.168.47.106",
+    "macAddress": "52:d6:2c:20:76:f7",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-500",
+    "firewallRules": [],
+    "created": 1741737168.041978
+  },
+  {
+    "_key": "device15-4",
+    "name": "IoT Iot Model 177",
+    "type": "IoT",
+    "model": "Iot Model 177",
+    "serialNumber": "21f9a688-2798-4623-a88a-bb75395ecde3",
+    "ipAddress": "192.168.47.106",
+    "macAddress": "52:d6:2c:20:76:f7",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-628",
+    "firewallRules": [],
+    "created": 1741564368.041985
+  },
+  {
+    "_key": "device15-5",
+    "name": "IoT Iot Model 177",
+    "type": "IoT",
+    "model": "Iot Model 177",
+    "serialNumber": "21f9a688-2798-4623-a88a-bb75395ecde3",
+    "ipAddress": "192.168.47.106",
+    "macAddress": "52:d6:2c:20:76:f7",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-628",
+    "firewallRules": [],
+    "created": 1741135968.041993
+  },
+  {
+    "_key": "device16-0",
+    "name": "server Server Model 767",
+    "type": "server",
+    "model": "Server Model 767",
+    "serialNumber": "772f9ddd-0865-40a7-81b5-7afb809d7d3b",
+    "ipAddress": "192.168.204.151",
+    "macAddress": "71:1c:88:f5:66:91",
+    "os": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostname": "device16",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1743033168.042006
+  },
+  {
+    "_key": "device16-1",
+    "name": "server Server Model 767",
+    "type": "server",
+    "model": "Server Model 767",
+    "serialNumber": "772f9ddd-0865-40a7-81b5-7afb809d7d3b",
+    "ipAddress": "192.168.204.151",
+    "macAddress": "71:1c:88:f5:66:91",
+    "os": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostname": "device16",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1742773968.04204
+  },
+  {
+    "_key": "device16-2",
+    "name": "server Server Model 767",
+    "type": "server",
+    "model": "Server Model 767",
+    "serialNumber": "772f9ddd-0865-40a7-81b5-7afb809d7d3b",
+    "ipAddress": "192.168.204.151",
+    "macAddress": "71:1c:88:f5:66:91",
+    "os": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostname": "device16",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1742341968.042047
+  },
+  {
+    "_key": "device16-3",
+    "name": "server Server Model 767",
+    "type": "server",
+    "model": "Server Model 767",
+    "serialNumber": "772f9ddd-0865-40a7-81b5-7afb809d7d3b",
+    "ipAddress": "192.168.204.151",
+    "macAddress": "71:1c:88:f5:66:91",
+    "os": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostname": "new-device-437",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1741737168.04206
+  },
+  {
+    "_key": "device16-4",
+    "name": "server Server Model 767",
+    "type": "server",
+    "model": "Server Model 767",
+    "serialNumber": "772f9ddd-0865-40a7-81b5-7afb809d7d3b",
+    "ipAddress": "192.168.204.151",
+    "macAddress": "71:1c:88:f5:66:91",
+    "os": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostname": "new-device-437",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1741481568.042067
+  },
+  {
+    "_key": "device16-5",
+    "name": "server Server Model 767",
+    "type": "server",
+    "model": "Server Model 767",
+    "serialNumber": "772f9ddd-0865-40a7-81b5-7afb809d7d3b",
+    "ipAddress": "192.168.204.151",
+    "macAddress": "71:1c:88:f5:66:91",
+    "os": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostname": "new-device-756",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1740876768.042074
+  },
+  {
+    "_key": "device17-0",
+    "name": "firewall Firewall Model 173",
+    "type": "firewall",
+    "model": "Firewall Model 173",
+    "serialNumber": "fde4290f-9ff7-49a6-8cb5-8819eb26fe76",
+    "ipAddress": "192.168.187.163",
+    "macAddress": "1e:1f:5a:a7:b8:60",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "device17",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6696"
+    ],
+    "created": 1743033168.042086
+  },
+  {
+    "_key": "device17-1",
+    "name": "firewall Firewall Model 173",
+    "type": "firewall",
+    "model": "Firewall Model 173",
+    "serialNumber": "fde4290f-9ff7-49a6-8cb5-8819eb26fe76",
+    "ipAddress": "192.168.187.163",
+    "macAddress": "1e:1f:5a:a7:b8:60",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-841",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6696"
+    ],
+    "created": 1742773968.042119
+  },
+  {
+    "_key": "device17-2",
+    "name": "firewall Firewall Model 173",
+    "type": "firewall",
+    "model": "Firewall Model 173",
+    "serialNumber": "fde4290f-9ff7-49a6-8cb5-8819eb26fe76",
+    "ipAddress": "192.168.187.163",
+    "macAddress": "1e:1f:5a:a7:b8:60",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-348",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6696"
+    ],
+    "created": 1742428368.042127
+  },
+  {
+    "_key": "device17-3",
+    "name": "firewall Firewall Model 173",
+    "type": "firewall",
+    "model": "Firewall Model 173",
+    "serialNumber": "fde4290f-9ff7-49a6-8cb5-8819eb26fe76",
+    "ipAddress": "192.168.187.163",
+    "macAddress": "1e:1f:5a:a7:b8:60",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-348",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6696"
+    ],
+    "created": 1742082768.042133
+  },
+  {
+    "_key": "device17-4",
+    "name": "firewall Firewall Model 173",
+    "type": "firewall",
+    "model": "Firewall Model 173",
+    "serialNumber": "fde4290f-9ff7-49a6-8cb5-8819eb26fe76",
+    "ipAddress": "192.168.187.163",
+    "macAddress": "1e:1f:5a:a7:b8:60",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-768",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6696"
+    ],
+    "created": 1741564368.04214
+  },
+  {
+    "_key": "device17-5",
+    "name": "firewall Firewall Model 173",
+    "type": "firewall",
+    "model": "Firewall Model 173",
+    "serialNumber": "fde4290f-9ff7-49a6-8cb5-8819eb26fe76",
+    "ipAddress": "192.168.187.163",
+    "macAddress": "1e:1f:5a:a7:b8:60",
+    "os": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostname": "new-device-245",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6696"
+    ],
+    "created": 1741135968.042148
+  },
+  {
+    "_key": "device18-0",
+    "name": "IoT Iot Model 399",
+    "type": "IoT",
+    "model": "Iot Model 399",
+    "serialNumber": "c41cde26-a938-42a4-904a-d00a0e6f2701",
+    "ipAddress": "192.168.118.241",
+    "macAddress": "fe:c8:a9:cd:e9:8c",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "device18",
+    "firewallRules": [],
+    "created": 1743033168.042159
+  },
+  {
+    "_key": "device18-1",
+    "name": "IoT Iot Model 399",
+    "type": "IoT",
+    "model": "Iot Model 399",
+    "serialNumber": "c41cde26-a938-42a4-904a-d00a0e6f2701",
+    "ipAddress": "192.168.118.241",
+    "macAddress": "fe:c8:a9:cd:e9:8c",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-973",
+    "firewallRules": [],
+    "created": 1742773968.042193
+  },
+  {
+    "_key": "device18-2",
+    "name": "IoT Iot Model 399",
+    "type": "IoT",
+    "model": "Iot Model 399",
+    "serialNumber": "c41cde26-a938-42a4-904a-d00a0e6f2701",
+    "ipAddress": "192.168.118.241",
+    "macAddress": "fe:c8:a9:cd:e9:8c",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-973",
+    "firewallRules": [],
+    "created": 1742341968.042201
+  },
+  {
+    "_key": "device18-3",
+    "name": "IoT Iot Model 399",
+    "type": "IoT",
+    "model": "Iot Model 399",
+    "serialNumber": "c41cde26-a938-42a4-904a-d00a0e6f2701",
+    "ipAddress": "192.168.118.241",
+    "macAddress": "fe:c8:a9:cd:e9:8c",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-973",
+    "firewallRules": [],
+    "created": 1742082768.042208
+  },
+  {
+    "_key": "device18-4",
+    "name": "IoT Iot Model 399",
+    "type": "IoT",
+    "model": "Iot Model 399",
+    "serialNumber": "c41cde26-a938-42a4-904a-d00a0e6f2701",
+    "ipAddress": "192.168.118.241",
+    "macAddress": "fe:c8:a9:cd:e9:8c",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-835",
+    "firewallRules": [],
+    "created": 1741650768.042215
+  },
+  {
+    "_key": "device18-5",
+    "name": "IoT Iot Model 399",
+    "type": "IoT",
+    "model": "Iot Model 399",
+    "serialNumber": "c41cde26-a938-42a4-904a-d00a0e6f2701",
+    "ipAddress": "192.168.118.241",
+    "macAddress": "fe:c8:a9:cd:e9:8c",
+    "os": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostname": "new-device-754",
+    "firewallRules": [],
+    "created": 1741135968.042224
+  },
+  {
+    "_key": "device19-0",
+    "name": "laptop Laptop Model 135",
+    "type": "laptop",
+    "model": "Laptop Model 135",
+    "serialNumber": "1569de67-6bba-4617-b2fd-2324647687e7",
+    "ipAddress": "192.168.4.174",
+    "macAddress": "f7:16:3a:26:1e:50",
+    "os": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostname": "device19",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2851",
+      "allow 2875"
+    ],
+    "created": 1743033168.042236
+  },
+  {
+    "_key": "device19-1",
+    "name": "laptop Laptop Model 135",
+    "type": "laptop",
+    "model": "Laptop Model 135",
+    "serialNumber": "1569de67-6bba-4617-b2fd-2324647687e7",
+    "ipAddress": "192.168.4.174",
+    "macAddress": "f7:16:3a:26:1e:50",
+    "os": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostname": "device19",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2851",
+      "allow 2875"
+    ],
+    "created": 1742946768.042269
+  },
+  {
+    "_key": "device19-2",
+    "name": "laptop Laptop Model 135",
+    "type": "laptop",
+    "model": "Laptop Model 135",
+    "serialNumber": "1569de67-6bba-4617-b2fd-2324647687e7",
+    "ipAddress": "192.168.4.174",
+    "macAddress": "f7:16:3a:26:1e:50",
+    "os": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostname": "new-device-330",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2851",
+      "allow 2875"
+    ],
+    "created": 1742428368.042277
+  },
+  {
+    "_key": "device19-3",
+    "name": "laptop Laptop Model 135",
+    "type": "laptop",
+    "model": "Laptop Model 135",
+    "serialNumber": "1569de67-6bba-4617-b2fd-2324647687e7",
+    "ipAddress": "192.168.4.174",
+    "macAddress": "f7:16:3a:26:1e:50",
+    "os": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostname": "new-device-330",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2851",
+      "allow 2875"
+    ],
+    "created": 1741737168.042284
+  },
+  {
+    "_key": "device19-4",
+    "name": "laptop Laptop Model 135",
+    "type": "laptop",
+    "model": "Laptop Model 135",
+    "serialNumber": "1569de67-6bba-4617-b2fd-2324647687e7",
+    "ipAddress": "192.168.4.174",
+    "macAddress": "f7:16:3a:26:1e:50",
+    "os": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostname": "new-device-324",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2851",
+      "allow 2875"
+    ],
+    "created": 1741650768.042291
+  },
+  {
+    "_key": "device19-5",
+    "name": "laptop Laptop Model 135",
+    "type": "laptop",
+    "model": "Laptop Model 135",
+    "serialNumber": "1569de67-6bba-4617-b2fd-2324647687e7",
+    "ipAddress": "192.168.4.174",
+    "macAddress": "f7:16:3a:26:1e:50",
+    "os": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostname": "new-device-344",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2851",
+      "allow 2875"
+    ],
+    "created": 1740963168.042297
+  },
+  {
+    "_key": "device20-0",
+    "name": "router Router Model 519",
+    "type": "router",
+    "model": "Router Model 519",
+    "serialNumber": "45b57a86-b7e6-41ab-8e61-515f65a48992",
+    "ipAddress": "192.168.223.71",
+    "macAddress": "18:8a:72:c8:23:dc",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "device20",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3355",
+      "allow 3712"
+    ],
+    "created": 1743033168.042309
+  },
+  {
+    "_key": "device20-1",
+    "name": "router Router Model 519",
+    "type": "router",
+    "model": "Router Model 519",
+    "serialNumber": "45b57a86-b7e6-41ab-8e61-515f65a48992",
+    "ipAddress": "192.168.223.71",
+    "macAddress": "18:8a:72:c8:23:dc",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-316",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3355",
+      "allow 3712"
+    ],
+    "created": 1742860368.042345
+  },
+  {
+    "_key": "device20-2",
+    "name": "router Router Model 519",
+    "type": "router",
+    "model": "Router Model 519",
+    "serialNumber": "45b57a86-b7e6-41ab-8e61-515f65a48992",
+    "ipAddress": "192.168.223.71",
+    "macAddress": "18:8a:72:c8:23:dc",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-316",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3355",
+      "allow 3712"
+    ],
+    "created": 1742341968.042353
+  },
+  {
+    "_key": "device20-3",
+    "name": "router Router Model 519",
+    "type": "router",
+    "model": "Router Model 519",
+    "serialNumber": "45b57a86-b7e6-41ab-8e61-515f65a48992",
+    "ipAddress": "192.168.223.71",
+    "macAddress": "18:8a:72:c8:23:dc",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-316",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3355",
+      "allow 3712"
+    ],
+    "created": 1741996368.04236
+  },
+  {
+    "_key": "device20-4",
+    "name": "router Router Model 519",
+    "type": "router",
+    "model": "Router Model 519",
+    "serialNumber": "45b57a86-b7e6-41ab-8e61-515f65a48992",
+    "ipAddress": "192.168.223.71",
+    "macAddress": "18:8a:72:c8:23:dc",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-316",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3355",
+      "allow 3712"
+    ],
+    "created": 1741564368.042367
+  },
+  {
+    "_key": "device20-5",
+    "name": "router Router Model 519",
+    "type": "router",
+    "model": "Router Model 519",
+    "serialNumber": "45b57a86-b7e6-41ab-8e61-515f65a48992",
+    "ipAddress": "192.168.223.71",
+    "macAddress": "18:8a:72:c8:23:dc",
+    "os": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostname": "new-device-316",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3355",
+      "allow 3712"
+    ],
+    "created": 1741049568.042375
   }
 ]

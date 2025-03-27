@@ -1,53 +1,53 @@
 [
   {
     "_key": "device1",
-    "name": "router Router Model 855 proxy in",
+    "name": "router Router Model 899 proxy in",
     "type": "router"
   },
   {
     "_key": "device2",
-    "name": "IoT Iot Model 318 proxy in",
-    "type": "IoT"
-  },
-  {
-    "_key": "device3",
-    "name": "router Router Model 903 proxy in",
-    "type": "router"
-  },
-  {
-    "_key": "device4",
-    "name": "firewall Firewall Model 750 proxy in",
+    "name": "firewall Firewall Model 645 proxy in",
     "type": "firewall"
   },
   {
+    "_key": "device3",
+    "name": "firewall Firewall Model 391 proxy in",
+    "type": "firewall"
+  },
+  {
+    "_key": "device4",
+    "name": "router Router Model 342 proxy in",
+    "type": "router"
+  },
+  {
     "_key": "device5",
-    "name": "laptop Laptop Model 458 proxy in",
-    "type": "laptop"
+    "name": "firewall Firewall Model 147 proxy in",
+    "type": "firewall"
   },
   {
     "_key": "device6",
-    "name": "router Router Model 148 proxy in",
+    "name": "router Router Model 684 proxy in",
     "type": "router"
   },
   {
     "_key": "device7",
-    "name": "IoT Iot Model 362 proxy in",
+    "name": "IoT Iot Model 415 proxy in",
     "type": "IoT"
   },
   {
     "_key": "device8",
-    "name": "firewall Firewall Model 293 proxy in",
+    "name": "firewall Firewall Model 739 proxy in",
     "type": "firewall"
   },
   {
     "_key": "device9",
-    "name": "server Server Model 936 proxy in",
-    "type": "server"
+    "name": "router Router Model 157 proxy in",
+    "type": "router"
   },
   {
     "_key": "device10",
-    "name": "IoT Iot Model 547 proxy in",
-    "type": "IoT"
+    "name": "laptop Laptop Model 265 proxy in",
+    "type": "laptop"
   },
   {
     "_key": "device11",
@@ -56,47 +56,47 @@
   },
   {
     "_key": "device12",
-    "name": "laptop Laptop Model 347 proxy in",
-    "type": "laptop"
+    "name": "server Server Model 399 proxy in",
+    "type": "server"
   },
   {
     "_key": "device13",
-    "name": "laptop Laptop Model 102 proxy in",
-    "type": "laptop"
+    "name": "IoT Iot Model 384 proxy in",
+    "type": "IoT"
   },
   {
     "_key": "device14",
-    "name": "firewall Firewall Model 935 proxy in",
-    "type": "firewall"
+    "name": "IoT Iot Model 362 proxy in",
+    "type": "IoT"
   },
   {
     "_key": "device15",
-    "name": "IoT Iot Model 514 proxy in",
+    "name": "IoT Iot Model 177 proxy in",
     "type": "IoT"
   },
   {
     "_key": "device16",
-    "name": "router Router Model 855 proxy in",
-    "type": "router"
-  },
-  {
-    "_key": "device17",
-    "name": "router Router Model 862 proxy in",
-    "type": "router"
-  },
-  {
-    "_key": "device18",
-    "name": "router Router Model 933 proxy in",
-    "type": "router"
-  },
-  {
-    "_key": "device19",
-    "name": "server Server Model 810 proxy in",
+    "name": "server Server Model 767 proxy in",
     "type": "server"
   },
   {
-    "_key": "device20",
-    "name": "IoT Iot Model 224 proxy in",
+    "_key": "device17",
+    "name": "firewall Firewall Model 173 proxy in",
+    "type": "firewall"
+  },
+  {
+    "_key": "device18",
+    "name": "IoT Iot Model 399 proxy in",
     "type": "IoT"
+  },
+  {
+    "_key": "device19",
+    "name": "laptop Laptop Model 135 proxy in",
+    "type": "laptop"
+  },
+  {
+    "_key": "device20",
+    "name": "router Router Model 519 proxy in",
+    "type": "router"
   }
 ]

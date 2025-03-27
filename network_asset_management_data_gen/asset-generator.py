@@ -50,16 +50,16 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
         os_version = random.choice(os_versions[device_type])
         model = f"{device_type.capitalize()} Model {random.randint(100, 999)}"
 
-        deviceIn = {"_key": f"device{i+1}", "name": device_type+" "+model+" proxy in","type": device_type}
+        proxyKey = f"device{i+1}"
+        deviceIn = {"_key": proxyKey, "name": device_type+" "+model+" proxy in","type": device_type}
         deviceIns.append(deviceIn)
-        deviceOut = {"_key": f"device{i+1}", "name": device_type+" "+model+" proxy out", "type": device_type}
+        deviceOut = {"_key": proxyKey, "name": device_type+" "+model+" proxy out", "type": device_type}
         deviceOuts.append(deviceOut)
-        versionIn = {"_key": f"deviceIn{i+1}", "_from": "DeviceIn/"+f"device{i+1}", "_to": "Device/"+f"device{i+1}"}
-        versions.append(versionIn)
-        versionOut = {"_key": f"deviceOut{i+1}", "_from": "Device/"+f"device{i+1}", "_to": "DeviceOut/"+f"device{i+1}"}
-        versions.append(versionOut)
-        device = {
-            "_key": f"device{i+1}",
+        # Generate configuration history
+        currentDeviceKey = f"device{i+1}-{0}"
+        currentCreated = datetime.datetime.now().timestamp()
+        current_config = {
+            "_key" : currentDeviceKey,
             "name" : device_type+" "+model,
             "type": device_type,
             "model": model,
@@ -67,16 +67,19 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
             "ipAddress": f"192.168.{random.randint(1, 254)}.{random.randint(1, 254)}",
             "macAddress": ":".join(f"{random.randint(0, 255):02x}" for _ in range(6)),
             "os": os_version.split(" ")[0],
-            "osVersion": os_version,
-            "configurationHistory": []
-        }
-        devices.append(device)
-        # Generate configuration history
-        current_config = {"hostname": f"device{i+1}", "firewallRules": ["allow 80", "allow 443"], "created": datetime.datetime.now().timestamp(), "expired": notExpiredValue()}
-        device["configurationHistory"].append(current_config)
+            "osVersion": os_version,"hostname": f"device{i+1}",
+            "firewallRules": ["allow 80", "allow 443"],
+            "created": currentCreated}
+        currentVersionIn = {"_key": "in-"+currentDeviceKey, "_from": "DeviceIn/"+proxyKey, "_to": "Device/"+currentDeviceKey, "created":currentCreated, "expired": notExpiredValue() }
+        versions.append(currentVersionIn)
+        currentVersionOut = {"_key": "out-"+currentDeviceKey, "_from": "Device/"+currentDeviceKey, "_to": "DeviceOut/"+proxyKey, "created":currentCreated , "expired": notExpiredValue()}
+        versions.append(currentVersionOut)
+        devices.append(current_config)
         for changeNo in range(num_config_changes):
-            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(changeNo*5+1, (changeNo+1)*5))
             previous_config = current_config.copy()
+            _key = f"device{i+1}-{changeNo+1}"
+            previous_config["_key"] = _key
+            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(changeNo*5+1, (changeNo+1)*5))
             if random.random() < 0.5:
                 # Add/remove firewall rule
                 if random.random() < 0.5:
@@ -88,9 +91,13 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
                 # Change hostname
                 previous_config["hostname"] = f"new-device-{random.randint(100, 999)}"
             expired = previous_config["created"]
-            previous_config["expired"] = expired
+            # previous_config["expired"] = expired
             previous_config["created"] = created.timestamp()
-            device["configurationHistory"].append(previous_config)
+            devices.append(previous_config)
+            versionIn = {"_key": "in-"+_key, "_from": "DeviceIn/"+proxyKey, "_to": "Device/"+_key, "created":created.timestamp(), "expired": expired }
+            versions.append(versionIn)
+            versionOut = {"_key": "out-"+_key, "_from": "Device/"+_key, "_to": "DeviceOut/"+proxyKey, "created":created.timestamp() , "expired": expired}
+            versions.append(versionOut)
             current_config = previous_config
     with open("./data/Device.json", "w") as f:
         json.dump(devices, f, indent=2)
