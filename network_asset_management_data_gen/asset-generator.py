@@ -33,8 +33,6 @@ def generateLocations(num_locations=5):
 
 def generateDevices(locations, num_devices=20,num_config_changes=5):
     """Generate device data and store in Device.json."""
-    devices = []
-   # Devices (with real OS and configuration history)
     device_types = ["server", "router", "laptop", "IoT", "firewall"]
     os_versions = {
         "server": ["CentOS 7.9.2009", "Ubuntu 20.04.3 LTS", "Windows Server 2019 Datacenter"],
@@ -43,12 +41,25 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
         "IoT": ["Embedded Linux 4.14.247", "FreeRTOS 10.4.6"],
         "firewall": ["FortiOS 7.0.9", "pfSense 2.5.2"]
     }
+    devices = []
+    deviceIns = []
+    deviceOuts = []
+    versions = []
     for i in range(num_devices):
         device_type = random.choice(device_types)
         os_version = random.choice(os_versions[device_type])
         model = f"{device_type.capitalize()} Model {random.randint(100, 999)}"
-        device = {
-            "_key": f"device{i+1}",
+
+        proxyKey = f"device{i+1}"
+        deviceIn = {"_key": proxyKey, "name": device_type+" "+model+" proxy in","type": device_type}
+        deviceIns.append(deviceIn)
+        deviceOut = {"_key": proxyKey, "name": device_type+" "+model+" proxy out", "type": device_type}
+        deviceOuts.append(deviceOut)
+        # Generate configuration history
+        currentDeviceKey = f"device{i+1}-{0}"
+        currentCreated = datetime.datetime.now().timestamp()
+        current_config = {
+            "_key" : currentDeviceKey,
             "name" : device_type+" "+model,
             "type": device_type,
             "model": model,
@@ -56,17 +67,19 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
             "ipAddress": f"192.168.{random.randint(1, 254)}.{random.randint(1, 254)}",
             "macAddress": ":".join(f"{random.randint(0, 255):02x}" for _ in range(6)),
             "os": os_version.split(" ")[0],
-            "osVersion": os_version,
-            "locationId": random.choice(locations)["_key"],
-            "configurationHistory": []
-        }
-        devices.append(device)
-        # Generate configuration history
-        current_config = {"hostname": f"device{i+1}", "firewallRules": ["allow 80", "allow 443"], "created": datetime.datetime.now().timestamp(), "expired": notExpiredValue()}
-        device["configurationHistory"].append(current_config)
+            "osVersion": os_version,"hostname": f"device{i+1}",
+            "firewallRules": ["allow 80", "allow 443"],
+            "created": currentCreated}
+        currentVersionIn = {"_key": "in-"+currentDeviceKey, "_from": "DeviceIn/"+proxyKey, "_to": "Device/"+currentDeviceKey, "created":currentCreated, "expired": notExpiredValue() }
+        versions.append(currentVersionIn)
+        currentVersionOut = {"_key": "out-"+currentDeviceKey, "_from": "Device/"+currentDeviceKey, "_to": "DeviceOut/"+proxyKey, "created":currentCreated , "expired": notExpiredValue()}
+        versions.append(currentVersionOut)
+        devices.append(current_config)
         for changeNo in range(num_config_changes):
-            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(changeNo*5+1, (changeNo+1)*5))
             previous_config = current_config.copy()
+            _key = f"device{i+1}-{changeNo+1}"
+            previous_config["_key"] = _key
+            created = datetime.datetime.now() - datetime.timedelta(days=random.randint(changeNo*5+1, (changeNo+1)*5))
             if random.random() < 0.5:
                 # Add/remove firewall rule
                 if random.random() < 0.5:
@@ -78,21 +91,31 @@ def generateDevices(locations, num_devices=20,num_config_changes=5):
                 # Change hostname
                 previous_config["hostname"] = f"new-device-{random.randint(100, 999)}"
             expired = previous_config["created"]
-            previous_config["expired"] = expired
+            # previous_config["expired"] = expired
             previous_config["created"] = created.timestamp()
-            device["configurationHistory"].append(previous_config)
+            devices.append(previous_config)
+            versionIn = {"_key": "in-"+_key, "_from": "DeviceIn/"+proxyKey, "_to": "Device/"+_key, "created":created.timestamp(), "expired": expired }
+            versions.append(versionIn)
+            versionOut = {"_key": "out-"+_key, "_from": "Device/"+_key, "_to": "DeviceOut/"+proxyKey, "created":created.timestamp() , "expired": expired}
+            versions.append(versionOut)
             current_config = previous_config
     with open("./data/Device.json", "w") as f:
         json.dump(devices, f, indent=2)
-    return devices
+    with open("./data/DeviceIn.json", "w") as f:
+        json.dump(deviceIns, f, indent=2)
+    with open("./data/DeviceOut.json", "w") as f:
+        json.dump(deviceOuts, f, indent=2)
+    with open("./data/version.json", "w") as f:
+        json.dump(versions, f, indent=2)
+    return devices, deviceIns, deviceOuts, versions
 
-def generateHasLocation(devices):
+def generateHasLocation(deviceOuts, locations):
     """Generate hasLocation edge data and store in hasLocation.json."""
     hasLocations = []
     # Connections 
-    for device in devices:
-        _from = "Device/"+device["_key"]
-        _to = "Location/"+device["locationId"]
+    for device in deviceOuts:
+        _from = "DeviceOut/"+device["_key"]
+        _to =   "Location/"+random.choice(locations)["_key"]
         hasLocation = {
             "_key": f"hasLocation{len(hasLocations) + 1}",
             "_from": _from,
@@ -108,7 +131,6 @@ def generateHasLocation(devices):
 def generateSoftware(num_software=30, num_config_changes=5):
     """Generate software data and store in Software.json."""
     software = []
-    # Software (with real software versions and configuration history)
     software_types = ["application", "database", "service"]
     software_versions = {
         "application": ["Apache HTTP Server 2.4.53", "Nginx 1.22.0", "Python 3.10.6"],
@@ -146,14 +168,16 @@ def generateSoftware(num_software=30, num_config_changes=5):
         json.dump(software, f, indent=2)
     return software
 
-def generateConnections(devices,num_connections=30):
+def generateConnections(deviceIns, deviceOuts,num_connections=30):
     """Generate connection data and store in connection.json."""
     connections = []
     # Connections 
     while len(connections) < num_connections:
-        _from = "Device/"+random.choice(devices)["_key"]
-        _to = "Device/"+random.choice(devices)["_key"]
-        if _from != _to: # prevent self loops
+        fromKey = random.choice(deviceOuts)["_key"]
+        toKey  = random.choice(deviceIns)["_key"]
+        if fromKey != toKey: # prevent self loops
+            _from = "DeviceOut/"+fromKey
+            _to = "DeviceIn/"+toKey
             connection = {
                 # "_key": f"connection{i+1}",
                 "_key": f"connection{len(connections) + 1}",
@@ -170,13 +194,13 @@ def generateConnections(devices,num_connections=30):
         json.dump(connections, f, indent=2)
     return connections
 
-def generateHasSoftware(devices, software, num_hasSoftware=40):
+def generateHasSoftware(deviceOuts, software, num_hasSoftware=40):
     """Generate hasSoftware edge data and store in hasSoftware.json."""
     hasSoftwares = []
     while len(hasSoftwares) < num_hasSoftware:
-        device = random.choice(devices)
+        device = random.choice(deviceOuts)
         if device["type"] != "router":
-            _from = "Device/"+device["_key"]
+            _from = "DeviceOut/"+device["_key"]
             hasSoftware = {
                 "_key": f"hasSoftware{len(hasSoftwares) + 1}",
                 "_from": _from,
@@ -192,11 +216,11 @@ def generateHasSoftware(devices, software, num_hasSoftware=40):
 def generate_network_asset_data(num_devices=20, num_locations=5, num_software=30, num_connections=30, num_hasSoftware=40, num_config_changes=5):
     """Generate network asset data and store in individual vertex and edge .json files"""
     locations = generateLocations(num_locations)
-    devices = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
+    devices, deviceIns, deviceOuts, versions = generateDevices(locations, num_devices=num_devices, num_config_changes=num_config_changes)
     software = generateSoftware(num_software=num_software, num_config_changes=num_config_changes)
-    connections = generateConnections(devices, num_connections=30)
-    hasSoftware = generateHasSoftware(devices, software, num_hasSoftware=num_hasSoftware)
-    hasLocation = generateHasLocation(devices)
+    connections = generateConnections(deviceIns, deviceOuts, num_connections=30)
+    hasSoftware = generateHasSoftware(deviceOuts, software, num_hasSoftware=num_hasSoftware)
+    hasLocation = generateHasLocation(deviceOuts, locations)
 
 def main():
     """Generates data and stores in separate JSON files."""
