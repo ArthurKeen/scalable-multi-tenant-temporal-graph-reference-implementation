@@ -158,17 +158,39 @@ A series of scripts must be developed to manage the entire demo lifecycle. These
 - **Scope**: All collections, edges, and file names include tenant context
 - **Metadata**: Tenant configuration stored separately from generated data
 
-### Collection Naming Convention
+### W3C OWL Naming Conventions
+
+Following W3C OWL standards for professional data modeling:
+
+#### Vertex Collections
+- **Format**: PascalCase, singular form
+- **Examples**: `Device`, `Location`, `Software`, `DeviceIn`, `DeviceOut`
+- **Rationale**: Represents entity classes/types in RDF ontologies
+
+#### Edge Collections  
+- **Format**: camelCase, singular form
+- **Examples**: `hasConnection`, `hasLocation`, `hasSoftware`, `version`
+- **Rationale**: Represents predicates/relationships in RDF ontologies
+
+#### Property Names
+- **Single Values**: camelCase, singular form
+  - Examples: `deviceType`, `ipAddress`, `macAddress`, `serialNumber`
+- **Lists/Arrays**: camelCase, plural form  
+  - Examples: `firewallRules`, `configurationHistory`, `edgeDefinitions`
+- **Sub-documents**: camelCase, singular form
+  - Examples: `location` (GeoJSON), `softwareVersion`
+
+#### Collection Naming Convention (Updated)
 ```
-tenant_{tenant_id}_devices
-tenant_{tenant_id}_device_ins
-tenant_{tenant_id}_device_outs
-tenant_{tenant_id}_locations
-tenant_{tenant_id}_software
-tenant_{tenant_id}_has_connections
-tenant_{tenant_id}_has_locations
-tenant_{tenant_id}_has_software
-tenant_{tenant_id}_versions
+Device (tenant-scoped via smartGraph attribute)
+DeviceIn (tenant-scoped via smartGraph attribute)  
+DeviceOut (tenant-scoped via smartGraph attribute)
+Location (tenant-scoped via smartGraph attribute)
+Software (tenant-scoped via smartGraph attribute)
+hasConnection (tenant-scoped via smartGraph attribute)
+hasLocation (tenant-scoped via smartGraph attribute)
+hasSoftware (tenant-scoped via smartGraph attribute)
+version (tenant-scoped via smartGraph attribute)
 ```
 
 ### File Structure

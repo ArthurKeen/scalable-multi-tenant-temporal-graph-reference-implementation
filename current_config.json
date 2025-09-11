@@ -1,0 +1,27 @@
+{
+  "environment": "production",
+  "database": {
+    "endpoint": "https://1d53cdf6fad0.arangodb.cloud:8529",
+    "database_name": "network_assets_demo"
+  },
+  "collections": {
+    "vertex_collections": {
+      "devices": "Device",
+      "device_ins": "DeviceIn",
+      "device_outs": "DeviceOut",
+      "locations": "Location",
+      "software": "Software"
+    },
+    "edge_collections": {
+      "connections": "hasConnection",
+      "has_locations": "hasLocation",
+      "has_software": "hasSoftware",
+      "versions": "version"
+    }
+  },
+  "limits": {
+    "max_generation_retries": 1000,
+    "max_tenant_count": 100,
+    "max_documents_per_collection": 10000
+  }
+}

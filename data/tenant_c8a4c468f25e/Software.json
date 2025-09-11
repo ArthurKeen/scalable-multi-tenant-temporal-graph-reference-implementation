@@ -1,0 +1,1592 @@
+[
+  {
+    "_key": "c8a4c468f25e_software1",
+    "softwareName": "Acme Corp OpenSSH",
+    "softwareType": "service",
+    "softwareVersion": "OpenSSH 9.3p1",
+    "configurationHistory": [
+      {
+        "portNumber": 8248,
+        "isEnabled": true,
+        "created": 1757553953.829975,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8248,
+        "isEnabled": false,
+        "created": 1757294753.829978,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8248,
+        "isEnabled": false,
+        "created": 1756776353.829984,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8248,
+        "isEnabled": false,
+        "created": 1756603553.829989,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8248,
+        "isEnabled": false,
+        "created": 1756085153.829992,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8248,
+        "isEnabled": false,
+        "created": 1755566753.829995,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.829998,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software2",
+    "softwareName": "Acme Corp Redis",
+    "softwareType": "database",
+    "softwareVersion": "Redis 7.0.11",
+    "configurationHistory": [
+      {
+        "portNumber": 8328,
+        "isEnabled": true,
+        "created": 1757553953.830005,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8328,
+        "isEnabled": false,
+        "created": 1757467553.830007,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8328,
+        "isEnabled": false,
+        "created": 1756862753.830009,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8581,
+        "isEnabled": false,
+        "created": 1756517153.830012,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8860,
+        "isEnabled": false,
+        "created": 1755998753.830015,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8860,
+        "isEnabled": false,
+        "created": 1755393953.830018,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830021,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software3",
+    "softwareName": "Acme Corp Docker",
+    "softwareType": "service",
+    "softwareVersion": "Docker 20.10.17",
+    "configurationHistory": [
+      {
+        "portNumber": 8884,
+        "isEnabled": true,
+        "created": 1757553953.830026,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8953,
+        "isEnabled": true,
+        "created": 1757467553.830027,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8953,
+        "isEnabled": false,
+        "created": 1756689953.83003,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8953,
+        "isEnabled": false,
+        "created": 1756517153.830033,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8600,
+        "isEnabled": false,
+        "created": 1755998753.830035,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8600,
+        "isEnabled": false,
+        "created": 1755393953.830038,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.83004,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software4",
+    "softwareName": "Acme Corp Consul",
+    "softwareType": "service",
+    "softwareVersion": "Consul 1.15.3",
+    "configurationHistory": [
+      {
+        "portNumber": 8765,
+        "isEnabled": true,
+        "created": 1757553953.830044,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8765,
+        "isEnabled": false,
+        "created": 1757294753.830045,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8765,
+        "isEnabled": false,
+        "created": 1756862753.830047,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8986,
+        "isEnabled": false,
+        "created": 1756257953.830049,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8656,
+        "isEnabled": false,
+        "created": 1756085153.830052,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8656,
+        "isEnabled": false,
+        "created": 1755653153.830055,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830057,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software5",
+    "softwareName": "Acme Corp Node.js",
+    "softwareType": "application",
+    "softwareVersion": "Node.js 18.16.0",
+    "configurationHistory": [
+      {
+        "portNumber": 8587,
+        "isEnabled": true,
+        "created": 1757553953.830061,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8826,
+        "isEnabled": true,
+        "created": 1757208353.830062,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8826,
+        "isEnabled": false,
+        "created": 1756776353.830065,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8869,
+        "isEnabled": false,
+        "created": 1756517153.830067,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8072,
+        "isEnabled": false,
+        "created": 1755912353.83007,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8975,
+        "isEnabled": false,
+        "created": 1755566753.830073,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830075,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software6",
+    "softwareName": "Acme Corp Python",
+    "softwareType": "application",
+    "softwareVersion": "Python 3.11.3",
+    "configurationHistory": [
+      {
+        "portNumber": 8208,
+        "isEnabled": true,
+        "created": 1757553953.830079,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8833,
+        "isEnabled": true,
+        "created": 1757121953.83008,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8200,
+        "isEnabled": true,
+        "created": 1756776353.830083,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8200,
+        "isEnabled": false,
+        "created": 1756257953.830085,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8853,
+        "isEnabled": false,
+        "created": 1755912353.830088,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8239,
+        "isEnabled": false,
+        "created": 1755480353.83009,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830093,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software7",
+    "softwareName": "Acme Corp MySQL",
+    "softwareType": "database",
+    "softwareVersion": "MySQL 8.0.30",
+    "configurationHistory": [
+      {
+        "portNumber": 8182,
+        "isEnabled": true,
+        "created": 1757553953.830097,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8182,
+        "isEnabled": false,
+        "created": 1757381153.830098,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8298,
+        "isEnabled": false,
+        "created": 1756949153.8301,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8799,
+        "isEnabled": false,
+        "created": 1756517153.830102,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8900,
+        "isEnabled": false,
+        "created": 1755825953.830105,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8071,
+        "isEnabled": false,
+        "created": 1755480353.830108,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830111,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software8",
+    "softwareName": "Acme Corp MongoDB",
+    "softwareType": "database",
+    "softwareVersion": "MongoDB 6.0.2",
+    "configurationHistory": [
+      {
+        "portNumber": 8005,
+        "isEnabled": true,
+        "created": 1757553953.830114,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8005,
+        "isEnabled": false,
+        "created": 1757381153.830115,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8005,
+        "isEnabled": false,
+        "created": 1756776353.830117,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8005,
+        "isEnabled": false,
+        "created": 1756344353.830119,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8917,
+        "isEnabled": false,
+        "created": 1756085153.830121,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8708,
+        "isEnabled": false,
+        "created": 1755480353.830124,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830127,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software9",
+    "softwareName": "Acme Corp MongoDB",
+    "softwareType": "database",
+    "softwareVersion": "MongoDB 6.0.6",
+    "configurationHistory": [
+      {
+        "portNumber": 8517,
+        "isEnabled": true,
+        "created": 1757553953.83013,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8390,
+        "isEnabled": true,
+        "created": 1757294753.830131,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8390,
+        "isEnabled": false,
+        "created": 1756689953.830134,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8390,
+        "isEnabled": false,
+        "created": 1756257953.830136,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8794,
+        "isEnabled": false,
+        "created": 1756085153.830139,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8305,
+        "isEnabled": false,
+        "created": 1755393953.830141,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830144,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software10",
+    "softwareName": "Acme Corp OpenSSH",
+    "softwareType": "service",
+    "softwareVersion": "OpenSSH 9.3p1",
+    "configurationHistory": [
+      {
+        "portNumber": 8281,
+        "isEnabled": true,
+        "created": 1757553953.830147,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8281,
+        "isEnabled": false,
+        "created": 1757121953.830148,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8605,
+        "isEnabled": false,
+        "created": 1756776353.830151,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8605,
+        "isEnabled": false,
+        "created": 1756344353.830153,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8119,
+        "isEnabled": false,
+        "created": 1756085153.830156,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8119,
+        "isEnabled": false,
+        "created": 1755739553.830158,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830161,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software11",
+    "softwareName": "Acme Corp Apache",
+    "softwareType": "application",
+    "softwareVersion": "Apache HTTP Server 2.4.53",
+    "configurationHistory": [
+      {
+        "portNumber": 8890,
+        "isEnabled": true,
+        "created": 1757553953.830164,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8890,
+        "isEnabled": false,
+        "created": 1757294753.830165,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8890,
+        "isEnabled": false,
+        "created": 1756949153.830167,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8890,
+        "isEnabled": false,
+        "created": 1756517153.83017,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8188,
+        "isEnabled": false,
+        "created": 1755825953.830172,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8188,
+        "isEnabled": false,
+        "created": 1755653153.830175,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830178,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software12",
+    "softwareName": "Acme Corp MongoDB",
+    "softwareType": "database",
+    "softwareVersion": "MongoDB 6.0.6",
+    "configurationHistory": [
+      {
+        "portNumber": 8962,
+        "isEnabled": true,
+        "created": 1757553953.830183,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8962,
+        "isEnabled": false,
+        "created": 1757467553.830184,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8962,
+        "isEnabled": false,
+        "created": 1757035553.830187,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8877,
+        "isEnabled": false,
+        "created": 1756517153.830189,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8877,
+        "isEnabled": false,
+        "created": 1755825953.830192,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8877,
+        "isEnabled": false,
+        "created": 1755393953.830194,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830197,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software13",
+    "softwareName": "Acme Corp Redis",
+    "softwareType": "database",
+    "softwareVersion": "Redis 7.0.11",
+    "configurationHistory": [
+      {
+        "portNumber": 8827,
+        "isEnabled": true,
+        "created": 1757553953.8302,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8827,
+        "isEnabled": false,
+        "created": 1757381153.830201,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8208,
+        "isEnabled": false,
+        "created": 1756949153.830203,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8208,
+        "isEnabled": false,
+        "created": 1756430753.830206,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8208,
+        "isEnabled": false,
+        "created": 1755825953.830208,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8208,
+        "isEnabled": false,
+        "created": 1755566753.83021,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830213,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software14",
+    "softwareName": "Acme Corp Docker",
+    "softwareType": "service",
+    "softwareVersion": "Docker 24.0.2",
+    "configurationHistory": [
+      {
+        "portNumber": 8864,
+        "isEnabled": true,
+        "created": 1757553953.830216,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8236,
+        "isEnabled": true,
+        "created": 1757294753.830217,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8236,
+        "isEnabled": false,
+        "created": 1756862753.83022,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8236,
+        "isEnabled": false,
+        "created": 1756344353.830222,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8704,
+        "isEnabled": false,
+        "created": 1755998753.830224,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8752,
+        "isEnabled": false,
+        "created": 1755393953.830227,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.83023,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software15",
+    "softwareName": "Acme Corp PostgreSQL",
+    "softwareType": "database",
+    "softwareVersion": "PostgreSQL 14.5",
+    "configurationHistory": [
+      {
+        "portNumber": 8753,
+        "isEnabled": true,
+        "created": 1757553953.830233,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8753,
+        "isEnabled": false,
+        "created": 1757381153.830234,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8753,
+        "isEnabled": false,
+        "created": 1756689953.830237,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8753,
+        "isEnabled": false,
+        "created": 1756603553.830239,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8537,
+        "isEnabled": false,
+        "created": 1756171553.830241,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8537,
+        "isEnabled": false,
+        "created": 1755739553.830244,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830246,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software16",
+    "softwareName": "Acme Corp OpenSSH",
+    "softwareType": "service",
+    "softwareVersion": "OpenSSH 8.9p1",
+    "configurationHistory": [
+      {
+        "portNumber": 8763,
+        "isEnabled": true,
+        "created": 1757553953.830249,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8647,
+        "isEnabled": true,
+        "created": 1757208353.83025,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8235,
+        "isEnabled": true,
+        "created": 1756949153.830253,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8235,
+        "isEnabled": false,
+        "created": 1756430753.830255,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8235,
+        "isEnabled": false,
+        "created": 1756171553.830258,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8235,
+        "isEnabled": false,
+        "created": 1755480353.83026,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830262,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software17",
+    "softwareName": "Acme Corp OpenSSH",
+    "softwareType": "service",
+    "softwareVersion": "OpenSSH 9.3p1",
+    "configurationHistory": [
+      {
+        "portNumber": 8082,
+        "isEnabled": true,
+        "created": 1757553953.830265,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8082,
+        "isEnabled": false,
+        "created": 1757467553.830267,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8082,
+        "isEnabled": false,
+        "created": 1756949153.830269,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8082,
+        "isEnabled": false,
+        "created": 1756344353.830271,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8880,
+        "isEnabled": false,
+        "created": 1755825953.830273,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8196,
+        "isEnabled": false,
+        "created": 1755393953.830276,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830279,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software18",
+    "softwareName": "Acme Corp Nginx",
+    "softwareType": "application",
+    "softwareVersion": "Nginx 1.24.0",
+    "configurationHistory": [
+      {
+        "portNumber": 8586,
+        "isEnabled": true,
+        "created": 1757553953.830282,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8586,
+        "isEnabled": false,
+        "created": 1757208353.830283,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8586,
+        "isEnabled": false,
+        "created": 1757035553.830285,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8279,
+        "isEnabled": false,
+        "created": 1756344353.830287,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8179,
+        "isEnabled": false,
+        "created": 1756171553.83029,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8179,
+        "isEnabled": false,
+        "created": 1755566753.830293,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830295,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software19",
+    "softwareName": "Acme Corp PostgreSQL",
+    "softwareType": "database",
+    "softwareVersion": "PostgreSQL 15.3",
+    "configurationHistory": [
+      {
+        "portNumber": 8798,
+        "isEnabled": true,
+        "created": 1757553953.830299,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8011,
+        "isEnabled": true,
+        "created": 1757121953.8303,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8527,
+        "isEnabled": true,
+        "created": 1756949153.830303,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8527,
+        "isEnabled": false,
+        "created": 1756603553.830305,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8527,
+        "isEnabled": false,
+        "created": 1755998753.830308,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8527,
+        "isEnabled": false,
+        "created": 1755653153.83031,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830312,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software20",
+    "softwareName": "Acme Corp MySQL",
+    "softwareType": "database",
+    "softwareVersion": "MySQL 8.0.33",
+    "configurationHistory": [
+      {
+        "portNumber": 8721,
+        "isEnabled": true,
+        "created": 1757553953.830315,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8426,
+        "isEnabled": true,
+        "created": 1757121953.830317,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8426,
+        "isEnabled": false,
+        "created": 1756949153.830319,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8426,
+        "isEnabled": false,
+        "created": 1756603553.830321,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8426,
+        "isEnabled": false,
+        "created": 1755912353.830324,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8426,
+        "isEnabled": false,
+        "created": 1755739553.830326,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830328,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software21",
+    "softwareName": "Acme Corp Consul",
+    "softwareType": "service",
+    "softwareVersion": "Consul 1.15.3",
+    "configurationHistory": [
+      {
+        "portNumber": 8859,
+        "isEnabled": true,
+        "created": 1757553953.830332,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8241,
+        "isEnabled": true,
+        "created": 1757208353.830333,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8241,
+        "isEnabled": false,
+        "created": 1756862753.830335,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8241,
+        "isEnabled": false,
+        "created": 1756257953.830337,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8033,
+        "isEnabled": false,
+        "created": 1756085153.83034,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8120,
+        "isEnabled": false,
+        "created": 1755739553.830342,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830345,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software22",
+    "softwareName": "Acme Corp Nginx",
+    "softwareType": "application",
+    "softwareVersion": "Nginx 1.22.0",
+    "configurationHistory": [
+      {
+        "portNumber": 8474,
+        "isEnabled": true,
+        "created": 1757553953.830349,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8474,
+        "isEnabled": false,
+        "created": 1757208353.830351,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8331,
+        "isEnabled": false,
+        "created": 1757035553.830353,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8235,
+        "isEnabled": false,
+        "created": 1756517153.830356,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8235,
+        "isEnabled": false,
+        "created": 1755998753.830359,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8314,
+        "isEnabled": false,
+        "created": 1755480353.830361,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830364,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software23",
+    "softwareName": "Acme Corp Consul",
+    "softwareType": "service",
+    "softwareVersion": "Consul 1.15.3",
+    "configurationHistory": [
+      {
+        "portNumber": 8468,
+        "isEnabled": true,
+        "created": 1757553953.830367,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8468,
+        "isEnabled": false,
+        "created": 1757381153.830368,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8468,
+        "isEnabled": false,
+        "created": 1756949153.83037,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8468,
+        "isEnabled": false,
+        "created": 1756603553.830372,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8468,
+        "isEnabled": false,
+        "created": 1756171553.830375,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8468,
+        "isEnabled": false,
+        "created": 1755739553.830377,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830379,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software24",
+    "softwareName": "Acme Corp Python",
+    "softwareType": "application",
+    "softwareVersion": "Python 3.11.3",
+    "configurationHistory": [
+      {
+        "portNumber": 8512,
+        "isEnabled": true,
+        "created": 1757553953.830383,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8849,
+        "isEnabled": true,
+        "created": 1757294753.830384,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8849,
+        "isEnabled": false,
+        "created": 1756689953.830386,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8849,
+        "isEnabled": false,
+        "created": 1756257953.830388,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8364,
+        "isEnabled": false,
+        "created": 1755998753.830391,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8588,
+        "isEnabled": false,
+        "created": 1755653153.830393,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830396,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software25",
+    "softwareName": "Acme Corp Nginx",
+    "softwareType": "application",
+    "softwareVersion": "Nginx 1.24.0",
+    "configurationHistory": [
+      {
+        "portNumber": 9000,
+        "isEnabled": true,
+        "created": 1757553953.830399,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8216,
+        "isEnabled": true,
+        "created": 1757208353.8304,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8435,
+        "isEnabled": true,
+        "created": 1756949153.830403,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8435,
+        "isEnabled": false,
+        "created": 1756344353.830405,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8850,
+        "isEnabled": false,
+        "created": 1755825953.830408,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8850,
+        "isEnabled": false,
+        "created": 1755566753.83041,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830413,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software26",
+    "softwareName": "Acme Corp Apache",
+    "softwareType": "application",
+    "softwareVersion": "Apache HTTP Server 2.4.53",
+    "configurationHistory": [
+      {
+        "portNumber": 8820,
+        "isEnabled": true,
+        "created": 1757553953.830416,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8615,
+        "isEnabled": true,
+        "created": 1757381153.830417,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8644,
+        "isEnabled": true,
+        "created": 1757035553.83042,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8644,
+        "isEnabled": false,
+        "created": 1756344353.830422,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8644,
+        "isEnabled": false,
+        "created": 1755912353.830425,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8644,
+        "isEnabled": false,
+        "created": 1755653153.830427,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.83043,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software27",
+    "softwareName": "Acme Corp Redis",
+    "softwareType": "database",
+    "softwareVersion": "Redis 7.0.11",
+    "configurationHistory": [
+      {
+        "portNumber": 8101,
+        "isEnabled": true,
+        "created": 1757553953.830433,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8101,
+        "isEnabled": false,
+        "created": 1757294753.830434,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8379,
+        "isEnabled": false,
+        "created": 1757035553.830436,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8379,
+        "isEnabled": false,
+        "created": 1756430753.830439,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8593,
+        "isEnabled": false,
+        "created": 1756085153.830443,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8593,
+        "isEnabled": false,
+        "created": 1755653153.830445,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830448,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software28",
+    "softwareName": "Acme Corp PostgreSQL",
+    "softwareType": "database",
+    "softwareVersion": "PostgreSQL 14.5",
+    "configurationHistory": [
+      {
+        "portNumber": 8095,
+        "isEnabled": true,
+        "created": 1757553953.830451,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8095,
+        "isEnabled": false,
+        "created": 1757208353.830452,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8520,
+        "isEnabled": false,
+        "created": 1756776353.830455,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8520,
+        "isEnabled": false,
+        "created": 1756603553.830457,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8520,
+        "isEnabled": false,
+        "created": 1756085153.830459,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8317,
+        "isEnabled": false,
+        "created": 1755393953.830462,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830464,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software29",
+    "softwareName": "Acme Corp MySQL",
+    "softwareType": "database",
+    "softwareVersion": "MySQL 8.0.30",
+    "configurationHistory": [
+      {
+        "portNumber": 8411,
+        "isEnabled": true,
+        "created": 1757553953.830468,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8789,
+        "isEnabled": true,
+        "created": 1757294753.830469,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8941,
+        "isEnabled": true,
+        "created": 1756776353.830471,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8224,
+        "isEnabled": true,
+        "created": 1756517153.830474,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8096,
+        "isEnabled": true,
+        "created": 1756085153.830476,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8096,
+        "isEnabled": false,
+        "created": 1755653153.830479,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830481,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  },
+  {
+    "_key": "c8a4c468f25e_software30",
+    "softwareName": "Acme Corp OpenSSH",
+    "softwareType": "service",
+    "softwareVersion": "OpenSSH 9.3p1",
+    "configurationHistory": [
+      {
+        "portNumber": 8469,
+        "isEnabled": true,
+        "created": 1757553953.830485,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8469,
+        "isEnabled": false,
+        "created": 1757294753.830486,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8469,
+        "isEnabled": false,
+        "created": 1756689953.830488,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8140,
+        "isEnabled": false,
+        "created": 1756344353.83049,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8769,
+        "isEnabled": false,
+        "created": 1755998753.830493,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      },
+      {
+        "portNumber": 8769,
+        "isEnabled": false,
+        "created": 1755480353.830495,
+        "expired": 9223372036854775807,
+        "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+      }
+    ],
+    "created": 1757553953.830498,
+    "expired": 9223372036854775807,
+    "tenant_c8a4c468f25e_attr": "c8a4c468f25e"
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "tenants": {
+    "c8a4c468f25e": {
+      "tenantName": "Acme Corp",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_c8a4c468f25e_network_assets",
+      "smartGraphAttribute": "tenant_c8a4c468f25e_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_c8a4c468f25e",
+      "scaleFactor": 1,
+      "createdAt": "2025-09-10T19:25:53.822029",
+      "tenantDescription": "Small enterprise with standard deployment"
+    },
+    "8b1821453a27": {
+      "tenantName": "Global Enterprises",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_8b1821453a27_network_assets",
+      "smartGraphAttribute": "tenant_8b1821453a27_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_8b1821453a27",
+      "scaleFactor": 3,
+      "createdAt": "2025-09-10T19:25:53.822044",
+      "tenantDescription": "Large enterprise with scaled deployment"
+    },
+    "e3fc012ccdb8": {
+      "tenantName": "StartupXYZ",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_e3fc012ccdb8_network_assets",
+      "smartGraphAttribute": "tenant_e3fc012ccdb8_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_e3fc012ccdb8",
+      "scaleFactor": 1,
+      "createdAt": "2025-09-10T19:25:53.822051",
+      "tenantDescription": "Small startup with minimal infrastructure"
+    }
+  },
+  "summary": {
+    "totalTenants": 3,
+    "totalDocuments": 2336,
+    "sharedDatabase": "network_assets_demo",
+    "generatedAt": "2025-09-10T19:25:53.871646",
+    "environment": "production",
+    "owlCompliant": true,
+    "finalCorrections": [
+      "Removed observedAt property",
+      "Expired defaults to largest possible value",
+      "TTL configuration disabled",
+      "Created/expired retained for temporal tracking",
+      "TODO: Future temporal observation tracking design"
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "_key": "e3fc012ccdb8_hasLocation1",
+    "_from": "DeviceProxyOut/e3fc012ccdb8_device1",
+    "_to": "Location/e3fc012ccdb8_location1",
+    "created": 1757553953.866121,
+    "expired": 9223372036854775807,
+    "tenant_e3fc012ccdb8_attr": "e3fc012ccdb8",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "Location"
+  },
+  {
+    "_key": "e3fc012ccdb8_hasLocation2",
+    "_from": "DeviceProxyOut/e3fc012ccdb8_device2",
+    "_to": "Location/e3fc012ccdb8_location2",
+    "created": 1757553953.866124,
+    "expired": 9223372036854775807,
+    "tenant_e3fc012ccdb8_attr": "e3fc012ccdb8",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "Location"
+  },
+  {
+    "_key": "e3fc012ccdb8_hasLocation3",
+    "_from": "DeviceProxyOut/e3fc012ccdb8_device3",
+    "_to": "Location/e3fc012ccdb8_location1",
+    "created": 1757553953.866127,
+    "expired": 9223372036854775807,
+    "tenant_e3fc012ccdb8_attr": "e3fc012ccdb8",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "Location"
+  },
+  {
+    "_key": "e3fc012ccdb8_hasLocation4",
+    "_from": "DeviceProxyOut/e3fc012ccdb8_device4",
+    "_to": "Location/e3fc012ccdb8_location2",
+    "created": 1757553953.866129,
+    "expired": 9223372036854775807,
+    "tenant_e3fc012ccdb8_attr": "e3fc012ccdb8",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "Location"
+  },
+  {
+    "_key": "e3fc012ccdb8_hasLocation5",
+    "_from": "DeviceProxyOut/e3fc012ccdb8_device5",
+    "_to": "Location/e3fc012ccdb8_location2",
+    "created": 1757553953.866132,
+    "expired": 9223372036854775807,
+    "tenant_e3fc012ccdb8_attr": "e3fc012ccdb8",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "Location"
+  },
+  {
+    "_key": "e3fc012ccdb8_hasLocation6",
+    "_from": "DeviceProxyOut/e3fc012ccdb8_device6",
+    "_to": "Location/e3fc012ccdb8_location1",
+    "created": 1757553953.866134,
+    "expired": 9223372036854775807,
+    "tenant_e3fc012ccdb8_attr": "e3fc012ccdb8",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "Location"
+  },
+  {
+    "_key": "e3fc012ccdb8_hasLocation7",
+    "_from": "DeviceProxyOut/e3fc012ccdb8_device7",
+    "_to": "Location/e3fc012ccdb8_location2",
+    "created": 1757553953.866137,
+    "expired": 9223372036854775807,
+    "tenant_e3fc012ccdb8_attr": "e3fc012ccdb8",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "Location"
+  },
+  {
+    "_key": "e3fc012ccdb8_hasLocation8",
+    "_from": "DeviceProxyOut/e3fc012ccdb8_device8",
+    "_to": "Location/e3fc012ccdb8_location2",
+    "created": 1757553953.866139,
+    "expired": 9223372036854775807,
+    "tenant_e3fc012ccdb8_attr": "e3fc012ccdb8",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "Location"
+  }
+]

@@ -1,0 +1,227 @@
+[
+  {
+    "_key": "8b1821453a27_location1",
+    "locationName": "Global Enterprises - New York Data Center",
+    "streetAddress": "123 Broadway, New York, NY",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    },
+    "created": 1757553953.838066,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location2",
+    "locationName": "Global Enterprises - London Office",
+    "streetAddress": "456 Oxford St, London",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    },
+    "created": 1757553953.838071,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location3",
+    "locationName": "Global Enterprises - Tokyo HQ",
+    "streetAddress": "789 Ginza, Tokyo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    },
+    "created": 1757553953.838073,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location4",
+    "locationName": "Global Enterprises - Sydney Warehouse",
+    "streetAddress": "101 George St, Sydney",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    },
+    "created": 1757553953.838075,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location5",
+    "locationName": "Global Enterprises - Frankfurt Cloud Region",
+    "streetAddress": "222 Mainzer Landstr, Frankfurt",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    },
+    "created": 1757553953.838077,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location6",
+    "locationName": "Global Enterprises - Singapore Hub",
+    "streetAddress": "Marina Bay, Singapore",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        103.8764,
+        1.2966
+      ]
+    },
+    "created": 1757553953.838079,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location7",
+    "locationName": "Global Enterprises - Toronto Branch",
+    "streetAddress": "Bay St, Toronto",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -79.3832,
+        43.6532
+      ]
+    },
+    "created": 1757553953.838081,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location8",
+    "locationName": "Global Enterprises - Mumbai Center",
+    "streetAddress": "Nariman Point, Mumbai",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        72.8347,
+        18.922
+      ]
+    },
+    "created": 1757553953.838082,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location9",
+    "locationName": "Global Enterprises - S\u00e3o Paulo Office",
+    "streetAddress": "Av. Paulista, S\u00e3o Paulo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -46.6333,
+        -23.5505
+      ]
+    },
+    "created": 1757553953.838084,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location10",
+    "locationName": "Global Enterprises - Cape Town Hub",
+    "streetAddress": "V&A Waterfront, Cape Town",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        18.4167,
+        -33.9025
+      ]
+    },
+    "created": 1757553953.838086,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location11",
+    "locationName": "Global Enterprises - New York Data Center",
+    "streetAddress": "123 Broadway, New York, NY",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    },
+    "created": 1757553953.838088,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location12",
+    "locationName": "Global Enterprises - London Office",
+    "streetAddress": "456 Oxford St, London",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    },
+    "created": 1757553953.83809,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location13",
+    "locationName": "Global Enterprises - Tokyo HQ",
+    "streetAddress": "789 Ginza, Tokyo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    },
+    "created": 1757553953.838091,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location14",
+    "locationName": "Global Enterprises - Sydney Warehouse",
+    "streetAddress": "101 George St, Sydney",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    },
+    "created": 1757553953.838093,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  },
+  {
+    "_key": "8b1821453a27_location15",
+    "locationName": "Global Enterprises - Frankfurt Cloud Region",
+    "streetAddress": "222 Mainzer Landstr, Frankfurt",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    },
+    "created": 1757553953.838095,
+    "expired": 9223372036854775807,
+    "tenant_8b1821453a27_attr": "8b1821453a27"
+  }
+]
