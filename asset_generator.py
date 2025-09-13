@@ -389,17 +389,24 @@ class TimeTravelRefactoredGenerator:
     
     # === RELATIONSHIP EDGES ===
     def generate_connections(self, device_proxy_ins: List[Dict], device_proxy_outs: List[Dict]) -> List[Dict[str, Any]]:
-        """Generate hasConnection edges (Device ⟷ Device relationships)."""
-        self.logger.info(f"Generating {self.tenant_config.num_connections} hasConnection edges")
+        """Generate hasConnection edges ensuring better network connectivity."""
+        self.logger.info(f"Generating hasConnection edges with improved connectivity")
         
         connections = []
-        attempts = 0
+        used_pairs = set()
         
-        while len(connections) < self.tenant_config.num_connections and attempts < self.limits.MAX_GENERATION_RETRIES:
+        # Ensure we have enough unique pairs possible
+        max_possible_connections = len(device_proxy_outs) * (len(device_proxy_ins) - 1)  # Exclude self-connections
+        target_connections = min(self.tenant_config.num_connections, max_possible_connections)
+        
+        attempts = 0
+        while len(connections) < target_connections and attempts < self.limits.MAX_GENERATION_RETRIES:
             from_device = self.random_gen.select_random_item(device_proxy_outs)
             to_device = self.random_gen.select_random_item(device_proxy_ins)
             
-            if from_device["_key"] != to_device["_key"]:  # Prevent self loops
+            # Prevent self loops and duplicate connections
+            connection_pair = (from_device["_key"], to_device["_key"])
+            if from_device["_key"] != to_device["_key"] and connection_pair not in used_pairs:
                 connection_key = KeyGenerator.generate_connection_key(
                     self.tenant_config.tenant_id, len(connections) + 1
                 )
@@ -423,6 +430,7 @@ class TimeTravelRefactoredGenerator:
                 )
                 
                 connections.append(connection)
+                used_pairs.add(connection_pair)
             
             attempts += 1
         
@@ -459,18 +467,53 @@ class TimeTravelRefactoredGenerator:
     
     def generate_has_device_software_edges(self, device_proxy_outs: List[Dict], 
                                          software_proxy_ins: List[Dict]) -> List[Dict[str, Any]]:
-        """Generate hasDeviceSoftware edges (Device → Software relationships)."""
-        self.logger.info(f"Generating {self.tenant_config.num_has_software} hasDeviceSoftware edges")
+        """Generate hasDeviceSoftware edges ensuring all software entities are connected."""
+        self.logger.info(f"Generating hasDeviceSoftware edges with improved connectivity")
         
         has_device_software = []
-        attempts = 0
+        connected_software = set()
         
-        while len(has_device_software) < self.tenant_config.num_has_software and attempts < self.limits.MAX_GENERATION_RETRIES:
-            device = self.random_gen.select_random_item(device_proxy_outs)
+        # Filter out routers (they don't run additional software)
+        non_router_devices = [d for d in device_proxy_outs if d["type"] != "router"]
+        
+        if not non_router_devices:
+            self.logger.warning("No non-router devices available for software connections")
+            return has_device_software
+        
+        # PHASE 1: Ensure every software entity gets at least one connection
+        for i, software_proxy in enumerate(software_proxy_ins):
+            device = self.random_gen.select_random_item(non_router_devices)
+            key = KeyGenerator.generate_has_software_key(
+                self.tenant_config.tenant_id, len(has_device_software) + 1
+            )
             
-            # Routers don't typically run additional software
-            if device["type"] != "router":
-                software_proxy = self.random_gen.select_random_item(software_proxy_ins)
+            has_device_software_edge = DocumentEnhancer.create_edge_document(
+                key=key,
+                from_collection=self.app_config.get_collection_name("device_outs"),  # DeviceProxyOut
+                from_key=device["_key"],
+                to_collection=self.app_config.get_collection_name("software_ins"),  # SoftwareProxyIn
+                to_key=software_proxy["_key"],
+                from_type="DeviceProxyOut",
+                to_type="SoftwareProxyIn",
+                tenant_config=self.tenant_config
+            )
+            
+            has_device_software.append(has_device_software_edge)
+            connected_software.add(software_proxy["_key"])
+        
+        # PHASE 2: Add additional connections to reach target count
+        attempts = 0
+        target_additional = max(0, self.tenant_config.num_has_software - len(software_proxy_ins))
+        
+        while len(has_device_software) < len(software_proxy_ins) + target_additional and attempts < self.limits.MAX_GENERATION_RETRIES:
+            device = self.random_gen.select_random_item(non_router_devices)
+            software_proxy = self.random_gen.select_random_item(software_proxy_ins)
+            
+            # Create unique edge key to avoid duplicates
+            edge_signature = f"{device['_key']}->{software_proxy['_key']}"
+            existing_signatures = {f"{e['_from'].split('/')[1]}->{e['_to'].split('/')[1]}" for e in has_device_software}
+            
+            if edge_signature not in existing_signatures:
                 key = KeyGenerator.generate_has_software_key(
                     self.tenant_config.tenant_id, len(has_device_software) + 1
                 )
@@ -491,6 +534,7 @@ class TimeTravelRefactoredGenerator:
             attempts += 1
         
         self.logger.info(f"Generated {len(has_device_software)} hasDeviceSoftware edges")
+        self.logger.info(f"Connected {len(connected_software)} software entities (100% coverage)")
         return has_device_software
     
     # === MAIN GENERATION METHOD ===
