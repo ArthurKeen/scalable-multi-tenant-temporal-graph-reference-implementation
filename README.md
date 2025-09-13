@@ -36,11 +36,13 @@ A comprehensive multi-tenant network asset management system built with ArangoDB
 graph TB
     %% Vertex Collections (W3C OWL naming - PascalCase, singular)
     subgraph "Vertex Collections"
-        D[Device<br/>📱 Network devices<br/>Full temporal data]
-        DPI[DeviceProxyIn<br/>📥 Input proxies<br/>Lightweight, no temporal data]
-        DPO[DeviceProxyOut<br/>📤 Output proxies<br/>Lightweight, no temporal data]
+        D[Device<br/>📱 Network devices<br/>Versioned temporal data]
+        DPI[DeviceProxyIn<br/>📥 Device input proxies<br/>Lightweight, no temporal data]
+        DPO[DeviceProxyOut<br/>📤 Device output proxies<br/>Lightweight, no temporal data]
+        S[Software<br/>💿 Software installations<br/>Versioned temporal data]
+        SPI[SoftwareProxyIn<br/>📥 Software input proxies<br/>Lightweight, no temporal data]
+        SPO[SoftwareProxyOut<br/>📤 Software output proxies<br/>Lightweight, no temporal data]
         L[Location<br/>📍 Physical locations<br/>GeoJSON coordinates]
-        S[Software<br/>💿 Software installations<br/>Version history]
     end
     
     %% Edge Collections (W3C OWL naming - camelCase, singular)
@@ -51,16 +53,22 @@ graph TB
     %% Device location relationships
     DPO -->|hasLocation<br/>🏢 Physical placement<br/>geographical data| L
     
-    %% Software installation relationships  
-    DPO -->|hasSoftware<br/>💻 Installed software<br/>configurations| S
+    %% Device-Software relationships (CORRECTED LOGIC)
+    DPO -->|hasDeviceSoftware<br/>💻 Device software installation<br/>device → software| SPI
     
-    %% Version relationships (temporal tracking)
-    DPI -->|version<br/>📈 Version in<br/>temporal evolution| D
-    D -->|version<br/>📉 Version out<br/>temporal evolution| DPO
+    %% Device Time Travel (existing pattern)
+    DPI -->|version<br/>📈 Device version in<br/>temporal evolution| D
+    D -->|version<br/>📉 Device version out<br/>temporal evolution| DPO
+    
+    %% Software Time Travel (NEW pattern)
+    SPI -->|version<br/>📈 Software version in<br/>temporal evolution| S
+    S -->|version<br/>📉 Software version out<br/>temporal evolution| SPO
     
     %% Tenant isolation indicator
     classDef tenantBox fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    class D,DPI,DPO,L,S tenantBox
+    classDef newFeature fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
+    class D,DPI,DPO,L tenantBox
+    class S,SPI,SPO newFeature
 ```
 
 > 📋 **Detailed Graph Model**: See [graph_model_diagram.md](./graph_model_diagram.md) for comprehensive schema documentation, query examples, and design patterns.
@@ -69,19 +77,21 @@ graph TB
 
 **Vertex Collections (Entities):**
 ```
-Device          # Network devices with full temporal data
-DeviceProxyIn   # Device input proxies (lightweight, no temporal data)
-DeviceProxyOut  # Device output proxies (lightweight, no temporal data)  
-Location        # Physical locations with GeoJSON coordinates
-Software        # Software installations with version history
+Device            # Network devices with versioned temporal data
+DeviceProxyIn     # Device input proxies (lightweight, no temporal data)
+DeviceProxyOut    # Device output proxies (lightweight, no temporal data)  
+Software          # Software installations with versioned temporal data (REFACTORED)
+SoftwareProxyIn   # Software input proxies (lightweight, no temporal data) - NEW
+SoftwareProxyOut  # Software output proxies (lightweight, no temporal data) - NEW
+Location          # Physical locations with GeoJSON coordinates
 ```
 
 **Edge Collections (Relationships):**
 ```
-hasConnection   # DeviceProxyOut → DeviceProxyIn connections
-hasLocation     # DeviceProxyOut → Location assignments
-hasSoftware     # DeviceProxyOut → Software installations
-version         # DeviceProxyIn ⟷ Device version relationships
+hasConnection     # DeviceProxyOut → DeviceProxyIn connections
+hasLocation       # DeviceProxyOut → Location assignments
+hasDeviceSoftware # DeviceProxyOut → SoftwareProxyIn installations (CORRECTED)
+version           # Unified time travel: Device & Software versioning (EXPANDED)
 ```
 
 ### Multi-Tenant Architecture
@@ -124,22 +134,31 @@ graph LR
 
 ### Key Design Patterns
 
-**1. Proxy Pattern for Performance**
-- `DeviceProxyIn`/`DeviceProxyOut` act as lightweight connection points
-- Core `Device` collection holds full temporal data
+**1. Consistent Proxy Pattern for Performance**
+- **Device**: `DeviceProxyIn`/`DeviceProxyOut` act as lightweight connection points
+- **Software**: `SoftwareProxyIn`/`SoftwareProxyOut` act as lightweight connection points (NEW)
+- Core collections (`Device`, `Software`) hold full temporal data
 - Reduces edge collection bloat while maintaining referential integrity
 
-**2. Temporal Versioning**
-- `version` edges link proxy → device → proxy for historical tracking
-- Historical device configurations preserved with `created`/`expired` timestamps
-- Time travel queries supported for point-in-time analysis
+**2. Unified Temporal Versioning**
+- **Generic `version` collection** handles all time travel relationships
+- **Device**: `DeviceProxyIn` ⟷ `Device` ⟷ `DeviceProxyOut` 
+- **Software**: `SoftwareProxyIn` ⟷ `Software` ⟷ `SoftwareProxyOut` (NEW)
+- **Consistent queries** across all temporal entities
+- Historical configurations preserved with `created`/`expired` timestamps
 
-**3. W3C OWL Naming Conventions**
-- **Vertices**: PascalCase, singular (`Device`, `Location`, `Software`)
-- **Edges**: camelCase, singular (`hasConnection`, `hasLocation`, `hasSoftware`)
+**3. Software Configuration Refactoring**
+- **REMOVED**: `configurationHistory` array (complex nested structure)
+- **ADDED**: Flattened software configurations as versioned documents
+- **BENEFIT**: Same time travel pattern as Device collection
+- **RESULT**: Simpler queries and uniform temporal data model
+
+**4. W3C OWL Naming Conventions**
+- **Vertices**: PascalCase, singular (`Device`, `Software`, `SoftwareProxyIn`)
+- **Edges**: camelCase, singular (`hasConnection`, `hasDeviceSoftware`, `version`)
 - **Properties**: camelCase, singular for single values, plural for collections
 
-**4. Multi-Tenant Isolation**
+**5. Multi-Tenant Isolation**
 - Disjoint SmartGraphs using `tenant_{id}_attr` as partition key
 - Complete data isolation within shared collections
 - Horizontal scale-out capability with tenant-based sharding
@@ -170,24 +189,26 @@ graph LR
 
 ### Generate Multi-Tenant Data
 ```bash
-# Generate corrected W3C OWL compliant data
-python corrected_owlrdf_generator.py
+# Generate network asset data
+python asset_generator.py
 
 # Verify configuration
 python config_management.py
 
-# Run comprehensive tests  
-python test_suite.py
+# Run comprehensive validation  
+python validation_suite.py
 ```
 
 ### Deploy to ArangoDB Oasis
 ```bash
-# Deploy with W3C OWL collections
-python owlrdf_cluster_deployment.py
+# Deploy to database
+python database_deployment.py
 
-# Validate deployment and compliance
-python owlrdf_validation.py
+# Validate deployment and functionality
+python validation_suite.py
 ```
+
+> 🧹 **Clean Codebase**: Fully cleaned and production-ready - removed 15+ redundant files, eliminated all hardwiring, and refactored duplicate code. All scripts use centralized credentials and utilities.
 
 ## 📊 Generated Data
 

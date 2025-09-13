@@ -10,7 +10,7 @@
 
 ### Existing Architecture
 - **Language**: Python
-- **Data Generator**: `network_asset_management_data_gen/asset-generator.py`
+- **Data Generator**: `asset_generator.py` (multi-tenant with time travel)
 - **Output**: JSON files for ArangoDB import
 - **Collections**: Device, DeviceIn, DeviceOut, Location, Software
 - **Edge Collections**: hasConnection, hasLocation, hasSoftware, version
@@ -196,7 +196,7 @@ FR6: Index Optimization -> [DESIGN COMPLETED]
 ### W3C OWL Compliant Deployment Results
 - **3 tenants deployed**: Acme Corp (1x), Global Enterprises (3x), StartupXYZ (1x)
 - **2,333 documents loaded**: Complete tenant isolation verified in production
-- **ArangoDB Oasis cluster**: https://1d53cdf6fad0.arangodb.cloud:8529
+- **ArangoDB Oasis cluster**: [Managed via centralized_credentials.py]
 - **Database**: network_assets_demo with 9 W3C OWL compliant collections
 - **Standards compliance**: 100% W3C OWL naming convention compliance
 - **Collection structure**: 5 vertex collections (PascalCase), 4 edge collections (camelCase)

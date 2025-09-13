@@ -37,18 +37,21 @@ except ImportError:
         GraphCreateError, GraphDeleteError, CollectionCreateError
     )
 
-# Import our tenant configuration
+# Import our tenant configuration and centralized credentials
 from tenant_config import TenantConfig, TenantNamingConvention, SmartGraphDefinition
 from data_generation_config import DATABASE_CONFIG
+from centralized_credentials import CredentialsManager
 
 
 class OasisClusterManager:
     """Manages ArangoDB Oasis cluster operations for multi-tenant demo."""
     
-    def __init__(self, endpoint: str, username: str, password: str):
-        self.endpoint = endpoint
-        self.username = username
-        self.password = password
+    def __init__(self, environment: str = "production"):
+        creds = CredentialsManager.get_database_credentials(environment)
+        self.endpoint = creds.endpoint
+        self.username = creds.username
+        self.password = creds.password
+        self.database_name = creds.database_name
         self.client = None
         self.database = None
         
@@ -96,7 +99,7 @@ class OasisClusterManager:
             print("❌ Not connected to cluster")
             return False
             
-        db_name = db_name or DATABASE_CONFIG["shared_database_name"]
+        db_name = db_name or self.database_name
         
         try:
             sys_db = self.client.db('_system', username=self.username, password=self.password)
@@ -502,16 +505,11 @@ class OasisClusterManager:
 def main():
     """Main function to test cluster setup and configuration."""
     
-    # Oasis cluster credentials
-    OASIS_ENDPOINT = "https://1d53cdf6fad0.arangodb.cloud:8529"
-    OASIS_USERNAME = "root"
-    OASIS_PASSWORD = "GcZO9wNKLq9faIuIUgnY"
-    
     print("🚀 ArangoDB Oasis Cluster Setup")
     print("=" * 50)
     
-    # Initialize cluster manager
-    manager = OasisClusterManager(OASIS_ENDPOINT, OASIS_USERNAME, OASIS_PASSWORD)
+    # Initialize cluster manager with centralized credentials
+    manager = OasisClusterManager()
     
     # Test connection
     if not manager.connect():

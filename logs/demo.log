@@ -1,0 +1,148 @@
+2025-09-12 16:19:55,833 - __main__ - INFO - Generating 2 software proxies for tenant Test Software Time Travel
+2025-09-12 16:19:55,833 - __main__ - INFO - Generated 2 SoftwareProxyIn and 2 SoftwareProxyOut entities
+2025-09-12 16:19:55,833 - __main__ - INFO - Generating software configurations with 2 historical versions
+2025-09-12 16:19:55,834 - __main__ - INFO - Generated 6 software configurations and 12 version edges
+2025-09-12 16:25:25,211 - __main__ - INFO - Starting time travel refactored data generation for tenant: Acme Corp (Scale: 1x)
+2025-09-12 16:25:25,211 - __main__ - INFO - Generating 5 locations for tenant Acme Corp
+2025-09-12 16:25:25,211 - __main__ - INFO - Generated 5 location entities
+2025-09-12 16:25:25,212 - __main__ - INFO - Generating 20 device proxies for tenant Acme Corp
+2025-09-12 16:25:25,212 - __main__ - INFO - Generated 20 DeviceProxyIn and 20 DeviceProxyOut entities
+2025-09-12 16:25:25,212 - __main__ - INFO - Generating device configurations with 5 historical versions
+2025-09-12 16:25:25,213 - __main__ - INFO - Generated 120 device configurations and 240 device version edges
+2025-09-12 16:25:25,213 - __main__ - INFO - Generating 30 software proxies for tenant Acme Corp
+2025-09-12 16:25:25,213 - __main__ - INFO - Generated 30 SoftwareProxyIn and 30 SoftwareProxyOut entities
+2025-09-12 16:25:25,213 - __main__ - INFO - Generating software configurations with 5 historical versions
+2025-09-12 16:25:25,215 - __main__ - INFO - Generated 180 software configurations and 360 software version edges
+2025-09-12 16:25:25,215 - __main__ - INFO - Generating 30 hasConnection edges
+2025-09-12 16:25:25,215 - __main__ - INFO - Generated 30 hasConnection edges
+2025-09-12 16:25:25,215 - __main__ - INFO - Generating hasLocation edges
+2025-09-12 16:25:25,215 - __main__ - INFO - Generated 20 hasLocation edges
+2025-09-12 16:25:25,217 - __main__ - INFO - Generating 40 hasDeviceSoftware edges
+2025-09-12 16:25:25,217 - __main__ - INFO - Generated 40 hasDeviceSoftware edges
+2025-09-12 16:25:25,229 - __main__ - INFO - Completed time travel refactored data generation: 1095 total documents
+2025-09-12 16:25:25,229 - __main__ - INFO - Starting time travel refactored data generation for tenant: Global Enterprises (Scale: 2x)
+2025-09-12 16:25:25,229 - __main__ - INFO - Generating 10 locations for tenant Global Enterprises
+2025-09-12 16:25:25,229 - __main__ - INFO - Generated 10 location entities
+2025-09-12 16:25:25,229 - __main__ - INFO - Generating 40 device proxies for tenant Global Enterprises
+2025-09-12 16:25:25,230 - __main__ - INFO - Generated 40 DeviceProxyIn and 40 DeviceProxyOut entities
+2025-09-12 16:25:25,230 - __main__ - INFO - Generating device configurations with 5 historical versions
+2025-09-12 16:25:25,234 - __main__ - INFO - Generated 240 device configurations and 480 device version edges
+2025-09-12 16:25:25,234 - __main__ - INFO - Generating 60 software proxies for tenant Global Enterprises
+2025-09-12 16:25:25,234 - __main__ - INFO - Generated 60 SoftwareProxyIn and 60 SoftwareProxyOut entities
+2025-09-12 16:25:25,234 - __main__ - INFO - Generating software configurations with 5 historical versions
+2025-09-12 16:25:25,249 - __main__ - INFO - Generated 360 software configurations and 720 software version edges
+2025-09-12 16:25:25,249 - __main__ - INFO - Generating 60 hasConnection edges
+2025-09-12 16:25:25,250 - __main__ - INFO - Generated 60 hasConnection edges
+2025-09-12 16:25:25,250 - __main__ - INFO - Generating hasLocation edges
+2025-09-12 16:25:25,250 - __main__ - INFO - Generated 40 hasLocation edges
+2025-09-12 16:25:25,250 - __main__ - INFO - Generating 80 hasDeviceSoftware edges
+2025-09-12 16:25:25,250 - __main__ - INFO - Generated 80 hasDeviceSoftware edges
+2025-09-12 16:25:25,275 - __main__ - INFO - Completed time travel refactored data generation: 2190 total documents
+2025-09-12 16:30:16,060 - __main__ - INFO - Starting time travel refactored data generation for tenant: Acme Corp (Scale: 1x)
+2025-09-12 16:30:16,061 - __main__ - INFO - Generating 5 locations for tenant Acme Corp
+2025-09-12 16:30:16,061 - __main__ - INFO - Generated 5 location entities
+2025-09-12 16:30:16,061 - __main__ - INFO - Generating 20 device proxies for tenant Acme Corp
+2025-09-12 16:30:16,061 - __main__ - INFO - Generated 20 DeviceProxyIn and 20 DeviceProxyOut entities
+2025-09-12 16:30:16,061 - __main__ - INFO - Generating device configurations with 5 historical versions
+2025-09-12 16:30:16,062 - __main__ - INFO - Generated 120 device configurations and 240 device version edges
+2025-09-12 16:30:16,062 - __main__ - INFO - Generating 30 software proxies for tenant Acme Corp
+2025-09-12 16:30:16,062 - __main__ - INFO - Generated 30 SoftwareProxyIn and 30 SoftwareProxyOut entities
+2025-09-12 16:30:16,062 - __main__ - INFO - Generating software configurations with 5 historical versions
+2025-09-12 16:30:16,063 - __main__ - INFO - Generated 180 software configurations and 360 software version edges
+2025-09-12 16:30:16,063 - __main__ - INFO - Generating 30 hasConnection edges
+2025-09-12 16:30:16,064 - __main__ - INFO - Generated 30 hasConnection edges
+2025-09-12 16:30:16,064 - __main__ - INFO - Generating hasLocation edges
+2025-09-12 16:30:16,064 - __main__ - INFO - Generated 20 hasLocation edges
+2025-09-12 16:30:16,064 - __main__ - INFO - Generating 40 hasDeviceSoftware edges
+2025-09-12 16:30:16,064 - __main__ - INFO - Generated 40 hasDeviceSoftware edges
+2025-09-12 16:30:16,074 - __main__ - INFO - Completed time travel refactored data generation: 1095 total documents
+2025-09-12 16:30:16,075 - __main__ - INFO - Starting time travel refactored data generation for tenant: Global Enterprises (Scale: 2x)
+2025-09-12 16:30:16,075 - __main__ - INFO - Generating 10 locations for tenant Global Enterprises
+2025-09-12 16:30:16,075 - __main__ - INFO - Generated 10 location entities
+2025-09-12 16:30:16,075 - __main__ - INFO - Generating 40 device proxies for tenant Global Enterprises
+2025-09-12 16:30:16,075 - __main__ - INFO - Generated 40 DeviceProxyIn and 40 DeviceProxyOut entities
+2025-09-12 16:30:16,075 - __main__ - INFO - Generating device configurations with 5 historical versions
+2025-09-12 16:30:16,077 - __main__ - INFO - Generated 240 device configurations and 480 device version edges
+2025-09-12 16:30:16,077 - __main__ - INFO - Generating 60 software proxies for tenant Global Enterprises
+2025-09-12 16:30:16,077 - __main__ - INFO - Generated 60 SoftwareProxyIn and 60 SoftwareProxyOut entities
+2025-09-12 16:30:16,077 - __main__ - INFO - Generating software configurations with 5 historical versions
+2025-09-12 16:30:16,080 - __main__ - INFO - Generated 360 software configurations and 720 software version edges
+2025-09-12 16:30:16,080 - __main__ - INFO - Generating 60 hasConnection edges
+2025-09-12 16:30:16,080 - __main__ - INFO - Generated 60 hasConnection edges
+2025-09-12 16:30:16,080 - __main__ - INFO - Generating hasLocation edges
+2025-09-12 16:30:16,080 - __main__ - INFO - Generated 40 hasLocation edges
+2025-09-12 16:30:16,080 - __main__ - INFO - Generating 80 hasDeviceSoftware edges
+2025-09-12 16:30:16,081 - __main__ - INFO - Generated 80 hasDeviceSoftware edges
+2025-09-12 16:30:16,099 - __main__ - INFO - Completed time travel refactored data generation: 2190 total documents
+2025-09-12 17:40:25,670 - __main__ - INFO - Starting time travel refactored data generation for tenant: Acme Corp (Scale: 1x)
+2025-09-12 17:40:25,670 - __main__ - INFO - Generating 5 locations for tenant Acme Corp
+2025-09-12 17:40:25,670 - __main__ - INFO - Generated 5 location entities
+2025-09-12 17:40:25,670 - __main__ - INFO - Generating 20 device proxies for tenant Acme Corp
+2025-09-12 17:40:25,671 - __main__ - INFO - Generated 20 DeviceProxyIn and 20 DeviceProxyOut entities
+2025-09-12 17:40:25,671 - __main__ - INFO - Generating device configurations with 5 historical versions
+2025-09-12 17:40:25,672 - __main__ - INFO - Generated 120 device configurations and 240 device version edges
+2025-09-12 17:40:25,672 - __main__ - INFO - Generating 30 software proxies for tenant Acme Corp
+2025-09-12 17:40:25,673 - __main__ - INFO - Generated 30 SoftwareProxyIn and 30 SoftwareProxyOut entities
+2025-09-12 17:40:25,673 - __main__ - INFO - Generating software configurations with 5 historical versions
+2025-09-12 17:40:25,675 - __main__ - INFO - Generated 180 software configurations and 360 software version edges
+2025-09-12 17:40:25,676 - __main__ - INFO - Generating 30 hasConnection edges
+2025-09-12 17:40:25,677 - __main__ - INFO - Generated 30 hasConnection edges
+2025-09-12 17:40:25,677 - __main__ - INFO - Generating hasLocation edges
+2025-09-12 17:40:25,677 - __main__ - INFO - Generated 20 hasLocation edges
+2025-09-12 17:40:25,677 - __main__ - INFO - Generating 40 hasDeviceSoftware edges
+2025-09-12 17:40:25,678 - __main__ - INFO - Generated 40 hasDeviceSoftware edges
+2025-09-12 17:40:25,698 - __main__ - INFO - Completed time travel refactored data generation: 1095 total documents
+2025-09-12 17:40:25,698 - __main__ - INFO - Starting time travel refactored data generation for tenant: Global Enterprises (Scale: 2x)
+2025-09-12 17:40:25,698 - __main__ - INFO - Generating 10 locations for tenant Global Enterprises
+2025-09-12 17:40:25,698 - __main__ - INFO - Generated 10 location entities
+2025-09-12 17:40:25,698 - __main__ - INFO - Generating 40 device proxies for tenant Global Enterprises
+2025-09-12 17:40:25,698 - __main__ - INFO - Generated 40 DeviceProxyIn and 40 DeviceProxyOut entities
+2025-09-12 17:40:25,698 - __main__ - INFO - Generating device configurations with 5 historical versions
+2025-09-12 17:40:25,700 - __main__ - INFO - Generated 240 device configurations and 480 device version edges
+2025-09-12 17:40:25,700 - __main__ - INFO - Generating 60 software proxies for tenant Global Enterprises
+2025-09-12 17:40:25,701 - __main__ - INFO - Generated 60 SoftwareProxyIn and 60 SoftwareProxyOut entities
+2025-09-12 17:40:25,701 - __main__ - INFO - Generating software configurations with 5 historical versions
+2025-09-12 17:40:25,703 - __main__ - INFO - Generated 360 software configurations and 720 software version edges
+2025-09-12 17:40:25,703 - __main__ - INFO - Generating 60 hasConnection edges
+2025-09-12 17:40:25,703 - __main__ - INFO - Generated 60 hasConnection edges
+2025-09-12 17:40:25,703 - __main__ - INFO - Generating hasLocation edges
+2025-09-12 17:40:25,704 - __main__ - INFO - Generated 40 hasLocation edges
+2025-09-12 17:40:25,704 - __main__ - INFO - Generating 80 hasDeviceSoftware edges
+2025-09-12 17:40:25,705 - __main__ - INFO - Generated 73 hasDeviceSoftware edges
+2025-09-12 17:40:25,731 - __main__ - INFO - Completed time travel refactored data generation: 2183 total documents
+2025-09-12 17:58:59,107 - __main__ - INFO - Starting time travel refactored data generation for tenant: Acme Corp (Scale: 1x)
+2025-09-12 17:58:59,107 - __main__ - INFO - Generating 5 locations for tenant Acme Corp
+2025-09-12 17:58:59,107 - __main__ - INFO - Generated 5 location entities
+2025-09-12 17:58:59,107 - __main__ - INFO - Generating 20 device proxies for tenant Acme Corp
+2025-09-12 17:58:59,108 - __main__ - INFO - Generated 20 DeviceProxyIn and 20 DeviceProxyOut entities
+2025-09-12 17:58:59,108 - __main__ - INFO - Generating device configurations with 5 historical versions
+2025-09-12 17:58:59,109 - __main__ - INFO - Generated 120 device configurations and 240 device version edges
+2025-09-12 17:58:59,109 - __main__ - INFO - Generating 30 software proxies for tenant Acme Corp
+2025-09-12 17:58:59,109 - __main__ - INFO - Generated 30 SoftwareProxyIn and 30 SoftwareProxyOut entities
+2025-09-12 17:58:59,109 - __main__ - INFO - Generating software configurations with 5 historical versions
+2025-09-12 17:58:59,110 - __main__ - INFO - Generated 180 software configurations and 360 software version edges
+2025-09-12 17:58:59,110 - __main__ - INFO - Generating 30 hasConnection edges
+2025-09-12 17:58:59,111 - __main__ - INFO - Generated 30 hasConnection edges
+2025-09-12 17:58:59,111 - __main__ - INFO - Generating hasLocation edges
+2025-09-12 17:58:59,111 - __main__ - INFO - Generated 20 hasLocation edges
+2025-09-12 17:58:59,111 - __main__ - INFO - Generating 40 hasDeviceSoftware edges
+2025-09-12 17:58:59,111 - __main__ - INFO - Generated 40 hasDeviceSoftware edges
+2025-09-12 17:58:59,126 - __main__ - INFO - Completed time travel refactored data generation: 1095 total documents
+2025-09-12 17:58:59,127 - __main__ - INFO - Starting time travel refactored data generation for tenant: Global Enterprises (Scale: 2x)
+2025-09-12 17:58:59,127 - __main__ - INFO - Generating 10 locations for tenant Global Enterprises
+2025-09-12 17:58:59,127 - __main__ - INFO - Generated 10 location entities
+2025-09-12 17:58:59,127 - __main__ - INFO - Generating 40 device proxies for tenant Global Enterprises
+2025-09-12 17:58:59,127 - __main__ - INFO - Generated 40 DeviceProxyIn and 40 DeviceProxyOut entities
+2025-09-12 17:58:59,127 - __main__ - INFO - Generating device configurations with 5 historical versions
+2025-09-12 17:58:59,129 - __main__ - INFO - Generated 240 device configurations and 480 device version edges
+2025-09-12 17:58:59,129 - __main__ - INFO - Generating 60 software proxies for tenant Global Enterprises
+2025-09-12 17:58:59,130 - __main__ - INFO - Generated 60 SoftwareProxyIn and 60 SoftwareProxyOut entities
+2025-09-12 17:58:59,130 - __main__ - INFO - Generating software configurations with 5 historical versions
+2025-09-12 17:58:59,134 - __main__ - INFO - Generated 360 software configurations and 720 software version edges
+2025-09-12 17:58:59,134 - __main__ - INFO - Generating 60 hasConnection edges
+2025-09-12 17:58:59,135 - __main__ - INFO - Generated 60 hasConnection edges
+2025-09-12 17:58:59,135 - __main__ - INFO - Generating hasLocation edges
+2025-09-12 17:58:59,135 - __main__ - INFO - Generated 40 hasLocation edges
+2025-09-12 17:58:59,135 - __main__ - INFO - Generating 80 hasDeviceSoftware edges
+2025-09-12 17:58:59,135 - __main__ - INFO - Generated 80 hasDeviceSoftware edges
+2025-09-12 17:58:59,153 - __main__ - INFO - Completed time travel refactored data generation: 2190 total documents

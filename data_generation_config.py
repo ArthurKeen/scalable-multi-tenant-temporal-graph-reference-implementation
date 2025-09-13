@@ -194,10 +194,13 @@ COLLECTION_NAMES: Dict[str, str] = {
     "device_outs": "DeviceProxyOut",
     "locations": "Location",
     "software": "Software",
+    "software_ins": "SoftwareProxyIn",  # New
+    "software_outs": "SoftwareProxyOut",  # New
     # Edge collections (camelCase, singular)
     "connections": "hasConnection",
     "has_locations": "hasLocation", 
     "has_software": "hasSoftware",
+    "has_device_software": "hasDeviceSoftware",  # New - clearer naming
     "versions": "version"
 }
 
@@ -208,9 +211,12 @@ FILE_NAMES: Dict[str, str] = {
     "device_outs": "DeviceProxyOut.json",
     "locations": "Location.json",
     "software": "Software.json",
+    "software_ins": "SoftwareProxyIn.json",  # New
+    "software_outs": "SoftwareProxyOut.json",  # New
     "connections": "hasConnection.json",
     "has_locations": "hasLocation.json",
-    "has_software": "hasSoftware.json", 
+    "has_software": "hasSoftware.json",
+    "has_device_software": "hasDeviceSoftware.json",  # New
     "versions": "version.json",
     "smartgraph_config": "smartgraph_config.json",
     "tenant_registry": "tenant_registry.json"

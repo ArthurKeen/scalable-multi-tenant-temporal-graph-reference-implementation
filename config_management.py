@@ -12,38 +12,8 @@ from dataclasses import dataclass
 from typing import Dict, Optional, Any
 
 
-@dataclass
-class DatabaseCredentials:
-    """Secure database credentials management."""
-    
-    endpoint: str
-    username: str
-    password: str
-    database_name: str = "network_assets_demo"
-    
-    @classmethod
-    def from_environment(cls) -> 'DatabaseCredentials':
-        """Load credentials from environment variables."""
-        return cls(
-            endpoint=os.getenv('ARANGO_ENDPOINT', 'https://1d53cdf6fad0.arangodb.cloud:8529'),
-            username=os.getenv('ARANGO_USERNAME', 'root'),
-            password=os.getenv('ARANGO_PASSWORD', 'GcZO9wNKLq9faIuIUgnY'),
-            database_name=os.getenv('ARANGO_DATABASE', 'network_assets_demo')
-        )
-    
-    @classmethod
-    def from_config_file(cls, config_path: Path = None) -> 'DatabaseCredentials':
-        """Load credentials from configuration file."""
-        if not config_path:
-            config_path = Path.home() / '.config' / 'arango_demo' / 'credentials.json'
-        
-        if config_path.exists():
-            with open(config_path, 'r') as f:
-                config = json.load(f)
-            return cls(**config)
-        else:
-            # Fallback to environment
-            return cls.from_environment()
+# Import centralized credentials to avoid duplication
+from centralized_credentials import DatabaseCredentials, CredentialsManager
 
 
 @dataclass
@@ -102,13 +72,16 @@ class CollectionConfiguration:
             "device_ins": "DeviceProxyIn", 
             "device_outs": "DeviceProxyOut",
             "locations": "Location",
-            "software": "Software"
+            "software": "Software",
+            "software_ins": "SoftwareProxyIn",
+            "software_outs": "SoftwareProxyOut"
         }
         
         edge_collections = {
             "connections": "hasConnection",
             "has_locations": "hasLocation", 
             "has_software": "hasSoftware",
+            "has_device_software": "hasDeviceSoftware",
             "versions": "version"
         }
         
@@ -118,9 +91,12 @@ class CollectionConfiguration:
             "DeviceProxyOut": "DeviceProxyOut.json",
             "Location": "Location.json",
             "Software": "Software.json",
+            "SoftwareProxyIn": "SoftwareProxyIn.json",
+            "SoftwareProxyOut": "SoftwareProxyOut.json",
             "hasConnection": "hasConnection.json",
             "hasLocation": "hasLocation.json",
-            "hasSoftware": "hasSoftware.json", 
+            "hasSoftware": "hasSoftware.json",
+            "hasDeviceSoftware": "hasDeviceSoftware.json",
             "version": "version.json",
             "smartgraph_config": "smartgraph_config.json"
         }
@@ -165,7 +141,7 @@ class ConfigurationManager:
     
     def __init__(self, environment: str = "production"):
         self.environment = environment
-        self.credentials = DatabaseCredentials.from_environment()
+        self.credentials = CredentialsManager.get_database_credentials(environment)
         self.paths = ApplicationPaths.initialize_default()
         self.collections = CollectionConfiguration.get_owlrdf_config()
         

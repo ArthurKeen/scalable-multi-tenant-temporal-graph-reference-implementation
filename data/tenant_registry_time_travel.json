@@ -1,0 +1,42 @@
+{
+  "tenants": {
+    "4e1c86403a84": {
+      "tenantName": "Acme Corp",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_4e1c86403a84_network_assets",
+      "smartGraphAttribute": "tenant_4e1c86403a84_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_4e1c86403a84",
+      "scaleFactor": 1,
+      "createdAt": "2025-09-12T17:58:59.102260",
+      "tenantDescription": "Small enterprise with refactored time travel"
+    },
+    "13647eab4bb3": {
+      "tenantName": "Global Enterprises",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_13647eab4bb3_network_assets",
+      "smartGraphAttribute": "tenant_13647eab4bb3_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_13647eab4bb3",
+      "scaleFactor": 2,
+      "createdAt": "2025-09-12T17:58:59.102281",
+      "tenantDescription": "Large enterprise with refactored time travel"
+    }
+  },
+  "summary": {
+    "totalTenants": 2,
+    "totalDocuments": 3285,
+    "sharedDatabase": "network_assets_demo",
+    "generatedAt": "2025-09-12T17:58:59.153629",
+    "environment": "production",
+    "owlCompliant": true,
+    "timeTravel": {
+      "refactored": true,
+      "consistentPattern": true,
+      "deviceTimeTravel": "DeviceProxyIn \u27f7 Device \u27f7 DeviceProxyOut",
+      "softwareTimeTravel": "SoftwareProxyIn \u27f7 Software \u27f7 SoftwareProxyOut",
+      "unifiedVersionCollection": true,
+      "softwareConfigurationHistory": "Removed - flattened to versioned documents"
+    }
+  }
+}

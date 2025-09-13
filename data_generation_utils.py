@@ -305,16 +305,19 @@ class FileManager:
         """
         data_dir = FileManager.ensure_tenant_directory(tenant_config)
         
-        # Map collection types to file names
+        # Map collection types to file names (including new Software proxy collections)
         file_mapping = {
             "devices": FILE_NAMES["devices"],
             "device_ins": FILE_NAMES["device_ins"], 
             "device_outs": FILE_NAMES["device_outs"],
             "locations": FILE_NAMES["locations"],
             "software": FILE_NAMES["software"],
+            "software_ins": FILE_NAMES["software_ins"],  # NEW
+            "software_outs": FILE_NAMES["software_outs"],  # NEW
             "connections": FILE_NAMES["connections"],
             "has_locations": FILE_NAMES["has_locations"],
             "has_software": FILE_NAMES["has_software"],
+            "has_device_software": FILE_NAMES["has_device_software"],  # NEW
             "versions": FILE_NAMES["versions"]
         }
         
