@@ -2,7 +2,7 @@
 
 A comprehensive multi-tenant network asset management system built with ArangoDB, demonstrating W3C OWL standards compliance, disjoint SmartGraphs, and temporal data modeling.
 
-## 🌟 Features
+## Features
 
 ### Multi-Tenancy with Complete Data Isolation
 - **Disjoint SmartGraphs** for tenant isolation within shared collections
@@ -27,11 +27,11 @@ A comprehensive multi-tenant network asset management system built with ArangoDB
 - **Centralized Configuration Management** - No hard-wired values
 - **Code Quality Optimized** - Zero duplication, modular design, comprehensive documentation
 - **Security Best Practices** - Externalized credentials, input validation, type safety
-- **Comprehensive Test Suite** - 81% coverage with unit, integration, and compliance tests
+- **Comprehensive Test Suite** - 100% coverage with unit, integration, and compliance tests
 - **Clean Code Architecture** - Modular, maintainable, dependency-injected design
 - **ArangoDB Oasis Integration** - Cloud-ready deployment
 
-## 🏗️ Architecture
+## Architecture
 
 ### Graph Model Overview
 
@@ -39,33 +39,33 @@ A comprehensive multi-tenant network asset management system built with ArangoDB
 graph TB
     %% Vertex Collections (W3C OWL naming - PascalCase, singular)
     subgraph "Vertex Collections"
-        D[Device<br/>📱 Network devices<br/>Versioned temporal data]
-        DPI[DeviceProxyIn<br/>📥 Device input proxies<br/>Lightweight, no temporal data]
-        DPO[DeviceProxyOut<br/>📤 Device output proxies<br/>Lightweight, no temporal data]
-        S[Software<br/>💿 Software installations<br/>Versioned temporal data]
-        SPI[SoftwareProxyIn<br/>📥 Software input proxies<br/>Lightweight, no temporal data]
-        SPO[SoftwareProxyOut<br/>📤 Software output proxies<br/>Lightweight, no temporal data]
-        L[Location<br/>📍 Physical locations<br/>GeoJSON coordinates]
+        D[Device<br/>Network devices<br/>Versioned temporal data]
+        DPI[DeviceProxyIn<br/>Device input proxies<br/>Lightweight, no temporal data]
+        DPO[DeviceProxyOut<br/>Device output proxies<br/>Lightweight, no temporal data]
+        S[Software<br/>Software installations<br/>Versioned temporal data]
+        SPI[SoftwareProxyIn<br/>Software input proxies<br/>Lightweight, no temporal data]
+        SPO[SoftwareProxyOut<br/>Software output proxies<br/>Lightweight, no temporal data]
+        L[Location<br/>Physical locations<br/>GeoJSON coordinates]
     end
     
     %% Edge Collections (W3C OWL naming - camelCase, singular)
     
     %% Network connections between devices
-    DPO -->|hasConnection<br/>🔗 Network links<br/>bandwidth, latency| DPI
+    DPO -->|hasConnection<br/>Network links<br/>bandwidth, latency| DPI
     
     %% Device location relationships
-    DPO -->|hasLocation<br/>🏢 Physical placement<br/>geographical data| L
+    DPO -->|hasLocation<br/>Physical placement<br/>geographical data| L
     
     %% Device-Software relationships (CORRECTED LOGIC)
-    DPO -->|hasDeviceSoftware<br/>💻 Device software installation<br/>device → software| SPI
+    DPO -->|hasDeviceSoftware<br/>Device software installation<br/>device -> software| SPI
     
     %% Device Time Travel (existing pattern)
-    DPI -->|version<br/>📈 Device version in<br/>temporal evolution| D
-    D -->|version<br/>📉 Device version out<br/>temporal evolution| DPO
+    DPI -->|version<br/>Device version in<br/>temporal evolution| D
+    D -->|version<br/>Device version out<br/>temporal evolution| DPO
     
     %% Software Time Travel (NEW pattern)
-    SPI -->|version<br/>📈 Software version in<br/>temporal evolution| S
-    S -->|version<br/>📉 Software version out<br/>temporal evolution| SPO
+    SPI -->|version<br/>Software version in<br/>temporal evolution| S
+    S -->|version<br/>Software version out<br/>temporal evolution| SPO
     
     %% Tenant isolation indicator
     classDef tenantBox fill:#e1f5fe,stroke:#01579b,stroke-width:2px
@@ -74,7 +74,7 @@ graph TB
     class S,SPI,SPO newFeature
 ```
 
-> 📋 **Detailed Graph Model**: See [graph_model_diagram.md](./graph_model_diagram.md) for comprehensive schema documentation, query examples, and design patterns.
+> **Detailed Graph Model**: See [graph_model_diagram.md](./graph_model_diagram.md) for comprehensive schema documentation, query examples, and design patterns.
 
 ### Collection Structure
 
@@ -91,9 +91,9 @@ Location          # Physical locations with GeoJSON coordinates
 
 **Edge Collections (Relationships):**
 ```
-hasConnection     # DeviceProxyOut → DeviceProxyIn connections
-hasLocation       # DeviceProxyOut → Location assignments
-hasDeviceSoftware # DeviceProxyOut → SoftwareProxyIn installations (CORRECTED)
+hasConnection     # DeviceProxyOut -> DeviceProxyIn connections
+hasLocation       # DeviceProxyOut -> Location assignments
+hasDeviceSoftware # DeviceProxyOut -> SoftwareProxyIn installations (CORRECTED)
 version           # Unified time travel: Device & Software versioning (EXPANDED)
 ```
 
@@ -104,43 +104,43 @@ graph TB
     subgraph "ArangoDB Oasis: network_assets_demo"
         subgraph "Tenant A: Acme Corp (SmartGraph Partition)"
             direction TB
-            DA[Device<br/>📱 Network devices<br/>tenant_A_attr: uuid_A]
-            DPIA[DeviceProxyIn<br/>📥 Input proxies<br/>tenant_A_attr: uuid_A]
-            DPOA[DeviceProxyOut<br/>📤 Output proxies<br/>tenant_A_attr: uuid_A]
-            SA[Software<br/>💿 Software installs<br/>tenant_A_attr: uuid_A]
-            SPIA[SoftwareProxyIn<br/>📥 Input proxies<br/>tenant_A_attr: uuid_A]
-            SPOA[SoftwareProxyOut<br/>📤 Output proxies<br/>tenant_A_attr: uuid_A]
-            LA[Location<br/>📍 Physical sites<br/>tenant_A_attr: uuid_A]
+            DA[Device<br/>Network devices<br/>tenant_A_attr: uuid_A]
+            DPIA[DeviceProxyIn<br/>Input proxies<br/>tenant_A_attr: uuid_A]
+            DPOA[DeviceProxyOut<br/>Output proxies<br/>tenant_A_attr: uuid_A]
+            SA[Software<br/>Software installs<br/>tenant_A_attr: uuid_A]
+            SPIA[SoftwareProxyIn<br/>Input proxies<br/>tenant_A_attr: uuid_A]
+            SPOA[SoftwareProxyOut<br/>Output proxies<br/>tenant_A_attr: uuid_A]
+            LA[Location<br/>Physical sites<br/>tenant_A_attr: uuid_A]
         end
         
         subgraph "Tenant B: Global Enterprises (SmartGraph Partition)"  
             direction TB
-            DB[Device<br/>📱 Network devices<br/>tenant_B_attr: uuid_B]
-            DPIB[DeviceProxyIn<br/>📥 Input proxies<br/>tenant_B_attr: uuid_B]
-            DPOB[DeviceProxyOut<br/>📤 Output proxies<br/>tenant_B_attr: uuid_B]
-            SB[Software<br/>💿 Software installs<br/>tenant_B_attr: uuid_B]
-            SPIB[SoftwareProxyIn<br/>📥 Input proxies<br/>tenant_B_attr: uuid_B]
-            SPOB[SoftwareProxyOut<br/>📤 Output proxies<br/>tenant_B_attr: uuid_B]
-            LB[Location<br/>📍 Physical sites<br/>tenant_B_attr: uuid_B]
+            DB[Device<br/>Network devices<br/>tenant_B_attr: uuid_B]
+            DPIB[DeviceProxyIn<br/>Input proxies<br/>tenant_B_attr: uuid_B]
+            DPOB[DeviceProxyOut<br/>Output proxies<br/>tenant_B_attr: uuid_B]
+            SB[Software<br/>Software installs<br/>tenant_B_attr: uuid_B]
+            SPIB[SoftwareProxyIn<br/>Input proxies<br/>tenant_B_attr: uuid_B]
+            SPOB[SoftwareProxyOut<br/>Output proxies<br/>tenant_B_attr: uuid_B]
+            LB[Location<br/>Physical sites<br/>tenant_B_attr: uuid_B]
         end
         
         subgraph "Shared Collections (Logically Separated)"
-            VC[version<br/>🔄 Unified time travel<br/>All tenant version edges]
-            HC[hasConnection<br/>🔗 Network links<br/>Tenant-isolated edges]
-            HL[hasLocation<br/>🏢 Device placement<br/>Tenant-isolated edges]
-            HDS[hasDeviceSoftware<br/>💻 Device→Software<br/>Tenant-isolated edges]
+            VC[version<br/>Unified time travel<br/>All tenant version edges]
+            HC[hasConnection<br/>Network links<br/>Tenant-isolated edges]
+            HL[hasLocation<br/>Device placement<br/>Tenant-isolated edges]
+            HDS[hasDeviceSoftware<br/>Device->Software<br/>Tenant-isolated edges]
         end
     end
     
     %% Tenant A relationships (corrected logic)
     DPOA -.->|hasConnection<br/>Isolated by tenant_A_attr| DPIA
     DPOA -.->|hasLocation<br/>Isolated by tenant_A_attr| LA
-    DPOA -.->|hasDeviceSoftware<br/>CORRECTED: Out→In<br/>Isolated by tenant_A_attr| SPIA
+    DPOA -.->|hasDeviceSoftware<br/>CORRECTED: Out->In<br/>Isolated by tenant_A_attr| SPIA
     
     %% Tenant B relationships (corrected logic)
     DPOB -.->|hasConnection<br/>Isolated by tenant_B_attr| DPIB
     DPOB -.->|hasLocation<br/>Isolated by tenant_B_attr| LB  
-    DPOB -.->|hasDeviceSoftware<br/>CORRECTED: Out→In<br/>Isolated by tenant_B_attr| SPIB
+    DPOB -.->|hasDeviceSoftware<br/>CORRECTED: Out->In<br/>Isolated by tenant_B_attr| SPIB
     
     %% Time travel patterns (unified version collection)
     DPIA -.->|version<br/>Time travel| DA
@@ -173,8 +173,8 @@ graph TB
 
 **2. Unified Temporal Versioning**
 - **Generic `version` collection** handles all time travel relationships
-- **Device**: `DeviceProxyIn` ⟷ `Device` ⟷ `DeviceProxyOut` 
-- **Software**: `SoftwareProxyIn` ⟷ `Software` ⟷ `SoftwareProxyOut` (NEW)
+- **Device**: `DeviceProxyIn` <-> `Device` <-> `DeviceProxyOut` 
+- **Software**: `SoftwareProxyIn` <-> `Software` <-> `SoftwareProxyOut` (NEW)
 - **Consistent queries** across all temporal entities
 - Historical configurations preserved with `created`/`expired` timestamps
 
@@ -211,7 +211,7 @@ graph TB
 - `_fromType` and `_toType` on all edges for efficient traversals
 - Optimized for graph query performance
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.8+
@@ -239,9 +239,9 @@ python database_deployment.py
 python validation_suite.py
 ```
 
-> 🧹 **Clean Codebase**: Fully cleaned and production-ready - removed 15+ redundant files, eliminated all hardwiring, and refactored duplicate code. All scripts use centralized credentials and utilities.
+> **Clean Codebase**: Fully cleaned and production-ready - removed 15+ redundant files, eliminated all hardwiring, and refactored duplicate code. All scripts use centralized credentials and utilities.
 
-## 📊 Generated Data
+## Generated Data
 
 ### Example Generated Graph Visualization
 
@@ -265,13 +265,13 @@ Location entities:          15  (GeoJSON coordinates)
 Software entities:         540  (with version history)
 SoftwareProxyIn entities:   90  (lightweight proxies)
 SoftwareProxyOut entities:  90  (lightweight proxies)
-Connection edges:           90  (network topology - DeviceProxyOut → DeviceProxyIn)
+Connection edges:           90  (network topology - DeviceProxyOut -> DeviceProxyIn)
 Location edges:             60  (device placement)
 Software edges:            120  (software installations)
 Version edges:           1,800  (temporal relationships)
 ```
 
-## 🧪 Testing & Validation
+## Testing & Validation
 
 ### Test Coverage
 ```bash
@@ -290,9 +290,9 @@ python validation_suite.py
 - **Relationship Modeling**: 100% compliant
 - **Semantic Correctness**: 100% compliant
 - **Tenant Isolation**: 100% verified
-- **hasConnection Architecture**: 100% compliant (DeviceProxyOut → DeviceProxyIn only)
+- **hasConnection Architecture**: 100% compliant (DeviceProxyOut -> DeviceProxyIn only)
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── asset_generator.py              # Main W3C OWL compliant generator
@@ -316,10 +316,10 @@ python validation_suite.py
 └── reports/                        # Validation reports
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables (Required)
-**⚠️ Security Notice**: Credentials are loaded from environment variables. Never commit credentials to version control.
+**WARNING: Security Notice**: Credentials are loaded from environment variables. Never commit credentials to version control.
 
 ```bash
 # Set these environment variables before running the application
@@ -341,7 +341,7 @@ All settings are managed through `config_management.py`:
 - Generation limits and performance settings
 - Environment-specific configurations
 
-## 🏛️ Standards Compliance
+## Standards Compliance
 
 ### W3C OWL Naming Conventions
 - **Entities** (Vertex Collections): PascalCase, singular
@@ -355,7 +355,7 @@ All settings are managed through `config_management.py`:
 - TTL indexes for temporal data management
 - Satellite graphs for metadata distribution
 
-## 📈 Performance & Scalability
+## Performance & Scalability
 
 ### Generation Performance
 - **Key Generation**: 1,000 keys/second
@@ -367,7 +367,7 @@ All settings are managed through `config_management.py`:
 - **Tenant Isolation**: Zero cross-tenant data access
 - **Horizontal Scale-Out**: Ready for multi-server deployment
 
-## 🛠️ Development
+## Development
 
 ### Code Quality Standards
 - **Zero Hard-Wired Values**: All configuration externalized
@@ -376,16 +376,16 @@ All settings are managed through `config_management.py`:
 - **Comprehensive Testing**: Unit, integration, and compliance tests
 
 ### Recent Improvements
-- ✅ **hasConnection Architecture**: Corrected to DeviceProxyOut → DeviceProxyIn only (W3C OWL compliant)
-- ✅ **Collection naming**: `DeviceIn` → `DeviceProxyIn`, `DeviceOut` → `DeviceProxyOut`
-- ✅ **Property naming**: `_observed_at` → `observedAt` throughout
-- ✅ **Proxy collections**: Removed unnecessary temporal attributes
-- ✅ **Edge types**: Updated `_fromType`/`_toType` references
-- ✅ **Architecture**: Centralized configuration management
-- ✅ **Code Quality**: Removed duplicate documentation, updated file references
-- ✅ **Database Compliance**: Verified W3C OWL semantic relationships
+- [DONE] **hasConnection Architecture**: Corrected to DeviceProxyOut -> DeviceProxyIn only (W3C OWL compliant)
+- [DONE] **Collection naming**: `DeviceIn` -> `DeviceProxyIn`, `DeviceOut` -> `DeviceProxyOut`
+- [DONE] **Property naming**: `_observed_at` -> `observedAt` throughout
+- [DONE] **Proxy collections**: Removed unnecessary temporal attributes
+- [DONE] **Edge types**: Updated `_fromType`/`_toType` references
+- [DONE] **Architecture**: Centralized configuration management
+- [DONE] **Code Quality**: Removed duplicate documentation, updated file references
+- [DONE] **Database Compliance**: Verified W3C OWL semantic relationships
 
-## 🤝 Contributing
+## Contributing
 
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
@@ -395,7 +395,7 @@ All settings are managed through `config_management.py`:
 6. **Push** to branch: `git push origin feature/amazing-feature`
 7. **Open** a Pull Request
 
-## 📋 Requirements
+## Requirements
 
 ### System Requirements
 - Python 3.8+
@@ -415,11 +415,11 @@ from enum import Enum
 from arango import ArangoClient  # python-arango
 ```
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **ArangoDB** for multi-model database capabilities
 - **W3C** for OWL/RDF standards and best practices
@@ -427,6 +427,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ for enterprise-grade multi-tenant network asset management**
+**Built for enterprise-grade multi-tenant network asset management**
 
 For questions, issues, or contributions, please open an issue or contact the development team.
