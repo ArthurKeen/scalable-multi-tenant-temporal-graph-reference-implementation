@@ -1,0 +1,802 @@
+[
+  {
+    "_key": "52c0fbe8bce4_hasSoftware1",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device10",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software1",
+    "created": 1757728330.089901,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware2",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device8",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software2",
+    "created": 1757728330.089904,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware3",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device15",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software3",
+    "created": 1757728330.089906,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware4",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device20",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software4",
+    "created": 1757728330.089908,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware5",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device37",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software5",
+    "created": 1757728330.089911,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware6",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device15",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software6",
+    "created": 1757728330.089913,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware7",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device11",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software7",
+    "created": 1757728330.089916,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware8",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device21",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software8",
+    "created": 1757728330.089918,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware9",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device26",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software9",
+    "created": 1757728330.08992,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware10",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device18",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software10",
+    "created": 1757728330.089923,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware11",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device38",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software11",
+    "created": 1757728330.089925,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware12",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device9",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software12",
+    "created": 1757728330.089927,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware13",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device22",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software13",
+    "created": 1757728330.08993,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware14",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device6",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software14",
+    "created": 1757728330.089932,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware15",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device32",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software15",
+    "created": 1757728330.089935,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware16",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device13",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software16",
+    "created": 1757728330.089937,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware17",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device21",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software17",
+    "created": 1757728330.089939,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware18",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device27",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software18",
+    "created": 1757728330.089942,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware19",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device21",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software19",
+    "created": 1757728330.089944,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware20",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device15",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software20",
+    "created": 1757728330.089947,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware21",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device15",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software21",
+    "created": 1757728330.089949,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware22",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device18",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software22",
+    "created": 1757728330.089953,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware23",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device31",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software23",
+    "created": 1757728330.089955,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware24",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device4",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software24",
+    "created": 1757728330.089957,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware25",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device15",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software25",
+    "created": 1757728330.08996,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware26",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device28",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software26",
+    "created": 1757728330.089962,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware27",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device3",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software27",
+    "created": 1757728330.089964,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware28",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device13",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software28",
+    "created": 1757728330.089967,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware29",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device8",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software29",
+    "created": 1757728330.089969,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware30",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device30",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software30",
+    "created": 1757728330.089971,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware31",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device25",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software31",
+    "created": 1757728330.089974,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware32",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device28",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software32",
+    "created": 1757728330.089976,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware33",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device30",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software33",
+    "created": 1757728330.089978,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware34",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device37",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software34",
+    "created": 1757728330.08998,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware35",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device27",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software35",
+    "created": 1757728330.089983,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware36",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device3",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software36",
+    "created": 1757728330.089985,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware37",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device10",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software37",
+    "created": 1757728330.089988,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware38",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device9",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software38",
+    "created": 1757728330.08999,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware39",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device21",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software39",
+    "created": 1757728330.089992,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware40",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device29",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software40",
+    "created": 1757728330.089995,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware41",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device35",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software41",
+    "created": 1757728330.089997,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware42",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device5",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software42",
+    "created": 1757728330.09,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware43",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device9",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software43",
+    "created": 1757728330.090002,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware44",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device16",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software44",
+    "created": 1757728330.090007,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware45",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device29",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software45",
+    "created": 1757728330.090009,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware46",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device18",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software46",
+    "created": 1757728330.090012,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware47",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device8",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software47",
+    "created": 1757728330.090014,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware48",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device35",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software48",
+    "created": 1757728330.090016,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware49",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device29",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software49",
+    "created": 1757728330.090019,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware50",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device18",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software50",
+    "created": 1757728330.090021,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware51",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device32",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software51",
+    "created": 1757728330.090023,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware52",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device20",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software52",
+    "created": 1757728330.090026,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware53",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device23",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software53",
+    "created": 1757728330.090028,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware54",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device4",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software54",
+    "created": 1757728330.09003,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware55",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device27",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software55",
+    "created": 1757728330.090033,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware56",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device24",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software56",
+    "created": 1757728330.090035,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware57",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device6",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software57",
+    "created": 1757728330.090037,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware58",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device24",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software58",
+    "created": 1757728330.090039,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware59",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device20",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software59",
+    "created": 1757728330.090042,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware60",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device21",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software60",
+    "created": 1757728330.090044,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware61",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device21",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software56",
+    "created": 1757728330.090068,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware62",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device3",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software12",
+    "created": 1757728330.090092,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware63",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device9",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software2",
+    "created": 1757728330.090113,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware64",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device13",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software42",
+    "created": 1757728330.090134,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware65",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device22",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software11",
+    "created": 1757728330.090155,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware66",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device34",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software35",
+    "created": 1757728330.090175,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware67",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device14",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software32",
+    "created": 1757728330.090197,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware68",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device23",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software8",
+    "created": 1757728330.090218,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware69",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device21",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software50",
+    "created": 1757728330.09024,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware70",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device28",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software12",
+    "created": 1757728330.090262,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware71",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device35",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software11",
+    "created": 1757728330.090285,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware72",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device13",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software24",
+    "created": 1757728330.090308,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware73",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device16",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software25",
+    "created": 1757728330.09033,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware74",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device28",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software2",
+    "created": 1757728330.090354,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware75",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device28",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software48",
+    "created": 1757728330.090377,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware76",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device37",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software33",
+    "created": 1757728330.090406,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware77",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device19",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software14",
+    "created": 1757728330.090436,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware78",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device21",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software29",
+    "created": 1757728330.090911,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware79",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device16",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software58",
+    "created": 1757728330.09127,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "52c0fbe8bce4_hasSoftware80",
+    "_from": "DeviceProxyOut/52c0fbe8bce4_device32",
+    "_to": "SoftwareProxyIn/52c0fbe8bce4_software6",
+    "created": 1757728330.091305,
+    "expired": 9223372036854775807,
+    "tenant_52c0fbe8bce4_attr": "52c0fbe8bce4",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  }
+]

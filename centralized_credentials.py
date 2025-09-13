@@ -29,24 +29,39 @@ class DatabaseCredentials:
 
 
 class CredentialsManager:
-    """Centralized credentials management."""
-    
-    # ArangoDB Oasis Cluster Credentials (from memory: 8684340)
-    _OASIS_CREDENTIALS = DatabaseCredentials(
-        endpoint="https://1d53cdf6fad0.arangodb.cloud:8529",
-        username="root", 
-        password="GcZO9wNKLq9faIuIUgnY",
-        database_name="network_assets_demo"
-    )
+    """Centralized credentials management with environment variable support."""
     
     @classmethod
     def get_database_credentials(cls, environment: str = "production") -> DatabaseCredentials:
-        """Get database credentials for specified environment."""
-        if environment == "production":
-            return cls._OASIS_CREDENTIALS
-        else:
-            # For testing or other environments, could be extended
-            return cls._OASIS_CREDENTIALS
+        """
+        Get database credentials from environment variables.
+        
+        Required environment variables:
+        - ARANGO_ENDPOINT: ArangoDB endpoint URL
+        - ARANGO_USERNAME: Database username  
+        - ARANGO_PASSWORD: Database password
+        - ARANGO_DATABASE: Database name
+        """
+        endpoint = os.getenv('ARANGO_ENDPOINT')
+        username = os.getenv('ARANGO_USERNAME') 
+        password = os.getenv('ARANGO_PASSWORD')
+        database_name = os.getenv('ARANGO_DATABASE')
+        
+        if not all([endpoint, username, password, database_name]):
+            raise ValueError(
+                "Missing required environment variables. Please set:\n"
+                "- ARANGO_ENDPOINT (e.g., https://your-cluster.arangodb.cloud:8529)\n"
+                "- ARANGO_USERNAME (e.g., root)\n" 
+                "- ARANGO_PASSWORD (your database password)\n"
+                "- ARANGO_DATABASE (e.g., network_assets_demo)"
+            )
+        
+        return DatabaseCredentials(
+            endpoint=endpoint,
+            username=username,
+            password=password,
+            database_name=database_name
+        )
     
     @classmethod
     def get_connection_string(cls, environment: str = "production") -> str:

@@ -1,0 +1,23 @@
+# ArangoDB Oasis Cluster Configuration
+# Set these environment variables before running the application
+
+# ArangoDB Oasis cluster endpoint
+export ARANGO_ENDPOINT=https://your-cluster-id.arangodb.cloud:8529
+
+# Database credentials
+export ARANGO_USERNAME=root
+export ARANGO_PASSWORD=your-secure-password-here
+
+# Database name
+export ARANGO_DATABASE=network_assets_demo
+
+# Example usage:
+# 1. Copy these lines to your shell or .bashrc/.zshrc
+# 2. Replace the values with your actual ArangoDB Oasis credentials
+# 3. Run: source ~/.bashrc (or restart your terminal)
+# 4. Verify: echo $ARANGO_ENDPOINT
+
+# Security Note:
+# - Never commit actual credentials to version control
+# - Use environment variables or secure credential management
+# - For production, consider using secrets management services

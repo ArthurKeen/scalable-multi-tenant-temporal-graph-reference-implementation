@@ -54,7 +54,7 @@ Comprehensive code quality analysis and improvements performed on the network as
 _OASIS_CREDENTIALS = DatabaseCredentials(
     endpoint="https://1d53cdf6fad0.arangodb.cloud:8529",  # ✅ Centralized
     username="root", 
-    password="GcZO9wNKLq9faIuIUgnY"
+    password="[ENVIRONMENT_VARIABLE]"
 )
 
 # test_suite.py - Appropriate for test fixtures

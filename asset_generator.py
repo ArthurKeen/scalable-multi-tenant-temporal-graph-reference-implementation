@@ -539,172 +539,35 @@ class TimeTravelRefactoredGenerator:
     
     def create_historical_entity_connections(self, devices: List[Dict], software: List[Dict], 
                                            connections: List[Dict], has_device_software: List[Dict]) -> List[Dict]:
-        """Create additional connections to make historical entities visible in graph visualization."""
-        self.logger.info("Creating visualization-friendly connections for historical entities")
+        """
+        REMOVED: Historical entity connections via hasConnection edges.
         
-        historical_connections = []
+        According to W3C OWL architecture, hasConnection should ONLY exist between 
+        DeviceProxyOut and DeviceProxyIn. Temporal relationships are handled by 
+        hasVersion edges, not hasConnection.
         
-        # Group devices and software by their base proxy keys
-        device_groups = {}
-        software_groups = {}
-        
-        for device in devices:
-            # Extract base key (remove version suffix)
-            base_key = device["_key"].rsplit("-", 1)[0]  # Remove "-0", "-1", etc.
-            if base_key not in device_groups:
-                device_groups[base_key] = []
-            device_groups[base_key].append(device)
-        
-        for software in software:
-            # Extract base key (remove version suffix)
-            base_key = software["_key"].rsplit("-", 1)[0]  # Remove "-0", "-1", etc.
-            if base_key not in software_groups:
-                software_groups[base_key] = []
-            software_groups[base_key].append(software)
-        
-        # Create connections between historical versions of the same entity
-        connection_count = len(connections)
-        
-        # Connect historical device versions in sequence
-        for base_key, device_list in device_groups.items():
-            if len(device_list) > 1:
-                # Sort by version number
-                device_list.sort(key=lambda d: int(d["_key"].split("-")[-1]))
-                
-                for i in range(len(device_list) - 1):
-                    current_device = device_list[i]
-                    next_device = device_list[i + 1]
-                    
-                    connection_key = KeyGenerator.generate_connection_key(
-                        self.tenant_config.tenant_id, connection_count + len(historical_connections) + 1
-                    )
-                    
-                    connection_attrs = {
-                        "connectionType": "temporal_sequence",
-                        "bandwidthCapacity": "N/A",
-                        "networkLatency": "0ms"
-                    }
-                    
-                    historical_connection = DocumentEnhancer.create_edge_document(
-                        key=connection_key,
-                        from_collection=self.app_config.get_collection_name("devices"),  # Device
-                        from_key=current_device["_key"],
-                        to_collection=self.app_config.get_collection_name("devices"),  # Device
-                        to_key=next_device["_key"],
-                        from_type="Device",
-                        to_type="Device",
-                        tenant_config=self.tenant_config,
-                        extra_attributes=connection_attrs
-                    )
-                    
-                    historical_connections.append(historical_connection)
-        
-        # Connect historical software versions in sequence
-        for base_key, software_list in software_groups.items():
-            if len(software_list) > 1:
-                # Sort by version number
-                software_list.sort(key=lambda s: int(s["_key"].split("-")[-1]))
-                
-                for i in range(len(software_list) - 1):
-                    current_software = software_list[i]
-                    next_software = software_list[i + 1]
-                    
-                    connection_key = KeyGenerator.generate_connection_key(
-                        self.tenant_config.tenant_id, connection_count + len(historical_connections) + 1
-                    )
-                    
-                    connection_attrs = {
-                        "connectionType": "temporal_sequence",
-                        "bandwidthCapacity": "N/A", 
-                        "networkLatency": "0ms"
-                    }
-                    
-                    historical_connection = DocumentEnhancer.create_edge_document(
-                        key=connection_key,
-                        from_collection=self.app_config.get_collection_name("software"),  # Software
-                        from_key=current_software["_key"],
-                        to_collection=self.app_config.get_collection_name("software"),  # Software
-                        to_key=next_software["_key"],
-                        from_type="Software",
-                        to_type="Software",
-                        tenant_config=self.tenant_config,
-                        extra_attributes=connection_attrs
-                    )
-                    
-                    historical_connections.append(historical_connection)
-        
-        self.logger.info(f"Created {len(historical_connections)} historical entity connections for visualization")
-        return historical_connections
+        Historical entities are connected through the proper hasVersion temporal 
+        relationship pattern: ProxyIn -> Entity -> ProxyOut
+        """
+        self.logger.info("Skipping historical hasConnection edges - using proper hasVersion temporal relationships")
+        return []  # Return empty list - no historical hasConnection edges
     
     def create_software_proxy_connections(self, software_proxy_ins: List[Dict], software_proxy_outs: List[Dict], 
                                         device_proxy_outs: List[Dict], existing_connections: List[Dict]) -> List[Dict]:
-        """Create hasConnection edges for software proxy entities to prevent orphaned appearance in visualization."""
-        self.logger.info("Creating visualization-friendly connections for software proxy entities")
+        """
+        REMOVED: Software proxy connections via hasConnection edges.
         
-        software_proxy_connections = []
-        connection_count = len(existing_connections)
+        According to W3C OWL architecture, hasConnection should ONLY exist between 
+        DeviceProxyOut and DeviceProxyIn. Software proxies are connected to the 
+        network through hasDeviceSoftware edges (DeviceProxyOut -> SoftwareProxyIn)
+        and temporal hasVersion relationships.
         
-        # Connect SoftwareProxyIn to SoftwareProxyOut (bidirectional software proxy network)
-        for i, proxy_in in enumerate(software_proxy_ins):
-            for j, proxy_out in enumerate(software_proxy_outs):
-                # Create some connections (not all-to-all to avoid too dense graph)
-                if i == j or (i + j) % 3 == 0:  # Connect matching indices and every 3rd combination
-                    
-                    connection_key = KeyGenerator.generate_connection_key(
-                        self.tenant_config.tenant_id, connection_count + len(software_proxy_connections) + 1
-                    )
-                    
-                    connection_attrs = {
-                        "connectionType": "software_proxy_network",
-                        "bandwidthCapacity": "1Gbps",
-                        "networkLatency": "1ms"
-                    }
-                    
-                    proxy_connection = DocumentEnhancer.create_edge_document(
-                        key=connection_key,
-                        from_collection=self.app_config.get_collection_name("software_ins"),  # SoftwareProxyIn
-                        from_key=proxy_in["_key"],
-                        to_collection=self.app_config.get_collection_name("software_outs"),  # SoftwareProxyOut
-                        to_key=proxy_out["_key"],
-                        from_type="SoftwareProxyIn",
-                        to_type="SoftwareProxyOut",
-                        tenant_config=self.tenant_config,
-                        extra_attributes=connection_attrs
-                    )
-                    
-                    software_proxy_connections.append(proxy_connection)
-        
-        # Connect some SoftwareProxyOut entities to DeviceProxyOut entities (cross-domain connections)
-        for i, software_proxy_out in enumerate(software_proxy_outs):
-            if i < len(device_proxy_outs):  # Connect to corresponding device proxy
-                device_proxy_out = device_proxy_outs[i]
-                
-                connection_key = KeyGenerator.generate_connection_key(
-                    self.tenant_config.tenant_id, connection_count + len(software_proxy_connections) + 1
-                )
-                
-                connection_attrs = {
-                    "connectionType": "cross_domain_proxy",
-                    "bandwidthCapacity": "100Mbps",
-                    "networkLatency": "5ms"
-                }
-                
-                cross_domain_connection = DocumentEnhancer.create_edge_document(
-                    key=connection_key,
-                    from_collection=self.app_config.get_collection_name("software_outs"),  # SoftwareProxyOut
-                    from_key=software_proxy_out["_key"],
-                    to_collection=self.app_config.get_collection_name("device_outs"),  # DeviceProxyOut
-                    to_key=device_proxy_out["_key"],
-                    from_type="SoftwareProxyOut",
-                    to_type="DeviceProxyOut",
-                    tenant_config=self.tenant_config,
-                    extra_attributes=connection_attrs
-                )
-                
-                software_proxy_connections.append(cross_domain_connection)
-        
-        self.logger.info(f"Created {len(software_proxy_connections)} software proxy connections for visualization")
-        return software_proxy_connections
+        Software entities don't need hasConnection edges - they're connected through:
+        1. hasDeviceSoftware: DeviceProxyOut -> SoftwareProxyIn 
+        2. hasVersion: SoftwareProxyIn -> Software -> SoftwareProxyOut
+        """
+        self.logger.info("Skipping software proxy hasConnection edges - using proper hasDeviceSoftware and hasVersion relationships")
+        return []  # Return empty list - no software proxy hasConnection edges
     
     # === MAIN GENERATION METHOD ===
     def generate_all_data(self) -> Dict[str, Any]:
@@ -723,13 +586,9 @@ class TimeTravelRefactoredGenerator:
         has_locations = self.generate_has_location_edges(device_proxy_outs, locations)
         has_device_software = self.generate_has_device_software_edges(device_proxy_outs, software_proxy_ins)
         
-        # VISUALIZATION FIX: Create connections for historical entities to prevent orphaned appearance
-        historical_connections = self.create_historical_entity_connections(devices, software, connections, has_device_software)
-        connections.extend(historical_connections)
-        
-        # VISUALIZATION FIX: Create connections for software proxy entities to prevent orphaned appearance
-        software_proxy_connections = self.create_software_proxy_connections(software_proxy_ins, software_proxy_outs, device_proxy_outs, connections)
-        connections.extend(software_proxy_connections)
+        # ARCHITECTURE COMPLIANCE: hasConnection edges only between DeviceProxyOut and DeviceProxyIn
+        # Historical entities connected via hasVersion edges (proper temporal relationships)
+        # Software entities connected via hasDeviceSoftware and hasVersion edges
         
         # Combine all version edges (unified collection)
         all_versions = device_versions + software_versions

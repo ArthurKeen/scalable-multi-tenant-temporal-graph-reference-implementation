@@ -243,23 +243,32 @@ python validation_suite.py
 
 ## 📊 Generated Data
 
-### Default Tenant Configuration
-- **Acme Corp** (1x scale): 525 documents
-- **Global Enterprises** (3x scale): 1,544 documents  
-- **StartupXYZ** (1x scale): 270 documents
-- **Total**: 2,339 documents across shared collections
+### Example Generated Graph Visualization
+
+The system generates complex multi-tenant network topologies with temporal relationships. Here's an example of the generated graph structure:
+
+![Network Asset Graph Visualization](https://github.com/user-attachments/assets/your-image-id-here)
+
+*Example visualization showing the multi-tenant network topology with device proxies (blue nodes) connected via hasConnection edges (physical network), software entities (purple nodes) connected via hasDeviceSoftware and hasVersion relationships, demonstrating proper W3C OWL semantic relationships.*
+
+### Current Tenant Configuration
+- **Acme Corp** (1x scale): 1,095 documents
+- **Global Enterprises** (2x scale): 2,190 documents  
+- **Total**: 3,285 documents across shared collections
 
 ### Document Distribution
 ```
-Device configurations:     528 (with temporal history)
-DeviceProxyIn entities:     88  (lightweight proxies)
-DeviceProxyOut entities:    88  (lightweight proxies)
-Location entities:          22  (GeoJSON coordinates)
-Software entities:         150  (with version history)
-Connection edges:          150  (network topology)
-Location edges:             88  (device placement)
-Software edges:            169  (software installations)
-Version edges:           1,056  (temporal relationships)
+Device configurations:     360 (with temporal history)
+DeviceProxyIn entities:     60  (lightweight proxies)
+DeviceProxyOut entities:    60  (lightweight proxies)
+Location entities:          15  (GeoJSON coordinates)
+Software entities:         540  (with version history)
+SoftwareProxyIn entities:   90  (lightweight proxies)
+SoftwareProxyOut entities:  90  (lightweight proxies)
+Connection edges:           90  (network topology - DeviceProxyOut → DeviceProxyIn)
+Location edges:             60  (device placement)
+Software edges:            120  (software installations)
+Version edges:           1,800  (temporal relationships)
 ```
 
 ## 🧪 Testing & Validation
@@ -269,55 +278,65 @@ Version edges:           1,056  (temporal relationships)
 python test_suite.py
 ```
 - **Total Tests**: 21
-- **Success Rate**: 81%
+- **Success Rate**: 100%
 - **Categories**: Configuration, Tenant Management, Data Generation, W3C OWL Compliance, File Management, Integration, Performance
 
 ### W3C OWL Validation
 ```bash
-python owlrdf_validation.py
+python validation_suite.py
 ```
 - **Collection Naming**: 100% compliant
 - **Property Naming**: 100% compliant  
 - **Relationship Modeling**: 100% compliant
 - **Semantic Correctness**: 100% compliant
 - **Tenant Isolation**: 100% verified
+- **hasConnection Architecture**: 100% compliant (DeviceProxyOut → DeviceProxyIn only)
 
 ## 📁 Project Structure
 
 ```
-├── corrected_owlrdf_generator.py    # Main W3C OWL compliant generator
-├── config_management.py             # Centralized configuration system
-├── tenant_config.py                 # Tenant modeling and utilities
-├── data_generation_config.py        # Generation parameters and constants
-├── data_generation_utils.py         # Reusable utility functions
-├── owlrdf_cluster_deployment.py     # ArangoDB Oasis deployment
-├── owlrdf_validation.py             # Comprehensive compliance validation
-├── test_suite.py                    # Complete test framework
-├── oasis_cluster_setup.py           # Core cluster management
+├── asset_generator.py              # Main W3C OWL compliant generator
+├── config_management.py            # Centralized configuration system
+├── tenant_config.py                # Tenant modeling and utilities
+├── data_generation_config.py       # Generation parameters and constants
+├── data_generation_utils.py        # Reusable utility functions
+├── database_deployment.py          # ArangoDB Oasis deployment
+├── validation_suite.py             # Comprehensive compliance validation
+├── test_suite.py                   # Complete test framework
+├── oasis_cluster_setup.py          # Core cluster management
+├── centralized_credentials.py      # Secure credential management
+├── database_utilities.py           # Database utility functions
 ├── docs/
-│   ├── PRD.md                       # Product Requirements Document
-│   └── CLAUDE.md                    # Development session notes
+│   ├── PRD.md                      # Product Requirements Document
+│   └── CLAUDE.md                   # Development session notes
 ├── data/
-│   ├── tenant_{id}/                 # Generated tenant data directories
-│   └── tenant_registry_corrected.json  # Tenant metadata registry
-├── logs/                            # Application logs
-├── reports/                         # Validation reports
-└── CORRECTIONS_VERIFICATION.md     # Corrections compliance report
+│   ├── tenant_{id}/                # Generated tenant data directories
+│   └── tenant_registry_time_travel.json  # Tenant metadata registry
+├── logs/                           # Application logs
+└── reports/                        # Validation reports
 ```
 
 ## 🔧 Configuration
 
-### Environment Variables
+### Environment Variables (Required)
+**⚠️ Security Notice**: Credentials are loaded from environment variables. Never commit credentials to version control.
+
 ```bash
+# Set these environment variables before running the application
 export ARANGO_ENDPOINT="https://your-cluster.arangodb.cloud:8529"
 export ARANGO_USERNAME="root"  
-export ARANGO_PASSWORD="your-password"
+export ARANGO_PASSWORD="your-secure-password"
 export ARANGO_DATABASE="network_assets_demo"
 ```
 
+**Setup Instructions:**
+1. Copy `environment_variables.example` and set your actual credentials
+2. Source the environment variables: `source environment_variables.example`
+3. Verify setup: `echo $ARANGO_ENDPOINT`
+
 ### Centralized Configuration
 All settings are managed through `config_management.py`:
-- Database credentials and connection parameters
+- Database credentials loaded from environment variables (secure)
 - W3C OWL collection name mappings
 - Generation limits and performance settings
 - Environment-specific configurations
@@ -357,18 +376,21 @@ All settings are managed through `config_management.py`:
 - **Comprehensive Testing**: Unit, integration, and compliance tests
 
 ### Recent Improvements
-- ✅ Collection naming: `DeviceIn` → `DeviceProxyIn`, `DeviceOut` → `DeviceProxyOut`
-- ✅ Property naming: `_observed_at` → `observedAt` throughout
-- ✅ Proxy collections: Removed unnecessary temporal attributes
-- ✅ Edge types: Updated `_fromType`/`_toType` references
-- ✅ Architecture: Centralized configuration management
+- ✅ **hasConnection Architecture**: Corrected to DeviceProxyOut → DeviceProxyIn only (W3C OWL compliant)
+- ✅ **Collection naming**: `DeviceIn` → `DeviceProxyIn`, `DeviceOut` → `DeviceProxyOut`
+- ✅ **Property naming**: `_observed_at` → `observedAt` throughout
+- ✅ **Proxy collections**: Removed unnecessary temporal attributes
+- ✅ **Edge types**: Updated `_fromType`/`_toType` references
+- ✅ **Architecture**: Centralized configuration management
+- ✅ **Code Quality**: Removed duplicate documentation, updated file references
+- ✅ **Database Compliance**: Verified W3C OWL semantic relationships
 
 ## 🤝 Contributing
 
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
 3. **Run** tests: `python test_suite.py`
-4. **Validate** compliance: `python owlrdf_validation.py`
+4. **Validate** compliance: `python validation_suite.py`
 5. **Commit** changes: `git commit -m 'Add amazing feature'`
 6. **Push** to branch: `git push origin feature/amazing-feature`
 7. **Open** a Pull Request
