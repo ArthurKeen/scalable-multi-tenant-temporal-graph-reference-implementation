@@ -636,6 +636,76 @@ class TimeTravelRefactoredGenerator:
         self.logger.info(f"Created {len(historical_connections)} historical entity connections for visualization")
         return historical_connections
     
+    def create_software_proxy_connections(self, software_proxy_ins: List[Dict], software_proxy_outs: List[Dict], 
+                                        device_proxy_outs: List[Dict], existing_connections: List[Dict]) -> List[Dict]:
+        """Create hasConnection edges for software proxy entities to prevent orphaned appearance in visualization."""
+        self.logger.info("Creating visualization-friendly connections for software proxy entities")
+        
+        software_proxy_connections = []
+        connection_count = len(existing_connections)
+        
+        # Connect SoftwareProxyIn to SoftwareProxyOut (bidirectional software proxy network)
+        for i, proxy_in in enumerate(software_proxy_ins):
+            for j, proxy_out in enumerate(software_proxy_outs):
+                # Create some connections (not all-to-all to avoid too dense graph)
+                if i == j or (i + j) % 3 == 0:  # Connect matching indices and every 3rd combination
+                    
+                    connection_key = KeyGenerator.generate_connection_key(
+                        self.tenant_config.tenant_id, connection_count + len(software_proxy_connections) + 1
+                    )
+                    
+                    connection_attrs = {
+                        "connectionType": "software_proxy_network",
+                        "bandwidthCapacity": "1Gbps",
+                        "networkLatency": "1ms"
+                    }
+                    
+                    proxy_connection = DocumentEnhancer.create_edge_document(
+                        key=connection_key,
+                        from_collection=self.app_config.get_collection_name("software_ins"),  # SoftwareProxyIn
+                        from_key=proxy_in["_key"],
+                        to_collection=self.app_config.get_collection_name("software_outs"),  # SoftwareProxyOut
+                        to_key=proxy_out["_key"],
+                        from_type="SoftwareProxyIn",
+                        to_type="SoftwareProxyOut",
+                        tenant_config=self.tenant_config,
+                        extra_attributes=connection_attrs
+                    )
+                    
+                    software_proxy_connections.append(proxy_connection)
+        
+        # Connect some SoftwareProxyOut entities to DeviceProxyOut entities (cross-domain connections)
+        for i, software_proxy_out in enumerate(software_proxy_outs):
+            if i < len(device_proxy_outs):  # Connect to corresponding device proxy
+                device_proxy_out = device_proxy_outs[i]
+                
+                connection_key = KeyGenerator.generate_connection_key(
+                    self.tenant_config.tenant_id, connection_count + len(software_proxy_connections) + 1
+                )
+                
+                connection_attrs = {
+                    "connectionType": "cross_domain_proxy",
+                    "bandwidthCapacity": "100Mbps",
+                    "networkLatency": "5ms"
+                }
+                
+                cross_domain_connection = DocumentEnhancer.create_edge_document(
+                    key=connection_key,
+                    from_collection=self.app_config.get_collection_name("software_outs"),  # SoftwareProxyOut
+                    from_key=software_proxy_out["_key"],
+                    to_collection=self.app_config.get_collection_name("device_outs"),  # DeviceProxyOut
+                    to_key=device_proxy_out["_key"],
+                    from_type="SoftwareProxyOut",
+                    to_type="DeviceProxyOut",
+                    tenant_config=self.tenant_config,
+                    extra_attributes=connection_attrs
+                )
+                
+                software_proxy_connections.append(cross_domain_connection)
+        
+        self.logger.info(f"Created {len(software_proxy_connections)} software proxy connections for visualization")
+        return software_proxy_connections
+    
     # === MAIN GENERATION METHOD ===
     def generate_all_data(self) -> Dict[str, Any]:
         """Generate complete time travel refactored network asset data."""
@@ -656,6 +726,10 @@ class TimeTravelRefactoredGenerator:
         # VISUALIZATION FIX: Create connections for historical entities to prevent orphaned appearance
         historical_connections = self.create_historical_entity_connections(devices, software, connections, has_device_software)
         connections.extend(historical_connections)
+        
+        # VISUALIZATION FIX: Create connections for software proxy entities to prevent orphaned appearance
+        software_proxy_connections = self.create_software_proxy_connections(software_proxy_ins, software_proxy_outs, device_proxy_outs, connections)
+        connections.extend(software_proxy_connections)
         
         # Combine all version edges (unified collection)
         all_versions = device_versions + software_versions
