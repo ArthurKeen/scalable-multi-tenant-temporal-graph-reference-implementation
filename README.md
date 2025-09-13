@@ -12,7 +12,7 @@ A comprehensive multi-tenant network asset management system built with ArangoDB
 
 ### W3C OWL Naming Conventions
 - **Vertex Collections** (PascalCase, singular): `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`
-- **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasSoftware`, `version`
+- **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `version`
 - **Property Naming** (camelCase): `deviceName`, `ipAddress`, `created`, `expired`, `firewallRules`
 - **RDF Triple Structure**: Subject-Predicate-Object relationships
 
@@ -97,39 +97,67 @@ version           # Unified time travel: Device & Software versioning (EXPANDED)
 ### Multi-Tenant Architecture
 
 ```mermaid
-graph LR
-    subgraph "Shared Database: network_assets_demo"
-        subgraph "Tenant A: SmartGraph Partition"
-            DA[Device<br/>tenant_A_attr: uuid_A]
-            DPIA[DeviceProxyIn<br/>tenant_A_attr: uuid_A]
-            DPOA[DeviceProxyOut<br/>tenant_A_attr: uuid_A]
+graph TB
+    subgraph "ArangoDB Oasis: network_assets_demo"
+        subgraph "Tenant A: Acme Corp (SmartGraph Partition)"
+            direction TB
+            DA[Device<br/>📱 Network devices<br/>tenant_A_attr: uuid_A]
+            DPIA[DeviceProxyIn<br/>📥 Input proxies<br/>tenant_A_attr: uuid_A]
+            DPOA[DeviceProxyOut<br/>📤 Output proxies<br/>tenant_A_attr: uuid_A]
+            SA[Software<br/>💿 Software installs<br/>tenant_A_attr: uuid_A]
+            SPIA[SoftwareProxyIn<br/>📥 Input proxies<br/>tenant_A_attr: uuid_A]
+            SPOA[SoftwareProxyOut<br/>📤 Output proxies<br/>tenant_A_attr: uuid_A]
+            LA[Location<br/>📍 Physical sites<br/>tenant_A_attr: uuid_A]
         end
         
-        subgraph "Tenant B: SmartGraph Partition"  
-            DB[Device<br/>tenant_B_attr: uuid_B]
-            DPIB[DeviceProxyIn<br/>tenant_B_attr: uuid_B]
-            DPOB[DeviceProxyOut<br/>tenant_B_attr: uuid_B]
+        subgraph "Tenant B: Global Enterprises (SmartGraph Partition)"  
+            direction TB
+            DB[Device<br/>📱 Network devices<br/>tenant_B_attr: uuid_B]
+            DPIB[DeviceProxyIn<br/>📥 Input proxies<br/>tenant_B_attr: uuid_B]
+            DPOB[DeviceProxyOut<br/>📤 Output proxies<br/>tenant_B_attr: uuid_B]
+            SB[Software<br/>💿 Software installs<br/>tenant_B_attr: uuid_B]
+            SPIB[SoftwareProxyIn<br/>📥 Input proxies<br/>tenant_B_attr: uuid_B]
+            SPOB[SoftwareProxyOut<br/>📤 Output proxies<br/>tenant_B_attr: uuid_B]
+            LB[Location<br/>📍 Physical sites<br/>tenant_B_attr: uuid_B]
         end
         
-        subgraph "Tenant C: SmartGraph Partition"
-            DC[Device<br/>tenant_C_attr: uuid_C]
-            DPIC[DeviceProxyIn<br/>tenant_C_attr: uuid_C]  
-            DPOC[DeviceProxyOut<br/>tenant_C_attr: uuid_C]
+        subgraph "Shared Collections (Logically Separated)"
+            VC[version<br/>🔄 Unified time travel<br/>All tenant version edges]
+            HC[hasConnection<br/>🔗 Network links<br/>Tenant-isolated edges]
+            HL[hasLocation<br/>🏢 Device placement<br/>Tenant-isolated edges]
+            HDS[hasDeviceSoftware<br/>💻 Device→Software<br/>Tenant-isolated edges]
         end
     end
     
-    %% Tenant isolation
-    DPOA -.->|hasConnection<br/>Isolated by tenant_attr| DPIA
-    DPOB -.->|hasConnection<br/>Isolated by tenant_attr| DPIB  
-    DPOC -.->|hasConnection<br/>Isolated by tenant_attr| DPIC
+    %% Tenant A relationships (corrected logic)
+    DPOA -.->|hasConnection<br/>Isolated by tenant_A_attr| DPIA
+    DPOA -.->|hasLocation<br/>Isolated by tenant_A_attr| LA
+    DPOA -.->|hasDeviceSoftware<br/>CORRECTED: Out→In<br/>Isolated by tenant_A_attr| SPIA
     
-    classDef tenantA fill:#ffebee,stroke:#c62828
-    classDef tenantB fill:#e8f5e8,stroke:#2e7d32
-    classDef tenantC fill:#e3f2fd,stroke:#1565c0
+    %% Tenant B relationships (corrected logic)
+    DPOB -.->|hasConnection<br/>Isolated by tenant_B_attr| DPIB
+    DPOB -.->|hasLocation<br/>Isolated by tenant_B_attr| LB  
+    DPOB -.->|hasDeviceSoftware<br/>CORRECTED: Out→In<br/>Isolated by tenant_B_attr| SPIB
     
-    class DA,DPIA,DPOA tenantA
-    class DB,DPIB,DPOB tenantB
-    class DC,DPIC,DPOC tenantC
+    %% Time travel patterns (unified version collection)
+    DPIA -.->|version<br/>Time travel| DA
+    DA -.->|version<br/>Time travel| DPOA
+    SPIA -.->|version<br/>Time travel| SA
+    SA -.->|version<br/>Time travel| SPOA
+    
+    DPIB -.->|version<br/>Time travel| DB
+    DB -.->|version<br/>Time travel| DPOB
+    SPIB -.->|version<br/>Time travel| SB
+    SB -.->|version<br/>Time travel| SPOB
+    
+    classDef tenantA fill:#ffebee,stroke:#c62828,stroke-width:3px
+    classDef tenantB fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
+    classDef shared fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef corrected fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+    
+    class DA,DPIA,DPOA,SA,SPIA,SPOA,LA tenantA
+    class DB,DPIB,DPOB,SB,SPIB,SPOB,LB tenantB
+    class VC,HC,HL,HDS shared
 ```
 
 ### Key Design Patterns
