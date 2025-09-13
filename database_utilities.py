@@ -46,12 +46,12 @@ class DatabaseConnectionManager:
         """Connect to database and test connection."""
         try:
             version_info = self.database.version()
-            print(f"✅ Connected to {self.creds.database_name}")
+            print(f"[DONE] Connected to {self.creds.database_name}")
             if isinstance(version_info, dict):
                 print(f"   Version: {version_info.get('version', 'Unknown')}")
             return True
         except Exception as e:
-            print(f"❌ Connection failed: {str(e)}")
+            print(f"[ERROR] Connection failed: {str(e)}")
             return False
     
     def execute_aql(self, query: str, bind_vars: Optional[Dict] = None) -> List[Dict]:
@@ -59,7 +59,7 @@ class DatabaseConnectionManager:
         try:
             return list(self.database.aql.execute(query, bind_vars=bind_vars or {}))
         except Exception as e:
-            print(f"❌ Query failed: {str(e)}")
+            print(f"[ERROR] Query failed: {str(e)}")
             return []
     
     def get_collection(self, logical_name: str):
@@ -154,7 +154,7 @@ class FileUtility:
             with open(file_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except Exception as e:
-            print(f"❌ Error reading {file_path}: {e}")
+            print(f"[ERROR] Error reading {file_path}: {e}")
             return {}
     
     @staticmethod
@@ -166,7 +166,7 @@ class FileUtility:
                 json.dump(data, f, indent=indent)
             return True
         except Exception as e:
-            print(f"❌ Error writing {file_path}: {e}")
+            print(f"[ERROR] Error writing {file_path}: {e}")
             return False
     
     @staticmethod
@@ -212,7 +212,7 @@ class ValidationHelper:
                 "collection_name": collection_name
             }
             
-            status = "✅" if exists else "❌"
+            status = "[DONE]" if exists else "[ERROR]"
             print(f"   {status} {collection_name}: {count} documents")
         
         return results
@@ -271,7 +271,7 @@ def run_quick_validation(environment: str = "production") -> Dict[str, Any]:
     
     validator = ValidationHelper(db_manager)
     
-    print("\n🔍 Quick Database Validation:")
+    print("\n[ANALYSIS] Quick Database Validation:")
     collection_results = validator.validate_collection_structure()
     
     # Check version collection specifically

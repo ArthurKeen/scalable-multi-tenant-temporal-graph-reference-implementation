@@ -620,13 +620,13 @@ class TimeTravelRefactoredGenerator:
         total_documents = sum(len(data) for data in data_collections.values())
         self.logger.info(f"Completed time travel refactored data generation: {total_documents} total documents")
         
-        print(f"✅ Generated {total_documents} time travel refactored documents")
+        print(f"[DONE] Generated {total_documents} time travel refactored documents")
         print(f"   Device entities: {len(devices)} devices, {len(device_proxy_ins)} DeviceProxyIn, {len(device_proxy_outs)} DeviceProxyOut")
         print(f"   Software entities: {len(software)} software, {len(software_proxy_ins)} SoftwareProxyIn, {len(software_proxy_outs)} SoftwareProxyOut")
         print(f"   Location entities: {len(locations)} locations")
         print(f"   Relationship edges: {len(connections)} hasConnection, {len(has_locations)} hasLocation, {len(has_device_software)} hasDeviceSoftware")
         print(f"   Version edges: {len(all_versions)} version (unified - {len(device_versions)} device + {len(software_versions)} software)")
-        print(f"   🔄 Consistent time travel pattern: Generic 'version' collection for all entities")
+        print(f"   -> Consistent time travel pattern: Generic 'version' collection for all entities")
         
         return {
             "tenant_config": self.tenant_config,
@@ -639,13 +639,13 @@ class TimeTravelRefactoredGenerator:
 def generate_time_travel_refactored_demo(environment: str = "production"):
     """Generate time travel refactored multi-tenant demo."""
     
-    print("🔄 Time Travel Refactored Multi-Tenant Generation")
+    print("Time Travel Refactored Multi-Tenant Generation")
     print("=" * 60)
-    print("📋 Time travel patterns:")
-    print("   • Device: DeviceProxyIn ⟷ Device ⟷ DeviceProxyOut")
-    print("   • Software: SoftwareProxyIn ⟷ Software ⟷ SoftwareProxyOut (NEW)")
-    print("   • Generic 'version' collection for all time travel relationships")
-    print("   • Consistent temporal queries across all entities")
+    print("Time travel patterns:")
+    print("   - Device: DeviceProxyIn <-> Device <-> DeviceProxyOut")
+    print("   - Software: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)")
+    print("   - Generic 'version' collection for all time travel relationships")
+    print("   - Consistent temporal queries across all entities")
     print()
     
     app_config = get_config(environment)
@@ -712,15 +712,15 @@ def generate_time_travel_refactored_demo(environment: str = "production"):
     with open(registry_path, "w") as f:
         json.dump(tenant_registry, f, indent=2)
     
-    print(f"\n🎉 Time travel refactored generation completed!")
-    print(f"📊 Generated {total_documents} documents across {len(tenant_configs)} tenants")
-    print(f"📁 Registry: {registry_path}")
-    print(f"🔄 Time Travel: Consistent pattern across Device and Software")
-    print(f"📝 Software: Removed configurationHistory array, now uses version edges")
+    print(f"\n[SUCCESS] Time travel refactored generation completed!")
+    print(f"[DATA] Generated {total_documents} documents across {len(tenant_configs)} tenants")
+    print(f" Registry: {registry_path}")
+    print(f"-> Time Travel: Consistent pattern across Device and Software")
+    print(f"[EDIT] Software: Removed configurationHistory array, now uses version edges")
     
     return results
 
 
 if __name__ == "__main__":
     results = generate_time_travel_refactored_demo()
-    print(f"\n✅ Ready for time travel refactored deployment!")
+    print(f"\n[DONE] Ready for time travel refactored deployment!")

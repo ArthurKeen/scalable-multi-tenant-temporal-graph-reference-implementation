@@ -36,15 +36,15 @@ class TimeTravelValidationSuite:
             creds = CredentialsManager.get_database_credentials()
             self.database = self.client.db(creds.database_name, **CredentialsManager.get_database_params())
             version_info = self.database.version()
-            print(f"✅ Connected to {creds.database_name}")
+            print(f"[DONE] Connected to {creds.database_name}")
             return True
         except Exception as e:
-            print(f"❌ Connection failed: {str(e)}")
+            print(f"[ERROR] Connection failed: {str(e)}")
             return False
     
     def validate_collection_structure(self) -> bool:
         """Validate that all required collections exist with correct structure."""
-        print(f"\n🔍 Validating Collection Structure...")
+        print(f"\n[ANALYSIS] Validating Collection Structure...")
         
         try:
             # Expected collections after refactoring
@@ -63,21 +63,21 @@ class TimeTravelValidationSuite:
                 if self.database.has_collection(collection_name):
                     collection = self.database.collection(collection_name)
                     count = collection.count()
-                    print(f"   ✅ {collection_name}: {count} documents")
+                    print(f"   [DONE] {collection_name}: {count} documents")
                     
                     # Validate new Software proxy collections have correct structure
                     if collection_name in ["SoftwareProxyIn", "SoftwareProxyOut"]:
                         sample = collection.all(limit=1)
                         for doc in sample:
                             if "configurationHistory" in doc:
-                                print(f"   ❌ {collection_name} has configurationHistory (should not)")
+                                print(f"   [ERROR] {collection_name} has configurationHistory (should not)")
                                 return False
                             if "created" in doc or "expired" in doc:
-                                print(f"   ❌ {collection_name} has temporal data (should not)")
+                                print(f"   [ERROR] {collection_name} has temporal data (should not)")
                                 return False
-                            print(f"   ✅ {collection_name} structure correct (no temporal data)")
+                            print(f"   [DONE] {collection_name} structure correct (no temporal data)")
                 else:
-                    print(f"   ❌ Missing collection: {collection_name}")
+                    print(f"   [ERROR] Missing collection: {collection_name}")
                     return False
             
             # Validate edge collections
@@ -85,21 +85,21 @@ class TimeTravelValidationSuite:
                 if self.database.has_collection(collection_name):
                     collection = self.database.collection(collection_name)
                     count = collection.count()
-                    print(f"   ✅ {collection_name}: {count} documents")
+                    print(f"   [DONE] {collection_name}: {count} documents")
                 else:
-                    print(f"   ❌ Missing edge collection: {collection_name}")
+                    print(f"   [ERROR] Missing edge collection: {collection_name}")
                     return False
             
-            print(f"✅ Collection structure validation passed")
+            print(f"[DONE] Collection structure validation passed")
             return True
             
         except Exception as e:
-            print(f"❌ Collection structure validation failed: {str(e)}")
+            print(f"[ERROR] Collection structure validation failed: {str(e)}")
             return False
     
     def validate_software_refactoring(self) -> bool:
         """Validate that Software collection is properly refactored."""
-        print(f"\n🔍 Validating Software Refactoring...")
+        print(f"\n[ANALYSIS] Validating Software Refactoring...")
         
         try:
             software_collection = self.database.collection("Software")
@@ -112,29 +112,29 @@ class TimeTravelValidationSuite:
             for doc in samples:
                 if "configurationHistory" in doc:
                     old_structure_count += 1
-                    print(f"   ❌ Document {doc['_key']} still has configurationHistory")
+                    print(f"   [ERROR] Document {doc['_key']} still has configurationHistory")
                 else:
                     refactored_count += 1
                     # Check for flattened configuration
                     if "portNumber" in doc and "isEnabled" in doc:
-                        print(f"   ✅ Document {doc['_key']} has flattened configuration")
+                        print(f"   [DONE] Document {doc['_key']} has flattened configuration")
                     else:
-                        print(f"   ⚠️  Document {doc['_key']} missing flattened config attributes")
+                        print(f"   [WARNING]  Document {doc['_key']} missing flattened config attributes")
             
             if old_structure_count > 0:
-                print(f"❌ Software refactoring incomplete: {old_structure_count} documents still have old structure")
+                print(f"[ERROR] Software refactoring incomplete: {old_structure_count} documents still have old structure")
                 return False
             
-            print(f"✅ Software refactoring validation passed: {refactored_count} documents correctly refactored")
+            print(f"[DONE] Software refactoring validation passed: {refactored_count} documents correctly refactored")
             return True
             
         except Exception as e:
-            print(f"❌ Software refactoring validation failed: {str(e)}")
+            print(f"[ERROR] Software refactoring validation failed: {str(e)}")
             return False
     
     def validate_unified_version_collection(self) -> bool:
         """Validate that hasVersion collection handles both Device and Software."""
-        print(f"\n🔍 Validating Unified HasVersion Collection...")
+        print(f"\n[ANALYSIS] Validating Unified HasVersion Collection...")
         
         try:
             version_collection = self.database.collection("hasVersion")
@@ -149,16 +149,16 @@ class TimeTravelValidationSuite:
             
             total_versions = version_collection.count()
             
-            print(f"   📊 Device version edges: {device_versions} (in) + {device_out_versions} (out)")
-            print(f"   📊 Software version edges: {software_versions} (in) + {software_out_versions} (out)")
-            print(f"   📊 Total version edges: {total_versions}")
+            print(f"   [DATA] Device version edges: {device_versions} (in) + {device_out_versions} (out)")
+            print(f"   [DATA] Software version edges: {software_versions} (in) + {software_out_versions} (out)")
+            print(f"   [DATA] Total version edges: {total_versions}")
             
             if software_versions == 0:
-                print(f"   ❌ No software version edges found")
+                print(f"   [ERROR] No software version edges found")
                 return False
             
             if device_versions == 0:
-                print(f"   ❌ No device version edges found")
+                print(f"   [ERROR] No device version edges found")
                 return False
             
             # Validate version edge structure
@@ -167,21 +167,21 @@ class TimeTravelValidationSuite:
                 required_fields = ["_from", "_to", "_fromType", "_toType", "created", "expired"]
                 for field in required_fields:
                     if field not in version:
-                        print(f"   ❌ Version edge {version['_key']} missing field: {field}")
+                        print(f"   [ERROR] Version edge {version['_key']} missing field: {field}")
                         return False
                 
-                print(f"   ✅ Version edge {version['_key']}: {version['_fromType']} → {version['_toType']}")
+                print(f"   [DONE] Version edge {version['_key']}: {version['_fromType']} → {version['_toType']}")
             
-            print(f"✅ Unified hasVersion collection validation passed")
+            print(f"[DONE] Unified hasVersion collection validation passed")
             return True
             
         except Exception as e:
-            print(f"❌ Unified version collection validation failed: {str(e)}")
+            print(f"[ERROR] Unified version collection validation failed: {str(e)}")
             return False
     
     def validate_time_travel_queries(self) -> bool:
         """Validate that time travel queries work correctly for both Device and Software."""
-        print(f"\n🔍 Validating Time Travel Queries...")
+        print(f"\n[ANALYSIS] Validating Time Travel Queries...")
         
         try:
             # Test point-in-time query for devices
@@ -201,9 +201,9 @@ class TimeTravelValidationSuite:
             point_in_time = datetime.datetime.now().timestamp()
             device_results = list(self.database.aql.execute(device_query, bind_vars={"point_in_time": point_in_time}))
             
-            print(f"   📊 Device time travel query returned {len(device_results)} results")
+            print(f"   [DATA] Device time travel query returned {len(device_results)} results")
             for result in device_results[:3]:
-                print(f"      ✅ Device: {result['name']} (created: {result['created']})")
+                print(f"      [DONE] Device: {result['name']} (created: {result['created']})")
             
             # Test point-in-time query for software
             software_query = """
@@ -223,9 +223,9 @@ class TimeTravelValidationSuite:
             
             software_results = list(self.database.aql.execute(software_query, bind_vars={"point_in_time": point_in_time}))
             
-            print(f"   📊 Software time travel query returned {len(software_results)} results")
+            print(f"   [DATA] Software time travel query returned {len(software_results)} results")
             for result in software_results[:3]:
-                print(f"      ✅ Software: {result['name']} (port: {result['port']}, enabled: {result['enabled']})")
+                print(f"      [DONE] Software: {result['name']} (port: {result['port']}, enabled: {result['enabled']})")
             
             # Test unified time travel query
             unified_query = """
@@ -242,25 +242,25 @@ class TimeTravelValidationSuite:
             
             unified_results = list(self.database.aql.execute(unified_query, bind_vars={"point_in_time": point_in_time}))
             
-            print(f"   📊 Unified version query returned {len(unified_results)} results")
+            print(f"   [DATA] Unified version query returned {len(unified_results)} results")
             device_count = sum(1 for r in unified_results if r['fromType'] == 'DeviceProxyIn')
             software_count = sum(1 for r in unified_results if r['fromType'] == 'SoftwareProxyIn')
-            print(f"      📈 Device versions: {device_count}, Software versions: {software_count}")
+            print(f"      [METRICS] Device versions: {device_count}, Software versions: {software_count}")
             
             if len(device_results) == 0 or len(software_results) == 0:
-                print(f"   ❌ Time travel queries returned no results")
+                print(f"   [ERROR] Time travel queries returned no results")
                 return False
             
-            print(f"✅ Time travel queries validation passed")
+            print(f"[DONE] Time travel queries validation passed")
             return True
             
         except Exception as e:
-            print(f"❌ Time travel queries validation failed: {str(e)}")
+            print(f"[ERROR] Time travel queries validation failed: {str(e)}")
             return False
     
     def validate_cross_entity_relationships(self) -> bool:
         """Validate cross-entity relationships (Device → Software)."""
-        print(f"\n🔍 Validating Cross-Entity Relationships...")
+        print(f"\n[ANALYSIS] Validating Cross-Entity Relationships...")
         
         try:
             # Test Device → Software relationship query (corrected logical flow)
@@ -294,36 +294,36 @@ class TimeTravelValidationSuite:
             
             cross_results = list(self.database.aql.execute(cross_entity_query))
             
-            print(f"   📊 Cross-entity query returned {len(cross_results)} relationships")
+            print(f"   [DATA] Cross-entity query returned {len(cross_results)} relationships")
             for result in cross_results[:5]:
-                print(f"      ✅ {result['device']} → {result['software']} (port: {result['softwarePort']})")
+                print(f"      [DONE] {result['device']} → {result['software']} (port: {result['softwarePort']})")
                 print(f"         Flow: {result['flow']}")
             
             # Validate hasDeviceSoftware collection exists and has data
             has_device_software = self.database.collection("hasDeviceSoftware")
             relationship_count = has_device_software.count()
-            print(f"   📊 hasDeviceSoftware edges: {relationship_count}")
+            print(f"   [DATA] hasDeviceSoftware edges: {relationship_count}")
             
             if relationship_count == 0:
-                print(f"   ❌ No hasDeviceSoftware relationships found")
+                print(f"   [ERROR] No hasDeviceSoftware relationships found")
                 return False
             
             # Sample relationship structure
             sample_relationship = has_device_software.all(limit=1)
             for rel in sample_relationship:
-                print(f"      ✅ Sample relationship: {rel['_from']} → {rel['_to']}")
+                print(f"      [DONE] Sample relationship: {rel['_from']} → {rel['_to']}")
                 print(f"         Types: {rel['_fromType']} → {rel['_toType']}")
             
-            print(f"✅ Cross-entity relationships validation passed")
+            print(f"[DONE] Cross-entity relationships validation passed")
             return True
             
         except Exception as e:
-            print(f"❌ Cross-entity relationships validation failed: {str(e)}")
+            print(f"[ERROR] Cross-entity relationships validation failed: {str(e)}")
             return False
     
     def validate_performance_improvements(self) -> bool:
         """Validate performance improvements from refactoring."""
-        print(f"\n🔍 Validating Performance Improvements...")
+        print(f"\n[ANALYSIS] Validating Performance Improvements...")
         
         try:
             # Test new flattened software query performance
@@ -346,7 +346,7 @@ class TimeTravelValidationSuite:
             end_time = datetime.datetime.now()
             query_duration = (end_time - start_time).total_seconds()
             
-            print(f"   📊 Simple software query: {len(results)} results in {query_duration:.4f} seconds")
+            print(f"   [DATA] Simple software query: {len(results)} results in {query_duration:.4f} seconds")
             
             # Test index usage on version collection
             version_index_query = """
@@ -361,50 +361,50 @@ class TimeTravelValidationSuite:
             end_time = datetime.datetime.now()
             version_duration = (end_time - start_time).total_seconds()
             
-            print(f"   📊 Version index query: {len(version_results)} results in {version_duration:.4f} seconds")
+            print(f"   [DATA] Version index query: {len(version_results)} results in {version_duration:.4f} seconds")
             
             # Validate query performance is reasonable (under 1 second for typical datasets)
             if query_duration > 1.0:
-                print(f"   ⚠️  Software query duration seems high: {query_duration:.4f} seconds")
+                print(f"   [WARNING]  Software query duration seems high: {query_duration:.4f} seconds")
             else:
-                print(f"   ✅ Software query performance acceptable")
+                print(f"   [DONE] Software query performance acceptable")
             
             if version_duration > 1.0:
-                print(f"   ⚠️  Version query duration seems high: {version_duration:.4f} seconds")
+                print(f"   [WARNING]  Version query duration seems high: {version_duration:.4f} seconds")
             else:
-                print(f"   ✅ Version query performance acceptable")
+                print(f"   [DONE] Version query performance acceptable")
             
-            print(f"✅ Performance validation completed")
+            print(f"[DONE] Performance validation completed")
             return True
             
         except Exception as e:
-            print(f"❌ Performance validation failed: {str(e)}")
+            print(f"[ERROR] Performance validation failed: {str(e)}")
             return False
     
     def validate_data_consistency(self) -> bool:
         """Validate data consistency between proxy and versioned collections."""
-        print(f"\n🔍 Validating Data Consistency...")
+        print(f"\n[ANALYSIS] Validating Data Consistency...")
         
         try:
             # Check Device proxy → Device consistency
             device_proxy_count = self.database.collection("DeviceProxyIn").count()
             device_version_edges = self.database.collection("hasVersion").find({"_fromType": "DeviceProxyIn"}).count()
             
-            print(f"   📊 DeviceProxyIn: {device_proxy_count}, Device version edges: {device_version_edges}")
+            print(f"   [DATA] DeviceProxyIn: {device_proxy_count}, Device version edges: {device_version_edges}")
             
             # Check Software proxy → Software consistency
             software_proxy_count = self.database.collection("SoftwareProxyIn").count()
             software_version_edges = self.database.collection("hasVersion").find({"_fromType": "SoftwareProxyIn"}).count()
             
-            print(f"   📊 SoftwareProxyIn: {software_proxy_count}, Software version edges: {software_version_edges}")
+            print(f"   [DATA] SoftwareProxyIn: {software_proxy_count}, Software version edges: {software_version_edges}")
             
             # Validate each proxy has at least one version
             if device_proxy_count > 0 and device_version_edges == 0:
-                print(f"   ❌ Device proxies exist but no version edges found")
+                print(f"   [ERROR] Device proxies exist but no version edges found")
                 return False
             
             if software_proxy_count > 0 and software_version_edges == 0:
-                print(f"   ❌ Software proxies exist but no version edges found")
+                print(f"   [ERROR] Software proxies exist but no version edges found")
                 return False
             
             # Check tenant isolation consistency
@@ -414,29 +414,29 @@ class TimeTravelValidationSuite:
             for device in sample_device:
                 tenant_attr = [key for key in device.keys() if key.startswith('tenant_') and key.endswith('_attr')]
                 if not tenant_attr:
-                    print(f"   ❌ Device {device['_key']} missing tenant attribute")
+                    print(f"   [ERROR] Device {device['_key']} missing tenant attribute")
                     return False
-                print(f"   ✅ Device {device['_key']} has tenant attribute: {tenant_attr[0]}")
+                print(f"   [DONE] Device {device['_key']} has tenant attribute: {tenant_attr[0]}")
             
             for software in sample_software:
                 tenant_attr = [key for key in software.keys() if key.startswith('tenant_') and key.endswith('_attr')]
                 if not tenant_attr:
-                    print(f"   ❌ Software {software['_key']} missing tenant attribute")
+                    print(f"   [ERROR] Software {software['_key']} missing tenant attribute")
                     return False
-                print(f"   ✅ Software {software['_key']} has tenant attribute: {tenant_attr[0]}")
+                print(f"   [DONE] Software {software['_key']} has tenant attribute: {tenant_attr[0]}")
             
-            print(f"✅ Data consistency validation passed")
+            print(f"[DONE] Data consistency validation passed")
             return True
             
         except Exception as e:
-            print(f"❌ Data consistency validation failed: {str(e)}")
+            print(f"[ERROR] Data consistency validation failed: {str(e)}")
             return False
     
     def run_comprehensive_validation(self) -> Dict[str, bool]:
         """Run all validation tests and return results."""
-        print("🧪 Network Asset Management Validation Suite")
+        print("[TEST] Network Asset Management Validation Suite")
         print("=" * 60)
-        print("🔍 Validating multi-tenant time travel implementation:")
+        print("[ANALYSIS] Validating multi-tenant time travel implementation:")
         print("   • Software time travel pattern")
         print("   • Unified version collection")
         print("   • Cross-entity relationships")
@@ -461,30 +461,30 @@ class TimeTravelValidationSuite:
         results = {"connection": True}
         
         for test_name, test_function in tests:
-            print(f"\n🔄 Running {test_name} validation...")
+            print(f"\n-> Running {test_name} validation...")
             try:
                 result = test_function()
                 results[test_name.lower().replace(" ", "_")] = result
                 if result:
-                    print(f"✅ {test_name} validation PASSED")
+                    print(f"[DONE] {test_name} validation PASSED")
                 else:
-                    print(f"❌ {test_name} validation FAILED")
+                    print(f"[ERROR] {test_name} validation FAILED")
             except Exception as e:
-                print(f"❌ {test_name} validation ERROR: {str(e)}")
+                print(f"[ERROR] {test_name} validation ERROR: {str(e)}")
                 results[test_name.lower().replace(" ", "_")] = False
         
         # Summary
         passed_count = sum(1 for result in results.values() if result)
         total_count = len(results)
         
-        print(f"\n🎯 Validation Summary:")
+        print(f"\n[TARGET] Validation Summary:")
         print(f"   Passed: {passed_count}/{total_count} tests")
         
         if passed_count == total_count:
-            print(f"🎉 All validations PASSED! Multi-tenant time travel is working correctly.")
+            print(f"[SUCCESS] All validations PASSED! Multi-tenant time travel is working correctly.")
         else:
             failed_tests = [test for test, result in results.items() if not result]
-            print(f"❌ Failed tests: {', '.join(failed_tests)}")
+            print(f"[ERROR] Failed tests: {', '.join(failed_tests)}")
         
         return results
 
@@ -507,14 +507,14 @@ def main():
             }
         }, f, indent=2)
     
-    print(f"\n📁 Validation results saved to: {results_file}")
+    print(f"\n Validation results saved to: {results_file}")
     
     # Exit with appropriate code
     if all(results.values()):
-        print(f"✅ Network asset management validation completed successfully!")
+        print(f"[DONE] Network asset management validation completed successfully!")
         sys.exit(0)
     else:
-        print(f"❌ Network asset management validation failed!")
+        print(f"[ERROR] Network asset management validation failed!")
         sys.exit(1)
 
 

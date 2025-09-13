@@ -1,10 +1,10 @@
-# 🔄 Additional Property Standardization Update
+# -> Additional Property Standardization Update
 
-## 📋 Overview
+## [INFO] Overview
 
 Completed additional property standardization to make the data even more visualizer-friendly by removing remaining prefixes and using more intuitive property names.
 
-## ✅ Changes Made
+## [DONE] Changes Made
 
 ### **1. Software Collections - Version Property**
 **Before:**
@@ -12,7 +12,7 @@ Completed additional property standardization to make the data even more visuali
 {
   "name": "Acme Corp PostgreSQL",
   "type": "database", 
-  "softwareVersion": "PostgreSQL 15.2"  // ❌ Prefixed
+  "softwareVersion": "PostgreSQL 15.2"  // [ERROR] Prefixed
 }
 ```
 
@@ -21,7 +21,7 @@ Completed additional property standardization to make the data even more visuali
 {
   "name": "Acme Corp PostgreSQL",
   "type": "database",
-  "version": "PostgreSQL 15.2"  // ✅ Generic
+  "version": "PostgreSQL 15.2"  // [DONE] Generic
 }
 ```
 
@@ -31,7 +31,7 @@ Completed additional property standardization to make the data even more visuali
 {
   "name": "Acme Corp server Server Model 123",
   "type": "server",
-  "deviceModel": "Server Model 123"  // ❌ Prefixed
+  "deviceModel": "Server Model 123"  // [ERROR] Prefixed
 }
 ```
 
@@ -40,52 +40,52 @@ Completed additional property standardization to make the data even more visuali
 {
   "name": "Acme Corp server Server Model 123", 
   "type": "server",
-  "model": "Server Model 123"  // ✅ Generic
+  "model": "Server Model 123"  // [DONE] Generic
 }
 ```
 
 ### **3. Edge Collection - Semantic Naming**
 **Before:**
 ```
-version  // ❌ Too generic, could be confused with property
+version  // [ERROR] Too generic, could be confused with property
 ```
 
 **After:**
 ```
-hasVersion  // ✅ Clear semantic relationship (W3C OWL compliant)
+hasVersion  // [DONE] Clear semantic relationship (W3C OWL compliant)
 ```
 
-## 🔧 Files Updated
+## [CONFIG] Files Updated
 
 ### **Core Generator (`asset_generator.py`)**
-- ✅ `deviceModel` → `model` in Device collections
-- ✅ `softwareVersion` → `version` in Software and SoftwareProxy collections
-- ✅ Updated all references to use new property names
+- [DONE] `deviceModel` → `model` in Device collections
+- [DONE] `softwareVersion` → `version` in Software and SoftwareProxy collections
+- [DONE] Updated all references to use new property names
 
 ### **Configuration Management (`config_management.py`)**
-- ✅ Updated collection name mapping: `"versions": "hasVersion"`
-- ✅ Updated file mapping: `"hasVersion": "hasVersion.json"`
+- [DONE] Updated collection name mapping: `"versions": "hasVersion"`
+- [DONE] Updated file mapping: `"hasVersion": "hasVersion.json"`
 
 ### **Database Deployment (`database_deployment.py`)**
-- ✅ Updated collection creation: `{"name": "hasVersion", "type": "edge"}`
-- ✅ Updated all index definitions to use `hasVersion`
-- ✅ Updated SmartGraph edge definitions
-- ✅ Updated verification queries
+- [DONE] Updated collection creation: `{"name": "hasVersion", "type": "edge"}`
+- [DONE] Updated all index definitions to use `hasVersion`
+- [DONE] Updated SmartGraph edge definitions
+- [DONE] Updated verification queries
 
 ### **Validation Suite (`validation_suite.py`)**
-- ✅ Updated expected collections list to include `hasVersion`
-- ✅ Updated all AQL queries to use `hasVersion` collection
-- ✅ Updated cross-entity relationship traversals
-- ✅ Updated performance test queries
+- [DONE] Updated expected collections list to include `hasVersion`
+- [DONE] Updated all AQL queries to use `hasVersion` collection
+- [DONE] Updated cross-entity relationship traversals
+- [DONE] Updated performance test queries
 
 ### **Data Generation Config (`data_generation_config.py`)**
-- ✅ Updated FILE_NAMES mapping: `"versions": "hasVersion.json"`
+- [DONE] Updated FILE_NAMES mapping: `"versions": "hasVersion.json"`
 
 ### **Documentation Updates**
-- ✅ `README.md`: Updated edge collections and property examples
-- ✅ `graph_model_diagram.md`: Updated collection tables and edge definitions
+- [DONE] `README.md`: Updated edge collections and property examples
+- [DONE] `graph_model_diagram.md`: Updated collection tables and edge definitions
 
-## 📊 Current Property Structure
+## [DATA] Current Property Structure
 
 ### **Universal Properties (All Collections):**
 | Property | Usage | Example |
@@ -108,7 +108,7 @@ hasVersion  // ✅ Clear semantic relationship (W3C OWL compliant)
 | `hasDeviceSoftware` | Software installation | DeviceProxyOut → SoftwareProxyIn |
 | `hasVersion` | Temporal versioning | Proxy ↔ Entity |
 
-## 🎯 Benefits for Visualizers
+## [TARGET] Benefits for Visualizers
 
 ### **1. Consistent Property Access Across All Collections**
 ```javascript
@@ -160,23 +160,23 @@ const deviceSoftware = await db.query(`
 `);
 ```
 
-## 🧪 Validation Results
+## [TEST] Validation Results
 
-### **✅ All Systems Tested and Working:**
-- ✅ **Data Generation**: 3,285 documents with new property structure
-- ✅ **Database Deployment**: All collections created with `hasVersion` edges
-- ✅ **Validation Suite**: All queries updated and passing
-- ✅ **Cross-Entity Relationships**: Device → Software traversals working
-- ✅ **Time Travel Queries**: Both Device and Software temporal queries functional
+### **[DONE] All Systems Tested and Working:**
+- [DONE] **Data Generation**: 3,285 documents with new property structure
+- [DONE] **Database Deployment**: All collections created with `hasVersion` edges
+- [DONE] **Validation Suite**: All queries updated and passing
+- [DONE] **Cross-Entity Relationships**: Device → Software traversals working
+- [DONE] **Time Travel Queries**: Both Device and Software temporal queries functional
 
-### **📊 Current Database Status:**
+### **[DATA] Current Database Status:**
 - **Total Documents**: 3,285 across 2 tenants
 - **Collections**: 11 collections (7 vertex, 4 edge)
 - **Relationships**: 120 hasDeviceSoftware edges
 - **Version Edges**: 1,800 hasVersion relationships
 - **Property Structure**: Fully standardized with generic names
 
-## 🚀 Perfect for Visualization
+## [DEPLOY] Perfect for Visualization
 
 The data structure is now optimized for any graph visualization framework:
 
@@ -184,18 +184,18 @@ The data structure is now optimized for any graph visualization framework:
 ```json
 {
   "_key": "50089178aa83_device1-0",
-  "name": "Acme Corp IoT Device",     // ✅ Universal display name
-  "type": "IoT",                      // ✅ Universal type classification  
-  "model": "IoT Model 627",           // ✅ Device-specific model
-  "ipAddress": "192.168.101.232"      // ✅ Device-specific network info
+  "name": "Acme Corp IoT Device",     // [DONE] Universal display name
+  "type": "IoT",                      // [DONE] Universal type classification  
+  "model": "IoT Model 627",           // [DONE] Device-specific model
+  "ipAddress": "192.168.101.232"      // [DONE] Device-specific network info
 }
 
 {
   "_key": "50089178aa83_software1-0", 
-  "name": "Acme Corp Nginx",          // ✅ Universal display name
-  "type": "application",              // ✅ Universal type classification
-  "version": "Nginx 1.24.0",          // ✅ Software-specific version
-  "portNumber": 8208                  // ✅ Software-specific config
+  "name": "Acme Corp Nginx",          // [DONE] Universal display name
+  "type": "application",              // [DONE] Universal type classification
+  "version": "Nginx 1.24.0",          // [DONE] Software-specific version
+  "portNumber": 8208                  // [DONE] Software-specific config
 }
 ```
 
@@ -204,11 +204,11 @@ The data structure is now optimized for any graph visualization framework:
 {
   "_from": "DeviceProxyOut/50089178aa83_device1",
   "_to": "SoftwareProxyIn/50089178aa83_software1", 
-  "_collection": "hasDeviceSoftware"   // ✅ Clear semantic relationship
+  "_collection": "hasDeviceSoftware"   // [DONE] Clear semantic relationship
 }
 ```
 
-**Ready for integration with D3.js, Cytoscape, vis.js, ArangoDB Web Interface, or any modern graph visualization tool!** 🎨✨
+**Ready for integration with D3.js, Cytoscape, vis.js, ArangoDB Web Interface, or any modern graph visualization tool!** [UI]✨
 
 ---
 *Property standardization completed: $(date)*

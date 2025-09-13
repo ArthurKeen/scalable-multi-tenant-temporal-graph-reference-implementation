@@ -6,32 +6,32 @@
 graph TB
     %% Vertex Collections (W3C OWL naming - PascalCase, singular)
     subgraph "Vertex Collections"
-        D[Device<br/>📱 Network devices<br/>Versioned temporal data]
-        DPI[DeviceProxyIn<br/>📥 Device input proxies<br/>Lightweight, no temporal data]
-        DPO[DeviceProxyOut<br/>📤 Device output proxies<br/>Lightweight, no temporal data]
-        S[Software<br/>💿 Software installations<br/>Versioned temporal data]
-        SPI[SoftwareProxyIn<br/>📥 Software input proxies<br/>Lightweight, no temporal data]
-        SPO[SoftwareProxyOut<br/>📤 Software output proxies<br/>Lightweight, no temporal data]
-        L[Location<br/>📍 Physical locations<br/>GeoJSON coordinates]
+        D[Device<br/>[DEVICE] Network devices<br/>Versioned temporal data]
+        DPI[DeviceProxyIn<br/>[IN] Device input proxies<br/>Lightweight, no temporal data]
+        DPO[DeviceProxyOut<br/>[OUT] Device output proxies<br/>Lightweight, no temporal data]
+        S[Software<br/>[SOFTWARE] Software installations<br/>Versioned temporal data]
+        SPI[SoftwareProxyIn<br/>[IN] Software input proxies<br/>Lightweight, no temporal data]
+        SPO[SoftwareProxyOut<br/>[OUT] Software output proxies<br/>Lightweight, no temporal data]
+        L[Location<br/>[LOCATION] Physical locations<br/>GeoJSON coordinates]
     end
     
     %% Edge Collections (W3C OWL naming - camelCase, singular)
     
     %% Network connections between devices
-    DPO -->|hasConnection<br/>🔗 Network links<br/>bandwidth, latency| DPI
+    DPO -->|hasConnection<br/>[LINK] Network links<br/>bandwidth, latency| DPI
     
     %% Device location relationships
     DPO -->|hasLocation<br/>🏢 Physical placement<br/>geographical data| L
     
     %% Device-Software relationships (CORRECTED LOGIC)
-    DPO -->|hasDeviceSoftware<br/>💻 Device software installation<br/>device → software| SPI
+    DPO -->|hasDeviceSoftware<br/>[CODE] Device software installation<br/>device → software| SPI
     
     %% Device Time Travel (existing pattern)
-    DPI -->|version<br/>📈 Device version in<br/>temporal evolution| D
+    DPI -->|version<br/>[METRICS] Device version in<br/>temporal evolution| D
     D -->|version<br/>📉 Device version out<br/>temporal evolution| DPO
     
     %% Software Time Travel (NEW pattern)
-    SPI -->|version<br/>📈 Software version in<br/>temporal evolution| S
+    SPI -->|version<br/>[METRICS] Software version in<br/>temporal evolution| S
     S -->|version<br/>📉 Software version out<br/>temporal evolution| SPO
     
     %% Tenant isolation indicator
@@ -53,13 +53,13 @@ graph TB
 
 | Collection | Purpose | Temporal Data | Key Attributes |
 |------------|---------|---------------|----------------|
-| **Device** | Core network devices | ✅ Versioned temporal | `name`, `type`, `model`, `ipAddress`, `macAddress`, `created`, `expired` |
-| **DeviceProxyIn** | Device input proxies | ❌ None | `name`, `type`, `tenant_attr` |
-| **DeviceProxyOut** | Device output proxies | ❌ None | `name`, `type`, `tenant_attr` |
-| **Software** | Software installations | ✅ Versioned temporal | `name`, `type`, `version`, `portNumber`, `isEnabled`, `created`, `expired` |
-| **SoftwareProxyIn** | Software input proxies | ❌ None | `name`, `type`, `version`, `tenant_attr` |
-| **SoftwareProxyOut** | Software output proxies | ❌ None | `name`, `type`, `version`, `tenant_attr` |
-| **Location** | Physical locations | ✅ Full temporal | `name`, `streetAddress`, `geoLocation`, `created`, `expired` |
+| **Device** | Core network devices | [DONE] Versioned temporal | `name`, `type`, `model`, `ipAddress`, `macAddress`, `created`, `expired` |
+| **DeviceProxyIn** | Device input proxies | [ERROR] None | `name`, `type`, `tenant_attr` |
+| **DeviceProxyOut** | Device output proxies | [ERROR] None | `name`, `type`, `tenant_attr` |
+| **Software** | Software installations | [DONE] Versioned temporal | `name`, `type`, `version`, `portNumber`, `isEnabled`, `created`, `expired` |
+| **SoftwareProxyIn** | Software input proxies | [ERROR] None | `name`, `type`, `version`, `tenant_attr` |
+| **SoftwareProxyOut** | Software output proxies | [ERROR] None | `name`, `type`, `version`, `tenant_attr` |
+| **Location** | Physical locations | [DONE] Full temporal | `name`, `streetAddress`, `geoLocation`, `created`, `expired` |
 
 ### Edge Collections (camelCase, singular)
 

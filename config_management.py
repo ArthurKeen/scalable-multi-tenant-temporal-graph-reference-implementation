@@ -261,15 +261,15 @@ if __name__ == "__main__":
     # Configuration validation demo
     config = get_config()
     
-    print("🔧 Configuration Management Validation")
+    print("[CONFIG] Configuration Management Validation")
     print("=" * 50)
     
     validation = config.validate_configuration()
     for check, result in validation.items():
-        status = "✅" if result else "❌"
+        status = "[DONE]" if result else "[ERROR]"
         print(f"   {check}: {status}")
     
-    print(f"\n📁 Paths:")
+    print(f"\n Paths:")
     print(f"   Project root: {config.paths.project_root}")
     print(f"   Data directory: {config.paths.data_directory}")
     print(f"   Reports directory: {config.paths.reports_directory}")

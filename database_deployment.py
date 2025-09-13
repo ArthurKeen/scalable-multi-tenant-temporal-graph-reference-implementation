@@ -32,7 +32,7 @@ class TimeTravelRefactoredDeployment:
     def connect_to_cluster(self) -> bool:
         """Connect to ArangoDB Oasis cluster."""
         try:
-            print(f"🔗 Connecting to ArangoDB Oasis cluster...")
+            print(f"[LINK] Connecting to ArangoDB Oasis cluster...")
             print(f"   Endpoint: {self.creds.endpoint}")
             
             # Connect to system database
@@ -49,20 +49,20 @@ class TimeTravelRefactoredDeployment:
             # Connect to target database
             if self.sys_db.has_database(self.creds.database_name):
                 self.database = self.client.db(self.creds.database_name, **CredentialsManager.get_database_params())
-                print(f"✅ Connected to database: {self.creds.database_name}")
+                print(f"[DONE] Connected to database: {self.creds.database_name}")
                 return True
             else:
-                print(f"❌ Database '{self.creds.database_name}' not found")
+                print(f"[ERROR] Database '{self.creds.database_name}' not found")
                 return False
                 
         except Exception as e:
-            print(f"❌ Connection failed: {str(e)}")
+            print(f"[ERROR] Connection failed: {str(e)}")
             return False
     
     def drop_and_recreate_database(self) -> bool:
         """Drop existing database and recreate with refactored structure."""
         try:
-            print(f"\n🗑️  Dropping existing database: {self.creds.database_name}")
+            print(f"\n[DELETE]  Dropping existing database: {self.creds.database_name}")
             
             # Drop database if it exists
             if self.sys_db.has_database(self.creds.database_name):
@@ -72,18 +72,18 @@ class TimeTravelRefactoredDeployment:
             # Create fresh database
             self.sys_db.create_database(self.creds.database_name)
             self.database = self.client.db(self.creds.database_name, **CredentialsManager.get_database_params())
-            print(f"✅ Created fresh database: {self.creds.database_name}")
+            print(f"[DONE] Created fresh database: {self.creds.database_name}")
             
             return True
             
         except Exception as e:
-            print(f"❌ Error recreating database: {str(e)}")
+            print(f"[ERROR] Error recreating database: {str(e)}")
             return False
     
     def create_refactored_collections(self) -> bool:
         """Create time travel refactored collections."""
         try:
-            print(f"\n📋 Creating time travel refactored collections...")
+            print(f"\n[INFO] Creating time travel refactored collections...")
             
             # Refactored vertex collections (W3C OWL naming)
             vertex_collections = [
@@ -109,30 +109,30 @@ class TimeTravelRefactoredDeployment:
                 name = collection_config["name"]
                 if not self.database.has_collection(name):
                     self.database.create_collection(name)
-                    print(f"   ✅ Created vertex collection: {name}")
+                    print(f"   [DONE] Created vertex collection: {name}")
                 else:
-                    print(f"   📋 Vertex collection '{name}' already exists")
+                    print(f"   [INFO] Vertex collection '{name}' already exists")
             
             # Create edge collections
             for collection_config in edge_collections:
                 name = collection_config["name"]
                 if not self.database.has_collection(name):
                     self.database.create_collection(name, edge=True)
-                    print(f"   ✅ Created edge collection: {name}")
+                    print(f"   [DONE] Created edge collection: {name}")
                 else:
-                    print(f"   📋 Edge collection '{name}' already exists")
+                    print(f"   [INFO] Edge collection '{name}' already exists")
             
-            print(f"✅ Time travel refactored collections created successfully")
+            print(f"[DONE] Time travel refactored collections created successfully")
             return True
             
         except Exception as e:
-            print(f"❌ Error creating collections: {str(e)}")
+            print(f"[ERROR] Error creating collections: {str(e)}")
             return False
     
     def create_refactored_indexes(self) -> bool:
         """Create indexes optimized for time travel refactored structure."""
         try:
-            print(f"\n🔍 Creating time travel refactored indexes...")
+            print(f"\n[ANALYSIS] Creating time travel refactored indexes...")
             
             # Refactored index configurations
             index_configs = [
@@ -228,7 +228,7 @@ class TimeTravelRefactoredDeployment:
                             'fields': index_config["fields"],
                             'name': index_config.get("name")
                         })
-                        print(f"   ✅ Created persistent index: {index_config['name']}")
+                        print(f"   [DONE] Created persistent index: {index_config['name']}")
                         
                     elif index_config["type"] == "hash":
                         collection.add_index({
@@ -236,26 +236,26 @@ class TimeTravelRefactoredDeployment:
                             'fields': index_config["fields"],
                             'name': index_config.get("name")
                         })
-                        print(f"   ✅ Created hash index: {index_config['name']}")
+                        print(f"   [DONE] Created hash index: {index_config['name']}")
             
-            print(f"✅ Time travel refactored indexes created")
+            print(f"[DONE] Time travel refactored indexes created")
             return True
             
         except Exception as e:
-            print(f"❌ Error creating indexes: {str(e)}")
+            print(f"[ERROR] Error creating indexes: {str(e)}")
             return False
     
     def load_refactored_data(self) -> bool:
         """Load time travel refactored tenant data into collections."""
         try:
-            print(f"\n📊 Loading time travel refactored data...")
+            print(f"\n[DATA] Loading time travel refactored data...")
             
             # Find tenant directories with refactored data
             data_dir = Path("data")
             tenant_dirs = [d for d in data_dir.iterdir() if d.is_dir() and d.name.startswith("tenant_")]
             
             if not tenant_dirs:
-                print(f"❌ No tenant data directories found in {data_dir}")
+                print(f"[ERROR] No tenant data directories found in {data_dir}")
                 return False
             
             # Time travel refactored file to collection mappings
@@ -277,7 +277,7 @@ class TimeTravelRefactoredDeployment:
             
             for tenant_dir in tenant_dirs:
                 tenant_id = tenant_dir.name.replace("tenant_", "")
-                print(f"\n   📁 Loading tenant: {tenant_id}")
+                print(f"\n    Loading tenant: {tenant_id}")
                 
                 tenant_total = 0
                 
@@ -296,33 +296,33 @@ class TimeTravelRefactoredDeployment:
                             doc_count = len(data)
                             tenant_total += doc_count
                             total_loaded += doc_count
-                            print(f"      ✅ {collection_name}: {doc_count} documents")
+                            print(f"      [DONE] {collection_name}: {doc_count} documents")
                         else:
-                            print(f"      📋 {collection_name}: empty file")
+                            print(f"      [INFO] {collection_name}: empty file")
                     else:
                         if filename in ["SoftwareProxyIn.json", "SoftwareProxyOut.json", "hasDeviceSoftware.json"]:
-                            print(f"      ⚠️  {filename}: NEW collection - file not found (expected for old data)")
+                            print(f"      [WARNING]  {filename}: NEW collection - file not found (expected for old data)")
                         else:
-                            print(f"      ⚠️  {filename}: file not found")
+                            print(f"      [WARNING]  {filename}: file not found")
                 
-                print(f"   📊 Tenant {tenant_id}: {tenant_total} documents loaded")
+                print(f"   [DATA] Tenant {tenant_id}: {tenant_total} documents loaded")
             
-            print(f"\n✅ Total documents loaded: {total_loaded}")
+            print(f"\n[DONE] Total documents loaded: {total_loaded}")
             return True
             
         except Exception as e:
-            print(f"❌ Error loading data: {str(e)}")
+            print(f"[ERROR] Error loading data: {str(e)}")
             return False
     
     def create_refactored_named_graphs(self) -> bool:
         """Create named graphs with refactored edge relationships."""
         try:
-            print(f"\n🕸️  Creating refactored named graphs...")
+            print(f"\n[GRAPH]  Creating refactored named graphs...")
             
             # Read tenant registry
             registry_path = Path("data/tenant_registry_time_travel.json")
             if not registry_path.exists():
-                print(f"❌ Time travel tenant registry not found: {registry_path}")
+                print(f"[ERROR] Time travel tenant registry not found: {registry_path}")
                 return False
             
             with open(registry_path, 'r') as f:
@@ -358,25 +358,25 @@ class TimeTravelRefactoredDeployment:
                 
                 # Create or update named graph
                 if self.database.has_graph(graph_name):
-                    print(f"   📋 Graph '{graph_name}' already exists")
+                    print(f"   [INFO] Graph '{graph_name}' already exists")
                 else:
                     self.database.create_graph(
                         graph_name,
                         edge_definitions=edge_definitions
                     )
-                    print(f"   ✅ Created refactored named graph: {graph_name}")
+                    print(f"   [DONE] Created refactored named graph: {graph_name}")
             
-            print(f"✅ Refactored named graphs created")
+            print(f"[DONE] Refactored named graphs created")
             return True
             
         except Exception as e:
-            print(f"❌ Error creating named graphs: {str(e)}")
+            print(f"[ERROR] Error creating named graphs: {str(e)}")
             return False
     
     def verify_refactored_deployment(self) -> bool:
         """Verify the refactored time travel deployment."""
         try:
-            print(f"\n🔍 Verifying time travel refactored deployment...")
+            print(f"\n[ANALYSIS] Verifying time travel refactored deployment...")
             
             # Check new Software proxy collections exist
             software_proxy_collections = ["SoftwareProxyIn", "SoftwareProxyOut"]
@@ -384,9 +384,9 @@ class TimeTravelRefactoredDeployment:
                 if self.database.has_collection(collection_name):
                     collection = self.database.collection(collection_name)
                     count = collection.count()
-                    print(f"   ✅ {collection_name}: {count} documents")
+                    print(f"   [DONE] {collection_name}: {count} documents")
                 else:
-                    print(f"   ⚠️  {collection_name}: collection not found (may be from old data)")
+                    print(f"   [WARNING]  {collection_name}: collection not found (may be from old data)")
             
             # Check Software collection is refactored (no configurationHistory)
             software_collection = self.database.collection("Software")
@@ -394,35 +394,35 @@ class TimeTravelRefactoredDeployment:
             
             for doc in sample_software:
                 if "configurationHistory" in doc:
-                    print(f"   ❌ Software still has configurationHistory: {doc['_key']}")
+                    print(f"   [ERROR] Software still has configurationHistory: {doc['_key']}")
                     return False
                 else:
-                    print(f"   ✅ Software refactored (no configurationHistory): {doc['_key']}")
+                    print(f"   [DONE] Software refactored (no configurationHistory): {doc['_key']}")
                 
                 # Check for flattened configuration
                 if "portNumber" in doc and "isEnabled" in doc:
-                    print(f"   ✅ Software has flattened configuration: portNumber={doc.get('portNumber')}, isEnabled={doc.get('isEnabled')}")
+                    print(f"   [DONE] Software has flattened configuration: portNumber={doc.get('portNumber')}, isEnabled={doc.get('isEnabled')}")
                 else:
-                    print(f"   ⚠️  Software missing flattened configuration")
+                    print(f"   [WARNING]  Software missing flattened configuration")
             
             # Check unified version collection has both device and software edges
             version_collection = self.database.collection("hasVersion")
             
             # Query for device version edges
             device_version_count = version_collection.find({"_fromType": "DeviceProxyIn"}).count()
-            print(f"   ✅ Device version edges: {device_version_count}")
+            print(f"   [DONE] Device version edges: {device_version_count}")
             
             # Query for software version edges  
             software_version_count = version_collection.find({"_fromType": "SoftwareProxyIn"}).count()
-            print(f"   ✅ Software version edges: {software_version_count}")
+            print(f"   [DONE] Software version edges: {software_version_count}")
             
             # Check hasDeviceSoftware collection
             if self.database.has_collection("hasDeviceSoftware"):
                 has_device_software = self.database.collection("hasDeviceSoftware")
                 count = has_device_software.count()
-                print(f"   ✅ hasDeviceSoftware: {count} edges")
+                print(f"   [DONE] hasDeviceSoftware: {count} edges")
             else:
-                print(f"   ⚠️  hasDeviceSoftware: collection not found")
+                print(f"   [WARNING]  hasDeviceSoftware: collection not found")
             
             # Verify all collections exist with correct names
             expected_collections = [
@@ -434,23 +434,23 @@ class TimeTravelRefactoredDeployment:
                 if self.database.has_collection(collection_name):
                     collection = self.database.collection(collection_name)
                     count = collection.count()
-                    print(f"   ✅ {collection_name}: {count} documents")
+                    print(f"   [DONE] {collection_name}: {count} documents")
                 else:
-                    print(f"❌ Missing collection: {collection_name}")
+                    print(f"[ERROR] Missing collection: {collection_name}")
                     return False
             
-            print(f"✅ Time travel refactored deployment verified successfully")
+            print(f"[DONE] Time travel refactored deployment verified successfully")
             return True
             
         except Exception as e:
-            print(f"❌ Error verifying deployment: {str(e)}")
+            print(f"[ERROR] Error verifying deployment: {str(e)}")
             return False
     
     def deploy_time_travel_refactored(self) -> bool:
         """Execute complete deployment of time travel refactored data."""
-        print("🚀 Time Travel Refactored Database Deployment")
+        print("[DEPLOY] Time Travel Refactored Database Deployment")
         print("=" * 60)
-        print("📋 Deploying:")
+        print("[INFO] Deploying:")
         print("   • Device time travel: DeviceProxyIn ⟷ Device ⟷ DeviceProxyOut")
         print("   • Software time travel: SoftwareProxyIn ⟷ Software ⟷ SoftwareProxyOut (NEW)")
         print("   • Unified 'version' collection for all time travel relationships")
@@ -470,15 +470,15 @@ class TimeTravelRefactoredDeployment:
         ]
         
         for step_name, step_function in steps:
-            print(f"\n🔄 {step_name}...")
+            print(f"\n-> {step_name}...")
             if not step_function():
-                print(f"❌ Failed at step: {step_name}")
+                print(f"[ERROR] Failed at step: {step_name}")
                 return False
         
-        print(f"\n🎉 Time travel refactored deployment completed successfully!")
-        print(f"📊 Database: {self.creds.database_name}")
-        print(f"🔗 Endpoint: {self.creds.endpoint}")
-        print(f"🔄 Time Travel Refactoring:")
+        print(f"\n[SUCCESS] Time travel refactored deployment completed successfully!")
+        print(f"[DATA] Database: {self.creds.database_name}")
+        print(f"[LINK] Endpoint: {self.creds.endpoint}")
+        print(f"-> Time Travel Refactoring:")
         print(f"   • Device: Existing pattern maintained")
         print(f"   • Software: NEW time travel pattern implemented")
         print(f"   • Unified version collection for consistent queries")
@@ -494,10 +494,10 @@ def main():
     success = deployment.deploy_time_travel_refactored()
     
     if success:
-        print(f"\n✅ Database updated with time travel refactored structure!")
+        print(f"\n[DONE] Database updated with time travel refactored structure!")
         sys.exit(0)
     else:
-        print(f"\n❌ Deployment failed!")
+        print(f"\n[ERROR] Deployment failed!")
         sys.exit(1)
 
 

@@ -440,7 +440,7 @@ class TestPerformance(unittest.TestCase):
 def run_test_suite():
     """Run the complete test suite."""
     
-    print("🧪 Multi-Tenant Demo Test Suite")
+    print("[TEST] Multi-Tenant Demo Test Suite")
     print("=" * 50)
     
     # Create test suite
@@ -466,14 +466,14 @@ def run_test_suite():
     result = runner.run(test_suite)
     
     # Report results
-    print(f"\n📊 Test Results:")
+    print(f"\n[DATA] Test Results:")
     print(f"   Tests run: {result.testsRun}")
     print(f"   Failures: {len(result.failures)}")
     print(f"   Errors: {len(result.errors)}")
     print(f"   Success rate: {((result.testsRun - len(result.failures) - len(result.errors)) / result.testsRun * 100):.1f}%")
     
     if result.failures:
-        print(f"\n❌ Failures:")
+        print(f"\n[ERROR] Failures:")
         for test, traceback in result.failures:
             print(f"   {test}: {traceback}")
     
@@ -485,9 +485,9 @@ def run_test_suite():
     overall_success = len(result.failures) == 0 and len(result.errors) == 0
     
     if overall_success:
-        print(f"\n🎉 All tests passed! Code quality verified.")
+        print(f"\n[SUCCESS] All tests passed! Code quality verified.")
     else:
-        print(f"\n⚠️  Some tests failed. Review failures and errors above.")
+        print(f"\n[WARNING]  Some tests failed. Review failures and errors above.")
     
     return overall_success
 

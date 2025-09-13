@@ -70,7 +70,7 @@ class OasisClusterManager:
             sys_db = self.client.db('_system', username=self.username, password=self.password)
             version_info = sys_db.version()
             
-            print(f"✅ Connected successfully!")
+            print(f"[DONE] Connected successfully!")
             print(f"   Server version: {version_info}")
             
             # Handle version info safely
@@ -82,7 +82,7 @@ class OasisClusterManager:
             return True
             
         except Exception as e:
-            print(f"❌ Connection failed: {str(e)}")
+            print(f"[ERROR] Connection failed: {str(e)}")
             return False
     
     def create_shared_database(self, db_name: str = None) -> bool:
@@ -96,7 +96,7 @@ class OasisClusterManager:
             bool: True if successful, False otherwise
         """
         if not self.client:
-            print("❌ Not connected to cluster")
+            print("[ERROR] Not connected to cluster")
             return False
             
         db_name = db_name or self.database_name
@@ -106,7 +106,7 @@ class OasisClusterManager:
             
             # Check if database already exists
             if sys_db.has_database(db_name):
-                print(f"📋 Database '{db_name}' already exists")
+                print(f"[INFO] Database '{db_name}' already exists")
                 self.database = self.client.db(db_name, username=self.username, password=self.password)
                 return True
             
@@ -114,14 +114,14 @@ class OasisClusterManager:
             sys_db.create_database(db_name)
             self.database = self.client.db(db_name, username=self.username, password=self.password)
             
-            print(f"✅ Created database: {db_name}")
+            print(f"[DONE] Created database: {db_name}")
             return True
             
         except DatabaseCreateError as e:
-            print(f"❌ Failed to create database: {e}")
+            print(f"[ERROR] Failed to create database: {e}")
             return False
         except Exception as e:
-            print(f"❌ Unexpected error creating database: {e}")
+            print(f"[ERROR] Unexpected error creating database: {e}")
             return False
     
     def create_shared_collections(self) -> bool:
@@ -132,7 +132,7 @@ class OasisClusterManager:
             bool: True if successful, False otherwise
         """
         if not self.database:
-            print("❌ No database connection")
+            print("[ERROR] No database connection")
             return False
         
         # Define collection configurations
@@ -157,26 +157,26 @@ class OasisClusterManager:
                 name = collection_config["name"]
                 if not self.database.has_collection(name):
                     self.database.create_collection(name)
-                    print(f"✅ Created vertex collection: {name}")
+                    print(f"[DONE] Created vertex collection: {name}")
                 else:
-                    print(f"📋 Vertex collection '{name}' already exists")
+                    print(f"[INFO] Vertex collection '{name}' already exists")
             
             # Create edge collections
             for collection_config in edge_collections:
                 name = collection_config["name"]
                 if not self.database.has_collection(name):
                     self.database.create_collection(name, edge=True)
-                    print(f"✅ Created edge collection: {name}")
+                    print(f"[DONE] Created edge collection: {name}")
                 else:
-                    print(f"📋 Edge collection '{name}' already exists")
+                    print(f"[INFO] Edge collection '{name}' already exists")
             
             return True
             
         except CollectionCreateError as e:
-            print(f"❌ Failed to create collection: {e}")
+            print(f"[ERROR] Failed to create collection: {e}")
             return False
         except Exception as e:
-            print(f"❌ Unexpected error creating collections: {e}")
+            print(f"[ERROR] Unexpected error creating collections: {e}")
             return False
     
     def create_tenant_smartgraph(self, tenant_config: TenantConfig) -> bool:
@@ -190,7 +190,7 @@ class OasisClusterManager:
             bool: True if successful, False otherwise
         """
         if not self.database:
-            print("❌ No database connection")
+            print("[ERROR] No database connection")
             return False
         
         naming = TenantNamingConvention(tenant_config.tenant_id)
@@ -202,7 +202,7 @@ class OasisClusterManager:
         try:
             # Check if graph already exists
             if self.database.has_graph(graph_name):
-                print(f"📋 SmartGraph '{graph_name}' already exists")
+                print(f"[INFO] SmartGraph '{graph_name}' already exists")
                 return True
             
             # Create the SmartGraph
@@ -213,17 +213,17 @@ class OasisClusterManager:
                 smart_field=graph_config["options"]["smart_graph_attribute"]
             )
             
-            print(f"✅ Created SmartGraph for tenant: {tenant_config.tenant_name}")
+            print(f"[DONE] Created SmartGraph for tenant: {tenant_config.tenant_name}")
             print(f"   Graph name: {graph_name}")
             print(f"   SmartGraph attribute: {graph_config['options']['smart_graph_attribute']}")
             
             return True
             
         except GraphCreateError as e:
-            print(f"❌ Failed to create SmartGraph: {e}")
+            print(f"[ERROR] Failed to create SmartGraph: {e}")
             return False
         except Exception as e:
-            print(f"❌ Unexpected error creating SmartGraph: {e}")
+            print(f"[ERROR] Unexpected error creating SmartGraph: {e}")
             return False
     
     def create_indexes(self, tenant_config: TenantConfig) -> bool:
@@ -237,7 +237,7 @@ class OasisClusterManager:
             bool: True if successful, False otherwise
         """
         if not self.database:
-            print("❌ No database connection")
+            print("[ERROR] No database connection")
             return False
         
         try:
@@ -304,7 +304,7 @@ class OasisClusterManager:
                             fields=index_config["fields"],
                             name=index_config.get("name")
                         )
-                        print(f"✅ Created persistent index on {collection_name}: {index_config['fields']}")
+                        print(f"[DONE] Created persistent index on {collection_name}: {index_config['fields']}")
                         
                     elif index_config["type"] == "hash":
                         # Create hash index
@@ -312,12 +312,12 @@ class OasisClusterManager:
                             fields=index_config["fields"],
                             name=index_config.get("name")
                         )
-                        print(f"✅ Created hash index on {collection_name}: {index_config['fields']}")
+                        print(f"[DONE] Created hash index on {collection_name}: {index_config['fields']}")
             
             return True
             
         except Exception as e:
-            print(f"❌ Error creating indexes: {e}")
+            print(f"[ERROR] Error creating indexes: {e}")
             return False
     
     def load_tenant_data(self, tenant_config: TenantConfig, data_directory: str = None) -> bool:
@@ -332,7 +332,7 @@ class OasisClusterManager:
             bool: True if successful, False otherwise
         """
         if not self.database:
-            print("❌ No database connection")
+            print("[ERROR] No database connection")
             return False
         
         if not data_directory:
@@ -341,7 +341,7 @@ class OasisClusterManager:
         
         data_dir = Path(data_directory)
         if not data_dir.exists():
-            print(f"❌ Data directory not found: {data_directory}")
+            print(f"[ERROR] Data directory not found: {data_directory}")
             return False
         
         # Define file mappings
@@ -377,17 +377,17 @@ class OasisClusterManager:
                         loaded_count = result.get('created', 0)
                         total_loaded += loaded_count
                         
-                        print(f"✅ Loaded {loaded_count} documents into {collection_name}")
+                        print(f"[DONE] Loaded {loaded_count} documents into {collection_name}")
                     else:
-                        print(f"⚠️  Empty data file: {filename}")
+                        print(f"[WARNING]  Empty data file: {filename}")
                 else:
-                    print(f"⚠️  File not found: {filename}")
+                    print(f"[WARNING]  File not found: {filename}")
             
-            print(f"✅ Total documents loaded for tenant {tenant_config.tenant_name}: {total_loaded}")
+            print(f"[DONE] Total documents loaded for tenant {tenant_config.tenant_name}: {total_loaded}")
             return True
             
         except Exception as e:
-            print(f"❌ Error loading tenant data: {e}")
+            print(f"[ERROR] Error loading tenant data: {e}")
             return False
     
     def validate_tenant_isolation(self, tenant_configs: List[TenantConfig]) -> bool:
@@ -401,10 +401,10 @@ class OasisClusterManager:
             bool: True if isolation is verified, False otherwise
         """
         if not self.database:
-            print("❌ No database connection")
+            print("[ERROR] No database connection")
             return False
         
-        print("\n🔍 Validating tenant isolation...")
+        print("\n[ANALYSIS] Validating tenant isolation...")
         
         try:
             for tenant_config in tenant_configs:
@@ -426,7 +426,7 @@ class OasisClusterManager:
                 )
                 
                 tenant_docs = list(cursor)
-                print(f"✅ Tenant {tenant_config.tenant_name}: {len(tenant_docs)} isolated documents")
+                print(f"[DONE] Tenant {tenant_config.tenant_name}: {len(tenant_docs)} isolated documents")
                 
                 # Verify no cross-tenant data
                 other_tenant_aql = f"""
@@ -442,16 +442,16 @@ class OasisClusterManager:
                 
                 other_docs = list(other_cursor)
                 if len(other_docs) == 0:
-                    print(f"✅ No cross-tenant data access for {tenant_config.tenant_name}")
+                    print(f"[DONE] No cross-tenant data access for {tenant_config.tenant_name}")
                 else:
-                    print(f"❌ Cross-tenant access detected for {tenant_config.tenant_name}")
+                    print(f"[ERROR] Cross-tenant access detected for {tenant_config.tenant_name}")
                     return False
             
-            print("✅ Tenant isolation validation successful!")
+            print("[DONE] Tenant isolation validation successful!")
             return True
             
         except Exception as e:
-            print(f"❌ Error validating tenant isolation: {e}")
+            print(f"[ERROR] Error validating tenant isolation: {e}")
             return False
     
     def get_cluster_status(self) -> Dict[str, Any]:
@@ -505,7 +505,7 @@ class OasisClusterManager:
 def main():
     """Main function to test cluster setup and configuration."""
     
-    print("🚀 ArangoDB Oasis Cluster Setup")
+    print("[DEPLOY] ArangoDB Oasis Cluster Setup")
     print("=" * 50)
     
     # Initialize cluster manager with centralized credentials
@@ -523,11 +523,11 @@ def main():
     if not manager.create_shared_collections():
         return False
     
-    print("\n✅ Basic cluster setup complete!")
+    print("\n[DONE] Basic cluster setup complete!")
     
     # Get cluster status
     status = manager.get_cluster_status()
-    print(f"\n📊 Cluster Status:")
+    print(f"\n[DATA] Cluster Status:")
     print(f"   Server version: {status.get('server_version', 'Unknown')}")
     print(f"   Database: {status.get('database', {}).get('name', 'Unknown')}")
     print(f"   Collections: {len(status.get('collections', {}))}")
@@ -539,7 +539,7 @@ def main():
 if __name__ == "__main__":
     success = main()
     if success:
-        print("\n🎉 Cluster setup completed successfully!")
+        print("\n[SUCCESS] Cluster setup completed successfully!")
     else:
-        print("\n❌ Cluster setup failed!")
+        print("\n[ERROR] Cluster setup failed!")
         sys.exit(1)
