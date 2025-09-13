@@ -1,33 +1,33 @@
 {
   "tenants": {
-    "adcfd7e68620": {
+    "ebeb2f631cf2": {
       "tenantName": "Acme Corp",
       "tenantStatus": "provisioning",
       "databaseName": "network_assets_demo",
-      "smartGraphName": "tenant_adcfd7e68620_network_assets",
-      "smartGraphAttribute": "tenant_adcfd7e68620_attr",
-      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_adcfd7e68620",
+      "smartGraphName": "tenant_ebeb2f631cf2_network_assets",
+      "smartGraphAttribute": "tenant_ebeb2f631cf2_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_ebeb2f631cf2",
       "scaleFactor": 1,
-      "createdAt": "2025-09-12T19:16:56.059675",
+      "createdAt": "2025-09-12T19:25:08.708234",
       "tenantDescription": "Small enterprise with refactored time travel"
     },
-    "3a3a4f909658": {
+    "f4ac0b13506e": {
       "tenantName": "Global Enterprises",
       "tenantStatus": "provisioning",
       "databaseName": "network_assets_demo",
-      "smartGraphName": "tenant_3a3a4f909658_network_assets",
-      "smartGraphAttribute": "tenant_3a3a4f909658_attr",
-      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_3a3a4f909658",
+      "smartGraphName": "tenant_f4ac0b13506e_network_assets",
+      "smartGraphAttribute": "tenant_f4ac0b13506e_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_f4ac0b13506e",
       "scaleFactor": 2,
-      "createdAt": "2025-09-12T19:16:56.059692",
+      "createdAt": "2025-09-12T19:25:08.708251",
       "tenantDescription": "Large enterprise with refactored time travel"
     }
   },
   "summary": {
     "totalTenants": 2,
-    "totalDocuments": 3285,
+    "totalDocuments": 4035,
     "sharedDatabase": "network_assets_demo",
-    "generatedAt": "2025-09-12T19:16:56.109415",
+    "generatedAt": "2025-09-12T19:25:08.767298",
     "environment": "production",
     "owlCompliant": true,
     "timeTravel": {

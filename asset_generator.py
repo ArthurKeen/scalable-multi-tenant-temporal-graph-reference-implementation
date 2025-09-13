@@ -537,6 +537,105 @@ class TimeTravelRefactoredGenerator:
         self.logger.info(f"Connected {len(connected_software)} software entities (100% coverage)")
         return has_device_software
     
+    def create_historical_entity_connections(self, devices: List[Dict], software: List[Dict], 
+                                           connections: List[Dict], has_device_software: List[Dict]) -> List[Dict]:
+        """Create additional connections to make historical entities visible in graph visualization."""
+        self.logger.info("Creating visualization-friendly connections for historical entities")
+        
+        historical_connections = []
+        
+        # Group devices and software by their base proxy keys
+        device_groups = {}
+        software_groups = {}
+        
+        for device in devices:
+            # Extract base key (remove version suffix)
+            base_key = device["_key"].rsplit("-", 1)[0]  # Remove "-0", "-1", etc.
+            if base_key not in device_groups:
+                device_groups[base_key] = []
+            device_groups[base_key].append(device)
+        
+        for software in software:
+            # Extract base key (remove version suffix)
+            base_key = software["_key"].rsplit("-", 1)[0]  # Remove "-0", "-1", etc.
+            if base_key not in software_groups:
+                software_groups[base_key] = []
+            software_groups[base_key].append(software)
+        
+        # Create connections between historical versions of the same entity
+        connection_count = len(connections)
+        
+        # Connect historical device versions in sequence
+        for base_key, device_list in device_groups.items():
+            if len(device_list) > 1:
+                # Sort by version number
+                device_list.sort(key=lambda d: int(d["_key"].split("-")[-1]))
+                
+                for i in range(len(device_list) - 1):
+                    current_device = device_list[i]
+                    next_device = device_list[i + 1]
+                    
+                    connection_key = KeyGenerator.generate_connection_key(
+                        self.tenant_config.tenant_id, connection_count + len(historical_connections) + 1
+                    )
+                    
+                    connection_attrs = {
+                        "connectionType": "temporal_sequence",
+                        "bandwidthCapacity": "N/A",
+                        "networkLatency": "0ms"
+                    }
+                    
+                    historical_connection = DocumentEnhancer.create_edge_document(
+                        key=connection_key,
+                        from_collection=self.app_config.get_collection_name("devices"),  # Device
+                        from_key=current_device["_key"],
+                        to_collection=self.app_config.get_collection_name("devices"),  # Device
+                        to_key=next_device["_key"],
+                        from_type="Device",
+                        to_type="Device",
+                        tenant_config=self.tenant_config,
+                        extra_attributes=connection_attrs
+                    )
+                    
+                    historical_connections.append(historical_connection)
+        
+        # Connect historical software versions in sequence
+        for base_key, software_list in software_groups.items():
+            if len(software_list) > 1:
+                # Sort by version number
+                software_list.sort(key=lambda s: int(s["_key"].split("-")[-1]))
+                
+                for i in range(len(software_list) - 1):
+                    current_software = software_list[i]
+                    next_software = software_list[i + 1]
+                    
+                    connection_key = KeyGenerator.generate_connection_key(
+                        self.tenant_config.tenant_id, connection_count + len(historical_connections) + 1
+                    )
+                    
+                    connection_attrs = {
+                        "connectionType": "temporal_sequence",
+                        "bandwidthCapacity": "N/A", 
+                        "networkLatency": "0ms"
+                    }
+                    
+                    historical_connection = DocumentEnhancer.create_edge_document(
+                        key=connection_key,
+                        from_collection=self.app_config.get_collection_name("software"),  # Software
+                        from_key=current_software["_key"],
+                        to_collection=self.app_config.get_collection_name("software"),  # Software
+                        to_key=next_software["_key"],
+                        from_type="Software",
+                        to_type="Software",
+                        tenant_config=self.tenant_config,
+                        extra_attributes=connection_attrs
+                    )
+                    
+                    historical_connections.append(historical_connection)
+        
+        self.logger.info(f"Created {len(historical_connections)} historical entity connections for visualization")
+        return historical_connections
+    
     # === MAIN GENERATION METHOD ===
     def generate_all_data(self) -> Dict[str, Any]:
         """Generate complete time travel refactored network asset data."""
@@ -553,6 +652,10 @@ class TimeTravelRefactoredGenerator:
         connections = self.generate_connections(device_proxy_ins, device_proxy_outs)
         has_locations = self.generate_has_location_edges(device_proxy_outs, locations)
         has_device_software = self.generate_has_device_software_edges(device_proxy_outs, software_proxy_ins)
+        
+        # VISUALIZATION FIX: Create connections for historical entities to prevent orphaned appearance
+        historical_connections = self.create_historical_entity_connections(devices, software, connections, has_device_software)
+        connections.extend(historical_connections)
         
         # Combine all version edges (unified collection)
         all_versions = device_versions + software_versions
