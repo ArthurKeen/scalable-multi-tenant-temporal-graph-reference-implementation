@@ -82,7 +82,7 @@ class CollectionConfiguration:
             "has_locations": "hasLocation", 
             "has_software": "hasSoftware",
             "has_device_software": "hasDeviceSoftware",
-            "versions": "version"
+            "versions": "hasVersion"
         }
         
         file_mappings = {
@@ -97,7 +97,7 @@ class CollectionConfiguration:
             "hasLocation": "hasLocation.json",
             "hasSoftware": "hasSoftware.json",
             "hasDeviceSoftware": "hasDeviceSoftware.json",
-            "version": "version.json",
+            "hasVersion": "hasVersion.json",
             "smartgraph_config": "smartgraph_config.json"
         }
         

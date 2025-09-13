@@ -101,7 +101,7 @@ class TimeTravelRefactoredDeployment:
                 {"name": "hasConnection", "type": "edge"},
                 {"name": "hasLocation", "type": "edge"},
                 {"name": "hasDeviceSoftware", "type": "edge"},  # NEW - clearer naming
-                {"name": "version", "type": "edge"}  # UNIFIED - handles both Device and Software versioning
+                {"name": "hasVersion", "type": "edge"}  # UNIFIED - handles both Device and Software versioning
             ]
             
             # Create vertex collections
@@ -184,13 +184,13 @@ class TimeTravelRefactoredDeployment:
                 
                 # UNIFIED version collection indexes (handles Device + Software)
                 {
-                    "collection": "version",
+                    "collection": "hasVersion",
                     "type": "persistent",
                     "fields": ["_from", "_toType"],
                     "name": "idx_version_from_totype"
                 },
                 {
-                    "collection": "version",
+                    "collection": "hasVersion",
                     "type": "persistent",
                     "fields": ["_to", "_fromType"],
                     "name": "idx_version_to_fromtype"
@@ -210,7 +210,7 @@ class TimeTravelRefactoredDeployment:
                     "name": "idx_software_temporal"
                 },
                 {
-                    "collection": "version",
+                    "collection": "hasVersion",
                     "type": "persistent",
                     "fields": ["created", "expired"],
                     "name": "idx_version_temporal"
@@ -270,7 +270,7 @@ class TimeTravelRefactoredDeployment:
                 "hasConnection.json": "hasConnection",
                 "hasLocation.json": "hasLocation",
                 "hasDeviceSoftware.json": "hasDeviceSoftware",  # NEW
-                "version.json": "version"  # UNIFIED
+                "hasVersion.json": "hasVersion"  # UNIFIED
             }
             
             total_loaded = 0
@@ -350,7 +350,7 @@ class TimeTravelRefactoredDeployment:
                         "to_vertex_collections": ["SoftwareProxyIn"]
                     },
                     {
-                        "edge_collection": "version",  # UNIFIED - handles both Device and Software
+                        "edge_collection": "hasVersion",  # UNIFIED - handles both Device and Software
                         "from_vertex_collections": ["DeviceProxyIn", "Device", "SoftwareProxyIn", "Software"],
                         "to_vertex_collections": ["Device", "DeviceProxyOut", "Software", "SoftwareProxyOut"]
                     }
@@ -406,7 +406,7 @@ class TimeTravelRefactoredDeployment:
                     print(f"   ⚠️  Software missing flattened configuration")
             
             # Check unified version collection has both device and software edges
-            version_collection = self.database.collection("version")
+            version_collection = self.database.collection("hasVersion")
             
             # Query for device version edges
             device_version_count = version_collection.find({"_fromType": "DeviceProxyIn"}).count()
@@ -427,7 +427,7 @@ class TimeTravelRefactoredDeployment:
             # Verify all collections exist with correct names
             expected_collections = [
                 "Device", "DeviceProxyIn", "DeviceProxyOut", "Location", "Software",
-                "hasConnection", "hasLocation", "version"
+                "hasConnection", "hasLocation", "hasVersion"
             ]
             
             for collection_name in expected_collections:

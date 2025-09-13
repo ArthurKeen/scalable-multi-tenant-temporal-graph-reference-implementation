@@ -1,0 +1,4640 @@
+[
+  {
+    "_key": "46842f93171d_device1-0",
+    "name": "Global Enterprises firewall Firewall Model 504",
+    "type": "firewall",
+    "model": "Firewall Model 504",
+    "serialNumber": "d0a1d9bb-56f9-40fc-add7-74998fae4938",
+    "ipAddress": "192.168.227.121",
+    "macAddress": "8c:44:0c:7e:a3:59",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_device1",
+    "firewallRules": [
+      "allow 80",
+      "allow 4536",
+      "allow 6663"
+    ],
+    "created": 1757725696.942406,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device1-1",
+    "name": "Global Enterprises firewall Firewall Model 504",
+    "type": "firewall",
+    "model": "Firewall Model 504",
+    "serialNumber": "d0a1d9bb-56f9-40fc-add7-74998fae4938",
+    "ipAddress": "192.168.227.121",
+    "macAddress": "8c:44:0c:7e:a3:59",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-565",
+    "firewallRules": [
+      "allow 80",
+      "allow 4536",
+      "allow 6663"
+    ],
+    "created": 1757639296.942446,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device1-2",
+    "name": "Global Enterprises firewall Firewall Model 504",
+    "type": "firewall",
+    "model": "Firewall Model 504",
+    "serialNumber": "d0a1d9bb-56f9-40fc-add7-74998fae4938",
+    "ipAddress": "192.168.227.121",
+    "macAddress": "8c:44:0c:7e:a3:59",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-132",
+    "firewallRules": [
+      "allow 80",
+      "allow 4536",
+      "allow 6663"
+    ],
+    "created": 1757207296.942458,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device1-3",
+    "name": "Global Enterprises firewall Firewall Model 504",
+    "type": "firewall",
+    "model": "Firewall Model 504",
+    "serialNumber": "d0a1d9bb-56f9-40fc-add7-74998fae4938",
+    "ipAddress": "192.168.227.121",
+    "macAddress": "8c:44:0c:7e:a3:59",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-516",
+    "firewallRules": [
+      "allow 80",
+      "allow 4536",
+      "allow 6663"
+    ],
+    "created": 1756516096.942467,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device1-4",
+    "name": "Global Enterprises firewall Firewall Model 504",
+    "type": "firewall",
+    "model": "Firewall Model 504",
+    "serialNumber": "d0a1d9bb-56f9-40fc-add7-74998fae4938",
+    "ipAddress": "192.168.227.121",
+    "macAddress": "8c:44:0c:7e:a3:59",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-534",
+    "firewallRules": [
+      "allow 80",
+      "allow 4536",
+      "allow 6663"
+    ],
+    "created": 1755997696.942473,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device1-5",
+    "name": "Global Enterprises firewall Firewall Model 504",
+    "type": "firewall",
+    "model": "Firewall Model 504",
+    "serialNumber": "d0a1d9bb-56f9-40fc-add7-74998fae4938",
+    "ipAddress": "192.168.227.121",
+    "macAddress": "8c:44:0c:7e:a3:59",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-990",
+    "firewallRules": [
+      "allow 80",
+      "allow 4536",
+      "allow 6663"
+    ],
+    "created": 1755738496.94248,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device2-0",
+    "name": "Global Enterprises router Router Model 928",
+    "type": "router",
+    "model": "Router Model 928",
+    "serialNumber": "79bf1bbf-e201-4152-88f1-33bba46747b4",
+    "ipAddress": "192.168.235.167",
+    "macAddress": "20:99:df:58:e5:0b",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_device2",
+    "firewallRules": [
+      "allow 80",
+      "allow 2905",
+      "allow 4415"
+    ],
+    "created": 1757725696.942488,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device2-1",
+    "name": "Global Enterprises router Router Model 928",
+    "type": "router",
+    "model": "Router Model 928",
+    "serialNumber": "79bf1bbf-e201-4152-88f1-33bba46747b4",
+    "ipAddress": "192.168.235.167",
+    "macAddress": "20:99:df:58:e5:0b",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-969",
+    "firewallRules": [
+      "allow 80",
+      "allow 2905",
+      "allow 4415"
+    ],
+    "created": 1757380096.942506,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device2-2",
+    "name": "Global Enterprises router Router Model 928",
+    "type": "router",
+    "model": "Router Model 928",
+    "serialNumber": "79bf1bbf-e201-4152-88f1-33bba46747b4",
+    "ipAddress": "192.168.235.167",
+    "macAddress": "20:99:df:58:e5:0b",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-242",
+    "firewallRules": [
+      "allow 80",
+      "allow 2905",
+      "allow 4415"
+    ],
+    "created": 1757120896.942513,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device2-3",
+    "name": "Global Enterprises router Router Model 928",
+    "type": "router",
+    "model": "Router Model 928",
+    "serialNumber": "79bf1bbf-e201-4152-88f1-33bba46747b4",
+    "ipAddress": "192.168.235.167",
+    "macAddress": "20:99:df:58:e5:0b",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-894",
+    "firewallRules": [
+      "allow 80",
+      "allow 2905",
+      "allow 4415"
+    ],
+    "created": 1756602496.942519,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device2-4",
+    "name": "Global Enterprises router Router Model 928",
+    "type": "router",
+    "model": "Router Model 928",
+    "serialNumber": "79bf1bbf-e201-4152-88f1-33bba46747b4",
+    "ipAddress": "192.168.235.167",
+    "macAddress": "20:99:df:58:e5:0b",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-523",
+    "firewallRules": [
+      "allow 80",
+      "allow 2905",
+      "allow 4415"
+    ],
+    "created": 1756343296.942525,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device2-5",
+    "name": "Global Enterprises router Router Model 928",
+    "type": "router",
+    "model": "Router Model 928",
+    "serialNumber": "79bf1bbf-e201-4152-88f1-33bba46747b4",
+    "ipAddress": "192.168.235.167",
+    "macAddress": "20:99:df:58:e5:0b",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-195",
+    "firewallRules": [
+      "allow 80",
+      "allow 2905",
+      "allow 4415"
+    ],
+    "created": 1755824896.942532,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device3-0",
+    "name": "Global Enterprises IoT Iot Model 121",
+    "type": "IoT",
+    "model": "Iot Model 121",
+    "serialNumber": "be65ec04-9c78-4c21-bce2-35a96503daed",
+    "ipAddress": "192.168.172.96",
+    "macAddress": "58:55:4d:91:ce:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "46842f93171d_device3",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4349"
+    ],
+    "created": 1757725696.942539,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device3-1",
+    "name": "Global Enterprises IoT Iot Model 121",
+    "type": "IoT",
+    "model": "Iot Model 121",
+    "serialNumber": "be65ec04-9c78-4c21-bce2-35a96503daed",
+    "ipAddress": "192.168.172.96",
+    "macAddress": "58:55:4d:91:ce:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "46842f93171d_new-device-450",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4349"
+    ],
+    "created": 1757639296.942555,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device3-2",
+    "name": "Global Enterprises IoT Iot Model 121",
+    "type": "IoT",
+    "model": "Iot Model 121",
+    "serialNumber": "be65ec04-9c78-4c21-bce2-35a96503daed",
+    "ipAddress": "192.168.172.96",
+    "macAddress": "58:55:4d:91:ce:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "46842f93171d_new-device-927",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4349"
+    ],
+    "created": 1757120896.942561,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device3-3",
+    "name": "Global Enterprises IoT Iot Model 121",
+    "type": "IoT",
+    "model": "Iot Model 121",
+    "serialNumber": "be65ec04-9c78-4c21-bce2-35a96503daed",
+    "ipAddress": "192.168.172.96",
+    "macAddress": "58:55:4d:91:ce:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "46842f93171d_new-device-221",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4349"
+    ],
+    "created": 1756429696.942567,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device3-4",
+    "name": "Global Enterprises IoT Iot Model 121",
+    "type": "IoT",
+    "model": "Iot Model 121",
+    "serialNumber": "be65ec04-9c78-4c21-bce2-35a96503daed",
+    "ipAddress": "192.168.172.96",
+    "macAddress": "58:55:4d:91:ce:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "46842f93171d_new-device-596",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4349"
+    ],
+    "created": 1756343296.942574,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device3-5",
+    "name": "Global Enterprises IoT Iot Model 121",
+    "type": "IoT",
+    "model": "Iot Model 121",
+    "serialNumber": "be65ec04-9c78-4c21-bce2-35a96503daed",
+    "ipAddress": "192.168.172.96",
+    "macAddress": "58:55:4d:91:ce:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "46842f93171d_new-device-738",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4349"
+    ],
+    "created": 1755652096.942581,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device4-0",
+    "name": "Global Enterprises IoT Iot Model 959",
+    "type": "IoT",
+    "model": "Iot Model 959",
+    "serialNumber": "f95e618f-1a95-4a2c-a3f2-cc88ed3c99b0",
+    "ipAddress": "192.168.26.118",
+    "macAddress": "20:91:d1:b6:a6:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_device4",
+    "firewallRules": [],
+    "created": 1757725696.942588,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device4-1",
+    "name": "Global Enterprises IoT Iot Model 959",
+    "type": "IoT",
+    "model": "Iot Model 959",
+    "serialNumber": "f95e618f-1a95-4a2c-a3f2-cc88ed3c99b0",
+    "ipAddress": "192.168.26.118",
+    "macAddress": "20:91:d1:b6:a6:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-305",
+    "firewallRules": [],
+    "created": 1757380096.942602,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device4-2",
+    "name": "Global Enterprises IoT Iot Model 959",
+    "type": "IoT",
+    "model": "Iot Model 959",
+    "serialNumber": "f95e618f-1a95-4a2c-a3f2-cc88ed3c99b0",
+    "ipAddress": "192.168.26.118",
+    "macAddress": "20:91:d1:b6:a6:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-846",
+    "firewallRules": [],
+    "created": 1757034496.942608,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device4-3",
+    "name": "Global Enterprises IoT Iot Model 959",
+    "type": "IoT",
+    "model": "Iot Model 959",
+    "serialNumber": "f95e618f-1a95-4a2c-a3f2-cc88ed3c99b0",
+    "ipAddress": "192.168.26.118",
+    "macAddress": "20:91:d1:b6:a6:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-857",
+    "firewallRules": [],
+    "created": 1756688896.942615,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device4-4",
+    "name": "Global Enterprises IoT Iot Model 959",
+    "type": "IoT",
+    "model": "Iot Model 959",
+    "serialNumber": "f95e618f-1a95-4a2c-a3f2-cc88ed3c99b0",
+    "ipAddress": "192.168.26.118",
+    "macAddress": "20:91:d1:b6:a6:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-709",
+    "firewallRules": [],
+    "created": 1756343296.942621,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device4-5",
+    "name": "Global Enterprises IoT Iot Model 959",
+    "type": "IoT",
+    "model": "Iot Model 959",
+    "serialNumber": "f95e618f-1a95-4a2c-a3f2-cc88ed3c99b0",
+    "ipAddress": "192.168.26.118",
+    "macAddress": "20:91:d1:b6:a6:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-207",
+    "firewallRules": [],
+    "created": 1755824896.942628,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device5-0",
+    "name": "Global Enterprises laptop Laptop Model 982",
+    "type": "laptop",
+    "model": "Laptop Model 982",
+    "serialNumber": "b51019ff-ca6d-4a10-9e75-8692a1f0f0bf",
+    "ipAddress": "192.168.38.138",
+    "macAddress": "1e:c6:57:e2:f5:2e",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_device5",
+    "firewallRules": [
+      "allow 80",
+      "allow 1239"
+    ],
+    "created": 1757725696.942635,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device5-1",
+    "name": "Global Enterprises laptop Laptop Model 982",
+    "type": "laptop",
+    "model": "Laptop Model 982",
+    "serialNumber": "b51019ff-ca6d-4a10-9e75-8692a1f0f0bf",
+    "ipAddress": "192.168.38.138",
+    "macAddress": "1e:c6:57:e2:f5:2e",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-941",
+    "firewallRules": [
+      "allow 80",
+      "allow 1239"
+    ],
+    "created": 1757380096.94265,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device5-2",
+    "name": "Global Enterprises laptop Laptop Model 982",
+    "type": "laptop",
+    "model": "Laptop Model 982",
+    "serialNumber": "b51019ff-ca6d-4a10-9e75-8692a1f0f0bf",
+    "ipAddress": "192.168.38.138",
+    "macAddress": "1e:c6:57:e2:f5:2e",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-494",
+    "firewallRules": [
+      "allow 80",
+      "allow 1239"
+    ],
+    "created": 1757034496.942656,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device5-3",
+    "name": "Global Enterprises laptop Laptop Model 982",
+    "type": "laptop",
+    "model": "Laptop Model 982",
+    "serialNumber": "b51019ff-ca6d-4a10-9e75-8692a1f0f0bf",
+    "ipAddress": "192.168.38.138",
+    "macAddress": "1e:c6:57:e2:f5:2e",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-910",
+    "firewallRules": [
+      "allow 80",
+      "allow 1239"
+    ],
+    "created": 1756516096.942662,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device5-4",
+    "name": "Global Enterprises laptop Laptop Model 982",
+    "type": "laptop",
+    "model": "Laptop Model 982",
+    "serialNumber": "b51019ff-ca6d-4a10-9e75-8692a1f0f0bf",
+    "ipAddress": "192.168.38.138",
+    "macAddress": "1e:c6:57:e2:f5:2e",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-870",
+    "firewallRules": [
+      "allow 80",
+      "allow 1239"
+    ],
+    "created": 1756170496.942669,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device5-5",
+    "name": "Global Enterprises laptop Laptop Model 982",
+    "type": "laptop",
+    "model": "Laptop Model 982",
+    "serialNumber": "b51019ff-ca6d-4a10-9e75-8692a1f0f0bf",
+    "ipAddress": "192.168.38.138",
+    "macAddress": "1e:c6:57:e2:f5:2e",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-279",
+    "firewallRules": [
+      "allow 80",
+      "allow 1239"
+    ],
+    "created": 1755565696.942675,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device6-0",
+    "name": "Global Enterprises firewall Firewall Model 242",
+    "type": "firewall",
+    "model": "Firewall Model 242",
+    "serialNumber": "66305c30-8758-4fb0-901d-f7c92b7c8fe6",
+    "ipAddress": "192.168.104.188",
+    "macAddress": "3d:d6:21:b6:93:21",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_device6",
+    "firewallRules": [
+      "allow 80",
+      "allow 8034",
+      "allow 2020"
+    ],
+    "created": 1757725696.942683,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device6-1",
+    "name": "Global Enterprises firewall Firewall Model 242",
+    "type": "firewall",
+    "model": "Firewall Model 242",
+    "serialNumber": "66305c30-8758-4fb0-901d-f7c92b7c8fe6",
+    "ipAddress": "192.168.104.188",
+    "macAddress": "3d:d6:21:b6:93:21",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-464",
+    "firewallRules": [
+      "allow 80",
+      "allow 8034",
+      "allow 2020"
+    ],
+    "created": 1757639296.942698,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device6-2",
+    "name": "Global Enterprises firewall Firewall Model 242",
+    "type": "firewall",
+    "model": "Firewall Model 242",
+    "serialNumber": "66305c30-8758-4fb0-901d-f7c92b7c8fe6",
+    "ipAddress": "192.168.104.188",
+    "macAddress": "3d:d6:21:b6:93:21",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-548",
+    "firewallRules": [
+      "allow 80",
+      "allow 8034",
+      "allow 2020"
+    ],
+    "created": 1757207296.942705,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device6-3",
+    "name": "Global Enterprises firewall Firewall Model 242",
+    "type": "firewall",
+    "model": "Firewall Model 242",
+    "serialNumber": "66305c30-8758-4fb0-901d-f7c92b7c8fe6",
+    "ipAddress": "192.168.104.188",
+    "macAddress": "3d:d6:21:b6:93:21",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-727",
+    "firewallRules": [
+      "allow 80",
+      "allow 8034",
+      "allow 2020"
+    ],
+    "created": 1756516096.942712,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device6-4",
+    "name": "Global Enterprises firewall Firewall Model 242",
+    "type": "firewall",
+    "model": "Firewall Model 242",
+    "serialNumber": "66305c30-8758-4fb0-901d-f7c92b7c8fe6",
+    "ipAddress": "192.168.104.188",
+    "macAddress": "3d:d6:21:b6:93:21",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-344",
+    "firewallRules": [
+      "allow 80",
+      "allow 8034",
+      "allow 2020"
+    ],
+    "created": 1756343296.942718,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device6-5",
+    "name": "Global Enterprises firewall Firewall Model 242",
+    "type": "firewall",
+    "model": "Firewall Model 242",
+    "serialNumber": "66305c30-8758-4fb0-901d-f7c92b7c8fe6",
+    "ipAddress": "192.168.104.188",
+    "macAddress": "3d:d6:21:b6:93:21",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-151",
+    "firewallRules": [
+      "allow 80",
+      "allow 8034",
+      "allow 2020"
+    ],
+    "created": 1755911296.942724,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device7-0",
+    "name": "Global Enterprises IoT Iot Model 911",
+    "type": "IoT",
+    "model": "Iot Model 911",
+    "serialNumber": "6de49cf5-bd47-4c09-904d-c76bb31b668f",
+    "ipAddress": "192.168.84.185",
+    "macAddress": "b4:34:9c:f7:bd:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "46842f93171d_device7",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757725696.942732,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device7-1",
+    "name": "Global Enterprises IoT Iot Model 911",
+    "type": "IoT",
+    "model": "Iot Model 911",
+    "serialNumber": "6de49cf5-bd47-4c09-904d-c76bb31b668f",
+    "ipAddress": "192.168.84.185",
+    "macAddress": "b4:34:9c:f7:bd:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "46842f93171d_new-device-544",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757293696.942747,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device7-2",
+    "name": "Global Enterprises IoT Iot Model 911",
+    "type": "IoT",
+    "model": "Iot Model 911",
+    "serialNumber": "6de49cf5-bd47-4c09-904d-c76bb31b668f",
+    "ipAddress": "192.168.84.185",
+    "macAddress": "b4:34:9c:f7:bd:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "46842f93171d_new-device-312",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757120896.942753,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device7-3",
+    "name": "Global Enterprises IoT Iot Model 911",
+    "type": "IoT",
+    "model": "Iot Model 911",
+    "serialNumber": "6de49cf5-bd47-4c09-904d-c76bb31b668f",
+    "ipAddress": "192.168.84.185",
+    "macAddress": "b4:34:9c:f7:bd:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "46842f93171d_new-device-775",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756516096.94276,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device7-4",
+    "name": "Global Enterprises IoT Iot Model 911",
+    "type": "IoT",
+    "model": "Iot Model 911",
+    "serialNumber": "6de49cf5-bd47-4c09-904d-c76bb31b668f",
+    "ipAddress": "192.168.84.185",
+    "macAddress": "b4:34:9c:f7:bd:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "46842f93171d_new-device-426",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756343296.942766,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device7-5",
+    "name": "Global Enterprises IoT Iot Model 911",
+    "type": "IoT",
+    "model": "Iot Model 911",
+    "serialNumber": "6de49cf5-bd47-4c09-904d-c76bb31b668f",
+    "ipAddress": "192.168.84.185",
+    "macAddress": "b4:34:9c:f7:bd:aa",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "46842f93171d_new-device-263",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755652096.942773,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device8-0",
+    "name": "Global Enterprises IoT Iot Model 256",
+    "type": "IoT",
+    "model": "Iot Model 256",
+    "serialNumber": "d26391cc-2b13-49e5-bf75-252280d592ed",
+    "ipAddress": "192.168.178.82",
+    "macAddress": "e7:2f:06:8a:2d:5a",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_device8",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757725696.942781,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device8-1",
+    "name": "Global Enterprises IoT Iot Model 256",
+    "type": "IoT",
+    "model": "Iot Model 256",
+    "serialNumber": "d26391cc-2b13-49e5-bf75-252280d592ed",
+    "ipAddress": "192.168.178.82",
+    "macAddress": "e7:2f:06:8a:2d:5a",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-206",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757552896.942794,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device8-2",
+    "name": "Global Enterprises IoT Iot Model 256",
+    "type": "IoT",
+    "model": "Iot Model 256",
+    "serialNumber": "d26391cc-2b13-49e5-bf75-252280d592ed",
+    "ipAddress": "192.168.178.82",
+    "macAddress": "e7:2f:06:8a:2d:5a",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-851",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757207296.942801,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device8-3",
+    "name": "Global Enterprises IoT Iot Model 256",
+    "type": "IoT",
+    "model": "Iot Model 256",
+    "serialNumber": "d26391cc-2b13-49e5-bf75-252280d592ed",
+    "ipAddress": "192.168.178.82",
+    "macAddress": "e7:2f:06:8a:2d:5a",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-863",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756516096.942807,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device8-4",
+    "name": "Global Enterprises IoT Iot Model 256",
+    "type": "IoT",
+    "model": "Iot Model 256",
+    "serialNumber": "d26391cc-2b13-49e5-bf75-252280d592ed",
+    "ipAddress": "192.168.178.82",
+    "macAddress": "e7:2f:06:8a:2d:5a",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-132",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755997696.942814,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device8-5",
+    "name": "Global Enterprises IoT Iot Model 256",
+    "type": "IoT",
+    "model": "Iot Model 256",
+    "serialNumber": "d26391cc-2b13-49e5-bf75-252280d592ed",
+    "ipAddress": "192.168.178.82",
+    "macAddress": "e7:2f:06:8a:2d:5a",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-822",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755738496.94282,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device9-0",
+    "name": "Global Enterprises router Router Model 650",
+    "type": "router",
+    "model": "Router Model 650",
+    "serialNumber": "a9d8a987-a7c7-499f-8258-962ea56d792f",
+    "ipAddress": "192.168.105.125",
+    "macAddress": "c0:55:c1:2b:d6:98",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "46842f93171d_device9",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2109",
+      "allow 1146"
+    ],
+    "created": 1757725696.942828,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device9-1",
+    "name": "Global Enterprises router Router Model 650",
+    "type": "router",
+    "model": "Router Model 650",
+    "serialNumber": "a9d8a987-a7c7-499f-8258-962ea56d792f",
+    "ipAddress": "192.168.105.125",
+    "macAddress": "c0:55:c1:2b:d6:98",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "46842f93171d_new-device-995",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2109",
+      "allow 1146"
+    ],
+    "created": 1757552896.942841,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device9-2",
+    "name": "Global Enterprises router Router Model 650",
+    "type": "router",
+    "model": "Router Model 650",
+    "serialNumber": "a9d8a987-a7c7-499f-8258-962ea56d792f",
+    "ipAddress": "192.168.105.125",
+    "macAddress": "c0:55:c1:2b:d6:98",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "46842f93171d_new-device-461",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2109",
+      "allow 1146"
+    ],
+    "created": 1757034496.942847,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device9-3",
+    "name": "Global Enterprises router Router Model 650",
+    "type": "router",
+    "model": "Router Model 650",
+    "serialNumber": "a9d8a987-a7c7-499f-8258-962ea56d792f",
+    "ipAddress": "192.168.105.125",
+    "macAddress": "c0:55:c1:2b:d6:98",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "46842f93171d_new-device-191",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2109",
+      "allow 1146"
+    ],
+    "created": 1756516096.942854,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device9-4",
+    "name": "Global Enterprises router Router Model 650",
+    "type": "router",
+    "model": "Router Model 650",
+    "serialNumber": "a9d8a987-a7c7-499f-8258-962ea56d792f",
+    "ipAddress": "192.168.105.125",
+    "macAddress": "c0:55:c1:2b:d6:98",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "46842f93171d_new-device-133",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2109",
+      "allow 1146"
+    ],
+    "created": 1756170496.94286,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device9-5",
+    "name": "Global Enterprises router Router Model 650",
+    "type": "router",
+    "model": "Router Model 650",
+    "serialNumber": "a9d8a987-a7c7-499f-8258-962ea56d792f",
+    "ipAddress": "192.168.105.125",
+    "macAddress": "c0:55:c1:2b:d6:98",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "46842f93171d_new-device-741",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2109",
+      "allow 1146"
+    ],
+    "created": 1755652096.942867,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device10-0",
+    "name": "Global Enterprises router Router Model 413",
+    "type": "router",
+    "model": "Router Model 413",
+    "serialNumber": "d48afce8-d91e-4693-be68-a018e883a39d",
+    "ipAddress": "192.168.142.109",
+    "macAddress": "3a:87:d3:14:9e:b3",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_device10",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757725696.942874,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device10-1",
+    "name": "Global Enterprises router Router Model 413",
+    "type": "router",
+    "model": "Router Model 413",
+    "serialNumber": "d48afce8-d91e-4693-be68-a018e883a39d",
+    "ipAddress": "192.168.142.109",
+    "macAddress": "3a:87:d3:14:9e:b3",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-779",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757552896.942887,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device10-2",
+    "name": "Global Enterprises router Router Model 413",
+    "type": "router",
+    "model": "Router Model 413",
+    "serialNumber": "d48afce8-d91e-4693-be68-a018e883a39d",
+    "ipAddress": "192.168.142.109",
+    "macAddress": "3a:87:d3:14:9e:b3",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-783",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756948096.942893,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device10-3",
+    "name": "Global Enterprises router Router Model 413",
+    "type": "router",
+    "model": "Router Model 413",
+    "serialNumber": "d48afce8-d91e-4693-be68-a018e883a39d",
+    "ipAddress": "192.168.142.109",
+    "macAddress": "3a:87:d3:14:9e:b3",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-527",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756429696.942899,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device10-4",
+    "name": "Global Enterprises router Router Model 413",
+    "type": "router",
+    "model": "Router Model 413",
+    "serialNumber": "d48afce8-d91e-4693-be68-a018e883a39d",
+    "ipAddress": "192.168.142.109",
+    "macAddress": "3a:87:d3:14:9e:b3",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-493",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756343296.942905,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device10-5",
+    "name": "Global Enterprises router Router Model 413",
+    "type": "router",
+    "model": "Router Model 413",
+    "serialNumber": "d48afce8-d91e-4693-be68-a018e883a39d",
+    "ipAddress": "192.168.142.109",
+    "macAddress": "3a:87:d3:14:9e:b3",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-553",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755824896.942911,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device11-0",
+    "name": "Global Enterprises IoT Iot Model 775",
+    "type": "IoT",
+    "model": "Iot Model 775",
+    "serialNumber": "a8af55ff-b7bc-440d-94b6-edd0a0de00a9",
+    "ipAddress": "192.168.92.213",
+    "macAddress": "a2:01:0c:fa:6f:95",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_device11",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6323"
+    ],
+    "created": 1757725696.942918,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device11-1",
+    "name": "Global Enterprises IoT Iot Model 775",
+    "type": "IoT",
+    "model": "Iot Model 775",
+    "serialNumber": "a8af55ff-b7bc-440d-94b6-edd0a0de00a9",
+    "ipAddress": "192.168.92.213",
+    "macAddress": "a2:01:0c:fa:6f:95",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-197",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6323"
+    ],
+    "created": 1757466496.942931,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device11-2",
+    "name": "Global Enterprises IoT Iot Model 775",
+    "type": "IoT",
+    "model": "Iot Model 775",
+    "serialNumber": "a8af55ff-b7bc-440d-94b6-edd0a0de00a9",
+    "ipAddress": "192.168.92.213",
+    "macAddress": "a2:01:0c:fa:6f:95",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-163",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6323"
+    ],
+    "created": 1757120896.942937,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device11-3",
+    "name": "Global Enterprises IoT Iot Model 775",
+    "type": "IoT",
+    "model": "Iot Model 775",
+    "serialNumber": "a8af55ff-b7bc-440d-94b6-edd0a0de00a9",
+    "ipAddress": "192.168.92.213",
+    "macAddress": "a2:01:0c:fa:6f:95",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-402",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6323"
+    ],
+    "created": 1756602496.942943,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device11-4",
+    "name": "Global Enterprises IoT Iot Model 775",
+    "type": "IoT",
+    "model": "Iot Model 775",
+    "serialNumber": "a8af55ff-b7bc-440d-94b6-edd0a0de00a9",
+    "ipAddress": "192.168.92.213",
+    "macAddress": "a2:01:0c:fa:6f:95",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-816",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6323"
+    ],
+    "created": 1755997696.94295,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device11-5",
+    "name": "Global Enterprises IoT Iot Model 775",
+    "type": "IoT",
+    "model": "Iot Model 775",
+    "serialNumber": "a8af55ff-b7bc-440d-94b6-edd0a0de00a9",
+    "ipAddress": "192.168.92.213",
+    "macAddress": "a2:01:0c:fa:6f:95",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "46842f93171d_new-device-450",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6323"
+    ],
+    "created": 1755911296.942956,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device12-0",
+    "name": "Global Enterprises server Server Model 949",
+    "type": "server",
+    "model": "Server Model 949",
+    "serialNumber": "f15eeab1-c50d-4cbd-ae0c-012aac0c83b2",
+    "ipAddress": "192.168.61.18",
+    "macAddress": "48:e9:40:8c:37:2d",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_device12",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8653",
+      "allow 3171"
+    ],
+    "created": 1757725696.942962,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device12-1",
+    "name": "Global Enterprises server Server Model 949",
+    "type": "server",
+    "model": "Server Model 949",
+    "serialNumber": "f15eeab1-c50d-4cbd-ae0c-012aac0c83b2",
+    "ipAddress": "192.168.61.18",
+    "macAddress": "48:e9:40:8c:37:2d",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-185",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8653",
+      "allow 3171"
+    ],
+    "created": 1757552896.942975,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device12-2",
+    "name": "Global Enterprises server Server Model 949",
+    "type": "server",
+    "model": "Server Model 949",
+    "serialNumber": "f15eeab1-c50d-4cbd-ae0c-012aac0c83b2",
+    "ipAddress": "192.168.61.18",
+    "macAddress": "48:e9:40:8c:37:2d",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-278",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8653",
+      "allow 3171"
+    ],
+    "created": 1757034496.942982,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device12-3",
+    "name": "Global Enterprises server Server Model 949",
+    "type": "server",
+    "model": "Server Model 949",
+    "serialNumber": "f15eeab1-c50d-4cbd-ae0c-012aac0c83b2",
+    "ipAddress": "192.168.61.18",
+    "macAddress": "48:e9:40:8c:37:2d",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-889",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8653",
+      "allow 3171"
+    ],
+    "created": 1756688896.942988,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device12-4",
+    "name": "Global Enterprises server Server Model 949",
+    "type": "server",
+    "model": "Server Model 949",
+    "serialNumber": "f15eeab1-c50d-4cbd-ae0c-012aac0c83b2",
+    "ipAddress": "192.168.61.18",
+    "macAddress": "48:e9:40:8c:37:2d",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-903",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8653",
+      "allow 3171"
+    ],
+    "created": 1756343296.942994,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device12-5",
+    "name": "Global Enterprises server Server Model 949",
+    "type": "server",
+    "model": "Server Model 949",
+    "serialNumber": "f15eeab1-c50d-4cbd-ae0c-012aac0c83b2",
+    "ipAddress": "192.168.61.18",
+    "macAddress": "48:e9:40:8c:37:2d",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-742",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8653",
+      "allow 3171"
+    ],
+    "created": 1755565696.943,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device13-0",
+    "name": "Global Enterprises IoT Iot Model 847",
+    "type": "IoT",
+    "model": "Iot Model 847",
+    "serialNumber": "12f3d619-0142-4c86-93d1-72a5e60f1d41",
+    "ipAddress": "192.168.112.87",
+    "macAddress": "0c:31:f3:e8:94:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "46842f93171d_device13",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4150"
+    ],
+    "created": 1757725696.943007,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device13-1",
+    "name": "Global Enterprises IoT Iot Model 847",
+    "type": "IoT",
+    "model": "Iot Model 847",
+    "serialNumber": "12f3d619-0142-4c86-93d1-72a5e60f1d41",
+    "ipAddress": "192.168.112.87",
+    "macAddress": "0c:31:f3:e8:94:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "46842f93171d_new-device-171",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4150"
+    ],
+    "created": 1757380096.94302,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device13-2",
+    "name": "Global Enterprises IoT Iot Model 847",
+    "type": "IoT",
+    "model": "Iot Model 847",
+    "serialNumber": "12f3d619-0142-4c86-93d1-72a5e60f1d41",
+    "ipAddress": "192.168.112.87",
+    "macAddress": "0c:31:f3:e8:94:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "46842f93171d_new-device-815",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4150"
+    ],
+    "created": 1756861696.943026,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device13-3",
+    "name": "Global Enterprises IoT Iot Model 847",
+    "type": "IoT",
+    "model": "Iot Model 847",
+    "serialNumber": "12f3d619-0142-4c86-93d1-72a5e60f1d41",
+    "ipAddress": "192.168.112.87",
+    "macAddress": "0c:31:f3:e8:94:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "46842f93171d_new-device-734",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4150"
+    ],
+    "created": 1756602496.943032,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device13-4",
+    "name": "Global Enterprises IoT Iot Model 847",
+    "type": "IoT",
+    "model": "Iot Model 847",
+    "serialNumber": "12f3d619-0142-4c86-93d1-72a5e60f1d41",
+    "ipAddress": "192.168.112.87",
+    "macAddress": "0c:31:f3:e8:94:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "46842f93171d_new-device-520",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4150"
+    ],
+    "created": 1756343296.943039,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device13-5",
+    "name": "Global Enterprises IoT Iot Model 847",
+    "type": "IoT",
+    "model": "Iot Model 847",
+    "serialNumber": "12f3d619-0142-4c86-93d1-72a5e60f1d41",
+    "ipAddress": "192.168.112.87",
+    "macAddress": "0c:31:f3:e8:94:1b",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "46842f93171d_new-device-513",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4150"
+    ],
+    "created": 1755911296.943045,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device14-0",
+    "name": "Global Enterprises laptop Laptop Model 305",
+    "type": "laptop",
+    "model": "Laptop Model 305",
+    "serialNumber": "c478e340-074c-463a-afd7-9b92f2a35430",
+    "ipAddress": "192.168.151.68",
+    "macAddress": "3d:f4:0c:68:e4:f4",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "46842f93171d_device14",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7294",
+      "allow 6228"
+    ],
+    "created": 1757725696.943052,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device14-1",
+    "name": "Global Enterprises laptop Laptop Model 305",
+    "type": "laptop",
+    "model": "Laptop Model 305",
+    "serialNumber": "c478e340-074c-463a-afd7-9b92f2a35430",
+    "ipAddress": "192.168.151.68",
+    "macAddress": "3d:f4:0c:68:e4:f4",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "46842f93171d_new-device-235",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7294",
+      "allow 6228"
+    ],
+    "created": 1757466496.943065,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device14-2",
+    "name": "Global Enterprises laptop Laptop Model 305",
+    "type": "laptop",
+    "model": "Laptop Model 305",
+    "serialNumber": "c478e340-074c-463a-afd7-9b92f2a35430",
+    "ipAddress": "192.168.151.68",
+    "macAddress": "3d:f4:0c:68:e4:f4",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "46842f93171d_new-device-959",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7294",
+      "allow 6228"
+    ],
+    "created": 1756948096.943071,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device14-3",
+    "name": "Global Enterprises laptop Laptop Model 305",
+    "type": "laptop",
+    "model": "Laptop Model 305",
+    "serialNumber": "c478e340-074c-463a-afd7-9b92f2a35430",
+    "ipAddress": "192.168.151.68",
+    "macAddress": "3d:f4:0c:68:e4:f4",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "46842f93171d_new-device-865",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7294",
+      "allow 6228"
+    ],
+    "created": 1756516096.943078,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device14-4",
+    "name": "Global Enterprises laptop Laptop Model 305",
+    "type": "laptop",
+    "model": "Laptop Model 305",
+    "serialNumber": "c478e340-074c-463a-afd7-9b92f2a35430",
+    "ipAddress": "192.168.151.68",
+    "macAddress": "3d:f4:0c:68:e4:f4",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "46842f93171d_new-device-123",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7294",
+      "allow 6228"
+    ],
+    "created": 1755997696.943083,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device14-5",
+    "name": "Global Enterprises laptop Laptop Model 305",
+    "type": "laptop",
+    "model": "Laptop Model 305",
+    "serialNumber": "c478e340-074c-463a-afd7-9b92f2a35430",
+    "ipAddress": "192.168.151.68",
+    "macAddress": "3d:f4:0c:68:e4:f4",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "46842f93171d_new-device-769",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7294",
+      "allow 6228"
+    ],
+    "created": 1755565696.94309,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device15-0",
+    "name": "Global Enterprises router Router Model 878",
+    "type": "router",
+    "model": "Router Model 878",
+    "serialNumber": "67bdf1d0-2c5b-4a76-a8fc-d8bba9a1d42e",
+    "ipAddress": "192.168.179.36",
+    "macAddress": "c1:72:21:97:54:af",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_device15",
+    "firewallRules": [
+      "allow 1075",
+      "allow 6075",
+      "allow 2904"
+    ],
+    "created": 1757725696.943097,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device15-1",
+    "name": "Global Enterprises router Router Model 878",
+    "type": "router",
+    "model": "Router Model 878",
+    "serialNumber": "67bdf1d0-2c5b-4a76-a8fc-d8bba9a1d42e",
+    "ipAddress": "192.168.179.36",
+    "macAddress": "c1:72:21:97:54:af",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-322",
+    "firewallRules": [
+      "allow 1075",
+      "allow 6075",
+      "allow 2904"
+    ],
+    "created": 1757380096.94311,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device15-2",
+    "name": "Global Enterprises router Router Model 878",
+    "type": "router",
+    "model": "Router Model 878",
+    "serialNumber": "67bdf1d0-2c5b-4a76-a8fc-d8bba9a1d42e",
+    "ipAddress": "192.168.179.36",
+    "macAddress": "c1:72:21:97:54:af",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-481",
+    "firewallRules": [
+      "allow 1075",
+      "allow 6075",
+      "allow 2904"
+    ],
+    "created": 1757120896.943117,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device15-3",
+    "name": "Global Enterprises router Router Model 878",
+    "type": "router",
+    "model": "Router Model 878",
+    "serialNumber": "67bdf1d0-2c5b-4a76-a8fc-d8bba9a1d42e",
+    "ipAddress": "192.168.179.36",
+    "macAddress": "c1:72:21:97:54:af",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-353",
+    "firewallRules": [
+      "allow 1075",
+      "allow 6075",
+      "allow 2904"
+    ],
+    "created": 1756602496.943123,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device15-4",
+    "name": "Global Enterprises router Router Model 878",
+    "type": "router",
+    "model": "Router Model 878",
+    "serialNumber": "67bdf1d0-2c5b-4a76-a8fc-d8bba9a1d42e",
+    "ipAddress": "192.168.179.36",
+    "macAddress": "c1:72:21:97:54:af",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-115",
+    "firewallRules": [
+      "allow 1075",
+      "allow 6075",
+      "allow 2904"
+    ],
+    "created": 1756084096.94313,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device15-5",
+    "name": "Global Enterprises router Router Model 878",
+    "type": "router",
+    "model": "Router Model 878",
+    "serialNumber": "67bdf1d0-2c5b-4a76-a8fc-d8bba9a1d42e",
+    "ipAddress": "192.168.179.36",
+    "macAddress": "c1:72:21:97:54:af",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-226",
+    "firewallRules": [
+      "allow 1075",
+      "allow 6075",
+      "allow 2904"
+    ],
+    "created": 1755565696.943136,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device16-0",
+    "name": "Global Enterprises laptop Laptop Model 630",
+    "type": "laptop",
+    "model": "Laptop Model 630",
+    "serialNumber": "1a1761cd-803c-43ca-ad49-d4694d45e56f",
+    "ipAddress": "192.168.135.142",
+    "macAddress": "f0:46:ef:c9:fa:6b",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_device16",
+    "firewallRules": [
+      "allow 1002"
+    ],
+    "created": 1757725696.943144,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device16-1",
+    "name": "Global Enterprises laptop Laptop Model 630",
+    "type": "laptop",
+    "model": "Laptop Model 630",
+    "serialNumber": "1a1761cd-803c-43ca-ad49-d4694d45e56f",
+    "ipAddress": "192.168.135.142",
+    "macAddress": "f0:46:ef:c9:fa:6b",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-943",
+    "firewallRules": [
+      "allow 1002"
+    ],
+    "created": 1757639296.943157,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device16-2",
+    "name": "Global Enterprises laptop Laptop Model 630",
+    "type": "laptop",
+    "model": "Laptop Model 630",
+    "serialNumber": "1a1761cd-803c-43ca-ad49-d4694d45e56f",
+    "ipAddress": "192.168.135.142",
+    "macAddress": "f0:46:ef:c9:fa:6b",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-886",
+    "firewallRules": [
+      "allow 1002"
+    ],
+    "created": 1757034496.943163,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device16-3",
+    "name": "Global Enterprises laptop Laptop Model 630",
+    "type": "laptop",
+    "model": "Laptop Model 630",
+    "serialNumber": "1a1761cd-803c-43ca-ad49-d4694d45e56f",
+    "ipAddress": "192.168.135.142",
+    "macAddress": "f0:46:ef:c9:fa:6b",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-811",
+    "firewallRules": [
+      "allow 1002"
+    ],
+    "created": 1756688896.943169,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device16-4",
+    "name": "Global Enterprises laptop Laptop Model 630",
+    "type": "laptop",
+    "model": "Laptop Model 630",
+    "serialNumber": "1a1761cd-803c-43ca-ad49-d4694d45e56f",
+    "ipAddress": "192.168.135.142",
+    "macAddress": "f0:46:ef:c9:fa:6b",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-487",
+    "firewallRules": [
+      "allow 1002"
+    ],
+    "created": 1756343296.943176,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device16-5",
+    "name": "Global Enterprises laptop Laptop Model 630",
+    "type": "laptop",
+    "model": "Laptop Model 630",
+    "serialNumber": "1a1761cd-803c-43ca-ad49-d4694d45e56f",
+    "ipAddress": "192.168.135.142",
+    "macAddress": "f0:46:ef:c9:fa:6b",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-789",
+    "firewallRules": [
+      "allow 1002"
+    ],
+    "created": 1755565696.943182,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device17-0",
+    "name": "Global Enterprises laptop Laptop Model 506",
+    "type": "laptop",
+    "model": "Laptop Model 506",
+    "serialNumber": "27604c76-cd0a-476c-8f4a-13d5da7b3076",
+    "ipAddress": "192.168.6.99",
+    "macAddress": "89:aa:c6:de:ea:cf",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "46842f93171d_device17",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757725696.943189,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device17-1",
+    "name": "Global Enterprises laptop Laptop Model 506",
+    "type": "laptop",
+    "model": "Laptop Model 506",
+    "serialNumber": "27604c76-cd0a-476c-8f4a-13d5da7b3076",
+    "ipAddress": "192.168.6.99",
+    "macAddress": "89:aa:c6:de:ea:cf",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "46842f93171d_new-device-405",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757466496.943202,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device17-2",
+    "name": "Global Enterprises laptop Laptop Model 506",
+    "type": "laptop",
+    "model": "Laptop Model 506",
+    "serialNumber": "27604c76-cd0a-476c-8f4a-13d5da7b3076",
+    "ipAddress": "192.168.6.99",
+    "macAddress": "89:aa:c6:de:ea:cf",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "46842f93171d_new-device-990",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757034496.943208,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device17-3",
+    "name": "Global Enterprises laptop Laptop Model 506",
+    "type": "laptop",
+    "model": "Laptop Model 506",
+    "serialNumber": "27604c76-cd0a-476c-8f4a-13d5da7b3076",
+    "ipAddress": "192.168.6.99",
+    "macAddress": "89:aa:c6:de:ea:cf",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "46842f93171d_new-device-877",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756688896.943214,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device17-4",
+    "name": "Global Enterprises laptop Laptop Model 506",
+    "type": "laptop",
+    "model": "Laptop Model 506",
+    "serialNumber": "27604c76-cd0a-476c-8f4a-13d5da7b3076",
+    "ipAddress": "192.168.6.99",
+    "macAddress": "89:aa:c6:de:ea:cf",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "46842f93171d_new-device-550",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756256896.94322,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device17-5",
+    "name": "Global Enterprises laptop Laptop Model 506",
+    "type": "laptop",
+    "model": "Laptop Model 506",
+    "serialNumber": "27604c76-cd0a-476c-8f4a-13d5da7b3076",
+    "ipAddress": "192.168.6.99",
+    "macAddress": "89:aa:c6:de:ea:cf",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "46842f93171d_new-device-837",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1755738496.943226,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device18-0",
+    "name": "Global Enterprises server Server Model 300",
+    "type": "server",
+    "model": "Server Model 300",
+    "serialNumber": "ccc5b6f9-36b3-4311-b231-74c73678f77e",
+    "ipAddress": "192.168.168.128",
+    "macAddress": "77:76:e8:b7:3a:bc",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_device18",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5044",
+      "allow 2587"
+    ],
+    "created": 1757725696.943233,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device18-1",
+    "name": "Global Enterprises server Server Model 300",
+    "type": "server",
+    "model": "Server Model 300",
+    "serialNumber": "ccc5b6f9-36b3-4311-b231-74c73678f77e",
+    "ipAddress": "192.168.168.128",
+    "macAddress": "77:76:e8:b7:3a:bc",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-145",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5044",
+      "allow 2587"
+    ],
+    "created": 1757552896.943246,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device18-2",
+    "name": "Global Enterprises server Server Model 300",
+    "type": "server",
+    "model": "Server Model 300",
+    "serialNumber": "ccc5b6f9-36b3-4311-b231-74c73678f77e",
+    "ipAddress": "192.168.168.128",
+    "macAddress": "77:76:e8:b7:3a:bc",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-408",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5044",
+      "allow 2587"
+    ],
+    "created": 1757207296.943253,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device18-3",
+    "name": "Global Enterprises server Server Model 300",
+    "type": "server",
+    "model": "Server Model 300",
+    "serialNumber": "ccc5b6f9-36b3-4311-b231-74c73678f77e",
+    "ipAddress": "192.168.168.128",
+    "macAddress": "77:76:e8:b7:3a:bc",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-856",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5044",
+      "allow 2587"
+    ],
+    "created": 1756429696.943259,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device18-4",
+    "name": "Global Enterprises server Server Model 300",
+    "type": "server",
+    "model": "Server Model 300",
+    "serialNumber": "ccc5b6f9-36b3-4311-b231-74c73678f77e",
+    "ipAddress": "192.168.168.128",
+    "macAddress": "77:76:e8:b7:3a:bc",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-576",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5044",
+      "allow 2587"
+    ],
+    "created": 1756256896.943265,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device18-5",
+    "name": "Global Enterprises server Server Model 300",
+    "type": "server",
+    "model": "Server Model 300",
+    "serialNumber": "ccc5b6f9-36b3-4311-b231-74c73678f77e",
+    "ipAddress": "192.168.168.128",
+    "macAddress": "77:76:e8:b7:3a:bc",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-426",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5044",
+      "allow 2587"
+    ],
+    "created": 1755911296.943271,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device19-0",
+    "name": "Global Enterprises router Router Model 344",
+    "type": "router",
+    "model": "Router Model 344",
+    "serialNumber": "4d369a17-9dbd-4da8-8ae6-a7ddeb002620",
+    "ipAddress": "192.168.66.3",
+    "macAddress": "ee:0f:11:1b:f8:37",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_device19",
+    "firewallRules": [
+      "allow 80",
+      "allow 3056",
+      "allow 2894"
+    ],
+    "created": 1757725696.943278,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device19-1",
+    "name": "Global Enterprises router Router Model 344",
+    "type": "router",
+    "model": "Router Model 344",
+    "serialNumber": "4d369a17-9dbd-4da8-8ae6-a7ddeb002620",
+    "ipAddress": "192.168.66.3",
+    "macAddress": "ee:0f:11:1b:f8:37",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-618",
+    "firewallRules": [
+      "allow 80",
+      "allow 3056",
+      "allow 2894"
+    ],
+    "created": 1757380096.943292,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device19-2",
+    "name": "Global Enterprises router Router Model 344",
+    "type": "router",
+    "model": "Router Model 344",
+    "serialNumber": "4d369a17-9dbd-4da8-8ae6-a7ddeb002620",
+    "ipAddress": "192.168.66.3",
+    "macAddress": "ee:0f:11:1b:f8:37",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-394",
+    "firewallRules": [
+      "allow 80",
+      "allow 3056",
+      "allow 2894"
+    ],
+    "created": 1757207296.943298,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device19-3",
+    "name": "Global Enterprises router Router Model 344",
+    "type": "router",
+    "model": "Router Model 344",
+    "serialNumber": "4d369a17-9dbd-4da8-8ae6-a7ddeb002620",
+    "ipAddress": "192.168.66.3",
+    "macAddress": "ee:0f:11:1b:f8:37",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-323",
+    "firewallRules": [
+      "allow 80",
+      "allow 3056",
+      "allow 2894"
+    ],
+    "created": 1756775296.943304,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device19-4",
+    "name": "Global Enterprises router Router Model 344",
+    "type": "router",
+    "model": "Router Model 344",
+    "serialNumber": "4d369a17-9dbd-4da8-8ae6-a7ddeb002620",
+    "ipAddress": "192.168.66.3",
+    "macAddress": "ee:0f:11:1b:f8:37",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-325",
+    "firewallRules": [
+      "allow 80",
+      "allow 3056",
+      "allow 2894"
+    ],
+    "created": 1756343296.943311,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device19-5",
+    "name": "Global Enterprises router Router Model 344",
+    "type": "router",
+    "model": "Router Model 344",
+    "serialNumber": "4d369a17-9dbd-4da8-8ae6-a7ddeb002620",
+    "ipAddress": "192.168.66.3",
+    "macAddress": "ee:0f:11:1b:f8:37",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-936",
+    "firewallRules": [
+      "allow 80",
+      "allow 3056",
+      "allow 2894"
+    ],
+    "created": 1755565696.943317,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device20-0",
+    "name": "Global Enterprises server Server Model 297",
+    "type": "server",
+    "model": "Server Model 297",
+    "serialNumber": "5d16d090-5ea2-4744-a881-0da6d0206f28",
+    "ipAddress": "192.168.101.188",
+    "macAddress": "98:4f:16:cf:c3:23",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "46842f93171d_device20",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1789",
+      "allow 7380"
+    ],
+    "created": 1757725696.943324,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device20-1",
+    "name": "Global Enterprises server Server Model 297",
+    "type": "server",
+    "model": "Server Model 297",
+    "serialNumber": "5d16d090-5ea2-4744-a881-0da6d0206f28",
+    "ipAddress": "192.168.101.188",
+    "macAddress": "98:4f:16:cf:c3:23",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "46842f93171d_new-device-518",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1789",
+      "allow 7380"
+    ],
+    "created": 1757552896.943337,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device20-2",
+    "name": "Global Enterprises server Server Model 297",
+    "type": "server",
+    "model": "Server Model 297",
+    "serialNumber": "5d16d090-5ea2-4744-a881-0da6d0206f28",
+    "ipAddress": "192.168.101.188",
+    "macAddress": "98:4f:16:cf:c3:23",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "46842f93171d_new-device-364",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1789",
+      "allow 7380"
+    ],
+    "created": 1757207296.943343,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device20-3",
+    "name": "Global Enterprises server Server Model 297",
+    "type": "server",
+    "model": "Server Model 297",
+    "serialNumber": "5d16d090-5ea2-4744-a881-0da6d0206f28",
+    "ipAddress": "192.168.101.188",
+    "macAddress": "98:4f:16:cf:c3:23",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "46842f93171d_new-device-187",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1789",
+      "allow 7380"
+    ],
+    "created": 1756775296.943349,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device20-4",
+    "name": "Global Enterprises server Server Model 297",
+    "type": "server",
+    "model": "Server Model 297",
+    "serialNumber": "5d16d090-5ea2-4744-a881-0da6d0206f28",
+    "ipAddress": "192.168.101.188",
+    "macAddress": "98:4f:16:cf:c3:23",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "46842f93171d_new-device-725",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1789",
+      "allow 7380"
+    ],
+    "created": 1756170496.943355,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device20-5",
+    "name": "Global Enterprises server Server Model 297",
+    "type": "server",
+    "model": "Server Model 297",
+    "serialNumber": "5d16d090-5ea2-4744-a881-0da6d0206f28",
+    "ipAddress": "192.168.101.188",
+    "macAddress": "98:4f:16:cf:c3:23",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "46842f93171d_new-device-949",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1789",
+      "allow 7380"
+    ],
+    "created": 1755652096.943361,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device21-0",
+    "name": "Global Enterprises firewall Firewall Model 640",
+    "type": "firewall",
+    "model": "Firewall Model 640",
+    "serialNumber": "9b4abfee-39c6-49dd-93c5-1c5d1470334b",
+    "ipAddress": "192.168.66.123",
+    "macAddress": "37:44:00:72:e2:29",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_device21",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2245",
+      "allow 8879",
+      "allow 7171"
+    ],
+    "created": 1757725696.943368,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device21-1",
+    "name": "Global Enterprises firewall Firewall Model 640",
+    "type": "firewall",
+    "model": "Firewall Model 640",
+    "serialNumber": "9b4abfee-39c6-49dd-93c5-1c5d1470334b",
+    "ipAddress": "192.168.66.123",
+    "macAddress": "37:44:00:72:e2:29",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-650",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2245",
+      "allow 8879",
+      "allow 7171"
+    ],
+    "created": 1757293696.943381,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device21-2",
+    "name": "Global Enterprises firewall Firewall Model 640",
+    "type": "firewall",
+    "model": "Firewall Model 640",
+    "serialNumber": "9b4abfee-39c6-49dd-93c5-1c5d1470334b",
+    "ipAddress": "192.168.66.123",
+    "macAddress": "37:44:00:72:e2:29",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-709",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2245",
+      "allow 8879",
+      "allow 7171"
+    ],
+    "created": 1757207296.943388,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device21-3",
+    "name": "Global Enterprises firewall Firewall Model 640",
+    "type": "firewall",
+    "model": "Firewall Model 640",
+    "serialNumber": "9b4abfee-39c6-49dd-93c5-1c5d1470334b",
+    "ipAddress": "192.168.66.123",
+    "macAddress": "37:44:00:72:e2:29",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-994",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2245",
+      "allow 8879",
+      "allow 7171"
+    ],
+    "created": 1756688896.943394,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device21-4",
+    "name": "Global Enterprises firewall Firewall Model 640",
+    "type": "firewall",
+    "model": "Firewall Model 640",
+    "serialNumber": "9b4abfee-39c6-49dd-93c5-1c5d1470334b",
+    "ipAddress": "192.168.66.123",
+    "macAddress": "37:44:00:72:e2:29",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-830",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2245",
+      "allow 8879",
+      "allow 7171"
+    ],
+    "created": 1756256896.943401,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device21-5",
+    "name": "Global Enterprises firewall Firewall Model 640",
+    "type": "firewall",
+    "model": "Firewall Model 640",
+    "serialNumber": "9b4abfee-39c6-49dd-93c5-1c5d1470334b",
+    "ipAddress": "192.168.66.123",
+    "macAddress": "37:44:00:72:e2:29",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-272",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 2245",
+      "allow 8879",
+      "allow 7171"
+    ],
+    "created": 1755911296.943407,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device22-0",
+    "name": "Global Enterprises server Server Model 503",
+    "type": "server",
+    "model": "Server Model 503",
+    "serialNumber": "3cb99ee8-32f4-46a8-9ae9-f4def8d57fac",
+    "ipAddress": "192.168.221.186",
+    "macAddress": "3e:7b:55:1d:a5:86",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_device22",
+    "firewallRules": [],
+    "created": 1757725696.943414,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device22-1",
+    "name": "Global Enterprises server Server Model 503",
+    "type": "server",
+    "model": "Server Model 503",
+    "serialNumber": "3cb99ee8-32f4-46a8-9ae9-f4def8d57fac",
+    "ipAddress": "192.168.221.186",
+    "macAddress": "3e:7b:55:1d:a5:86",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-642",
+    "firewallRules": [],
+    "created": 1757466496.943427,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device22-2",
+    "name": "Global Enterprises server Server Model 503",
+    "type": "server",
+    "model": "Server Model 503",
+    "serialNumber": "3cb99ee8-32f4-46a8-9ae9-f4def8d57fac",
+    "ipAddress": "192.168.221.186",
+    "macAddress": "3e:7b:55:1d:a5:86",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-191",
+    "firewallRules": [],
+    "created": 1757207296.943433,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device22-3",
+    "name": "Global Enterprises server Server Model 503",
+    "type": "server",
+    "model": "Server Model 503",
+    "serialNumber": "3cb99ee8-32f4-46a8-9ae9-f4def8d57fac",
+    "ipAddress": "192.168.221.186",
+    "macAddress": "3e:7b:55:1d:a5:86",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-829",
+    "firewallRules": [],
+    "created": 1756775296.943439,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device22-4",
+    "name": "Global Enterprises server Server Model 503",
+    "type": "server",
+    "model": "Server Model 503",
+    "serialNumber": "3cb99ee8-32f4-46a8-9ae9-f4def8d57fac",
+    "ipAddress": "192.168.221.186",
+    "macAddress": "3e:7b:55:1d:a5:86",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-816",
+    "firewallRules": [],
+    "created": 1756170496.943445,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device22-5",
+    "name": "Global Enterprises server Server Model 503",
+    "type": "server",
+    "model": "Server Model 503",
+    "serialNumber": "3cb99ee8-32f4-46a8-9ae9-f4def8d57fac",
+    "ipAddress": "192.168.221.186",
+    "macAddress": "3e:7b:55:1d:a5:86",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-644",
+    "firewallRules": [],
+    "created": 1755565696.943452,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device23-0",
+    "name": "Global Enterprises router Router Model 838",
+    "type": "router",
+    "model": "Router Model 838",
+    "serialNumber": "41d3fbcd-d31e-4103-b43e-d7a91eca93bc",
+    "ipAddress": "192.168.76.93",
+    "macAddress": "c2:a0:e2:53:f5:17",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_device23",
+    "firewallRules": [
+      "allow 6670"
+    ],
+    "created": 1757725696.943458,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device23-1",
+    "name": "Global Enterprises router Router Model 838",
+    "type": "router",
+    "model": "Router Model 838",
+    "serialNumber": "41d3fbcd-d31e-4103-b43e-d7a91eca93bc",
+    "ipAddress": "192.168.76.93",
+    "macAddress": "c2:a0:e2:53:f5:17",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-201",
+    "firewallRules": [
+      "allow 6670"
+    ],
+    "created": 1757466496.943471,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device23-2",
+    "name": "Global Enterprises router Router Model 838",
+    "type": "router",
+    "model": "Router Model 838",
+    "serialNumber": "41d3fbcd-d31e-4103-b43e-d7a91eca93bc",
+    "ipAddress": "192.168.76.93",
+    "macAddress": "c2:a0:e2:53:f5:17",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-515",
+    "firewallRules": [
+      "allow 6670"
+    ],
+    "created": 1756861696.943478,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device23-3",
+    "name": "Global Enterprises router Router Model 838",
+    "type": "router",
+    "model": "Router Model 838",
+    "serialNumber": "41d3fbcd-d31e-4103-b43e-d7a91eca93bc",
+    "ipAddress": "192.168.76.93",
+    "macAddress": "c2:a0:e2:53:f5:17",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-166",
+    "firewallRules": [
+      "allow 6670"
+    ],
+    "created": 1756429696.943483,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device23-4",
+    "name": "Global Enterprises router Router Model 838",
+    "type": "router",
+    "model": "Router Model 838",
+    "serialNumber": "41d3fbcd-d31e-4103-b43e-d7a91eca93bc",
+    "ipAddress": "192.168.76.93",
+    "macAddress": "c2:a0:e2:53:f5:17",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-983",
+    "firewallRules": [
+      "allow 6670"
+    ],
+    "created": 1756084096.94349,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device23-5",
+    "name": "Global Enterprises router Router Model 838",
+    "type": "router",
+    "model": "Router Model 838",
+    "serialNumber": "41d3fbcd-d31e-4103-b43e-d7a91eca93bc",
+    "ipAddress": "192.168.76.93",
+    "macAddress": "c2:a0:e2:53:f5:17",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "46842f93171d_new-device-602",
+    "firewallRules": [
+      "allow 6670"
+    ],
+    "created": 1755652096.943496,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device24-0",
+    "name": "Global Enterprises server Server Model 147",
+    "type": "server",
+    "model": "Server Model 147",
+    "serialNumber": "28d1a78d-331e-4481-bc73-aa8ac9cff5e1",
+    "ipAddress": "192.168.164.68",
+    "macAddress": "f9:67:c2:c1:55:e9",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_device24",
+    "firewallRules": [
+      "allow 80",
+      "allow 5187",
+      "allow 1809"
+    ],
+    "created": 1757725696.943503,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device24-1",
+    "name": "Global Enterprises server Server Model 147",
+    "type": "server",
+    "model": "Server Model 147",
+    "serialNumber": "28d1a78d-331e-4481-bc73-aa8ac9cff5e1",
+    "ipAddress": "192.168.164.68",
+    "macAddress": "f9:67:c2:c1:55:e9",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-629",
+    "firewallRules": [
+      "allow 80",
+      "allow 5187",
+      "allow 1809"
+    ],
+    "created": 1757466496.943515,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device24-2",
+    "name": "Global Enterprises server Server Model 147",
+    "type": "server",
+    "model": "Server Model 147",
+    "serialNumber": "28d1a78d-331e-4481-bc73-aa8ac9cff5e1",
+    "ipAddress": "192.168.164.68",
+    "macAddress": "f9:67:c2:c1:55:e9",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-157",
+    "firewallRules": [
+      "allow 80",
+      "allow 5187",
+      "allow 1809"
+    ],
+    "created": 1756861696.943522,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device24-3",
+    "name": "Global Enterprises server Server Model 147",
+    "type": "server",
+    "model": "Server Model 147",
+    "serialNumber": "28d1a78d-331e-4481-bc73-aa8ac9cff5e1",
+    "ipAddress": "192.168.164.68",
+    "macAddress": "f9:67:c2:c1:55:e9",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-924",
+    "firewallRules": [
+      "allow 80",
+      "allow 5187",
+      "allow 1809"
+    ],
+    "created": 1756602496.943528,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device24-4",
+    "name": "Global Enterprises server Server Model 147",
+    "type": "server",
+    "model": "Server Model 147",
+    "serialNumber": "28d1a78d-331e-4481-bc73-aa8ac9cff5e1",
+    "ipAddress": "192.168.164.68",
+    "macAddress": "f9:67:c2:c1:55:e9",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-229",
+    "firewallRules": [
+      "allow 80",
+      "allow 5187",
+      "allow 1809"
+    ],
+    "created": 1755997696.943534,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device24-5",
+    "name": "Global Enterprises server Server Model 147",
+    "type": "server",
+    "model": "Server Model 147",
+    "serialNumber": "28d1a78d-331e-4481-bc73-aa8ac9cff5e1",
+    "ipAddress": "192.168.164.68",
+    "macAddress": "f9:67:c2:c1:55:e9",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-863",
+    "firewallRules": [
+      "allow 80",
+      "allow 5187",
+      "allow 1809"
+    ],
+    "created": 1755652096.943541,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device25-0",
+    "name": "Global Enterprises IoT Iot Model 700",
+    "type": "IoT",
+    "model": "Iot Model 700",
+    "serialNumber": "be4a8f59-c51c-4647-af73-10b35a91ad3c",
+    "ipAddress": "192.168.56.243",
+    "macAddress": "c4:d3:a0:3f:5a:b8",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_device25",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757725696.943547,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device25-1",
+    "name": "Global Enterprises IoT Iot Model 700",
+    "type": "IoT",
+    "model": "Iot Model 700",
+    "serialNumber": "be4a8f59-c51c-4647-af73-10b35a91ad3c",
+    "ipAddress": "192.168.56.243",
+    "macAddress": "c4:d3:a0:3f:5a:b8",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-426",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757466496.94356,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device25-2",
+    "name": "Global Enterprises IoT Iot Model 700",
+    "type": "IoT",
+    "model": "Iot Model 700",
+    "serialNumber": "be4a8f59-c51c-4647-af73-10b35a91ad3c",
+    "ipAddress": "192.168.56.243",
+    "macAddress": "c4:d3:a0:3f:5a:b8",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-944",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757034496.943566,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device25-3",
+    "name": "Global Enterprises IoT Iot Model 700",
+    "type": "IoT",
+    "model": "Iot Model 700",
+    "serialNumber": "be4a8f59-c51c-4647-af73-10b35a91ad3c",
+    "ipAddress": "192.168.56.243",
+    "macAddress": "c4:d3:a0:3f:5a:b8",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-149",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756602496.943572,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device25-4",
+    "name": "Global Enterprises IoT Iot Model 700",
+    "type": "IoT",
+    "model": "Iot Model 700",
+    "serialNumber": "be4a8f59-c51c-4647-af73-10b35a91ad3c",
+    "ipAddress": "192.168.56.243",
+    "macAddress": "c4:d3:a0:3f:5a:b8",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-584",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756343296.943578,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device25-5",
+    "name": "Global Enterprises IoT Iot Model 700",
+    "type": "IoT",
+    "model": "Iot Model 700",
+    "serialNumber": "be4a8f59-c51c-4647-af73-10b35a91ad3c",
+    "ipAddress": "192.168.56.243",
+    "macAddress": "c4:d3:a0:3f:5a:b8",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-566",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1755738496.943585,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device26-0",
+    "name": "Global Enterprises router Router Model 653",
+    "type": "router",
+    "model": "Router Model 653",
+    "serialNumber": "fd03f51d-4ea8-47ac-ac72-8b1d3059bda8",
+    "ipAddress": "192.168.140.94",
+    "macAddress": "49:4c:5b:ec:48:53",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_device26",
+    "firewallRules": [
+      "allow 3633"
+    ],
+    "created": 1757725696.943592,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device26-1",
+    "name": "Global Enterprises router Router Model 653",
+    "type": "router",
+    "model": "Router Model 653",
+    "serialNumber": "fd03f51d-4ea8-47ac-ac72-8b1d3059bda8",
+    "ipAddress": "192.168.140.94",
+    "macAddress": "49:4c:5b:ec:48:53",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-481",
+    "firewallRules": [
+      "allow 3633"
+    ],
+    "created": 1757293696.943605,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device26-2",
+    "name": "Global Enterprises router Router Model 653",
+    "type": "router",
+    "model": "Router Model 653",
+    "serialNumber": "fd03f51d-4ea8-47ac-ac72-8b1d3059bda8",
+    "ipAddress": "192.168.140.94",
+    "macAddress": "49:4c:5b:ec:48:53",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-696",
+    "firewallRules": [
+      "allow 3633"
+    ],
+    "created": 1756861696.943611,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device26-3",
+    "name": "Global Enterprises router Router Model 653",
+    "type": "router",
+    "model": "Router Model 653",
+    "serialNumber": "fd03f51d-4ea8-47ac-ac72-8b1d3059bda8",
+    "ipAddress": "192.168.140.94",
+    "macAddress": "49:4c:5b:ec:48:53",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-551",
+    "firewallRules": [
+      "allow 3633"
+    ],
+    "created": 1756602496.943617,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device26-4",
+    "name": "Global Enterprises router Router Model 653",
+    "type": "router",
+    "model": "Router Model 653",
+    "serialNumber": "fd03f51d-4ea8-47ac-ac72-8b1d3059bda8",
+    "ipAddress": "192.168.140.94",
+    "macAddress": "49:4c:5b:ec:48:53",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-493",
+    "firewallRules": [
+      "allow 3633"
+    ],
+    "created": 1756343296.943623,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device26-5",
+    "name": "Global Enterprises router Router Model 653",
+    "type": "router",
+    "model": "Router Model 653",
+    "serialNumber": "fd03f51d-4ea8-47ac-ac72-8b1d3059bda8",
+    "ipAddress": "192.168.140.94",
+    "macAddress": "49:4c:5b:ec:48:53",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "46842f93171d_new-device-250",
+    "firewallRules": [
+      "allow 3633"
+    ],
+    "created": 1755565696.943629,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device27-0",
+    "name": "Global Enterprises router Router Model 511",
+    "type": "router",
+    "model": "Router Model 511",
+    "serialNumber": "877a1eda-ccbc-47dc-907b-21b6f59fc315",
+    "ipAddress": "192.168.176.18",
+    "macAddress": "ec:e1:50:60:6f:00",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_device27",
+    "firewallRules": [
+      "allow 7583",
+      "allow 3914"
+    ],
+    "created": 1757725696.943636,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device27-1",
+    "name": "Global Enterprises router Router Model 511",
+    "type": "router",
+    "model": "Router Model 511",
+    "serialNumber": "877a1eda-ccbc-47dc-907b-21b6f59fc315",
+    "ipAddress": "192.168.176.18",
+    "macAddress": "ec:e1:50:60:6f:00",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-627",
+    "firewallRules": [
+      "allow 7583",
+      "allow 3914"
+    ],
+    "created": 1757293696.943649,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device27-2",
+    "name": "Global Enterprises router Router Model 511",
+    "type": "router",
+    "model": "Router Model 511",
+    "serialNumber": "877a1eda-ccbc-47dc-907b-21b6f59fc315",
+    "ipAddress": "192.168.176.18",
+    "macAddress": "ec:e1:50:60:6f:00",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-375",
+    "firewallRules": [
+      "allow 7583",
+      "allow 3914"
+    ],
+    "created": 1756861696.943655,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device27-3",
+    "name": "Global Enterprises router Router Model 511",
+    "type": "router",
+    "model": "Router Model 511",
+    "serialNumber": "877a1eda-ccbc-47dc-907b-21b6f59fc315",
+    "ipAddress": "192.168.176.18",
+    "macAddress": "ec:e1:50:60:6f:00",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-664",
+    "firewallRules": [
+      "allow 7583",
+      "allow 3914"
+    ],
+    "created": 1756688896.943661,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device27-4",
+    "name": "Global Enterprises router Router Model 511",
+    "type": "router",
+    "model": "Router Model 511",
+    "serialNumber": "877a1eda-ccbc-47dc-907b-21b6f59fc315",
+    "ipAddress": "192.168.176.18",
+    "macAddress": "ec:e1:50:60:6f:00",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-248",
+    "firewallRules": [
+      "allow 7583",
+      "allow 3914"
+    ],
+    "created": 1756256896.943668,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device27-5",
+    "name": "Global Enterprises router Router Model 511",
+    "type": "router",
+    "model": "Router Model 511",
+    "serialNumber": "877a1eda-ccbc-47dc-907b-21b6f59fc315",
+    "ipAddress": "192.168.176.18",
+    "macAddress": "ec:e1:50:60:6f:00",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 21.2R3-S1",
+    "hostName": "46842f93171d_new-device-261",
+    "firewallRules": [
+      "allow 7583",
+      "allow 3914"
+    ],
+    "created": 1755911296.943674,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device28-0",
+    "name": "Global Enterprises firewall Firewall Model 697",
+    "type": "firewall",
+    "model": "Firewall Model 697",
+    "serialNumber": "08b6c13d-7321-46c0-b332-65949ee02374",
+    "ipAddress": "192.168.100.166",
+    "macAddress": "e3:51:52:08:b9:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_device28",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5562",
+      "allow 4992",
+      "allow 4052"
+    ],
+    "created": 1757725696.943681,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device28-1",
+    "name": "Global Enterprises firewall Firewall Model 697",
+    "type": "firewall",
+    "model": "Firewall Model 697",
+    "serialNumber": "08b6c13d-7321-46c0-b332-65949ee02374",
+    "ipAddress": "192.168.100.166",
+    "macAddress": "e3:51:52:08:b9:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-544",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5562",
+      "allow 4992",
+      "allow 4052"
+    ],
+    "created": 1757380096.943694,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device28-2",
+    "name": "Global Enterprises firewall Firewall Model 697",
+    "type": "firewall",
+    "model": "Firewall Model 697",
+    "serialNumber": "08b6c13d-7321-46c0-b332-65949ee02374",
+    "ipAddress": "192.168.100.166",
+    "macAddress": "e3:51:52:08:b9:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-503",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5562",
+      "allow 4992",
+      "allow 4052"
+    ],
+    "created": 1756948096.9437,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device28-3",
+    "name": "Global Enterprises firewall Firewall Model 697",
+    "type": "firewall",
+    "model": "Firewall Model 697",
+    "serialNumber": "08b6c13d-7321-46c0-b332-65949ee02374",
+    "ipAddress": "192.168.100.166",
+    "macAddress": "e3:51:52:08:b9:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-644",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5562",
+      "allow 4992",
+      "allow 4052"
+    ],
+    "created": 1756516096.943706,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device28-4",
+    "name": "Global Enterprises firewall Firewall Model 697",
+    "type": "firewall",
+    "model": "Firewall Model 697",
+    "serialNumber": "08b6c13d-7321-46c0-b332-65949ee02374",
+    "ipAddress": "192.168.100.166",
+    "macAddress": "e3:51:52:08:b9:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-828",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5562",
+      "allow 4992",
+      "allow 4052"
+    ],
+    "created": 1756084096.943713,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device28-5",
+    "name": "Global Enterprises firewall Firewall Model 697",
+    "type": "firewall",
+    "model": "Firewall Model 697",
+    "serialNumber": "08b6c13d-7321-46c0-b332-65949ee02374",
+    "ipAddress": "192.168.100.166",
+    "macAddress": "e3:51:52:08:b9:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-998",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5562",
+      "allow 4992",
+      "allow 4052"
+    ],
+    "created": 1755738496.943719,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device29-0",
+    "name": "Global Enterprises server Server Model 333",
+    "type": "server",
+    "model": "Server Model 333",
+    "serialNumber": "61a39f13-f70e-41cc-8da8-f2cd92369bda",
+    "ipAddress": "192.168.8.123",
+    "macAddress": "3f:d5:43:ac:2f:15",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04.2 LTS",
+    "hostName": "46842f93171d_device29",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757725696.943726,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device29-1",
+    "name": "Global Enterprises server Server Model 333",
+    "type": "server",
+    "model": "Server Model 333",
+    "serialNumber": "61a39f13-f70e-41cc-8da8-f2cd92369bda",
+    "ipAddress": "192.168.8.123",
+    "macAddress": "3f:d5:43:ac:2f:15",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04.2 LTS",
+    "hostName": "46842f93171d_new-device-236",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757380096.943739,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device29-2",
+    "name": "Global Enterprises server Server Model 333",
+    "type": "server",
+    "model": "Server Model 333",
+    "serialNumber": "61a39f13-f70e-41cc-8da8-f2cd92369bda",
+    "ipAddress": "192.168.8.123",
+    "macAddress": "3f:d5:43:ac:2f:15",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04.2 LTS",
+    "hostName": "46842f93171d_new-device-156",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756861696.943745,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device29-3",
+    "name": "Global Enterprises server Server Model 333",
+    "type": "server",
+    "model": "Server Model 333",
+    "serialNumber": "61a39f13-f70e-41cc-8da8-f2cd92369bda",
+    "ipAddress": "192.168.8.123",
+    "macAddress": "3f:d5:43:ac:2f:15",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04.2 LTS",
+    "hostName": "46842f93171d_new-device-149",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756688896.943751,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device29-4",
+    "name": "Global Enterprises server Server Model 333",
+    "type": "server",
+    "model": "Server Model 333",
+    "serialNumber": "61a39f13-f70e-41cc-8da8-f2cd92369bda",
+    "ipAddress": "192.168.8.123",
+    "macAddress": "3f:d5:43:ac:2f:15",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04.2 LTS",
+    "hostName": "46842f93171d_new-device-362",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755997696.943757,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device29-5",
+    "name": "Global Enterprises server Server Model 333",
+    "type": "server",
+    "model": "Server Model 333",
+    "serialNumber": "61a39f13-f70e-41cc-8da8-f2cd92369bda",
+    "ipAddress": "192.168.8.123",
+    "macAddress": "3f:d5:43:ac:2f:15",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04.2 LTS",
+    "hostName": "46842f93171d_new-device-704",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755652096.943764,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device30-0",
+    "name": "Global Enterprises IoT Iot Model 697",
+    "type": "IoT",
+    "model": "Iot Model 697",
+    "serialNumber": "329679c2-e85d-44c6-97f2-ca83e7fa83a8",
+    "ipAddress": "192.168.250.202",
+    "macAddress": "62:84:93:29:91:cd",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_device30",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757725696.943771,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device30-1",
+    "name": "Global Enterprises IoT Iot Model 697",
+    "type": "IoT",
+    "model": "Iot Model 697",
+    "serialNumber": "329679c2-e85d-44c6-97f2-ca83e7fa83a8",
+    "ipAddress": "192.168.250.202",
+    "macAddress": "62:84:93:29:91:cd",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-157",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757639296.943784,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device30-2",
+    "name": "Global Enterprises IoT Iot Model 697",
+    "type": "IoT",
+    "model": "Iot Model 697",
+    "serialNumber": "329679c2-e85d-44c6-97f2-ca83e7fa83a8",
+    "ipAddress": "192.168.250.202",
+    "macAddress": "62:84:93:29:91:cd",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-354",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756948096.94379,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device30-3",
+    "name": "Global Enterprises IoT Iot Model 697",
+    "type": "IoT",
+    "model": "Iot Model 697",
+    "serialNumber": "329679c2-e85d-44c6-97f2-ca83e7fa83a8",
+    "ipAddress": "192.168.250.202",
+    "macAddress": "62:84:93:29:91:cd",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-576",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756688896.943797,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device30-4",
+    "name": "Global Enterprises IoT Iot Model 697",
+    "type": "IoT",
+    "model": "Iot Model 697",
+    "serialNumber": "329679c2-e85d-44c6-97f2-ca83e7fa83a8",
+    "ipAddress": "192.168.250.202",
+    "macAddress": "62:84:93:29:91:cd",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-872",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1755997696.943803,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device30-5",
+    "name": "Global Enterprises IoT Iot Model 697",
+    "type": "IoT",
+    "model": "Iot Model 697",
+    "serialNumber": "329679c2-e85d-44c6-97f2-ca83e7fa83a8",
+    "ipAddress": "192.168.250.202",
+    "macAddress": "62:84:93:29:91:cd",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "46842f93171d_new-device-852",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1755911296.943809,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device31-0",
+    "name": "Global Enterprises laptop Laptop Model 917",
+    "type": "laptop",
+    "model": "Laptop Model 917",
+    "serialNumber": "e07c3274-a0a4-45c3-ba8e-e9ee149e0847",
+    "ipAddress": "192.168.47.196",
+    "macAddress": "d0:84:18:be:7c:eb",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_device31",
+    "firewallRules": [
+      "allow 443",
+      "allow 6532"
+    ],
+    "created": 1757725696.943816,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device31-1",
+    "name": "Global Enterprises laptop Laptop Model 917",
+    "type": "laptop",
+    "model": "Laptop Model 917",
+    "serialNumber": "e07c3274-a0a4-45c3-ba8e-e9ee149e0847",
+    "ipAddress": "192.168.47.196",
+    "macAddress": "d0:84:18:be:7c:eb",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-455",
+    "firewallRules": [
+      "allow 443",
+      "allow 6532"
+    ],
+    "created": 1757552896.943829,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device31-2",
+    "name": "Global Enterprises laptop Laptop Model 917",
+    "type": "laptop",
+    "model": "Laptop Model 917",
+    "serialNumber": "e07c3274-a0a4-45c3-ba8e-e9ee149e0847",
+    "ipAddress": "192.168.47.196",
+    "macAddress": "d0:84:18:be:7c:eb",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-608",
+    "firewallRules": [
+      "allow 443",
+      "allow 6532"
+    ],
+    "created": 1757207296.943835,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device31-3",
+    "name": "Global Enterprises laptop Laptop Model 917",
+    "type": "laptop",
+    "model": "Laptop Model 917",
+    "serialNumber": "e07c3274-a0a4-45c3-ba8e-e9ee149e0847",
+    "ipAddress": "192.168.47.196",
+    "macAddress": "d0:84:18:be:7c:eb",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-340",
+    "firewallRules": [
+      "allow 443",
+      "allow 6532"
+    ],
+    "created": 1756688896.943842,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device31-4",
+    "name": "Global Enterprises laptop Laptop Model 917",
+    "type": "laptop",
+    "model": "Laptop Model 917",
+    "serialNumber": "e07c3274-a0a4-45c3-ba8e-e9ee149e0847",
+    "ipAddress": "192.168.47.196",
+    "macAddress": "d0:84:18:be:7c:eb",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-330",
+    "firewallRules": [
+      "allow 443",
+      "allow 6532"
+    ],
+    "created": 1755997696.943848,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device31-5",
+    "name": "Global Enterprises laptop Laptop Model 917",
+    "type": "laptop",
+    "model": "Laptop Model 917",
+    "serialNumber": "e07c3274-a0a4-45c3-ba8e-e9ee149e0847",
+    "ipAddress": "192.168.47.196",
+    "macAddress": "d0:84:18:be:7c:eb",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-990",
+    "firewallRules": [
+      "allow 443",
+      "allow 6532"
+    ],
+    "created": 1755565696.943854,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device32-0",
+    "name": "Global Enterprises router Router Model 927",
+    "type": "router",
+    "model": "Router Model 927",
+    "serialNumber": "fedef310-ad28-48a7-a090-9480a528dccf",
+    "ipAddress": "192.168.56.230",
+    "macAddress": "80:0f:e4:5b:16:8c",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "46842f93171d_device32",
+    "firewallRules": [
+      "allow 80",
+      "allow 5586"
+    ],
+    "created": 1757725696.943861,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device32-1",
+    "name": "Global Enterprises router Router Model 927",
+    "type": "router",
+    "model": "Router Model 927",
+    "serialNumber": "fedef310-ad28-48a7-a090-9480a528dccf",
+    "ipAddress": "192.168.56.230",
+    "macAddress": "80:0f:e4:5b:16:8c",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "46842f93171d_new-device-253",
+    "firewallRules": [
+      "allow 80",
+      "allow 5586"
+    ],
+    "created": 1757380096.943873,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device32-2",
+    "name": "Global Enterprises router Router Model 927",
+    "type": "router",
+    "model": "Router Model 927",
+    "serialNumber": "fedef310-ad28-48a7-a090-9480a528dccf",
+    "ipAddress": "192.168.56.230",
+    "macAddress": "80:0f:e4:5b:16:8c",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "46842f93171d_new-device-213",
+    "firewallRules": [
+      "allow 80",
+      "allow 5586"
+    ],
+    "created": 1756861696.94388,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device32-3",
+    "name": "Global Enterprises router Router Model 927",
+    "type": "router",
+    "model": "Router Model 927",
+    "serialNumber": "fedef310-ad28-48a7-a090-9480a528dccf",
+    "ipAddress": "192.168.56.230",
+    "macAddress": "80:0f:e4:5b:16:8c",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "46842f93171d_new-device-294",
+    "firewallRules": [
+      "allow 80",
+      "allow 5586"
+    ],
+    "created": 1756516096.943886,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device32-4",
+    "name": "Global Enterprises router Router Model 927",
+    "type": "router",
+    "model": "Router Model 927",
+    "serialNumber": "fedef310-ad28-48a7-a090-9480a528dccf",
+    "ipAddress": "192.168.56.230",
+    "macAddress": "80:0f:e4:5b:16:8c",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "46842f93171d_new-device-382",
+    "firewallRules": [
+      "allow 80",
+      "allow 5586"
+    ],
+    "created": 1756084096.943892,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device32-5",
+    "name": "Global Enterprises router Router Model 927",
+    "type": "router",
+    "model": "Router Model 927",
+    "serialNumber": "fedef310-ad28-48a7-a090-9480a528dccf",
+    "ipAddress": "192.168.56.230",
+    "macAddress": "80:0f:e4:5b:16:8c",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "46842f93171d_new-device-259",
+    "firewallRules": [
+      "allow 80",
+      "allow 5586"
+    ],
+    "created": 1755565696.943898,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device33-0",
+    "name": "Global Enterprises firewall Firewall Model 793",
+    "type": "firewall",
+    "model": "Firewall Model 793",
+    "serialNumber": "8d1ab567-6aaf-4de3-8376-853462ee37fb",
+    "ipAddress": "192.168.9.199",
+    "macAddress": "cf:63:fc:74:a1:28",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_device33",
+    "firewallRules": [
+      "allow 80",
+      "allow 1118",
+      "allow 2177",
+      "allow 2792"
+    ],
+    "created": 1757725696.943905,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device33-1",
+    "name": "Global Enterprises firewall Firewall Model 793",
+    "type": "firewall",
+    "model": "Firewall Model 793",
+    "serialNumber": "8d1ab567-6aaf-4de3-8376-853462ee37fb",
+    "ipAddress": "192.168.9.199",
+    "macAddress": "cf:63:fc:74:a1:28",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-629",
+    "firewallRules": [
+      "allow 80",
+      "allow 1118",
+      "allow 2177",
+      "allow 2792"
+    ],
+    "created": 1757552896.943917,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device33-2",
+    "name": "Global Enterprises firewall Firewall Model 793",
+    "type": "firewall",
+    "model": "Firewall Model 793",
+    "serialNumber": "8d1ab567-6aaf-4de3-8376-853462ee37fb",
+    "ipAddress": "192.168.9.199",
+    "macAddress": "cf:63:fc:74:a1:28",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-707",
+    "firewallRules": [
+      "allow 80",
+      "allow 1118",
+      "allow 2177",
+      "allow 2792"
+    ],
+    "created": 1757120896.943924,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device33-3",
+    "name": "Global Enterprises firewall Firewall Model 793",
+    "type": "firewall",
+    "model": "Firewall Model 793",
+    "serialNumber": "8d1ab567-6aaf-4de3-8376-853462ee37fb",
+    "ipAddress": "192.168.9.199",
+    "macAddress": "cf:63:fc:74:a1:28",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-248",
+    "firewallRules": [
+      "allow 80",
+      "allow 1118",
+      "allow 2177",
+      "allow 2792"
+    ],
+    "created": 1756429696.94393,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device33-4",
+    "name": "Global Enterprises firewall Firewall Model 793",
+    "type": "firewall",
+    "model": "Firewall Model 793",
+    "serialNumber": "8d1ab567-6aaf-4de3-8376-853462ee37fb",
+    "ipAddress": "192.168.9.199",
+    "macAddress": "cf:63:fc:74:a1:28",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-816",
+    "firewallRules": [
+      "allow 80",
+      "allow 1118",
+      "allow 2177",
+      "allow 2792"
+    ],
+    "created": 1755997696.943937,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device33-5",
+    "name": "Global Enterprises firewall Firewall Model 793",
+    "type": "firewall",
+    "model": "Firewall Model 793",
+    "serialNumber": "8d1ab567-6aaf-4de3-8376-853462ee37fb",
+    "ipAddress": "192.168.9.199",
+    "macAddress": "cf:63:fc:74:a1:28",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "46842f93171d_new-device-432",
+    "firewallRules": [
+      "allow 80",
+      "allow 1118",
+      "allow 2177",
+      "allow 2792"
+    ],
+    "created": 1755565696.943943,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device34-0",
+    "name": "Global Enterprises server Server Model 371",
+    "type": "server",
+    "model": "Server Model 371",
+    "serialNumber": "d1ba4588-c6b7-4981-9b88-8bd04938b7fc",
+    "ipAddress": "192.168.206.86",
+    "macAddress": "b9:9c:85:8d:70:59",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_device34",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7519",
+      "allow 3665"
+    ],
+    "created": 1757725696.94395,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device34-1",
+    "name": "Global Enterprises server Server Model 371",
+    "type": "server",
+    "model": "Server Model 371",
+    "serialNumber": "d1ba4588-c6b7-4981-9b88-8bd04938b7fc",
+    "ipAddress": "192.168.206.86",
+    "macAddress": "b9:9c:85:8d:70:59",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-568",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7519",
+      "allow 3665"
+    ],
+    "created": 1757552896.943962,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device34-2",
+    "name": "Global Enterprises server Server Model 371",
+    "type": "server",
+    "model": "Server Model 371",
+    "serialNumber": "d1ba4588-c6b7-4981-9b88-8bd04938b7fc",
+    "ipAddress": "192.168.206.86",
+    "macAddress": "b9:9c:85:8d:70:59",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-749",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7519",
+      "allow 3665"
+    ],
+    "created": 1757120896.943969,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device34-3",
+    "name": "Global Enterprises server Server Model 371",
+    "type": "server",
+    "model": "Server Model 371",
+    "serialNumber": "d1ba4588-c6b7-4981-9b88-8bd04938b7fc",
+    "ipAddress": "192.168.206.86",
+    "macAddress": "b9:9c:85:8d:70:59",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-625",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7519",
+      "allow 3665"
+    ],
+    "created": 1756516096.943975,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device34-4",
+    "name": "Global Enterprises server Server Model 371",
+    "type": "server",
+    "model": "Server Model 371",
+    "serialNumber": "d1ba4588-c6b7-4981-9b88-8bd04938b7fc",
+    "ipAddress": "192.168.206.86",
+    "macAddress": "b9:9c:85:8d:70:59",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-294",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7519",
+      "allow 3665"
+    ],
+    "created": 1756256896.943981,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device34-5",
+    "name": "Global Enterprises server Server Model 371",
+    "type": "server",
+    "model": "Server Model 371",
+    "serialNumber": "d1ba4588-c6b7-4981-9b88-8bd04938b7fc",
+    "ipAddress": "192.168.206.86",
+    "macAddress": "b9:9c:85:8d:70:59",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-655",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7519",
+      "allow 3665"
+    ],
+    "created": 1755824896.943988,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device35-0",
+    "name": "Global Enterprises server Server Model 224",
+    "type": "server",
+    "model": "Server Model 224",
+    "serialNumber": "b517b5b0-b779-4e28-a060-6fe7486b3f1d",
+    "ipAddress": "192.168.33.90",
+    "macAddress": "07:11:11:27:41:82",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_device35",
+    "firewallRules": [
+      "allow 443",
+      "allow 5332"
+    ],
+    "created": 1757725696.943995,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device35-1",
+    "name": "Global Enterprises server Server Model 224",
+    "type": "server",
+    "model": "Server Model 224",
+    "serialNumber": "b517b5b0-b779-4e28-a060-6fe7486b3f1d",
+    "ipAddress": "192.168.33.90",
+    "macAddress": "07:11:11:27:41:82",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-324",
+    "firewallRules": [
+      "allow 443",
+      "allow 5332"
+    ],
+    "created": 1757552896.944008,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device35-2",
+    "name": "Global Enterprises server Server Model 224",
+    "type": "server",
+    "model": "Server Model 224",
+    "serialNumber": "b517b5b0-b779-4e28-a060-6fe7486b3f1d",
+    "ipAddress": "192.168.33.90",
+    "macAddress": "07:11:11:27:41:82",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-261",
+    "firewallRules": [
+      "allow 443",
+      "allow 5332"
+    ],
+    "created": 1756948096.944014,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device35-3",
+    "name": "Global Enterprises server Server Model 224",
+    "type": "server",
+    "model": "Server Model 224",
+    "serialNumber": "b517b5b0-b779-4e28-a060-6fe7486b3f1d",
+    "ipAddress": "192.168.33.90",
+    "macAddress": "07:11:11:27:41:82",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-917",
+    "firewallRules": [
+      "allow 443",
+      "allow 5332"
+    ],
+    "created": 1756429696.94402,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device35-4",
+    "name": "Global Enterprises server Server Model 224",
+    "type": "server",
+    "model": "Server Model 224",
+    "serialNumber": "b517b5b0-b779-4e28-a060-6fe7486b3f1d",
+    "ipAddress": "192.168.33.90",
+    "macAddress": "07:11:11:27:41:82",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-484",
+    "firewallRules": [
+      "allow 443",
+      "allow 5332"
+    ],
+    "created": 1755997696.944026,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device35-5",
+    "name": "Global Enterprises server Server Model 224",
+    "type": "server",
+    "model": "Server Model 224",
+    "serialNumber": "b517b5b0-b779-4e28-a060-6fe7486b3f1d",
+    "ipAddress": "192.168.33.90",
+    "macAddress": "07:11:11:27:41:82",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "46842f93171d_new-device-178",
+    "firewallRules": [
+      "allow 443",
+      "allow 5332"
+    ],
+    "created": 1755565696.944033,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device36-0",
+    "name": "Global Enterprises firewall Firewall Model 229",
+    "type": "firewall",
+    "model": "Firewall Model 229",
+    "serialNumber": "e66c6fcf-05d4-4c97-af6d-0183ea33ceed",
+    "ipAddress": "192.168.100.153",
+    "macAddress": "47:95:bf:eb:08:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_device36",
+    "firewallRules": [
+      "allow 80",
+      "allow 3068"
+    ],
+    "created": 1757725696.94404,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device36-1",
+    "name": "Global Enterprises firewall Firewall Model 229",
+    "type": "firewall",
+    "model": "Firewall Model 229",
+    "serialNumber": "e66c6fcf-05d4-4c97-af6d-0183ea33ceed",
+    "ipAddress": "192.168.100.153",
+    "macAddress": "47:95:bf:eb:08:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-785",
+    "firewallRules": [
+      "allow 80",
+      "allow 3068"
+    ],
+    "created": 1757552896.944052,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device36-2",
+    "name": "Global Enterprises firewall Firewall Model 229",
+    "type": "firewall",
+    "model": "Firewall Model 229",
+    "serialNumber": "e66c6fcf-05d4-4c97-af6d-0183ea33ceed",
+    "ipAddress": "192.168.100.153",
+    "macAddress": "47:95:bf:eb:08:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-309",
+    "firewallRules": [
+      "allow 80",
+      "allow 3068"
+    ],
+    "created": 1757207296.944058,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device36-3",
+    "name": "Global Enterprises firewall Firewall Model 229",
+    "type": "firewall",
+    "model": "Firewall Model 229",
+    "serialNumber": "e66c6fcf-05d4-4c97-af6d-0183ea33ceed",
+    "ipAddress": "192.168.100.153",
+    "macAddress": "47:95:bf:eb:08:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-931",
+    "firewallRules": [
+      "allow 80",
+      "allow 3068"
+    ],
+    "created": 1756602496.944064,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device36-4",
+    "name": "Global Enterprises firewall Firewall Model 229",
+    "type": "firewall",
+    "model": "Firewall Model 229",
+    "serialNumber": "e66c6fcf-05d4-4c97-af6d-0183ea33ceed",
+    "ipAddress": "192.168.100.153",
+    "macAddress": "47:95:bf:eb:08:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-351",
+    "firewallRules": [
+      "allow 80",
+      "allow 3068"
+    ],
+    "created": 1756170496.944071,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device36-5",
+    "name": "Global Enterprises firewall Firewall Model 229",
+    "type": "firewall",
+    "model": "Firewall Model 229",
+    "serialNumber": "e66c6fcf-05d4-4c97-af6d-0183ea33ceed",
+    "ipAddress": "192.168.100.153",
+    "macAddress": "47:95:bf:eb:08:de",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "46842f93171d_new-device-539",
+    "firewallRules": [
+      "allow 80",
+      "allow 3068"
+    ],
+    "created": 1755911296.944077,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device37-0",
+    "name": "Global Enterprises server Server Model 963",
+    "type": "server",
+    "model": "Server Model 963",
+    "serialNumber": "fba486b6-eda3-4130-80ee-3b77c1fa3b2b",
+    "ipAddress": "192.168.203.242",
+    "macAddress": "7c:99:11:e2:0c:b4",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_device37",
+    "firewallRules": [],
+    "created": 1757725696.944084,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device37-1",
+    "name": "Global Enterprises server Server Model 963",
+    "type": "server",
+    "model": "Server Model 963",
+    "serialNumber": "fba486b6-eda3-4130-80ee-3b77c1fa3b2b",
+    "ipAddress": "192.168.203.242",
+    "macAddress": "7c:99:11:e2:0c:b4",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-351",
+    "firewallRules": [],
+    "created": 1757380096.944097,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device37-2",
+    "name": "Global Enterprises server Server Model 963",
+    "type": "server",
+    "model": "Server Model 963",
+    "serialNumber": "fba486b6-eda3-4130-80ee-3b77c1fa3b2b",
+    "ipAddress": "192.168.203.242",
+    "macAddress": "7c:99:11:e2:0c:b4",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-156",
+    "firewallRules": [],
+    "created": 1756861696.944103,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device37-3",
+    "name": "Global Enterprises server Server Model 963",
+    "type": "server",
+    "model": "Server Model 963",
+    "serialNumber": "fba486b6-eda3-4130-80ee-3b77c1fa3b2b",
+    "ipAddress": "192.168.203.242",
+    "macAddress": "7c:99:11:e2:0c:b4",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-373",
+    "firewallRules": [],
+    "created": 1756688896.944109,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device37-4",
+    "name": "Global Enterprises server Server Model 963",
+    "type": "server",
+    "model": "Server Model 963",
+    "serialNumber": "fba486b6-eda3-4130-80ee-3b77c1fa3b2b",
+    "ipAddress": "192.168.203.242",
+    "macAddress": "7c:99:11:e2:0c:b4",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-803",
+    "firewallRules": [],
+    "created": 1756170496.944115,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device37-5",
+    "name": "Global Enterprises server Server Model 963",
+    "type": "server",
+    "model": "Server Model 963",
+    "serialNumber": "fba486b6-eda3-4130-80ee-3b77c1fa3b2b",
+    "ipAddress": "192.168.203.242",
+    "macAddress": "7c:99:11:e2:0c:b4",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "46842f93171d_new-device-605",
+    "firewallRules": [],
+    "created": 1755824896.944121,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device38-0",
+    "name": "Global Enterprises laptop Laptop Model 775",
+    "type": "laptop",
+    "model": "Laptop Model 775",
+    "serialNumber": "ad96799a-9b1c-4d69-95d2-4398b24ae77b",
+    "ipAddress": "192.168.237.48",
+    "macAddress": "a3:60:19:59:ac:23",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_device38",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3965"
+    ],
+    "created": 1757725696.944128,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device38-1",
+    "name": "Global Enterprises laptop Laptop Model 775",
+    "type": "laptop",
+    "model": "Laptop Model 775",
+    "serialNumber": "ad96799a-9b1c-4d69-95d2-4398b24ae77b",
+    "ipAddress": "192.168.237.48",
+    "macAddress": "a3:60:19:59:ac:23",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-429",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3965"
+    ],
+    "created": 1757552896.944141,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device38-2",
+    "name": "Global Enterprises laptop Laptop Model 775",
+    "type": "laptop",
+    "model": "Laptop Model 775",
+    "serialNumber": "ad96799a-9b1c-4d69-95d2-4398b24ae77b",
+    "ipAddress": "192.168.237.48",
+    "macAddress": "a3:60:19:59:ac:23",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-320",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3965"
+    ],
+    "created": 1757120896.944148,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device38-3",
+    "name": "Global Enterprises laptop Laptop Model 775",
+    "type": "laptop",
+    "model": "Laptop Model 775",
+    "serialNumber": "ad96799a-9b1c-4d69-95d2-4398b24ae77b",
+    "ipAddress": "192.168.237.48",
+    "macAddress": "a3:60:19:59:ac:23",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-124",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3965"
+    ],
+    "created": 1756516096.944154,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device38-4",
+    "name": "Global Enterprises laptop Laptop Model 775",
+    "type": "laptop",
+    "model": "Laptop Model 775",
+    "serialNumber": "ad96799a-9b1c-4d69-95d2-4398b24ae77b",
+    "ipAddress": "192.168.237.48",
+    "macAddress": "a3:60:19:59:ac:23",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-217",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3965"
+    ],
+    "created": 1756343296.94416,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device38-5",
+    "name": "Global Enterprises laptop Laptop Model 775",
+    "type": "laptop",
+    "model": "Laptop Model 775",
+    "serialNumber": "ad96799a-9b1c-4d69-95d2-4398b24ae77b",
+    "ipAddress": "192.168.237.48",
+    "macAddress": "a3:60:19:59:ac:23",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "46842f93171d_new-device-348",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3965"
+    ],
+    "created": 1755565696.944166,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device39-0",
+    "name": "Global Enterprises firewall Firewall Model 720",
+    "type": "firewall",
+    "model": "Firewall Model 720",
+    "serialNumber": "0d10d8d3-baef-45bf-99b5-31d430e25420",
+    "ipAddress": "192.168.36.215",
+    "macAddress": "15:e0:10:50:3f:cd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "46842f93171d_device39",
+    "firewallRules": [
+      "allow 1210"
+    ],
+    "created": 1757725696.944173,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device39-1",
+    "name": "Global Enterprises firewall Firewall Model 720",
+    "type": "firewall",
+    "model": "Firewall Model 720",
+    "serialNumber": "0d10d8d3-baef-45bf-99b5-31d430e25420",
+    "ipAddress": "192.168.36.215",
+    "macAddress": "15:e0:10:50:3f:cd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "46842f93171d_new-device-102",
+    "firewallRules": [
+      "allow 1210"
+    ],
+    "created": 1757552896.944186,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device39-2",
+    "name": "Global Enterprises firewall Firewall Model 720",
+    "type": "firewall",
+    "model": "Firewall Model 720",
+    "serialNumber": "0d10d8d3-baef-45bf-99b5-31d430e25420",
+    "ipAddress": "192.168.36.215",
+    "macAddress": "15:e0:10:50:3f:cd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "46842f93171d_new-device-523",
+    "firewallRules": [
+      "allow 1210"
+    ],
+    "created": 1757120896.944192,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device39-3",
+    "name": "Global Enterprises firewall Firewall Model 720",
+    "type": "firewall",
+    "model": "Firewall Model 720",
+    "serialNumber": "0d10d8d3-baef-45bf-99b5-31d430e25420",
+    "ipAddress": "192.168.36.215",
+    "macAddress": "15:e0:10:50:3f:cd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "46842f93171d_new-device-649",
+    "firewallRules": [
+      "allow 1210"
+    ],
+    "created": 1756775296.944198,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device39-4",
+    "name": "Global Enterprises firewall Firewall Model 720",
+    "type": "firewall",
+    "model": "Firewall Model 720",
+    "serialNumber": "0d10d8d3-baef-45bf-99b5-31d430e25420",
+    "ipAddress": "192.168.36.215",
+    "macAddress": "15:e0:10:50:3f:cd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "46842f93171d_new-device-466",
+    "firewallRules": [
+      "allow 1210"
+    ],
+    "created": 1756084096.944205,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device39-5",
+    "name": "Global Enterprises firewall Firewall Model 720",
+    "type": "firewall",
+    "model": "Firewall Model 720",
+    "serialNumber": "0d10d8d3-baef-45bf-99b5-31d430e25420",
+    "ipAddress": "192.168.36.215",
+    "macAddress": "15:e0:10:50:3f:cd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "46842f93171d_new-device-616",
+    "firewallRules": [
+      "allow 1210"
+    ],
+    "created": 1755565696.944211,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device40-0",
+    "name": "Global Enterprises laptop Laptop Model 134",
+    "type": "laptop",
+    "model": "Laptop Model 134",
+    "serialNumber": "4bad0305-f5d7-4fda-b454-572f07edb451",
+    "ipAddress": "192.168.39.155",
+    "macAddress": "54:ce:9f:4d:b7:18",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "46842f93171d_device40",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757725696.944218,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device40-1",
+    "name": "Global Enterprises laptop Laptop Model 134",
+    "type": "laptop",
+    "model": "Laptop Model 134",
+    "serialNumber": "4bad0305-f5d7-4fda-b454-572f07edb451",
+    "ipAddress": "192.168.39.155",
+    "macAddress": "54:ce:9f:4d:b7:18",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "46842f93171d_new-device-717",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757293696.94423,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device40-2",
+    "name": "Global Enterprises laptop Laptop Model 134",
+    "type": "laptop",
+    "model": "Laptop Model 134",
+    "serialNumber": "4bad0305-f5d7-4fda-b454-572f07edb451",
+    "ipAddress": "192.168.39.155",
+    "macAddress": "54:ce:9f:4d:b7:18",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "46842f93171d_new-device-289",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757207296.944236,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device40-3",
+    "name": "Global Enterprises laptop Laptop Model 134",
+    "type": "laptop",
+    "model": "Laptop Model 134",
+    "serialNumber": "4bad0305-f5d7-4fda-b454-572f07edb451",
+    "ipAddress": "192.168.39.155",
+    "macAddress": "54:ce:9f:4d:b7:18",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "46842f93171d_new-device-326",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756775296.944242,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device40-4",
+    "name": "Global Enterprises laptop Laptop Model 134",
+    "type": "laptop",
+    "model": "Laptop Model 134",
+    "serialNumber": "4bad0305-f5d7-4fda-b454-572f07edb451",
+    "ipAddress": "192.168.39.155",
+    "macAddress": "54:ce:9f:4d:b7:18",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "46842f93171d_new-device-804",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756343296.944248,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  },
+  {
+    "_key": "46842f93171d_device40-5",
+    "name": "Global Enterprises laptop Laptop Model 134",
+    "type": "laptop",
+    "model": "Laptop Model 134",
+    "serialNumber": "4bad0305-f5d7-4fda-b454-572f07edb451",
+    "ipAddress": "192.168.39.155",
+    "macAddress": "54:ce:9f:4d:b7:18",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "46842f93171d_new-device-657",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1755911296.944254,
+    "expired": 9223372036854775807,
+    "tenant_46842f93171d_attr": "46842f93171d"
+  }
+]

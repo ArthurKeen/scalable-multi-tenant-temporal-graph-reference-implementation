@@ -53,13 +53,13 @@ graph TB
 
 | Collection | Purpose | Temporal Data | Key Attributes |
 |------------|---------|---------------|----------------|
-| **Device** | Core network devices | ✅ Versioned temporal | `deviceName`, `deviceType`, `ipAddress`, `macAddress`, `created`, `expired` |
-| **DeviceProxyIn** | Device input proxies | ❌ None | `deviceName`, `deviceType`, `tenant_attr` |
-| **DeviceProxyOut** | Device output proxies | ❌ None | `deviceName`, `deviceType`, `tenant_attr` |
-| **Software** | Software installations | ✅ Versioned temporal | `softwareName`, `softwareType`, `portNumber`, `isEnabled`, `created`, `expired` |
-| **SoftwareProxyIn** | Software input proxies | ❌ None | `softwareName`, `softwareType`, `softwareVersion`, `tenant_attr` |
-| **SoftwareProxyOut** | Software output proxies | ❌ None | `softwareName`, `softwareType`, `softwareVersion`, `tenant_attr` |
-| **Location** | Physical locations | ✅ Full temporal | `locationName`, `streetAddress`, `geoLocation`, `created`, `expired` |
+| **Device** | Core network devices | ✅ Versioned temporal | `name`, `type`, `model`, `ipAddress`, `macAddress`, `created`, `expired` |
+| **DeviceProxyIn** | Device input proxies | ❌ None | `name`, `type`, `tenant_attr` |
+| **DeviceProxyOut** | Device output proxies | ❌ None | `name`, `type`, `tenant_attr` |
+| **Software** | Software installations | ✅ Versioned temporal | `name`, `type`, `version`, `portNumber`, `isEnabled`, `created`, `expired` |
+| **SoftwareProxyIn** | Software input proxies | ❌ None | `name`, `type`, `version`, `tenant_attr` |
+| **SoftwareProxyOut** | Software output proxies | ❌ None | `name`, `type`, `version`, `tenant_attr` |
+| **Location** | Physical locations | ✅ Full temporal | `name`, `streetAddress`, `geoLocation`, `created`, `expired` |
 
 ### Edge Collections (camelCase, singular)
 
@@ -68,7 +68,7 @@ graph TB
 | **hasConnection** | DeviceProxyOut → DeviceProxyIn | Network connectivity | `connectionType`, `bandwidthCapacity`, `networkLatency` |
 | **hasLocation** | DeviceProxyOut → Location | Physical placement | Geographic relationships |
 | **hasDeviceSoftware** | DeviceProxyOut → SoftwareProxyIn | Device software installation | Installation relationships |
-| **version** | ALL proxies ⟷ versioned entities | Unified temporal versioning | `created`, `expired`, `_fromType`, `_toType` |
+| **hasVersion** | ALL proxies ⟷ versioned entities | Unified temporal versioning | `created`, `expired`, `_fromType`, `_toType` |
 
 ## Multi-Tenant Architecture
 

@@ -217,7 +217,7 @@ FILE_NAMES: Dict[str, str] = {
     "has_locations": "hasLocation.json",
     "has_software": "hasSoftware.json",
     "has_device_software": "hasDeviceSoftware.json",  # New
-    "versions": "version.json",
+    "versions": "hasVersion.json",
     "smartgraph_config": "smartgraph_config.json",
     "tenant_registry": "tenant_registry.json"
 }

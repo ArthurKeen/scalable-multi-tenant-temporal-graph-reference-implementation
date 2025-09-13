@@ -55,7 +55,7 @@ class TimeTravelValidationSuite:
             ]
             
             expected_edge_collections = [
-                "hasConnection", "hasLocation", "hasDeviceSoftware", "version"
+                "hasConnection", "hasLocation", "hasDeviceSoftware", "hasVersion"
             ]
             
             # Validate vertex collections
@@ -133,11 +133,11 @@ class TimeTravelValidationSuite:
             return False
     
     def validate_unified_version_collection(self) -> bool:
-        """Validate that version collection handles both Device and Software."""
-        print(f"\n🔍 Validating Unified Version Collection...")
+        """Validate that hasVersion collection handles both Device and Software."""
+        print(f"\n🔍 Validating Unified HasVersion Collection...")
         
         try:
-            version_collection = self.database.collection("version")
+            version_collection = self.database.collection("hasVersion")
             
             # Count device version edges
             device_versions = version_collection.find({"_fromType": "DeviceProxyIn"}).count()
@@ -172,7 +172,7 @@ class TimeTravelValidationSuite:
                 
                 print(f"   ✅ Version edge {version['_key']}: {version['_fromType']} → {version['_toType']}")
             
-            print(f"✅ Unified version collection validation passed")
+            print(f"✅ Unified hasVersion collection validation passed")
             return True
             
         except Exception as e:
@@ -191,8 +191,8 @@ class TimeTravelValidationSuite:
               LIMIT 5
               RETURN {
                 key: device._key,
-                name: device.deviceName,
-                type: device.deviceType,
+                name: device.name,
+                type: device.type,
                 created: device.created,
                 expired: device.expired
               }
@@ -212,8 +212,8 @@ class TimeTravelValidationSuite:
               LIMIT 5
               RETURN {
                 key: software._key,
-                name: software.softwareName,
-                type: software.softwareType,
+                name: software.name,
+                type: software.type,
                 port: software.portNumber,
                 enabled: software.isEnabled,
                 created: software.created,
@@ -229,7 +229,7 @@ class TimeTravelValidationSuite:
             
             # Test unified time travel query
             unified_query = """
-            FOR version IN version
+            FOR version IN hasVersion
               FILTER version._fromType IN ["DeviceProxyIn", "SoftwareProxyIn"]
               FILTER version.created <= @point_in_time AND version.expired > @point_in_time
               LIMIT 10
@@ -265,26 +265,26 @@ class TimeTravelValidationSuite:
         try:
             # Test Device → Software relationship query (corrected logical flow)
             cross_entity_query = """
-            WITH DeviceProxyOut, SoftwareProxyIn, hasDeviceSoftware, Device, Software, version
+            WITH DeviceProxyOut, SoftwareProxyIn, hasDeviceSoftware, Device, Software, hasVersion
             FOR hasDevSoft IN hasDeviceSoftware
               LIMIT 3
               
               // Find the device that connects TO this DeviceProxyOut (Device → DeviceProxyOut)
-              FOR version_to_device_proxy IN version
+              FOR version_to_device_proxy IN hasVersion
                 FILTER version_to_device_proxy._to == hasDevSoft._from
                 FILTER version_to_device_proxy._fromType == "Device"
                 LET device = DOCUMENT(version_to_device_proxy._from)
                 
                 // Find the software that connects FROM this SoftwareProxyIn (SoftwareProxyIn → Software)
-                FOR version_to_software IN version
+                FOR version_to_software IN hasVersion
                   FILTER version_to_software._from == hasDevSoft._to
                   FILTER version_to_software._toType == "Software"
                   LET software = DOCUMENT(version_to_software._to)
                   
                   RETURN {
-                    device: device.deviceName,
+                    device: device.name,
                     deviceKey: device._key,
-                    software: software.softwareName,
+                    software: software.name,
                     softwareKey: software._key,
                     softwarePort: software.portNumber,
                     softwareEnabled: software.isEnabled,
@@ -333,8 +333,8 @@ class TimeTravelValidationSuite:
             FOR software IN Software
               FILTER software.created <= @point_in_time AND software.expired > @point_in_time
               RETURN {
-                name: software.softwareName,
-                type: software.softwareType,
+                name: software.name,
+                type: software.type,
                 port: software.portNumber,
                 enabled: software.isEnabled
               }
@@ -350,7 +350,7 @@ class TimeTravelValidationSuite:
             
             # Test index usage on version collection
             version_index_query = """
-            FOR version IN version
+            FOR version IN hasVersion
               FILTER version._fromType == "SoftwareProxyIn"
               FILTER version.created <= @point_in_time AND version.expired > @point_in_time
               RETURN version._key
@@ -388,13 +388,13 @@ class TimeTravelValidationSuite:
         try:
             # Check Device proxy → Device consistency
             device_proxy_count = self.database.collection("DeviceProxyIn").count()
-            device_version_edges = self.database.collection("version").find({"_fromType": "DeviceProxyIn"}).count()
+            device_version_edges = self.database.collection("hasVersion").find({"_fromType": "DeviceProxyIn"}).count()
             
             print(f"   📊 DeviceProxyIn: {device_proxy_count}, Device version edges: {device_version_edges}")
             
             # Check Software proxy → Software consistency
             software_proxy_count = self.database.collection("SoftwareProxyIn").count()
-            software_version_edges = self.database.collection("version").find({"_fromType": "SoftwareProxyIn"}).count()
+            software_version_edges = self.database.collection("hasVersion").find({"_fromType": "SoftwareProxyIn"}).count()
             
             print(f"   📊 SoftwareProxyIn: {software_proxy_count}, Software version edges: {software_version_edges}")
             

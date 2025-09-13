@@ -60,7 +60,7 @@ class TimeTravelRefactoredGenerator:
                 "_key": KeyGenerator.generate_tenant_key(
                     self.tenant_config.tenant_id, "location", i + 1
                 ),
-                "locationName": f"{self.tenant_config.tenant_name} - {loc_data['name']}",
+                "name": f"{self.tenant_config.tenant_name} - {loc_data['name']}",
                 "streetAddress": loc_data["address"],
                 "geoLocation": {
                     "type": "Point",
@@ -92,8 +92,8 @@ class TimeTravelRefactoredGenerator:
             # DeviceProxyIn - no temporal attributes, only tenant key
             device_proxy_in = {
                 "_key": proxy_key,
-                "deviceName": f"{self.tenant_config.tenant_name} {device_type.value} {model} proxy in",
-                "deviceType": device_type.value
+                "name": f"{self.tenant_config.tenant_name} {device_type.value} {model} proxy in",
+                "type": device_type.value
             }
             device_proxy_in = DocumentEnhancer.add_tenant_attributes(device_proxy_in, self.tenant_config, is_proxy=True)
             device_proxy_ins.append(device_proxy_in)
@@ -101,8 +101,8 @@ class TimeTravelRefactoredGenerator:
             # DeviceProxyOut - no temporal attributes, only tenant key  
             device_proxy_out = {
                 "_key": proxy_key,
-                "deviceName": f"{self.tenant_config.tenant_name} {device_type.value} {model} proxy out",
-                "deviceType": device_type.value
+                "name": f"{self.tenant_config.tenant_name} {device_type.value} {model} proxy out",
+                "type": device_type.value
             }
             device_proxy_out = DocumentEnhancer.add_tenant_attributes(device_proxy_out, self.tenant_config, is_proxy=True)
             device_proxy_outs.append(device_proxy_out)
@@ -118,7 +118,7 @@ class TimeTravelRefactoredGenerator:
         versions = []
         
         for i, device_proxy_in in enumerate(device_proxy_ins):
-            device_type_str = device_proxy_in["deviceType"]
+            device_type_str = device_proxy_in["type"]
             from data_generation_config import DeviceType
             device_type = DeviceType(device_type_str)
             
@@ -134,9 +134,9 @@ class TimeTravelRefactoredGenerator:
             
             current_config = {
                 "_key": current_device_key,
-                "deviceName": f"{self.tenant_config.tenant_name} {device_type.value} {model}",
-                "deviceType": device_type.value,
-                "deviceModel": model,
+                "name": f"{self.tenant_config.tenant_name} {device_type.value} {model}",
+                "type": device_type.value,
+                "model": model,
                 "serialNumber": str(__import__('uuid').uuid4()),
                 "ipAddress": self.random_gen.generate_ip_address(),
                 "macAddress": self.random_gen.generate_mac_address(),
@@ -151,8 +151,8 @@ class TimeTravelRefactoredGenerator:
             devices.append(current_config)
             
             # Create version edges for current configuration
-            current_versions = self._create_device_version_edges(
-                proxy_key, current_device_key, current_created
+            current_versions = self._create_version_edges(
+                "device", proxy_key, current_device_key, current_created
             )
             versions.extend(current_versions)
             
@@ -166,29 +166,46 @@ class TimeTravelRefactoredGenerator:
         self.logger.info(f"Generated {len(devices)} device configurations and {len(versions)} device version edges")
         return devices, versions
     
-    def _create_device_version_edges(self, proxy_key: str, device_key: str, 
-                                   timestamp: datetime.datetime) -> List[Dict[str, Any]]:
-        """Create version edges for Device time travel."""
+    def _create_version_edges(self, entity_type: str, proxy_key: str, entity_key: str, 
+                            timestamp: datetime.datetime) -> List[Dict[str, Any]]:
+        """Create version edges for any entity type (Device or Software) time travel."""
+        if entity_type == "device":
+            proxy_in_collection = self.app_config.get_collection_name("device_ins")
+            proxy_out_collection = self.app_config.get_collection_name("device_outs")
+            entity_collection = self.app_config.get_collection_name("devices")
+            proxy_in_type = "DeviceProxyIn"
+            proxy_out_type = "DeviceProxyOut"
+            entity_type_name = "Device"
+        elif entity_type == "software":
+            proxy_in_collection = self.app_config.get_collection_name("software_ins")
+            proxy_out_collection = self.app_config.get_collection_name("software_outs")
+            entity_collection = self.app_config.get_collection_name("software")
+            proxy_in_type = "SoftwareProxyIn"
+            proxy_out_type = "SoftwareProxyOut"
+            entity_type_name = "Software"
+        else:
+            raise ValueError(f"Unsupported entity type: {entity_type}")
+        
         version_in = DocumentEnhancer.create_edge_document(
-            key=KeyGenerator.generate_version_key("device-in", device_key),
-            from_collection=self.app_config.get_collection_name("device_ins"),  # DeviceProxyIn
+            key=KeyGenerator.generate_version_key(f"{entity_type}-in", entity_key),
+            from_collection=proxy_in_collection,
             from_key=proxy_key,
-            to_collection=self.app_config.get_collection_name("devices"),  # Device
-            to_key=device_key,
-            from_type="DeviceProxyIn",
-            to_type="Device",
+            to_collection=entity_collection,
+            to_key=entity_key,
+            from_type=proxy_in_type,
+            to_type=entity_type_name,
             tenant_config=self.tenant_config,
             timestamp=timestamp
         )
         
         version_out = DocumentEnhancer.create_edge_document(
-            key=KeyGenerator.generate_version_key("device-out", device_key),
-            from_collection=self.app_config.get_collection_name("devices"),  # Device
-            from_key=device_key,
-            to_collection=self.app_config.get_collection_name("device_outs"),  # DeviceProxyOut
+            key=KeyGenerator.generate_version_key(f"{entity_type}-out", entity_key),
+            from_collection=entity_collection,
+            from_key=entity_key,
+            to_collection=proxy_out_collection,
             to_key=proxy_key,
-            from_type="Device",
-            to_type="DeviceProxyOut",
+            from_type=entity_type_name,
+            to_type=proxy_out_type,
             tenant_config=self.tenant_config,
             timestamp=timestamp
         )
@@ -227,7 +244,7 @@ class TimeTravelRefactoredGenerator:
             historical_devices.append(previous_config)
             
             # Create version edges for historical configuration
-            historical_version_edges = self._create_device_version_edges(proxy_key, key, created)
+            historical_version_edges = self._create_version_edges("device", proxy_key, key, created)
             for edge in historical_version_edges:
                 edge["expired"] = expired
             historical_versions.extend(historical_version_edges)
@@ -254,9 +271,9 @@ class TimeTravelRefactoredGenerator:
             # SoftwareProxyIn - no temporal attributes, only tenant key
             software_proxy_in = {
                 "_key": proxy_key,
-                "softwareName": f"{self.tenant_config.tenant_name} {software_version.split(' ')[0]}",
-                "softwareType": software_type.value,
-                "softwareVersion": software_version
+                "name": f"{self.tenant_config.tenant_name} {software_version.split(' ')[0]}",
+                "type": software_type.value,
+                "version": software_version
             }
             software_proxy_in = DocumentEnhancer.add_tenant_attributes(
                 software_proxy_in, self.tenant_config, is_proxy=True
@@ -266,9 +283,9 @@ class TimeTravelRefactoredGenerator:
             # SoftwareProxyOut - no temporal attributes, only tenant key  
             software_proxy_out = {
                 "_key": proxy_key,
-                "softwareName": f"{self.tenant_config.tenant_name} {software_version.split(' ')[0]}",
-                "softwareType": software_type.value,
-                "softwareVersion": software_version
+                "name": f"{self.tenant_config.tenant_name} {software_version.split(' ')[0]}",
+                "type": software_type.value,
+                "version": software_version
             }
             software_proxy_out = DocumentEnhancer.add_tenant_attributes(
                 software_proxy_out, self.tenant_config, is_proxy=True
@@ -286,11 +303,11 @@ class TimeTravelRefactoredGenerator:
         versions = []
         
         for i, software_proxy_in in enumerate(software_proxy_ins):
-            software_type_str = software_proxy_in["softwareType"]
+            software_type_str = software_proxy_in["type"]
             from data_generation_config import SoftwareType
             software_type = SoftwareType(software_type_str)
             
-            software_version = software_proxy_in["softwareVersion"]
+            software_version = software_proxy_in["version"]
             proxy_key = software_proxy_in["_key"]
             
             # Generate current configuration (FLATTENED - no configurationHistory array)
@@ -301,9 +318,9 @@ class TimeTravelRefactoredGenerator:
             
             current_config = {
                 "_key": current_software_key,
-                "softwareName": software_proxy_in["softwareName"],
-                "softwareType": software_type.value,
-                "softwareVersion": software_version,
+                "name": software_proxy_in["name"],
+                "type": software_type.value,
+                "version": software_version,
                 # Flattened configuration - no configurationHistory array
                 "portNumber": self.random_gen.generate_software_port(),
                 "isEnabled": True
@@ -314,8 +331,8 @@ class TimeTravelRefactoredGenerator:
             software.append(current_config)
             
             # Create version edges for current configuration
-            current_versions = self._create_software_version_edges(
-                proxy_key, current_software_key, current_created
+            current_versions = self._create_version_edges(
+                "software", proxy_key, current_software_key, current_created
             )
             versions.extend(current_versions)
             
@@ -329,34 +346,6 @@ class TimeTravelRefactoredGenerator:
         self.logger.info(f"Generated {len(software)} software configurations and {len(versions)} software version edges")
         return software, versions
     
-    def _create_software_version_edges(self, proxy_key: str, software_key: str, 
-                                     timestamp: datetime.datetime) -> List[Dict[str, Any]]:
-        """Create version edges for Software (using same 'version' collection as Device)."""
-        version_in = DocumentEnhancer.create_edge_document(
-            key=KeyGenerator.generate_version_key("software-in", software_key),
-            from_collection=self.app_config.get_collection_name("software_ins"),  # SoftwareProxyIn
-            from_key=proxy_key,
-            to_collection=self.app_config.get_collection_name("software"),  # Software
-            to_key=software_key,
-            from_type="SoftwareProxyIn",
-            to_type="Software",
-            tenant_config=self.tenant_config,
-            timestamp=timestamp
-        )
-        
-        version_out = DocumentEnhancer.create_edge_document(
-            key=KeyGenerator.generate_version_key("software-out", software_key),
-            from_collection=self.app_config.get_collection_name("software"),  # Software
-            from_key=software_key,
-            to_collection=self.app_config.get_collection_name("software_outs"),  # SoftwareProxyOut
-            to_key=proxy_key,
-            from_type="Software",
-            to_type="SoftwareProxyOut",
-            tenant_config=self.tenant_config,
-            timestamp=timestamp
-        )
-        
-        return [version_in, version_out]
     
     def _generate_historical_software_configurations(self, current_config: Dict[str, Any], 
                                                    proxy_key: str, software_index: int) -> Tuple[List[Dict], List[Dict]]:
@@ -389,7 +378,7 @@ class TimeTravelRefactoredGenerator:
             historical_software.append(previous_config)
             
             # Create version edges for historical configuration
-            historical_version_edges = self._create_software_version_edges(proxy_key, key, created)
+            historical_version_edges = self._create_version_edges("software", proxy_key, key, created)
             for edge in historical_version_edges:
                 edge["expired"] = expired
             historical_versions.extend(historical_version_edges)
@@ -480,7 +469,7 @@ class TimeTravelRefactoredGenerator:
             device = self.random_gen.select_random_item(device_proxy_outs)
             
             # Routers don't typically run additional software
-            if device["deviceType"] != "router":
+            if device["type"] != "router":
                 software_proxy = self.random_gen.select_random_item(software_proxy_ins)
                 key = KeyGenerator.generate_has_software_key(
                     self.tenant_config.tenant_id, len(has_device_software) + 1
