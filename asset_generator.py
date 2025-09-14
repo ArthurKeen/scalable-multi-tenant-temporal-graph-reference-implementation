@@ -16,7 +16,7 @@ from typing import Dict, List, Any, Tuple
 from pathlib import Path
 
 # Import centralized configuration
-from config_management import get_config, initialize_logging
+from config_management import get_config, initialize_logging, NamingConvention
 from tenant_config import TenantConfig, TenantNamingConvention, create_tenant_config
 from data_generation_utils import (
     DocumentEnhancer, RandomDataGenerator, KeyGenerator,
@@ -28,9 +28,10 @@ from data_generation_utils import (
 class TimeTravelRefactoredGenerator:
     """Complete refactored multi-tenant generator with consistent time travel patterns."""
     
-    def __init__(self, tenant_config: TenantConfig, environment: str = "production"):
+    def __init__(self, tenant_config: TenantConfig, environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
         self.tenant_config = tenant_config
-        self.app_config = get_config(environment)
+        self.naming_convention = naming_convention
+        self.app_config = get_config(environment, naming_convention)
         self.naming = TenantNamingConvention(tenant_config.tenant_id)
         
         # Initialize data generation components
@@ -636,19 +637,21 @@ class TimeTravelRefactoredGenerator:
         }
 
 
-def generate_time_travel_refactored_demo(environment: str = "production"):
+def generate_time_travel_refactored_demo(environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
     """Generate time travel refactored multi-tenant demo."""
     
-    print("Time Travel Refactored Multi-Tenant Generation")
+    convention_name = "camelCase" if naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
+    print(f"Multi-Tenant Network Asset Generation ({convention_name})")
     print("=" * 60)
     print("Time travel patterns:")
     print("   - Device: DeviceProxyIn <-> Device <-> DeviceProxyOut")
     print("   - Software: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)")
     print("   - Generic 'version' collection for all time travel relationships")
     print("   - Consistent temporal queries across all entities")
+    print(f"   - Naming convention: {convention_name}")
     print()
     
-    app_config = get_config(environment)
+    app_config = get_config(environment, naming_convention)
     
     # Create tenant configurations
     tenant_configs = [
@@ -669,7 +672,7 @@ def generate_time_travel_refactored_demo(environment: str = "production"):
     
     # Generate data for each tenant
     for tenant_config in tenant_configs:
-        generator = TimeTravelRefactoredGenerator(tenant_config, environment)
+        generator = TimeTravelRefactoredGenerator(tenant_config, environment, naming_convention)
         tenant_result = generator.generate_all_data()
         results[tenant_config.tenant_id] = tenant_result
         total_documents += sum(tenant_result["data_counts"].values())
@@ -722,5 +725,18 @@ def generate_time_travel_refactored_demo(environment: str = "production"):
 
 
 if __name__ == "__main__":
-    results = generate_time_travel_refactored_demo()
-    print(f"\n[DONE] Ready for time travel refactored deployment!")
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Generate multi-tenant network asset data")
+    parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
+                       help="Naming convention for collections and properties (default: camelCase)")
+    parser.add_argument("--environment", choices=["production", "development"], default="production",
+                       help="Environment configuration (default: production)")
+    
+    args = parser.parse_args()
+    
+    # Convert naming argument to enum
+    naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
+    
+    results = generate_time_travel_refactored_demo(args.environment, naming_convention)
+    print(f"\n[DONE] Ready for deployment with {args.naming} naming convention!")

@@ -15,14 +15,17 @@ from pathlib import Path
 from typing import Dict, List, Any
 from arango import ArangoClient
 
-# Import centralized credentials
+# Import centralized credentials and configuration
 from centralized_credentials import CredentialsManager, DatabaseConstants
+from config_management import get_config, NamingConvention
 
 
 class TimeTravelRefactoredDeployment:
     """Deploy time travel refactored data to ArangoDB Oasis."""
     
-    def __init__(self):
+    def __init__(self, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
+        self.naming_convention = naming_convention
+        self.app_config = get_config("production", naming_convention)
         creds = CredentialsManager.get_database_credentials()
         self.client = ArangoClient(hosts=creds.endpoint)
         self.sys_db = None
@@ -83,25 +86,26 @@ class TimeTravelRefactoredDeployment:
     def create_refactored_collections(self) -> bool:
         """Create time travel refactored collections."""
         try:
-            print(f"\n[INFO] Creating time travel refactored collections...")
+            convention_name = "camelCase" if self.naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
+            print(f"\n[INFO] Creating collections with {convention_name} naming...")
             
-            # Refactored vertex collections (W3C OWL naming)
+            # Get collection names from configuration
             vertex_collections = [
-                {"name": "Device", "type": "vertex"},
-                {"name": "DeviceProxyIn", "type": "vertex"},
-                {"name": "DeviceProxyOut", "type": "vertex"},
-                {"name": "Location", "type": "vertex"},
-                {"name": "Software", "type": "vertex"},
-                {"name": "SoftwareProxyIn", "type": "vertex"},  # NEW
-                {"name": "SoftwareProxyOut", "type": "vertex"}  # NEW
+                {"name": self.app_config.get_collection_name("devices"), "type": "vertex"},
+                {"name": self.app_config.get_collection_name("device_ins"), "type": "vertex"},
+                {"name": self.app_config.get_collection_name("device_outs"), "type": "vertex"},
+                {"name": self.app_config.get_collection_name("locations"), "type": "vertex"},
+                {"name": self.app_config.get_collection_name("software"), "type": "vertex"},
+                {"name": self.app_config.get_collection_name("software_ins"), "type": "vertex"},
+                {"name": self.app_config.get_collection_name("software_outs"), "type": "vertex"}
             ]
             
-            # Refactored edge collections (W3C OWL naming)
+            # Edge collections using configuration
             edge_collections = [
-                {"name": "hasConnection", "type": "edge"},
-                {"name": "hasLocation", "type": "edge"},
-                {"name": "hasDeviceSoftware", "type": "edge"},  # NEW - clearer naming
-                {"name": "hasVersion", "type": "edge"}  # UNIFIED - handles both Device and Software versioning
+                {"name": self.app_config.get_collection_name("connections"), "type": "edge"},
+                {"name": self.app_config.get_collection_name("has_locations"), "type": "edge"},
+                {"name": self.app_config.get_collection_name("has_device_software"), "type": "edge"},
+                {"name": self.app_config.get_collection_name("versions"), "type": "edge"}
             ]
             
             # Create vertex collections
@@ -490,11 +494,22 @@ class TimeTravelRefactoredDeployment:
 
 def main():
     """Main deployment function."""
-    deployment = TimeTravelRefactoredDeployment()
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Deploy multi-tenant network asset data to ArangoDB")
+    parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
+                       help="Naming convention for collections and properties (default: camelCase)")
+    
+    args = parser.parse_args()
+    
+    # Convert naming argument to enum
+    naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
+    
+    deployment = TimeTravelRefactoredDeployment(naming_convention)
     success = deployment.deploy_time_travel_refactored()
     
     if success:
-        print(f"\n[DONE] Database updated with time travel refactored structure!")
+        print(f"\n[DONE] Database updated with {args.naming} naming convention!")
         sys.exit(0)
     else:
         print(f"\n[ERROR] Deployment failed!")

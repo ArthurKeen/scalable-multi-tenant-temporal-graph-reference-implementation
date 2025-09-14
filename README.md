@@ -11,10 +11,20 @@ A comprehensive multi-tenant network asset management system built with ArangoDB
 - **Scalable Design** supporting horizontal scale-out capabilities
 
 ### Naming Conventions
+
+The system supports two naming conventions:
+
+#### Option 1: camelCase (Default)
 - **Vertex Collections** (PascalCase, singular): `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`
 - **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`
 - **Property Naming** (camelCase): `name`, `type`, `model`, `version`, `ipAddress`, `created`, `expired`
-- **Consistent Structure**: Subject-Predicate-Object relationships
+
+#### Option 2: snake_case
+- **Vertex Collections** (snake_case, singular): `device`, `device_proxy_in`, `device_proxy_out`, `location`, `software`
+- **Edge Collections** (snake_case, singular): `has_connection`, `has_location`, `has_device_software`, `has_version`
+- **Property Naming** (snake_case): `name`, `type`, `model`, `version`, `ip_address`, `created`, `expired`
+
+Both conventions maintain **consistent structure** with Subject-Predicate-Object relationships.
 
 ### Temporal Data Management
 - **Time Travel Blueprint** with `created`, `expired` timestamps
@@ -240,14 +250,16 @@ Choose your data generation approach:
 
 #### Option A: Default Generation (Recommended)
 ```bash
-# Generate data for 3 default tenants with varying scales
+# Generate data with camelCase naming (default)
 python asset_generator.py
+
+# Generate data with snake_case naming
+python asset_generator.py --naming snake_case
 
 # This creates:
 # - Acme Corp (1x scale): ~1,095 documents
-# - Global Enterprises (3x scale): ~3,285 documents  
-# - StartupXYZ (1x scale): ~1,095 documents
-# - Total: ~5,475 documents across all collections
+# - Global Enterprises (2x scale): ~2,190 documents  
+# - Total: ~3,285 documents across all collections
 ```
 
 #### Option B: Custom Tenant Configuration
@@ -278,12 +290,15 @@ Choose your deployment method:
 
 #### Option A: Fresh Database Deployment
 ```bash
-# Creates new database and loads all tenant data
+# Deploy with camelCase naming (default)
 python database_deployment.py
+
+# Deploy with snake_case naming
+python database_deployment.py --naming snake_case
 
 # This will:
 # 1. Create/recreate the database
-# 2. Set up all collections and indexes
+# 2. Set up all collections and indexes with chosen naming convention
 # 3. Load tenant data from generated JSON files
 # 4. Create tenant-specific SmartGraphs
 # 5. Verify deployment integrity
@@ -319,6 +334,30 @@ python test_suite.py
 
 ## Data Generation Options
 
+### Naming Convention Options
+
+Choose between two supported naming conventions:
+
+#### camelCase (Default)
+```bash
+python asset_generator.py --naming camelCase
+python database_deployment.py --naming camelCase
+```
+**Collections Created:**
+- Vertex: `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`, `SoftwareProxyIn`, `SoftwareProxyOut`
+- Edge: `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`
+
+#### snake_case
+```bash
+python asset_generator.py --naming snake_case
+python database_deployment.py --naming snake_case
+```
+**Collections Created:**
+- Vertex: `device`, `device_proxy_in`, `device_proxy_out`, `location`, `software`, `software_proxy_in`, `software_proxy_out`
+- Edge: `has_connection`, `has_location`, `has_device_software`, `has_version`
+
+**Important:** Use the same naming convention for both data generation and deployment.
+
 ### Scale Factors
 Control data volume per tenant:
 - **1x scale**: 60 devices, 90 software, 5 locations
@@ -350,17 +389,25 @@ Each tenant gets:
 
 ### Scenario 1: Demo/Development
 ```bash
-# Minimal data for testing
-# Edit data_generation_config.py: reduce counts
-python asset_generator.py
-python database_deployment.py
+# Minimal data for testing with camelCase
+python asset_generator.py --environment development
+python database_deployment.py --naming camelCase
+
+# Or with snake_case naming
+python asset_generator.py --environment development --naming snake_case
+python database_deployment.py --naming snake_case
 ```
 
 ### Scenario 2: Multi-Tenant Production
 ```bash
-# Full-scale multi-tenant deployment
-python asset_generator.py  # Uses default tenant configs
+# Full-scale multi-tenant deployment with camelCase (default)
+python asset_generator.py
 python database_deployment.py
+python validation_suite.py
+
+# Or with snake_case naming
+python asset_generator.py --naming snake_case
+python database_deployment.py --naming snake_case
 python validation_suite.py
 ```
 

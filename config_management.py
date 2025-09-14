@@ -7,13 +7,93 @@ secure credential management for the multi-tenant demo.
 
 import os
 import json
+import re
 from pathlib import Path
 from dataclasses import dataclass
 from typing import Dict, Optional, Any
+from enum import Enum
 
 
 # Import centralized credentials to avoid duplication
 from centralized_credentials import DatabaseCredentials, CredentialsManager
+
+
+class NamingConvention(Enum):
+    """Supported naming conventions for collections and properties."""
+    CAMEL_CASE = "camelCase"
+    SNAKE_CASE = "snake_case"
+
+
+class NamingConverter:
+    """Utility class for converting between naming conventions."""
+    
+    @staticmethod
+    def camel_to_snake(name: str) -> str:
+        """Convert camelCase to snake_case."""
+        # Handle special cases first
+        if name == "hasConnection":
+            return "has_connection"
+        elif name == "hasLocation":
+            return "has_location"
+        elif name == "hasDeviceSoftware":
+            return "has_device_software"
+        elif name == "hasVersion":
+            return "has_version"
+        elif name == "DeviceProxyIn":
+            return "device_proxy_in"
+        elif name == "DeviceProxyOut":
+            return "device_proxy_out"
+        elif name == "SoftwareProxyIn":
+            return "software_proxy_in"
+        elif name == "SoftwareProxyOut":
+            return "software_proxy_out"
+        
+        # General conversion: insert underscore before uppercase letters
+        s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+    
+    @staticmethod
+    def snake_to_camel(name: str, pascal_case: bool = False) -> str:
+        """Convert snake_case to camelCase or PascalCase."""
+        # Handle special cases first
+        if name == "has_connection":
+            return "hasConnection"
+        elif name == "has_location":
+            return "hasLocation"
+        elif name == "has_device_software":
+            return "hasDeviceSoftware"
+        elif name == "has_version":
+            return "hasVersion"
+        elif name == "device_proxy_in":
+            return "DeviceProxyIn"
+        elif name == "device_proxy_out":
+            return "DeviceProxyOut"
+        elif name == "software_proxy_in":
+            return "SoftwareProxyIn"
+        elif name == "software_proxy_out":
+            return "SoftwareProxyOut"
+        
+        # General conversion
+        components = name.split('_')
+        if pascal_case:
+            return ''.join(word.capitalize() for word in components)
+        else:
+            return components[0] + ''.join(word.capitalize() for word in components[1:])
+    
+    @staticmethod
+    def convert_name(name: str, from_convention: NamingConvention, 
+                    to_convention: NamingConvention, is_vertex: bool = False) -> str:
+        """Convert name between conventions."""
+        if from_convention == to_convention:
+            return name
+        
+        if from_convention == NamingConvention.CAMEL_CASE and to_convention == NamingConvention.SNAKE_CASE:
+            return NamingConverter.camel_to_snake(name)
+        elif from_convention == NamingConvention.SNAKE_CASE and to_convention == NamingConvention.CAMEL_CASE:
+            # Vertex collections use PascalCase, edge collections use camelCase
+            return NamingConverter.snake_to_camel(name, pascal_case=is_vertex)
+        
+        return name
 
 
 @dataclass
@@ -55,18 +135,20 @@ class ApplicationPaths:
 
 @dataclass  
 class CollectionConfiguration:
-    """W3C OWL compliant collection configuration."""
+    """Collection configuration supporting multiple naming conventions."""
     
-    # Vertex collections (PascalCase, singular)
+    # Vertex collections (PascalCase/snake_case, singular)
     vertex_collections: Dict[str, str]
-    # Edge collections (camelCase, singular)  
+    # Edge collections (camelCase/snake_case, singular)  
     edge_collections: Dict[str, str]
     # File name mappings
     file_mappings: Dict[str, str]
+    # Naming convention used
+    naming_convention: NamingConvention
     
     @classmethod
-    def get_owlrdf_config(cls) -> 'CollectionConfiguration':
-        """Get W3C OWL compliant configuration."""
+    def get_camel_case_config(cls) -> 'CollectionConfiguration':
+        """Get camelCase naming convention configuration."""
         vertex_collections = {
             "devices": "Device",
             "device_ins": "DeviceProxyIn", 
@@ -104,8 +186,69 @@ class CollectionConfiguration:
         return cls(
             vertex_collections=vertex_collections,
             edge_collections=edge_collections,
-            file_mappings=file_mappings
+            file_mappings=file_mappings,
+            naming_convention=NamingConvention.CAMEL_CASE
         )
+    
+    @classmethod
+    def get_snake_case_config(cls) -> 'CollectionConfiguration':
+        """Get snake_case naming convention configuration."""
+        vertex_collections = {
+            "devices": "device",
+            "device_ins": "device_proxy_in", 
+            "device_outs": "device_proxy_out",
+            "locations": "location",
+            "software": "software",
+            "software_ins": "software_proxy_in",
+            "software_outs": "software_proxy_out"
+        }
+        
+        edge_collections = {
+            "connections": "has_connection",
+            "has_locations": "has_location", 
+            "has_software": "has_software",
+            "has_device_software": "has_device_software",
+            "versions": "has_version"
+        }
+        
+        file_mappings = {
+            "device": "device.json",
+            "device_proxy_in": "device_proxy_in.json", 
+            "device_proxy_out": "device_proxy_out.json",
+            "location": "location.json",
+            "software": "software.json",
+            "software_proxy_in": "software_proxy_in.json",
+            "software_proxy_out": "software_proxy_out.json",
+            "has_connection": "has_connection.json",
+            "has_location": "has_location.json",
+            "has_software": "has_software.json",
+            "has_device_software": "has_device_software.json",
+            "has_version": "has_version.json",
+            "smartgraph_config": "smartgraph_config.json"
+        }
+        
+        return cls(
+            vertex_collections=vertex_collections,
+            edge_collections=edge_collections,
+            file_mappings=file_mappings,
+            naming_convention=NamingConvention.SNAKE_CASE
+        )
+    
+    @classmethod
+    def get_config(cls, naming_convention: NamingConvention) -> 'CollectionConfiguration':
+        """Get configuration for specified naming convention."""
+        if naming_convention == NamingConvention.CAMEL_CASE:
+            return cls.get_camel_case_config()
+        elif naming_convention == NamingConvention.SNAKE_CASE:
+            return cls.get_snake_case_config()
+        else:
+            raise ValueError(f"Unsupported naming convention: {naming_convention}")
+    
+    # Backward compatibility
+    @classmethod
+    def get_owlrdf_config(cls) -> 'CollectionConfiguration':
+        """Get camelCase configuration (backward compatibility)."""
+        return cls.get_camel_case_config()
 
 
 @dataclass
@@ -139,11 +282,12 @@ class GenerationLimits:
 class ConfigurationManager:
     """Centralized configuration management."""
     
-    def __init__(self, environment: str = "production"):
+    def __init__(self, environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
         self.environment = environment
+        self.naming_convention = naming_convention
         self.credentials = CredentialsManager.get_database_credentials(environment)
         self.paths = ApplicationPaths.initialize_default()
-        self.collections = CollectionConfiguration.get_owlrdf_config()
+        self.collections = CollectionConfiguration.get_config(naming_convention)
         
         if environment == "development":
             self.limits = GenerationLimits.get_development_limits()
@@ -160,7 +304,7 @@ class ConfigurationManager:
         }
     
     def get_collection_name(self, logical_name: str) -> str:
-        """Get W3C OWL compliant collection name."""
+        """Get collection name using configured naming convention."""
         vertex_name = self.collections.vertex_collections.get(logical_name)
         if vertex_name:
             return vertex_name
@@ -228,15 +372,15 @@ class ConfigurationManager:
         return validation_results
 
 
-# Global configuration instance
+# Global configuration instance (default: camelCase)
 config = ConfigurationManager()
 
 
-def get_config(environment: str = "production") -> ConfigurationManager:
+def get_config(environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE) -> ConfigurationManager:
     """Get global configuration instance."""
     global config
-    if config.environment != environment:
-        config = ConfigurationManager(environment)
+    if config.environment != environment or config.naming_convention != naming_convention:
+        config = ConfigurationManager(environment, naming_convention)
     return config
 
 
