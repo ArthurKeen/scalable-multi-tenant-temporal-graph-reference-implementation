@@ -247,7 +247,7 @@ python validation_suite.py
 
 The system generates complex multi-tenant network topologies with temporal relationships. Here's an example of the generated graph structure:
 
-![Network Asset Graph Visualization](./assets/network-graph-visualization.png)
+![Network Asset Graph Visualization](assets/network-graph-visualization.png)
 
 *Example visualization showing the multi-tenant network topology with device proxies (blue nodes) connected via hasConnection edges (physical network), software entities (purple nodes) connected via hasDeviceSoftware and hasVersion relationships, demonstrating proper W3C OWL semantic relationships.*
 
