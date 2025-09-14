@@ -426,29 +426,29 @@ python test_suite.py
 ```
 - **Total Tests**: 21
 - **Success Rate**: 100%
-- **Categories**: Configuration, Tenant Management, Data Generation, W3C OWL Compliance, File Management, Integration, Performance
+- **Categories**: Configuration, Tenant Management, Data Generation, Naming Convention Compliance, File Management, Integration, Performance
 
-### W3C OWL Validation
+### Naming Convention Validation
 ```bash
 python validation_suite.py
 ```
 - **Collection Naming**: 100% compliant
 - **Property Naming**: 100% compliant  
 - **Relationship Modeling**: 100% compliant
-- **Semantic Correctness**: 100% compliant
+- **Naming Consistency**: 100% compliant
 - **Tenant Isolation**: 100% verified
 - **hasConnection Architecture**: 100% compliant (DeviceProxyOut -> DeviceProxyIn only)
 
 ## Project Structure
 
 ```
-├── asset_generator.py              # Main W3C OWL compliant generator
+├── asset_generator.py              # Main data generator with naming conventions
 ├── config_management.py            # Centralized configuration system
 ├── tenant_config.py                # Tenant modeling and utilities
 ├── data_generation_config.py       # Generation parameters and constants
 ├── data_generation_utils.py        # Reusable utility functions
 ├── database_deployment.py          # ArangoDB Oasis deployment
-├── validation_suite.py             # Comprehensive compliance validation
+├── validation_suite.py             # Comprehensive naming convention validation
 ├── test_suite.py                   # Complete test framework
 ├── oasis_cluster_setup.py          # Core cluster management
 ├── centralized_credentials.py      # Secure credential management
