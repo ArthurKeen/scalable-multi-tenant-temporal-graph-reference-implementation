@@ -10,11 +10,11 @@ A comprehensive multi-tenant network asset management system built with ArangoDB
 - **Complete Tenant Isolation** verified through comprehensive testing
 - **Scalable Design** supporting horizontal scale-out capabilities
 
-### W3C OWL Naming Conventions
+### Naming Conventions
 - **Vertex Collections** (PascalCase, singular): `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`
 - **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`
 - **Property Naming** (camelCase): `name`, `type`, `model`, `version`, `ipAddress`, `created`, `expired`
-- **RDF Triple Structure**: Subject-Predicate-Object relationships
+- **Consistent Structure**: Subject-Predicate-Object relationships
 
 ### Temporal Data Management
 - **Time Travel Blueprint** with `created`, `expired` timestamps
@@ -249,7 +249,7 @@ The system generates complex multi-tenant network topologies with temporal relat
 
 ![Network Asset Graph Visualization](assets/network-graph-visualization.png)
 
-*Example visualization showing the multi-tenant network topology with device proxies (blue nodes) connected via hasConnection edges (physical network), software entities (purple nodes) connected via hasDeviceSoftware and hasVersion relationships, demonstrating proper W3C OWL semantic relationships.*
+*Example visualization showing the multi-tenant network topology with device proxies (blue nodes) connected via hasConnection edges (physical network), software entities (purple nodes) connected via hasDeviceSoftware and hasVersion relationships, demonstrating consistent naming conventions.*
 
 ### Current Tenant Configuration
 - **Acme Corp** (1x scale): 1,095 documents
@@ -341,13 +341,13 @@ All settings are managed through `config_management.py`:
 - Generation limits and performance settings
 - Environment-specific configurations
 
-## Standards Compliance
+## Design Standards
 
-### W3C OWL Naming Conventions
+### Naming Conventions
 - **Entities** (Vertex Collections): PascalCase, singular
 - **Predicates** (Edge Collections): camelCase, singular
 - **Properties**: camelCase with singular/plural rules
-- **RDF Triples**: Proper Subject-Predicate-Object structure
+- **Consistent Structure**: Proper Subject-Predicate-Object relationships
 
 ### ArangoDB Best Practices
 - Disjoint SmartGraphs for multi-tenancy
@@ -376,7 +376,7 @@ All settings are managed through `config_management.py`:
 - **Comprehensive Testing**: Unit, integration, and compliance tests
 
 ### Recent Improvements
-- [DONE] **hasConnection Architecture**: Corrected to DeviceProxyOut -> DeviceProxyIn only (W3C OWL compliant)
+- [DONE] **hasConnection Architecture**: Corrected to DeviceProxyOut -> DeviceProxyIn only (proper naming conventions)
 - [DONE] **Collection naming**: `DeviceIn` -> `DeviceProxyIn`, `DeviceOut` -> `DeviceProxyOut`
 - [DONE] **Property naming**: `_observed_at` -> `observedAt` throughout
 - [DONE] **Proxy collections**: Removed unnecessary temporal attributes
