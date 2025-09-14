@@ -1,5 +1,5 @@
 {
-  "graph_name": "tenant_52c0fbe8bce4_network_assets",
+  "graph_name": "tenant_b67bc66a53b0_network_assets",
   "edge_definitions": [
     {
       "edge_collection": "hasConnection",
@@ -43,7 +43,7 @@
   "orphan_collections": [],
   "is_smart": true,
   "options": {
-    "smart_graph_attribute": "tenant_52c0fbe8bce4_attr",
+    "smart_graph_attribute": "tenant_b67bc66a53b0_attr",
     "number_of_shards": 3,
     "replication_factor": 2,
     "orphan_collections": []

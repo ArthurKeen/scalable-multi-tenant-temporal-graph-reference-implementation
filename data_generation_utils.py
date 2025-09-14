@@ -295,31 +295,50 @@ class FileManager:
     
     @staticmethod
     def write_tenant_data_files(tenant_config: TenantConfig,
-                               data_collections: Dict[str, List[Dict]]) -> None:
+                               data_collections: Dict[str, List[Dict]],
+                               app_config=None) -> None:
         """
         Write all tenant data files using consistent naming and formatting.
         
         Args:
             tenant_config: Tenant configuration
             data_collections: Dictionary mapping collection types to data
+            app_config: Application configuration (optional, uses default if None)
         """
         data_dir = FileManager.ensure_tenant_directory(tenant_config)
         
-        # Map collection types to file names (including new Software proxy collections)
-        file_mapping = {
-            "devices": FILE_NAMES["devices"],
-            "device_ins": FILE_NAMES["device_ins"], 
-            "device_outs": FILE_NAMES["device_outs"],
-            "locations": FILE_NAMES["locations"],
-            "software": FILE_NAMES["software"],
-            "software_ins": FILE_NAMES["software_ins"],  # NEW
-            "software_outs": FILE_NAMES["software_outs"],  # NEW
-            "connections": FILE_NAMES["connections"],
-            "has_locations": FILE_NAMES["has_locations"],
-            "has_software": FILE_NAMES["has_software"],
-            "has_device_software": FILE_NAMES["has_device_software"],  # NEW
-            "versions": FILE_NAMES["versions"]
-        }
+        # Use app configuration for file names if provided, otherwise fall back to hardcoded names
+        if app_config:
+            file_mapping = {
+                "devices": app_config.get_file_name(app_config.get_collection_name("devices")),
+                "device_ins": app_config.get_file_name(app_config.get_collection_name("device_ins")), 
+                "device_outs": app_config.get_file_name(app_config.get_collection_name("device_outs")),
+                "locations": app_config.get_file_name(app_config.get_collection_name("locations")),
+                "software": app_config.get_file_name(app_config.get_collection_name("software")),
+                "software_ins": app_config.get_file_name(app_config.get_collection_name("software_ins")),
+                "software_outs": app_config.get_file_name(app_config.get_collection_name("software_outs")),
+                "connections": app_config.get_file_name(app_config.get_collection_name("connections")),
+                "has_locations": app_config.get_file_name(app_config.get_collection_name("has_locations")),
+                "has_software": app_config.get_file_name(app_config.get_collection_name("has_software")),
+                "has_device_software": app_config.get_file_name(app_config.get_collection_name("has_device_software")),
+                "versions": app_config.get_file_name(app_config.get_collection_name("versions"))
+            }
+        else:
+            # Fallback to hardcoded names for backward compatibility
+            file_mapping = {
+                "devices": FILE_NAMES["devices"],
+                "device_ins": FILE_NAMES["device_ins"], 
+                "device_outs": FILE_NAMES["device_outs"],
+                "locations": FILE_NAMES["locations"],
+                "software": FILE_NAMES["software"],
+                "software_ins": FILE_NAMES["software_ins"],
+                "software_outs": FILE_NAMES["software_outs"],
+                "connections": FILE_NAMES["connections"],
+                "has_locations": FILE_NAMES["has_locations"],
+                "has_software": FILE_NAMES["has_software"],
+                "has_device_software": FILE_NAMES["has_device_software"],
+                "versions": FILE_NAMES["versions"]
+            }
         
         total_documents = 0
         for collection_type, data in data_collections.items():

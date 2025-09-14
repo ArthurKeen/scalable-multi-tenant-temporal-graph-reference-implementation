@@ -610,7 +610,7 @@ class TimeTravelRefactoredGenerator:
         }
         
         # Write data files using centralized file management
-        FileManager.write_tenant_data_files(self.tenant_config, data_collections)
+        FileManager.write_tenant_data_files(self.tenant_config, data_collections, self.app_config)
         
         # Generate and write SmartGraph configuration
         smartgraph_config = SmartGraphConfigGenerator.generate_config(self.tenant_config)

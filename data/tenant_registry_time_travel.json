@@ -1,25 +1,25 @@
 {
   "tenants": {
-    "a65aa9f05ba5": {
+    "b67bc66a53b0": {
       "tenantName": "Acme Corp",
       "tenantStatus": "provisioning",
       "databaseName": "network_assets_demo",
-      "smartGraphName": "tenant_a65aa9f05ba5_network_assets",
-      "smartGraphAttribute": "tenant_a65aa9f05ba5_attr",
-      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_a65aa9f05ba5",
+      "smartGraphName": "tenant_b67bc66a53b0_network_assets",
+      "smartGraphAttribute": "tenant_b67bc66a53b0_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_b67bc66a53b0",
       "scaleFactor": 1,
-      "createdAt": "2025-09-12T19:52:10.055128",
+      "createdAt": "2025-09-14T17:41:35.864400",
       "tenantDescription": "Small enterprise with refactored time travel"
     },
-    "52c0fbe8bce4": {
+    "35b27baa982d": {
       "tenantName": "Global Enterprises",
       "tenantStatus": "provisioning",
       "databaseName": "network_assets_demo",
-      "smartGraphName": "tenant_52c0fbe8bce4_network_assets",
-      "smartGraphAttribute": "tenant_52c0fbe8bce4_attr",
-      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_52c0fbe8bce4",
+      "smartGraphName": "tenant_35b27baa982d_network_assets",
+      "smartGraphAttribute": "tenant_35b27baa982d_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_35b27baa982d",
       "scaleFactor": 2,
-      "createdAt": "2025-09-12T19:52:10.055145",
+      "createdAt": "2025-09-14T17:41:35.864430",
       "tenantDescription": "Large enterprise with refactored time travel"
     }
   },
@@ -27,8 +27,8 @@
     "totalTenants": 2,
     "totalDocuments": 3285,
     "sharedDatabase": "network_assets_demo",
-    "generatedAt": "2025-09-12T19:52:10.122587",
-    "environment": "production",
+    "generatedAt": "2025-09-14T17:41:35.936058",
+    "environment": "development",
     "owlCompliant": true,
     "timeTravel": {
       "refactored": true,
