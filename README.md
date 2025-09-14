@@ -211,35 +211,182 @@ graph TB
 - `_fromType` and `_toType` on all edges for efficient traversals
 - Optimized for graph query performance
 
-## Quick Start
+## Getting Started
 
 ### Prerequisites
-- Python 3.8+
-- ArangoDB 3.12+ (or ArangoDB Oasis cluster)
-- Required Python packages (see imports in scripts)
+- **Python 3.8+** with standard libraries
+- **ArangoDB 3.12+** or ArangoDB Oasis cluster access
+- **Environment Variables** configured (see Configuration section below)
 
-### Generate Multi-Tenant Data
+### Step 1: Configure Environment
+
+First, set up your database credentials:
+
 ```bash
-# Generate network asset data
-python asset_generator.py
+# Required environment variables
+export ARANGO_ENDPOINT="https://your-cluster.arangodb.cloud:8529"
+export ARANGO_USERNAME="root"
+export ARANGO_PASSWORD="your-secure-password"
+export ARANGO_DATABASE="network_assets_demo"
 
 # Verify configuration
-python config_management.py
-
-# Run comprehensive validation  
-python validation_suite.py
+echo "Endpoint: $ARANGO_ENDPOINT"
+echo "Database: $ARANGO_DATABASE"
 ```
 
-### Deploy to ArangoDB Oasis
+### Step 2: Generate Multi-Tenant Data
+
+Choose your data generation approach:
+
+#### Option A: Default Generation (Recommended)
 ```bash
-# Deploy to database
+# Generate data for 3 default tenants with varying scales
+python asset_generator.py
+
+# This creates:
+# - Acme Corp (1x scale): ~1,095 documents
+# - Global Enterprises (3x scale): ~3,285 documents  
+# - StartupXYZ (1x scale): ~1,095 documents
+# - Total: ~5,475 documents across all collections
+```
+
+#### Option B: Custom Tenant Configuration
+```bash
+# Edit tenant_config.py to customize:
+# - Tenant names and IDs
+# - Scale factors (1x, 2x, 3x, 5x)
+# - Device/software/location counts per tenant
+
+# Then generate with custom settings
+python asset_generator.py
+```
+
+#### Option C: Single Tenant Testing
+```bash
+# For development/testing with minimal data
+# Modify data_generation_config.py:
+# - Set DEVICE_COUNT = 5
+# - Set SOFTWARE_COUNT = 10
+# - Set LOCATION_COUNT = 2
+
+python asset_generator.py
+```
+
+### Step 3: Deploy to Database
+
+Choose your deployment method:
+
+#### Option A: Fresh Database Deployment
+```bash
+# Creates new database and loads all tenant data
 python database_deployment.py
 
-# Validate deployment and functionality
+# This will:
+# 1. Create/recreate the database
+# 2. Set up all collections and indexes
+# 3. Load tenant data from generated JSON files
+# 4. Create tenant-specific SmartGraphs
+# 5. Verify deployment integrity
+```
+
+#### Option B: Update Existing Database
+```bash
+# Load new tenant data into existing database
+# (Preserves existing data, adds new tenants)
+python oasis_cluster_setup.py
+
+# This will:
+# 1. Connect to existing database
+# 2. Create missing collections/indexes
+# 3. Load only new tenant data
+# 4. Maintain existing tenant isolation
+```
+
+### Step 4: Validate Deployment
+
+Run comprehensive validation:
+
+```bash
+# Full validation suite
+python validation_suite.py
+
+# Quick database check
+python database_utilities.py
+
+# Test suite (development validation)
+python test_suite.py
+```
+
+## Data Generation Options
+
+### Scale Factors
+Control data volume per tenant:
+- **1x scale**: 60 devices, 90 software, 5 locations
+- **2x scale**: 120 devices, 180 software, 10 locations  
+- **3x scale**: 180 devices, 270 software, 15 locations
+- **5x scale**: 300 devices, 450 software, 25 locations
+
+### Tenant Customization
+Edit `tenant_config.py` to modify:
+```python
+# Example custom tenant
+create_tenant_config(
+    tenant_name="Your Company",
+    scale_factor=2,  # 2x data volume
+    # Generates tenant_id automatically
+)
+```
+
+### Data Types Generated
+Each tenant gets:
+- **Device entities**: Network devices with temporal history
+- **DeviceProxy entities**: Lightweight connection points
+- **Software entities**: Applications with version tracking
+- **SoftwareProxy entities**: Software connection points
+- **Location entities**: Geographic placement data
+- **Relationship edges**: Network topology and associations
+
+## Deployment Scenarios
+
+### Scenario 1: Demo/Development
+```bash
+# Minimal data for testing
+# Edit data_generation_config.py: reduce counts
+python asset_generator.py
+python database_deployment.py
+```
+
+### Scenario 2: Multi-Tenant Production
+```bash
+# Full-scale multi-tenant deployment
+python asset_generator.py  # Uses default tenant configs
+python database_deployment.py
 python validation_suite.py
 ```
 
-> **Clean Codebase**: Fully cleaned and production-ready - removed 15+ redundant files, eliminated all hardwiring, and refactored duplicate code. All scripts use centralized credentials and utilities.
+### Scenario 3: Custom Enterprise Setup
+```bash
+# 1. Customize tenant_config.py with your tenants
+# 2. Adjust scale factors as needed
+python asset_generator.py
+python database_deployment.py
+
+# 3. Verify tenant isolation
+python validation_suite.py
+```
+
+### Scenario 4: Add New Tenants
+```bash
+# 1. Add new tenant configs to tenant_config.py
+# 2. Generate data (preserves existing tenants)
+python asset_generator.py
+
+# 3. Deploy only new tenants
+python oasis_cluster_setup.py
+
+# 4. Validate isolation maintained
+python validation_suite.py
+```
 
 ## Generated Data
 
