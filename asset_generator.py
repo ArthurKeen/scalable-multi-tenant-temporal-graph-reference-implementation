@@ -20,6 +20,7 @@ from pathlib import Path
 # Import centralized configuration
 from config_management import get_config, initialize_logging, NamingConvention
 from tenant_config import TenantConfig, TenantNamingConvention, create_tenant_config
+from ttl_constants import NEVER_EXPIRES
 from data_generation_utils import (
     DocumentEnhancer, RandomDataGenerator, KeyGenerator,
     ConfigurationManager as DataConfigManager, FileManager, LocationDataProvider,

@@ -230,25 +230,25 @@ graph TB
 **🎯 Automated Walkthrough (Recommended for First-Time Users)**
 ```bash
 # Interactive guided demonstration with explanations
-python automated_demo_walkthrough.py --interactive
+python3 automated_demo_walkthrough.py --interactive
 
 # Auto-advancing demonstration with timed pauses
-python automated_demo_walkthrough.py --auto-advance --pause-duration 5
+python3 automated_demo_walkthrough.py --auto-advance --pause-duration 5
 ```
 
 **🏃 Fast Complete Demo**
 ```bash
 # Run the complete demonstration (all steps automated)
-python comprehensive_demo.py --save-report
+python3 comprehensive_demo.py --save-report
 
 # Run with snake_case naming convention
-python comprehensive_demo.py --naming snake_case --save-report
+python3 comprehensive_demo.py --naming snake_case --save-report
 ```
 
 **🚀 Demo Launcher (Easy Access)**
 ```bash
 # Interactive menu with all demo options
-python demo_launcher.py
+python3 demo_launcher.py
 ```
 
 **The comprehensive demo includes:**
@@ -312,13 +312,13 @@ The **automated walkthrough** provides a guided tour of all system capabilities 
 #### Usage Options:
 ```bash
 # Interactive mode (recommended for presentations)
-python automated_demo_walkthrough.py --interactive
+python3 automated_demo_walkthrough.py --interactive
 
 # Auto-advance mode (for unattended demos)
-python automated_demo_walkthrough.py --auto-advance --pause-duration 3
+python3 automated_demo_walkthrough.py --auto-advance --pause-duration 3
 
 # View all options
-python automated_demo_walkthrough.py --help
+python3 automated_demo_walkthrough.py --help
 ```
 
 ### Individual Demo Components
@@ -327,25 +327,25 @@ For running specific parts of the demonstration:
 
 ```bash
 # Data Generation Only (4 tenants by default)
-python asset_generator.py --naming camelCase --environment development
+python3 asset_generator.py --naming camelCase --environment development
 
 # Generate specific number of tenants
-python asset_generator.py --tenants 6 --naming camelCase --environment development
+python3 asset_generator.py --tenants 6 --naming camelCase --environment development
 
 # Database Deployment Only  
-python database_deployment.py --naming camelCase
+python3 database_deployment.py --naming camelCase
 
 # Transaction Simulation Only
-python transaction_simulator.py --naming camelCase --devices 5 --software 3
+python3 transaction_simulator.py --naming camelCase --devices 5 --software 3
 
 # TTL Demo Scenarios Only
-python ttl_demo_scenarios.py --naming camelCase
+python3 ttl_demo_scenarios.py --naming camelCase
 
 # Scale-Out Demo Only
-python scale_out_demo.py --naming camelCase --save-report
+python3 scale_out_demo.py --naming camelCase --save-report
 
 # Validation Only
-python validation_suite.py
+python3 validation_suite.py
 ```
 
 ### Prerequisites
@@ -378,10 +378,10 @@ Choose your data generation approach:
 #### Option A: Default Generation (Recommended)
 ```bash
 # Generate data with camelCase naming (default)
-python asset_generator.py
+python3 asset_generator.py
 
 # Generate data with snake_case naming
-python asset_generator.py --naming snake_case
+python3 asset_generator.py --naming snake_case
 
 # This creates:
 # - Acme Corp (1x scale): ~1,095 documents
@@ -397,7 +397,7 @@ python asset_generator.py --naming snake_case
 # - Device/software/location counts per tenant
 
 # Then generate with custom settings
-python asset_generator.py
+python3 asset_generator.py
 ```
 
 #### Option C: Single Tenant Testing
@@ -408,7 +408,7 @@ python asset_generator.py
 # - Set SOFTWARE_COUNT = 10
 # - Set LOCATION_COUNT = 2
 
-python asset_generator.py
+python3 asset_generator.py
 ```
 
 #### Step 3: Deploy to Database
@@ -418,10 +418,10 @@ Choose your deployment method:
 #### Option A: Fresh Database Deployment
 ```bash
 # Deploy with camelCase naming (default)
-python database_deployment.py
+python3 database_deployment.py
 
 # Deploy with snake_case naming
-python database_deployment.py --naming snake_case
+python3 database_deployment.py --naming snake_case
 
 # This will:
 # 1. Create/recreate the database
@@ -450,7 +450,7 @@ Run comprehensive validation:
 
 ```bash
 # Full validation suite
-python validation_suite.py
+python3 validation_suite.py
 
 # Quick database check
 python database_utilities.py
@@ -473,7 +473,7 @@ python scale_out_manager.py --operation add-tenant --tenant-name "New Corp" --sc
 python scale_out_manager.py --operation add-tenants
 
 # Run complete scale-out demonstration
-python scale_out_demo.py --save-report
+python3 scale_out_demo.py --save-report
 ```
 
 ### Database Server Scaling
@@ -508,8 +508,8 @@ Choose between two supported naming conventions:
 
 #### camelCase (Default)
 ```bash
-python asset_generator.py --naming camelCase
-python database_deployment.py --naming camelCase
+python3 asset_generator.py --naming camelCase
+python3 database_deployment.py --naming camelCase
 ```
 **Collections Created:**
 - Vertex: `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`, `SoftwareProxyIn`, `SoftwareProxyOut`
@@ -517,8 +517,8 @@ python database_deployment.py --naming camelCase
 
 #### snake_case
 ```bash
-python asset_generator.py --naming snake_case
-python database_deployment.py --naming snake_case
+python3 asset_generator.py --naming snake_case
+python3 database_deployment.py --naming snake_case
 ```
 **Collections Created:**
 - Vertex: `device`, `device_proxy_in`, `device_proxy_out`, `location`, `software`, `software_proxy_in`, `software_proxy_out`
@@ -558,49 +558,49 @@ Each tenant gets:
 ### Scenario 1: Demo/Development
 ```bash
 # Minimal data for testing with camelCase
-python asset_generator.py --environment development
-python database_deployment.py --naming camelCase
+python3 asset_generator.py --environment development
+python3 database_deployment.py --naming camelCase
 
 # Or with snake_case naming
-python asset_generator.py --environment development --naming snake_case
-python database_deployment.py --naming snake_case
+python3 asset_generator.py --environment development --naming snake_case
+python3 database_deployment.py --naming snake_case
 ```
 
 ### Scenario 2: Multi-Tenant Production
 ```bash
 # Full-scale multi-tenant deployment with camelCase (default)
-python asset_generator.py
-python database_deployment.py
-python validation_suite.py
+python3 asset_generator.py
+python3 database_deployment.py
+python3 validation_suite.py
 
 # Or with snake_case naming
-python asset_generator.py --naming snake_case
-python database_deployment.py --naming snake_case
-python validation_suite.py
+python3 asset_generator.py --naming snake_case
+python3 database_deployment.py --naming snake_case
+python3 validation_suite.py
 ```
 
 ### Scenario 3: Custom Enterprise Setup
 ```bash
 # 1. Customize tenant_config.py with your tenants
 # 2. Adjust scale factors as needed
-python asset_generator.py
-python database_deployment.py
+python3 asset_generator.py
+python3 database_deployment.py
 
 # 3. Verify tenant isolation
-python validation_suite.py
+python3 validation_suite.py
 ```
 
 ### Scenario 4: Add New Tenants
 ```bash
 # 1. Add new tenant configs to tenant_config.py
 # 2. Generate data (preserves existing tenants)
-python asset_generator.py
+python3 asset_generator.py
 
 # 3. Deploy only new tenants
 python oasis_cluster_setup.py
 
 # 4. Validate isolation maintained
-python validation_suite.py
+python3 validation_suite.py
 ```
 
 ## Generated Data
@@ -645,7 +645,7 @@ python test_suite.py
 
 ### Naming Convention Validation
 ```bash
-python validation_suite.py
+python3 validation_suite.py
 ```
 - **Collection Naming**: 100% compliant
 - **Property Naming**: 100% compliant  
@@ -746,7 +746,7 @@ All settings are managed through `config_management.py`:
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
 3. **Run** tests: `python test_suite.py`
-4. **Validate** compliance: `python validation_suite.py`
+4. **Validate** compliance: `python3 validation_suite.py`
 5. **Commit** changes: `git commit -m 'Add amazing feature'`
 6. **Push** to branch: `git push origin feature/amazing-feature`
 7. **Open** a Pull Request

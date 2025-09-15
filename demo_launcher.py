@@ -57,7 +57,7 @@ def run_automated_walkthrough_interactive():
     print()
     input("Press Enter to begin...")
     
-    os.system("python automated_demo_walkthrough.py --interactive")
+    os.system("python3 automated_demo_walkthrough.py --interactive")
 
 
 def run_automated_walkthrough_auto():
@@ -78,7 +78,7 @@ def run_automated_walkthrough_auto():
         print("❌ Invalid duration, using default of 3 seconds")
         pause_duration = 3
     
-    os.system(f"python automated_demo_walkthrough.py --auto-advance --pause-duration {pause_duration}")
+    os.system(f"python3 automated_demo_walkthrough.py --auto-advance --pause-duration {pause_duration}")
 
 
 def run_comprehensive_demo():
@@ -95,7 +95,7 @@ def run_comprehensive_demo():
     save_report = input("Save demonstration report? (y/N): ").strip().lower()
     report_flag = "--save-report" if save_report.startswith('y') else ""
     
-    os.system(f"python comprehensive_demo.py --naming {naming} {report_flag}")
+    os.system(f"python3 comprehensive_demo.py --naming {naming} {report_flag}")
 
 
 def run_individual_components():
@@ -120,25 +120,25 @@ def run_individual_components():
         elif choice == 1:
             tenants = input("Number of tenants (default: 4): ").strip() or "4"
             naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
-            os.system(f"python asset_generator.py --tenants {tenants} --naming {naming} --environment development")
+            os.system(f"python3 asset_generator.py --tenants {tenants} --naming {naming} --environment development")
         elif choice == 2:
             naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
-            os.system(f"python database_deployment.py --naming {naming}")
+            os.system(f"python3 database_deployment.py --naming {naming}")
         elif choice == 3:
             naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
             devices = input("Number of device changes (default: 5): ").strip() or "5"
             software = input("Number of software changes (default: 3): ").strip() or "3"
-            os.system(f"python transaction_simulator.py --naming {naming} --devices {devices} --software {software}")
+            os.system(f"python3 transaction_simulator.py --naming {naming} --devices {devices} --software {software}")
         elif choice == 4:
             naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
-            os.system(f"python ttl_demo_scenarios.py --naming {naming}")
+            os.system(f"python3 ttl_demo_scenarios.py --naming {naming}")
         elif choice == 5:
             naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
             save_report = input("Save report? (y/N): ").strip().lower()
             report_flag = "--save-report" if save_report.startswith('y') else ""
-            os.system(f"python scale_out_demo.py --naming {naming} {report_flag}")
+            os.system(f"python3 scale_out_demo.py --naming {naming} {report_flag}")
         elif choice == 6:
-            os.system("python validation_suite.py")
+            os.system("python3 validation_suite.py")
         else:
             print("❌ Invalid choice")
             
@@ -155,7 +155,7 @@ def run_validation_only():
     print("   → No data generation or changes")
     print()
     
-    os.system("python validation_suite.py")
+    os.system("python3 validation_suite.py")
 
 
 def main():
