@@ -1,0 +1,77 @@
+[
+  {
+    "_key": "e466d07075ac_location1",
+    "name": "DataFlow Corp - New York Data Center",
+    "streetAddress": "123 Broadway, New York, NY",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    },
+    "created": 1757965622.818007,
+    "expired": 9223372036854775807,
+    "tenant_e466d07075ac_attr": "e466d07075ac"
+  },
+  {
+    "_key": "e466d07075ac_location2",
+    "name": "DataFlow Corp - London Office",
+    "streetAddress": "456 Oxford St, London",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    },
+    "created": 1757965622.818012,
+    "expired": 9223372036854775807,
+    "tenant_e466d07075ac_attr": "e466d07075ac"
+  },
+  {
+    "_key": "e466d07075ac_location3",
+    "name": "DataFlow Corp - Tokyo HQ",
+    "streetAddress": "789 Ginza, Tokyo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    },
+    "created": 1757965622.818014,
+    "expired": 9223372036854775807,
+    "tenant_e466d07075ac_attr": "e466d07075ac"
+  },
+  {
+    "_key": "e466d07075ac_location4",
+    "name": "DataFlow Corp - Sydney Warehouse",
+    "streetAddress": "101 George St, Sydney",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    },
+    "created": 1757965622.818016,
+    "expired": 9223372036854775807,
+    "tenant_e466d07075ac_attr": "e466d07075ac"
+  },
+  {
+    "_key": "e466d07075ac_location5",
+    "name": "DataFlow Corp - Frankfurt Cloud Region",
+    "streetAddress": "222 Mainzer Landstr, Frankfurt",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    },
+    "created": 1757965622.818018,
+    "expired": 9223372036854775807,
+    "tenant_e466d07075ac_attr": "e466d07075ac"
+  }
+]

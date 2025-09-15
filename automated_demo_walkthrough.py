@@ -249,18 +249,18 @@ class AutomatedDemoWalkthrough:
         """Section 3: Database Deployment and Setup."""
         self.print_section_header(
             "DATABASE DEPLOYMENT", 
-            "Deploying multi-tenant data to ArangoDB with SmartGraphs and TTL indexes"
+            "Deploying multi-tenant data to ArangoDB with unified graph and TTL indexes"
         )
         
         self.print_subsection(
             "Deployment Components",
-            "Creating collections, indexes, and SmartGraph configurations"
+            "Creating collections, indexes, and unified graph configurations"
         )
         
         print("Deployment Process:")
         print("- Collection Creation (vertex and edge collections)")
         print("- Index Configuration (performance and TTL indexes)")
-        print("- SmartGraph Setup (tenant isolation via disjoint graphs)")
+        print("- Unified Graph Setup (single graph for all tenant visualization)")
         print("- TTL Index Creation (automatic historical data aging)")
         print("- Data Import (JSON files to collections)")
         print()
@@ -290,8 +290,9 @@ class AutomatedDemoWalkthrough:
                 print("Loading data to collections...")
                 deployment.load_refactored_data()
                 
-                print("Creating SmartGraphs...")
-                deployment.create_refactored_named_graphs()
+                print("Creating unified network graph...")
+                # Create unified graph instead of per-tenant graphs
+                self._ensure_unified_graph()
                 
                 # Verify data was actually imported
                 total_docs = 0
@@ -566,11 +567,16 @@ class AutomatedDemoWalkthrough:
                     # Generate tenant data only
                     tenant_config = tenant_manager.create_new_tenant(tenant_name, scale_factor)
                     if tenant_manager.generate_tenant_data(tenant_config):
-                        # Import data directly without complex deployment
+                        # Import data to unified collections
                         if self._import_tenant_data_simple(tenant_config):
-                            tenant_count += 1
-                            print(f"     [SUCCESS] {tenant_name} added successfully")
-                            print(f"     [DATA] Tenant ID: {tenant_config.tenant_id}")
+                            # Ensure unified graph exists (only create once)
+                            if self._ensure_unified_graph():
+                                tenant_count += 1
+                                print(f"     [SUCCESS] {tenant_name} added successfully")
+                                print(f"     [DATA] Tenant ID: {tenant_config.tenant_id}")
+                                print(f"     [GRAPH] Data visible in unified network_assets_graph")
+                            else:
+                                print(f"     [WARNING] Data imported but unified graph verification failed for {tenant_name}")
                         else:
                             print(f"     [WARNING] Failed to import data for {tenant_name}")
                     else:
@@ -662,6 +668,58 @@ class AutomatedDemoWalkthrough:
             
         except Exception as e:
             print(f"     [ERROR] Import failed: {e}")
+            return False
+    
+    def _ensure_unified_graph(self) -> bool:
+        """Ensure the unified network assets graph exists."""
+        try:
+            if not self.database:
+                if not self.connect_to_database():
+                    return False
+            
+            graph_name = "network_assets_graph"
+            
+            # Check if unified graph already exists
+            if self.database.has_graph(graph_name):
+                print(f"     [INFO] Unified graph {graph_name} already exists")
+                return True
+            
+            # Define graph configuration for all tenant data
+            edge_definitions = [
+                {
+                    "edge_collection": "hasConnection",
+                    "from_vertex_collections": ["DeviceProxyOut"],
+                    "to_vertex_collections": ["DeviceProxyIn"]
+                },
+                {
+                    "edge_collection": "hasDeviceSoftware",
+                    "from_vertex_collections": ["DeviceProxyOut"],
+                    "to_vertex_collections": ["SoftwareProxyIn"]
+                },
+                {
+                    "edge_collection": "hasLocation", 
+                    "from_vertex_collections": ["DeviceProxyOut"],
+                    "to_vertex_collections": ["Location"]
+                },
+                {
+                    "edge_collection": "hasVersion",
+                    "from_vertex_collections": ["Device", "DeviceProxyIn", "Software", "SoftwareProxyIn"],
+                    "to_vertex_collections": ["Device", "DeviceProxyOut", "Software", "SoftwareProxyOut"]
+                }
+            ]
+            
+            # Create unified graph for all tenant visualization
+            graph = self.database.create_graph(
+                name=graph_name,
+                edge_definitions=edge_definitions
+            )
+            
+            print(f"     [GRAPH] Created unified graph: {graph_name}")
+            print(f"     [INFO] All tenant data visible in single graph")
+            return True
+            
+        except Exception as e:
+            print(f"     [ERROR] Unified graph creation failed: {e}")
             return False
     
     def section_8_final_validation(self):

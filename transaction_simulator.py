@@ -19,6 +19,7 @@ from arango import ArangoClient
 
 # Import project modules
 from centralized_credentials import CredentialsManager
+from database_utilities import QueryExecutor
 from config_management import get_config, NamingConvention
 from ttl_config import TTLManager, create_ttl_configuration, create_snake_case_ttl_configuration
 from ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS

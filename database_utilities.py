@@ -16,6 +16,43 @@ import json
 from centralized_credentials import CredentialsManager, DatabaseConstants, get_collection_name
 
 
+class QueryExecutor:
+    """Common query execution functionality with optional query display."""
+    
+    @staticmethod
+    def execute_and_display_query(database, query: str, query_name: str, bind_vars: Dict = None, show_queries: bool = False) -> List[Dict]:
+        """Execute a query and display it with results if show_queries is enabled."""
+        if show_queries:
+            print(f"\n[QUERY] {query_name}:")
+            print(f"   AQL: {query}")
+            if bind_vars:
+                print(f"   Variables: {bind_vars}")
+        
+        try:
+            cursor = database.aql.execute(query, bind_vars=bind_vars)
+            results = list(cursor)
+            
+            if show_queries:
+                print(f"   Results: {len(results)} documents returned")
+                if results and len(results) <= 3:  # Show sample results for small result sets
+                    for i, result in enumerate(results[:3]):
+                        if isinstance(result, dict):
+                            # Show key fields only
+                            sample = {k: v for k, v in result.items() if k in ['_key', '_id', 'name', 'type', 'created', 'expired']}
+                            print(f"   Sample {i+1}: {sample}")
+                        else:
+                            print(f"   Sample {i+1}: {result}")
+                elif results:
+                    print(f"   (Large result set - showing count only)")
+            
+            return results
+            
+        except Exception as e:
+            if show_queries:
+                print(f"   [ERROR] Query failed: {e}")
+            return []
+
+
 class DatabaseConnectionManager:
     """Manages database connections and provides common operations."""
     
