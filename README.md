@@ -251,6 +251,8 @@ python3 comprehensive_demo.py --naming snake_case --save-report
 python3 demo_launcher.py
 ```
 
+> **Note**: All scripts use `python3` for compatibility with pyenv and modern Python installations. If you encounter `python: command not found` errors, the scripts have been updated to use `python3` automatically.
+
 **The comprehensive demo includes:**
 1. **Initial Data Generation** - Multi-tenant network asset data (4 tenants by default)
 2. **Database Deployment** - Collections, indexes, and SmartGraphs
@@ -458,6 +460,44 @@ python database_utilities.py
 # Test suite (development validation)
 python test_suite.py
 ```
+
+## Troubleshooting
+
+### Python Command Issues
+
+If you encounter `python: command not found` errors:
+
+```bash
+# Use python3 instead of python (already updated in all scripts)
+python3 demo_launcher.py
+python3 automated_demo_walkthrough.py --interactive
+
+# Check your Python installation
+which python3
+python3 --version
+
+# If using pyenv, ensure Python is properly configured
+pyenv versions
+pyenv global 3.11.11  # or your preferred version
+```
+
+### Environment Setup
+
+Ensure you have the required environment variables set:
+
+```bash
+# Required ArangoDB credentials
+export ARANGO_ENDPOINT="https://your-cluster.arangodb.cloud:8529"
+export ARANGO_USERNAME="root"
+export ARANGO_PASSWORD="your-password"
+export ARANGO_DATABASE="network_assets_demo"
+```
+
+### Common Issues
+
+- **Import Errors**: Ensure all project files are in the same directory
+- **Connection Errors**: Verify ArangoDB credentials and network connectivity
+- **Permission Errors**: Check file permissions for data and logs directories
 
 ## Scale-Out Capabilities
 
