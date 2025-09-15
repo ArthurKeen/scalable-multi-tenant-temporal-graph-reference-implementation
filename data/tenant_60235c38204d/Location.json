@@ -1,0 +1,77 @@
+[
+  {
+    "_key": "60235c38204d_location1",
+    "name": "Manufacturing Solutions Inc - New York Data Center",
+    "streetAddress": "123 Broadway, New York, NY",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    },
+    "created": 1757902724.771136,
+    "expired": 9223372036854775807,
+    "tenant_60235c38204d_attr": "60235c38204d"
+  },
+  {
+    "_key": "60235c38204d_location2",
+    "name": "Manufacturing Solutions Inc - London Office",
+    "streetAddress": "456 Oxford St, London",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    },
+    "created": 1757902724.771141,
+    "expired": 9223372036854775807,
+    "tenant_60235c38204d_attr": "60235c38204d"
+  },
+  {
+    "_key": "60235c38204d_location3",
+    "name": "Manufacturing Solutions Inc - Tokyo HQ",
+    "streetAddress": "789 Ginza, Tokyo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    },
+    "created": 1757902724.771143,
+    "expired": 9223372036854775807,
+    "tenant_60235c38204d_attr": "60235c38204d"
+  },
+  {
+    "_key": "60235c38204d_location4",
+    "name": "Manufacturing Solutions Inc - Sydney Warehouse",
+    "streetAddress": "101 George St, Sydney",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    },
+    "created": 1757902724.771145,
+    "expired": 9223372036854775807,
+    "tenant_60235c38204d_attr": "60235c38204d"
+  },
+  {
+    "_key": "60235c38204d_location5",
+    "name": "Manufacturing Solutions Inc - Frankfurt Cloud Region",
+    "streetAddress": "222 Mainzer Landstr, Frankfurt",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    },
+    "created": 1757902724.771147,
+    "expired": 9223372036854775807,
+    "tenant_60235c38204d_attr": "60235c38204d"
+  }
+]

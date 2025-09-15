@@ -1,0 +1,77 @@
+[
+  {
+    "_key": "ac94d6bef096_location1",
+    "name": "Tech Startup Innovations - New York Data Center",
+    "streetAddress": "123 Broadway, New York, NY",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    },
+    "created": 1757902724.784935,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_location2",
+    "name": "Tech Startup Innovations - London Office",
+    "streetAddress": "456 Oxford St, London",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    },
+    "created": 1757902724.784939,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_location3",
+    "name": "Tech Startup Innovations - Tokyo HQ",
+    "streetAddress": "789 Ginza, Tokyo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    },
+    "created": 1757902724.784941,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_location4",
+    "name": "Tech Startup Innovations - Sydney Warehouse",
+    "streetAddress": "101 George St, Sydney",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    },
+    "created": 1757902724.784942,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_location5",
+    "name": "Tech Startup Innovations - Frankfurt Cloud Region",
+    "streetAddress": "222 Mainzer Landstr, Frankfurt",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    },
+    "created": 1757902724.784944,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  }
+]

@@ -1,0 +1,2336 @@
+[
+  {
+    "_key": "ac94d6bef096_device1-0",
+    "name": "Tech Startup Innovations firewall Firewall Model 393",
+    "type": "firewall",
+    "model": "Firewall Model 393",
+    "serialNumber": "a223bccd-6eef-48b7-a95a-4ce9c93b738a",
+    "ipAddress": "192.168.83.86",
+    "macAddress": "17:29:01:3d:68:b2",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_device1",
+    "firewallRules": [
+      "allow 80",
+      "allow 4546",
+      "allow 7412"
+    ],
+    "created": 1757902724.785108,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device1-1",
+    "name": "Tech Startup Innovations firewall Firewall Model 393",
+    "type": "firewall",
+    "model": "Firewall Model 393",
+    "serialNumber": "a223bccd-6eef-48b7-a95a-4ce9c93b738a",
+    "ipAddress": "192.168.83.86",
+    "macAddress": "17:29:01:3d:68:b2",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-961",
+    "firewallRules": [
+      "allow 80",
+      "allow 4546",
+      "allow 7412"
+    ],
+    "created": 1757557124.785141,
+    "expired": 1757902724.785108,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device1-2",
+    "name": "Tech Startup Innovations firewall Firewall Model 393",
+    "type": "firewall",
+    "model": "Firewall Model 393",
+    "serialNumber": "a223bccd-6eef-48b7-a95a-4ce9c93b738a",
+    "ipAddress": "192.168.83.86",
+    "macAddress": "17:29:01:3d:68:b2",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-109",
+    "firewallRules": [
+      "allow 80",
+      "allow 4546",
+      "allow 7412"
+    ],
+    "created": 1757384324.785154,
+    "expired": 1757557124.785141,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device1-3",
+    "name": "Tech Startup Innovations firewall Firewall Model 393",
+    "type": "firewall",
+    "model": "Firewall Model 393",
+    "serialNumber": "a223bccd-6eef-48b7-a95a-4ce9c93b738a",
+    "ipAddress": "192.168.83.86",
+    "macAddress": "17:29:01:3d:68:b2",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-640",
+    "firewallRules": [
+      "allow 80",
+      "allow 4546",
+      "allow 7412"
+    ],
+    "created": 1756606724.785162,
+    "expired": 1757384324.785154,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device1-4",
+    "name": "Tech Startup Innovations firewall Firewall Model 393",
+    "type": "firewall",
+    "model": "Firewall Model 393",
+    "serialNumber": "a223bccd-6eef-48b7-a95a-4ce9c93b738a",
+    "ipAddress": "192.168.83.86",
+    "macAddress": "17:29:01:3d:68:b2",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-412",
+    "firewallRules": [
+      "allow 80",
+      "allow 4546",
+      "allow 7412"
+    ],
+    "created": 1756261124.78517,
+    "expired": 1756606724.785162,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device1-5",
+    "name": "Tech Startup Innovations firewall Firewall Model 393",
+    "type": "firewall",
+    "model": "Firewall Model 393",
+    "serialNumber": "a223bccd-6eef-48b7-a95a-4ce9c93b738a",
+    "ipAddress": "192.168.83.86",
+    "macAddress": "17:29:01:3d:68:b2",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-164",
+    "firewallRules": [
+      "allow 80",
+      "allow 4546",
+      "allow 7412"
+    ],
+    "created": 1756001924.785177,
+    "expired": 1756261124.78517,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device2-0",
+    "name": "Tech Startup Innovations IoT Iot Model 963",
+    "type": "IoT",
+    "model": "Iot Model 963",
+    "serialNumber": "46968698-c184-43be-9b6d-7d89d222c0b7",
+    "ipAddress": "192.168.33.245",
+    "macAddress": "2c:6e:44:88:c8:9d",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "ac94d6bef096_device2",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3519",
+      "allow 3636",
+      "allow 1666",
+      "allow 7676"
+    ],
+    "created": 1757902724.785185,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device2-1",
+    "name": "Tech Startup Innovations IoT Iot Model 963",
+    "type": "IoT",
+    "model": "Iot Model 963",
+    "serialNumber": "46968698-c184-43be-9b6d-7d89d222c0b7",
+    "ipAddress": "192.168.33.245",
+    "macAddress": "2c:6e:44:88:c8:9d",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "ac94d6bef096_new-device-141",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3519",
+      "allow 3636",
+      "allow 1666",
+      "allow 7676"
+    ],
+    "created": 1757816324.785204,
+    "expired": 1757902724.785185,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device2-2",
+    "name": "Tech Startup Innovations IoT Iot Model 963",
+    "type": "IoT",
+    "model": "Iot Model 963",
+    "serialNumber": "46968698-c184-43be-9b6d-7d89d222c0b7",
+    "ipAddress": "192.168.33.245",
+    "macAddress": "2c:6e:44:88:c8:9d",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "ac94d6bef096_new-device-376",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3519",
+      "allow 3636",
+      "allow 1666",
+      "allow 7676"
+    ],
+    "created": 1757125124.785211,
+    "expired": 1757816324.785204,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device2-3",
+    "name": "Tech Startup Innovations IoT Iot Model 963",
+    "type": "IoT",
+    "model": "Iot Model 963",
+    "serialNumber": "46968698-c184-43be-9b6d-7d89d222c0b7",
+    "ipAddress": "192.168.33.245",
+    "macAddress": "2c:6e:44:88:c8:9d",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "ac94d6bef096_new-device-204",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3519",
+      "allow 3636",
+      "allow 1666",
+      "allow 7676"
+    ],
+    "created": 1756952324.785217,
+    "expired": 1757125124.785211,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device2-4",
+    "name": "Tech Startup Innovations IoT Iot Model 963",
+    "type": "IoT",
+    "model": "Iot Model 963",
+    "serialNumber": "46968698-c184-43be-9b6d-7d89d222c0b7",
+    "ipAddress": "192.168.33.245",
+    "macAddress": "2c:6e:44:88:c8:9d",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "ac94d6bef096_new-device-642",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3519",
+      "allow 3636",
+      "allow 1666",
+      "allow 7676"
+    ],
+    "created": 1756520324.785224,
+    "expired": 1756952324.785217,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device2-5",
+    "name": "Tech Startup Innovations IoT Iot Model 963",
+    "type": "IoT",
+    "model": "Iot Model 963",
+    "serialNumber": "46968698-c184-43be-9b6d-7d89d222c0b7",
+    "ipAddress": "192.168.33.245",
+    "macAddress": "2c:6e:44:88:c8:9d",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "ac94d6bef096_new-device-767",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3519",
+      "allow 3636",
+      "allow 1666",
+      "allow 7676"
+    ],
+    "created": 1756088324.785231,
+    "expired": 1756520324.785224,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device3-0",
+    "name": "Tech Startup Innovations IoT Iot Model 211",
+    "type": "IoT",
+    "model": "Iot Model 211",
+    "serialNumber": "8ac6dc83-052f-479e-8086-3c476639e983",
+    "ipAddress": "192.168.18.104",
+    "macAddress": "e6:32:4c:ac:4a:f4",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "ac94d6bef096_device3",
+    "firewallRules": [
+      "allow 1221"
+    ],
+    "created": 1757902724.785238,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device3-1",
+    "name": "Tech Startup Innovations IoT Iot Model 211",
+    "type": "IoT",
+    "model": "Iot Model 211",
+    "serialNumber": "8ac6dc83-052f-479e-8086-3c476639e983",
+    "ipAddress": "192.168.18.104",
+    "macAddress": "e6:32:4c:ac:4a:f4",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "ac94d6bef096_new-device-302",
+    "firewallRules": [
+      "allow 1221"
+    ],
+    "created": 1757729924.785253,
+    "expired": 1757902724.785238,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device3-2",
+    "name": "Tech Startup Innovations IoT Iot Model 211",
+    "type": "IoT",
+    "model": "Iot Model 211",
+    "serialNumber": "8ac6dc83-052f-479e-8086-3c476639e983",
+    "ipAddress": "192.168.18.104",
+    "macAddress": "e6:32:4c:ac:4a:f4",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "ac94d6bef096_new-device-807",
+    "firewallRules": [
+      "allow 1221"
+    ],
+    "created": 1757038724.78526,
+    "expired": 1757729924.785253,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device3-3",
+    "name": "Tech Startup Innovations IoT Iot Model 211",
+    "type": "IoT",
+    "model": "Iot Model 211",
+    "serialNumber": "8ac6dc83-052f-479e-8086-3c476639e983",
+    "ipAddress": "192.168.18.104",
+    "macAddress": "e6:32:4c:ac:4a:f4",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "ac94d6bef096_new-device-226",
+    "firewallRules": [
+      "allow 1221"
+    ],
+    "created": 1756952324.785267,
+    "expired": 1757038724.78526,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device3-4",
+    "name": "Tech Startup Innovations IoT Iot Model 211",
+    "type": "IoT",
+    "model": "Iot Model 211",
+    "serialNumber": "8ac6dc83-052f-479e-8086-3c476639e983",
+    "ipAddress": "192.168.18.104",
+    "macAddress": "e6:32:4c:ac:4a:f4",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "ac94d6bef096_new-device-556",
+    "firewallRules": [
+      "allow 1221"
+    ],
+    "created": 1756174724.785274,
+    "expired": 1756952324.785267,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device3-5",
+    "name": "Tech Startup Innovations IoT Iot Model 211",
+    "type": "IoT",
+    "model": "Iot Model 211",
+    "serialNumber": "8ac6dc83-052f-479e-8086-3c476639e983",
+    "ipAddress": "192.168.18.104",
+    "macAddress": "e6:32:4c:ac:4a:f4",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "ac94d6bef096_new-device-909",
+    "firewallRules": [
+      "allow 1221"
+    ],
+    "created": 1755829124.785281,
+    "expired": 1756174724.785274,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device4-0",
+    "name": "Tech Startup Innovations laptop Laptop Model 636",
+    "type": "laptop",
+    "model": "Laptop Model 636",
+    "serialNumber": "cfefbe35-a3a9-4919-9ecb-be1d8d270ba0",
+    "ipAddress": "192.168.34.68",
+    "macAddress": "f4:eb:24:2c:57:36",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "ac94d6bef096_device4",
+    "firewallRules": [
+      "allow 443",
+      "allow 8322"
+    ],
+    "created": 1757902724.785289,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device4-1",
+    "name": "Tech Startup Innovations laptop Laptop Model 636",
+    "type": "laptop",
+    "model": "Laptop Model 636",
+    "serialNumber": "cfefbe35-a3a9-4919-9ecb-be1d8d270ba0",
+    "ipAddress": "192.168.34.68",
+    "macAddress": "f4:eb:24:2c:57:36",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "ac94d6bef096_new-device-508",
+    "firewallRules": [
+      "allow 443",
+      "allow 8322"
+    ],
+    "created": 1757816324.785303,
+    "expired": 1757902724.785289,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device4-2",
+    "name": "Tech Startup Innovations laptop Laptop Model 636",
+    "type": "laptop",
+    "model": "Laptop Model 636",
+    "serialNumber": "cfefbe35-a3a9-4919-9ecb-be1d8d270ba0",
+    "ipAddress": "192.168.34.68",
+    "macAddress": "f4:eb:24:2c:57:36",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "ac94d6bef096_new-device-897",
+    "firewallRules": [
+      "allow 443",
+      "allow 8322"
+    ],
+    "created": 1757038724.785309,
+    "expired": 1757816324.785303,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device4-3",
+    "name": "Tech Startup Innovations laptop Laptop Model 636",
+    "type": "laptop",
+    "model": "Laptop Model 636",
+    "serialNumber": "cfefbe35-a3a9-4919-9ecb-be1d8d270ba0",
+    "ipAddress": "192.168.34.68",
+    "macAddress": "f4:eb:24:2c:57:36",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "ac94d6bef096_new-device-693",
+    "firewallRules": [
+      "allow 443",
+      "allow 8322"
+    ],
+    "created": 1756952324.785316,
+    "expired": 1757038724.785309,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device4-4",
+    "name": "Tech Startup Innovations laptop Laptop Model 636",
+    "type": "laptop",
+    "model": "Laptop Model 636",
+    "serialNumber": "cfefbe35-a3a9-4919-9ecb-be1d8d270ba0",
+    "ipAddress": "192.168.34.68",
+    "macAddress": "f4:eb:24:2c:57:36",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "ac94d6bef096_new-device-748",
+    "firewallRules": [
+      "allow 443",
+      "allow 8322"
+    ],
+    "created": 1756174724.785323,
+    "expired": 1756952324.785316,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device4-5",
+    "name": "Tech Startup Innovations laptop Laptop Model 636",
+    "type": "laptop",
+    "model": "Laptop Model 636",
+    "serialNumber": "cfefbe35-a3a9-4919-9ecb-be1d8d270ba0",
+    "ipAddress": "192.168.34.68",
+    "macAddress": "f4:eb:24:2c:57:36",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Pro 21H2",
+    "hostName": "ac94d6bef096_new-device-413",
+    "firewallRules": [
+      "allow 443",
+      "allow 8322"
+    ],
+    "created": 1755829124.785329,
+    "expired": 1756174724.785323,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device5-0",
+    "name": "Tech Startup Innovations firewall Firewall Model 544",
+    "type": "firewall",
+    "model": "Firewall Model 544",
+    "serialNumber": "df2530e6-d09c-4d71-b124-462203fae892",
+    "ipAddress": "192.168.194.133",
+    "macAddress": "0a:6a:f1:1c:63:4e",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "ac94d6bef096_device5",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757902724.785336,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device5-1",
+    "name": "Tech Startup Innovations firewall Firewall Model 544",
+    "type": "firewall",
+    "model": "Firewall Model 544",
+    "serialNumber": "df2530e6-d09c-4d71-b124-462203fae892",
+    "ipAddress": "192.168.194.133",
+    "macAddress": "0a:6a:f1:1c:63:4e",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "ac94d6bef096_new-device-645",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757557124.785351,
+    "expired": 1757902724.785336,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device5-2",
+    "name": "Tech Startup Innovations firewall Firewall Model 544",
+    "type": "firewall",
+    "model": "Firewall Model 544",
+    "serialNumber": "df2530e6-d09c-4d71-b124-462203fae892",
+    "ipAddress": "192.168.194.133",
+    "macAddress": "0a:6a:f1:1c:63:4e",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "ac94d6bef096_new-device-589",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757297924.785357,
+    "expired": 1757557124.785351,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device5-3",
+    "name": "Tech Startup Innovations firewall Firewall Model 544",
+    "type": "firewall",
+    "model": "Firewall Model 544",
+    "serialNumber": "df2530e6-d09c-4d71-b124-462203fae892",
+    "ipAddress": "192.168.194.133",
+    "macAddress": "0a:6a:f1:1c:63:4e",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "ac94d6bef096_new-device-434",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756693124.785363,
+    "expired": 1757297924.785357,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device5-4",
+    "name": "Tech Startup Innovations firewall Firewall Model 544",
+    "type": "firewall",
+    "model": "Firewall Model 544",
+    "serialNumber": "df2530e6-d09c-4d71-b124-462203fae892",
+    "ipAddress": "192.168.194.133",
+    "macAddress": "0a:6a:f1:1c:63:4e",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "ac94d6bef096_new-device-171",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756174724.78537,
+    "expired": 1756693124.785363,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device5-5",
+    "name": "Tech Startup Innovations firewall Firewall Model 544",
+    "type": "firewall",
+    "model": "Firewall Model 544",
+    "serialNumber": "df2530e6-d09c-4d71-b124-462203fae892",
+    "ipAddress": "192.168.194.133",
+    "macAddress": "0a:6a:f1:1c:63:4e",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "ac94d6bef096_new-device-112",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1755742724.785377,
+    "expired": 1756174724.78537,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device6-0",
+    "name": "Tech Startup Innovations router Router Model 978",
+    "type": "router",
+    "model": "Router Model 978",
+    "serialNumber": "14bb14ec-46d8-420d-b0f8-613706cb8b8a",
+    "ipAddress": "192.168.50.61",
+    "macAddress": "15:74:1d:9f:1b:8f",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "ac94d6bef096_device6",
+    "firewallRules": [
+      "allow 80",
+      "allow 8224"
+    ],
+    "created": 1757902724.785384,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device6-1",
+    "name": "Tech Startup Innovations router Router Model 978",
+    "type": "router",
+    "model": "Router Model 978",
+    "serialNumber": "14bb14ec-46d8-420d-b0f8-613706cb8b8a",
+    "ipAddress": "192.168.50.61",
+    "macAddress": "15:74:1d:9f:1b:8f",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "ac94d6bef096_new-device-519",
+    "firewallRules": [
+      "allow 80",
+      "allow 8224"
+    ],
+    "created": 1757816324.785398,
+    "expired": 1757902724.785384,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device6-2",
+    "name": "Tech Startup Innovations router Router Model 978",
+    "type": "router",
+    "model": "Router Model 978",
+    "serialNumber": "14bb14ec-46d8-420d-b0f8-613706cb8b8a",
+    "ipAddress": "192.168.50.61",
+    "macAddress": "15:74:1d:9f:1b:8f",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "ac94d6bef096_new-device-919",
+    "firewallRules": [
+      "allow 80",
+      "allow 8224"
+    ],
+    "created": 1757038724.785405,
+    "expired": 1757816324.785398,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device6-3",
+    "name": "Tech Startup Innovations router Router Model 978",
+    "type": "router",
+    "model": "Router Model 978",
+    "serialNumber": "14bb14ec-46d8-420d-b0f8-613706cb8b8a",
+    "ipAddress": "192.168.50.61",
+    "macAddress": "15:74:1d:9f:1b:8f",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "ac94d6bef096_new-device-755",
+    "firewallRules": [
+      "allow 80",
+      "allow 8224"
+    ],
+    "created": 1756606724.785411,
+    "expired": 1757038724.785405,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device6-4",
+    "name": "Tech Startup Innovations router Router Model 978",
+    "type": "router",
+    "model": "Router Model 978",
+    "serialNumber": "14bb14ec-46d8-420d-b0f8-613706cb8b8a",
+    "ipAddress": "192.168.50.61",
+    "macAddress": "15:74:1d:9f:1b:8f",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "ac94d6bef096_new-device-138",
+    "firewallRules": [
+      "allow 80",
+      "allow 8224"
+    ],
+    "created": 1756174724.785417,
+    "expired": 1756606724.785411,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device6-5",
+    "name": "Tech Startup Innovations router Router Model 978",
+    "type": "router",
+    "model": "Router Model 978",
+    "serialNumber": "14bb14ec-46d8-420d-b0f8-613706cb8b8a",
+    "ipAddress": "192.168.50.61",
+    "macAddress": "15:74:1d:9f:1b:8f",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "ac94d6bef096_new-device-166",
+    "firewallRules": [
+      "allow 80",
+      "allow 8224"
+    ],
+    "created": 1756001924.785424,
+    "expired": 1756174724.785417,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device7-0",
+    "name": "Tech Startup Innovations firewall Firewall Model 800",
+    "type": "firewall",
+    "model": "Firewall Model 800",
+    "serialNumber": "436c4d81-2935-4bef-9052-7e61afdc454f",
+    "ipAddress": "192.168.20.62",
+    "macAddress": "37:7f:22:4f:6c:2d",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_device7",
+    "firewallRules": [
+      "allow 443",
+      "allow 3703",
+      "allow 2266"
+    ],
+    "created": 1757902724.785432,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device7-1",
+    "name": "Tech Startup Innovations firewall Firewall Model 800",
+    "type": "firewall",
+    "model": "Firewall Model 800",
+    "serialNumber": "436c4d81-2935-4bef-9052-7e61afdc454f",
+    "ipAddress": "192.168.20.62",
+    "macAddress": "37:7f:22:4f:6c:2d",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-818",
+    "firewallRules": [
+      "allow 443",
+      "allow 3703",
+      "allow 2266"
+    ],
+    "created": 1757643524.785446,
+    "expired": 1757902724.785432,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device7-2",
+    "name": "Tech Startup Innovations firewall Firewall Model 800",
+    "type": "firewall",
+    "model": "Firewall Model 800",
+    "serialNumber": "436c4d81-2935-4bef-9052-7e61afdc454f",
+    "ipAddress": "192.168.20.62",
+    "macAddress": "37:7f:22:4f:6c:2d",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-381",
+    "firewallRules": [
+      "allow 443",
+      "allow 3703",
+      "allow 2266"
+    ],
+    "created": 1757125124.785452,
+    "expired": 1757643524.785446,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device7-3",
+    "name": "Tech Startup Innovations firewall Firewall Model 800",
+    "type": "firewall",
+    "model": "Firewall Model 800",
+    "serialNumber": "436c4d81-2935-4bef-9052-7e61afdc454f",
+    "ipAddress": "192.168.20.62",
+    "macAddress": "37:7f:22:4f:6c:2d",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-214",
+    "firewallRules": [
+      "allow 443",
+      "allow 3703",
+      "allow 2266"
+    ],
+    "created": 1756606724.785459,
+    "expired": 1757125124.785452,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device7-4",
+    "name": "Tech Startup Innovations firewall Firewall Model 800",
+    "type": "firewall",
+    "model": "Firewall Model 800",
+    "serialNumber": "436c4d81-2935-4bef-9052-7e61afdc454f",
+    "ipAddress": "192.168.20.62",
+    "macAddress": "37:7f:22:4f:6c:2d",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-132",
+    "firewallRules": [
+      "allow 443",
+      "allow 3703",
+      "allow 2266"
+    ],
+    "created": 1756347524.785466,
+    "expired": 1756606724.785459,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device7-5",
+    "name": "Tech Startup Innovations firewall Firewall Model 800",
+    "type": "firewall",
+    "model": "Firewall Model 800",
+    "serialNumber": "436c4d81-2935-4bef-9052-7e61afdc454f",
+    "ipAddress": "192.168.20.62",
+    "macAddress": "37:7f:22:4f:6c:2d",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-545",
+    "firewallRules": [
+      "allow 443",
+      "allow 3703",
+      "allow 2266"
+    ],
+    "created": 1756001924.785472,
+    "expired": 1756347524.785466,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device8-0",
+    "name": "Tech Startup Innovations server Server Model 609",
+    "type": "server",
+    "model": "Server Model 609",
+    "serialNumber": "ea3bce27-ef06-4110-87e9-82d3bb4dfac0",
+    "ipAddress": "192.168.5.191",
+    "macAddress": "3f:5b:48:15:05:c2",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_device8",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757902724.785479,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device8-1",
+    "name": "Tech Startup Innovations server Server Model 609",
+    "type": "server",
+    "model": "Server Model 609",
+    "serialNumber": "ea3bce27-ef06-4110-87e9-82d3bb4dfac0",
+    "ipAddress": "192.168.5.191",
+    "macAddress": "3f:5b:48:15:05:c2",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-604",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757729924.785493,
+    "expired": 1757902724.785479,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device8-2",
+    "name": "Tech Startup Innovations server Server Model 609",
+    "type": "server",
+    "model": "Server Model 609",
+    "serialNumber": "ea3bce27-ef06-4110-87e9-82d3bb4dfac0",
+    "ipAddress": "192.168.5.191",
+    "macAddress": "3f:5b:48:15:05:c2",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-473",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757211524.785499,
+    "expired": 1757729924.785493,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device8-3",
+    "name": "Tech Startup Innovations server Server Model 609",
+    "type": "server",
+    "model": "Server Model 609",
+    "serialNumber": "ea3bce27-ef06-4110-87e9-82d3bb4dfac0",
+    "ipAddress": "192.168.5.191",
+    "macAddress": "3f:5b:48:15:05:c2",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-327",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756693124.785506,
+    "expired": 1757211524.785499,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device8-4",
+    "name": "Tech Startup Innovations server Server Model 609",
+    "type": "server",
+    "model": "Server Model 609",
+    "serialNumber": "ea3bce27-ef06-4110-87e9-82d3bb4dfac0",
+    "ipAddress": "192.168.5.191",
+    "macAddress": "3f:5b:48:15:05:c2",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-305",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756433924.785512,
+    "expired": 1756693124.785506,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device8-5",
+    "name": "Tech Startup Innovations server Server Model 609",
+    "type": "server",
+    "model": "Server Model 609",
+    "serialNumber": "ea3bce27-ef06-4110-87e9-82d3bb4dfac0",
+    "ipAddress": "192.168.5.191",
+    "macAddress": "3f:5b:48:15:05:c2",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-793",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756088324.785518,
+    "expired": 1756433924.785512,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device9-0",
+    "name": "Tech Startup Innovations server Server Model 748",
+    "type": "server",
+    "model": "Server Model 748",
+    "serialNumber": "0682f315-a9f7-4ae2-936c-34de4256d4e4",
+    "ipAddress": "192.168.138.116",
+    "macAddress": "6f:c9:b7:e7:f4:50",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "ac94d6bef096_device9",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7715",
+      "allow 2662"
+    ],
+    "created": 1757902724.785526,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device9-1",
+    "name": "Tech Startup Innovations server Server Model 748",
+    "type": "server",
+    "model": "Server Model 748",
+    "serialNumber": "0682f315-a9f7-4ae2-936c-34de4256d4e4",
+    "ipAddress": "192.168.138.116",
+    "macAddress": "6f:c9:b7:e7:f4:50",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "ac94d6bef096_new-device-933",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7715",
+      "allow 2662"
+    ],
+    "created": 1757557124.785542,
+    "expired": 1757902724.785526,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device9-2",
+    "name": "Tech Startup Innovations server Server Model 748",
+    "type": "server",
+    "model": "Server Model 748",
+    "serialNumber": "0682f315-a9f7-4ae2-936c-34de4256d4e4",
+    "ipAddress": "192.168.138.116",
+    "macAddress": "6f:c9:b7:e7:f4:50",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "ac94d6bef096_new-device-469",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7715",
+      "allow 2662"
+    ],
+    "created": 1757384324.785548,
+    "expired": 1757557124.785542,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device9-3",
+    "name": "Tech Startup Innovations server Server Model 748",
+    "type": "server",
+    "model": "Server Model 748",
+    "serialNumber": "0682f315-a9f7-4ae2-936c-34de4256d4e4",
+    "ipAddress": "192.168.138.116",
+    "macAddress": "6f:c9:b7:e7:f4:50",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "ac94d6bef096_new-device-708",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7715",
+      "allow 2662"
+    ],
+    "created": 1756865924.785555,
+    "expired": 1757384324.785548,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device9-4",
+    "name": "Tech Startup Innovations server Server Model 748",
+    "type": "server",
+    "model": "Server Model 748",
+    "serialNumber": "0682f315-a9f7-4ae2-936c-34de4256d4e4",
+    "ipAddress": "192.168.138.116",
+    "macAddress": "6f:c9:b7:e7:f4:50",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "ac94d6bef096_new-device-369",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7715",
+      "allow 2662"
+    ],
+    "created": 1756433924.785561,
+    "expired": 1756865924.785555,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device9-5",
+    "name": "Tech Startup Innovations server Server Model 748",
+    "type": "server",
+    "model": "Server Model 748",
+    "serialNumber": "0682f315-a9f7-4ae2-936c-34de4256d4e4",
+    "ipAddress": "192.168.138.116",
+    "macAddress": "6f:c9:b7:e7:f4:50",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2022 Datacenter",
+    "hostName": "ac94d6bef096_new-device-254",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 7715",
+      "allow 2662"
+    ],
+    "created": 1755829124.785568,
+    "expired": 1756433924.785561,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device10-0",
+    "name": "Tech Startup Innovations firewall Firewall Model 243",
+    "type": "firewall",
+    "model": "Firewall Model 243",
+    "serialNumber": "59601b15-4dcb-43e3-9d18-44a595603cde",
+    "ipAddress": "192.168.23.8",
+    "macAddress": "31:bd:b8:8c:91:30",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_device10",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757902724.785575,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device10-1",
+    "name": "Tech Startup Innovations firewall Firewall Model 243",
+    "type": "firewall",
+    "model": "Firewall Model 243",
+    "serialNumber": "59601b15-4dcb-43e3-9d18-44a595603cde",
+    "ipAddress": "192.168.23.8",
+    "macAddress": "31:bd:b8:8c:91:30",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-786",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757557124.785589,
+    "expired": 1757902724.785575,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device10-2",
+    "name": "Tech Startup Innovations firewall Firewall Model 243",
+    "type": "firewall",
+    "model": "Firewall Model 243",
+    "serialNumber": "59601b15-4dcb-43e3-9d18-44a595603cde",
+    "ipAddress": "192.168.23.8",
+    "macAddress": "31:bd:b8:8c:91:30",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-773",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757384324.785595,
+    "expired": 1757557124.785589,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device10-3",
+    "name": "Tech Startup Innovations firewall Firewall Model 243",
+    "type": "firewall",
+    "model": "Firewall Model 243",
+    "serialNumber": "59601b15-4dcb-43e3-9d18-44a595603cde",
+    "ipAddress": "192.168.23.8",
+    "macAddress": "31:bd:b8:8c:91:30",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-205",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756606724.785601,
+    "expired": 1757384324.785595,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device10-4",
+    "name": "Tech Startup Innovations firewall Firewall Model 243",
+    "type": "firewall",
+    "model": "Firewall Model 243",
+    "serialNumber": "59601b15-4dcb-43e3-9d18-44a595603cde",
+    "ipAddress": "192.168.23.8",
+    "macAddress": "31:bd:b8:8c:91:30",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-331",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756261124.785607,
+    "expired": 1756606724.785601,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device10-5",
+    "name": "Tech Startup Innovations firewall Firewall Model 243",
+    "type": "firewall",
+    "model": "Firewall Model 243",
+    "serialNumber": "59601b15-4dcb-43e3-9d18-44a595603cde",
+    "ipAddress": "192.168.23.8",
+    "macAddress": "31:bd:b8:8c:91:30",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-754",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755915524.785614,
+    "expired": 1756261124.785607,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device11-0",
+    "name": "Tech Startup Innovations laptop Laptop Model 801",
+    "type": "laptop",
+    "model": "Laptop Model 801",
+    "serialNumber": "de1a4a46-5d4b-46e7-a4f3-8b6a0f1e877c",
+    "ipAddress": "192.168.221.61",
+    "macAddress": "9f:24:35:a4:44:9e",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "ac94d6bef096_device11",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757902724.785622,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device11-1",
+    "name": "Tech Startup Innovations laptop Laptop Model 801",
+    "type": "laptop",
+    "model": "Laptop Model 801",
+    "serialNumber": "de1a4a46-5d4b-46e7-a4f3-8b6a0f1e877c",
+    "ipAddress": "192.168.221.61",
+    "macAddress": "9f:24:35:a4:44:9e",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "ac94d6bef096_new-device-973",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757643524.785635,
+    "expired": 1757902724.785622,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device11-2",
+    "name": "Tech Startup Innovations laptop Laptop Model 801",
+    "type": "laptop",
+    "model": "Laptop Model 801",
+    "serialNumber": "de1a4a46-5d4b-46e7-a4f3-8b6a0f1e877c",
+    "ipAddress": "192.168.221.61",
+    "macAddress": "9f:24:35:a4:44:9e",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "ac94d6bef096_new-device-236",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757038724.785642,
+    "expired": 1757643524.785635,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device11-3",
+    "name": "Tech Startup Innovations laptop Laptop Model 801",
+    "type": "laptop",
+    "model": "Laptop Model 801",
+    "serialNumber": "de1a4a46-5d4b-46e7-a4f3-8b6a0f1e877c",
+    "ipAddress": "192.168.221.61",
+    "macAddress": "9f:24:35:a4:44:9e",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "ac94d6bef096_new-device-400",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756606724.785648,
+    "expired": 1757038724.785642,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device11-4",
+    "name": "Tech Startup Innovations laptop Laptop Model 801",
+    "type": "laptop",
+    "model": "Laptop Model 801",
+    "serialNumber": "de1a4a46-5d4b-46e7-a4f3-8b6a0f1e877c",
+    "ipAddress": "192.168.221.61",
+    "macAddress": "9f:24:35:a4:44:9e",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "ac94d6bef096_new-device-699",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756261124.785655,
+    "expired": 1756606724.785648,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device11-5",
+    "name": "Tech Startup Innovations laptop Laptop Model 801",
+    "type": "laptop",
+    "model": "Laptop Model 801",
+    "serialNumber": "de1a4a46-5d4b-46e7-a4f3-8b6a0f1e877c",
+    "ipAddress": "192.168.221.61",
+    "macAddress": "9f:24:35:a4:44:9e",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "ac94d6bef096_new-device-283",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1755915524.785661,
+    "expired": 1756261124.785655,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device12-0",
+    "name": "Tech Startup Innovations laptop Laptop Model 545",
+    "type": "laptop",
+    "model": "Laptop Model 545",
+    "serialNumber": "8050f490-6b3b-4dd3-a4f9-b2004731343e",
+    "ipAddress": "192.168.171.135",
+    "macAddress": "6e:b5:ec:5e:98:88",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Ventura 13.2",
+    "hostName": "ac94d6bef096_device12",
+    "firewallRules": [
+      "allow 1206"
+    ],
+    "created": 1757902724.785668,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device12-1",
+    "name": "Tech Startup Innovations laptop Laptop Model 545",
+    "type": "laptop",
+    "model": "Laptop Model 545",
+    "serialNumber": "8050f490-6b3b-4dd3-a4f9-b2004731343e",
+    "ipAddress": "192.168.171.135",
+    "macAddress": "6e:b5:ec:5e:98:88",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Ventura 13.2",
+    "hostName": "ac94d6bef096_new-device-136",
+    "firewallRules": [
+      "allow 1206"
+    ],
+    "created": 1757729924.785682,
+    "expired": 1757902724.785668,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device12-2",
+    "name": "Tech Startup Innovations laptop Laptop Model 545",
+    "type": "laptop",
+    "model": "Laptop Model 545",
+    "serialNumber": "8050f490-6b3b-4dd3-a4f9-b2004731343e",
+    "ipAddress": "192.168.171.135",
+    "macAddress": "6e:b5:ec:5e:98:88",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Ventura 13.2",
+    "hostName": "ac94d6bef096_new-device-585",
+    "firewallRules": [
+      "allow 1206"
+    ],
+    "created": 1757211524.785689,
+    "expired": 1757729924.785682,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device12-3",
+    "name": "Tech Startup Innovations laptop Laptop Model 545",
+    "type": "laptop",
+    "model": "Laptop Model 545",
+    "serialNumber": "8050f490-6b3b-4dd3-a4f9-b2004731343e",
+    "ipAddress": "192.168.171.135",
+    "macAddress": "6e:b5:ec:5e:98:88",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Ventura 13.2",
+    "hostName": "ac94d6bef096_new-device-780",
+    "firewallRules": [
+      "allow 1206"
+    ],
+    "created": 1756865924.785695,
+    "expired": 1757211524.785689,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device12-4",
+    "name": "Tech Startup Innovations laptop Laptop Model 545",
+    "type": "laptop",
+    "model": "Laptop Model 545",
+    "serialNumber": "8050f490-6b3b-4dd3-a4f9-b2004731343e",
+    "ipAddress": "192.168.171.135",
+    "macAddress": "6e:b5:ec:5e:98:88",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Ventura 13.2",
+    "hostName": "ac94d6bef096_new-device-957",
+    "firewallRules": [
+      "allow 1206"
+    ],
+    "created": 1756174724.785702,
+    "expired": 1756865924.785695,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device12-5",
+    "name": "Tech Startup Innovations laptop Laptop Model 545",
+    "type": "laptop",
+    "model": "Laptop Model 545",
+    "serialNumber": "8050f490-6b3b-4dd3-a4f9-b2004731343e",
+    "ipAddress": "192.168.171.135",
+    "macAddress": "6e:b5:ec:5e:98:88",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Ventura 13.2",
+    "hostName": "ac94d6bef096_new-device-773",
+    "firewallRules": [
+      "allow 1206"
+    ],
+    "created": 1755829124.785708,
+    "expired": 1756174724.785702,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device13-0",
+    "name": "Tech Startup Innovations router Router Model 312",
+    "type": "router",
+    "model": "Router Model 312",
+    "serialNumber": "d73f4085-2efc-486d-ba6c-0131a4bfb33c",
+    "ipAddress": "192.168.18.21",
+    "macAddress": "f2:42:a2:a4:ce:6a",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "ac94d6bef096_device13",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8890",
+      "allow 6138"
+    ],
+    "created": 1757902724.785715,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device13-1",
+    "name": "Tech Startup Innovations router Router Model 312",
+    "type": "router",
+    "model": "Router Model 312",
+    "serialNumber": "d73f4085-2efc-486d-ba6c-0131a4bfb33c",
+    "ipAddress": "192.168.18.21",
+    "macAddress": "f2:42:a2:a4:ce:6a",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "ac94d6bef096_new-device-104",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8890",
+      "allow 6138"
+    ],
+    "created": 1757470724.785728,
+    "expired": 1757902724.785715,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device13-2",
+    "name": "Tech Startup Innovations router Router Model 312",
+    "type": "router",
+    "model": "Router Model 312",
+    "serialNumber": "d73f4085-2efc-486d-ba6c-0131a4bfb33c",
+    "ipAddress": "192.168.18.21",
+    "macAddress": "f2:42:a2:a4:ce:6a",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "ac94d6bef096_new-device-661",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8890",
+      "allow 6138"
+    ],
+    "created": 1757297924.785734,
+    "expired": 1757470724.785728,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device13-3",
+    "name": "Tech Startup Innovations router Router Model 312",
+    "type": "router",
+    "model": "Router Model 312",
+    "serialNumber": "d73f4085-2efc-486d-ba6c-0131a4bfb33c",
+    "ipAddress": "192.168.18.21",
+    "macAddress": "f2:42:a2:a4:ce:6a",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "ac94d6bef096_new-device-403",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8890",
+      "allow 6138"
+    ],
+    "created": 1756865924.78574,
+    "expired": 1757297924.785734,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device13-4",
+    "name": "Tech Startup Innovations router Router Model 312",
+    "type": "router",
+    "model": "Router Model 312",
+    "serialNumber": "d73f4085-2efc-486d-ba6c-0131a4bfb33c",
+    "ipAddress": "192.168.18.21",
+    "macAddress": "f2:42:a2:a4:ce:6a",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "ac94d6bef096_new-device-535",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8890",
+      "allow 6138"
+    ],
+    "created": 1756433924.785746,
+    "expired": 1756865924.78574,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device13-5",
+    "name": "Tech Startup Innovations router Router Model 312",
+    "type": "router",
+    "model": "Router Model 312",
+    "serialNumber": "d73f4085-2efc-486d-ba6c-0131a4bfb33c",
+    "ipAddress": "192.168.18.21",
+    "macAddress": "f2:42:a2:a4:ce:6a",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "ac94d6bef096_new-device-628",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8890",
+      "allow 6138"
+    ],
+    "created": 1756088324.785752,
+    "expired": 1756433924.785746,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device14-0",
+    "name": "Tech Startup Innovations router Router Model 689",
+    "type": "router",
+    "model": "Router Model 689",
+    "serialNumber": "3eb85870-fbd5-4ae8-acd5-061d2fbcf30e",
+    "ipAddress": "192.168.127.57",
+    "macAddress": "1b:b3:7d:45:1a:b1",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_device14",
+    "firewallRules": [
+      "allow 80",
+      "allow 3709"
+    ],
+    "created": 1757902724.785759,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device14-1",
+    "name": "Tech Startup Innovations router Router Model 689",
+    "type": "router",
+    "model": "Router Model 689",
+    "serialNumber": "3eb85870-fbd5-4ae8-acd5-061d2fbcf30e",
+    "ipAddress": "192.168.127.57",
+    "macAddress": "1b:b3:7d:45:1a:b1",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-419",
+    "firewallRules": [
+      "allow 80",
+      "allow 3709"
+    ],
+    "created": 1757643524.785772,
+    "expired": 1757902724.785759,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device14-2",
+    "name": "Tech Startup Innovations router Router Model 689",
+    "type": "router",
+    "model": "Router Model 689",
+    "serialNumber": "3eb85870-fbd5-4ae8-acd5-061d2fbcf30e",
+    "ipAddress": "192.168.127.57",
+    "macAddress": "1b:b3:7d:45:1a:b1",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-200",
+    "firewallRules": [
+      "allow 80",
+      "allow 3709"
+    ],
+    "created": 1757211524.785778,
+    "expired": 1757643524.785772,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device14-3",
+    "name": "Tech Startup Innovations router Router Model 689",
+    "type": "router",
+    "model": "Router Model 689",
+    "serialNumber": "3eb85870-fbd5-4ae8-acd5-061d2fbcf30e",
+    "ipAddress": "192.168.127.57",
+    "macAddress": "1b:b3:7d:45:1a:b1",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-482",
+    "firewallRules": [
+      "allow 80",
+      "allow 3709"
+    ],
+    "created": 1756952324.785784,
+    "expired": 1757211524.785778,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device14-4",
+    "name": "Tech Startup Innovations router Router Model 689",
+    "type": "router",
+    "model": "Router Model 689",
+    "serialNumber": "3eb85870-fbd5-4ae8-acd5-061d2fbcf30e",
+    "ipAddress": "192.168.127.57",
+    "macAddress": "1b:b3:7d:45:1a:b1",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-131",
+    "firewallRules": [
+      "allow 80",
+      "allow 3709"
+    ],
+    "created": 1756261124.785791,
+    "expired": 1756952324.785784,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device14-5",
+    "name": "Tech Startup Innovations router Router Model 689",
+    "type": "router",
+    "model": "Router Model 689",
+    "serialNumber": "3eb85870-fbd5-4ae8-acd5-061d2fbcf30e",
+    "ipAddress": "192.168.127.57",
+    "macAddress": "1b:b3:7d:45:1a:b1",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-740",
+    "firewallRules": [
+      "allow 80",
+      "allow 3709"
+    ],
+    "created": 1755915524.785797,
+    "expired": 1756261124.785791,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device15-0",
+    "name": "Tech Startup Innovations server Server Model 505",
+    "type": "server",
+    "model": "Server Model 505",
+    "serialNumber": "f231a1fb-115f-48e6-adb1-c5585c698640",
+    "ipAddress": "192.168.118.41",
+    "macAddress": "88:6f:af:45:65:71",
+    "operatingSystem": "SUSE",
+    "osVersion": "SUSE Linux Enterprise Server 15 SP4",
+    "hostName": "ac94d6bef096_device15",
+    "firewallRules": [
+      "allow 443",
+      "allow 6804",
+      "allow 6761"
+    ],
+    "created": 1757902724.785804,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device15-1",
+    "name": "Tech Startup Innovations server Server Model 505",
+    "type": "server",
+    "model": "Server Model 505",
+    "serialNumber": "f231a1fb-115f-48e6-adb1-c5585c698640",
+    "ipAddress": "192.168.118.41",
+    "macAddress": "88:6f:af:45:65:71",
+    "operatingSystem": "SUSE",
+    "osVersion": "SUSE Linux Enterprise Server 15 SP4",
+    "hostName": "ac94d6bef096_new-device-669",
+    "firewallRules": [
+      "allow 443",
+      "allow 6804",
+      "allow 6761"
+    ],
+    "created": 1757729924.785817,
+    "expired": 1757902724.785804,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device15-2",
+    "name": "Tech Startup Innovations server Server Model 505",
+    "type": "server",
+    "model": "Server Model 505",
+    "serialNumber": "f231a1fb-115f-48e6-adb1-c5585c698640",
+    "ipAddress": "192.168.118.41",
+    "macAddress": "88:6f:af:45:65:71",
+    "operatingSystem": "SUSE",
+    "osVersion": "SUSE Linux Enterprise Server 15 SP4",
+    "hostName": "ac94d6bef096_new-device-301",
+    "firewallRules": [
+      "allow 443",
+      "allow 6804",
+      "allow 6761"
+    ],
+    "created": 1757038724.785823,
+    "expired": 1757729924.785817,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device15-3",
+    "name": "Tech Startup Innovations server Server Model 505",
+    "type": "server",
+    "model": "Server Model 505",
+    "serialNumber": "f231a1fb-115f-48e6-adb1-c5585c698640",
+    "ipAddress": "192.168.118.41",
+    "macAddress": "88:6f:af:45:65:71",
+    "operatingSystem": "SUSE",
+    "osVersion": "SUSE Linux Enterprise Server 15 SP4",
+    "hostName": "ac94d6bef096_new-device-917",
+    "firewallRules": [
+      "allow 443",
+      "allow 6804",
+      "allow 6761"
+    ],
+    "created": 1756952324.785829,
+    "expired": 1757038724.785823,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device15-4",
+    "name": "Tech Startup Innovations server Server Model 505",
+    "type": "server",
+    "model": "Server Model 505",
+    "serialNumber": "f231a1fb-115f-48e6-adb1-c5585c698640",
+    "ipAddress": "192.168.118.41",
+    "macAddress": "88:6f:af:45:65:71",
+    "operatingSystem": "SUSE",
+    "osVersion": "SUSE Linux Enterprise Server 15 SP4",
+    "hostName": "ac94d6bef096_new-device-600",
+    "firewallRules": [
+      "allow 443",
+      "allow 6804",
+      "allow 6761"
+    ],
+    "created": 1756261124.785836,
+    "expired": 1756952324.785829,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device15-5",
+    "name": "Tech Startup Innovations server Server Model 505",
+    "type": "server",
+    "model": "Server Model 505",
+    "serialNumber": "f231a1fb-115f-48e6-adb1-c5585c698640",
+    "ipAddress": "192.168.118.41",
+    "macAddress": "88:6f:af:45:65:71",
+    "operatingSystem": "SUSE",
+    "osVersion": "SUSE Linux Enterprise Server 15 SP4",
+    "hostName": "ac94d6bef096_new-device-417",
+    "firewallRules": [
+      "allow 443",
+      "allow 6804",
+      "allow 6761"
+    ],
+    "created": 1755829124.785842,
+    "expired": 1756261124.785836,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device16-0",
+    "name": "Tech Startup Innovations firewall Firewall Model 374",
+    "type": "firewall",
+    "model": "Firewall Model 374",
+    "serialNumber": "3a4b72d4-9726-41d5-8f65-5c713000813b",
+    "ipAddress": "192.168.206.155",
+    "macAddress": "34:52:4e:b5:a1:c7",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_device16",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3996",
+      "allow 7439"
+    ],
+    "created": 1757902724.785849,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device16-1",
+    "name": "Tech Startup Innovations firewall Firewall Model 374",
+    "type": "firewall",
+    "model": "Firewall Model 374",
+    "serialNumber": "3a4b72d4-9726-41d5-8f65-5c713000813b",
+    "ipAddress": "192.168.206.155",
+    "macAddress": "34:52:4e:b5:a1:c7",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-589",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3996",
+      "allow 7439"
+    ],
+    "created": 1757729924.785863,
+    "expired": 1757902724.785849,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device16-2",
+    "name": "Tech Startup Innovations firewall Firewall Model 374",
+    "type": "firewall",
+    "model": "Firewall Model 374",
+    "serialNumber": "3a4b72d4-9726-41d5-8f65-5c713000813b",
+    "ipAddress": "192.168.206.155",
+    "macAddress": "34:52:4e:b5:a1:c7",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-158",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3996",
+      "allow 7439"
+    ],
+    "created": 1757384324.785869,
+    "expired": 1757729924.785863,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device16-3",
+    "name": "Tech Startup Innovations firewall Firewall Model 374",
+    "type": "firewall",
+    "model": "Firewall Model 374",
+    "serialNumber": "3a4b72d4-9726-41d5-8f65-5c713000813b",
+    "ipAddress": "192.168.206.155",
+    "macAddress": "34:52:4e:b5:a1:c7",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-149",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3996",
+      "allow 7439"
+    ],
+    "created": 1756606724.785875,
+    "expired": 1757384324.785869,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device16-4",
+    "name": "Tech Startup Innovations firewall Firewall Model 374",
+    "type": "firewall",
+    "model": "Firewall Model 374",
+    "serialNumber": "3a4b72d4-9726-41d5-8f65-5c713000813b",
+    "ipAddress": "192.168.206.155",
+    "macAddress": "34:52:4e:b5:a1:c7",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-194",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3996",
+      "allow 7439"
+    ],
+    "created": 1756174724.785882,
+    "expired": 1756606724.785875,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device16-5",
+    "name": "Tech Startup Innovations firewall Firewall Model 374",
+    "type": "firewall",
+    "model": "Firewall Model 374",
+    "serialNumber": "3a4b72d4-9726-41d5-8f65-5c713000813b",
+    "ipAddress": "192.168.206.155",
+    "macAddress": "34:52:4e:b5:a1:c7",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "ac94d6bef096_new-device-970",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3996",
+      "allow 7439"
+    ],
+    "created": 1756001924.785888,
+    "expired": 1756174724.785882,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device17-0",
+    "name": "Tech Startup Innovations IoT Iot Model 425",
+    "type": "IoT",
+    "model": "Iot Model 425",
+    "serialNumber": "899f68ab-6672-4dd4-8cd0-e818b2aa60e5",
+    "ipAddress": "192.168.65.223",
+    "macAddress": "30:2d:af:8f:30:f3",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "ac94d6bef096_device17",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757902724.785895,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device17-1",
+    "name": "Tech Startup Innovations IoT Iot Model 425",
+    "type": "IoT",
+    "model": "Iot Model 425",
+    "serialNumber": "899f68ab-6672-4dd4-8cd0-e818b2aa60e5",
+    "ipAddress": "192.168.65.223",
+    "macAddress": "30:2d:af:8f:30:f3",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "ac94d6bef096_new-device-353",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757729924.785908,
+    "expired": 1757902724.785895,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device17-2",
+    "name": "Tech Startup Innovations IoT Iot Model 425",
+    "type": "IoT",
+    "model": "Iot Model 425",
+    "serialNumber": "899f68ab-6672-4dd4-8cd0-e818b2aa60e5",
+    "ipAddress": "192.168.65.223",
+    "macAddress": "30:2d:af:8f:30:f3",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "ac94d6bef096_new-device-900",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757297924.785914,
+    "expired": 1757729924.785908,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device17-3",
+    "name": "Tech Startup Innovations IoT Iot Model 425",
+    "type": "IoT",
+    "model": "Iot Model 425",
+    "serialNumber": "899f68ab-6672-4dd4-8cd0-e818b2aa60e5",
+    "ipAddress": "192.168.65.223",
+    "macAddress": "30:2d:af:8f:30:f3",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "ac94d6bef096_new-device-303",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756693124.78592,
+    "expired": 1757297924.785914,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device17-4",
+    "name": "Tech Startup Innovations IoT Iot Model 425",
+    "type": "IoT",
+    "model": "Iot Model 425",
+    "serialNumber": "899f68ab-6672-4dd4-8cd0-e818b2aa60e5",
+    "ipAddress": "192.168.65.223",
+    "macAddress": "30:2d:af:8f:30:f3",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "ac94d6bef096_new-device-714",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756520324.785927,
+    "expired": 1756693124.78592,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device17-5",
+    "name": "Tech Startup Innovations IoT Iot Model 425",
+    "type": "IoT",
+    "model": "Iot Model 425",
+    "serialNumber": "899f68ab-6672-4dd4-8cd0-e818b2aa60e5",
+    "ipAddress": "192.168.65.223",
+    "macAddress": "30:2d:af:8f:30:f3",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "ac94d6bef096_new-device-343",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755742724.785933,
+    "expired": 1756520324.785927,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device18-0",
+    "name": "Tech Startup Innovations server Server Model 525",
+    "type": "server",
+    "model": "Server Model 525",
+    "serialNumber": "48236646-a503-4e56-86d3-b84deaf32718",
+    "ipAddress": "192.168.26.138",
+    "macAddress": "4d:73:2e:c7:d1:bc",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_device18",
+    "firewallRules": [
+      "allow 443",
+      "allow 6544",
+      "allow 4313"
+    ],
+    "created": 1757902724.78594,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device18-1",
+    "name": "Tech Startup Innovations server Server Model 525",
+    "type": "server",
+    "model": "Server Model 525",
+    "serialNumber": "48236646-a503-4e56-86d3-b84deaf32718",
+    "ipAddress": "192.168.26.138",
+    "macAddress": "4d:73:2e:c7:d1:bc",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-147",
+    "firewallRules": [
+      "allow 443",
+      "allow 6544",
+      "allow 4313"
+    ],
+    "created": 1757643524.785953,
+    "expired": 1757902724.78594,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device18-2",
+    "name": "Tech Startup Innovations server Server Model 525",
+    "type": "server",
+    "model": "Server Model 525",
+    "serialNumber": "48236646-a503-4e56-86d3-b84deaf32718",
+    "ipAddress": "192.168.26.138",
+    "macAddress": "4d:73:2e:c7:d1:bc",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-632",
+    "firewallRules": [
+      "allow 443",
+      "allow 6544",
+      "allow 4313"
+    ],
+    "created": 1757384324.78596,
+    "expired": 1757643524.785953,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device18-3",
+    "name": "Tech Startup Innovations server Server Model 525",
+    "type": "server",
+    "model": "Server Model 525",
+    "serialNumber": "48236646-a503-4e56-86d3-b84deaf32718",
+    "ipAddress": "192.168.26.138",
+    "macAddress": "4d:73:2e:c7:d1:bc",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-406",
+    "firewallRules": [
+      "allow 443",
+      "allow 6544",
+      "allow 4313"
+    ],
+    "created": 1756779524.785967,
+    "expired": 1757384324.78596,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device18-4",
+    "name": "Tech Startup Innovations server Server Model 525",
+    "type": "server",
+    "model": "Server Model 525",
+    "serialNumber": "48236646-a503-4e56-86d3-b84deaf32718",
+    "ipAddress": "192.168.26.138",
+    "macAddress": "4d:73:2e:c7:d1:bc",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-369",
+    "firewallRules": [
+      "allow 443",
+      "allow 6544",
+      "allow 4313"
+    ],
+    "created": 1756174724.785973,
+    "expired": 1756779524.785967,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device18-5",
+    "name": "Tech Startup Innovations server Server Model 525",
+    "type": "server",
+    "model": "Server Model 525",
+    "serialNumber": "48236646-a503-4e56-86d3-b84deaf32718",
+    "ipAddress": "192.168.26.138",
+    "macAddress": "4d:73:2e:c7:d1:bc",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows Server 2019 Datacenter",
+    "hostName": "ac94d6bef096_new-device-370",
+    "firewallRules": [
+      "allow 443",
+      "allow 6544",
+      "allow 4313"
+    ],
+    "created": 1756001924.78598,
+    "expired": 1756174724.785973,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device19-0",
+    "name": "Tech Startup Innovations firewall Firewall Model 227",
+    "type": "firewall",
+    "model": "Firewall Model 227",
+    "serialNumber": "ec7e5459-5b59-40b2-8715-f63eaa2fb9d7",
+    "ipAddress": "192.168.102.171",
+    "macAddress": "5e:6f:49:e7:f7:2a",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_device19",
+    "firewallRules": [
+      "allow 443",
+      "allow 2406",
+      "allow 7918",
+      "allow 6857"
+    ],
+    "created": 1757902724.785988,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device19-1",
+    "name": "Tech Startup Innovations firewall Firewall Model 227",
+    "type": "firewall",
+    "model": "Firewall Model 227",
+    "serialNumber": "ec7e5459-5b59-40b2-8715-f63eaa2fb9d7",
+    "ipAddress": "192.168.102.171",
+    "macAddress": "5e:6f:49:e7:f7:2a",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-211",
+    "firewallRules": [
+      "allow 443",
+      "allow 2406",
+      "allow 7918",
+      "allow 6857"
+    ],
+    "created": 1757557124.786001,
+    "expired": 1757902724.785988,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device19-2",
+    "name": "Tech Startup Innovations firewall Firewall Model 227",
+    "type": "firewall",
+    "model": "Firewall Model 227",
+    "serialNumber": "ec7e5459-5b59-40b2-8715-f63eaa2fb9d7",
+    "ipAddress": "192.168.102.171",
+    "macAddress": "5e:6f:49:e7:f7:2a",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-324",
+    "firewallRules": [
+      "allow 443",
+      "allow 2406",
+      "allow 7918",
+      "allow 6857"
+    ],
+    "created": 1757211524.786008,
+    "expired": 1757557124.786001,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device19-3",
+    "name": "Tech Startup Innovations firewall Firewall Model 227",
+    "type": "firewall",
+    "model": "Firewall Model 227",
+    "serialNumber": "ec7e5459-5b59-40b2-8715-f63eaa2fb9d7",
+    "ipAddress": "192.168.102.171",
+    "macAddress": "5e:6f:49:e7:f7:2a",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-786",
+    "firewallRules": [
+      "allow 443",
+      "allow 2406",
+      "allow 7918",
+      "allow 6857"
+    ],
+    "created": 1756952324.786014,
+    "expired": 1757211524.786008,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device19-4",
+    "name": "Tech Startup Innovations firewall Firewall Model 227",
+    "type": "firewall",
+    "model": "Firewall Model 227",
+    "serialNumber": "ec7e5459-5b59-40b2-8715-f63eaa2fb9d7",
+    "ipAddress": "192.168.102.171",
+    "macAddress": "5e:6f:49:e7:f7:2a",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-635",
+    "firewallRules": [
+      "allow 443",
+      "allow 2406",
+      "allow 7918",
+      "allow 6857"
+    ],
+    "created": 1756347524.78602,
+    "expired": 1756952324.786014,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device19-5",
+    "name": "Tech Startup Innovations firewall Firewall Model 227",
+    "type": "firewall",
+    "model": "Firewall Model 227",
+    "serialNumber": "ec7e5459-5b59-40b2-8715-f63eaa2fb9d7",
+    "ipAddress": "192.168.102.171",
+    "macAddress": "5e:6f:49:e7:f7:2a",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "ac94d6bef096_new-device-393",
+    "firewallRules": [
+      "allow 443",
+      "allow 2406",
+      "allow 7918",
+      "allow 6857"
+    ],
+    "created": 1755915524.786026,
+    "expired": 1756347524.78602,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device20-0",
+    "name": "Tech Startup Innovations server Server Model 456",
+    "type": "server",
+    "model": "Server Model 456",
+    "serialNumber": "dde07e16-7774-4277-9ed1-8ea4396822d2",
+    "ipAddress": "192.168.226.102",
+    "macAddress": "54:c7:71:01:6d:03",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Enterprise LTSC 2021",
+    "hostName": "ac94d6bef096_device20",
+    "firewallRules": [],
+    "created": 1757902724.786033,
+    "expired": 9223372036854775807,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device20-1",
+    "name": "Tech Startup Innovations server Server Model 456",
+    "type": "server",
+    "model": "Server Model 456",
+    "serialNumber": "dde07e16-7774-4277-9ed1-8ea4396822d2",
+    "ipAddress": "192.168.226.102",
+    "macAddress": "54:c7:71:01:6d:03",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Enterprise LTSC 2021",
+    "hostName": "ac94d6bef096_new-device-738",
+    "firewallRules": [],
+    "created": 1757557124.786046,
+    "expired": 1757902724.786033,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device20-2",
+    "name": "Tech Startup Innovations server Server Model 456",
+    "type": "server",
+    "model": "Server Model 456",
+    "serialNumber": "dde07e16-7774-4277-9ed1-8ea4396822d2",
+    "ipAddress": "192.168.226.102",
+    "macAddress": "54:c7:71:01:6d:03",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Enterprise LTSC 2021",
+    "hostName": "ac94d6bef096_new-device-832",
+    "firewallRules": [],
+    "created": 1757038724.786052,
+    "expired": 1757557124.786046,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device20-3",
+    "name": "Tech Startup Innovations server Server Model 456",
+    "type": "server",
+    "model": "Server Model 456",
+    "serialNumber": "dde07e16-7774-4277-9ed1-8ea4396822d2",
+    "ipAddress": "192.168.226.102",
+    "macAddress": "54:c7:71:01:6d:03",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Enterprise LTSC 2021",
+    "hostName": "ac94d6bef096_new-device-746",
+    "firewallRules": [],
+    "created": 1756865924.786058,
+    "expired": 1757038724.786052,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device20-4",
+    "name": "Tech Startup Innovations server Server Model 456",
+    "type": "server",
+    "model": "Server Model 456",
+    "serialNumber": "dde07e16-7774-4277-9ed1-8ea4396822d2",
+    "ipAddress": "192.168.226.102",
+    "macAddress": "54:c7:71:01:6d:03",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Enterprise LTSC 2021",
+    "hostName": "ac94d6bef096_new-device-381",
+    "firewallRules": [],
+    "created": 1756261124.786065,
+    "expired": 1756865924.786058,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  },
+  {
+    "_key": "ac94d6bef096_device20-5",
+    "name": "Tech Startup Innovations server Server Model 456",
+    "type": "server",
+    "model": "Server Model 456",
+    "serialNumber": "dde07e16-7774-4277-9ed1-8ea4396822d2",
+    "ipAddress": "192.168.226.102",
+    "macAddress": "54:c7:71:01:6d:03",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 10 Enterprise LTSC 2021",
+    "hostName": "ac94d6bef096_new-device-334",
+    "firewallRules": [],
+    "created": 1755742724.786071,
+    "expired": 1756261124.786065,
+    "tenant_ac94d6bef096_attr": "ac94d6bef096"
+  }
+]

@@ -1,0 +1,212 @@
+[
+  {
+    "_key": "018b3397cdd0_software1",
+    "name": "Enterprise Solutions Nginx",
+    "type": "application",
+    "version": "Nginx 1.24.0",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software2",
+    "name": "Enterprise Solutions Nginx",
+    "type": "application",
+    "version": "Nginx 1.22.0",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software3",
+    "name": "Enterprise Solutions Docker",
+    "type": "service",
+    "version": "Docker 20.10.17",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software4",
+    "name": "Enterprise Solutions Redis",
+    "type": "database",
+    "version": "Redis 7.0.11",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software5",
+    "name": "Enterprise Solutions OpenSSH",
+    "type": "service",
+    "version": "OpenSSH 8.9p1",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software6",
+    "name": "Enterprise Solutions Python",
+    "type": "application",
+    "version": "Python 3.11.3",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software7",
+    "name": "Enterprise Solutions Docker",
+    "type": "service",
+    "version": "Docker 24.0.2",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software8",
+    "name": "Enterprise Solutions MongoDB",
+    "type": "database",
+    "version": "MongoDB 6.0.2",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software9",
+    "name": "Enterprise Solutions Nginx",
+    "type": "application",
+    "version": "Nginx 1.24.0",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software10",
+    "name": "Enterprise Solutions PostgreSQL",
+    "type": "database",
+    "version": "PostgreSQL 15.3",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software11",
+    "name": "Enterprise Solutions Docker",
+    "type": "service",
+    "version": "Docker 20.10.17",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software12",
+    "name": "Enterprise Solutions Nginx",
+    "type": "application",
+    "version": "Nginx 1.22.0",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software13",
+    "name": "Enterprise Solutions Kubernetes",
+    "type": "service",
+    "version": "Kubernetes 1.25.2",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software14",
+    "name": "Enterprise Solutions Docker",
+    "type": "service",
+    "version": "Docker 20.10.17",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software15",
+    "name": "Enterprise Solutions Docker",
+    "type": "service",
+    "version": "Docker 20.10.17",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software16",
+    "name": "Enterprise Solutions Kubernetes",
+    "type": "service",
+    "version": "Kubernetes 1.25.2",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software17",
+    "name": "Enterprise Solutions OpenSSH",
+    "type": "service",
+    "version": "OpenSSH 8.9p1",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software18",
+    "name": "Enterprise Solutions MongoDB",
+    "type": "database",
+    "version": "MongoDB 6.0.2",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software19",
+    "name": "Enterprise Solutions Nginx",
+    "type": "application",
+    "version": "Nginx 1.22.0",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software20",
+    "name": "Enterprise Solutions Python",
+    "type": "application",
+    "version": "Python 3.11.3",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software21",
+    "name": "Enterprise Solutions Docker",
+    "type": "service",
+    "version": "Docker 24.0.2",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software22",
+    "name": "Enterprise Solutions MySQL",
+    "type": "database",
+    "version": "MySQL 8.0.33",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software23",
+    "name": "Enterprise Solutions PostgreSQL",
+    "type": "database",
+    "version": "PostgreSQL 15.3",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software24",
+    "name": "Enterprise Solutions Redis",
+    "type": "database",
+    "version": "Redis 7.0.11",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software25",
+    "name": "Enterprise Solutions Kubernetes",
+    "type": "service",
+    "version": "Kubernetes 1.25.2",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software26",
+    "name": "Enterprise Solutions Apache",
+    "type": "application",
+    "version": "Apache HTTP Server 2.4.53",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software27",
+    "name": "Enterprise Solutions Nginx",
+    "type": "application",
+    "version": "Nginx 1.24.0",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software28",
+    "name": "Enterprise Solutions OpenSSH",
+    "type": "service",
+    "version": "OpenSSH 8.9p1",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software29",
+    "name": "Enterprise Solutions Docker",
+    "type": "service",
+    "version": "Docker 20.10.17",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  },
+  {
+    "_key": "018b3397cdd0_software30",
+    "name": "Enterprise Solutions Apache",
+    "type": "application",
+    "version": "Apache HTTP Server 2.4.53",
+    "tenant_018b3397cdd0_attr": "018b3397cdd0"
+  }
+]

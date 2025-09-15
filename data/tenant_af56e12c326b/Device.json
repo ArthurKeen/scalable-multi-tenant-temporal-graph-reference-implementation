@@ -1,0 +1,2348 @@
+[
+  {
+    "_key": "af56e12c326b_device1-0",
+    "name": "Acme Corp IoT Iot Model 627",
+    "type": "IoT",
+    "model": "Iot Model 627",
+    "serialNumber": "127c1e40-65e6-452f-96c3-68d1f86c3d99",
+    "ipAddress": "192.168.182.161",
+    "macAddress": "1e:7c:c1:11:0b:97",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_device1",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6089",
+      "allow 1567"
+    ],
+    "created": 1757902486.50961,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device1-1",
+    "name": "Acme Corp IoT Iot Model 627",
+    "type": "IoT",
+    "model": "Iot Model 627",
+    "serialNumber": "127c1e40-65e6-452f-96c3-68d1f86c3d99",
+    "ipAddress": "192.168.182.161",
+    "macAddress": "1e:7c:c1:11:0b:97",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-336",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6089",
+      "allow 1567"
+    ],
+    "created": 1757816086.509702,
+    "expired": 1757902486.50961,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device1-2",
+    "name": "Acme Corp IoT Iot Model 627",
+    "type": "IoT",
+    "model": "Iot Model 627",
+    "serialNumber": "127c1e40-65e6-452f-96c3-68d1f86c3d99",
+    "ipAddress": "192.168.182.161",
+    "macAddress": "1e:7c:c1:11:0b:97",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-491",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6089",
+      "allow 1567"
+    ],
+    "created": 1757384086.509718,
+    "expired": 1757816086.509702,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device1-3",
+    "name": "Acme Corp IoT Iot Model 627",
+    "type": "IoT",
+    "model": "Iot Model 627",
+    "serialNumber": "127c1e40-65e6-452f-96c3-68d1f86c3d99",
+    "ipAddress": "192.168.182.161",
+    "macAddress": "1e:7c:c1:11:0b:97",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-718",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6089",
+      "allow 1567"
+    ],
+    "created": 1756952086.509727,
+    "expired": 1757384086.509718,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device1-4",
+    "name": "Acme Corp IoT Iot Model 627",
+    "type": "IoT",
+    "model": "Iot Model 627",
+    "serialNumber": "127c1e40-65e6-452f-96c3-68d1f86c3d99",
+    "ipAddress": "192.168.182.161",
+    "macAddress": "1e:7c:c1:11:0b:97",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-871",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6089",
+      "allow 1567"
+    ],
+    "created": 1756260886.509734,
+    "expired": 1756952086.509727,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device1-5",
+    "name": "Acme Corp IoT Iot Model 627",
+    "type": "IoT",
+    "model": "Iot Model 627",
+    "serialNumber": "127c1e40-65e6-452f-96c3-68d1f86c3d99",
+    "ipAddress": "192.168.182.161",
+    "macAddress": "1e:7c:c1:11:0b:97",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-597",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6089",
+      "allow 1567"
+    ],
+    "created": 1756001686.509743,
+    "expired": 1756260886.509734,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device2-0",
+    "name": "Acme Corp router Router Model 812",
+    "type": "router",
+    "model": "Router Model 812",
+    "serialNumber": "1af3da56-9b3f-4162-9fb4-5211a995b3fc",
+    "ipAddress": "192.168.183.74",
+    "macAddress": "5c:bf:ae:47:a1:69",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_device2",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3135",
+      "allow 6130"
+    ],
+    "created": 1757902486.509753,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device2-1",
+    "name": "Acme Corp router Router Model 812",
+    "type": "router",
+    "model": "Router Model 812",
+    "serialNumber": "1af3da56-9b3f-4162-9fb4-5211a995b3fc",
+    "ipAddress": "192.168.183.74",
+    "macAddress": "5c:bf:ae:47:a1:69",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-714",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3135",
+      "allow 6130"
+    ],
+    "created": 1757816086.509775,
+    "expired": 1757902486.509753,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device2-2",
+    "name": "Acme Corp router Router Model 812",
+    "type": "router",
+    "model": "Router Model 812",
+    "serialNumber": "1af3da56-9b3f-4162-9fb4-5211a995b3fc",
+    "ipAddress": "192.168.183.74",
+    "macAddress": "5c:bf:ae:47:a1:69",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-781",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3135",
+      "allow 6130"
+    ],
+    "created": 1757124886.509782,
+    "expired": 1757816086.509775,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device2-3",
+    "name": "Acme Corp router Router Model 812",
+    "type": "router",
+    "model": "Router Model 812",
+    "serialNumber": "1af3da56-9b3f-4162-9fb4-5211a995b3fc",
+    "ipAddress": "192.168.183.74",
+    "macAddress": "5c:bf:ae:47:a1:69",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-302",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3135",
+      "allow 6130"
+    ],
+    "created": 1756606486.509789,
+    "expired": 1757124886.509782,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device2-4",
+    "name": "Acme Corp router Router Model 812",
+    "type": "router",
+    "model": "Router Model 812",
+    "serialNumber": "1af3da56-9b3f-4162-9fb4-5211a995b3fc",
+    "ipAddress": "192.168.183.74",
+    "macAddress": "5c:bf:ae:47:a1:69",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-691",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3135",
+      "allow 6130"
+    ],
+    "created": 1756433686.509796,
+    "expired": 1756606486.509789,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device2-5",
+    "name": "Acme Corp router Router Model 812",
+    "type": "router",
+    "model": "Router Model 812",
+    "serialNumber": "1af3da56-9b3f-4162-9fb4-5211a995b3fc",
+    "ipAddress": "192.168.183.74",
+    "macAddress": "5c:bf:ae:47:a1:69",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-533",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3135",
+      "allow 6130"
+    ],
+    "created": 1756088086.509802,
+    "expired": 1756433686.509796,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device3-0",
+    "name": "Acme Corp server Server Model 886",
+    "type": "server",
+    "model": "Server Model 886",
+    "serialNumber": "7fe3e0f0-f692-4306-9742-1c1e74af142b",
+    "ipAddress": "192.168.138.35",
+    "macAddress": "6a:52:d9:5d:e3:4c",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_device3",
+    "firewallRules": [
+      "allow 7983"
+    ],
+    "created": 1757902486.50981,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device3-1",
+    "name": "Acme Corp server Server Model 886",
+    "type": "server",
+    "model": "Server Model 886",
+    "serialNumber": "7fe3e0f0-f692-4306-9742-1c1e74af142b",
+    "ipAddress": "192.168.138.35",
+    "macAddress": "6a:52:d9:5d:e3:4c",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-138",
+    "firewallRules": [
+      "allow 7983"
+    ],
+    "created": 1757470486.509828,
+    "expired": 1757902486.50981,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device3-2",
+    "name": "Acme Corp server Server Model 886",
+    "type": "server",
+    "model": "Server Model 886",
+    "serialNumber": "7fe3e0f0-f692-4306-9742-1c1e74af142b",
+    "ipAddress": "192.168.138.35",
+    "macAddress": "6a:52:d9:5d:e3:4c",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-251",
+    "firewallRules": [
+      "allow 7983"
+    ],
+    "created": 1757124886.509838,
+    "expired": 1757470486.509828,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device3-3",
+    "name": "Acme Corp server Server Model 886",
+    "type": "server",
+    "model": "Server Model 886",
+    "serialNumber": "7fe3e0f0-f692-4306-9742-1c1e74af142b",
+    "ipAddress": "192.168.138.35",
+    "macAddress": "6a:52:d9:5d:e3:4c",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-187",
+    "firewallRules": [
+      "allow 7983"
+    ],
+    "created": 1756779286.509846,
+    "expired": 1757124886.509838,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device3-4",
+    "name": "Acme Corp server Server Model 886",
+    "type": "server",
+    "model": "Server Model 886",
+    "serialNumber": "7fe3e0f0-f692-4306-9742-1c1e74af142b",
+    "ipAddress": "192.168.138.35",
+    "macAddress": "6a:52:d9:5d:e3:4c",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-843",
+    "firewallRules": [
+      "allow 7983"
+    ],
+    "created": 1756174486.509852,
+    "expired": 1756779286.509846,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device3-5",
+    "name": "Acme Corp server Server Model 886",
+    "type": "server",
+    "model": "Server Model 886",
+    "serialNumber": "7fe3e0f0-f692-4306-9742-1c1e74af142b",
+    "ipAddress": "192.168.138.35",
+    "macAddress": "6a:52:d9:5d:e3:4c",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-119",
+    "firewallRules": [
+      "allow 7983"
+    ],
+    "created": 1756088086.50986,
+    "expired": 1756174486.509852,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device4-0",
+    "name": "Acme Corp firewall Firewall Model 216",
+    "type": "firewall",
+    "model": "Firewall Model 216",
+    "serialNumber": "5c4e47ed-7532-40c7-bb1e-6973db5f153a",
+    "ipAddress": "192.168.245.127",
+    "macAddress": "a9:58:34:01:2c:d5",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "af56e12c326b_device4",
+    "firewallRules": [
+      "allow 80",
+      "allow 8264",
+      "allow 3824"
+    ],
+    "created": 1757902486.509868,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device4-1",
+    "name": "Acme Corp firewall Firewall Model 216",
+    "type": "firewall",
+    "model": "Firewall Model 216",
+    "serialNumber": "5c4e47ed-7532-40c7-bb1e-6973db5f153a",
+    "ipAddress": "192.168.245.127",
+    "macAddress": "a9:58:34:01:2c:d5",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "af56e12c326b_new-device-391",
+    "firewallRules": [
+      "allow 80",
+      "allow 8264",
+      "allow 3824"
+    ],
+    "created": 1757816086.509891,
+    "expired": 1757902486.509868,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device4-2",
+    "name": "Acme Corp firewall Firewall Model 216",
+    "type": "firewall",
+    "model": "Firewall Model 216",
+    "serialNumber": "5c4e47ed-7532-40c7-bb1e-6973db5f153a",
+    "ipAddress": "192.168.245.127",
+    "macAddress": "a9:58:34:01:2c:d5",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "af56e12c326b_new-device-268",
+    "firewallRules": [
+      "allow 80",
+      "allow 8264",
+      "allow 3824"
+    ],
+    "created": 1757038486.509898,
+    "expired": 1757816086.509891,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device4-3",
+    "name": "Acme Corp firewall Firewall Model 216",
+    "type": "firewall",
+    "model": "Firewall Model 216",
+    "serialNumber": "5c4e47ed-7532-40c7-bb1e-6973db5f153a",
+    "ipAddress": "192.168.245.127",
+    "macAddress": "a9:58:34:01:2c:d5",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "af56e12c326b_new-device-595",
+    "firewallRules": [
+      "allow 80",
+      "allow 8264",
+      "allow 3824"
+    ],
+    "created": 1756606486.509905,
+    "expired": 1757038486.509898,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device4-4",
+    "name": "Acme Corp firewall Firewall Model 216",
+    "type": "firewall",
+    "model": "Firewall Model 216",
+    "serialNumber": "5c4e47ed-7532-40c7-bb1e-6973db5f153a",
+    "ipAddress": "192.168.245.127",
+    "macAddress": "a9:58:34:01:2c:d5",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "af56e12c326b_new-device-108",
+    "firewallRules": [
+      "allow 80",
+      "allow 8264",
+      "allow 3824"
+    ],
+    "created": 1756433686.509911,
+    "expired": 1756606486.509905,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device4-5",
+    "name": "Acme Corp firewall Firewall Model 216",
+    "type": "firewall",
+    "model": "Firewall Model 216",
+    "serialNumber": "5c4e47ed-7532-40c7-bb1e-6973db5f153a",
+    "ipAddress": "192.168.245.127",
+    "macAddress": "a9:58:34:01:2c:d5",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.5.2",
+    "hostName": "af56e12c326b_new-device-594",
+    "firewallRules": [
+      "allow 80",
+      "allow 8264",
+      "allow 3824"
+    ],
+    "created": 1756088086.509918,
+    "expired": 1756433686.509911,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device5-0",
+    "name": "Acme Corp server Server Model 569",
+    "type": "server",
+    "model": "Server Model 569",
+    "serialNumber": "55e59f41-4dc5-49b8-9add-fb18e735c889",
+    "ipAddress": "192.168.53.232",
+    "macAddress": "10:2c:6d:e8:32:09",
+    "operatingSystem": "Red",
+    "osVersion": "Red Hat Enterprise Linux 8.8",
+    "hostName": "af56e12c326b_device5",
+    "firewallRules": [
+      "allow 2371"
+    ],
+    "created": 1757902486.509926,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device5-1",
+    "name": "Acme Corp server Server Model 569",
+    "type": "server",
+    "model": "Server Model 569",
+    "serialNumber": "55e59f41-4dc5-49b8-9add-fb18e735c889",
+    "ipAddress": "192.168.53.232",
+    "macAddress": "10:2c:6d:e8:32:09",
+    "operatingSystem": "Red",
+    "osVersion": "Red Hat Enterprise Linux 8.8",
+    "hostName": "af56e12c326b_new-device-559",
+    "firewallRules": [
+      "allow 2371"
+    ],
+    "created": 1757729686.509951,
+    "expired": 1757902486.509926,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device5-2",
+    "name": "Acme Corp server Server Model 569",
+    "type": "server",
+    "model": "Server Model 569",
+    "serialNumber": "55e59f41-4dc5-49b8-9add-fb18e735c889",
+    "ipAddress": "192.168.53.232",
+    "macAddress": "10:2c:6d:e8:32:09",
+    "operatingSystem": "Red",
+    "osVersion": "Red Hat Enterprise Linux 8.8",
+    "hostName": "af56e12c326b_new-device-500",
+    "firewallRules": [
+      "allow 2371"
+    ],
+    "created": 1757124886.509959,
+    "expired": 1757729686.509951,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device5-3",
+    "name": "Acme Corp server Server Model 569",
+    "type": "server",
+    "model": "Server Model 569",
+    "serialNumber": "55e59f41-4dc5-49b8-9add-fb18e735c889",
+    "ipAddress": "192.168.53.232",
+    "macAddress": "10:2c:6d:e8:32:09",
+    "operatingSystem": "Red",
+    "osVersion": "Red Hat Enterprise Linux 8.8",
+    "hostName": "af56e12c326b_new-device-295",
+    "firewallRules": [
+      "allow 2371"
+    ],
+    "created": 1756692886.509965,
+    "expired": 1757124886.509959,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device5-4",
+    "name": "Acme Corp server Server Model 569",
+    "type": "server",
+    "model": "Server Model 569",
+    "serialNumber": "55e59f41-4dc5-49b8-9add-fb18e735c889",
+    "ipAddress": "192.168.53.232",
+    "macAddress": "10:2c:6d:e8:32:09",
+    "operatingSystem": "Red",
+    "osVersion": "Red Hat Enterprise Linux 8.8",
+    "hostName": "af56e12c326b_new-device-496",
+    "firewallRules": [
+      "allow 2371"
+    ],
+    "created": 1756174486.509974,
+    "expired": 1756692886.509965,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device5-5",
+    "name": "Acme Corp server Server Model 569",
+    "type": "server",
+    "model": "Server Model 569",
+    "serialNumber": "55e59f41-4dc5-49b8-9add-fb18e735c889",
+    "ipAddress": "192.168.53.232",
+    "macAddress": "10:2c:6d:e8:32:09",
+    "operatingSystem": "Red",
+    "osVersion": "Red Hat Enterprise Linux 8.8",
+    "hostName": "af56e12c326b_new-device-371",
+    "firewallRules": [
+      "allow 2371"
+    ],
+    "created": 1755915286.509982,
+    "expired": 1756174486.509974,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device6-0",
+    "name": "Acme Corp firewall Firewall Model 199",
+    "type": "firewall",
+    "model": "Firewall Model 199",
+    "serialNumber": "a9d6c086-ec29-4942-87b3-17f476b06d1e",
+    "ipAddress": "192.168.61.192",
+    "macAddress": "eb:26:d2:ba:e5:81",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "af56e12c326b_device6",
+    "firewallRules": [
+      "allow 80",
+      "allow 6408"
+    ],
+    "created": 1757902486.50999,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device6-1",
+    "name": "Acme Corp firewall Firewall Model 199",
+    "type": "firewall",
+    "model": "Firewall Model 199",
+    "serialNumber": "a9d6c086-ec29-4942-87b3-17f476b06d1e",
+    "ipAddress": "192.168.61.192",
+    "macAddress": "eb:26:d2:ba:e5:81",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "af56e12c326b_new-device-113",
+    "firewallRules": [
+      "allow 80",
+      "allow 6408"
+    ],
+    "created": 1757643286.510007,
+    "expired": 1757902486.50999,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device6-2",
+    "name": "Acme Corp firewall Firewall Model 199",
+    "type": "firewall",
+    "model": "Firewall Model 199",
+    "serialNumber": "a9d6c086-ec29-4942-87b3-17f476b06d1e",
+    "ipAddress": "192.168.61.192",
+    "macAddress": "eb:26:d2:ba:e5:81",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "af56e12c326b_new-device-548",
+    "firewallRules": [
+      "allow 80",
+      "allow 6408"
+    ],
+    "created": 1757211286.510013,
+    "expired": 1757643286.510007,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device6-3",
+    "name": "Acme Corp firewall Firewall Model 199",
+    "type": "firewall",
+    "model": "Firewall Model 199",
+    "serialNumber": "a9d6c086-ec29-4942-87b3-17f476b06d1e",
+    "ipAddress": "192.168.61.192",
+    "macAddress": "eb:26:d2:ba:e5:81",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "af56e12c326b_new-device-149",
+    "firewallRules": [
+      "allow 80",
+      "allow 6408"
+    ],
+    "created": 1756606486.510021,
+    "expired": 1757211286.510013,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device6-4",
+    "name": "Acme Corp firewall Firewall Model 199",
+    "type": "firewall",
+    "model": "Firewall Model 199",
+    "serialNumber": "a9d6c086-ec29-4942-87b3-17f476b06d1e",
+    "ipAddress": "192.168.61.192",
+    "macAddress": "eb:26:d2:ba:e5:81",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "af56e12c326b_new-device-505",
+    "firewallRules": [
+      "allow 80",
+      "allow 6408"
+    ],
+    "created": 1756347286.510027,
+    "expired": 1756606486.510021,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device6-5",
+    "name": "Acme Corp firewall Firewall Model 199",
+    "type": "firewall",
+    "model": "Firewall Model 199",
+    "serialNumber": "a9d6c086-ec29-4942-87b3-17f476b06d1e",
+    "ipAddress": "192.168.61.192",
+    "macAddress": "eb:26:d2:ba:e5:81",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "af56e12c326b_new-device-635",
+    "firewallRules": [
+      "allow 80",
+      "allow 6408"
+    ],
+    "created": 1755915286.510033,
+    "expired": 1756347286.510027,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device7-0",
+    "name": "Acme Corp laptop Laptop Model 258",
+    "type": "laptop",
+    "model": "Laptop Model 258",
+    "serialNumber": "aa5863b6-5f58-4b79-96f5-577386c70d52",
+    "ipAddress": "192.168.165.248",
+    "macAddress": "d2:f7:0c:1a:11:24",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_device7",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6002"
+    ],
+    "created": 1757902486.510041,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device7-1",
+    "name": "Acme Corp laptop Laptop Model 258",
+    "type": "laptop",
+    "model": "Laptop Model 258",
+    "serialNumber": "aa5863b6-5f58-4b79-96f5-577386c70d52",
+    "ipAddress": "192.168.165.248",
+    "macAddress": "d2:f7:0c:1a:11:24",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-820",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6002"
+    ],
+    "created": 1757729686.510062,
+    "expired": 1757902486.510041,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device7-2",
+    "name": "Acme Corp laptop Laptop Model 258",
+    "type": "laptop",
+    "model": "Laptop Model 258",
+    "serialNumber": "aa5863b6-5f58-4b79-96f5-577386c70d52",
+    "ipAddress": "192.168.165.248",
+    "macAddress": "d2:f7:0c:1a:11:24",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-792",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6002"
+    ],
+    "created": 1757038486.510068,
+    "expired": 1757729686.510062,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device7-3",
+    "name": "Acme Corp laptop Laptop Model 258",
+    "type": "laptop",
+    "model": "Laptop Model 258",
+    "serialNumber": "aa5863b6-5f58-4b79-96f5-577386c70d52",
+    "ipAddress": "192.168.165.248",
+    "macAddress": "d2:f7:0c:1a:11:24",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-200",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6002"
+    ],
+    "created": 1756952086.510075,
+    "expired": 1757038486.510068,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device7-4",
+    "name": "Acme Corp laptop Laptop Model 258",
+    "type": "laptop",
+    "model": "Laptop Model 258",
+    "serialNumber": "aa5863b6-5f58-4b79-96f5-577386c70d52",
+    "ipAddress": "192.168.165.248",
+    "macAddress": "d2:f7:0c:1a:11:24",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-461",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6002"
+    ],
+    "created": 1756433686.510081,
+    "expired": 1756952086.510075,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device7-5",
+    "name": "Acme Corp laptop Laptop Model 258",
+    "type": "laptop",
+    "model": "Laptop Model 258",
+    "serialNumber": "aa5863b6-5f58-4b79-96f5-577386c70d52",
+    "ipAddress": "192.168.165.248",
+    "macAddress": "d2:f7:0c:1a:11:24",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-809",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6002"
+    ],
+    "created": 1756001686.510087,
+    "expired": 1756433686.510081,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device8-0",
+    "name": "Acme Corp firewall Firewall Model 871",
+    "type": "firewall",
+    "model": "Firewall Model 871",
+    "serialNumber": "cf68fe11-71be-41f6-862a-1ea01a646090",
+    "ipAddress": "192.168.11.160",
+    "macAddress": "09:83:97:be:ac:65",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_device8",
+    "firewallRules": [
+      "allow 5491"
+    ],
+    "created": 1757902486.510094,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device8-1",
+    "name": "Acme Corp firewall Firewall Model 871",
+    "type": "firewall",
+    "model": "Firewall Model 871",
+    "serialNumber": "cf68fe11-71be-41f6-862a-1ea01a646090",
+    "ipAddress": "192.168.11.160",
+    "macAddress": "09:83:97:be:ac:65",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-704",
+    "firewallRules": [
+      "allow 5491"
+    ],
+    "created": 1757643286.510108,
+    "expired": 1757902486.510094,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device8-2",
+    "name": "Acme Corp firewall Firewall Model 871",
+    "type": "firewall",
+    "model": "Firewall Model 871",
+    "serialNumber": "cf68fe11-71be-41f6-862a-1ea01a646090",
+    "ipAddress": "192.168.11.160",
+    "macAddress": "09:83:97:be:ac:65",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-255",
+    "firewallRules": [
+      "allow 5491"
+    ],
+    "created": 1757384086.510114,
+    "expired": 1757643286.510108,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device8-3",
+    "name": "Acme Corp firewall Firewall Model 871",
+    "type": "firewall",
+    "model": "Firewall Model 871",
+    "serialNumber": "cf68fe11-71be-41f6-862a-1ea01a646090",
+    "ipAddress": "192.168.11.160",
+    "macAddress": "09:83:97:be:ac:65",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-843",
+    "firewallRules": [
+      "allow 5491"
+    ],
+    "created": 1756606486.51012,
+    "expired": 1757384086.510114,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device8-4",
+    "name": "Acme Corp firewall Firewall Model 871",
+    "type": "firewall",
+    "model": "Firewall Model 871",
+    "serialNumber": "cf68fe11-71be-41f6-862a-1ea01a646090",
+    "ipAddress": "192.168.11.160",
+    "macAddress": "09:83:97:be:ac:65",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-101",
+    "firewallRules": [
+      "allow 5491"
+    ],
+    "created": 1756174486.510127,
+    "expired": 1756606486.51012,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device8-5",
+    "name": "Acme Corp firewall Firewall Model 871",
+    "type": "firewall",
+    "model": "Firewall Model 871",
+    "serialNumber": "cf68fe11-71be-41f6-862a-1ea01a646090",
+    "ipAddress": "192.168.11.160",
+    "macAddress": "09:83:97:be:ac:65",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-654",
+    "firewallRules": [
+      "allow 5491"
+    ],
+    "created": 1755915286.510133,
+    "expired": 1756174486.510127,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device9-0",
+    "name": "Acme Corp router Router Model 454",
+    "type": "router",
+    "model": "Router Model 454",
+    "serialNumber": "8914bb95-f7ed-4a3b-b4e5-0437a64b8e58",
+    "ipAddress": "192.168.9.157",
+    "macAddress": "47:78:53:ea:8a:b6",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "af56e12c326b_device9",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1221",
+      "allow 4811",
+      "allow 8516",
+      "allow 1440"
+    ],
+    "created": 1757902486.510141,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device9-1",
+    "name": "Acme Corp router Router Model 454",
+    "type": "router",
+    "model": "Router Model 454",
+    "serialNumber": "8914bb95-f7ed-4a3b-b4e5-0437a64b8e58",
+    "ipAddress": "192.168.9.157",
+    "macAddress": "47:78:53:ea:8a:b6",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "af56e12c326b_new-device-345",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1221",
+      "allow 4811",
+      "allow 8516",
+      "allow 1440"
+    ],
+    "created": 1757643286.510155,
+    "expired": 1757902486.510141,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device9-2",
+    "name": "Acme Corp router Router Model 454",
+    "type": "router",
+    "model": "Router Model 454",
+    "serialNumber": "8914bb95-f7ed-4a3b-b4e5-0437a64b8e58",
+    "ipAddress": "192.168.9.157",
+    "macAddress": "47:78:53:ea:8a:b6",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "af56e12c326b_new-device-621",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1221",
+      "allow 4811",
+      "allow 8516",
+      "allow 1440"
+    ],
+    "created": 1757297686.510161,
+    "expired": 1757643286.510155,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device9-3",
+    "name": "Acme Corp router Router Model 454",
+    "type": "router",
+    "model": "Router Model 454",
+    "serialNumber": "8914bb95-f7ed-4a3b-b4e5-0437a64b8e58",
+    "ipAddress": "192.168.9.157",
+    "macAddress": "47:78:53:ea:8a:b6",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "af56e12c326b_new-device-578",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1221",
+      "allow 4811",
+      "allow 8516",
+      "allow 1440"
+    ],
+    "created": 1756692886.510167,
+    "expired": 1757297686.510161,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device9-4",
+    "name": "Acme Corp router Router Model 454",
+    "type": "router",
+    "model": "Router Model 454",
+    "serialNumber": "8914bb95-f7ed-4a3b-b4e5-0437a64b8e58",
+    "ipAddress": "192.168.9.157",
+    "macAddress": "47:78:53:ea:8a:b6",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "af56e12c326b_new-device-742",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1221",
+      "allow 4811",
+      "allow 8516",
+      "allow 1440"
+    ],
+    "created": 1756433686.510174,
+    "expired": 1756692886.510167,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device9-5",
+    "name": "Acme Corp router Router Model 454",
+    "type": "router",
+    "model": "Router Model 454",
+    "serialNumber": "8914bb95-f7ed-4a3b-b4e5-0437a64b8e58",
+    "ipAddress": "192.168.9.157",
+    "macAddress": "47:78:53:ea:8a:b6",
+    "operatingSystem": "JUNOS",
+    "osVersion": "JUNOS 22.1R1",
+    "hostName": "af56e12c326b_new-device-222",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 1221",
+      "allow 4811",
+      "allow 8516",
+      "allow 1440"
+    ],
+    "created": 1755915286.51018,
+    "expired": 1756433686.510174,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device10-0",
+    "name": "Acme Corp IoT Iot Model 582",
+    "type": "IoT",
+    "model": "Iot Model 582",
+    "serialNumber": "e929b8ea-fc75-48db-be48-5edfae15d193",
+    "ipAddress": "192.168.97.253",
+    "macAddress": "db:aa:f7:9d:95:ab",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "af56e12c326b_device10",
+    "firewallRules": [
+      "allow 80",
+      "allow 4496",
+      "allow 3077",
+      "allow 5055",
+      "allow 2853"
+    ],
+    "created": 1757902486.510187,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device10-1",
+    "name": "Acme Corp IoT Iot Model 582",
+    "type": "IoT",
+    "model": "Iot Model 582",
+    "serialNumber": "e929b8ea-fc75-48db-be48-5edfae15d193",
+    "ipAddress": "192.168.97.253",
+    "macAddress": "db:aa:f7:9d:95:ab",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "af56e12c326b_new-device-297",
+    "firewallRules": [
+      "allow 80",
+      "allow 4496",
+      "allow 3077",
+      "allow 5055",
+      "allow 2853"
+    ],
+    "created": 1757643286.510201,
+    "expired": 1757902486.510187,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device10-2",
+    "name": "Acme Corp IoT Iot Model 582",
+    "type": "IoT",
+    "model": "Iot Model 582",
+    "serialNumber": "e929b8ea-fc75-48db-be48-5edfae15d193",
+    "ipAddress": "192.168.97.253",
+    "macAddress": "db:aa:f7:9d:95:ab",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "af56e12c326b_new-device-713",
+    "firewallRules": [
+      "allow 80",
+      "allow 4496",
+      "allow 3077",
+      "allow 5055",
+      "allow 2853"
+    ],
+    "created": 1757211286.510207,
+    "expired": 1757643286.510201,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device10-3",
+    "name": "Acme Corp IoT Iot Model 582",
+    "type": "IoT",
+    "model": "Iot Model 582",
+    "serialNumber": "e929b8ea-fc75-48db-be48-5edfae15d193",
+    "ipAddress": "192.168.97.253",
+    "macAddress": "db:aa:f7:9d:95:ab",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "af56e12c326b_new-device-375",
+    "firewallRules": [
+      "allow 80",
+      "allow 4496",
+      "allow 3077",
+      "allow 5055",
+      "allow 2853"
+    ],
+    "created": 1756779286.510215,
+    "expired": 1757211286.510207,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device10-4",
+    "name": "Acme Corp IoT Iot Model 582",
+    "type": "IoT",
+    "model": "Iot Model 582",
+    "serialNumber": "e929b8ea-fc75-48db-be48-5edfae15d193",
+    "ipAddress": "192.168.97.253",
+    "macAddress": "db:aa:f7:9d:95:ab",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "af56e12c326b_new-device-765",
+    "firewallRules": [
+      "allow 80",
+      "allow 4496",
+      "allow 3077",
+      "allow 5055",
+      "allow 2853"
+    ],
+    "created": 1756347286.510222,
+    "expired": 1756779286.510215,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device10-5",
+    "name": "Acme Corp IoT Iot Model 582",
+    "type": "IoT",
+    "model": "Iot Model 582",
+    "serialNumber": "e929b8ea-fc75-48db-be48-5edfae15d193",
+    "ipAddress": "192.168.97.253",
+    "macAddress": "db:aa:f7:9d:95:ab",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.4.6",
+    "hostName": "af56e12c326b_new-device-233",
+    "firewallRules": [
+      "allow 80",
+      "allow 4496",
+      "allow 3077",
+      "allow 5055",
+      "allow 2853"
+    ],
+    "created": 1756001686.510229,
+    "expired": 1756347286.510222,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device11-0",
+    "name": "Acme Corp router Router Model 490",
+    "type": "router",
+    "model": "Router Model 490",
+    "serialNumber": "947b65c2-d2ad-4508-bec2-48f9126da167",
+    "ipAddress": "192.168.74.250",
+    "macAddress": "7b:df:eb:db:24:e7",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_device11",
+    "firewallRules": [
+      "allow 80",
+      "allow 8622"
+    ],
+    "created": 1757902486.510238,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device11-1",
+    "name": "Acme Corp router Router Model 490",
+    "type": "router",
+    "model": "Router Model 490",
+    "serialNumber": "947b65c2-d2ad-4508-bec2-48f9126da167",
+    "ipAddress": "192.168.74.250",
+    "macAddress": "7b:df:eb:db:24:e7",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-728",
+    "firewallRules": [
+      "allow 80",
+      "allow 8622"
+    ],
+    "created": 1757556886.510252,
+    "expired": 1757902486.510238,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device11-2",
+    "name": "Acme Corp router Router Model 490",
+    "type": "router",
+    "model": "Router Model 490",
+    "serialNumber": "947b65c2-d2ad-4508-bec2-48f9126da167",
+    "ipAddress": "192.168.74.250",
+    "macAddress": "7b:df:eb:db:24:e7",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-447",
+    "firewallRules": [
+      "allow 80",
+      "allow 8622"
+    ],
+    "created": 1757384086.510259,
+    "expired": 1757556886.510252,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device11-3",
+    "name": "Acme Corp router Router Model 490",
+    "type": "router",
+    "model": "Router Model 490",
+    "serialNumber": "947b65c2-d2ad-4508-bec2-48f9126da167",
+    "ipAddress": "192.168.74.250",
+    "macAddress": "7b:df:eb:db:24:e7",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-408",
+    "firewallRules": [
+      "allow 80",
+      "allow 8622"
+    ],
+    "created": 1756779286.510265,
+    "expired": 1757384086.510259,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device11-4",
+    "name": "Acme Corp router Router Model 490",
+    "type": "router",
+    "model": "Router Model 490",
+    "serialNumber": "947b65c2-d2ad-4508-bec2-48f9126da167",
+    "ipAddress": "192.168.74.250",
+    "macAddress": "7b:df:eb:db:24:e7",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-354",
+    "firewallRules": [
+      "allow 80",
+      "allow 8622"
+    ],
+    "created": 1756433686.510272,
+    "expired": 1756779286.510265,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device11-5",
+    "name": "Acme Corp router Router Model 490",
+    "type": "router",
+    "model": "Router Model 490",
+    "serialNumber": "947b65c2-d2ad-4508-bec2-48f9126da167",
+    "ipAddress": "192.168.74.250",
+    "macAddress": "7b:df:eb:db:24:e7",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "af56e12c326b_new-device-266",
+    "firewallRules": [
+      "allow 80",
+      "allow 8622"
+    ],
+    "created": 1755915286.510278,
+    "expired": 1756433686.510272,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device12-0",
+    "name": "Acme Corp IoT Iot Model 686",
+    "type": "IoT",
+    "model": "Iot Model 686",
+    "serialNumber": "f972ace3-9c53-4192-9059-f3bff3c6246e",
+    "ipAddress": "192.168.156.215",
+    "macAddress": "fb:fc:7f:5b:61:28",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_device12",
+    "firewallRules": [
+      "allow 4900",
+      "allow 8797"
+    ],
+    "created": 1757902486.510285,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device12-1",
+    "name": "Acme Corp IoT Iot Model 686",
+    "type": "IoT",
+    "model": "Iot Model 686",
+    "serialNumber": "f972ace3-9c53-4192-9059-f3bff3c6246e",
+    "ipAddress": "192.168.156.215",
+    "macAddress": "fb:fc:7f:5b:61:28",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-920",
+    "firewallRules": [
+      "allow 4900",
+      "allow 8797"
+    ],
+    "created": 1757470486.510299,
+    "expired": 1757902486.510285,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device12-2",
+    "name": "Acme Corp IoT Iot Model 686",
+    "type": "IoT",
+    "model": "Iot Model 686",
+    "serialNumber": "f972ace3-9c53-4192-9059-f3bff3c6246e",
+    "ipAddress": "192.168.156.215",
+    "macAddress": "fb:fc:7f:5b:61:28",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-582",
+    "firewallRules": [
+      "allow 4900",
+      "allow 8797"
+    ],
+    "created": 1757297686.510306,
+    "expired": 1757470486.510299,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device12-3",
+    "name": "Acme Corp IoT Iot Model 686",
+    "type": "IoT",
+    "model": "Iot Model 686",
+    "serialNumber": "f972ace3-9c53-4192-9059-f3bff3c6246e",
+    "ipAddress": "192.168.156.215",
+    "macAddress": "fb:fc:7f:5b:61:28",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-118",
+    "firewallRules": [
+      "allow 4900",
+      "allow 8797"
+    ],
+    "created": 1756606486.510313,
+    "expired": 1757297686.510306,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device12-4",
+    "name": "Acme Corp IoT Iot Model 686",
+    "type": "IoT",
+    "model": "Iot Model 686",
+    "serialNumber": "f972ace3-9c53-4192-9059-f3bff3c6246e",
+    "ipAddress": "192.168.156.215",
+    "macAddress": "fb:fc:7f:5b:61:28",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-238",
+    "firewallRules": [
+      "allow 4900",
+      "allow 8797"
+    ],
+    "created": 1756260886.510321,
+    "expired": 1756606486.510313,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device12-5",
+    "name": "Acme Corp IoT Iot Model 686",
+    "type": "IoT",
+    "model": "Iot Model 686",
+    "serialNumber": "f972ace3-9c53-4192-9059-f3bff3c6246e",
+    "ipAddress": "192.168.156.215",
+    "macAddress": "fb:fc:7f:5b:61:28",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "af56e12c326b_new-device-943",
+    "firewallRules": [
+      "allow 4900",
+      "allow 8797"
+    ],
+    "created": 1755915286.510328,
+    "expired": 1756260886.510321,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device13-0",
+    "name": "Acme Corp server Server Model 402",
+    "type": "server",
+    "model": "Server Model 402",
+    "serialNumber": "19d28fe3-3f6e-4a9f-8c3f-a4f0d4ed1739",
+    "ipAddress": "192.168.73.225",
+    "macAddress": "f1:52:6c:28:9e:c6",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_device13",
+    "firewallRules": [
+      "allow 443",
+      "allow 1412"
+    ],
+    "created": 1757902486.510336,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device13-1",
+    "name": "Acme Corp server Server Model 402",
+    "type": "server",
+    "model": "Server Model 402",
+    "serialNumber": "19d28fe3-3f6e-4a9f-8c3f-a4f0d4ed1739",
+    "ipAddress": "192.168.73.225",
+    "macAddress": "f1:52:6c:28:9e:c6",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-312",
+    "firewallRules": [
+      "allow 443",
+      "allow 1412"
+    ],
+    "created": 1757643286.510351,
+    "expired": 1757902486.510336,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device13-2",
+    "name": "Acme Corp server Server Model 402",
+    "type": "server",
+    "model": "Server Model 402",
+    "serialNumber": "19d28fe3-3f6e-4a9f-8c3f-a4f0d4ed1739",
+    "ipAddress": "192.168.73.225",
+    "macAddress": "f1:52:6c:28:9e:c6",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-831",
+    "firewallRules": [
+      "allow 443",
+      "allow 1412"
+    ],
+    "created": 1757038486.510357,
+    "expired": 1757643286.510351,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device13-3",
+    "name": "Acme Corp server Server Model 402",
+    "type": "server",
+    "model": "Server Model 402",
+    "serialNumber": "19d28fe3-3f6e-4a9f-8c3f-a4f0d4ed1739",
+    "ipAddress": "192.168.73.225",
+    "macAddress": "f1:52:6c:28:9e:c6",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-489",
+    "firewallRules": [
+      "allow 443",
+      "allow 1412"
+    ],
+    "created": 1756952086.510363,
+    "expired": 1757038486.510357,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device13-4",
+    "name": "Acme Corp server Server Model 402",
+    "type": "server",
+    "model": "Server Model 402",
+    "serialNumber": "19d28fe3-3f6e-4a9f-8c3f-a4f0d4ed1739",
+    "ipAddress": "192.168.73.225",
+    "macAddress": "f1:52:6c:28:9e:c6",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-140",
+    "firewallRules": [
+      "allow 443",
+      "allow 1412"
+    ],
+    "created": 1756174486.510369,
+    "expired": 1756952086.510363,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device13-5",
+    "name": "Acme Corp server Server Model 402",
+    "type": "server",
+    "model": "Server Model 402",
+    "serialNumber": "19d28fe3-3f6e-4a9f-8c3f-a4f0d4ed1739",
+    "ipAddress": "192.168.73.225",
+    "macAddress": "f1:52:6c:28:9e:c6",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "af56e12c326b_new-device-890",
+    "firewallRules": [
+      "allow 443",
+      "allow 1412"
+    ],
+    "created": 1755915286.510375,
+    "expired": 1756174486.510369,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device14-0",
+    "name": "Acme Corp firewall Firewall Model 324",
+    "type": "firewall",
+    "model": "Firewall Model 324",
+    "serialNumber": "31925006-23ea-4b25-a070-800bb4e83313",
+    "ipAddress": "192.168.194.49",
+    "macAddress": "1f:9e:65:61:9d:27",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "af56e12c326b_device14",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3975"
+    ],
+    "created": 1757902486.510382,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device14-1",
+    "name": "Acme Corp firewall Firewall Model 324",
+    "type": "firewall",
+    "model": "Firewall Model 324",
+    "serialNumber": "31925006-23ea-4b25-a070-800bb4e83313",
+    "ipAddress": "192.168.194.49",
+    "macAddress": "1f:9e:65:61:9d:27",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "af56e12c326b_new-device-404",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3975"
+    ],
+    "created": 1757470486.510397,
+    "expired": 1757902486.510382,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device14-2",
+    "name": "Acme Corp firewall Firewall Model 324",
+    "type": "firewall",
+    "model": "Firewall Model 324",
+    "serialNumber": "31925006-23ea-4b25-a070-800bb4e83313",
+    "ipAddress": "192.168.194.49",
+    "macAddress": "1f:9e:65:61:9d:27",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "af56e12c326b_new-device-477",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3975"
+    ],
+    "created": 1757297686.510403,
+    "expired": 1757470486.510397,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device14-3",
+    "name": "Acme Corp firewall Firewall Model 324",
+    "type": "firewall",
+    "model": "Firewall Model 324",
+    "serialNumber": "31925006-23ea-4b25-a070-800bb4e83313",
+    "ipAddress": "192.168.194.49",
+    "macAddress": "1f:9e:65:61:9d:27",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "af56e12c326b_new-device-731",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3975"
+    ],
+    "created": 1756779286.510409,
+    "expired": 1757297686.510403,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device14-4",
+    "name": "Acme Corp firewall Firewall Model 324",
+    "type": "firewall",
+    "model": "Firewall Model 324",
+    "serialNumber": "31925006-23ea-4b25-a070-800bb4e83313",
+    "ipAddress": "192.168.194.49",
+    "macAddress": "1f:9e:65:61:9d:27",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "af56e12c326b_new-device-684",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3975"
+    ],
+    "created": 1756260886.510415,
+    "expired": 1756779286.510409,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device14-5",
+    "name": "Acme Corp firewall Firewall Model 324",
+    "type": "firewall",
+    "model": "Firewall Model 324",
+    "serialNumber": "31925006-23ea-4b25-a070-800bb4e83313",
+    "ipAddress": "192.168.194.49",
+    "macAddress": "1f:9e:65:61:9d:27",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "af56e12c326b_new-device-993",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3975"
+    ],
+    "created": 1756001686.510421,
+    "expired": 1756260886.510415,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device15-0",
+    "name": "Acme Corp firewall Firewall Model 247",
+    "type": "firewall",
+    "model": "Firewall Model 247",
+    "serialNumber": "f310c7eb-af47-4e2a-8f92-6384b0afd7f6",
+    "ipAddress": "192.168.96.62",
+    "macAddress": "f9:4f:d5:24:aa:1b",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "af56e12c326b_device15",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757902486.510429,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device15-1",
+    "name": "Acme Corp firewall Firewall Model 247",
+    "type": "firewall",
+    "model": "Firewall Model 247",
+    "serialNumber": "f310c7eb-af47-4e2a-8f92-6384b0afd7f6",
+    "ipAddress": "192.168.96.62",
+    "macAddress": "f9:4f:d5:24:aa:1b",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "af56e12c326b_new-device-944",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757816086.510444,
+    "expired": 1757902486.510429,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device15-2",
+    "name": "Acme Corp firewall Firewall Model 247",
+    "type": "firewall",
+    "model": "Firewall Model 247",
+    "serialNumber": "f310c7eb-af47-4e2a-8f92-6384b0afd7f6",
+    "ipAddress": "192.168.96.62",
+    "macAddress": "f9:4f:d5:24:aa:1b",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "af56e12c326b_new-device-970",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757038486.51046,
+    "expired": 1757816086.510444,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device15-3",
+    "name": "Acme Corp firewall Firewall Model 247",
+    "type": "firewall",
+    "model": "Firewall Model 247",
+    "serialNumber": "f310c7eb-af47-4e2a-8f92-6384b0afd7f6",
+    "ipAddress": "192.168.96.62",
+    "macAddress": "f9:4f:d5:24:aa:1b",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "af56e12c326b_new-device-365",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756692886.510466,
+    "expired": 1757038486.51046,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device15-4",
+    "name": "Acme Corp firewall Firewall Model 247",
+    "type": "firewall",
+    "model": "Firewall Model 247",
+    "serialNumber": "f310c7eb-af47-4e2a-8f92-6384b0afd7f6",
+    "ipAddress": "192.168.96.62",
+    "macAddress": "f9:4f:d5:24:aa:1b",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "af56e12c326b_new-device-205",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756433686.510473,
+    "expired": 1756692886.510466,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device15-5",
+    "name": "Acme Corp firewall Firewall Model 247",
+    "type": "firewall",
+    "model": "Firewall Model 247",
+    "serialNumber": "f310c7eb-af47-4e2a-8f92-6384b0afd7f6",
+    "ipAddress": "192.168.96.62",
+    "macAddress": "f9:4f:d5:24:aa:1b",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "af56e12c326b_new-device-971",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755915286.510479,
+    "expired": 1756433686.510473,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device16-0",
+    "name": "Acme Corp firewall Firewall Model 276",
+    "type": "firewall",
+    "model": "Firewall Model 276",
+    "serialNumber": "5ece50c9-640a-41c9-8b55-087c1a0f38b8",
+    "ipAddress": "192.168.153.35",
+    "macAddress": "16:45:d7:a6:e2:79",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_device16",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757902486.510487,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device16-1",
+    "name": "Acme Corp firewall Firewall Model 276",
+    "type": "firewall",
+    "model": "Firewall Model 276",
+    "serialNumber": "5ece50c9-640a-41c9-8b55-087c1a0f38b8",
+    "ipAddress": "192.168.153.35",
+    "macAddress": "16:45:d7:a6:e2:79",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-850",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757816086.510544,
+    "expired": 1757902486.510487,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device16-2",
+    "name": "Acme Corp firewall Firewall Model 276",
+    "type": "firewall",
+    "model": "Firewall Model 276",
+    "serialNumber": "5ece50c9-640a-41c9-8b55-087c1a0f38b8",
+    "ipAddress": "192.168.153.35",
+    "macAddress": "16:45:d7:a6:e2:79",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-675",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757384086.510557,
+    "expired": 1757816086.510544,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device16-3",
+    "name": "Acme Corp firewall Firewall Model 276",
+    "type": "firewall",
+    "model": "Firewall Model 276",
+    "serialNumber": "5ece50c9-640a-41c9-8b55-087c1a0f38b8",
+    "ipAddress": "192.168.153.35",
+    "macAddress": "16:45:d7:a6:e2:79",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-695",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756952086.510564,
+    "expired": 1757384086.510557,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device16-4",
+    "name": "Acme Corp firewall Firewall Model 276",
+    "type": "firewall",
+    "model": "Firewall Model 276",
+    "serialNumber": "5ece50c9-640a-41c9-8b55-087c1a0f38b8",
+    "ipAddress": "192.168.153.35",
+    "macAddress": "16:45:d7:a6:e2:79",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-197",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756347286.510571,
+    "expired": 1756952086.510564,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device16-5",
+    "name": "Acme Corp firewall Firewall Model 276",
+    "type": "firewall",
+    "model": "Firewall Model 276",
+    "serialNumber": "5ece50c9-640a-41c9-8b55-087c1a0f38b8",
+    "ipAddress": "192.168.153.35",
+    "macAddress": "16:45:d7:a6:e2:79",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "af56e12c326b_new-device-784",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756001686.510577,
+    "expired": 1756347286.510571,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device17-0",
+    "name": "Acme Corp IoT Iot Model 704",
+    "type": "IoT",
+    "model": "Iot Model 704",
+    "serialNumber": "1b93c5ac-2f5d-4b9c-85c9-1bbdd0d0a23c",
+    "ipAddress": "192.168.2.101",
+    "macAddress": "39:ce:ff:74:78:f1",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_device17",
+    "firewallRules": [],
+    "created": 1757902486.510591,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device17-1",
+    "name": "Acme Corp IoT Iot Model 704",
+    "type": "IoT",
+    "model": "Iot Model 704",
+    "serialNumber": "1b93c5ac-2f5d-4b9c-85c9-1bbdd0d0a23c",
+    "ipAddress": "192.168.2.101",
+    "macAddress": "39:ce:ff:74:78:f1",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-481",
+    "firewallRules": [],
+    "created": 1757556886.510618,
+    "expired": 1757902486.510591,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device17-2",
+    "name": "Acme Corp IoT Iot Model 704",
+    "type": "IoT",
+    "model": "Iot Model 704",
+    "serialNumber": "1b93c5ac-2f5d-4b9c-85c9-1bbdd0d0a23c",
+    "ipAddress": "192.168.2.101",
+    "macAddress": "39:ce:ff:74:78:f1",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-624",
+    "firewallRules": [],
+    "created": 1757038486.510624,
+    "expired": 1757556886.510618,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device17-3",
+    "name": "Acme Corp IoT Iot Model 704",
+    "type": "IoT",
+    "model": "Iot Model 704",
+    "serialNumber": "1b93c5ac-2f5d-4b9c-85c9-1bbdd0d0a23c",
+    "ipAddress": "192.168.2.101",
+    "macAddress": "39:ce:ff:74:78:f1",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-783",
+    "firewallRules": [],
+    "created": 1756692886.510631,
+    "expired": 1757038486.510624,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device17-4",
+    "name": "Acme Corp IoT Iot Model 704",
+    "type": "IoT",
+    "model": "Iot Model 704",
+    "serialNumber": "1b93c5ac-2f5d-4b9c-85c9-1bbdd0d0a23c",
+    "ipAddress": "192.168.2.101",
+    "macAddress": "39:ce:ff:74:78:f1",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-950",
+    "firewallRules": [],
+    "created": 1756260886.510638,
+    "expired": 1756692886.510631,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device17-5",
+    "name": "Acme Corp IoT Iot Model 704",
+    "type": "IoT",
+    "model": "Iot Model 704",
+    "serialNumber": "1b93c5ac-2f5d-4b9c-85c9-1bbdd0d0a23c",
+    "ipAddress": "192.168.2.101",
+    "macAddress": "39:ce:ff:74:78:f1",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-104",
+    "firewallRules": [],
+    "created": 1755828886.510644,
+    "expired": 1756260886.510638,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device18-0",
+    "name": "Acme Corp laptop Laptop Model 456",
+    "type": "laptop",
+    "model": "Laptop Model 456",
+    "serialNumber": "4c87a0fb-0f1d-4399-ad0a-401b80acbfae",
+    "ipAddress": "192.168.201.14",
+    "macAddress": "e5:9b:e6:da:aa:74",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "af56e12c326b_device18",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4750",
+      "allow 5262",
+      "allow 4307"
+    ],
+    "created": 1757902486.510653,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device18-1",
+    "name": "Acme Corp laptop Laptop Model 456",
+    "type": "laptop",
+    "model": "Laptop Model 456",
+    "serialNumber": "4c87a0fb-0f1d-4399-ad0a-401b80acbfae",
+    "ipAddress": "192.168.201.14",
+    "macAddress": "e5:9b:e6:da:aa:74",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "af56e12c326b_new-device-727",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4750",
+      "allow 5262",
+      "allow 4307"
+    ],
+    "created": 1757816086.51067,
+    "expired": 1757902486.510653,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device18-2",
+    "name": "Acme Corp laptop Laptop Model 456",
+    "type": "laptop",
+    "model": "Laptop Model 456",
+    "serialNumber": "4c87a0fb-0f1d-4399-ad0a-401b80acbfae",
+    "ipAddress": "192.168.201.14",
+    "macAddress": "e5:9b:e6:da:aa:74",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "af56e12c326b_new-device-721",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4750",
+      "allow 5262",
+      "allow 4307"
+    ],
+    "created": 1757384086.510677,
+    "expired": 1757816086.51067,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device18-3",
+    "name": "Acme Corp laptop Laptop Model 456",
+    "type": "laptop",
+    "model": "Laptop Model 456",
+    "serialNumber": "4c87a0fb-0f1d-4399-ad0a-401b80acbfae",
+    "ipAddress": "192.168.201.14",
+    "macAddress": "e5:9b:e6:da:aa:74",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "af56e12c326b_new-device-405",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4750",
+      "allow 5262",
+      "allow 4307"
+    ],
+    "created": 1756952086.510683,
+    "expired": 1757384086.510677,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device18-4",
+    "name": "Acme Corp laptop Laptop Model 456",
+    "type": "laptop",
+    "model": "Laptop Model 456",
+    "serialNumber": "4c87a0fb-0f1d-4399-ad0a-401b80acbfae",
+    "ipAddress": "192.168.201.14",
+    "macAddress": "e5:9b:e6:da:aa:74",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "af56e12c326b_new-device-507",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4750",
+      "allow 5262",
+      "allow 4307"
+    ],
+    "created": 1756433686.51069,
+    "expired": 1756952086.510683,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device18-5",
+    "name": "Acme Corp laptop Laptop Model 456",
+    "type": "laptop",
+    "model": "Laptop Model 456",
+    "serialNumber": "4c87a0fb-0f1d-4399-ad0a-401b80acbfae",
+    "ipAddress": "192.168.201.14",
+    "macAddress": "e5:9b:e6:da:aa:74",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "af56e12c326b_new-device-644",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4750",
+      "allow 5262",
+      "allow 4307"
+    ],
+    "created": 1756001686.510697,
+    "expired": 1756433686.51069,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device19-0",
+    "name": "Acme Corp laptop Laptop Model 916",
+    "type": "laptop",
+    "model": "Laptop Model 916",
+    "serialNumber": "d2737990-cca1-4f7e-b8bb-497105df0c12",
+    "ipAddress": "192.168.126.79",
+    "macAddress": "88:d6:7f:f8:10:29",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_device19",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4802",
+      "allow 4831"
+    ],
+    "created": 1757902486.510705,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device19-1",
+    "name": "Acme Corp laptop Laptop Model 916",
+    "type": "laptop",
+    "model": "Laptop Model 916",
+    "serialNumber": "d2737990-cca1-4f7e-b8bb-497105df0c12",
+    "ipAddress": "192.168.126.79",
+    "macAddress": "88:d6:7f:f8:10:29",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-999",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4802",
+      "allow 4831"
+    ],
+    "created": 1757643286.510722,
+    "expired": 1757902486.510705,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device19-2",
+    "name": "Acme Corp laptop Laptop Model 916",
+    "type": "laptop",
+    "model": "Laptop Model 916",
+    "serialNumber": "d2737990-cca1-4f7e-b8bb-497105df0c12",
+    "ipAddress": "192.168.126.79",
+    "macAddress": "88:d6:7f:f8:10:29",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-637",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4802",
+      "allow 4831"
+    ],
+    "created": 1757384086.510729,
+    "expired": 1757643286.510722,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device19-3",
+    "name": "Acme Corp laptop Laptop Model 916",
+    "type": "laptop",
+    "model": "Laptop Model 916",
+    "serialNumber": "d2737990-cca1-4f7e-b8bb-497105df0c12",
+    "ipAddress": "192.168.126.79",
+    "macAddress": "88:d6:7f:f8:10:29",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-876",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4802",
+      "allow 4831"
+    ],
+    "created": 1756692886.510735,
+    "expired": 1757384086.510729,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device19-4",
+    "name": "Acme Corp laptop Laptop Model 916",
+    "type": "laptop",
+    "model": "Laptop Model 916",
+    "serialNumber": "d2737990-cca1-4f7e-b8bb-497105df0c12",
+    "ipAddress": "192.168.126.79",
+    "macAddress": "88:d6:7f:f8:10:29",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-258",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4802",
+      "allow 4831"
+    ],
+    "created": 1756520086.510741,
+    "expired": 1756692886.510735,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device19-5",
+    "name": "Acme Corp laptop Laptop Model 916",
+    "type": "laptop",
+    "model": "Laptop Model 916",
+    "serialNumber": "d2737990-cca1-4f7e-b8bb-497105df0c12",
+    "ipAddress": "192.168.126.79",
+    "macAddress": "88:d6:7f:f8:10:29",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "af56e12c326b_new-device-819",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4802",
+      "allow 4831"
+    ],
+    "created": 1756001686.510748,
+    "expired": 1756520086.510741,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device20-0",
+    "name": "Acme Corp IoT Iot Model 796",
+    "type": "IoT",
+    "model": "Iot Model 796",
+    "serialNumber": "90f13712-6120-4b7f-a1f7-fb80d8c79ac6",
+    "ipAddress": "192.168.112.194",
+    "macAddress": "08:46:a9:50:79:05",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_device20",
+    "firewallRules": [
+      "allow 1182"
+    ],
+    "created": 1757902486.510757,
+    "expired": 9223372036854775807,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device20-1",
+    "name": "Acme Corp IoT Iot Model 796",
+    "type": "IoT",
+    "model": "Iot Model 796",
+    "serialNumber": "90f13712-6120-4b7f-a1f7-fb80d8c79ac6",
+    "ipAddress": "192.168.112.194",
+    "macAddress": "08:46:a9:50:79:05",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-918",
+    "firewallRules": [
+      "allow 1182"
+    ],
+    "created": 1757470486.510771,
+    "expired": 1757902486.510757,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device20-2",
+    "name": "Acme Corp IoT Iot Model 796",
+    "type": "IoT",
+    "model": "Iot Model 796",
+    "serialNumber": "90f13712-6120-4b7f-a1f7-fb80d8c79ac6",
+    "ipAddress": "192.168.112.194",
+    "macAddress": "08:46:a9:50:79:05",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-618",
+    "firewallRules": [
+      "allow 1182"
+    ],
+    "created": 1757124886.510777,
+    "expired": 1757470486.510771,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device20-3",
+    "name": "Acme Corp IoT Iot Model 796",
+    "type": "IoT",
+    "model": "Iot Model 796",
+    "serialNumber": "90f13712-6120-4b7f-a1f7-fb80d8c79ac6",
+    "ipAddress": "192.168.112.194",
+    "macAddress": "08:46:a9:50:79:05",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-535",
+    "firewallRules": [
+      "allow 1182"
+    ],
+    "created": 1756865686.510783,
+    "expired": 1757124886.510777,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device20-4",
+    "name": "Acme Corp IoT Iot Model 796",
+    "type": "IoT",
+    "model": "Iot Model 796",
+    "serialNumber": "90f13712-6120-4b7f-a1f7-fb80d8c79ac6",
+    "ipAddress": "192.168.112.194",
+    "macAddress": "08:46:a9:50:79:05",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-649",
+    "firewallRules": [
+      "allow 1182"
+    ],
+    "created": 1756520086.51079,
+    "expired": 1756865686.510783,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  },
+  {
+    "_key": "af56e12c326b_device20-5",
+    "name": "Acme Corp IoT Iot Model 796",
+    "type": "IoT",
+    "model": "Iot Model 796",
+    "serialNumber": "90f13712-6120-4b7f-a1f7-fb80d8c79ac6",
+    "ipAddress": "192.168.112.194",
+    "macAddress": "08:46:a9:50:79:05",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "af56e12c326b_new-device-983",
+    "firewallRules": [
+      "allow 1182"
+    ],
+    "created": 1755742486.510796,
+    "expired": 1756520086.51079,
+    "tenant_af56e12c326b_attr": "af56e12c326b"
+  }
+]
