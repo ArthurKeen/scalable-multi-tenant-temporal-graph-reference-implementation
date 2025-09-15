@@ -12,6 +12,8 @@ Implements consistent time travel pattern across ALL collections:
 import json
 import datetime
 import sys
+import uuid
+import random
 from typing import Dict, List, Any, Tuple
 from pathlib import Path
 
@@ -138,7 +140,7 @@ class TimeTravelRefactoredGenerator:
                 "name": f"{self.tenant_config.tenant_name} {device_type.value} {model}",
                 "type": device_type.value,
                 "model": model,
-                "serialNumber": str(__import__('uuid').uuid4()),
+                "serialNumber": str(uuid.uuid4()),
                 "ipAddress": self.random_gen.generate_ip_address(),
                 "macAddress": self.random_gen.generate_mac_address(),
                 "operatingSystem": os_version.split(" ")[0],
@@ -235,7 +237,7 @@ class TimeTravelRefactoredGenerator:
             
             # Set temporal timestamps
             created = datetime.datetime.now() - datetime.timedelta(
-                days=__import__('random').randint(change_no*5+1, (change_no+1)*5)
+                days=random.randint(change_no*5+1, (change_no+1)*5)
             )
             expired = previous_config["created"]  # Historical records expire when replaced
             
@@ -369,7 +371,7 @@ class TimeTravelRefactoredGenerator:
             
             # Set temporal timestamps
             created = datetime.datetime.now() - datetime.timedelta(
-                days=__import__('random').randint(change_no*5+1, (change_no+1)*5)
+                days=random.randint(change_no*5+1, (change_no+1)*5)
             )
             expired = previous_config["created"]  # Historical records expire when replaced
             

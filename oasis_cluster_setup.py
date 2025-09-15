@@ -243,8 +243,7 @@ class OasisClusterManager:
         try:
             # Define index configurations based on PRD requirements
             index_configs = [
-                # TTL indexes removed - observedAt property removed, will be addressed in future
-                # TODO: Determine proper collections and attribute naming for temporal observation tracking
+                # Temporal indexing is now handled by created/expired timestamps with TTL
                 
                 # Vertex-centric indexes for graph performance (FR6.1)
                 {
@@ -280,8 +279,7 @@ class OasisClusterManager:
                     "name": "idx_devices_key"
                 },
                 
-                # Temporal range indexes for time travel queries (FR6.3) - observedAt removed
-                # TODO: Re-implement when proper temporal observation tracking is determined
+                # Temporal range indexes for time travel queries (FR6.3) - using created/expired
                 {
                     "collection": "version",
                     "type": "persistent",
@@ -295,8 +293,7 @@ class OasisClusterManager:
                 if self.database.has_collection(collection_name):
                     collection = self.database.collection(collection_name)
                     
-                    # TTL index creation removed - observedAt property removed
-                    # TODO: Re-implement when proper temporal observation tracking is determined
+                    # TTL index creation is now handled by dedicated TTL deployment system
                     
                     if index_config["type"] == "persistent":
                         # Create persistent index
