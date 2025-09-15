@@ -224,12 +224,18 @@ graph TB
 ## Getting Started
 
 ### Quick Start - Complete Demo
+
+**Main Demo Script:** `comprehensive_demo.py`
+
 ```bash
 # Run the complete demonstration (all steps automated)
 python comprehensive_demo.py --save-report
 
 # Run with snake_case naming convention
 python comprehensive_demo.py --naming snake_case --save-report
+
+# View demo script options
+python comprehensive_demo.py --help
 ```
 
 **The comprehensive demo includes:**
@@ -239,6 +245,58 @@ python comprehensive_demo.py --naming snake_case --save-report
 4. **TTL Demonstration** - Time travel scenarios
 5. **Scale-Out Demo** - Dynamic tenant addition and cluster analysis
 6. **Comprehensive Validation** - Data integrity and isolation checks
+
+### Demo Flow Diagram
+
+```mermaid
+graph TD
+    A[Start Demo] --> B[Step 1: Generate Data]
+    B --> C[Step 2: Deploy to DB]
+    C --> D[Step 3: Initial Validation]
+    D --> E[Step 4: Transaction Simulation]
+    E --> F[Step 5: TTL Demonstration]
+    F --> G[Step 6: Scale-Out Demo]
+    G --> H[Step 7: Final Validation]
+    H --> I[Demo Complete]
+    
+    B --> B1[Create 2 Tenants<br/>Generate Assets<br/>Support camelCase/snake_case]
+    C --> C1[Deploy Collections<br/>Create Indexes<br/>Setup SmartGraphs]
+    D --> D1[Verify Deployment<br/>Check Tenant Isolation<br/>Test Time Travel]
+    E --> E1[Simulate Device Changes<br/>Simulate Software Updates<br/>Apply TTL Strategy]
+    F --> F1[Device Maintenance Cycle<br/>Software Upgrade Rollback<br/>Historical Data Aging]
+    G --> G1[Add New Tenants<br/>Analyze Cluster<br/>Rebalance Shards]
+    H --> H1[Data Integrity Check<br/>Isolation Verification<br/>Performance Validation]
+    
+    style A fill:#e1f5fe
+    style I fill:#e8f5e8
+    style E fill:#fff3e0
+    style F fill:#fff3e0
+    style G fill:#f3e5f5
+```
+
+### Individual Demo Components
+
+For running specific parts of the demonstration:
+
+```bash
+# Data Generation Only
+python asset_generator.py --naming camelCase --environment development
+
+# Database Deployment Only  
+python database_deployment.py --naming camelCase
+
+# Transaction Simulation Only
+python transaction_simulator.py --naming camelCase --devices 5 --software 3
+
+# TTL Demo Scenarios Only
+python ttl_demo_scenarios.py --naming camelCase
+
+# Scale-Out Demo Only
+python scale_out_demo.py --naming camelCase --save-report
+
+# Validation Only
+python validation_suite.py
+```
 
 ### Prerequisites
 - **Python 3.8+** with standard libraries
@@ -629,12 +687,6 @@ All settings are managed through `config_management.py`:
 - **Modular Design**: Single responsibility principle
 - **Comprehensive Testing**: Unit, integration, and compliance tests
 
-### Recent Improvements
-- [DONE] **hasConnection Architecture**: Corrected to DeviceProxyOut -> DeviceProxyIn only (proper naming conventions)
-- [DONE] **Collection naming**: `DeviceIn` -> `DeviceProxyIn`, `DeviceOut` -> `DeviceProxyOut`
-- [DONE] **Property naming**: `_observed_at` -> `observedAt` throughout
-- [DONE] **Proxy collections**: Removed unnecessary temporal attributes
-- [DONE] **Edge types**: Updated `_fromType`/`_toType` references
 - [DONE] **Architecture**: Centralized configuration management
 - [DONE] **Code Quality**: Removed duplicate documentation, updated file references
 - [DONE] **Database Compliance**: Verified W3C OWL semantic relationships
