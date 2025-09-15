@@ -225,19 +225,30 @@ graph TB
 
 ## Getting Started
 
-### Quick Start - Complete Demo
+### Quick Start - Demo Options
 
-**Main Demo Script:** `comprehensive_demo.py`
+**🎯 Automated Walkthrough (Recommended for First-Time Users)**
+```bash
+# Interactive guided demonstration with explanations
+python automated_demo_walkthrough.py --interactive
 
+# Auto-advancing demonstration with timed pauses
+python automated_demo_walkthrough.py --auto-advance --pause-duration 5
+```
+
+**🏃 Fast Complete Demo**
 ```bash
 # Run the complete demonstration (all steps automated)
 python comprehensive_demo.py --save-report
 
 # Run with snake_case naming convention
 python comprehensive_demo.py --naming snake_case --save-report
+```
 
-# View demo script options
-python comprehensive_demo.py --help
+**🚀 Demo Launcher (Easy Access)**
+```bash
+# Interactive menu with all demo options
+python demo_launcher.py
 ```
 
 **The comprehensive demo includes:**
@@ -274,6 +285,40 @@ graph TD
     style E fill:#fff3e0
     style F fill:#fff3e0
     style G fill:#f3e5f5
+```
+
+### Automated Demo Walkthrough
+
+The **automated walkthrough** provides a guided tour of all system capabilities with detailed explanations:
+
+#### Features:
+- **📋 Step-by-step explanations** of each component
+- **⏸️ Interactive pauses** for observation and learning
+- **🎯 Complete system coverage** in logical sequence
+- **🔧 Error handling** and graceful recovery
+- **📊 Results summaries** after each section
+
+#### Walkthrough Sections:
+1. **System Introduction** - Overview and capabilities
+2. **Data Generation** - Multi-tenant data creation
+3. **Database Deployment** - SmartGraphs and indexes
+4. **Initial Validation** - System integrity checks
+5. **Transaction Simulation** - Configuration changes with TTL
+6. **TTL Demonstration** - Time travel scenarios
+7. **Scale-Out Demo** - Horizontal scaling capabilities
+8. **Final Validation** - Comprehensive system verification
+9. **Demo Summary** - Results and achievements
+
+#### Usage Options:
+```bash
+# Interactive mode (recommended for presentations)
+python automated_demo_walkthrough.py --interactive
+
+# Auto-advance mode (for unattended demos)
+python automated_demo_walkthrough.py --auto-advance --pause-duration 3
+
+# View all options
+python automated_demo_walkthrough.py --help
 ```
 
 ### Individual Demo Components
