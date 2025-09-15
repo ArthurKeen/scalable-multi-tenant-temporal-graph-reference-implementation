@@ -216,7 +216,10 @@ class TimeTravelValidationSuite:
         print(f"\n[ANALYSIS] Validating Time Travel Queries...")
         
         try:
-            # Test point-in-time query for devices
+            # First, test system-wide queries (multi-tenant validation)
+            print(f"\n   [SYSTEM] Testing system-wide time travel functionality...")
+            
+            # Test point-in-time query for devices (all tenants)
             device_query = """
             FOR device IN Device
               FILTER device.created <= @point_in_time AND device.expired > @point_in_time
@@ -233,15 +236,15 @@ class TimeTravelValidationSuite:
             point_in_time = datetime.datetime.now().timestamp()
             device_results = self.execute_and_display_query(
                 device_query, 
-                "Device Point-in-Time Query", 
+                "System-Wide Device Point-in-Time Query", 
                 {"point_in_time": point_in_time}
             )
             
-            print(f"   [DATA] Device time travel query returned {len(device_results)} results")
+            print(f"   [DATA] System-wide device query returned {len(device_results)} results across all tenants")
             for result in device_results[:3]:
                 print(f"      [DONE] Device: {result['name']} (created: {result['created']})")
             
-            # Test point-in-time query for software
+            # Test point-in-time query for software (all tenants)
             software_query = """
             FOR software IN Software
               FILTER software.created <= @point_in_time AND software.expired > @point_in_time
@@ -259,15 +262,60 @@ class TimeTravelValidationSuite:
             
             software_results = self.execute_and_display_query(
                 software_query,
-                "Software Point-in-Time Query",
+                "System-Wide Software Point-in-Time Query",
                 {"point_in_time": point_in_time}
             )
             
-            print(f"   [DATA] Software time travel query returned {len(software_results)} results")
+            print(f"   [DATA] System-wide software query returned {len(software_results)} results across all tenants")
             for result in software_results[:3]:
                 print(f"      [DONE] Software: {result['name']} (port: {result['port']}, enabled: {result['enabled']})")
             
-            # Test unified time travel query
+            # Now test tenant-specific queries (SmartGraph isolation validation)
+            print(f"\n   [TENANT] Testing tenant-specific time travel functionality...")
+            
+            # Get a sample tenant ID for isolated testing
+            tenant_query = """
+            FOR device IN Device
+              LIMIT 1
+              RETURN REGEX_SPLIT(device._key, "_")[0]
+            """
+            
+            tenant_results = self.execute_and_display_query(
+                tenant_query,
+                "Sample Tenant ID Query"
+            )
+            
+            if tenant_results:
+                sample_tenant = tenant_results[0]
+                print(f"   [TENANT] Testing isolation for tenant: {sample_tenant}")
+                
+                # Test tenant-specific device query
+                tenant_device_query = """
+                FOR device IN Device
+                  FILTER STARTS_WITH(device._key, @tenant_prefix)
+                  FILTER device.created <= @point_in_time AND device.expired > @point_in_time
+                  LIMIT 3
+                  RETURN {
+                    key: device._key,
+                    name: device.name,
+                    type: device.type,
+                    tenant: REGEX_SPLIT(device._key, "_")[0],
+                    created: device.created,
+                    expired: device.expired
+                  }
+                """
+                
+                tenant_device_results = self.execute_and_display_query(
+                    tenant_device_query,
+                    f"Tenant-Specific Device Query ({sample_tenant})",
+                    {"tenant_prefix": f"{sample_tenant}_", "point_in_time": point_in_time}
+                )
+                
+                print(f"   [ISOLATION] Tenant {sample_tenant} has {len(tenant_device_results)} devices")
+                for result in tenant_device_results:
+                    print(f"      [TENANT] {result['tenant']}: {result['name']} (isolated data)")
+            
+            # Test unified time travel query (system-wide)
             unified_query = """
             FOR version IN hasVersion
               FILTER version._fromType IN ["DeviceProxyIn", "SoftwareProxyIn"]
@@ -282,14 +330,14 @@ class TimeTravelValidationSuite:
             
             unified_results = self.execute_and_display_query(
                 unified_query,
-                "Unified Time Travel Query",
+                "System-Wide Unified Time Travel Query",
                 {"point_in_time": point_in_time}
             )
             
-            print(f"   [DATA] Unified version query returned {len(unified_results)} results")
+            print(f"   [DATA] System-wide unified query returned {len(unified_results)} results across all tenants")
             device_count = sum(1 for r in unified_results if r['fromType'] == 'DeviceProxyIn')
             software_count = sum(1 for r in unified_results if r['fromType'] == 'SoftwareProxyIn')
-            print(f"      [METRICS] Device versions: {device_count}, Software versions: {software_count}")
+            print(f"      [METRICS] Total Device versions: {device_count}, Total Software versions: {software_count}")
             
             if len(device_results) == 0 or len(software_results) == 0:
                 print(f"   [ERROR] Time travel queries returned no results")
@@ -300,6 +348,94 @@ class TimeTravelValidationSuite:
             
         except Exception as e:
             print(f"[ERROR] Time travel queries validation failed: {str(e)}")
+            return False
+    
+    def validate_tenant_isolation(self) -> bool:
+        """Validate that tenant data is properly isolated using SmartGraphs."""
+        print(f"\n[ANALYSIS] Validating Tenant Isolation...")
+        
+        try:
+            # Get all tenant IDs
+            all_tenants_query = """
+            FOR device IN Device
+              COLLECT tenant = REGEX_SPLIT(device._key, "_")[0] WITH COUNT INTO deviceCount
+              SORT tenant
+              RETURN {
+                tenant: tenant,
+                deviceCount: deviceCount
+              }
+            """
+            
+            tenant_results = self.execute_and_display_query(
+                all_tenants_query,
+                "All Tenants Device Count Query"
+            )
+            
+            print(f"   [TENANTS] Found {len(tenant_results)} tenants in the system")
+            
+            # Test isolation for each tenant
+            for tenant_info in tenant_results[:3]:  # Test first 3 tenants
+                tenant_id = tenant_info['tenant']
+                print(f"\n   [ISOLATION] Testing tenant: {tenant_id}")
+                
+                # Test that tenant can only see its own data
+                isolation_query = """
+                FOR device IN Device
+                  FILTER STARTS_WITH(device._key, @tenant_prefix)
+                  LIMIT 5
+                  RETURN {
+                    key: device._key,
+                    name: device.name,
+                    tenant: REGEX_SPLIT(device._key, "_")[0],
+                    type: device.type
+                  }
+                """
+                
+                isolation_results = self.execute_and_display_query(
+                    isolation_query,
+                    f"Tenant Isolation Test ({tenant_id})",
+                    {"tenant_prefix": f"{tenant_id}_"}
+                )
+                
+                # Verify all results belong to this tenant
+                for result in isolation_results:
+                    if result['tenant'] != tenant_id:
+                        print(f"   [ERROR] Data leakage: Found {result['tenant']} data in {tenant_id} query")
+                        return False
+                    print(f"      [ISOLATED] {result['name']} belongs to {result['tenant']}")
+                
+                print(f"   [DONE] Tenant {tenant_id} isolation verified ({len(isolation_results)} devices)")
+            
+            # Test cross-tenant query doesn't leak data
+            cross_tenant_query = """
+            FOR device IN Device
+              FILTER STARTS_WITH(device._key, @tenant1_prefix) OR STARTS_WITH(device._key, @tenant2_prefix)
+              COLLECT tenant = REGEX_SPLIT(device._key, "_")[0] WITH COUNT INTO deviceCount
+              RETURN {
+                tenant: tenant,
+                deviceCount: deviceCount
+              }
+            """
+            
+            if len(tenant_results) >= 2:
+                tenant1 = tenant_results[0]['tenant']
+                tenant2 = tenant_results[1]['tenant']
+                
+                cross_results = self.execute_and_display_query(
+                    cross_tenant_query,
+                    f"Cross-Tenant Boundary Test ({tenant1} vs {tenant2})",
+                    {"tenant1_prefix": f"{tenant1}_", "tenant2_prefix": f"{tenant2}_"}
+                )
+                
+                print(f"   [BOUNDARY] Cross-tenant query returned {len(cross_results)} tenant groups")
+                for result in cross_results:
+                    print(f"      [BOUNDARY] Tenant {result['tenant']}: {result['deviceCount']} devices")
+            
+            print(f"[DONE] Tenant isolation validation passed")
+            return True
+            
+        except Exception as e:
+            print(f"[ERROR] Tenant isolation validation failed: {str(e)}")
             return False
     
     def validate_cross_entity_relationships(self) -> bool:

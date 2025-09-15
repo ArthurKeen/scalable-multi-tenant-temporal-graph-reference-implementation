@@ -249,6 +249,7 @@ class AutomatedDemoWalkthrough:
                     "collection_structure": validator.validate_collection_structure(),
                     "software_refactoring": validator.validate_software_refactoring(),
                     "time_travel_queries": validator.validate_time_travel_queries(),
+                    "tenant_isolation": validator.validate_tenant_isolation(),
                     "cross_entity_relationships": validator.validate_cross_entity_relationships(),
                     "data_consistency": validator.validate_data_consistency(),
                     "performance_improvements": validator.validate_performance_improvements()

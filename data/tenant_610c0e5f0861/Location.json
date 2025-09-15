@@ -1,0 +1,77 @@
+[
+  {
+    "_key": "610c0e5f0861_location1",
+    "name": "Enterprise Solutions - New York Data Center",
+    "streetAddress": "123 Broadway, New York, NY",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    },
+    "created": 1757903758.641288,
+    "expired": 9223372036854775807,
+    "tenant_610c0e5f0861_attr": "610c0e5f0861"
+  },
+  {
+    "_key": "610c0e5f0861_location2",
+    "name": "Enterprise Solutions - London Office",
+    "streetAddress": "456 Oxford St, London",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    },
+    "created": 1757903758.641294,
+    "expired": 9223372036854775807,
+    "tenant_610c0e5f0861_attr": "610c0e5f0861"
+  },
+  {
+    "_key": "610c0e5f0861_location3",
+    "name": "Enterprise Solutions - Tokyo HQ",
+    "streetAddress": "789 Ginza, Tokyo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    },
+    "created": 1757903758.641296,
+    "expired": 9223372036854775807,
+    "tenant_610c0e5f0861_attr": "610c0e5f0861"
+  },
+  {
+    "_key": "610c0e5f0861_location4",
+    "name": "Enterprise Solutions - Sydney Warehouse",
+    "streetAddress": "101 George St, Sydney",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    },
+    "created": 1757903758.641298,
+    "expired": 9223372036854775807,
+    "tenant_610c0e5f0861_attr": "610c0e5f0861"
+  },
+  {
+    "_key": "610c0e5f0861_location5",
+    "name": "Enterprise Solutions - Frankfurt Cloud Region",
+    "streetAddress": "222 Mainzer Landstr, Frankfurt",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    },
+    "created": 1757903758.6413,
+    "expired": 9223372036854775807,
+    "tenant_610c0e5f0861_attr": "610c0e5f0861"
+  }
+]
