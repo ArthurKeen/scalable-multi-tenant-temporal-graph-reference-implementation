@@ -21,18 +21,18 @@ graph TB
     DPO -->|hasConnection<br/>[LINK] Network links<br/>bandwidth, latency| DPI
     
     %% Device location relationships
-    DPO -->|hasLocation<br/>🏢 Physical placement<br/>geographical data| L
+    DPO -->|hasLocation<br/>[LOCATION] Physical placement<br/>geographical data| L
     
     %% Device-Software relationships (CORRECTED LOGIC)
     DPO -->|hasDeviceSoftware<br/>[CODE] Device software installation<br/>device → software| SPI
     
     %% Device Time Travel (existing pattern)
     DPI -->|version<br/>[METRICS] Device version in<br/>temporal evolution| D
-    D -->|version<br/>📉 Device version out<br/>temporal evolution| DPO
+    D -->|version<br/>[VERSION] Device version out<br/>temporal evolution| DPO
     
     %% Software Time Travel (NEW pattern)
     SPI -->|version<br/>[METRICS] Software version in<br/>temporal evolution| S
-    S -->|version<br/>📉 Software version out<br/>temporal evolution| SPO
+    S -->|version<br/>[VERSION] Software version out<br/>temporal evolution| SPO
     
     %% Tenant isolation indicator
     classDef tenantBox fill:#e1f5fe,stroke:#01579b,stroke-width:2px

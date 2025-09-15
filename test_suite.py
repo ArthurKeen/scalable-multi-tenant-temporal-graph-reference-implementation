@@ -478,7 +478,7 @@ def run_test_suite():
             print(f"   {test}: {traceback}")
     
     if result.errors:
-        print(f"\n💥 Errors:")
+        print(f"\n[ERRORS]:")
         for test, traceback in result.errors:
             print(f"   {test}: {traceback}")
     

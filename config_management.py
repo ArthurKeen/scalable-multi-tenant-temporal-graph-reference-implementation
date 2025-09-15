@@ -418,14 +418,14 @@ if __name__ == "__main__":
     print(f"   Data directory: {config.paths.data_directory}")
     print(f"   Reports directory: {config.paths.reports_directory}")
     
-    print(f"\n🏛️ Collections:")
+    print(f"\n[COLLECTIONS]:")
     print(f"   Vertex collections: {len(config.collections.vertex_collections)}")
     print(f"   Edge collections: {len(config.collections.edge_collections)}")
     
-    print(f"\n⚙️ Limits:")
+    print(f"\n[LIMITS]:")
     print(f"   Max tenants: {config.limits.max_tenant_count}")
     print(f"   Max documents: {config.limits.max_documents_per_collection}")
     
     # Save configuration
     config.save_configuration()
-    print(f"\n💾 Configuration saved to: current_config.json")
+    print(f"\n[SAVED] Configuration saved to: current_config.json")

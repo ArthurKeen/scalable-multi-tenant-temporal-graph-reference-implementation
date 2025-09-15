@@ -227,7 +227,7 @@ graph TB
 
 ### Quick Start - Demo Options
 
-**🎯 Automated Walkthrough (Recommended for First-Time Users)**
+**[TARGET] Automated Walkthrough (Recommended for First-Time Users)**
 ```bash
 # Interactive guided demonstration with explanations
 python3 automated_demo_walkthrough.py --interactive
@@ -236,7 +236,7 @@ python3 automated_demo_walkthrough.py --interactive
 python3 automated_demo_walkthrough.py --auto-advance --pause-duration 5
 ```
 
-**🏃 Fast Complete Demo**
+**[RUN] Fast Complete Demo**
 ```bash
 # Run the complete demonstration (all steps automated)
 python3 comprehensive_demo.py --save-report
@@ -245,7 +245,7 @@ python3 comprehensive_demo.py --save-report
 python3 comprehensive_demo.py --naming snake_case --save-report
 ```
 
-**🚀 Demo Launcher (Easy Access)**
+**[QUICK START] Demo Launcher (Easy Access)**
 ```bash
 # Interactive menu with all demo options
 python3 demo_launcher.pypython3 automated_demo_walkthrough.py --interactive
@@ -253,7 +253,7 @@ python3 demo_launcher.pypython3 automated_demo_walkthrough.py --interactive
 
 > **Note**: All scripts use `python3` for compatibility with pyenv and modern Python installations. If you encounter `python: command not found` errors, the scripts have been updated to use `python3` automatically.
 
-**🔄 Database Reset (Clean Start)**
+**[REFRESH] Database Reset (Clean Start)**
 ```bash
 # Reset database to clean state before demos
 python3 reset_database.py
@@ -301,11 +301,11 @@ graph TD
 The **automated walkthrough** provides a guided tour of all system capabilities with detailed explanations:
 
 #### Features:
-- **📋 Step-by-step explanations** of each component
-- **⏸️ Interactive pauses** for observation and learning
-- **🎯 Complete system coverage** in logical sequence
-- **🔧 Error handling** and graceful recovery
-- **📊 Results summaries** after each section
+- **[MENU] Step-by-step explanations** of each component
+- **[PAUSE] Interactive pauses** for observation and learning
+- **[TARGET] Complete system coverage** in logical sequence
+- **[SETUP] Error handling** and graceful recovery
+- **[STATS] Results summaries** after each section
 
 #### Walkthrough Sections:
 1. **System Introduction** - Overview and capabilities
@@ -749,11 +749,11 @@ For **production environments** requiring strict data isolation, use the full cl
 
 | Feature | Demo Approach | Enterprise Approach |
 |---------|---------------|-------------------|
-| **Development/Testing** | ✅ Recommended | ⚠️ Complex setup |
-| **Production SaaS** | ⚠️ Limited isolation | ✅ Full isolation |
-| **Compliance Requirements** | ❌ Logical only | ✅ Physical separation |
-| **Performance** | ✅ Simple queries | ✅ Optimized per tenant |
-| **Setup Complexity** | ✅ Minimal | ⚠️ Full configuration |
+| **Development/Testing** | [YES] Recommended | [WARNING] Complex setup |
+| **Production SaaS** | [WARNING] Limited isolation | [YES] Full isolation |
+| **Compliance Requirements** | [NO] Logical only | [YES] Physical separation |
+| **Performance** | [YES] Simple queries | [YES] Optimized per tenant |
+| **Setup Complexity** | [YES] Minimal | [WARNING] Full configuration |
 
 ## Configuration
 
