@@ -880,3 +880,136 @@
 2025-09-14 20:18:44,788 - asset_generator - INFO - Generated 40 hasDeviceSoftware edges
 2025-09-14 20:18:44,788 - asset_generator - INFO - Connected 30 software entities (100% coverage)
 2025-09-14 20:18:44,801 - asset_generator - INFO - Completed time travel refactored data generation: 1095 total documents
+2025-09-14 20:23:27,599 - asset_generator - INFO - Starting time travel refactored data generation for tenant: Acme Corp (Scale: 1x)
+2025-09-14 20:23:27,600 - asset_generator - INFO - Generating 5 locations for tenant Acme Corp
+2025-09-14 20:23:27,600 - asset_generator - INFO - Generated 5 location entities
+2025-09-14 20:23:27,600 - asset_generator - INFO - Generating 20 device proxies for tenant Acme Corp
+2025-09-14 20:23:27,600 - asset_generator - INFO - Generated 20 DeviceProxyIn and 20 DeviceProxyOut entities
+2025-09-14 20:23:27,600 - asset_generator - INFO - Generating device configurations with 5 historical versions
+2025-09-14 20:23:27,601 - asset_generator - INFO - Generated 120 device configurations and 240 device version edges
+2025-09-14 20:23:27,601 - asset_generator - INFO - Generating 30 software proxies for tenant Acme Corp
+2025-09-14 20:23:27,602 - asset_generator - INFO - Generated 30 SoftwareProxyIn and 30 SoftwareProxyOut entities
+2025-09-14 20:23:27,603 - asset_generator - INFO - Generating software configurations with 5 historical versions
+2025-09-14 20:23:27,604 - asset_generator - INFO - Generated 180 software configurations and 360 software version edges
+2025-09-14 20:23:27,604 - asset_generator - INFO - Generating hasConnection edges with improved connectivity
+2025-09-14 20:23:27,604 - asset_generator - INFO - Generated 30 hasConnection edges
+2025-09-14 20:23:27,605 - asset_generator - INFO - Generating hasLocation edges
+2025-09-14 20:23:27,605 - asset_generator - INFO - Generated 20 hasLocation edges
+2025-09-14 20:23:27,605 - asset_generator - INFO - Generating hasDeviceSoftware edges with improved connectivity
+2025-09-14 20:23:27,605 - asset_generator - INFO - Generated 40 hasDeviceSoftware edges
+2025-09-14 20:23:27,605 - asset_generator - INFO - Connected 30 software entities (100% coverage)
+2025-09-14 20:23:27,619 - asset_generator - INFO - Completed time travel refactored data generation: 1095 total documents
+2025-09-14 20:23:27,619 - asset_generator - INFO - Starting time travel refactored data generation for tenant: Global Enterprises (Scale: 2x)
+2025-09-14 20:23:27,619 - asset_generator - INFO - Generating 10 locations for tenant Global Enterprises
+2025-09-14 20:23:27,619 - asset_generator - INFO - Generated 10 location entities
+2025-09-14 20:23:27,619 - asset_generator - INFO - Generating 40 device proxies for tenant Global Enterprises
+2025-09-14 20:23:27,620 - asset_generator - INFO - Generated 40 DeviceProxyIn and 40 DeviceProxyOut entities
+2025-09-14 20:23:27,620 - asset_generator - INFO - Generating device configurations with 5 historical versions
+2025-09-14 20:23:27,623 - asset_generator - INFO - Generated 240 device configurations and 480 device version edges
+2025-09-14 20:23:27,623 - asset_generator - INFO - Generating 60 software proxies for tenant Global Enterprises
+2025-09-14 20:23:27,623 - asset_generator - INFO - Generated 60 SoftwareProxyIn and 60 SoftwareProxyOut entities
+2025-09-14 20:23:27,623 - asset_generator - INFO - Generating software configurations with 5 historical versions
+2025-09-14 20:23:27,626 - asset_generator - INFO - Generated 360 software configurations and 720 software version edges
+2025-09-14 20:23:27,626 - asset_generator - INFO - Generating hasConnection edges with improved connectivity
+2025-09-14 20:23:27,627 - asset_generator - INFO - Generated 60 hasConnection edges
+2025-09-14 20:23:27,627 - asset_generator - INFO - Generating hasLocation edges
+2025-09-14 20:23:27,627 - asset_generator - INFO - Generated 40 hasLocation edges
+2025-09-14 20:23:27,627 - asset_generator - INFO - Generating hasDeviceSoftware edges with improved connectivity
+2025-09-14 20:23:27,628 - asset_generator - INFO - Generated 80 hasDeviceSoftware edges
+2025-09-14 20:23:27,628 - asset_generator - INFO - Connected 60 software entities (100% coverage)
+2025-09-14 20:23:27,755 - asset_generator - INFO - Completed time travel refactored data generation: 2190 total documents
+2025-09-14 20:23:27,762 - asset_generator - INFO - Starting time travel refactored data generation for tenant: TechStart Inc (Scale: 3x)
+2025-09-14 20:23:27,768 - asset_generator - INFO - Generating 15 locations for tenant TechStart Inc
+2025-09-14 20:23:27,769 - asset_generator - INFO - Generated 15 location entities
+2025-09-14 20:23:27,769 - asset_generator - INFO - Generating 60 device proxies for tenant TechStart Inc
+2025-09-14 20:23:27,773 - asset_generator - INFO - Generated 60 DeviceProxyIn and 60 DeviceProxyOut entities
+2025-09-14 20:23:27,774 - asset_generator - INFO - Generating device configurations with 5 historical versions
+2025-09-14 20:23:27,784 - asset_generator - INFO - Generated 360 device configurations and 720 device version edges
+2025-09-14 20:23:27,785 - asset_generator - INFO - Generating 90 software proxies for tenant TechStart Inc
+2025-09-14 20:23:27,785 - asset_generator - INFO - Generated 90 SoftwareProxyIn and 90 SoftwareProxyOut entities
+2025-09-14 20:23:27,785 - asset_generator - INFO - Generating software configurations with 5 historical versions
+2025-09-14 20:23:27,791 - asset_generator - INFO - Generated 540 software configurations and 1080 software version edges
+2025-09-14 20:23:27,792 - asset_generator - INFO - Generating hasConnection edges with improved connectivity
+2025-09-14 20:23:27,792 - asset_generator - INFO - Generated 90 hasConnection edges
+2025-09-14 20:23:27,792 - asset_generator - INFO - Generating hasLocation edges
+2025-09-14 20:23:27,792 - asset_generator - INFO - Generated 60 hasLocation edges
+2025-09-14 20:23:27,792 - asset_generator - INFO - Generating hasDeviceSoftware edges with improved connectivity
+2025-09-14 20:23:27,793 - asset_generator - INFO - Generated 120 hasDeviceSoftware edges
+2025-09-14 20:23:27,794 - asset_generator - INFO - Connected 90 software entities (100% coverage)
+2025-09-14 20:23:27,859 - asset_generator - INFO - Completed time travel refactored data generation: 3285 total documents
+2025-09-14 20:23:27,859 - asset_generator - INFO - Starting time travel refactored data generation for tenant: Enterprise Solutions (Scale: 1x)
+2025-09-14 20:23:27,859 - asset_generator - INFO - Generating 5 locations for tenant Enterprise Solutions
+2025-09-14 20:23:27,859 - asset_generator - INFO - Generated 5 location entities
+2025-09-14 20:23:27,860 - asset_generator - INFO - Generating 20 device proxies for tenant Enterprise Solutions
+2025-09-14 20:23:27,860 - asset_generator - INFO - Generated 20 DeviceProxyIn and 20 DeviceProxyOut entities
+2025-09-14 20:23:27,860 - asset_generator - INFO - Generating device configurations with 5 historical versions
+2025-09-14 20:23:27,861 - asset_generator - INFO - Generated 120 device configurations and 240 device version edges
+2025-09-14 20:23:27,861 - asset_generator - INFO - Generating 30 software proxies for tenant Enterprise Solutions
+2025-09-14 20:23:27,861 - asset_generator - INFO - Generated 30 SoftwareProxyIn and 30 SoftwareProxyOut entities
+2025-09-14 20:23:27,861 - asset_generator - INFO - Generating software configurations with 5 historical versions
+2025-09-14 20:23:27,862 - asset_generator - INFO - Generated 180 software configurations and 360 software version edges
+2025-09-14 20:23:27,862 - asset_generator - INFO - Generating hasConnection edges with improved connectivity
+2025-09-14 20:23:27,862 - asset_generator - INFO - Generated 30 hasConnection edges
+2025-09-14 20:23:27,862 - asset_generator - INFO - Generating hasLocation edges
+2025-09-14 20:23:27,862 - asset_generator - INFO - Generated 20 hasLocation edges
+2025-09-14 20:23:27,862 - asset_generator - INFO - Generating hasDeviceSoftware edges with improved connectivity
+2025-09-14 20:23:27,863 - asset_generator - INFO - Generated 40 hasDeviceSoftware edges
+2025-09-14 20:23:27,863 - asset_generator - INFO - Connected 30 software entities (100% coverage)
+2025-09-14 20:23:27,877 - asset_generator - INFO - Completed time travel refactored data generation: 1095 total documents
+2025-09-14 20:27:58,618 - asset_generator - INFO - Starting time travel refactored data generation for tenant: Global Retail Chain (Scale: 2x)
+2025-09-14 20:27:58,618 - asset_generator - INFO - Generating 10 locations for tenant Global Retail Chain
+2025-09-14 20:27:58,619 - asset_generator - INFO - Generated 10 location entities
+2025-09-14 20:27:58,619 - asset_generator - INFO - Generating 40 device proxies for tenant Global Retail Chain
+2025-09-14 20:27:58,619 - asset_generator - INFO - Generated 40 DeviceProxyIn and 40 DeviceProxyOut entities
+2025-09-14 20:27:58,619 - asset_generator - INFO - Generating device configurations with 5 historical versions
+2025-09-14 20:27:58,621 - asset_generator - INFO - Generated 240 device configurations and 480 device version edges
+2025-09-14 20:27:58,621 - asset_generator - INFO - Generating 60 software proxies for tenant Global Retail Chain
+2025-09-14 20:27:58,621 - asset_generator - INFO - Generated 60 SoftwareProxyIn and 60 SoftwareProxyOut entities
+2025-09-14 20:27:58,621 - asset_generator - INFO - Generating software configurations with 5 historical versions
+2025-09-14 20:27:58,624 - asset_generator - INFO - Generated 360 software configurations and 720 software version edges
+2025-09-14 20:27:58,624 - asset_generator - INFO - Generating hasConnection edges with improved connectivity
+2025-09-14 20:27:58,624 - asset_generator - INFO - Generated 60 hasConnection edges
+2025-09-14 20:27:58,624 - asset_generator - INFO - Generating hasLocation edges
+2025-09-14 20:27:58,624 - asset_generator - INFO - Generated 40 hasLocation edges
+2025-09-14 20:27:58,624 - asset_generator - INFO - Generating hasDeviceSoftware edges with improved connectivity
+2025-09-14 20:27:58,625 - asset_generator - INFO - Generated 80 hasDeviceSoftware edges
+2025-09-14 20:27:58,625 - asset_generator - INFO - Connected 60 software entities (100% coverage)
+2025-09-14 20:27:58,646 - asset_generator - INFO - Completed time travel refactored data generation: 2190 total documents
+2025-09-14 20:27:58,647 - asset_generator - INFO - Starting time travel refactored data generation for tenant: Manufacturing Solutions Inc (Scale: 1x)
+2025-09-14 20:27:58,647 - asset_generator - INFO - Generating 5 locations for tenant Manufacturing Solutions Inc
+2025-09-14 20:27:58,647 - asset_generator - INFO - Generated 5 location entities
+2025-09-14 20:27:58,647 - asset_generator - INFO - Generating 20 device proxies for tenant Manufacturing Solutions Inc
+2025-09-14 20:27:58,647 - asset_generator - INFO - Generated 20 DeviceProxyIn and 20 DeviceProxyOut entities
+2025-09-14 20:27:58,647 - asset_generator - INFO - Generating device configurations with 5 historical versions
+2025-09-14 20:27:58,648 - asset_generator - INFO - Generated 120 device configurations and 240 device version edges
+2025-09-14 20:27:58,648 - asset_generator - INFO - Generating 30 software proxies for tenant Manufacturing Solutions Inc
+2025-09-14 20:27:58,648 - asset_generator - INFO - Generated 30 SoftwareProxyIn and 30 SoftwareProxyOut entities
+2025-09-14 20:27:58,648 - asset_generator - INFO - Generating software configurations with 5 historical versions
+2025-09-14 20:27:58,649 - asset_generator - INFO - Generated 180 software configurations and 360 software version edges
+2025-09-14 20:27:58,649 - asset_generator - INFO - Generating hasConnection edges with improved connectivity
+2025-09-14 20:27:58,650 - asset_generator - INFO - Generated 30 hasConnection edges
+2025-09-14 20:27:58,650 - asset_generator - INFO - Generating hasLocation edges
+2025-09-14 20:27:58,650 - asset_generator - INFO - Generated 20 hasLocation edges
+2025-09-14 20:27:58,650 - asset_generator - INFO - Generating hasDeviceSoftware edges with improved connectivity
+2025-09-14 20:27:58,650 - asset_generator - INFO - Generated 40 hasDeviceSoftware edges
+2025-09-14 20:27:58,650 - asset_generator - INFO - Connected 30 software entities (100% coverage)
+2025-09-14 20:27:58,663 - asset_generator - INFO - Completed time travel refactored data generation: 1095 total documents
+2025-09-14 20:27:58,663 - asset_generator - INFO - Starting time travel refactored data generation for tenant: Tech Startup Innovations (Scale: 1x)
+2025-09-14 20:27:58,663 - asset_generator - INFO - Generating 5 locations for tenant Tech Startup Innovations
+2025-09-14 20:27:58,664 - asset_generator - INFO - Generated 5 location entities
+2025-09-14 20:27:58,664 - asset_generator - INFO - Generating 20 device proxies for tenant Tech Startup Innovations
+2025-09-14 20:27:58,664 - asset_generator - INFO - Generated 20 DeviceProxyIn and 20 DeviceProxyOut entities
+2025-09-14 20:27:58,664 - asset_generator - INFO - Generating device configurations with 5 historical versions
+2025-09-14 20:27:58,665 - asset_generator - INFO - Generated 120 device configurations and 240 device version edges
+2025-09-14 20:27:58,665 - asset_generator - INFO - Generating 30 software proxies for tenant Tech Startup Innovations
+2025-09-14 20:27:58,665 - asset_generator - INFO - Generated 30 SoftwareProxyIn and 30 SoftwareProxyOut entities
+2025-09-14 20:27:58,665 - asset_generator - INFO - Generating software configurations with 5 historical versions
+2025-09-14 20:27:58,667 - asset_generator - INFO - Generated 180 software configurations and 360 software version edges
+2025-09-14 20:27:58,667 - asset_generator - INFO - Generating hasConnection edges with improved connectivity
+2025-09-14 20:27:58,667 - asset_generator - INFO - Generated 30 hasConnection edges
+2025-09-14 20:27:58,667 - asset_generator - INFO - Generating hasLocation edges
+2025-09-14 20:27:58,667 - asset_generator - INFO - Generated 20 hasLocation edges
+2025-09-14 20:27:58,667 - asset_generator - INFO - Generating hasDeviceSoftware edges with improved connectivity
+2025-09-14 20:27:58,667 - asset_generator - INFO - Generated 40 hasDeviceSoftware edges
+2025-09-14 20:27:58,667 - asset_generator - INFO - Connected 30 software entities (100% coverage)
+2025-09-14 20:27:58,678 - asset_generator - INFO - Completed time travel refactored data generation: 1095 total documents
