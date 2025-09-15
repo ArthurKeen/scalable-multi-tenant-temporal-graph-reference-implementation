@@ -253,6 +253,13 @@ python3 demo_launcher.py
 
 > **Note**: All scripts use `python3` for compatibility with pyenv and modern Python installations. If you encounter `python: command not found` errors, the scripts have been updated to use `python3` automatically.
 
+**🔄 Database Reset (Clean Start)**
+```bash
+# Reset database to clean state before demos
+python3 reset_database.py
+```
+Use this if you see more than 4 tenants in the ArangoDB interface, or if you want to ensure a completely fresh demo start.
+
 **The comprehensive demo includes:**
 1. **Initial Data Generation** - Multi-tenant network asset data (4 tenants by default)
 2. **Database Deployment** - Collections, indexes, and SmartGraphs

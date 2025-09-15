@@ -24,18 +24,24 @@ from validation_suite import TimeTravelValidationSuite
 from scale_out_manager import TenantAdditionManager, DatabaseServerManager, ShardRebalancingManager
 from transaction_simulator import TransactionSimulator
 from ttl_demo_scenarios import TTLDemoScenarios
+from centralized_credentials import CredentialsManager
+from arango import ArangoClient
 
 
 class AutomatedDemoWalkthrough:
     """Provides an automated, guided walkthrough of the entire system demonstration."""
     
-    def __init__(self):
+    def __init__(self, interactive: bool = True):
         """Initialize the demo walkthrough."""
         self.demo_id = f"walkthrough_{int(datetime.datetime.now().timestamp())}"
         self.start_time = datetime.datetime.now()
         self.sections_completed = []
         self.pause_duration = 3  # Default pause between sections
-        self.interactive_mode = True
+        self.interactive_mode = interactive
+        
+        # Database connection for reset functionality
+        self.client = None
+        self.database = None
         
         print("=" * 80)
         print("AUTOMATED DEMO WALKTHROUGH")
@@ -56,6 +62,78 @@ class AutomatedDemoWalkthrough:
                 input(f"\n[PAUSE] {message}")
             else:
                 time.sleep(self.pause_duration)
+    
+    def connect_to_database(self) -> bool:
+        """Connect to the ArangoDB database."""
+        try:
+            creds = CredentialsManager.get_database_credentials()
+            self.client = ArangoClient(hosts=creds.endpoint)
+            self.database = self.client.db(creds.database_name, **CredentialsManager.get_database_params())
+            return True
+        except Exception as e:
+            print(f"[ERROR] Database connection failed: {e}")
+            return False
+    
+    def reset_database(self) -> bool:
+        """Reset the database to ensure a clean demo start."""
+        print("\n[RESET] Preparing database for clean demo start...")
+        
+        if not self.connect_to_database():
+            print("[ERROR] Could not connect to database for reset")
+            return False
+        
+        try:
+            # Collections to clear for a fresh start
+            collections_to_clear = [
+                'Device', 'DeviceProxyIn', 'DeviceProxyOut',
+                'Software', 'SoftwareProxyIn', 'SoftwareProxyOut', 
+                'Location',
+                'hasConnection', 'hasLocation', 'hasDeviceSoftware', 'hasVersion'
+            ]
+            
+            cleared_count = 0
+            for collection_name in collections_to_clear:
+                if self.database.has_collection(collection_name):
+                    collection = self.database.collection(collection_name)
+                    result = collection.truncate()
+                    cleared_count += 1
+                    print(f"   [CLEAR] {collection_name} collection cleared")
+            
+            # Clear any existing graphs
+            graphs_to_remove = []
+            for graph_info in self.database.graphs():
+                graph_name = graph_info['name']
+                if 'network_assets' in graph_name:
+                    graphs_to_remove.append(graph_name)
+            
+            for graph_name in graphs_to_remove:
+                try:
+                    self.database.delete_graph(graph_name, drop_collections=False)
+                    print(f"   [CLEAR] Graph {graph_name} removed")
+                except:
+                    pass  # Graph might not exist
+            
+            # Clear tenant registry files
+            registry_file = Path("data/tenant_registry_time_travel.json")
+            if registry_file.exists():
+                registry_file.unlink()
+                print(f"   [CLEAR] Tenant registry file removed")
+            
+            # Clear tenant data directories (but keep the data folder structure)
+            data_dir = Path("data")
+            if data_dir.exists():
+                for tenant_dir in data_dir.glob("tenant_*"):
+                    if tenant_dir.is_dir():
+                        import shutil
+                        shutil.rmtree(tenant_dir)
+                        print(f"   [CLEAR] Tenant data directory {tenant_dir.name} removed")
+            
+            print(f"[SUCCESS] Database reset complete - {cleared_count} collections cleared")
+            return True
+            
+        except Exception as e:
+            print(f"[ERROR] Database reset failed: {e}")
+            return False
     
     def print_section_header(self, section_title: str, description: str):
         """Print a formatted section header."""
@@ -609,6 +687,19 @@ class AutomatedDemoWalkthrough:
         try:
             # Section 1: Introduction
             self.section_1_introduction()
+            
+            # Database Reset: Ensure clean start
+            print("\n" + "=" * 80)
+            print("DATABASE RESET: Ensuring Clean Demo Start")
+            print("=" * 80)
+            print("Clearing previous demo data to ensure exactly 4 tenants...")
+            
+            if not self.reset_database():
+                print("[WARNING] Database reset failed - demo may show unexpected results")
+                self.pause_for_observation("Continue anyway? Press Enter to proceed...", 2)
+            else:
+                print("[SUCCESS] Database reset complete - ready for fresh 4-tenant demo")
+                self.pause_for_observation("Database is now clean. Ready to generate fresh data?", 2)
             
             # Section 2: Data Generation
             self.section_2_data_generation()
