@@ -9,6 +9,7 @@ import uuid
 import datetime
 from typing import Dict, List, Any, Optional, Union
 from pathlib import Path
+from generation_constants import NETWORK_CONSTANTS
 
 from tenant_config import TenantConfig, TenantNamingConvention, TemporalDataModel
 from data_generation_config import (
@@ -95,7 +96,7 @@ class RandomDataGenerator:
     
     def generate_mac_address(self) -> str:
         """Generate a random MAC address."""
-        return ":".join(f"{random.randint(0, 255):02x}" for _ in range(6))
+        return ":".join(f"{random.randint(0, NETWORK_CONSTANTS.MAC_ADDRESS_MAX_VALUE):02x}" for _ in range(NETWORK_CONSTANTS.MAC_ADDRESS_SEGMENTS))
     
     def generate_model_name(self, device_type: DeviceType) -> str:
         """Generate a model name for a device type."""

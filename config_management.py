@@ -255,7 +255,7 @@ class CollectionConfiguration:
 class GenerationLimits:
     """Data generation limits and constraints."""
     
-    max_generation_retries: int = 1000
+    max_generation_retries: int = 1000  # Keep higher for config management
     max_tenant_count: int = 100
     max_documents_per_collection: int = 10000
     max_config_changes: int = 10

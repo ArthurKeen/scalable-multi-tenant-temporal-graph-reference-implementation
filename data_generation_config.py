@@ -8,6 +8,7 @@ Eliminates hard-coded values and provides consistent defaults.
 from typing import Dict, List, Any
 from dataclasses import dataclass
 from enum import Enum
+from generation_constants import GENERATION_CONSTANTS, NETWORK_CONSTANTS, LOCATION_CONSTANTS, OS_CONSTANTS
 
 
 class DeviceType(Enum):
@@ -40,52 +41,45 @@ class NetworkConfig:
     DEFAULT_FIREWALL_RULES: List[str] = None
     
     # Port ranges
-    DYNAMIC_PORT_MIN: int = 1000
-    DYNAMIC_PORT_MAX: int = 9000
-    SOFTWARE_PORT_MIN: int = 8000
-    SOFTWARE_PORT_MAX: int = 9000
+    DYNAMIC_PORT_MIN: int = GENERATION_CONSTANTS.DYNAMIC_PORT_MIN
+    DYNAMIC_PORT_MAX: int = GENERATION_CONSTANTS.DYNAMIC_PORT_MAX
+    SOFTWARE_PORT_MIN: int = GENERATION_CONSTANTS.SOFTWARE_PORT_MIN
+    SOFTWARE_PORT_MAX: int = GENERATION_CONSTANTS.SOFTWARE_PORT_MAX
     
     # Network parameters
-    IP_SUBNET_BASE: str = "192.168"
-    IP_RANGE_MIN: int = 1
-    IP_RANGE_MAX: int = 254
+    IP_SUBNET_BASE: str = GENERATION_CONSTANTS.IP_SUBNET_BASE
+    IP_RANGE_MIN: int = GENERATION_CONSTANTS.IP_RANGE_MIN
+    IP_RANGE_MAX: int = GENERATION_CONSTANTS.IP_RANGE_MAX
     
     # Connection parameters
-    BANDWIDTH_MIN: int = 10
-    BANDWIDTH_MAX: int = 1000
+    BANDWIDTH_MIN: int = GENERATION_CONSTANTS.BANDWIDTH_MIN
+    BANDWIDTH_MAX: int = GENERATION_CONSTANTS.BANDWIDTH_MAX
     LATENCY_MIN: int = 1
     LATENCY_MAX: int = 10
     
     def __post_init__(self):
         if self.DEFAULT_FIREWALL_RULES is None:
-            self.DEFAULT_FIREWALL_RULES = ["allow 80", "allow 443"]
+            self.DEFAULT_FIREWALL_RULES = GENERATION_CONSTANTS.DEFAULT_FIREWALL_RULES
 
 
 @dataclass
 class DataGenerationLimits:
     """Limits and constraints for data generation."""
     # Model number ranges
-    MODEL_NUMBER_MIN: int = 100
-    MODEL_NUMBER_MAX: int = 999
+    MODEL_NUMBER_MIN: int = GENERATION_CONSTANTS.MODEL_NUMBER_MIN
+    MODEL_NUMBER_MAX: int = GENERATION_CONSTANTS.MODEL_NUMBER_MAX
     
     # Hostname number ranges
-    HOSTNAME_NUMBER_MIN: int = 100
-    HOSTNAME_NUMBER_MAX: int = 999
+    HOSTNAME_NUMBER_MIN: int = GENERATION_CONSTANTS.HOSTNAME_NUMBER_MIN
+    HOSTNAME_NUMBER_MAX: int = GENERATION_CONSTANTS.HOSTNAME_NUMBER_MAX
     
     # Maximum retry attempts for unique generation
-    MAX_GENERATION_RETRIES: int = 100
+    MAX_GENERATION_RETRIES: int = GENERATION_CONSTANTS.MAX_GENERATION_RETRIES
 
 
 # Device type configurations
 DEVICE_OS_VERSIONS: Dict[DeviceType, List[str]] = {
-    DeviceType.SERVER: [
-        "CentOS 7.9.2009", 
-        "Ubuntu 20.04.3 LTS", 
-        "Windows Server 2019 Datacenter",
-        "Ubuntu 22.04.2 LTS",
-        "Windows Server 2022 Datacenter",
-        "RHEL 8.7"
-    ],
+    DeviceType.SERVER: OS_CONSTANTS.DEVICE_OPERATING_SYSTEMS,
     DeviceType.ROUTER: [
         "IOS XE 17.6.4a", 
         "JUNOS 21.2R3-S1",
@@ -171,9 +165,9 @@ SMARTGRAPH_DEFAULTS: Dict[str, Any] = {
 
 # TTL configuration defaults (in seconds)
 TTL_DEFAULTS: Dict[str, int] = {
-    "default_ttl_seconds": 7776000,  # 90 days
-    "short_ttl_seconds": 2592000,    # 30 days
-    "long_ttl_seconds": 31536000     # 365 days
+    "default_ttl_seconds": GENERATION_CONSTANTS.DEFAULT_TTL_SECONDS,  # 90 days
+    "short_ttl_seconds": GENERATION_CONSTANTS.SHORT_TTL_SECONDS,      # 30 days
+    "long_ttl_seconds": GENERATION_CONSTANTS.LONG_TTL_SECONDS         # 365 days
 }
 
 # Generation default sizes

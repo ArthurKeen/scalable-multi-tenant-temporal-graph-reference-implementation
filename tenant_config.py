@@ -52,10 +52,11 @@ class TenantConfig:
     # Scale-out demo parameters (FR2.7)
     scale_factor: int = 1  # Multiply base counts by this factor for large datasets
     
-    # Temporal data management (FR2.5, FR5.1, FR5.2) - observedAt removed, TTL disabled
-    ttl_enabled: bool = False  # Disabled since observedAt removed
-    ttl_expire_after_seconds: int = 7776000  # 90 days default (unused)
-    temporal_attribute_name: str = ""  # Removed observedAt - TODO: determine proper temporal tracking approach
+    # Temporal data management (FR2.5, FR5.1, FR5.2) - Current vs Historical TTL strategy
+    ttl_enabled: bool = True  # Enable TTL for historical documents only
+    ttl_expire_after_seconds: int = None  # Will be set from TTLConstants in __post_init__
+    preserve_current_configs: bool = True  # Never age out current configurations (expired = NEVER_EXPIRES)
+    temporal_attribute_name: str = "expired"  # TTL applies to expired field
     
     # Database and graph configuration (FR3.1, FR3.7)
     database_name: str = "network_assets_demo"  # Shared database for all tenants
@@ -68,6 +69,14 @@ class TenantConfig:
     
     def __post_init__(self):
         """Initialize auto-generated fields and validate configuration."""
+        # Set TTL expire seconds from constants if not provided
+        if self.ttl_expire_after_seconds is None:
+            try:
+                from ttl_constants import TTLConstants, NEVER_EXPIRES
+                self.ttl_expire_after_seconds = TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS
+            except ImportError:
+                self.ttl_expire_after_seconds = TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS  # Fallback to 30 days
+        
         if self.smartgraph_attribute is None:
             self.smartgraph_attribute = f"tenant_{self.tenant_id}_attr"
         
@@ -190,12 +199,16 @@ class TemporalDataModel:
             timestamp = datetime.datetime.now()
         
         if expired is None:
-            expired = sys.maxsize  # Default to not expired for current observations
+            expired = NEVER_EXPIRES  # Default to not expired for current observations
         
         # Add temporal attributes (FR2.5) - observedAt removed, expired defaults to max value
         enhanced_doc = document.copy()
         enhanced_doc["created"] = timestamp.timestamp()
-        enhanced_doc["expired"] = sys.maxsize  # Always use largest possible value
+        try:
+            from ttl_constants import NEVER_EXPIRES
+            enhanced_doc["expired"] = NEVER_EXPIRES  # Always use largest possible value
+        except ImportError:
+            enhanced_doc["expired"] = NEVER_EXPIRES  # Fallback
         
         # Add tenant key for disjoint smartgraph partitioning
         if tenant_config is not None:

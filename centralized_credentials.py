@@ -8,6 +8,7 @@ to all connection parameters. Uses memory reference for ArangoDB Oasis cluster.
 import os
 from typing import Dict, Optional
 from dataclasses import dataclass
+from generation_constants import GENERATION_CONSTANTS, NETWORK_CONSTANTS, SYSTEM_CONSTANTS
 
 
 @dataclass
@@ -108,15 +109,15 @@ class DatabaseConstants:
     }
     
     # Time constants
-    SECONDS_PER_DAY = 86400
-    TTL_90_DAYS = 7776000  # 90 days in seconds
-    MAX_TIMESTAMP = 9223372036854775807  # sys.maxsize equivalent
+    SECONDS_PER_DAY = GENERATION_CONSTANTS.SECONDS_PER_DAY
+    TTL_90_DAYS = GENERATION_CONSTANTS.DEFAULT_TTL_SECONDS  # 90 days in seconds
+    MAX_TIMESTAMP = SYSTEM_CONSTANTS.MAX_TIMESTAMP  # sys.maxsize equivalent
     
     # Default ports for different services
     DEFAULT_PORTS = {
-        "arangodb": 8529,
-        "http": 80,
-        "https": 443,
+        "arangodb": NETWORK_CONSTANTS.ARANGODB_PORT,
+        "http": NETWORK_CONSTANTS.HTTP_PORT,
+        "https": NETWORK_CONSTANTS.HTTPS_PORT,
         "ssh": 22
     }
 

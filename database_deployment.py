@@ -18,6 +18,8 @@ from arango import ArangoClient
 # Import centralized credentials and configuration
 from centralized_credentials import CredentialsManager, DatabaseConstants
 from config_management import get_config, NamingConvention
+from ttl_config import create_ttl_configuration, create_snake_case_ttl_configuration, TTLManager
+from ttl_constants import DEFAULT_TTL_DAYS
 
 
 class TimeTravelRefactoredDeployment:
@@ -31,6 +33,13 @@ class TimeTravelRefactoredDeployment:
         self.sys_db = None
         self.database = None
         self.creds = creds
+        
+        # Initialize TTL configuration
+        if naming_convention == NamingConvention.SNAKE_CASE:
+            self.ttl_config = create_snake_case_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
+        else:
+            self.ttl_config = create_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
+        self.ttl_manager = TTLManager(self.ttl_config)
         
     def connect_to_cluster(self) -> bool:
         """Connect to ArangoDB Oasis cluster."""
@@ -221,6 +230,26 @@ class TimeTravelRefactoredDeployment:
                 }
             ]
             
+            # Add TTL indexes for historical document aging
+            ttl_specs = self.ttl_manager.get_arango_index_specs()
+            for ttl_spec in ttl_specs:
+                # Extract collection name from TTL spec name (format: ttl_CollectionName_expired)
+                spec_parts = ttl_spec["name"].split("_")
+                if len(spec_parts) >= 3:
+                    base_collection_name = spec_parts[1]  # Get the collection name part
+                    # Use the collection name directly as it's already in the correct naming convention
+                    collection_name = self.app_config.get_collection_name(base_collection_name)
+                    if collection_name:
+                        index_configs.append({
+                            "collection": collection_name,
+                            "type": "ttl",
+                            "fields": ttl_spec["fields"],
+                            "name": ttl_spec["name"],
+                            "expireAfter": ttl_spec["expireAfter"],
+                            "sparse": ttl_spec["sparse"],
+                            "selectivityEstimate": ttl_spec["selectivityEstimate"]
+                        })
+            
             for index_config in index_configs:
                 collection_name = index_config["collection"]
                 if self.database.has_collection(collection_name):
@@ -241,8 +270,25 @@ class TimeTravelRefactoredDeployment:
                             'name': index_config.get("name")
                         })
                         print(f"   [DONE] Created hash index: {index_config['name']}")
+                    
+                    elif index_config["type"] == "ttl":
+                        collection.add_index({
+                            'type': 'ttl',
+                            'fields': index_config["fields"],
+                            'name': index_config.get("name"),
+                            'expireAfter': index_config["expireAfter"],
+                            'sparse': index_config.get("sparse", True),
+                            'selectivityEstimate': index_config.get("selectivityEstimate", 0.1)
+                        })
+                        expire_days = index_config["expireAfter"] // 86400 if index_config["expireAfter"] > 0 else 0
+                        print(f"   [TTL] Created TTL index: {index_config['name']} (expire after {expire_days} days)")
+                    
+                    else:
+                        print(f"   [SKIP] Unknown index type: {index_config['type']}")
+                else:
+                    print(f"   [SKIP] Collection not found: {collection_name}")
             
-            print(f"[DONE] Time travel refactored indexes created")
+            print(f"[DONE] Time travel refactored indexes created (including TTL)")
             return True
             
         except Exception as e:

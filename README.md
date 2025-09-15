@@ -70,12 +70,12 @@ graph TB
     DPO -->|hasDeviceSoftware<br/>Device software installation<br/>device -> software| SPI
     
     %% Device Time Travel (existing pattern)
-    DPI -->|version<br/>Device version in<br/>temporal evolution| D
-    D -->|version<br/>Device version out<br/>temporal evolution| DPO
+    DPI -->|hasVersion<br/>Device version in<br/>temporal evolution| D
+    D -->|hasVersion<br/>Device version out<br/>temporal evolution| DPO
     
     %% Software Time Travel (NEW pattern)
-    SPI -->|version<br/>Software version in<br/>temporal evolution| S
-    S -->|version<br/>Software version out<br/>temporal evolution| SPO
+    SPI -->|hasVersion<br/>Software version in<br/>temporal evolution| S
+    S -->|hasVersion<br/>Software version out<br/>temporal evolution| SPO
     
     %% Tenant isolation indicator
     classDef tenantBox fill:#e1f5fe,stroke:#01579b,stroke-width:2px
@@ -104,7 +104,7 @@ Location          # Physical locations with GeoJSON coordinates
 hasConnection     # DeviceProxyOut -> DeviceProxyIn connections
 hasLocation       # DeviceProxyOut -> Location assignments
 hasDeviceSoftware # DeviceProxyOut -> SoftwareProxyIn installations (CORRECTED)
-version           # Unified time travel: Device & Software versioning (EXPANDED)
+hasVersion        # Unified time travel: Device & Software versioning (EXPANDED)
 ```
 
 ### Multi-Tenant Architecture
@@ -135,7 +135,7 @@ graph TB
         end
         
         subgraph "Shared Collections (Logically Separated)"
-            VC[version<br/>Unified time travel<br/>All tenant version edges]
+            VC[hasVersion<br/>Unified time travel<br/>All tenant hasVersion edges]
             HC[hasConnection<br/>Network links<br/>Tenant-isolated edges]
             HL[hasLocation<br/>Device placement<br/>Tenant-isolated edges]
             HDS[hasDeviceSoftware<br/>Device->Software<br/>Tenant-isolated edges]
@@ -152,16 +152,16 @@ graph TB
     DPOB -.->|hasLocation<br/>Isolated by tenant_B_attr| LB  
     DPOB -.->|hasDeviceSoftware<br/>CORRECTED: Out->In<br/>Isolated by tenant_B_attr| SPIB
     
-    %% Time travel patterns (unified version collection)
-    DPIA -.->|version<br/>Time travel| DA
-    DA -.->|version<br/>Time travel| DPOA
-    SPIA -.->|version<br/>Time travel| SA
-    SA -.->|version<br/>Time travel| SPOA
-    
-    DPIB -.->|version<br/>Time travel| DB
-    DB -.->|version<br/>Time travel| DPOB
-    SPIB -.->|version<br/>Time travel| SB
-    SB -.->|version<br/>Time travel| SPOB
+    %% Time travel patterns (unified hasVersion collection)
+    DPIA -.->|hasVersion<br/>Time travel| DA
+    DA -.->|hasVersion<br/>Time travel| DPOA
+    SPIA -.->|hasVersion<br/>Time travel| SA
+    SA -.->|hasVersion<br/>Time travel| SPOA
+
+    DPIB -.->|hasVersion<br/>Time travel| DB
+    DB -.->|hasVersion<br/>Time travel| DPOB
+    SPIB -.->|hasVersion<br/>Time travel| SB
+    SB -.->|hasVersion<br/>Time travel| SPOB
     
     classDef tenantA fill:#ffebee,stroke:#c62828,stroke-width:3px
     classDef tenantB fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
@@ -182,7 +182,7 @@ graph TB
 - Reduces edge collection bloat while maintaining referential integrity
 
 **2. Unified Temporal Versioning**
-- **Generic `version` collection** handles all time travel relationships
+- **Generic `hasVersion` collection** handles all time travel relationships
 - **Device**: `DeviceProxyIn` <-> `Device` <-> `DeviceProxyOut` 
 - **Software**: `SoftwareProxyIn` <-> `Software` <-> `SoftwareProxyOut` (NEW)
 - **Consistent queries** across all temporal entities
@@ -196,7 +196,7 @@ graph TB
 
 **4. W3C OWL Naming Conventions**
 - **Vertices**: PascalCase, singular (`Device`, `Software`, `SoftwareProxyIn`)
-- **Edges**: camelCase, singular (`hasConnection`, `hasDeviceSoftware`, `version`)
+- **Edges**: camelCase, singular (`hasConnection`, `hasDeviceSoftware`, `hasVersion`)
 - **Properties**: camelCase, singular for single values, plural for collections
 
 **5. Multi-Tenant Isolation**
@@ -223,12 +223,31 @@ graph TB
 
 ## Getting Started
 
+### Quick Start - Complete Demo
+```bash
+# Run the complete demonstration (all steps automated)
+python comprehensive_demo.py --save-report
+
+# Run with snake_case naming convention
+python comprehensive_demo.py --naming snake_case --save-report
+```
+
+**The comprehensive demo includes:**
+1. **Initial Data Generation** - Multi-tenant network asset data
+2. **Database Deployment** - Collections, indexes, and SmartGraphs
+3. **Transaction Simulation** - Configuration changes with TTL
+4. **TTL Demonstration** - Time travel scenarios
+5. **Scale-Out Demo** - Dynamic tenant addition and cluster analysis
+6. **Comprehensive Validation** - Data integrity and isolation checks
+
 ### Prerequisites
 - **Python 3.8+** with standard libraries
 - **ArangoDB 3.12+** or ArangoDB Oasis cluster access
 - **Environment Variables** configured (see Configuration section below)
 
-### Step 1: Configure Environment
+### Manual Step-by-Step Setup
+
+#### Step 1: Configure Environment
 
 First, set up your database credentials:
 
@@ -244,7 +263,7 @@ echo "Endpoint: $ARANGO_ENDPOINT"
 echo "Database: $ARANGO_DATABASE"
 ```
 
-### Step 2: Generate Multi-Tenant Data
+#### Step 2: Generate Multi-Tenant Data
 
 Choose your data generation approach:
 
@@ -284,7 +303,7 @@ python asset_generator.py
 python asset_generator.py
 ```
 
-### Step 3: Deploy to Database
+#### Step 3: Deploy to Database
 
 Choose your deployment method:
 
@@ -317,7 +336,7 @@ python oasis_cluster_setup.py
 # 4. Maintain existing tenant isolation
 ```
 
-### Step 4: Validate Deployment
+#### Step 4: Validate Deployment
 
 Run comprehensive validation:
 
@@ -331,6 +350,47 @@ python database_utilities.py
 # Test suite (development validation)
 python test_suite.py
 ```
+
+## Scale-Out Capabilities
+
+### Dynamic Tenant Addition
+
+Add new tenants to existing database without disrupting operations:
+
+```bash
+# Add single tenant
+python scale_out_manager.py --operation add-tenant --tenant-name "New Corp" --scale-factor 2
+
+# Add multiple demo tenants
+python scale_out_manager.py --operation add-tenants
+
+# Run complete scale-out demonstration
+python scale_out_demo.py --save-report
+```
+
+### Database Server Scaling
+
+Analyze cluster state to prepare for manual server addition:
+
+```bash
+# Analyze current cluster state
+python scale_out_manager.py --operation server-info
+
+# Analyze shard distribution for rebalancing planning
+python scale_out_manager.py --operation shard-info
+```
+
+**Note**: Database server addition is performed manually through the ArangoDB Oasis web interface.
+
+### Scale-Out Benefits
+
+- **Zero Downtime**: Add tenants without affecting existing operations
+- **Linear Scaling**: Performance scales with additional servers  
+- **Data Isolation**: Complete tenant separation maintained via SmartGraphs
+- **Cost Efficiency**: Shared infrastructure with isolated data
+- **Operational Simplicity**: Centralized management with tenant autonomy
+
+See [SCALE_OUT_GUIDE.md](SCALE_OUT_GUIDE.md) for detailed instructions.
 
 ## Data Generation Options
 
@@ -462,7 +522,7 @@ SoftwareProxyOut entities:  90  (lightweight proxies)
 Connection edges:           90  (network topology - DeviceProxyOut -> DeviceProxyIn)
 Location edges:             60  (device placement)
 Software edges:            120  (software installations)
-Version edges:           1,800  (temporal relationships)
+hasVersion edges:        1,800  (temporal relationships)
 ```
 
 ## Testing & Validation
