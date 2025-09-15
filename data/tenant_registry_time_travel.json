@@ -1,33 +1,22 @@
 {
   "tenants": {
-    "b67bc66a53b0": {
+    "ff06e2cef1aa": {
       "tenantName": "Acme Corp",
       "tenantStatus": "provisioning",
       "databaseName": "network_assets_demo",
-      "smartGraphName": "tenant_b67bc66a53b0_network_assets",
-      "smartGraphAttribute": "tenant_b67bc66a53b0_attr",
-      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_b67bc66a53b0",
+      "smartGraphName": "tenant_ff06e2cef1aa_network_assets",
+      "smartGraphAttribute": "tenant_ff06e2cef1aa_attr",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_ff06e2cef1aa",
       "scaleFactor": 1,
-      "createdAt": "2025-09-14T17:41:35.864400",
-      "tenantDescription": "Small enterprise with refactored time travel"
-    },
-    "35b27baa982d": {
-      "tenantName": "Global Enterprises",
-      "tenantStatus": "provisioning",
-      "databaseName": "network_assets_demo",
-      "smartGraphName": "tenant_35b27baa982d_network_assets",
-      "smartGraphAttribute": "tenant_35b27baa982d_attr",
-      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_35b27baa982d",
-      "scaleFactor": 2,
-      "createdAt": "2025-09-14T17:41:35.864430",
-      "tenantDescription": "Large enterprise with refactored time travel"
+      "createdAt": "2025-09-14T20:04:35.825767",
+      "tenantDescription": "Multi-tenant demo organization #1 with scale factor 1"
     }
   },
   "summary": {
-    "totalTenants": 2,
-    "totalDocuments": 3285,
+    "totalTenants": 1,
+    "totalDocuments": 1095,
     "sharedDatabase": "network_assets_demo",
-    "generatedAt": "2025-09-14T17:41:35.936058",
+    "generatedAt": "2025-09-14T20:04:35.858789",
     "environment": "development",
     "owlCompliant": true,
     "timeTravel": {

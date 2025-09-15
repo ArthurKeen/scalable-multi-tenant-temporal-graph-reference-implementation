@@ -18,6 +18,7 @@ import sys
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 from enum import Enum
+from ttl_constants import NEVER_EXPIRES
 
 
 class TenantStatus(Enum):
@@ -204,11 +205,7 @@ class TemporalDataModel:
         # Add temporal attributes (FR2.5) - observedAt removed, expired defaults to max value
         enhanced_doc = document.copy()
         enhanced_doc["created"] = timestamp.timestamp()
-        try:
-            from ttl_constants import NEVER_EXPIRES
-            enhanced_doc["expired"] = NEVER_EXPIRES  # Always use largest possible value
-        except ImportError:
-            enhanced_doc["expired"] = NEVER_EXPIRES  # Fallback
+        enhanced_doc["expired"] = expired
         
         # Add tenant key for disjoint smartgraph partitioning
         if tenant_config is not None:
