@@ -18,7 +18,6 @@ from pathlib import Path
 from typing import Dict, Any
 
 # Import demo components
-from comprehensive_demo import ComprehensiveDemo
 from config_management import NamingConvention
 from validation_suite import TimeTravelValidationSuite
 from scale_out_manager import TenantAdditionManager, DatabaseServerManager, ShardRebalancingManager

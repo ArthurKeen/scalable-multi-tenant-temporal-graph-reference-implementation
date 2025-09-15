@@ -79,7 +79,15 @@ Thumbs.db
 logs/
 *.log
 
-# Generated data (optional - uncomment if you don't want to commit generated data)
-# data/tenant_*/
-# reports/
-# time_travel_validation_results.json
+# Generated data and temporary files
+data/tenant_*/
+reports/*.json
+time_travel_validation_results.json
+*.tmp
+*.bak
+*_backup.*
+
+# Code quality and cleanup reports (historical)
+*QUALITY*REPORT*.md
+*CLEANUP*REPORT*.md
+*IMPLEMENTATION*COMPLETE*.md
