@@ -248,7 +248,7 @@ python3 comprehensive_demo.py --naming snake_case --save-report
 **🚀 Demo Launcher (Easy Access)**
 ```bash
 # Interactive menu with all demo options
-python3 demo_launcher.py
+python3 demo_launcher.pypython3 automated_demo_walkthrough.py --interactive
 ```
 
 > **Note**: All scripts use `python3` for compatibility with pyenv and modern Python installations. If you encounter `python: command not found` errors, the scripts have been updated to use `python3` automatically.
@@ -712,7 +712,7 @@ python3 validation_suite.py
 ├── database_deployment.py          # ArangoDB Oasis deployment
 ├── validation_suite.py             # Comprehensive naming convention validation
 ├── test_suite.py                   # Complete test framework
-├── oasis_cluster_setup.py          # Core cluster management
+├── oasis_cluster_setup.py          # Enterprise cluster management (see note below)
 ├── centralized_credentials.py      # Secure credential management
 ├── database_utilities.py           # Database utility functions
 ├── docs/
@@ -724,6 +724,36 @@ python3 validation_suite.py
 ├── logs/                           # Application logs
 └── reports/                        # Validation reports
 ```
+
+## Architecture Notes
+
+### Multi-Tenant Approach
+
+This demo uses a **simplified shared collection approach** for easy demonstration and development:
+
+- **Shared Collections**: All tenants use the same `Device`, `Software`, `Location` collections
+- **Logical Isolation**: Tenant separation via key prefixes (`tenant_id_entity_id`)
+- **Unified Graph**: Single `network_assets_graph` shows all tenant data with visual separation
+- **Quick Setup**: No complex SmartGraph configuration required
+
+### Enterprise Alternative: `oasis_cluster_setup.py`
+
+For **production environments** requiring strict data isolation, use the full cluster setup:
+
+- **True SmartGraphs**: Physical separation with tenant-specific collections
+- **Complete Isolation**: Each tenant gets dedicated collection shards
+- **Enterprise Features**: Full lifecycle management and compliance support
+- **Usage**: Call `python3 oasis_cluster_setup.py` for production deployment
+
+**When to use each approach:**
+
+| Feature | Demo Approach | Enterprise Approach |
+|---------|---------------|-------------------|
+| **Development/Testing** | ✅ Recommended | ⚠️ Complex setup |
+| **Production SaaS** | ⚠️ Limited isolation | ✅ Full isolation |
+| **Compliance Requirements** | ❌ Logical only | ✅ Physical separation |
+| **Performance** | ✅ Simple queries | ✅ Optimized per tenant |
+| **Setup Complexity** | ✅ Minimal | ⚠️ Full configuration |
 
 ## Configuration
 

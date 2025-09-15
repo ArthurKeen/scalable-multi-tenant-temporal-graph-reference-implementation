@@ -4,6 +4,30 @@ ArangoDB Oasis Cluster Setup and Management
 This script handles the setup and configuration of the ArangoDB Oasis cluster
 for the multi-tenant network asset management demo.
 
+USAGE NOTE:
+The current demo uses a SIMPLIFIED approach with:
+- Shared collections across all tenants
+- Single unified graph for visualization
+- Logical tenant isolation via key prefixes
+
+This module provides FULL ENTERPRISE functionality for:
+- True SmartGraph isolation (separate collections per tenant)
+- Physical data separation
+- Complete tenant lifecycle management
+- Production-grade cluster operations
+
+WHEN TO USE THIS MODULE:
+✅ Production deployments requiring true tenant isolation
+✅ Enterprise environments with strict data separation
+✅ Multi-tenant SaaS applications
+✅ Compliance requirements for data segregation
+
+WHEN DEMO APPROACH IS SUFFICIENT:
+✅ Development and testing
+✅ Proof of concept demonstrations
+✅ Shared collection architectures
+✅ Logical isolation requirements
+
 Features:
 - Connection testing and validation
 - Database creation and configuration
