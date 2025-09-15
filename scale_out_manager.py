@@ -150,30 +150,10 @@ class TenantAdditionManager:
             print(f"[WARNING] Could not determine current tenants: {str(e)}")
             return []
     
-    def _get_tenant_attribute_pattern(self) -> str:
-        """Get the tenant attribute field name pattern."""
-        # This is a bit of a hack - we need to find the tenant attribute field
-        # In practice, it would be better to store this in tenant metadata
-        try:
-            device_collection = self.app_config.get_collection_name("Device")
-            collection = self.database.collection(device_collection)
-            
-            # Get a sample document to find tenant attribute field
-            cursor = collection.all(limit=1)
-            sample_docs = list(cursor)
-            
-            if sample_docs:
-                doc = sample_docs[0]
-                # Find field that looks like tenant attribute
-                for field, value in doc.items():
-                    if field.startswith("tenant_") and field.endswith("_attr"):
-                        return field
-            
-            # Fallback - assume standard pattern
-            return "tenant_*_attr"
-            
-        except Exception:
-            return "tenant_*_attr"
+    def _get_tenant_attribute_field(self) -> str:
+        """Get the standardized tenant attribute field name."""
+        # Now using a consistent tenantId field across all documents
+        return "tenantId"
     
     def create_new_tenant(self, tenant_name: str, scale_factor: int = 1, 
                          description: str = "") -> TenantConfig:

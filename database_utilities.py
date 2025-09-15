@@ -256,17 +256,15 @@ class ValidationHelper:
     
     def validate_tenant_isolation(self, tenant_id: str) -> bool:
         """Validate tenant isolation for specific tenant."""
-        # Sample query to check tenant isolation
+        # Sample query to check tenant isolation using standardized tenantId
         query = """
         FOR doc IN Device
-          FILTER doc.@tenant_attr == @tenant_id
+          FILTER doc.tenantId == @tenant_id
           LIMIT 1
           RETURN doc._key
         """
         
-        tenant_attr = f"tenant_{tenant_id}_attr"
         results = self.db_manager.execute_aql(query, {
-            "tenant_attr": tenant_attr,
             "tenant_id": tenant_id
         })
         

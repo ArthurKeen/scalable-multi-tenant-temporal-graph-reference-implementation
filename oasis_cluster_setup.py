@@ -429,15 +429,13 @@ class OasisClusterManager:
         
         try:
             for tenant_config in tenant_configs:
-                tenant_attr = f"tenant_{tenant_config.tenant_id}_attr"
-                
                 # Auto-detect collection name (Device for W3C OWL, devices for legacy)
                 collection_name = "Device" if self.database.has_collection("Device") else "devices"
                 
-                # Query devices for this tenant
+                # Query devices for this tenant using standardized tenantId
                 aql = f"""
                 FOR doc IN {collection_name}
-                FILTER doc.`{tenant_attr}` == @tenant_id
+                FILTER doc.tenantId == @tenant_id
                 RETURN doc._key
                 """
                 
@@ -452,7 +450,7 @@ class OasisClusterManager:
                 # Verify no cross-tenant data
                 other_tenant_aql = f"""
                 FOR doc IN {collection_name}  
-                FILTER doc.`{tenant_attr}` != @tenant_id AND doc.`{tenant_attr}` != null
+                FILTER doc.tenantId != @tenant_id AND doc.tenantId != null
                 RETURN doc._key
                 """
                 

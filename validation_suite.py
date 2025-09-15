@@ -586,23 +586,21 @@ class TimeTravelValidationSuite:
                 print(f"   [ERROR] Software proxies exist but no version edges found")
                 return False
             
-            # Check tenant isolation consistency
+            # Check tenant isolation consistency using standardized tenantId
             sample_device = self.database.collection("Device").all(limit=1)
             sample_software = self.database.collection("Software").all(limit=1)
             
             for device in sample_device:
-                tenant_attr = [key for key in device.keys() if key.startswith('tenant_') and key.endswith('_attr')]
-                if not tenant_attr:
-                    print(f"   [ERROR] Device {device['_key']} missing tenant attribute")
+                if 'tenantId' not in device:
+                    print(f"   [ERROR] Device {device['_key']} missing tenantId attribute")
                     return False
-                print(f"   [DONE] Device {device['_key']} has tenant attribute: {tenant_attr[0]}")
+                print(f"   [DONE] Device {device['_key']} has tenant ID: {device['tenantId']}")
             
             for software in sample_software:
-                tenant_attr = [key for key in software.keys() if key.startswith('tenant_') and key.endswith('_attr')]
-                if not tenant_attr:
-                    print(f"   [ERROR] Software {software['_key']} missing tenant attribute")
+                if 'tenantId' not in software:
+                    print(f"   [ERROR] Software {software['_key']} missing tenantId attribute")
                     return False
-                print(f"   [DONE] Software {software['_key']} has tenant attribute: {tenant_attr[0]}")
+                print(f"   [DONE] Software {software['_key']} has tenant ID: {software['tenantId']}")
             
             print(f"[DONE] Data consistency validation passed")
             return True

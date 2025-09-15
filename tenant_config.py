@@ -79,7 +79,7 @@ class TenantConfig:
                 self.ttl_expire_after_seconds = TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS  # Fallback to 30 days
         
         if self.smartgraph_attribute is None:
-            self.smartgraph_attribute = f"tenant_{self.tenant_id}_attr"
+            self.smartgraph_attribute = "tenantId"
         
         # Apply scale factor to data generation parameters (FR2.7)
         if self.scale_factor > 1:
@@ -112,7 +112,7 @@ class TenantNamingConvention:
     
     @property
     def smartgraph_attribute(self) -> str:
-        return f"tenant_{self.tenant_id}_attr"
+        return "tenantId"
     
     # W3C OWL compliant collection names (shared across all tenants)
     @property 
@@ -209,7 +209,7 @@ class TemporalDataModel:
         
         # Add tenant key for disjoint smartgraph partitioning
         if tenant_config is not None:
-            enhanced_doc[tenant_config.smartgraph_attribute] = tenant_config.tenant_id
+            enhanced_doc["tenantId"] = tenant_config.tenant_id
         
         return enhanced_doc
     
@@ -247,7 +247,7 @@ class TemporalDataModel:
         
         # Add only tenant key for disjoint smartgraph partitioning
         if tenant_config is not None:
-            enhanced_doc[tenant_config.smartgraph_attribute] = tenant_config.tenant_id
+            enhanced_doc["tenantId"] = tenant_config.tenant_id
         
         return enhanced_doc
 
@@ -398,9 +398,9 @@ def validate_tenant_isolation(config1: TenantConfig, config2: TenantConfig) -> b
     if naming1.smartgraph_name == naming2.smartgraph_name:
         return False
     
-    # Check smartgraph attribute isolation - this provides the disjoint partitioning
-    if naming1.smartgraph_attribute == naming2.smartgraph_attribute:
-        return False
+    # With standardized tenantId, smartgraph attributes are now the same for all tenants
+    # Isolation is provided by the tenantId value, not by different attribute names
+    assert naming1.smartgraph_attribute == naming2.smartgraph_attribute == "tenantId", "Should use standardized tenantId"
     
     # Collections are shared - isolation is provided by smartgraph attribute
     assert naming1.device_collection == naming2.device_collection, "Collections should be shared"
