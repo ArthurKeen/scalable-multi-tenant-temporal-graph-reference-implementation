@@ -280,16 +280,39 @@ class AutomatedDemoWalkthrough:
                 naming_convention=NamingConvention.CAMEL_CASE
             )
             
-            # This would normally deploy, but we'll simulate for demo
-            print("Collections created successfully")
-            print("Indexes configured for performance")
-            print("SmartGraphs deployed for tenant isolation")
-            print("TTL indexes configured for historical data")
-            print("Data imported to collections")
-            print("[SUCCESS] Database deployment completed successfully")
+            # Actually run the deployment instead of simulating
+            print("Connecting to cluster...")
+            if deployment.connect_to_cluster():
+                print("Creating collections and indexes...")
+                deployment.create_refactored_collections()
+                deployment.create_refactored_indexes()
+                
+                print("Loading data to collections...")
+                deployment.load_refactored_data()
+                
+                print("Creating SmartGraphs...")
+                deployment.create_refactored_named_graphs()
+                
+                # Verify data was actually imported
+                total_docs = 0
+                collections = ['Device', 'Software', 'Location']
+                for coll_name in collections:
+                    if deployment.database.has_collection(coll_name):
+                        count = deployment.database.collection(coll_name).count()
+                        total_docs += count
+                        print(f"   {coll_name}: {count} documents")
+                
+                if total_docs > 0:
+                    print(f"[SUCCESS] Database deployment completed successfully - {total_docs} documents imported")
+                else:
+                    print(f"[WARNING] Database deployment completed but no data imported - check data files")
+            else:
+                print("[ERROR] Failed to connect to cluster for deployment")
             
         except Exception as e:
             print(f"[ERROR] Deployment error: {e}")
+            import traceback
+            traceback.print_exc()
         
         self.pause_for_observation("Database deployment complete. Ready for validation?")
         self.sections_completed.append("database_deployment")
@@ -528,27 +551,53 @@ class AutomatedDemoWalkthrough:
         try:
             print("Adding new tenants dynamically...")
             tenant_manager = TenantAdditionManager(NamingConvention.CAMEL_CASE)
-            print("   - CloudSync Systems (scale factor 2)")
-            print("   - DataFlow Corp (scale factor 1)")
-            print("   - NetWork Industries (scale factor 3)")
+            
+            # Actually add the new tenants
+            new_tenants = [
+                ("CloudSync Systems", 2),
+                ("DataFlow Corp", 1), 
+                ("NetWork Industries", 3)
+            ]
+            
+            tenant_count = 0
+            for tenant_name, scale_factor in new_tenants:
+                print(f"   - Adding {tenant_name} (scale factor {scale_factor})")
+                if tenant_manager.connect_to_database():
+                    # Generate tenant data only
+                    tenant_config = tenant_manager.create_new_tenant(tenant_name, scale_factor)
+                    if tenant_manager.generate_tenant_data(tenant_config):
+                        # Import data directly without complex deployment
+                        if self._import_tenant_data_simple(tenant_config):
+                            tenant_count += 1
+                            print(f"     [SUCCESS] {tenant_name} added successfully")
+                            print(f"     [DATA] Tenant ID: {tenant_config.tenant_id}")
+                        else:
+                            print(f"     [WARNING] Failed to import data for {tenant_name}")
+                    else:
+                        print(f"     [WARNING] Failed to generate data for {tenant_name}")
+                else:
+                    print(f"     [ERROR] Could not connect to database for {tenant_name}")
             
             print("Analyzing cluster for manual server addition...")
             server_manager = DatabaseServerManager()
+            cluster_analysis = server_manager.get_scaling_recommendations()
             print("   - Current server configuration analyzed")
             print("   - Scaling recommendations generated")
             print("   - Manual addition steps provided")
             
             print("Analyzing shard distribution...")
             shard_manager = ShardRebalancingManager()
+            shard_analysis = shard_manager.analyze_shard_distribution()
             print("   - Current shard placement analyzed")
             print("   - Rebalancing recommendations generated")
             print("   - Performance optimization suggestions provided")
             
-            print("[SUCCESS] Scale-out demonstration completed successfully")
+            print(f"[SUCCESS] Scale-out demonstration completed successfully")
+            print(f"[DATA] Added {tenant_count} new tenants to the system")
             
             scale_out_results = {
-                "new_tenants_added": 3,
-                "total_tenants": 7,
+                "new_tenants_added": tenant_count,
+                "total_tenants": 4 + tenant_count,
                 "cluster_analysis_completed": True,
                 "shard_analysis_completed": True,
                 "zero_downtime_maintained": True
@@ -561,6 +610,59 @@ class AutomatedDemoWalkthrough:
         
         self.pause_for_observation("Scale-out demonstration complete. Ready for final validation?")
         self.sections_completed.append("scale_out_demonstration")
+    
+    def _import_tenant_data_simple(self, tenant_config) -> bool:
+        """Simple data import for scale-out tenants without complex deployment."""
+        try:
+            from pathlib import Path
+            import json
+            
+            # Connect to database if not already connected
+            if not self.database:
+                if not self.connect_to_database():
+                    return False
+            
+            # Get tenant data path
+            tenant_data_path = Path(f"data/tenant_{tenant_config.tenant_id}")
+            if not tenant_data_path.exists():
+                print(f"     [ERROR] Tenant data directory not found: {tenant_data_path}")
+                return False
+            
+            # File to collection mappings
+            file_mappings = {
+                'Device.json': 'Device',
+                'DeviceProxyIn.json': 'DeviceProxyIn', 
+                'DeviceProxyOut.json': 'DeviceProxyOut',
+                'Software.json': 'Software',
+                'SoftwareProxyIn.json': 'SoftwareProxyIn',
+                'SoftwareProxyOut.json': 'SoftwareProxyOut',
+                'Location.json': 'Location',
+                'hasConnection.json': 'hasConnection',
+                'hasLocation.json': 'hasLocation', 
+                'hasDeviceSoftware.json': 'hasDeviceSoftware',
+                'hasVersion.json': 'hasVersion'
+            }
+            
+            total_loaded = 0
+            
+            # Load each collection's data
+            for filename, collection_name in file_mappings.items():
+                file_path = tenant_data_path / filename
+                if file_path.exists():
+                    with open(file_path, 'r') as f:
+                        data = json.load(f)
+                    
+                    if data:
+                        collection = self.database.collection(collection_name)
+                        collection.insert_many(data, overwrite=False)
+                        total_loaded += len(data)
+            
+            print(f"     [DATA] Imported {total_loaded} documents")
+            return True
+            
+        except Exception as e:
+            print(f"     [ERROR] Import failed: {e}")
+            return False
     
     def section_8_final_validation(self):
         """Section 8: Final System Validation."""
