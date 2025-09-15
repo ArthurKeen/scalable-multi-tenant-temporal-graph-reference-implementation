@@ -24,11 +24,12 @@ from centralized_credentials import CredentialsManager
 class TimeTravelValidationSuite:
     """Comprehensive validation suite for time travel refactoring."""
     
-    def __init__(self):
+    def __init__(self, show_queries: bool = False):
         creds = CredentialsManager.get_database_credentials()
         self.client = ArangoClient(hosts=creds.endpoint)
         self.database = None
         self.validation_results = {}
+        self.show_queries = show_queries
         
     def connect_to_database(self) -> bool:
         """Connect to the ArangoDB Oasis database."""
@@ -41,6 +42,37 @@ class TimeTravelValidationSuite:
         except Exception as e:
             print(f"[ERROR] Connection failed: {str(e)}")
             return False
+    
+    def execute_and_display_query(self, query: str, query_name: str, bind_vars: Dict = None) -> List[Dict]:
+        """Execute a query and display it with results if show_queries is enabled."""
+        if self.show_queries:
+            print(f"\n[QUERY] {query_name}:")
+            print(f"   AQL: {query}")
+            if bind_vars:
+                print(f"   Variables: {bind_vars}")
+        
+        try:
+            cursor = self.database.aql.execute(query, bind_vars=bind_vars)
+            results = list(cursor)
+            
+            if self.show_queries:
+                print(f"   Results: {len(results)} documents returned")
+                if results and len(results) <= 3:  # Show sample results for small result sets
+                    for i, result in enumerate(results[:3]):
+                        if isinstance(result, dict):
+                            # Show key fields only
+                            sample = {k: v for k, v in result.items() if k in ['_key', '_id', 'name', 'type', 'created', 'expired']}
+                            print(f"   Sample {i+1}: {sample}")
+                elif results:
+                    print(f"   (Large result set - showing count only)")
+                print()
+            
+            return results
+        except Exception as e:
+            if self.show_queries:
+                print(f"   ERROR: {e}")
+                print()
+            raise e
     
     def validate_collection_structure(self) -> bool:
         """Validate that all required collections exist with correct structure."""
@@ -199,7 +231,11 @@ class TimeTravelValidationSuite:
             """
             
             point_in_time = datetime.datetime.now().timestamp()
-            device_results = list(self.database.aql.execute(device_query, bind_vars={"point_in_time": point_in_time}))
+            device_results = self.execute_and_display_query(
+                device_query, 
+                "Device Point-in-Time Query", 
+                {"point_in_time": point_in_time}
+            )
             
             print(f"   [DATA] Device time travel query returned {len(device_results)} results")
             for result in device_results[:3]:
@@ -221,7 +257,11 @@ class TimeTravelValidationSuite:
               }
             """
             
-            software_results = list(self.database.aql.execute(software_query, bind_vars={"point_in_time": point_in_time}))
+            software_results = self.execute_and_display_query(
+                software_query,
+                "Software Point-in-Time Query",
+                {"point_in_time": point_in_time}
+            )
             
             print(f"   [DATA] Software time travel query returned {len(software_results)} results")
             for result in software_results[:3]:
@@ -240,7 +280,11 @@ class TimeTravelValidationSuite:
               }
             """
             
-            unified_results = list(self.database.aql.execute(unified_query, bind_vars={"point_in_time": point_in_time}))
+            unified_results = self.execute_and_display_query(
+                unified_query,
+                "Unified Time Travel Query",
+                {"point_in_time": point_in_time}
+            )
             
             print(f"   [DATA] Unified version query returned {len(unified_results)} results")
             device_count = sum(1 for r in unified_results if r['fromType'] == 'DeviceProxyIn')
@@ -292,7 +336,10 @@ class TimeTravelValidationSuite:
                   }
             """
             
-            cross_results = list(self.database.aql.execute(cross_entity_query))
+            cross_results = self.execute_and_display_query(
+                cross_entity_query,
+                "Cross-Entity Relationship Query"
+            )
             
             print(f"   [DATA] Cross-entity query returned {len(cross_results)} relationships")
             for result in cross_results[:5]:
