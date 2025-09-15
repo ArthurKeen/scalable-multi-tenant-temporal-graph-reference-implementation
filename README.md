@@ -1,6 +1,6 @@
 # Multi-Tenant Network Asset Management Demo
 
-A comprehensive multi-tenant network asset management system built with ArangoDB, demonstrating W3C OWL standards compliance, disjoint SmartGraphs, and temporal data modeling.
+A comprehensive multi-tenant network asset management system built with ArangoDB, demonstrating proper naming conventions, disjoint SmartGraphs, and temporal data modeling.
 
 ## Features
 
@@ -47,7 +47,7 @@ Both conventions maintain **consistent structure** with Subject-Predicate-Object
 
 ```mermaid
 graph TB
-    %% Vertex Collections (W3C OWL naming - PascalCase, singular)
+    %% Vertex Collections (PascalCase, singular)
     subgraph "Vertex Collections"
         D[Device<br/>Network devices<br/>Versioned temporal data]
         DPI[DeviceProxyIn<br/>Device input proxies<br/>Lightweight, no temporal data]
@@ -58,7 +58,7 @@ graph TB
         L[Location<br/>Physical locations<br/>GeoJSON coordinates]
     end
     
-    %% Edge Collections (W3C OWL naming - camelCase, singular)
+    %% Edge Collections (camelCase, singular)
     
     %% Network connections between devices
     DPO -->|hasConnection<br/>Network links<br/>bandwidth, latency| DPI
@@ -194,10 +194,12 @@ graph TB
 - **BENEFIT**: Same time travel pattern as Device collection
 - **RESULT**: Simpler queries and uniform temporal data model
 
-**4. W3C OWL Naming Conventions**
-- **Vertices**: PascalCase, singular (`Device`, `Software`, `SoftwareProxyIn`)
-- **Edges**: camelCase, singular (`hasConnection`, `hasDeviceSoftware`, `hasVersion`)
-- **Properties**: camelCase, singular for single values, plural for collections
+**4. Dual Naming Convention Support**
+- **camelCase (default)**: `Device`, `hasConnection`, `deviceId` 
+- **snake_case (optional)**: `device`, `has_connection`, `device_id`
+- **Vertices**: PascalCase/lowercase, singular (`Device`/`device`, `Software`/`software`)
+- **Edges**: camelCase/snake_case, singular (`hasConnection`/`has_connection`)
+- **Properties**: camelCase/snake_case for consistency
 
 **5. Multi-Tenant Isolation**
 - Disjoint SmartGraphs using `tenant_{id}_attr` as partition key
@@ -649,7 +651,7 @@ export ARANGO_DATABASE="network_assets_demo"
 ### Centralized Configuration
 All settings are managed through `config_management.py`:
 - Database credentials loaded from environment variables (secure)
-- W3C OWL collection name mappings
+- Collection name mappings for both naming conventions
 - Generation limits and performance settings
 - Environment-specific configurations
 
@@ -689,7 +691,7 @@ All settings are managed through `config_management.py`:
 
 - [DONE] **Architecture**: Centralized configuration management
 - [DONE] **Code Quality**: Removed duplicate documentation, updated file references
-- [DONE] **Database Compliance**: Verified W3C OWL semantic relationships
+- [DONE] **Database Compliance**: Verified consistent naming conventions
 
 ## Contributing
 
@@ -728,7 +730,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - **ArangoDB** for multi-model database capabilities
-- **W3C** for OWL/RDF standards and best practices
+- **Industry Standards** for consistent naming conventions and best practices
 - **Python Community** for excellent development tools
 
 ---
