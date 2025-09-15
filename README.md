@@ -241,7 +241,7 @@ python comprehensive_demo.py --help
 ```
 
 **The comprehensive demo includes:**
-1. **Initial Data Generation** - Multi-tenant network asset data
+1. **Initial Data Generation** - Multi-tenant network asset data (4 tenants by default)
 2. **Database Deployment** - Collections, indexes, and SmartGraphs
 3. **Transaction Simulation** - Configuration changes with TTL
 4. **TTL Demonstration** - Time travel scenarios
@@ -261,7 +261,7 @@ graph TD
     G --> H[Step 7: Final Validation]
     H --> I[Demo Complete]
     
-    B --> B1[Create 2 Tenants<br/>Generate Assets<br/>Support camelCase/snake_case]
+    B --> B1[Create 4 Tenants<br/>Generate Assets<br/>Support camelCase/snake_case]
     C --> C1[Deploy Collections<br/>Create Indexes<br/>Setup SmartGraphs]
     D --> D1[Verify Deployment<br/>Check Tenant Isolation<br/>Test Time Travel]
     E --> E1[Simulate Device Changes<br/>Simulate Software Updates<br/>Apply TTL Strategy]
@@ -281,8 +281,11 @@ graph TD
 For running specific parts of the demonstration:
 
 ```bash
-# Data Generation Only
+# Data Generation Only (4 tenants by default)
 python asset_generator.py --naming camelCase --environment development
+
+# Generate specific number of tenants
+python asset_generator.py --tenants 6 --naming camelCase --environment development
 
 # Database Deployment Only  
 python database_deployment.py --naming camelCase

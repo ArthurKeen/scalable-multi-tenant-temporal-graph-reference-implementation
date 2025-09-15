@@ -60,12 +60,12 @@ class ComprehensiveDemo:
         try:
             print(f"[ACTION] Generating multi-tenant network asset data...")
             print(f"   Naming Convention: {self.naming_convention.value}")
-            print(f"   Tenant Count: 2 (initial load)")
+            print(f"   Tenant Count: 4 (initial load)")
             print(f"   Environment: development")
             
-            # Generate data for 2 initial tenants
+            # Generate data for 4 initial tenants
             generation_result = generate_time_travel_refactored_demo(
-                tenant_count=2,
+                tenant_count=4,
                 naming_convention=self.naming_convention,
                 environment="development"
             )
@@ -80,7 +80,7 @@ class ComprehensiveDemo:
             }
             
             print(f"\n[STEP 1 COMPLETE] Initial data generation successful")
-            print(f"   Generated data for 2 tenants")
+            print(f"   Generated data for 4 tenants")
             print(f"   Files created in data/ directory")
             
         except Exception as e:

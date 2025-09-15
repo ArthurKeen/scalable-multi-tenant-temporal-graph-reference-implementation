@@ -637,7 +637,7 @@ class TimeTravelRefactoredGenerator:
         }
 
 
-def generate_time_travel_refactored_demo(environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
+def generate_time_travel_refactored_demo(tenant_count: int = 4, environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
     """Generate time travel refactored multi-tenant demo."""
     
     convention_name = "camelCase" if naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
@@ -649,23 +649,36 @@ def generate_time_travel_refactored_demo(environment: str = "production", naming
     print("   - Generic 'version' collection for all time travel relationships")
     print("   - Consistent temporal queries across all entities")
     print(f"   - Naming convention: {convention_name}")
+    print(f"   - Tenant count: {tenant_count}")
     print()
     
     app_config = get_config(environment, naming_convention)
     
     # Create tenant configurations
-    tenant_configs = [
-        create_tenant_config(
-            "Acme Corp",
-            scale_factor=1,
-            description="Small enterprise with refactored time travel"
-        ),
-        create_tenant_config(
-            "Global Enterprises", 
-            scale_factor=2,
-            description="Large enterprise with refactored time travel"
-        )
+    tenant_names = [
+        "Acme Corp",
+        "Global Enterprises", 
+        "TechStart Inc",
+        "Enterprise Solutions",
+        "CloudSync Systems",
+        "DataFlow Corp",
+        "NetWork Industries",
+        "Digital Dynamics"
     ]
+    
+    # Generate the specified number of tenants
+    tenant_configs = []
+    for i in range(tenant_count):
+        tenant_name = tenant_names[i % len(tenant_names)]
+        if i >= len(tenant_names):
+            tenant_name = f"{tenant_name} {i // len(tenant_names) + 1}"
+        
+        scale_factor = 1 + (i % 3)  # Vary scale factors: 1, 2, 3, 1, 2, 3...
+        tenant_configs.append(create_tenant_config(
+            tenant_name,
+            scale_factor=scale_factor,
+            description=f"Multi-tenant demo organization #{i+1} with scale factor {scale_factor}"
+        ))
     
     results = {}
     total_documents = 0
@@ -728,6 +741,8 @@ if __name__ == "__main__":
     import argparse
     
     parser = argparse.ArgumentParser(description="Generate multi-tenant network asset data")
+    parser.add_argument("--tenants", type=int, default=4,
+                       help="Number of tenants to generate (default: 4)")
     parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
                        help="Naming convention for collections and properties (default: camelCase)")
     parser.add_argument("--environment", choices=["production", "development"], default="production",
@@ -738,5 +753,5 @@ if __name__ == "__main__":
     # Convert naming argument to enum
     naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
     
-    results = generate_time_travel_refactored_demo(args.environment, naming_convention)
+    results = generate_time_travel_refactored_demo(args.tenants, args.environment, naming_convention)
     print(f"\n[DONE] Ready for deployment with {args.naming} naming convention!")

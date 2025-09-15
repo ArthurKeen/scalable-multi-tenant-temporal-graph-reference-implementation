@@ -566,3 +566,5 @@
 2025-09-14 17:41:35,907 - __main__ - INFO - Generated 80 hasDeviceSoftware edges
 2025-09-14 17:41:35,907 - __main__ - INFO - Connected 60 software entities (100% coverage)
 2025-09-14 17:41:35,935 - __main__ - INFO - Completed time travel refactored data generation: 2190 total documents
+2025-09-14 19:31:25,737 - asset_generator - INFO - Starting time travel refactored data generation for tenant: Acme Corp (Scale: 1x)
+2025-09-14 19:31:25,738 - asset_generator - INFO - Generating 5 locations for tenant Acme Corp
