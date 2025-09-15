@@ -1,0 +1,77 @@
+[
+  {
+    "_key": "6379c3502169_location1",
+    "name": "Acme Corp - New York Data Center",
+    "streetAddress": "123 Broadway, New York, NY",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    },
+    "created": 1757902237.021676,
+    "expired": 9223372036854775807,
+    "tenant_6379c3502169_attr": "6379c3502169"
+  },
+  {
+    "_key": "6379c3502169_location2",
+    "name": "Acme Corp - London Office",
+    "streetAddress": "456 Oxford St, London",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    },
+    "created": 1757902237.021695,
+    "expired": 9223372036854775807,
+    "tenant_6379c3502169_attr": "6379c3502169"
+  },
+  {
+    "_key": "6379c3502169_location3",
+    "name": "Acme Corp - Tokyo HQ",
+    "streetAddress": "789 Ginza, Tokyo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    },
+    "created": 1757902237.021705,
+    "expired": 9223372036854775807,
+    "tenant_6379c3502169_attr": "6379c3502169"
+  },
+  {
+    "_key": "6379c3502169_location4",
+    "name": "Acme Corp - Sydney Warehouse",
+    "streetAddress": "101 George St, Sydney",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    },
+    "created": 1757902237.021712,
+    "expired": 9223372036854775807,
+    "tenant_6379c3502169_attr": "6379c3502169"
+  },
+  {
+    "_key": "6379c3502169_location5",
+    "name": "Acme Corp - Frankfurt Cloud Region",
+    "streetAddress": "222 Mainzer Landstr, Frankfurt",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    },
+    "created": 1757902237.021714,
+    "expired": 9223372036854775807,
+    "tenant_6379c3502169_attr": "6379c3502169"
+  }
+]
