@@ -1,0 +1,402 @@
+[
+  {
+    "_key": "d217fda73360_hasSoftware1",
+    "_from": "DeviceProxyOut/d217fda73360_device11",
+    "_to": "SoftwareProxyIn/d217fda73360_software1",
+    "created": 1757904930.664721,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware2",
+    "_from": "DeviceProxyOut/d217fda73360_device18",
+    "_to": "SoftwareProxyIn/d217fda73360_software2",
+    "created": 1757904930.664724,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware3",
+    "_from": "DeviceProxyOut/d217fda73360_device17",
+    "_to": "SoftwareProxyIn/d217fda73360_software3",
+    "created": 1757904930.664726,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware4",
+    "_from": "DeviceProxyOut/d217fda73360_device13",
+    "_to": "SoftwareProxyIn/d217fda73360_software4",
+    "created": 1757904930.664728,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware5",
+    "_from": "DeviceProxyOut/d217fda73360_device19",
+    "_to": "SoftwareProxyIn/d217fda73360_software5",
+    "created": 1757904930.664731,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware6",
+    "_from": "DeviceProxyOut/d217fda73360_device16",
+    "_to": "SoftwareProxyIn/d217fda73360_software6",
+    "created": 1757904930.664733,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware7",
+    "_from": "DeviceProxyOut/d217fda73360_device1",
+    "_to": "SoftwareProxyIn/d217fda73360_software7",
+    "created": 1757904930.664735,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware8",
+    "_from": "DeviceProxyOut/d217fda73360_device1",
+    "_to": "SoftwareProxyIn/d217fda73360_software8",
+    "created": 1757904930.664738,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware9",
+    "_from": "DeviceProxyOut/d217fda73360_device4",
+    "_to": "SoftwareProxyIn/d217fda73360_software9",
+    "created": 1757904930.66474,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware10",
+    "_from": "DeviceProxyOut/d217fda73360_device17",
+    "_to": "SoftwareProxyIn/d217fda73360_software10",
+    "created": 1757904930.664743,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware11",
+    "_from": "DeviceProxyOut/d217fda73360_device9",
+    "_to": "SoftwareProxyIn/d217fda73360_software11",
+    "created": 1757904930.664745,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware12",
+    "_from": "DeviceProxyOut/d217fda73360_device19",
+    "_to": "SoftwareProxyIn/d217fda73360_software12",
+    "created": 1757904930.664747,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware13",
+    "_from": "DeviceProxyOut/d217fda73360_device1",
+    "_to": "SoftwareProxyIn/d217fda73360_software13",
+    "created": 1757904930.664749,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware14",
+    "_from": "DeviceProxyOut/d217fda73360_device8",
+    "_to": "SoftwareProxyIn/d217fda73360_software14",
+    "created": 1757904930.664752,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware15",
+    "_from": "DeviceProxyOut/d217fda73360_device19",
+    "_to": "SoftwareProxyIn/d217fda73360_software15",
+    "created": 1757904930.664754,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware16",
+    "_from": "DeviceProxyOut/d217fda73360_device1",
+    "_to": "SoftwareProxyIn/d217fda73360_software16",
+    "created": 1757904930.664756,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware17",
+    "_from": "DeviceProxyOut/d217fda73360_device2",
+    "_to": "SoftwareProxyIn/d217fda73360_software17",
+    "created": 1757904930.664758,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware18",
+    "_from": "DeviceProxyOut/d217fda73360_device9",
+    "_to": "SoftwareProxyIn/d217fda73360_software18",
+    "created": 1757904930.664761,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware19",
+    "_from": "DeviceProxyOut/d217fda73360_device13",
+    "_to": "SoftwareProxyIn/d217fda73360_software19",
+    "created": 1757904930.664763,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware20",
+    "_from": "DeviceProxyOut/d217fda73360_device9",
+    "_to": "SoftwareProxyIn/d217fda73360_software20",
+    "created": 1757904930.664766,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware21",
+    "_from": "DeviceProxyOut/d217fda73360_device12",
+    "_to": "SoftwareProxyIn/d217fda73360_software21",
+    "created": 1757904930.664768,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware22",
+    "_from": "DeviceProxyOut/d217fda73360_device2",
+    "_to": "SoftwareProxyIn/d217fda73360_software22",
+    "created": 1757904930.66477,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware23",
+    "_from": "DeviceProxyOut/d217fda73360_device18",
+    "_to": "SoftwareProxyIn/d217fda73360_software23",
+    "created": 1757904930.664773,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware24",
+    "_from": "DeviceProxyOut/d217fda73360_device2",
+    "_to": "SoftwareProxyIn/d217fda73360_software24",
+    "created": 1757904930.664775,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware25",
+    "_from": "DeviceProxyOut/d217fda73360_device1",
+    "_to": "SoftwareProxyIn/d217fda73360_software25",
+    "created": 1757904930.664777,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware26",
+    "_from": "DeviceProxyOut/d217fda73360_device2",
+    "_to": "SoftwareProxyIn/d217fda73360_software26",
+    "created": 1757904930.66478,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware27",
+    "_from": "DeviceProxyOut/d217fda73360_device9",
+    "_to": "SoftwareProxyIn/d217fda73360_software27",
+    "created": 1757904930.664782,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware28",
+    "_from": "DeviceProxyOut/d217fda73360_device18",
+    "_to": "SoftwareProxyIn/d217fda73360_software28",
+    "created": 1757904930.664784,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware29",
+    "_from": "DeviceProxyOut/d217fda73360_device8",
+    "_to": "SoftwareProxyIn/d217fda73360_software29",
+    "created": 1757904930.664786,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware30",
+    "_from": "DeviceProxyOut/d217fda73360_device9",
+    "_to": "SoftwareProxyIn/d217fda73360_software30",
+    "created": 1757904930.664789,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware31",
+    "_from": "DeviceProxyOut/d217fda73360_device4",
+    "_to": "SoftwareProxyIn/d217fda73360_software4",
+    "created": 1757904930.664803,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware32",
+    "_from": "DeviceProxyOut/d217fda73360_device12",
+    "_to": "SoftwareProxyIn/d217fda73360_software26",
+    "created": 1757904930.664816,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware33",
+    "_from": "DeviceProxyOut/d217fda73360_device19",
+    "_to": "SoftwareProxyIn/d217fda73360_software11",
+    "created": 1757904930.664828,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware34",
+    "_from": "DeviceProxyOut/d217fda73360_device18",
+    "_to": "SoftwareProxyIn/d217fda73360_software11",
+    "created": 1757904930.66484,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware35",
+    "_from": "DeviceProxyOut/d217fda73360_device8",
+    "_to": "SoftwareProxyIn/d217fda73360_software1",
+    "created": 1757904930.664853,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware36",
+    "_from": "DeviceProxyOut/d217fda73360_device10",
+    "_to": "SoftwareProxyIn/d217fda73360_software14",
+    "created": 1757904930.664865,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware37",
+    "_from": "DeviceProxyOut/d217fda73360_device17",
+    "_to": "SoftwareProxyIn/d217fda73360_software7",
+    "created": 1757904930.664878,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware38",
+    "_from": "DeviceProxyOut/d217fda73360_device4",
+    "_to": "SoftwareProxyIn/d217fda73360_software10",
+    "created": 1757904930.664891,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware39",
+    "_from": "DeviceProxyOut/d217fda73360_device12",
+    "_to": "SoftwareProxyIn/d217fda73360_software13",
+    "created": 1757904930.664905,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  },
+  {
+    "_key": "d217fda73360_hasSoftware40",
+    "_from": "DeviceProxyOut/d217fda73360_device12",
+    "_to": "SoftwareProxyIn/d217fda73360_software16",
+    "created": 1757904930.664919,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360",
+    "_fromType": "DeviceProxyOut",
+    "_toType": "SoftwareProxyIn"
+  }
+]

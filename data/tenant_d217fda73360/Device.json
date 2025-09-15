@@ -1,0 +1,2270 @@
+[
+  {
+    "_key": "d217fda73360_device1-0",
+    "name": "Enterprise Solutions IoT Iot Model 210",
+    "type": "IoT",
+    "model": "Iot Model 210",
+    "serialNumber": "771dd52c-cd5e-4d19-acad-d7cd4136f556",
+    "ipAddress": "192.168.103.235",
+    "macAddress": "a1:50:14:66:c5:7a",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_device1",
+    "firewallRules": [
+      "allow 443",
+      "allow 3262"
+    ],
+    "created": 1757904930.661746,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device1-1",
+    "name": "Enterprise Solutions IoT Iot Model 210",
+    "type": "IoT",
+    "model": "Iot Model 210",
+    "serialNumber": "771dd52c-cd5e-4d19-acad-d7cd4136f556",
+    "ipAddress": "192.168.103.235",
+    "macAddress": "a1:50:14:66:c5:7a",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-388",
+    "firewallRules": [
+      "allow 443",
+      "allow 3262"
+    ],
+    "created": 1757559330.661786,
+    "expired": 1757904930.661746,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device1-2",
+    "name": "Enterprise Solutions IoT Iot Model 210",
+    "type": "IoT",
+    "model": "Iot Model 210",
+    "serialNumber": "771dd52c-cd5e-4d19-acad-d7cd4136f556",
+    "ipAddress": "192.168.103.235",
+    "macAddress": "a1:50:14:66:c5:7a",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-550",
+    "firewallRules": [
+      "allow 443",
+      "allow 3262"
+    ],
+    "created": 1757213730.661798,
+    "expired": 1757559330.661786,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device1-3",
+    "name": "Enterprise Solutions IoT Iot Model 210",
+    "type": "IoT",
+    "model": "Iot Model 210",
+    "serialNumber": "771dd52c-cd5e-4d19-acad-d7cd4136f556",
+    "ipAddress": "192.168.103.235",
+    "macAddress": "a1:50:14:66:c5:7a",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-116",
+    "firewallRules": [
+      "allow 443",
+      "allow 3262"
+    ],
+    "created": 1756781730.661805,
+    "expired": 1757213730.661798,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device1-4",
+    "name": "Enterprise Solutions IoT Iot Model 210",
+    "type": "IoT",
+    "model": "Iot Model 210",
+    "serialNumber": "771dd52c-cd5e-4d19-acad-d7cd4136f556",
+    "ipAddress": "192.168.103.235",
+    "macAddress": "a1:50:14:66:c5:7a",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-737",
+    "firewallRules": [
+      "allow 443",
+      "allow 3262"
+    ],
+    "created": 1756522530.661814,
+    "expired": 1756781730.661805,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device1-5",
+    "name": "Enterprise Solutions IoT Iot Model 210",
+    "type": "IoT",
+    "model": "Iot Model 210",
+    "serialNumber": "771dd52c-cd5e-4d19-acad-d7cd4136f556",
+    "ipAddress": "192.168.103.235",
+    "macAddress": "a1:50:14:66:c5:7a",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-631",
+    "firewallRules": [
+      "allow 443",
+      "allow 3262"
+    ],
+    "created": 1756004130.661821,
+    "expired": 1756522530.661814,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device2-0",
+    "name": "Enterprise Solutions IoT Iot Model 733",
+    "type": "IoT",
+    "model": "Iot Model 733",
+    "serialNumber": "6dffeed1-8eb3-4f37-b9d5-4e00947966f2",
+    "ipAddress": "192.168.193.51",
+    "macAddress": "7c:f2:34:99:15:90",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "d217fda73360_device2",
+    "firewallRules": [
+      "allow 8775"
+    ],
+    "created": 1757904930.66183,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device2-1",
+    "name": "Enterprise Solutions IoT Iot Model 733",
+    "type": "IoT",
+    "model": "Iot Model 733",
+    "serialNumber": "6dffeed1-8eb3-4f37-b9d5-4e00947966f2",
+    "ipAddress": "192.168.193.51",
+    "macAddress": "7c:f2:34:99:15:90",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "d217fda73360_new-device-767",
+    "firewallRules": [
+      "allow 8775"
+    ],
+    "created": 1757818530.661848,
+    "expired": 1757904930.66183,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device2-2",
+    "name": "Enterprise Solutions IoT Iot Model 733",
+    "type": "IoT",
+    "model": "Iot Model 733",
+    "serialNumber": "6dffeed1-8eb3-4f37-b9d5-4e00947966f2",
+    "ipAddress": "192.168.193.51",
+    "macAddress": "7c:f2:34:99:15:90",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "d217fda73360_new-device-702",
+    "firewallRules": [
+      "allow 8775"
+    ],
+    "created": 1757040930.661856,
+    "expired": 1757818530.661848,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device2-3",
+    "name": "Enterprise Solutions IoT Iot Model 733",
+    "type": "IoT",
+    "model": "Iot Model 733",
+    "serialNumber": "6dffeed1-8eb3-4f37-b9d5-4e00947966f2",
+    "ipAddress": "192.168.193.51",
+    "macAddress": "7c:f2:34:99:15:90",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "d217fda73360_new-device-275",
+    "firewallRules": [
+      "allow 8775"
+    ],
+    "created": 1756954530.661863,
+    "expired": 1757040930.661856,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device2-4",
+    "name": "Enterprise Solutions IoT Iot Model 733",
+    "type": "IoT",
+    "model": "Iot Model 733",
+    "serialNumber": "6dffeed1-8eb3-4f37-b9d5-4e00947966f2",
+    "ipAddress": "192.168.193.51",
+    "macAddress": "7c:f2:34:99:15:90",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "d217fda73360_new-device-893",
+    "firewallRules": [
+      "allow 8775"
+    ],
+    "created": 1756522530.661869,
+    "expired": 1756954530.661863,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device2-5",
+    "name": "Enterprise Solutions IoT Iot Model 733",
+    "type": "IoT",
+    "model": "Iot Model 733",
+    "serialNumber": "6dffeed1-8eb3-4f37-b9d5-4e00947966f2",
+    "ipAddress": "192.168.193.51",
+    "macAddress": "7c:f2:34:99:15:90",
+    "operatingSystem": "Zephyr",
+    "osVersion": "Zephyr 3.2.0",
+    "hostName": "d217fda73360_new-device-419",
+    "firewallRules": [
+      "allow 8775"
+    ],
+    "created": 1755831330.661876,
+    "expired": 1756522530.661869,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device3-0",
+    "name": "Enterprise Solutions IoT Iot Model 304",
+    "type": "IoT",
+    "model": "Iot Model 304",
+    "serialNumber": "33cb0f7c-6607-413e-926d-38eece4a0e4e",
+    "ipAddress": "192.168.206.62",
+    "macAddress": "a1:c5:16:01:42:38",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "d217fda73360_device3",
+    "firewallRules": [
+      "allow 5685"
+    ],
+    "created": 1757904930.661884,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device3-1",
+    "name": "Enterprise Solutions IoT Iot Model 304",
+    "type": "IoT",
+    "model": "Iot Model 304",
+    "serialNumber": "33cb0f7c-6607-413e-926d-38eece4a0e4e",
+    "ipAddress": "192.168.206.62",
+    "macAddress": "a1:c5:16:01:42:38",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "d217fda73360_new-device-724",
+    "firewallRules": [
+      "allow 5685"
+    ],
+    "created": 1757559330.661899,
+    "expired": 1757904930.661884,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device3-2",
+    "name": "Enterprise Solutions IoT Iot Model 304",
+    "type": "IoT",
+    "model": "Iot Model 304",
+    "serialNumber": "33cb0f7c-6607-413e-926d-38eece4a0e4e",
+    "ipAddress": "192.168.206.62",
+    "macAddress": "a1:c5:16:01:42:38",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "d217fda73360_new-device-624",
+    "firewallRules": [
+      "allow 5685"
+    ],
+    "created": 1757213730.661906,
+    "expired": 1757559330.661899,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device3-3",
+    "name": "Enterprise Solutions IoT Iot Model 304",
+    "type": "IoT",
+    "model": "Iot Model 304",
+    "serialNumber": "33cb0f7c-6607-413e-926d-38eece4a0e4e",
+    "ipAddress": "192.168.206.62",
+    "macAddress": "a1:c5:16:01:42:38",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "d217fda73360_new-device-971",
+    "firewallRules": [
+      "allow 5685"
+    ],
+    "created": 1756954530.661913,
+    "expired": 1757213730.661906,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device3-4",
+    "name": "Enterprise Solutions IoT Iot Model 304",
+    "type": "IoT",
+    "model": "Iot Model 304",
+    "serialNumber": "33cb0f7c-6607-413e-926d-38eece4a0e4e",
+    "ipAddress": "192.168.206.62",
+    "macAddress": "a1:c5:16:01:42:38",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "d217fda73360_new-device-234",
+    "firewallRules": [
+      "allow 5685"
+    ],
+    "created": 1756176930.661957,
+    "expired": 1756954530.661913,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device3-5",
+    "name": "Enterprise Solutions IoT Iot Model 304",
+    "type": "IoT",
+    "model": "Iot Model 304",
+    "serialNumber": "33cb0f7c-6607-413e-926d-38eece4a0e4e",
+    "ipAddress": "192.168.206.62",
+    "macAddress": "a1:c5:16:01:42:38",
+    "operatingSystem": "FreeRTOS",
+    "osVersion": "FreeRTOS 10.5.1",
+    "hostName": "d217fda73360_new-device-212",
+    "firewallRules": [
+      "allow 5685"
+    ],
+    "created": 1755831330.661967,
+    "expired": 1756176930.661957,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device4-0",
+    "name": "Enterprise Solutions laptop Laptop Model 450",
+    "type": "laptop",
+    "model": "Laptop Model 450",
+    "serialNumber": "e23c0fd4-7185-4549-af6a-92ca5c131430",
+    "ipAddress": "192.168.220.32",
+    "macAddress": "74:84:25:9c:dd:ed",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "d217fda73360_device4",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757904930.661979,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device4-1",
+    "name": "Enterprise Solutions laptop Laptop Model 450",
+    "type": "laptop",
+    "model": "Laptop Model 450",
+    "serialNumber": "e23c0fd4-7185-4549-af6a-92ca5c131430",
+    "ipAddress": "192.168.220.32",
+    "macAddress": "74:84:25:9c:dd:ed",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "d217fda73360_new-device-727",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757472930.662006,
+    "expired": 1757904930.661979,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device4-2",
+    "name": "Enterprise Solutions laptop Laptop Model 450",
+    "type": "laptop",
+    "model": "Laptop Model 450",
+    "serialNumber": "e23c0fd4-7185-4549-af6a-92ca5c131430",
+    "ipAddress": "192.168.220.32",
+    "macAddress": "74:84:25:9c:dd:ed",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "d217fda73360_new-device-377",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757386530.662013,
+    "expired": 1757472930.662006,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device4-3",
+    "name": "Enterprise Solutions laptop Laptop Model 450",
+    "type": "laptop",
+    "model": "Laptop Model 450",
+    "serialNumber": "e23c0fd4-7185-4549-af6a-92ca5c131430",
+    "ipAddress": "192.168.220.32",
+    "macAddress": "74:84:25:9c:dd:ed",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "d217fda73360_new-device-966",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756695330.662019,
+    "expired": 1757386530.662013,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device4-4",
+    "name": "Enterprise Solutions laptop Laptop Model 450",
+    "type": "laptop",
+    "model": "Laptop Model 450",
+    "serialNumber": "e23c0fd4-7185-4549-af6a-92ca5c131430",
+    "ipAddress": "192.168.220.32",
+    "macAddress": "74:84:25:9c:dd:ed",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "d217fda73360_new-device-941",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756176930.662027,
+    "expired": 1756695330.662019,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device4-5",
+    "name": "Enterprise Solutions laptop Laptop Model 450",
+    "type": "laptop",
+    "model": "Laptop Model 450",
+    "serialNumber": "e23c0fd4-7185-4549-af6a-92ca5c131430",
+    "ipAddress": "192.168.220.32",
+    "macAddress": "74:84:25:9c:dd:ed",
+    "operatingSystem": "Fedora",
+    "osVersion": "Fedora 37 Workstation",
+    "hostName": "d217fda73360_new-device-741",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1755917730.662033,
+    "expired": 1756176930.662027,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device5-0",
+    "name": "Enterprise Solutions server Server Model 603",
+    "type": "server",
+    "model": "Server Model 603",
+    "serialNumber": "f57fca27-8573-4e83-a822-5eff0594e168",
+    "ipAddress": "192.168.92.136",
+    "macAddress": "67:b1:4d:c3:6a:29",
+    "operatingSystem": "Debian",
+    "osVersion": "Debian 11.7",
+    "hostName": "d217fda73360_device5",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757904930.662042,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device5-1",
+    "name": "Enterprise Solutions server Server Model 603",
+    "type": "server",
+    "model": "Server Model 603",
+    "serialNumber": "f57fca27-8573-4e83-a822-5eff0594e168",
+    "ipAddress": "192.168.92.136",
+    "macAddress": "67:b1:4d:c3:6a:29",
+    "operatingSystem": "Debian",
+    "osVersion": "Debian 11.7",
+    "hostName": "d217fda73360_new-device-271",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757559330.66206,
+    "expired": 1757904930.662042,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device5-2",
+    "name": "Enterprise Solutions server Server Model 603",
+    "type": "server",
+    "model": "Server Model 603",
+    "serialNumber": "f57fca27-8573-4e83-a822-5eff0594e168",
+    "ipAddress": "192.168.92.136",
+    "macAddress": "67:b1:4d:c3:6a:29",
+    "operatingSystem": "Debian",
+    "osVersion": "Debian 11.7",
+    "hostName": "d217fda73360_new-device-822",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1757386530.662068,
+    "expired": 1757559330.66206,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device5-3",
+    "name": "Enterprise Solutions server Server Model 603",
+    "type": "server",
+    "model": "Server Model 603",
+    "serialNumber": "f57fca27-8573-4e83-a822-5eff0594e168",
+    "ipAddress": "192.168.92.136",
+    "macAddress": "67:b1:4d:c3:6a:29",
+    "operatingSystem": "Debian",
+    "osVersion": "Debian 11.7",
+    "hostName": "d217fda73360_new-device-304",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756781730.662076,
+    "expired": 1757386530.662068,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device5-4",
+    "name": "Enterprise Solutions server Server Model 603",
+    "type": "server",
+    "model": "Server Model 603",
+    "serialNumber": "f57fca27-8573-4e83-a822-5eff0594e168",
+    "ipAddress": "192.168.92.136",
+    "macAddress": "67:b1:4d:c3:6a:29",
+    "operatingSystem": "Debian",
+    "osVersion": "Debian 11.7",
+    "hostName": "d217fda73360_new-device-902",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756263330.662083,
+    "expired": 1756781730.662076,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device5-5",
+    "name": "Enterprise Solutions server Server Model 603",
+    "type": "server",
+    "model": "Server Model 603",
+    "serialNumber": "f57fca27-8573-4e83-a822-5eff0594e168",
+    "ipAddress": "192.168.92.136",
+    "macAddress": "67:b1:4d:c3:6a:29",
+    "operatingSystem": "Debian",
+    "osVersion": "Debian 11.7",
+    "hostName": "d217fda73360_new-device-399",
+    "firewallRules": [
+      "allow 80"
+    ],
+    "created": 1756004130.662089,
+    "expired": 1756263330.662083,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device6-0",
+    "name": "Enterprise Solutions router Router Model 362",
+    "type": "router",
+    "model": "Router Model 362",
+    "serialNumber": "bca908ff-c797-4577-bb65-7f8ac5f349c5",
+    "ipAddress": "192.168.56.108",
+    "macAddress": "fc:53:e9:3f:33:dd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "d217fda73360_device6",
+    "firewallRules": [
+      "allow 3596"
+    ],
+    "created": 1757904930.662097,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device6-1",
+    "name": "Enterprise Solutions router Router Model 362",
+    "type": "router",
+    "model": "Router Model 362",
+    "serialNumber": "bca908ff-c797-4577-bb65-7f8ac5f349c5",
+    "ipAddress": "192.168.56.108",
+    "macAddress": "fc:53:e9:3f:33:dd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "d217fda73360_new-device-408",
+    "firewallRules": [
+      "allow 3596"
+    ],
+    "created": 1757645730.662113,
+    "expired": 1757904930.662097,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device6-2",
+    "name": "Enterprise Solutions router Router Model 362",
+    "type": "router",
+    "model": "Router Model 362",
+    "serialNumber": "bca908ff-c797-4577-bb65-7f8ac5f349c5",
+    "ipAddress": "192.168.56.108",
+    "macAddress": "fc:53:e9:3f:33:dd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "d217fda73360_new-device-343",
+    "firewallRules": [
+      "allow 3596"
+    ],
+    "created": 1757040930.66212,
+    "expired": 1757645730.662113,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device6-3",
+    "name": "Enterprise Solutions router Router Model 362",
+    "type": "router",
+    "model": "Router Model 362",
+    "serialNumber": "bca908ff-c797-4577-bb65-7f8ac5f349c5",
+    "ipAddress": "192.168.56.108",
+    "macAddress": "fc:53:e9:3f:33:dd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "d217fda73360_new-device-778",
+    "firewallRules": [
+      "allow 3596"
+    ],
+    "created": 1756608930.662127,
+    "expired": 1757040930.66212,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device6-4",
+    "name": "Enterprise Solutions router Router Model 362",
+    "type": "router",
+    "model": "Router Model 362",
+    "serialNumber": "bca908ff-c797-4577-bb65-7f8ac5f349c5",
+    "ipAddress": "192.168.56.108",
+    "macAddress": "fc:53:e9:3f:33:dd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "d217fda73360_new-device-587",
+    "firewallRules": [
+      "allow 3596"
+    ],
+    "created": 1756349730.662133,
+    "expired": 1756608930.662127,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device6-5",
+    "name": "Enterprise Solutions router Router Model 362",
+    "type": "router",
+    "model": "Router Model 362",
+    "serialNumber": "bca908ff-c797-4577-bb65-7f8ac5f349c5",
+    "ipAddress": "192.168.56.108",
+    "macAddress": "fc:53:e9:3f:33:dd",
+    "operatingSystem": "pfSense",
+    "osVersion": "pfSense 2.6.0",
+    "hostName": "d217fda73360_new-device-238",
+    "firewallRules": [
+      "allow 3596"
+    ],
+    "created": 1755917730.66214,
+    "expired": 1756349730.662133,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device7-0",
+    "name": "Enterprise Solutions router Router Model 620",
+    "type": "router",
+    "model": "Router Model 620",
+    "serialNumber": "50d532a1-505a-470c-8ecc-025f22399cb0",
+    "ipAddress": "192.168.82.133",
+    "macAddress": "03:cc:94:f8:85:5b",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_device7",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4020",
+      "allow 2805"
+    ],
+    "created": 1757904930.662147,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device7-1",
+    "name": "Enterprise Solutions router Router Model 620",
+    "type": "router",
+    "model": "Router Model 620",
+    "serialNumber": "50d532a1-505a-470c-8ecc-025f22399cb0",
+    "ipAddress": "192.168.82.133",
+    "macAddress": "03:cc:94:f8:85:5b",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-213",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4020",
+      "allow 2805"
+    ],
+    "created": 1757732130.662163,
+    "expired": 1757904930.662147,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device7-2",
+    "name": "Enterprise Solutions router Router Model 620",
+    "type": "router",
+    "model": "Router Model 620",
+    "serialNumber": "50d532a1-505a-470c-8ecc-025f22399cb0",
+    "ipAddress": "192.168.82.133",
+    "macAddress": "03:cc:94:f8:85:5b",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-952",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4020",
+      "allow 2805"
+    ],
+    "created": 1757386530.66217,
+    "expired": 1757732130.662163,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device7-3",
+    "name": "Enterprise Solutions router Router Model 620",
+    "type": "router",
+    "model": "Router Model 620",
+    "serialNumber": "50d532a1-505a-470c-8ecc-025f22399cb0",
+    "ipAddress": "192.168.82.133",
+    "macAddress": "03:cc:94:f8:85:5b",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-776",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4020",
+      "allow 2805"
+    ],
+    "created": 1756868130.662176,
+    "expired": 1757386530.66217,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device7-4",
+    "name": "Enterprise Solutions router Router Model 620",
+    "type": "router",
+    "model": "Router Model 620",
+    "serialNumber": "50d532a1-505a-470c-8ecc-025f22399cb0",
+    "ipAddress": "192.168.82.133",
+    "macAddress": "03:cc:94:f8:85:5b",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-437",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4020",
+      "allow 2805"
+    ],
+    "created": 1756522530.662183,
+    "expired": 1756868130.662176,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device7-5",
+    "name": "Enterprise Solutions router Router Model 620",
+    "type": "router",
+    "model": "Router Model 620",
+    "serialNumber": "50d532a1-505a-470c-8ecc-025f22399cb0",
+    "ipAddress": "192.168.82.133",
+    "macAddress": "03:cc:94:f8:85:5b",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-254",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4020",
+      "allow 2805"
+    ],
+    "created": 1755744930.662189,
+    "expired": 1756522530.662183,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device8-0",
+    "name": "Enterprise Solutions laptop Laptop Model 309",
+    "type": "laptop",
+    "model": "Laptop Model 309",
+    "serialNumber": "f045d4ae-4fe1-429c-ad8c-91654246db0b",
+    "ipAddress": "192.168.172.231",
+    "macAddress": "ee:9c:0c:b2:d7:82",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "d217fda73360_device8",
+    "firewallRules": [
+      "allow 80",
+      "allow 2125"
+    ],
+    "created": 1757904930.662197,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device8-1",
+    "name": "Enterprise Solutions laptop Laptop Model 309",
+    "type": "laptop",
+    "model": "Laptop Model 309",
+    "serialNumber": "f045d4ae-4fe1-429c-ad8c-91654246db0b",
+    "ipAddress": "192.168.172.231",
+    "macAddress": "ee:9c:0c:b2:d7:82",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "d217fda73360_new-device-317",
+    "firewallRules": [
+      "allow 80",
+      "allow 2125"
+    ],
+    "created": 1757559330.662247,
+    "expired": 1757904930.662197,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device8-2",
+    "name": "Enterprise Solutions laptop Laptop Model 309",
+    "type": "laptop",
+    "model": "Laptop Model 309",
+    "serialNumber": "f045d4ae-4fe1-429c-ad8c-91654246db0b",
+    "ipAddress": "192.168.172.231",
+    "macAddress": "ee:9c:0c:b2:d7:82",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "d217fda73360_new-device-791",
+    "firewallRules": [
+      "allow 80",
+      "allow 2125"
+    ],
+    "created": 1757213730.662255,
+    "expired": 1757559330.662247,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device8-3",
+    "name": "Enterprise Solutions laptop Laptop Model 309",
+    "type": "laptop",
+    "model": "Laptop Model 309",
+    "serialNumber": "f045d4ae-4fe1-429c-ad8c-91654246db0b",
+    "ipAddress": "192.168.172.231",
+    "macAddress": "ee:9c:0c:b2:d7:82",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "d217fda73360_new-device-540",
+    "firewallRules": [
+      "allow 80",
+      "allow 2125"
+    ],
+    "created": 1756781730.662261,
+    "expired": 1757213730.662255,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device8-4",
+    "name": "Enterprise Solutions laptop Laptop Model 309",
+    "type": "laptop",
+    "model": "Laptop Model 309",
+    "serialNumber": "f045d4ae-4fe1-429c-ad8c-91654246db0b",
+    "ipAddress": "192.168.172.231",
+    "macAddress": "ee:9c:0c:b2:d7:82",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "d217fda73360_new-device-924",
+    "firewallRules": [
+      "allow 80",
+      "allow 2125"
+    ],
+    "created": 1756522530.662289,
+    "expired": 1756781730.662261,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device8-5",
+    "name": "Enterprise Solutions laptop Laptop Model 309",
+    "type": "laptop",
+    "model": "Laptop Model 309",
+    "serialNumber": "f045d4ae-4fe1-429c-ad8c-91654246db0b",
+    "ipAddress": "192.168.172.231",
+    "macAddress": "ee:9c:0c:b2:d7:82",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 22.04 LTS",
+    "hostName": "d217fda73360_new-device-710",
+    "firewallRules": [
+      "allow 80",
+      "allow 2125"
+    ],
+    "created": 1756090530.66233,
+    "expired": 1756522530.662289,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device9-0",
+    "name": "Enterprise Solutions server Server Model 281",
+    "type": "server",
+    "model": "Server Model 281",
+    "serialNumber": "6fc18f55-4918-4a80-9d7e-b21f9e1bfc04",
+    "ipAddress": "192.168.161.97",
+    "macAddress": "91:50:e8:09:de:97",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "d217fda73360_device9",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757904930.662351,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device9-1",
+    "name": "Enterprise Solutions server Server Model 281",
+    "type": "server",
+    "model": "Server Model 281",
+    "serialNumber": "6fc18f55-4918-4a80-9d7e-b21f9e1bfc04",
+    "ipAddress": "192.168.161.97",
+    "macAddress": "91:50:e8:09:de:97",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "d217fda73360_new-device-610",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757472930.66239,
+    "expired": 1757904930.662351,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device9-2",
+    "name": "Enterprise Solutions server Server Model 281",
+    "type": "server",
+    "model": "Server Model 281",
+    "serialNumber": "6fc18f55-4918-4a80-9d7e-b21f9e1bfc04",
+    "ipAddress": "192.168.161.97",
+    "macAddress": "91:50:e8:09:de:97",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "d217fda73360_new-device-119",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1757127330.662397,
+    "expired": 1757472930.66239,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device9-3",
+    "name": "Enterprise Solutions server Server Model 281",
+    "type": "server",
+    "model": "Server Model 281",
+    "serialNumber": "6fc18f55-4918-4a80-9d7e-b21f9e1bfc04",
+    "ipAddress": "192.168.161.97",
+    "macAddress": "91:50:e8:09:de:97",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "d217fda73360_new-device-981",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756781730.662405,
+    "expired": 1757127330.662397,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device9-4",
+    "name": "Enterprise Solutions server Server Model 281",
+    "type": "server",
+    "model": "Server Model 281",
+    "serialNumber": "6fc18f55-4918-4a80-9d7e-b21f9e1bfc04",
+    "ipAddress": "192.168.161.97",
+    "macAddress": "91:50:e8:09:de:97",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "d217fda73360_new-device-296",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1756522530.662411,
+    "expired": 1756781730.662405,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device9-5",
+    "name": "Enterprise Solutions server Server Model 281",
+    "type": "server",
+    "model": "Server Model 281",
+    "serialNumber": "6fc18f55-4918-4a80-9d7e-b21f9e1bfc04",
+    "ipAddress": "192.168.161.97",
+    "macAddress": "91:50:e8:09:de:97",
+    "operatingSystem": "CentOS",
+    "osVersion": "CentOS 7.9.2009",
+    "hostName": "d217fda73360_new-device-703",
+    "firewallRules": [
+      "allow 443"
+    ],
+    "created": 1755917730.662417,
+    "expired": 1756522530.662411,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device10-0",
+    "name": "Enterprise Solutions laptop Laptop Model 493",
+    "type": "laptop",
+    "model": "Laptop Model 493",
+    "serialNumber": "a93efc75-df33-4f41-8046-8d87d80489ee",
+    "ipAddress": "192.168.244.28",
+    "macAddress": "50:bd:64:94:78:3e",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "d217fda73360_device10",
+    "firewallRules": [
+      "allow 80",
+      "allow 2536"
+    ],
+    "created": 1757904930.662426,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device10-1",
+    "name": "Enterprise Solutions laptop Laptop Model 493",
+    "type": "laptop",
+    "model": "Laptop Model 493",
+    "serialNumber": "a93efc75-df33-4f41-8046-8d87d80489ee",
+    "ipAddress": "192.168.244.28",
+    "macAddress": "50:bd:64:94:78:3e",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "d217fda73360_new-device-687",
+    "firewallRules": [
+      "allow 80",
+      "allow 2536"
+    ],
+    "created": 1757559330.662443,
+    "expired": 1757904930.662426,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device10-2",
+    "name": "Enterprise Solutions laptop Laptop Model 493",
+    "type": "laptop",
+    "model": "Laptop Model 493",
+    "serialNumber": "a93efc75-df33-4f41-8046-8d87d80489ee",
+    "ipAddress": "192.168.244.28",
+    "macAddress": "50:bd:64:94:78:3e",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "d217fda73360_new-device-131",
+    "firewallRules": [
+      "allow 80",
+      "allow 2536"
+    ],
+    "created": 1757213730.662451,
+    "expired": 1757559330.662443,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device10-3",
+    "name": "Enterprise Solutions laptop Laptop Model 493",
+    "type": "laptop",
+    "model": "Laptop Model 493",
+    "serialNumber": "a93efc75-df33-4f41-8046-8d87d80489ee",
+    "ipAddress": "192.168.244.28",
+    "macAddress": "50:bd:64:94:78:3e",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "d217fda73360_new-device-791",
+    "firewallRules": [
+      "allow 80",
+      "allow 2536"
+    ],
+    "created": 1756954530.662457,
+    "expired": 1757213730.662451,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device10-4",
+    "name": "Enterprise Solutions laptop Laptop Model 493",
+    "type": "laptop",
+    "model": "Laptop Model 493",
+    "serialNumber": "a93efc75-df33-4f41-8046-8d87d80489ee",
+    "ipAddress": "192.168.244.28",
+    "macAddress": "50:bd:64:94:78:3e",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "d217fda73360_new-device-267",
+    "firewallRules": [
+      "allow 80",
+      "allow 2536"
+    ],
+    "created": 1756436130.662463,
+    "expired": 1756954530.662457,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device10-5",
+    "name": "Enterprise Solutions laptop Laptop Model 493",
+    "type": "laptop",
+    "model": "Laptop Model 493",
+    "serialNumber": "a93efc75-df33-4f41-8046-8d87d80489ee",
+    "ipAddress": "192.168.244.28",
+    "macAddress": "50:bd:64:94:78:3e",
+    "operatingSystem": "macOS",
+    "osVersion": "macOS Monterey 12.4",
+    "hostName": "d217fda73360_new-device-269",
+    "firewallRules": [
+      "allow 80",
+      "allow 2536"
+    ],
+    "created": 1755831330.662469,
+    "expired": 1756436130.662463,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device11-0",
+    "name": "Enterprise Solutions firewall Firewall Model 675",
+    "type": "firewall",
+    "model": "Firewall Model 675",
+    "serialNumber": "51d37d95-8352-4c7f-a8ec-380ffeb3f58c",
+    "ipAddress": "192.168.109.26",
+    "macAddress": "d5:ce:0a:24:9e:88",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "d217fda73360_device11",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4916"
+    ],
+    "created": 1757904930.662478,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device11-1",
+    "name": "Enterprise Solutions firewall Firewall Model 675",
+    "type": "firewall",
+    "model": "Firewall Model 675",
+    "serialNumber": "51d37d95-8352-4c7f-a8ec-380ffeb3f58c",
+    "ipAddress": "192.168.109.26",
+    "macAddress": "d5:ce:0a:24:9e:88",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "d217fda73360_new-device-595",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4916"
+    ],
+    "created": 1757732130.662493,
+    "expired": 1757904930.662478,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device11-2",
+    "name": "Enterprise Solutions firewall Firewall Model 675",
+    "type": "firewall",
+    "model": "Firewall Model 675",
+    "serialNumber": "51d37d95-8352-4c7f-a8ec-380ffeb3f58c",
+    "ipAddress": "192.168.109.26",
+    "macAddress": "d5:ce:0a:24:9e:88",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "d217fda73360_new-device-465",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4916"
+    ],
+    "created": 1757040930.662499,
+    "expired": 1757732130.662493,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device11-3",
+    "name": "Enterprise Solutions firewall Firewall Model 675",
+    "type": "firewall",
+    "model": "Firewall Model 675",
+    "serialNumber": "51d37d95-8352-4c7f-a8ec-380ffeb3f58c",
+    "ipAddress": "192.168.109.26",
+    "macAddress": "d5:ce:0a:24:9e:88",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "d217fda73360_new-device-920",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4916"
+    ],
+    "created": 1756954530.662505,
+    "expired": 1757040930.662499,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device11-4",
+    "name": "Enterprise Solutions firewall Firewall Model 675",
+    "type": "firewall",
+    "model": "Firewall Model 675",
+    "serialNumber": "51d37d95-8352-4c7f-a8ec-380ffeb3f58c",
+    "ipAddress": "192.168.109.26",
+    "macAddress": "d5:ce:0a:24:9e:88",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "d217fda73360_new-device-618",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4916"
+    ],
+    "created": 1756349730.662532,
+    "expired": 1756954530.662505,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device11-5",
+    "name": "Enterprise Solutions firewall Firewall Model 675",
+    "type": "firewall",
+    "model": "Firewall Model 675",
+    "serialNumber": "51d37d95-8352-4c7f-a8ec-380ffeb3f58c",
+    "ipAddress": "192.168.109.26",
+    "macAddress": "d5:ce:0a:24:9e:88",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.2.4",
+    "hostName": "d217fda73360_new-device-533",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 4916"
+    ],
+    "created": 1755744930.662548,
+    "expired": 1756349730.662532,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device12-0",
+    "name": "Enterprise Solutions IoT Iot Model 750",
+    "type": "IoT",
+    "model": "Iot Model 750",
+    "serialNumber": "fd066f64-36f5-4a3d-8025-30e2e7c2556a",
+    "ipAddress": "192.168.248.194",
+    "macAddress": "9b:80:4c:39:3c:a1",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_device12",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757904930.662559,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device12-1",
+    "name": "Enterprise Solutions IoT Iot Model 750",
+    "type": "IoT",
+    "model": "Iot Model 750",
+    "serialNumber": "fd066f64-36f5-4a3d-8025-30e2e7c2556a",
+    "ipAddress": "192.168.248.194",
+    "macAddress": "9b:80:4c:39:3c:a1",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-228",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757645730.662579,
+    "expired": 1757904930.662559,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device12-2",
+    "name": "Enterprise Solutions IoT Iot Model 750",
+    "type": "IoT",
+    "model": "Iot Model 750",
+    "serialNumber": "fd066f64-36f5-4a3d-8025-30e2e7c2556a",
+    "ipAddress": "192.168.248.194",
+    "macAddress": "9b:80:4c:39:3c:a1",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-237",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757213730.662586,
+    "expired": 1757645730.662579,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device12-3",
+    "name": "Enterprise Solutions IoT Iot Model 750",
+    "type": "IoT",
+    "model": "Iot Model 750",
+    "serialNumber": "fd066f64-36f5-4a3d-8025-30e2e7c2556a",
+    "ipAddress": "192.168.248.194",
+    "macAddress": "9b:80:4c:39:3c:a1",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-216",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756781730.662593,
+    "expired": 1757213730.662586,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device12-4",
+    "name": "Enterprise Solutions IoT Iot Model 750",
+    "type": "IoT",
+    "model": "Iot Model 750",
+    "serialNumber": "fd066f64-36f5-4a3d-8025-30e2e7c2556a",
+    "ipAddress": "192.168.248.194",
+    "macAddress": "9b:80:4c:39:3c:a1",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-500",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756436130.662599,
+    "expired": 1756781730.662593,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device12-5",
+    "name": "Enterprise Solutions IoT Iot Model 750",
+    "type": "IoT",
+    "model": "Iot Model 750",
+    "serialNumber": "fd066f64-36f5-4a3d-8025-30e2e7c2556a",
+    "ipAddress": "192.168.248.194",
+    "macAddress": "9b:80:4c:39:3c:a1",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 5.4.188",
+    "hostName": "d217fda73360_new-device-248",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755917730.662606,
+    "expired": 1756436130.662599,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device13-0",
+    "name": "Enterprise Solutions server Server Model 912",
+    "type": "server",
+    "model": "Server Model 912",
+    "serialNumber": "c6155163-e851-43d4-8c54-b9bb4bc7f7df",
+    "ipAddress": "192.168.156.161",
+    "macAddress": "dd:19:50:56:73:63",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "d217fda73360_device13",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8713",
+      "allow 8567"
+    ],
+    "created": 1757904930.662614,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device13-1",
+    "name": "Enterprise Solutions server Server Model 912",
+    "type": "server",
+    "model": "Server Model 912",
+    "serialNumber": "c6155163-e851-43d4-8c54-b9bb4bc7f7df",
+    "ipAddress": "192.168.156.161",
+    "macAddress": "dd:19:50:56:73:63",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "d217fda73360_new-device-751",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8713",
+      "allow 8567"
+    ],
+    "created": 1757645730.662629,
+    "expired": 1757904930.662614,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device13-2",
+    "name": "Enterprise Solutions server Server Model 912",
+    "type": "server",
+    "model": "Server Model 912",
+    "serialNumber": "c6155163-e851-43d4-8c54-b9bb4bc7f7df",
+    "ipAddress": "192.168.156.161",
+    "macAddress": "dd:19:50:56:73:63",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "d217fda73360_new-device-220",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8713",
+      "allow 8567"
+    ],
+    "created": 1757127330.662636,
+    "expired": 1757645730.662629,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device13-3",
+    "name": "Enterprise Solutions server Server Model 912",
+    "type": "server",
+    "model": "Server Model 912",
+    "serialNumber": "c6155163-e851-43d4-8c54-b9bb4bc7f7df",
+    "ipAddress": "192.168.156.161",
+    "macAddress": "dd:19:50:56:73:63",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "d217fda73360_new-device-168",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8713",
+      "allow 8567"
+    ],
+    "created": 1756608930.662642,
+    "expired": 1757127330.662636,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device13-4",
+    "name": "Enterprise Solutions server Server Model 912",
+    "type": "server",
+    "model": "Server Model 912",
+    "serialNumber": "c6155163-e851-43d4-8c54-b9bb4bc7f7df",
+    "ipAddress": "192.168.156.161",
+    "macAddress": "dd:19:50:56:73:63",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "d217fda73360_new-device-403",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8713",
+      "allow 8567"
+    ],
+    "created": 1756349730.662649,
+    "expired": 1756608930.662642,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device13-5",
+    "name": "Enterprise Solutions server Server Model 912",
+    "type": "server",
+    "model": "Server Model 912",
+    "serialNumber": "c6155163-e851-43d4-8c54-b9bb4bc7f7df",
+    "ipAddress": "192.168.156.161",
+    "macAddress": "dd:19:50:56:73:63",
+    "operatingSystem": "Ubuntu",
+    "osVersion": "Ubuntu 20.04.6 LTS",
+    "hostName": "d217fda73360_new-device-444",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 8713",
+      "allow 8567"
+    ],
+    "created": 1756090530.662655,
+    "expired": 1756349730.662649,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device14-0",
+    "name": "Enterprise Solutions IoT Iot Model 126",
+    "type": "IoT",
+    "model": "Iot Model 126",
+    "serialNumber": "38513097-f58d-4cb8-84bf-7acc91c803e6",
+    "ipAddress": "192.168.96.120",
+    "macAddress": "04:41:a2:ef:c5:6c",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "d217fda73360_device14",
+    "firewallRules": [],
+    "created": 1757904930.662663,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device14-1",
+    "name": "Enterprise Solutions IoT Iot Model 126",
+    "type": "IoT",
+    "model": "Iot Model 126",
+    "serialNumber": "38513097-f58d-4cb8-84bf-7acc91c803e6",
+    "ipAddress": "192.168.96.120",
+    "macAddress": "04:41:a2:ef:c5:6c",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "d217fda73360_new-device-704",
+    "firewallRules": [],
+    "created": 1757472930.662676,
+    "expired": 1757904930.662663,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device14-2",
+    "name": "Enterprise Solutions IoT Iot Model 126",
+    "type": "IoT",
+    "model": "Iot Model 126",
+    "serialNumber": "38513097-f58d-4cb8-84bf-7acc91c803e6",
+    "ipAddress": "192.168.96.120",
+    "macAddress": "04:41:a2:ef:c5:6c",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "d217fda73360_new-device-852",
+    "firewallRules": [],
+    "created": 1757213730.662683,
+    "expired": 1757472930.662676,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device14-3",
+    "name": "Enterprise Solutions IoT Iot Model 126",
+    "type": "IoT",
+    "model": "Iot Model 126",
+    "serialNumber": "38513097-f58d-4cb8-84bf-7acc91c803e6",
+    "ipAddress": "192.168.96.120",
+    "macAddress": "04:41:a2:ef:c5:6c",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "d217fda73360_new-device-194",
+    "firewallRules": [],
+    "created": 1756781730.66269,
+    "expired": 1757213730.662683,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device14-4",
+    "name": "Enterprise Solutions IoT Iot Model 126",
+    "type": "IoT",
+    "model": "Iot Model 126",
+    "serialNumber": "38513097-f58d-4cb8-84bf-7acc91c803e6",
+    "ipAddress": "192.168.96.120",
+    "macAddress": "04:41:a2:ef:c5:6c",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "d217fda73360_new-device-875",
+    "firewallRules": [],
+    "created": 1756176930.662696,
+    "expired": 1756781730.66269,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device14-5",
+    "name": "Enterprise Solutions IoT Iot Model 126",
+    "type": "IoT",
+    "model": "Iot Model 126",
+    "serialNumber": "38513097-f58d-4cb8-84bf-7acc91c803e6",
+    "ipAddress": "192.168.96.120",
+    "macAddress": "04:41:a2:ef:c5:6c",
+    "operatingSystem": "Embedded",
+    "osVersion": "Embedded Linux 4.14.247",
+    "hostName": "d217fda73360_new-device-679",
+    "firewallRules": [],
+    "created": 1755917730.662702,
+    "expired": 1756176930.662696,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device15-0",
+    "name": "Enterprise Solutions router Router Model 790",
+    "type": "router",
+    "model": "Router Model 790",
+    "serialNumber": "62cb5cb4-4c61-4048-9f31-34498c910265",
+    "ipAddress": "192.168.5.145",
+    "macAddress": "b0:ea:aa:23:31:51",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_device15",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3125",
+      "allow 6050"
+    ],
+    "created": 1757904930.662709,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device15-1",
+    "name": "Enterprise Solutions router Router Model 790",
+    "type": "router",
+    "model": "Router Model 790",
+    "serialNumber": "62cb5cb4-4c61-4048-9f31-34498c910265",
+    "ipAddress": "192.168.5.145",
+    "macAddress": "b0:ea:aa:23:31:51",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-106",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3125",
+      "allow 6050"
+    ],
+    "created": 1757818530.662723,
+    "expired": 1757904930.662709,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device15-2",
+    "name": "Enterprise Solutions router Router Model 790",
+    "type": "router",
+    "model": "Router Model 790",
+    "serialNumber": "62cb5cb4-4c61-4048-9f31-34498c910265",
+    "ipAddress": "192.168.5.145",
+    "macAddress": "b0:ea:aa:23:31:51",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-871",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3125",
+      "allow 6050"
+    ],
+    "created": 1757213730.66273,
+    "expired": 1757818530.662723,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device15-3",
+    "name": "Enterprise Solutions router Router Model 790",
+    "type": "router",
+    "model": "Router Model 790",
+    "serialNumber": "62cb5cb4-4c61-4048-9f31-34498c910265",
+    "ipAddress": "192.168.5.145",
+    "macAddress": "b0:ea:aa:23:31:51",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-118",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3125",
+      "allow 6050"
+    ],
+    "created": 1756868130.662736,
+    "expired": 1757213730.66273,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device15-4",
+    "name": "Enterprise Solutions router Router Model 790",
+    "type": "router",
+    "model": "Router Model 790",
+    "serialNumber": "62cb5cb4-4c61-4048-9f31-34498c910265",
+    "ipAddress": "192.168.5.145",
+    "macAddress": "b0:ea:aa:23:31:51",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-920",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3125",
+      "allow 6050"
+    ],
+    "created": 1756522530.662743,
+    "expired": 1756868130.662736,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device15-5",
+    "name": "Enterprise Solutions router Router Model 790",
+    "type": "router",
+    "model": "Router Model 790",
+    "serialNumber": "62cb5cb4-4c61-4048-9f31-34498c910265",
+    "ipAddress": "192.168.5.145",
+    "macAddress": "b0:ea:aa:23:31:51",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.9.3a",
+    "hostName": "d217fda73360_new-device-619",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 3125",
+      "allow 6050"
+    ],
+    "created": 1756090530.66275,
+    "expired": 1756522530.662743,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device16-0",
+    "name": "Enterprise Solutions laptop Laptop Model 359",
+    "type": "laptop",
+    "model": "Laptop Model 359",
+    "serialNumber": "b9873639-d5dc-4862-843e-4f1d6edd4489",
+    "ipAddress": "192.168.154.56",
+    "macAddress": "48:6b:8e:82:63:b6",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "d217fda73360_device16",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5366"
+    ],
+    "created": 1757904930.662759,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device16-1",
+    "name": "Enterprise Solutions laptop Laptop Model 359",
+    "type": "laptop",
+    "model": "Laptop Model 359",
+    "serialNumber": "b9873639-d5dc-4862-843e-4f1d6edd4489",
+    "ipAddress": "192.168.154.56",
+    "macAddress": "48:6b:8e:82:63:b6",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "d217fda73360_new-device-960",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5366"
+    ],
+    "created": 1757645730.662773,
+    "expired": 1757904930.662759,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device16-2",
+    "name": "Enterprise Solutions laptop Laptop Model 359",
+    "type": "laptop",
+    "model": "Laptop Model 359",
+    "serialNumber": "b9873639-d5dc-4862-843e-4f1d6edd4489",
+    "ipAddress": "192.168.154.56",
+    "macAddress": "48:6b:8e:82:63:b6",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "d217fda73360_new-device-808",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5366"
+    ],
+    "created": 1757213730.662779,
+    "expired": 1757645730.662773,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device16-3",
+    "name": "Enterprise Solutions laptop Laptop Model 359",
+    "type": "laptop",
+    "model": "Laptop Model 359",
+    "serialNumber": "b9873639-d5dc-4862-843e-4f1d6edd4489",
+    "ipAddress": "192.168.154.56",
+    "macAddress": "48:6b:8e:82:63:b6",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "d217fda73360_new-device-491",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5366"
+    ],
+    "created": 1756695330.662786,
+    "expired": 1757213730.662779,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device16-4",
+    "name": "Enterprise Solutions laptop Laptop Model 359",
+    "type": "laptop",
+    "model": "Laptop Model 359",
+    "serialNumber": "b9873639-d5dc-4862-843e-4f1d6edd4489",
+    "ipAddress": "192.168.154.56",
+    "macAddress": "48:6b:8e:82:63:b6",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "d217fda73360_new-device-244",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5366"
+    ],
+    "created": 1756349730.662792,
+    "expired": 1756695330.662786,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device16-5",
+    "name": "Enterprise Solutions laptop Laptop Model 359",
+    "type": "laptop",
+    "model": "Laptop Model 359",
+    "serialNumber": "b9873639-d5dc-4862-843e-4f1d6edd4489",
+    "ipAddress": "192.168.154.56",
+    "macAddress": "48:6b:8e:82:63:b6",
+    "operatingSystem": "Windows",
+    "osVersion": "Windows 11 Pro 22H2",
+    "hostName": "d217fda73360_new-device-974",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 5366"
+    ],
+    "created": 1755831330.662798,
+    "expired": 1756349730.662792,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device17-0",
+    "name": "Enterprise Solutions firewall Firewall Model 323",
+    "type": "firewall",
+    "model": "Firewall Model 323",
+    "serialNumber": "fc46a6af-af23-4d13-a598-067c6bf66dbc",
+    "ipAddress": "192.168.72.242",
+    "macAddress": "64:25:37:69:a0:ab",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "d217fda73360_device17",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757904930.662806,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device17-1",
+    "name": "Enterprise Solutions firewall Firewall Model 323",
+    "type": "firewall",
+    "model": "Firewall Model 323",
+    "serialNumber": "fc46a6af-af23-4d13-a598-067c6bf66dbc",
+    "ipAddress": "192.168.72.242",
+    "macAddress": "64:25:37:69:a0:ab",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "d217fda73360_new-device-649",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757559330.66282,
+    "expired": 1757904930.662806,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device17-2",
+    "name": "Enterprise Solutions firewall Firewall Model 323",
+    "type": "firewall",
+    "model": "Firewall Model 323",
+    "serialNumber": "fc46a6af-af23-4d13-a598-067c6bf66dbc",
+    "ipAddress": "192.168.72.242",
+    "macAddress": "64:25:37:69:a0:ab",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "d217fda73360_new-device-881",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1757300130.662826,
+    "expired": 1757559330.66282,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device17-3",
+    "name": "Enterprise Solutions firewall Firewall Model 323",
+    "type": "firewall",
+    "model": "Firewall Model 323",
+    "serialNumber": "fc46a6af-af23-4d13-a598-067c6bf66dbc",
+    "ipAddress": "192.168.72.242",
+    "macAddress": "64:25:37:69:a0:ab",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "d217fda73360_new-device-328",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756695330.662832,
+    "expired": 1757300130.662826,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device17-4",
+    "name": "Enterprise Solutions firewall Firewall Model 323",
+    "type": "firewall",
+    "model": "Firewall Model 323",
+    "serialNumber": "fc46a6af-af23-4d13-a598-067c6bf66dbc",
+    "ipAddress": "192.168.72.242",
+    "macAddress": "64:25:37:69:a0:ab",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "d217fda73360_new-device-183",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1756522530.662838,
+    "expired": 1756695330.662832,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device17-5",
+    "name": "Enterprise Solutions firewall Firewall Model 323",
+    "type": "firewall",
+    "model": "Firewall Model 323",
+    "serialNumber": "fc46a6af-af23-4d13-a598-067c6bf66dbc",
+    "ipAddress": "192.168.72.242",
+    "macAddress": "64:25:37:69:a0:ab",
+    "operatingSystem": "OpnSense",
+    "osVersion": "OpnSense 22.7",
+    "hostName": "d217fda73360_new-device-323",
+    "firewallRules": [
+      "allow 80",
+      "allow 443"
+    ],
+    "created": 1755744930.662845,
+    "expired": 1756522530.662838,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device18-0",
+    "name": "Enterprise Solutions firewall Firewall Model 433",
+    "type": "firewall",
+    "model": "Firewall Model 433",
+    "serialNumber": "947a5fe5-3a16-4b34-bbed-67fbb6d24027",
+    "ipAddress": "192.168.139.164",
+    "macAddress": "ff:e7:e4:8c:c2:b5",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_device18",
+    "firewallRules": [],
+    "created": 1757904930.662852,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device18-1",
+    "name": "Enterprise Solutions firewall Firewall Model 433",
+    "type": "firewall",
+    "model": "Firewall Model 433",
+    "serialNumber": "947a5fe5-3a16-4b34-bbed-67fbb6d24027",
+    "ipAddress": "192.168.139.164",
+    "macAddress": "ff:e7:e4:8c:c2:b5",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-801",
+    "firewallRules": [],
+    "created": 1757645730.662867,
+    "expired": 1757904930.662852,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device18-2",
+    "name": "Enterprise Solutions firewall Firewall Model 433",
+    "type": "firewall",
+    "model": "Firewall Model 433",
+    "serialNumber": "947a5fe5-3a16-4b34-bbed-67fbb6d24027",
+    "ipAddress": "192.168.139.164",
+    "macAddress": "ff:e7:e4:8c:c2:b5",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-744",
+    "firewallRules": [],
+    "created": 1757040930.662873,
+    "expired": 1757645730.662867,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device18-3",
+    "name": "Enterprise Solutions firewall Firewall Model 433",
+    "type": "firewall",
+    "model": "Firewall Model 433",
+    "serialNumber": "947a5fe5-3a16-4b34-bbed-67fbb6d24027",
+    "ipAddress": "192.168.139.164",
+    "macAddress": "ff:e7:e4:8c:c2:b5",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-962",
+    "firewallRules": [],
+    "created": 1756781730.662879,
+    "expired": 1757040930.662873,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device18-4",
+    "name": "Enterprise Solutions firewall Firewall Model 433",
+    "type": "firewall",
+    "model": "Firewall Model 433",
+    "serialNumber": "947a5fe5-3a16-4b34-bbed-67fbb6d24027",
+    "ipAddress": "192.168.139.164",
+    "macAddress": "ff:e7:e4:8c:c2:b5",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-439",
+    "firewallRules": [],
+    "created": 1756436130.662886,
+    "expired": 1756781730.662879,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device18-5",
+    "name": "Enterprise Solutions firewall Firewall Model 433",
+    "type": "firewall",
+    "model": "Firewall Model 433",
+    "serialNumber": "947a5fe5-3a16-4b34-bbed-67fbb6d24027",
+    "ipAddress": "192.168.139.164",
+    "macAddress": "ff:e7:e4:8c:c2:b5",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-406",
+    "firewallRules": [],
+    "created": 1755831330.662893,
+    "expired": 1756436130.662886,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device19-0",
+    "name": "Enterprise Solutions firewall Firewall Model 565",
+    "type": "firewall",
+    "model": "Firewall Model 565",
+    "serialNumber": "f946e607-82d2-40d8-b435-681f2c71f72a",
+    "ipAddress": "192.168.32.67",
+    "macAddress": "c9:da:0b:36:36:ac",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_device19",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6745"
+    ],
+    "created": 1757904930.662901,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device19-1",
+    "name": "Enterprise Solutions firewall Firewall Model 565",
+    "type": "firewall",
+    "model": "Firewall Model 565",
+    "serialNumber": "f946e607-82d2-40d8-b435-681f2c71f72a",
+    "ipAddress": "192.168.32.67",
+    "macAddress": "c9:da:0b:36:36:ac",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-213",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6745"
+    ],
+    "created": 1757818530.662915,
+    "expired": 1757904930.662901,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device19-2",
+    "name": "Enterprise Solutions firewall Firewall Model 565",
+    "type": "firewall",
+    "model": "Firewall Model 565",
+    "serialNumber": "f946e607-82d2-40d8-b435-681f2c71f72a",
+    "ipAddress": "192.168.32.67",
+    "macAddress": "c9:da:0b:36:36:ac",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-252",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6745"
+    ],
+    "created": 1757300130.662921,
+    "expired": 1757818530.662915,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device19-3",
+    "name": "Enterprise Solutions firewall Firewall Model 565",
+    "type": "firewall",
+    "model": "Firewall Model 565",
+    "serialNumber": "f946e607-82d2-40d8-b435-681f2c71f72a",
+    "ipAddress": "192.168.32.67",
+    "macAddress": "c9:da:0b:36:36:ac",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-658",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6745"
+    ],
+    "created": 1756695330.662928,
+    "expired": 1757300130.662921,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device19-4",
+    "name": "Enterprise Solutions firewall Firewall Model 565",
+    "type": "firewall",
+    "model": "Firewall Model 565",
+    "serialNumber": "f946e607-82d2-40d8-b435-681f2c71f72a",
+    "ipAddress": "192.168.32.67",
+    "macAddress": "c9:da:0b:36:36:ac",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-405",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6745"
+    ],
+    "created": 1756436130.662934,
+    "expired": 1756695330.662928,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device19-5",
+    "name": "Enterprise Solutions firewall Firewall Model 565",
+    "type": "firewall",
+    "model": "Firewall Model 565",
+    "serialNumber": "f946e607-82d2-40d8-b435-681f2c71f72a",
+    "ipAddress": "192.168.32.67",
+    "macAddress": "c9:da:0b:36:36:ac",
+    "operatingSystem": "FortiOS",
+    "osVersion": "FortiOS 7.0.9",
+    "hostName": "d217fda73360_new-device-473",
+    "firewallRules": [
+      "allow 80",
+      "allow 443",
+      "allow 6745"
+    ],
+    "created": 1755917730.66294,
+    "expired": 1756436130.662934,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device20-0",
+    "name": "Enterprise Solutions router Router Model 584",
+    "type": "router",
+    "model": "Router Model 584",
+    "serialNumber": "dac7ab1a-93b7-4efd-baf7-3b2bff22f625",
+    "ipAddress": "192.168.32.76",
+    "macAddress": "e8:41:67:00:fd:0e",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "d217fda73360_device20",
+    "firewallRules": [
+      "allow 443",
+      "allow 5985",
+      "allow 6695"
+    ],
+    "created": 1757904930.662948,
+    "expired": 9223372036854775807,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device20-1",
+    "name": "Enterprise Solutions router Router Model 584",
+    "type": "router",
+    "model": "Router Model 584",
+    "serialNumber": "dac7ab1a-93b7-4efd-baf7-3b2bff22f625",
+    "ipAddress": "192.168.32.76",
+    "macAddress": "e8:41:67:00:fd:0e",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "d217fda73360_new-device-529",
+    "firewallRules": [
+      "allow 443",
+      "allow 5985",
+      "allow 6695"
+    ],
+    "created": 1757472930.662963,
+    "expired": 1757904930.662948,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device20-2",
+    "name": "Enterprise Solutions router Router Model 584",
+    "type": "router",
+    "model": "Router Model 584",
+    "serialNumber": "dac7ab1a-93b7-4efd-baf7-3b2bff22f625",
+    "ipAddress": "192.168.32.76",
+    "macAddress": "e8:41:67:00:fd:0e",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "d217fda73360_new-device-378",
+    "firewallRules": [
+      "allow 443",
+      "allow 5985",
+      "allow 6695"
+    ],
+    "created": 1757040930.662969,
+    "expired": 1757472930.662963,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device20-3",
+    "name": "Enterprise Solutions router Router Model 584",
+    "type": "router",
+    "model": "Router Model 584",
+    "serialNumber": "dac7ab1a-93b7-4efd-baf7-3b2bff22f625",
+    "ipAddress": "192.168.32.76",
+    "macAddress": "e8:41:67:00:fd:0e",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "d217fda73360_new-device-643",
+    "firewallRules": [
+      "allow 443",
+      "allow 5985",
+      "allow 6695"
+    ],
+    "created": 1756781730.662976,
+    "expired": 1757040930.662969,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device20-4",
+    "name": "Enterprise Solutions router Router Model 584",
+    "type": "router",
+    "model": "Router Model 584",
+    "serialNumber": "dac7ab1a-93b7-4efd-baf7-3b2bff22f625",
+    "ipAddress": "192.168.32.76",
+    "macAddress": "e8:41:67:00:fd:0e",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "d217fda73360_new-device-309",
+    "firewallRules": [
+      "allow 443",
+      "allow 5985",
+      "allow 6695"
+    ],
+    "created": 1756349730.662982,
+    "expired": 1756781730.662976,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  },
+  {
+    "_key": "d217fda73360_device20-5",
+    "name": "Enterprise Solutions router Router Model 584",
+    "type": "router",
+    "model": "Router Model 584",
+    "serialNumber": "dac7ab1a-93b7-4efd-baf7-3b2bff22f625",
+    "ipAddress": "192.168.32.76",
+    "macAddress": "e8:41:67:00:fd:0e",
+    "operatingSystem": "IOS",
+    "osVersion": "IOS XE 17.6.4a",
+    "hostName": "d217fda73360_new-device-874",
+    "firewallRules": [
+      "allow 443",
+      "allow 5985",
+      "allow 6695"
+    ],
+    "created": 1756090530.662989,
+    "expired": 1756349730.662982,
+    "tenant_d217fda73360_attr": "d217fda73360"
+  }
+]

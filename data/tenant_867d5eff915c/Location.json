@@ -1,0 +1,227 @@
+[
+  {
+    "_key": "867d5eff915c_location1",
+    "name": "TechStart Inc - New York Data Center",
+    "streetAddress": "123 Broadway, New York, NY",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    },
+    "created": 1757904930.621364,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location2",
+    "name": "TechStart Inc - London Office",
+    "streetAddress": "456 Oxford St, London",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    },
+    "created": 1757904930.621374,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location3",
+    "name": "TechStart Inc - Tokyo HQ",
+    "streetAddress": "789 Ginza, Tokyo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    },
+    "created": 1757904930.621376,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location4",
+    "name": "TechStart Inc - Sydney Warehouse",
+    "streetAddress": "101 George St, Sydney",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    },
+    "created": 1757904930.621378,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location5",
+    "name": "TechStart Inc - Frankfurt Cloud Region",
+    "streetAddress": "222 Mainzer Landstr, Frankfurt",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    },
+    "created": 1757904930.62138,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location6",
+    "name": "TechStart Inc - Singapore Hub",
+    "streetAddress": "Marina Bay, Singapore",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        103.8764,
+        1.2966
+      ]
+    },
+    "created": 1757904930.621382,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location7",
+    "name": "TechStart Inc - Toronto Branch",
+    "streetAddress": "Bay St, Toronto",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -79.3832,
+        43.6532
+      ]
+    },
+    "created": 1757904930.621384,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location8",
+    "name": "TechStart Inc - Mumbai Center",
+    "streetAddress": "Nariman Point, Mumbai",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        72.8347,
+        18.922
+      ]
+    },
+    "created": 1757904930.621386,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location9",
+    "name": "TechStart Inc - S\u00e3o Paulo Office",
+    "streetAddress": "Av. Paulista, S\u00e3o Paulo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -46.6333,
+        -23.5505
+      ]
+    },
+    "created": 1757904930.621388,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location10",
+    "name": "TechStart Inc - Cape Town Hub",
+    "streetAddress": "V&A Waterfront, Cape Town",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        18.4167,
+        -33.9025
+      ]
+    },
+    "created": 1757904930.62139,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location11",
+    "name": "TechStart Inc - New York Data Center",
+    "streetAddress": "123 Broadway, New York, NY",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    },
+    "created": 1757904930.621392,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location12",
+    "name": "TechStart Inc - London Office",
+    "streetAddress": "456 Oxford St, London",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        -0.1278,
+        51.5074
+      ]
+    },
+    "created": 1757904930.621394,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location13",
+    "name": "TechStart Inc - Tokyo HQ",
+    "streetAddress": "789 Ginza, Tokyo",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        139.6917,
+        35.6895
+      ]
+    },
+    "created": 1757904930.621398,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location14",
+    "name": "TechStart Inc - Sydney Warehouse",
+    "streetAddress": "101 George St, Sydney",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        151.2093,
+        -33.8688
+      ]
+    },
+    "created": 1757904930.6214,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  },
+  {
+    "_key": "867d5eff915c_location15",
+    "name": "TechStart Inc - Frankfurt Cloud Region",
+    "streetAddress": "222 Mainzer Landstr, Frankfurt",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [
+        8.6821,
+        50.1109
+      ]
+    },
+    "created": 1757904930.621402,
+    "expired": 9223372036854775807,
+    "tenant_867d5eff915c_attr": "867d5eff915c"
+  }
+]

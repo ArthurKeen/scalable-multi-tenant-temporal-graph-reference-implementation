@@ -389,7 +389,7 @@ class AutomatedDemoWalkthrough:
         # Run transaction simulation
         print("Simulating configuration changes...")
         try:
-            simulator = TransactionSimulator(NamingConvention.CAMEL_CASE)
+            simulator = TransactionSimulator(NamingConvention.CAMEL_CASE, show_queries=True)
             
             print("Simulating device configuration changes...")
             print("   - Updating hostnames and IP addresses")
@@ -455,7 +455,7 @@ class AutomatedDemoWalkthrough:
         # Run TTL demonstration
         print("Starting TTL demonstration...")
         try:
-            ttl_demo = TTLDemoScenarios(NamingConvention.CAMEL_CASE)
+            ttl_demo = TTLDemoScenarios(NamingConvention.CAMEL_CASE, show_queries=True)
             
             print("Running Device Maintenance Cycle scenario...")
             print("   - Recording pre-maintenance state")

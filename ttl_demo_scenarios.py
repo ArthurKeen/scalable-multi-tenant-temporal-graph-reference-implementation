@@ -28,9 +28,10 @@ from ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES
 class TTLDemoScenarios:
     """Demonstrates TTL time travel capabilities with realistic scenarios."""
     
-    def __init__(self, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
+    def __init__(self, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE, show_queries: bool = False):
         self.naming_convention = naming_convention
         self.app_config = get_config("production", naming_convention)
+        self.show_queries = show_queries
         
         # Database connection
         creds = CredentialsManager.get_database_credentials()
@@ -39,7 +40,7 @@ class TTLDemoScenarios:
         self.creds = creds
         
         # Transaction simulator
-        self.simulator = TransactionSimulator(naming_convention)
+        self.simulator = TransactionSimulator(naming_convention, show_queries)
         
         # Query helper for time travel queries
         self.query_helper = QueryHelper()
@@ -66,6 +67,37 @@ class TTLDemoScenarios:
         except Exception as e:
             print(f"[ERROR] Failed to connect: {str(e)}")
             return False
+    
+    def execute_and_display_query(self, query: str, query_name: str, bind_vars: Dict = None) -> List[Dict]:
+        """Execute a query and display it with results if show_queries is enabled."""
+        if self.show_queries:
+            print(f"\n[QUERY] {query_name}:")
+            print(f"   AQL: {query}")
+            if bind_vars:
+                print(f"   Variables: {bind_vars}")
+        
+        try:
+            cursor = self.database.aql.execute(query, bind_vars=bind_vars)
+            results = list(cursor)
+            
+            if self.show_queries:
+                print(f"   Results: {len(results)} documents returned")
+                if results and len(results) <= 3:  # Show sample results for small result sets
+                    for i, result in enumerate(results[:3]):
+                        if isinstance(result, dict):
+                            # Show key fields only
+                            sample = {k: v for k, v in result.items() if k in ['_key', '_id', 'name', 'type', 'created', 'expired']}
+                            print(f"   Sample {i+1}: {sample}")
+                elif results:
+                    print(f"   (Large result set - showing count only)")
+                print()
+            
+            return results
+        except Exception as e:
+            if self.show_queries:
+                print(f"   ERROR: {e}")
+                print()
+            raise e
     
     def scenario_1_device_maintenance_cycle(self) -> Dict[str, Any]:
         """
