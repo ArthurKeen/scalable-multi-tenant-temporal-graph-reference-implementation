@@ -189,43 +189,123 @@ class ComprehensiveDemo:
         return step_result
     
     def step_4_transaction_simulation(self) -> Dict[str, Any]:
-        """Step 4: Simulate configuration changes with TTL."""
+        """Step 4: Simulate configuration changes with TTL (Enhanced with Database Visibility)."""
         print(f"\n{'='*60}")
-        print(f"[STEP 4] TRANSACTION SIMULATION")
+        print(f"[STEP 4] UNIFIED TRANSACTION + TTL DEMONSTRATION")
         print(f"{'='*60}")
         
         step_start = datetime.datetime.now()
         
         try:
-            print(f"[ACTION] Simulating device and software configuration changes...")
+            print(f"[ENHANCED] This step shows transactions immediately activating TTL aging...")
+            print(f"[INFO] Demo Mode TTL: 10 minutes (vs 30 days in production)")
+            print(f"[VISIBILITY] Watch specific documents change in real-time")
+            print()
             
-            # Initialize transaction simulator
-            simulator = TransactionSimulator(self.naming_convention)
+            # Initialize transaction simulator with enhanced visibility
+            simulator = TransactionSimulator(self.naming_convention, show_queries=True)
+            if not simulator.connect_to_database():
+                raise Exception("Failed to connect transaction simulator to database")
+            
+            # Step 4a: Show documents to watch BEFORE transactions
+            print(f"[STEP 4A] DATABASE STATE BEFORE TRANSACTIONS")
+            print(f"{'='*50}")
+            
+            # Find specific documents to track
+            current_devices = simulator.find_current_configurations("device", 3)
+            current_software = simulator.find_current_configurations("software", 3)
+            
+            tracked_docs = []
+            
+            print(f"\n[WATCH LIST] Documents that will change:")
+            for i, device in enumerate(current_devices[:2]):
+                device_key = device["_key"]
+                hostname = device.get("hostName", "N/A")
+                expired_msg = "NEVER" if device["expired"] == 9223372036854775807 else str(device["expired"])
+                ttl_field = device.get("ttlExpireAt", "NOT SET")
+                
+                tracked_docs.append({"type": "Device", "key": device_key, "name": device.get("name", "Unknown")})
+                
+                print(f"   [DEVICE {i+1}] {device_key}")
+                print(f"      Name: {device.get('name', 'Unknown')}")
+                print(f"      Hostname: {hostname}")
+                print(f"      Current expired: {expired_msg}")
+                print(f"      Current ttlExpireAt: {ttl_field}")
+                print()
+            
+            for i, software in enumerate(current_software[:2]):
+                software_key = software["_key"]
+                port = software.get("portNumber", "N/A")
+                expired_msg = "NEVER" if software["expired"] == 9223372036854775807 else str(software["expired"])
+                ttl_field = software.get("ttlExpireAt", "NOT SET")
+                
+                tracked_docs.append({"type": "Software", "key": software_key, "name": software.get("name", "Unknown")})
+                
+                print(f"   [SOFTWARE {i+1}] {software_key}")
+                print(f"      Name: {software.get('name', 'Unknown')}")
+                print(f"      Port: {port}")
+                print(f"      Current expired: {expired_msg}")
+                print(f"      Current ttlExpireAt: {ttl_field}")
+                print()
+            
+            print(f"[INSTRUCTION] Open ArangoDB Web Interface:")
+            print(f"   1. Database: {simulator.creds.database_name}")
+            print(f"   2. Go to Collections → Device/Software → Documents")
+            print(f"   3. Search for the keys above")
+            print(f"   4. Watch 'expired' and 'ttlExpireAt' fields change!")
+            print()
+            
+            input("Press Enter when ready to execute transactions (check ArangoDB interface)...")
+            
+            # Step 4b: Execute transactions with immediate TTL activation
+            print(f"\n[STEP 4B] EXECUTING TRANSACTIONS (TTL ACTIVATION)")
+            print(f"{'='*50}")
+            
+            transaction_time = datetime.datetime.now()
+            print(f"[TRANSACTION TIME] {transaction_time}")
+            print(f"[TTL EXPIRATION] {transaction_time.timestamp() + 600} (in 10 minutes)")
+            print()
             
             # Simulate device configuration changes
-            print(f"   Simulating device configuration changes...")
-            device_changes = simulator.simulate_device_configuration_changes(device_count=5)
+            print(f"[DEVICE TRANSACTIONS] Updating device configurations...")
+            device_changes = simulator.simulate_device_configuration_changes(device_count=2)
             
-            # Simulate software configuration changes
-            print(f"   Simulating software configuration changes...")
-            software_changes = simulator.simulate_software_configuration_changes(software_count=3)
+            # Simulate software configuration changes  
+            print(f"\n[SOFTWARE TRANSACTIONS] Updating software configurations...")
+            software_changes = simulator.simulate_software_configuration_changes(software_count=2)
+            
+            print(f"\n[IMMEDIATE IMPACT] TTL fields have been set on historical documents!")
+            print(f"   Transaction timestamp: {transaction_time.timestamp()}")
+            print(f"   TTL expiration: {transaction_time.timestamp() + 600} (10 minutes from now)")
+            print(f"   Historical documents will auto-delete in 10 minutes")
+            print(f"   Current documents (expired=9223372036854775807) never expire")
+            print()
+            
+            print(f"[VERIFICATION] Check ArangoDB Web Interface NOW:")
+            print(f"   • Old documents should have ttlExpireAt timestamps")
+            print(f"   • New documents should have expired = 9223372036854775807")
+            print(f"   • Count historical vs current documents")
+            print()
             
             step_result = {
                 "step": 4,
-                "name": "Transaction Simulation",
+                "name": "Unified Transaction + TTL Demonstration",
                 "start_time": step_start.isoformat(),
                 "end_time": datetime.datetime.now().isoformat(),
                 "status": "completed",
                 "result": {
                     "device_changes": device_changes,
-                    "software_changes": software_changes
+                    "software_changes": software_changes,
+                    "tracked_documents": tracked_docs,
+                    "ttl_expiration_timestamp": transaction_time.timestamp() + 600
                 }
             }
             
-            print(f"\n[STEP 4 COMPLETE] Transaction simulation successful")
+            print(f"[STEP 4 COMPLETE] Unified transaction + TTL demonstration successful")
             print(f"   Device configurations updated: {len(device_changes)}")
             print(f"   Software configurations updated: {len(software_changes)}")
-            print(f"   Historical data preserved with TTL")
+            print(f"   Historical data preserved with 10-minute TTL")
+            print(f"   Monitor aging with: python3 ttl_monitor.py --duration 15")
             
         except Exception as e:
             step_result = {

@@ -189,9 +189,12 @@ class TransactionSimulator:
             
             # Generate new key for the new configuration
             key_parts = current_device["_key"].split("_")
-            if len(key_parts) >= 3:
-                tenant_id, entity_type, entity_id = key_parts[0], key_parts[1], key_parts[2]
-                new_key = f"{tenant_id}_{entity_type}_{entity_id}_sim_{int(timestamp.timestamp())}"
+            if len(key_parts) >= 2:
+                tenant_id = key_parts[0]
+                entity_part = key_parts[1]  # e.g., "device1-0"
+                # Use microseconds to ensure uniqueness
+                unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                new_key = f"{tenant_id}_{entity_part}_{unique_suffix}"
                 new_config["_key"] = new_key
             
             return ConfigurationChange(
@@ -246,9 +249,12 @@ class TransactionSimulator:
             
             # Generate new key
             key_parts = current_software["_key"].split("_")
-            if len(key_parts) >= 3:
-                tenant_id, entity_type, entity_id = key_parts[0], key_parts[1], key_parts[2]
-                new_key = f"{tenant_id}_{entity_type}_{entity_id}_sim_{int(timestamp.timestamp())}"
+            if len(key_parts) >= 2:
+                tenant_id = key_parts[0]
+                entity_part = key_parts[1]  # e.g., "software3-0"
+                # Use microseconds to ensure uniqueness
+                unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                new_key = f"{tenant_id}_{entity_part}_{unique_suffix}"
                 new_config["_key"] = new_key
             
             return ConfigurationChange(
@@ -306,7 +312,7 @@ class TransactionSimulator:
     def _update_version_edges(self, change: ConfigurationChange):
         """Update version edges for the configuration change."""
         try:
-            version_collection_name = self.app_config.get_collection_name("hasVersion")
+            version_collection_name = self.app_config.get_collection_name("versions")
             if not version_collection_name:
                 return
             
@@ -390,6 +396,58 @@ class TransactionSimulator:
         print(f"   Errors: {results['error_count']}")
         
         return results
+    
+    def simulate_device_configuration_changes(self, device_count: int = 3) -> List[ConfigurationChange]:
+        """Simulate multiple device configuration changes."""
+        try:
+            print(f"[SIMULATION] Starting {device_count} device configuration changes...")
+            changes = []
+            
+            # Find current device configurations
+            current_devices = self.find_current_configurations("devices", device_count)
+            
+            for device in current_devices:
+                change = self.simulate_device_configuration_change(device)
+                if change:
+                    if self.execute_configuration_change(change):
+                        changes.append(change)
+                        print(f"   [CHANGE] {change.change_description}")
+                    else:
+                        print(f"   [ERROR] Failed to execute change for {device['_key']}")
+                else:
+                    print(f"   [SKIP] No change generated for {device['_key']}")
+            
+            return changes
+            
+        except Exception as e:
+            print(f"[ERROR] Failed to simulate device configuration changes: {str(e)}")
+            return []
+    
+    def simulate_software_configuration_changes(self, software_count: int = 3) -> List[ConfigurationChange]:
+        """Simulate multiple software configuration changes."""
+        try:
+            print(f"[SIMULATION] Starting {software_count} software configuration changes...")
+            changes = []
+            
+            # Find current software configurations
+            current_software = self.find_current_configurations("software", software_count)
+            
+            for software in current_software:
+                change = self.simulate_software_configuration_change(software)
+                if change:
+                    if self.execute_configuration_change(change):
+                        changes.append(change)
+                        print(f"   [CHANGE] {change.change_description}")
+                    else:
+                        print(f"   [ERROR] Failed to execute change for {software['_key']}")
+                else:
+                    print(f"   [SKIP] No change generated for {software['_key']}")
+            
+            return changes
+            
+        except Exception as e:
+            print(f"[ERROR] Failed to simulate software configuration changes: {str(e)}")
+            return []
     
     def get_simulation_summary(self) -> Dict[str, Any]:
         """Get summary of all simulated changes."""

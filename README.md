@@ -122,6 +122,14 @@ python3 ttl_monitor.py --duration 5 --refresh 10
 4. **T+15min**: All initial historical documents aged out
 5. **T+20min**: Recent historical documents aged out
 
+### Enhanced Time Travel & Graph Capabilities (NEW)
+- **Advanced Traversal Queries** - Complex multi-hop graph queries for latest and historical configurations
+- **Point-in-Time Reconstruction** - Rebuild complete network state at any timestamp
+- **Device-Software Relationship Mapping** - Full relationship tracking across time periods
+- **Unified Transaction + TTL Flow** - Integrated lifecycle management with real-time aging
+- **Bug Diagnosis & Fix Tools** - Comprehensive toolset for identifying and resolving issues
+- **Real-Time Aging Demonstrations** - Watch configurations age out with live TTL monitoring
+
 ### Production-Ready Architecture
 - **Centralized Configuration Management** - No hard-wired values
 - **Code Quality Optimized** - Zero duplication, modular design, comprehensive documentation
@@ -322,14 +330,21 @@ graph TB
 
 ### Quick Start - Demo Options
 
-**[TARGET] Automated Walkthrough (Recommended for First-Time Users)**
+**[TARGET] Enhanced Automated Walkthrough (Recommended for First-Time Users)**
 ```bash
-# Interactive guided demonstration with explanations
+# Interactive guided demonstration with database visibility
 python3 automated_demo_walkthrough.py --interactive
 
 # Auto-advancing demonstration with timed pauses
 python3 automated_demo_walkthrough.py --auto-advance --pause-duration 5
 ```
+
+**NEW: Enhanced Transaction + TTL Demo Features**
+- **ACTUAL database state** shown before and after transactions
+- **Specific document keys** provided for ArangoDB Web Interface monitoring
+- **Graph visualization guidance** with exact vertex paths to explore
+- **Real-time TTL field activation** during transaction execution
+- **Complete visibility** into "Current vs Historical" TTL strategy
 
 **[RUN] Fast Complete Demo**
 ```bash
@@ -343,10 +358,31 @@ python3 comprehensive_demo.py --naming snake_case --save-report
 **[QUICK START] Demo Launcher (Easy Access)**
 ```bash
 # Interactive menu with all demo options
-python3 demo_launcher.pypython3 automated_demo_walkthrough.py --interactive
+python3 demo_launcher.py
 ```
 
 > **Note**: All scripts use `python3` for compatibility with pyenv and modern Python installations. If you encounter `python: command not found` errors, the scripts have been updated to use `python3` automatically.
+
+**[NEW] Advanced Time Travel Demonstrations**
+```bash
+# Complex graph traversal queries with time travel
+python3 time_travel_demo_queries.py
+
+# Unified transaction + TTL with real-time aging
+python3 unified_transaction_ttl_demo.py
+```
+
+**[TOOLS] Bug Fix and Diagnostic Tools**
+```bash
+# Fix orphaned configurations (transaction simulation bug)
+python3 fix_transaction_simulation_bug.py
+
+# Fix multiple current configurations issue
+python3 fix_multiple_current_configs.py
+
+# Diagnose and fix TTL field issues
+python3 ttl_bug_fix.py
+```
 
 **[REFRESH] Database Reset (Clean Start)**
 ```bash
@@ -358,10 +394,32 @@ Use this if you see more than 4 tenants in the ArangoDB interface, or if you wan
 **The comprehensive demo includes:**
 1. **Initial Data Generation** - Multi-tenant network asset data (4 tenants by default)
 2. **Database Deployment** - Collections, indexes, and SmartGraphs
-3. **Transaction Simulation** - Configuration changes with TTL
+3. **Enhanced Transaction + TTL Demo** - Configuration changes with immediate TTL activation and database visibility
 4. **TTL Demonstration** - Time travel scenarios
 5. **Scale-Out Demo** - Dynamic tenant addition and cluster analysis
 6. **Comprehensive Validation** - Data integrity and isolation checks
+
+### Enhanced Transaction + TTL Demo Features
+
+The demo now addresses common concerns about transaction and TTL visibility:
+
+**🔍 Database Visibility**
+- **Pre-Transaction State**: Shows specific documents to watch before changes
+- **Watch List**: Provides exact document keys to monitor in ArangoDB Web Interface
+- **Field-Level Tracking**: Shows `expired` and `ttlExpireAt` field changes in real-time
+- **Interactive Pauses**: Allows time to check database state during the demo
+
+**⚡ Unified Transaction + TTL Process**
+- **Immediate TTL Activation**: Transactions set TTL fields immediately (not separately)
+- **Real-Time Impact**: Shows historical documents get `ttlExpireAt` timestamps
+- **Current vs Historical**: Demonstrates current configs never expire, historical configs age out
+- **10-Minute Demo TTL**: Accelerated aging for visible demonstration
+
+**📊 Step-by-Step Process**
+1. **Database State**: Shows current documents before transactions
+2. **Transaction Execution**: Updates configurations with immediate TTL field setting
+3. **Field Verification**: Confirms TTL timestamps are set on historical documents
+4. **Aging Monitoring**: Provides tools to watch documents age out in 10 minutes
 
 ### Demo Flow Diagram
 
@@ -601,6 +659,29 @@ export ARANGO_DATABASE="network_assets_demo"
 - **Connection Errors**: Verify ArangoDB credentials and network connectivity
 - **Permission Errors**: Check file permissions for data and logs directories
 
+### Bug Fixes and Diagnostic Tools
+
+**Orphaned Configuration Issue**
+If Software configurations appear disconnected in the graph:
+```bash
+python3 fix_transaction_simulation_bug.py
+```
+This fixes configurations created by transaction simulation that lack proper hasVersion edges.
+
+**Multiple Current Configurations**
+If software entities have multiple "current" configurations:
+```bash
+python3 fix_multiple_current_configs.py
+```
+This ensures each software entity has exactly one current configuration.
+
+**TTL Field Issues**
+If TTL behavior seems incorrect:
+```bash
+python3 ttl_bug_fix.py
+```
+This diagnoses and fixes TTL field inconsistencies in current vs historical documents.
+
 ## Scale-Out Capabilities
 
 ### Dynamic Tenant Addition
@@ -810,6 +891,12 @@ python3 validation_suite.py
 ├── oasis_cluster_setup.py          # Enterprise cluster management (see note below)
 ├── centralized_credentials.py      # Secure credential management
 ├── database_utilities.py           # Database utility functions
+├── time_travel_demo_queries.py     # Advanced traversal queries and time travel demos (NEW)
+├── unified_transaction_ttl_demo.py # Unified transaction + TTL demonstration (NEW)
+├── fix_transaction_simulation_bug.py # Fix for orphaned configuration bug (NEW)
+├── fix_multiple_current_configs.py # Fix for multiple current configs bug (NEW)
+├── ttl_bug_fix.py                  # TTL field diagnosis and fix tool (NEW)
+├── ENHANCED_TIME_TRAVEL_DEMO.md    # Documentation for enhanced capabilities (NEW)
 ├── docs/
 │   ├── PRD.md                      # Product Requirements Document
 │   └── CLAUDE.md                   # Development session notes

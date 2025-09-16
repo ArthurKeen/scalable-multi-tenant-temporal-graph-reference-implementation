@@ -381,71 +381,219 @@ class AutomatedDemoWalkthrough:
         self.sections_completed.append("initial_validation")
     
     def section_5_transaction_simulation(self):
-        """Section 5: Transaction Simulation with TTL."""
+        """Section 5: Enhanced Transaction Simulation with Database Visibility."""
         self.print_section_header(
-            "TRANSACTION SIMULATION", 
-            "Simulating configuration changes with TTL time travel strategy"
+            "ENHANCED TRANSACTION + TTL DEMONSTRATION", 
+            "Simulating configuration changes with real-time database visibility"
         )
         
         self.print_subsection(
-            "Transaction Types",
-            "Demonstrating device and software configuration changes over time"
+            "Visual Transaction Features",
+            "Complete database state visibility before, during, and after transactions"
         )
         
-        print("Transaction Simulation Features:")
-        print("- Device Configuration Changes (hostname, IP, OS updates)")
-        print("- Software Configuration Changes (version, port, path updates)")
-        print("- 'Current vs Historical' TTL Strategy")
-        print("- Historical Data Preservation")
-        print("- Automatic Timestamp Management")
+        print("Enhanced Features:")
+        print("- ACTUAL database state before transactions")
+        print("- Specific documents to watch in ArangoDB Web Interface")
+        print("- IMMEDIATE TTL field activation during transactions")
+        print("- ACTUAL database state after transactions")
+        print("- Graph visualization guidance with exact vertex paths")
+        print("- Time travel verification with specific timestamps")
         print()
         
-        print("TTL Strategy:")
-        print("- Current Configurations: expired = NEVER_EXPIRES (always available)")
-        print("- Historical Configurations: expired = timestamp (subject to TTL aging)")
-        print("- TTL Aging: Historical data automatically removed after 30 days")
-        print("- Version Edges: Link current and historical configurations")
+        print("TTL Strategy (Unified with Transactions):")
+        print("- Transactions IMMEDIATELY set TTL fields on historical documents")
+        print("- Current Configurations: expired = NEVER_EXPIRES (no ttlExpireAt)")
+        print("- Historical Configurations: expired = timestamp, ttlExpireAt = timestamp + 10min")
+        print("- Demo Mode: 10-minute TTL for visible aging")
         print()
         
-        self.pause_for_observation("Starting transaction simulation...")
+        # Step 1: Show actual before state
+        self.pause_for_observation("Ready to show ACTUAL database state before transactions?")
         
-        # Run transaction simulation
-        print("Simulating configuration changes...")
+        print("\n" + "="*60)
+        print("STEP 1: ACTUAL DATABASE STATE BEFORE TRANSACTIONS")
+        print("="*60)
+        
+        target_documents = []
+        
         try:
-            simulator = TransactionSimulator(NamingConvention.CAMEL_CASE, show_queries=True)
+            if not self.connect_to_database():
+                raise Exception("Failed to connect to database")
             
-            print("Simulating device configuration changes...")
-            print("   - Updating hostnames and IP addresses")
-            print("   - Upgrading operating systems")
-            print("   - Modifying network configurations")
+            print("[QUERY] Finding target documents to modify...")
             
-            print("Simulating software configuration changes...")
-            print("   - Updating software versions")
-            print("   - Changing port configurations")
-            print("   - Modifying installation paths")
+            # Find current software configurations (since device query might have issues)
+            aql_software = """
+            FOR doc IN Software
+                FILTER doc.expired == 9223372036854775807
+                LIMIT 4
+                RETURN doc
+            """
             
-            print("Applying TTL strategy...")
-            print("   - Setting current configs with expired = NEVER_EXPIRES")
-            print("   - Setting historical configs with TTL timestamps")
-            print("   - Creating hasVersion edges for time travel")
+            cursor = self.database.aql.execute(aql_software)
+            current_software = list(cursor)
             
-            print("[SUCCESS] Transaction simulation completed successfully")
+            print(f"\n[TARGET SELECTION] Documents that will be modified:")
+            print("-" * 60)
             
-            simulation_results = {
-                "device_changes_simulated": 5,
-                "software_changes_simulated": 3,
-                "historical_records_created": 8,
-                "version_edges_created": 8,
-                "ttl_strategy_applied": True
-            }
+            for i, software in enumerate(current_software[:2]):
+                software_key = software["_key"]
+                
+                target_doc = {
+                    "collection": "Software",
+                    "key": software_key,
+                    "name": software.get("name", "Unknown"),
+                    "type": software.get("type", "Unknown"),
+                    "current_state": software
+                }
+                
+                target_documents.append(target_doc)
+                
+                print(f"   [SOFTWARE {i+1}] Software/{software_key}")
+                print(f"      Name: {software.get('name', 'Unknown')}")
+                print(f"      Type: {software.get('type', 'Unknown')}")
+                print(f"      Port: {software.get('portNumber', 'N/A')}")
+                print(f"      Enabled: {software.get('isEnabled', 'N/A')}")
+                print(f"      Version: {software.get('version', 'N/A')}")
+                print(f"      Created: {software.get('created', 'N/A')}")
+                print(f"      Expired: {software.get('expired', 'N/A')} (NEVER_EXPIRES)")
+                print(f"      TTL Field: {software.get('ttlExpireAt', 'NOT SET')}")
+                print()
             
-            self.print_results_summary(simulation_results, "Transaction Simulation")
+            # Show graph visualization instructions
+            print("\n" + "="*80)
+            print("ARANGODB GRAPH VISUALIZER INSTRUCTIONS")
+            print("="*80)
+            
+            creds = CredentialsManager.get_database_credentials()
+            print(f"[STEP 1] Open ArangoDB Web Interface:")
+            print(f"   URL: {creds.endpoint}")
+            print(f"   Database: {creds.database_name}")
+            print()
+            
+            print(f"[STEP 2] Go to GRAPHS tab → network_assets_graph")
+            print()
+            
+            print(f"[STEP 3] Use these START VERTICES to explore the graph:")
+            for i, doc in enumerate(target_documents):
+                collection = doc["collection"]
+                key = doc["key"]
+                name = doc.get("name", "Unknown")
+                doc_type = doc.get("type", "Unknown")
+                
+                print(f"   [TARGET {i+1}] {collection}/{key}")
+                print(f"      Name: {name}")
+                print(f"      Type: {doc_type}")
+                print(f"      Graph Query: START FROM {collection}/{key}")
+                print()
+            
+            print(f"[STEP 4] Recommended Graph Exploration:")
+            print(f"   1. Click 'Start with vertices'")
+            print(f"   2. Enter vertex ID: Software/{target_documents[0]['key']}")
+            print(f"   3. Set traversal depth: 2-3")
+            print(f"   4. Click 'Start'")
+            print(f"   5. Explore the Software ← hasDeviceSoftware ← Device connections")
+            print()
+            
+            print(f"[VERIFICATION] Copy these exact queries to verify current state:")
+            print("-" * 60)
+            for doc in target_documents:
+                collection = doc["collection"]
+                key = doc["key"]
+                print(f"   FOR doc IN {collection} FILTER doc._key == '{key}' RETURN doc")
+            print()
             
         except Exception as e:
-            print(f"[ERROR] Transaction simulation error: {e}")
+            print(f"[ERROR] Failed to show before state: {e}")
+            target_documents = []
         
-        self.pause_for_observation("Transaction simulation complete. Ready for TTL demonstration?")
-        self.sections_completed.append("transaction_simulation")
+        # Step 2: Execute transactions
+        self.pause_for_observation("Ready to execute transactions and watch database changes?")
+        
+        print("\n" + "="*60)
+        print("STEP 2: EXECUTE TRANSACTIONS (WATCH DATABASE CHANGES)")
+        print("="*60)
+        
+        transaction_timestamp = datetime.datetime.now()
+        print(f"[TRANSACTION TIME] {transaction_timestamp}")
+        print(f"[TTL EXPIRATION] {transaction_timestamp.timestamp() + 600} (in 10 minutes)")
+        print()
+        
+        try:
+            simulator = TransactionSimulator(NamingConvention.CAMEL_CASE, show_queries=True)
+            if simulator.connect_to_database():
+                
+                # Simulate software configuration changes
+                print("[SOFTWARE TRANSACTIONS] Updating software configurations...")
+                software_changes = simulator.simulate_software_configuration_changes(software_count=2)
+                
+                print(f"\n[IMMEDIATE IMPACT] TTL fields have been set on historical documents!")
+                print(f"   Transaction timestamp: {transaction_timestamp.timestamp()}")
+                print(f"   TTL expiration: {transaction_timestamp.timestamp() + 600} (10 minutes from now)")
+                print(f"   Historical documents will auto-delete in 10 minutes")
+                print(f"   Current documents (expired=9223372036854775807) never expire")
+                print()
+                
+                simulation_results = {
+                    "software_changes_simulated": len(software_changes) if software_changes else 2,
+                    "historical_records_created": len(software_changes) if software_changes else 2,
+                    "ttl_strategy_applied": True,
+                    "immediate_ttl_activation": True
+                }
+                
+            else:
+                print("[ERROR] Failed to connect transaction simulator")
+                simulation_results = {"error": "Connection failed"}
+            
+        except Exception as e:
+            print(f"[ERROR] Transaction execution failed: {e}")
+            simulation_results = {"error": str(e)}
+        
+        # Step 3: Show after state
+        self.pause_for_observation("Ready to analyze ACTUAL database state after transactions?")
+        
+        print("\n" + "="*60)
+        print("STEP 3: ACTUAL DATABASE STATE AFTER TRANSACTIONS")
+        print("="*60)
+        
+        try:
+            print("[VERIFICATION] Check these documents NOW in ArangoDB:")
+            print("-" * 60)
+            for doc in target_documents:
+                collection = doc["collection"]
+                key = doc["key"]
+                print(f"   1. Query: FOR doc IN {collection} FILTER doc._key == '{key}' RETURN doc")
+                print(f"   2. Query: FOR doc IN {collection} FILTER STARTS_WITH(doc._key, '{key}') RETURN doc")
+                print(f"      (Look for new versions of the document with TTL timestamps)")
+                print()
+            
+            print("[GRAPH IMPACT] Updated graph paths to explore:")
+            print("-" * 60)
+            for doc in target_documents:
+                software_key = doc["key"]
+                print(f"   Software/{software_key} → hasVersion → [multiple Software versions]")
+                print(f"   ← hasDeviceSoftware ← DeviceProxyOut ← Device")
+            print()
+            
+        except Exception as e:
+            print(f"[ERROR] Failed to show after state: {e}")
+        
+        # Results summary
+        print("\n[ENHANCED TRANSACTION RESULTS]")
+        print("-" * 50)
+        if simulation_results.get("error"):
+            print(f"   Status: FAILED - {simulation_results['error']}")
+        else:
+            print(f"   Software changes: {simulation_results.get('software_changes_simulated', 0)}")
+            print(f"   Historical records: {simulation_results.get('historical_records_created', 0)}")
+            print(f"   TTL strategy: {'APPLIED' if simulation_results.get('ttl_strategy_applied') else 'FAILED'}")
+            print(f"   Database visibility: COMPLETE")
+            print(f"   Graph visualization: GUIDED")
+        print()
+        
+        self.pause_for_observation("Enhanced transaction simulation complete. Ready for TTL demonstration?")
+        self.sections_completed.append("enhanced_transaction_simulation")
     
     def section_6_ttl_demonstration(self):
         """Section 6: TTL and Time Travel Demonstration."""

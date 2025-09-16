@@ -560,6 +560,66 @@ class ShardRebalancingManager:
         print(f"   Total shards: {rebalancing_result['total_shards']}")
         
         return rebalancing_result
+    
+    def analyze_shard_distribution(self) -> Dict[str, Any]:
+        """Analyze and return detailed shard distribution information."""
+        try:
+            print(f"\n[ANALYSIS] Analyzing shard distribution and balance...")
+            
+            # Get base shard information
+            shard_info = self.get_shard_distribution()
+            
+            if "error" in shard_info:
+                return shard_info
+            
+            # Add analysis metrics
+            analysis = {
+                "timestamp": datetime.datetime.now().isoformat(),
+                "database": self.creds.database_name,
+                "shard_distribution": shard_info,
+                "balance_metrics": {
+                    "total_collections": len(shard_info.get("collections", {})),
+                    "total_shards": shard_info.get("total_shards", 0),
+                    "average_shards_per_collection": 0,
+                    "shard_distribution_summary": {}
+                },
+                "recommendations": []
+            }
+            
+            collections = shard_info.get("collections", {})
+            if collections:
+                total_shards = sum(coll.get("shard_count", 1) for coll in collections.values())
+                analysis["balance_metrics"]["average_shards_per_collection"] = total_shards / len(collections)
+                
+                # Analyze distribution
+                shard_counts = {}
+                for coll_name, coll_info in collections.items():
+                    shard_count = coll_info.get("shard_count", 1)
+                    if shard_count not in shard_counts:
+                        shard_counts[shard_count] = 0
+                    shard_counts[shard_count] += 1
+                
+                analysis["balance_metrics"]["shard_distribution_summary"] = shard_counts
+                
+                # Generate recommendations
+                if total_shards > 20:
+                    analysis["recommendations"].append("Consider shard rebalancing for large cluster")
+                if len(shard_counts) > 3:
+                    analysis["recommendations"].append("Uneven shard distribution detected")
+                else:
+                    analysis["recommendations"].append("Shard distribution appears balanced")
+            
+            print(f"   [ANALYSIS] Complete - {analysis['balance_metrics']['total_collections']} collections analyzed")
+            print(f"   [SHARDS] Total: {analysis['balance_metrics']['total_shards']}")
+            
+            for rec in analysis["recommendations"]:
+                print(f"   [RECOMMENDATION] {rec}")
+            
+            return analysis
+            
+        except Exception as e:
+            print(f"[ERROR] Failed to analyze shard distribution: {str(e)}")
+            return {"error": str(e)}
 
 
 def main():

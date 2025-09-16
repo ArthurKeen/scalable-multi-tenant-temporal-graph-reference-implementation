@@ -21,7 +21,7 @@ from arango import ArangoClient
 from centralized_credentials import CredentialsManager
 from config_management import get_config, NamingConvention
 from transaction_simulator import TransactionSimulator
-from database_utilities import QueryHelper
+from database_utilities import QueryExecutor
 from ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS
 
 
@@ -43,7 +43,7 @@ class TTLDemoScenarios:
         self.simulator = TransactionSimulator(naming_convention, show_queries)
         
         # Query helper for time travel queries
-        self.query_helper = QueryHelper()
+        # Query execution will be handled directly via database
         
         # Demo state tracking
         self.demo_timestamps = {}
