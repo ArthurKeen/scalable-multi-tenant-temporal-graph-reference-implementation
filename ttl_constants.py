@@ -18,6 +18,10 @@ class TTLConstants:
     DEFAULT_TTL_EXPIRE_DAYS: int = 30
     DEFAULT_TTL_EXPIRE_SECONDS: int = 30 * 24 * 60 * 60  # 30 days in seconds
     
+    # Demo-specific TTL Configuration (shorter periods for visible aging)
+    DEMO_TTL_EXPIRE_MINUTES: int = 10  # 10 minutes for demo
+    DEMO_TTL_EXPIRE_SECONDS: int = 10 * 60  # 600 seconds
+    
     # Timestamp Constants
     NEVER_EXPIRES: int = sys.maxsize
     MAX_TIMESTAMP: int = sys.maxsize

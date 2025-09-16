@@ -18,15 +18,17 @@ from arango import ArangoClient
 # Import centralized credentials and configuration
 from centralized_credentials import CredentialsManager, DatabaseConstants
 from config_management import get_config, NamingConvention
-from ttl_config import create_ttl_configuration, create_snake_case_ttl_configuration, TTLManager
+from ttl_config import (create_ttl_configuration, create_snake_case_ttl_configuration, 
+                       create_demo_ttl_configuration, create_demo_snake_case_ttl_configuration, TTLManager)
 from ttl_constants import DEFAULT_TTL_DAYS
 
 
 class TimeTravelRefactoredDeployment:
     """Deploy time travel refactored data to ArangoDB Oasis."""
     
-    def __init__(self, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
+    def __init__(self, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE, demo_mode: bool = False):
         self.naming_convention = naming_convention
+        self.demo_mode = demo_mode
         self.app_config = get_config("production", naming_convention)
         creds = CredentialsManager.get_database_credentials()
         self.client = ArangoClient(hosts=creds.endpoint)
@@ -35,10 +37,21 @@ class TimeTravelRefactoredDeployment:
         self.creds = creds
         
         # Initialize TTL configuration
-        if naming_convention == NamingConvention.SNAKE_CASE:
-            self.ttl_config = create_snake_case_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
+        if demo_mode:
+            # Use short TTL periods for demo (10 minutes)
+            if naming_convention == NamingConvention.SNAKE_CASE:
+                self.ttl_config = create_demo_snake_case_ttl_configuration("deployment")
+            else:
+                self.ttl_config = create_demo_ttl_configuration("deployment")
+            print(f"[DEMO] Using demo TTL configuration (10 minutes)")
         else:
-            self.ttl_config = create_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
+            # Use production TTL periods (30 days)
+            if naming_convention == NamingConvention.SNAKE_CASE:
+                self.ttl_config = create_snake_case_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
+            else:
+                self.ttl_config = create_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
+            print(f"[PRODUCTION] Using production TTL configuration (30 days)")
+        
         self.ttl_manager = TTLManager(self.ttl_config)
         
     def connect_to_cluster(self) -> bool:
@@ -222,6 +235,35 @@ class TimeTravelRefactoredDeployment:
                     "fields": ["created", "expired"],
                     "name": "idx_software_temporal"
                 },
+                
+                # Multi-dimensional indexes (ZKD) for optimal temporal range queries
+                {
+                    "collection": "Device",
+                    "type": "zkd",
+                    "fields": ["created", "expired"],
+                    "fieldValueTypes": "double",
+                    "unique": False,
+                    "sparse": False,
+                    "name": "idx_device_zkd_temporal"
+                },
+                {
+                    "collection": "Software",
+                    "type": "zkd",
+                    "fields": ["created", "expired"],
+                    "fieldValueTypes": "double",
+                    "unique": False,
+                    "sparse": False,
+                    "name": "idx_software_zkd_temporal"
+                },
+                {
+                    "collection": "hasVersion",
+                    "type": "zkd",
+                    "fields": ["created", "expired"],
+                    "fieldValueTypes": "double",
+                    "unique": False,
+                    "sparse": False,
+                    "name": "idx_version_zkd_temporal"
+                },
                 {
                     "collection": "hasVersion",
                     "type": "persistent",
@@ -282,6 +324,18 @@ class TimeTravelRefactoredDeployment:
                         })
                         expire_days = index_config["expireAfter"] // 86400 if index_config["expireAfter"] > 0 else 0
                         print(f"   [TTL] Created TTL index: {index_config['name']} (expire after {expire_days} days)")
+                    
+                    elif index_config["type"] == "zkd":
+                        collection.add_index({
+                            'type': 'zkd',
+                            'fields': index_config["fields"],
+                            'name': index_config.get("name"),
+                            'fieldValueTypes': index_config.get("fieldValueTypes", "double"),
+                            'unique': index_config.get("unique", False),
+                            'sparse': index_config.get("sparse", False)
+                        })
+                        field_names = ", ".join(index_config["fields"])
+                        print(f"   [ZKD] Created ZKD multi-dimensional index: {index_config['name']} on [{field_names}]")
                     
                     else:
                         print(f"   [SKIP] Unknown index type: {index_config['type']}")
@@ -545,13 +599,15 @@ def main():
     parser = argparse.ArgumentParser(description="Deploy multi-tenant network asset data to ArangoDB")
     parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
                        help="Naming convention for collections and properties (default: camelCase)")
+    parser.add_argument("--demo-mode", action="store_true",
+                       help="Use short TTL periods (10 minutes) for demonstration purposes")
     
     args = parser.parse_args()
     
     # Convert naming argument to enum
     naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
     
-    deployment = TimeTravelRefactoredDeployment(naming_convention)
+    deployment = TimeTravelRefactoredDeployment(naming_convention, demo_mode=args.demo_mode)
     success = deployment.deploy_time_travel_refactored()
     
     if success:

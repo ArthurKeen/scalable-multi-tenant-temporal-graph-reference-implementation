@@ -207,6 +207,13 @@ class TemporalDataModel:
         enhanced_doc["created"] = timestamp.timestamp()
         enhanced_doc["expired"] = expired
         
+        # TTL field management: only historical documents get ttlExpireAt timestamp
+        if expired != NEVER_EXPIRES:
+            # Historical document - set TTL deletion timestamp
+            from ttl_constants import TTLConstants
+            enhanced_doc["ttlExpireAt"] = expired + TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS
+        # Current documents (expired = NEVER_EXPIRES) don't get ttlExpireAt field
+        
         # Add tenant key for disjoint smartgraph partitioning
         if tenant_config is not None:
             enhanced_doc["tenantId"] = tenant_config.tenant_id

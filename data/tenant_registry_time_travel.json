@@ -1,34 +1,56 @@
 {
   "tenants": {
-    "9bfb3a86f70e": {
+    "292893c90f47": {
       "tenantName": "Acme Corp",
       "tenantStatus": "provisioning",
       "databaseName": "network_assets_demo",
-      "smartGraphName": "tenant_9bfb3a86f70e_network_assets",
-      "smartGraphAttribute": "tenant_9bfb3a86f70e_attr",
-      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_9bfb3a86f70e",
+      "smartGraphName": "tenant_292893c90f47_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_292893c90f47",
       "scaleFactor": 1,
-      "createdAt": "2025-09-15T14:34:34.938848",
+      "createdAt": "2025-09-15T16:59:17.319204",
       "tenantDescription": "Multi-tenant demo organization #1 with scale factor 1"
     },
-    "1369ad3dc3b5": {
+    "c3a988cc2114": {
       "tenantName": "Global Enterprises",
       "tenantStatus": "provisioning",
       "databaseName": "network_assets_demo",
-      "smartGraphName": "tenant_1369ad3dc3b5_network_assets",
-      "smartGraphAttribute": "tenant_1369ad3dc3b5_attr",
-      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_1369ad3dc3b5",
+      "smartGraphName": "tenant_c3a988cc2114_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_c3a988cc2114",
       "scaleFactor": 2,
-      "createdAt": "2025-09-15T14:34:34.938870",
+      "createdAt": "2025-09-15T16:59:17.321085",
       "tenantDescription": "Multi-tenant demo organization #2 with scale factor 2"
+    },
+    "76c1e2f5f312": {
+      "tenantName": "TechStart Inc",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_76c1e2f5f312_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_76c1e2f5f312",
+      "scaleFactor": 3,
+      "createdAt": "2025-09-15T16:59:17.321697",
+      "tenantDescription": "Multi-tenant demo organization #3 with scale factor 3"
+    },
+    "e499b017e8de": {
+      "tenantName": "Enterprise Solutions",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_e499b017e8de_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_e499b017e8de",
+      "scaleFactor": 1,
+      "createdAt": "2025-09-15T16:59:17.321954",
+      "tenantDescription": "Multi-tenant demo organization #4 with scale factor 1"
     }
   },
   "summary": {
-    "totalTenants": 2,
-    "totalDocuments": 3285,
+    "totalTenants": 4,
+    "totalDocuments": 7665,
     "sharedDatabase": "network_assets_demo",
-    "generatedAt": "2025-09-15T14:34:34.999092",
-    "environment": "production",
+    "generatedAt": "2025-09-15T16:59:17.437999",
+    "environment": "development",
     "owlCompliant": true,
     "timeTravel": {
       "refactored": true,

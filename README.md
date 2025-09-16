@@ -28,10 +28,99 @@ Both conventions maintain **consistent structure** with Subject-Predicate-Object
 
 ### Temporal Data Management
 - **Time Travel Blueprint** with `created`, `expired` timestamps
+- **ZKD Multi-Dimensional Indexes** for optimal temporal range query performance on `created` and `expired` fields
+- **TTL (Time-To-Live) Indexes** for automatic aging of historical data with configurable expiration periods
+- **Current vs Historical TTL Strategy**: Current configurations never expire (`expired = NEVER_EXPIRES`), historical configurations age out automatically
 - **Historical Versioning** via `hasVersion` edges for device and software configurations
 - **Standardized Properties**: Generic `name`, `type`, `model`, `version` across all collections
-- **Temporal Query Capabilities** for point-in-time analysis
-- **Note**: TTL disabled (observedAt removed) - future temporal observation tracking to be determined
+- **Temporal Query Capabilities** for point-in-time analysis with enhanced performance
+- **Transaction Simulation** for realistic configuration changes with proper TTL timestamp management
+
+#### TTL Index Implementation Details
+
+The demo implements a sophisticated **"Current vs Historical" TTL strategy** using separate fields for time travel and TTL:
+
+**Properties Used**:
+- **`expired` field**: Used exclusively for time travel queries (`expired > point_in_time`)
+- **`ttlExpireAt` field**: Used exclusively by ArangoDB's TTL indexes for automatic document deletion
+
+**TTL Configuration**:
+- **TTL Index Field**: `ttlExpireAt` (separate timestamp field)
+- **TTL Expire Mode**: `expireAfter: 0` (expire when timestamp is reached)
+- **Production TTL Period**: 30 days (configurable via `DEFAULT_TTL_EXPIRE_DAYS`)
+- **Demo TTL Period**: 10 minutes (configurable via `DEMO_TTL_EXPIRE_MINUTES`)
+- **Sparse Index**: `true` (skips documents where `ttlExpireAt` is null/undefined)
+
+**Transaction Process** (when new Device/Software configuration is added):
+
+1. **New Configuration Creation**:
+   ```
+   new_config.created = now()
+   new_config.expired = NEVER_EXPIRES  # sys.maxsize - never expires
+   # No ttlExpireAt field - will never be deleted by TTL
+   ```
+
+2. **Old Configuration Update**:
+   ```
+   old_config.expired = now()  # For time travel queries
+   old_config.ttlExpireAt = now() + TTL_INTERVAL  # TTL deletion timestamp
+   # TTL will delete this document when ttlExpireAt timestamp is reached
+   ```
+
+3. **TTL Index Behavior**:
+   - **Current configs**: No `ttlExpireAt` field → Ignored by sparse TTL index (never deleted)
+   - **Historical configs**: `ttlExpireAt = 1234567890.123` → Will be deleted when timestamp is reached
+   - **Automatic cleanup**: ArangoDB automatically removes expired historical documents
+
+**Key Constants**:
+- `NEVER_EXPIRES = sys.maxsize` (9223372036854775807) - used for `expired` field
+- `DEFAULT_TTL_EXPIRE_SECONDS = 2592000` (30 days) - added to `expired` for `ttlExpireAt`
+- `TTL_SPARSE_INDEX = true` (performance optimization)
+
+**Field Separation Benefits**:
+- **Time travel queries** remain fast and predictable using `expired`
+- **TTL deletion** operates independently using `ttlExpireAt`
+- **Current configurations** are permanently preserved (no `ttlExpireAt` field)
+- **Historical configurations** age out automatically after 30 days
+
+This approach ensures clean separation of concerns between time travel functionality and data lifecycle management.
+
+#### Demo Mode TTL Configuration
+
+For demonstration purposes, the system supports **Demo Mode** with accelerated TTL aging:
+
+**Demo Mode Activation**:
+```bash
+# Deploy with demo mode (10-minute TTL)
+python3 database_deployment.py --demo-mode
+
+# Run comprehensive demo (automatically uses demo mode)
+python3 comprehensive_demo.py
+```
+
+**Demo TTL Behavior**:
+- **Historical documents**: Age out after 10 minutes instead of 30 days
+- **Visible aging**: Allows observers to see TTL cleanup during demo
+- **Real-time monitoring**: Use `ttl_monitor.py` to watch aging process
+
+**TTL Monitoring Commands**:
+```bash
+# Show current TTL status
+python3 ttl_monitor.py --status-only
+
+# Live monitoring for 15 minutes
+python3 ttl_monitor.py --duration 15
+
+# Custom monitoring (5 minutes, refresh every 10 seconds)  
+python3 ttl_monitor.py --duration 5 --refresh 10
+```
+
+**Demo Timeline Example**:
+1. **T+0**: Create configuration, generate historical data
+2. **T+5min**: Run transaction simulation, create more historical data
+3. **T+10min**: First historical documents begin aging out
+4. **T+15min**: All initial historical documents aged out
+5. **T+20min**: Recent historical documents aged out
 
 ### Production-Ready Architecture
 - **Centralized Configuration Management** - No hard-wired values
@@ -114,24 +203,24 @@ graph TB
     subgraph "ArangoDB Oasis: network_assets_demo"
         subgraph "Tenant A: Acme Corp (SmartGraph Partition)"
             direction TB
-            DA[Device<br/>Network devices<br/>tenant_A_attr: uuid_A]
-            DPIA[DeviceProxyIn<br/>Input proxies<br/>tenant_A_attr: uuid_A]
-            DPOA[DeviceProxyOut<br/>Output proxies<br/>tenant_A_attr: uuid_A]
-            SA[Software<br/>Software installs<br/>tenant_A_attr: uuid_A]
-            SPIA[SoftwareProxyIn<br/>Input proxies<br/>tenant_A_attr: uuid_A]
-            SPOA[SoftwareProxyOut<br/>Output proxies<br/>tenant_A_attr: uuid_A]
-            LA[Location<br/>Physical sites<br/>tenant_A_attr: uuid_A]
+            DA[Device<br/>Network devices<br/>tenantId: uuid_A]
+            DPIA[DeviceProxyIn<br/>Input proxies<br/>tenantId: uuid_A]
+            DPOA[DeviceProxyOut<br/>Output proxies<br/>tenantId: uuid_A]
+            SA[Software<br/>Software installs<br/>tenantId: uuid_A]
+            SPIA[SoftwareProxyIn<br/>Input proxies<br/>tenantId: uuid_A]
+            SPOA[SoftwareProxyOut<br/>Output proxies<br/>tenantId: uuid_A]
+            LA[Location<br/>Physical sites<br/>tenantId: uuid_A]
         end
         
         subgraph "Tenant B: Global Enterprises (SmartGraph Partition)"  
             direction TB
-            DB[Device<br/>Network devices<br/>tenant_B_attr: uuid_B]
-            DPIB[DeviceProxyIn<br/>Input proxies<br/>tenant_B_attr: uuid_B]
-            DPOB[DeviceProxyOut<br/>Output proxies<br/>tenant_B_attr: uuid_B]
-            SB[Software<br/>Software installs<br/>tenant_B_attr: uuid_B]
-            SPIB[SoftwareProxyIn<br/>Input proxies<br/>tenant_B_attr: uuid_B]
-            SPOB[SoftwareProxyOut<br/>Output proxies<br/>tenant_B_attr: uuid_B]
-            LB[Location<br/>Physical sites<br/>tenant_B_attr: uuid_B]
+            DB[Device<br/>Network devices<br/>tenantId: uuid_B]
+            DPIB[DeviceProxyIn<br/>Input proxies<br/>tenantId: uuid_B]
+            DPOB[DeviceProxyOut<br/>Output proxies<br/>tenantId: uuid_B]
+            SB[Software<br/>Software installs<br/>tenantId: uuid_B]
+            SPIB[SoftwareProxyIn<br/>Input proxies<br/>tenantId: uuid_B]
+            SPOB[SoftwareProxyOut<br/>Output proxies<br/>tenantId: uuid_B]
+            LB[Location<br/>Physical sites<br/>tenantId: uuid_B]
         end
         
         subgraph "Shared Collections (Logically Separated)"
@@ -143,14 +232,14 @@ graph TB
     end
     
     %% Tenant A relationships (corrected logic)
-    DPOA -.->|hasConnection<br/>Isolated by tenant_A_attr| DPIA
-    DPOA -.->|hasLocation<br/>Isolated by tenant_A_attr| LA
-    DPOA -.->|hasDeviceSoftware<br/>CORRECTED: Out->In<br/>Isolated by tenant_A_attr| SPIA
+    DPOA -.->|hasConnection<br/>Isolated by tenantId| DPIA
+    DPOA -.->|hasLocation<br/>Isolated by tenantId| LA
+    DPOA -.->|hasDeviceSoftware<br/>CORRECTED: Out->In<br/>Isolated by tenantId| SPIA
     
     %% Tenant B relationships (corrected logic)
-    DPOB -.->|hasConnection<br/>Isolated by tenant_B_attr| DPIB
-    DPOB -.->|hasLocation<br/>Isolated by tenant_B_attr| LB  
-    DPOB -.->|hasDeviceSoftware<br/>CORRECTED: Out->In<br/>Isolated by tenant_B_attr| SPIB
+    DPOB -.->|hasConnection<br/>Isolated by tenantId| DPIB
+    DPOB -.->|hasLocation<br/>Isolated by tenantId| LB  
+    DPOB -.->|hasDeviceSoftware<br/>CORRECTED: Out->In<br/>Isolated by tenantId| SPIB
     
     %% Time travel patterns (unified hasVersion collection)
     DPIA -.->|hasVersion<br/>Time travel| DA
@@ -202,26 +291,32 @@ graph TB
 - **Properties**: camelCase/snake_case for consistency
 
 **5. Multi-Tenant Isolation**
-- Disjoint SmartGraphs using `tenant_{id}_attr` as partition key
+- Disjoint SmartGraphs using `tenantId` as partition key
 - Complete data isolation within shared collections
 - Horizontal scale-out capability with tenant-based sharding
 
 ### Data Model
 
 **Tenant Isolation:**
-- Each document contains `tenant_{id}_attr` for disjoint partitioning
-- Shared collections with tenant-scoped queries
-- Complete data isolation verified through testing
+- Each document contains `tenantId` property for disjoint partitioning
+- Unified graph with tenant-scoped queries using `tenantId`
+- Complete data isolation verified through testing and validation suite
 
 **Temporal Attributes:**
 - `created`: Creation timestamp (Unix epoch)
-- `expired`: Expiration timestamp (default: 9223372036854775807 - largest possible value)
-- Note: `observedAt` removed - future temporal observation tracking to be determined
-- **Note**: Proxy collections (`DeviceProxyIn`/`DeviceProxyOut`) contain only tenant attributes
+- `expired`: Expiration timestamp for time travel (NEVER_EXPIRES for current configurations)
+- `ttlExpireAt`: TTL field for historical document aging (only present on historical documents)
+- Current vs Historical strategy: Current configs have no TTL, historical configs age out
 
-**Vertex-Centric Indexing:**
-- `_fromType` and `_toType` on all edges for efficient traversals
-- Optimized for graph query performance
+**ZKD Multi-Dimensional Indexes:**
+- Optimized temporal range queries on `created` and `expired` fields
+- Enhanced performance for time travel and point-in-time queries
+- Applied to Device, Software, and hasVersion collections
+
+**TTL (Time-To-Live) Indexes:**
+- Automatic aging of historical data with configurable expiration periods
+- Demo mode: 10-minute TTL for visible aging demonstration
+- Production mode: 30-day TTL for practical data lifecycle management
 
 ## Getting Started
 

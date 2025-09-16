@@ -108,10 +108,10 @@ class ComprehensiveDemo:
         try:
             print(f"[ACTION] Deploying data to ArangoDB cluster...")
             
-            # Initialize deployment
+            # Initialize deployment with demo mode for short TTL periods
             deployment = TimeTravelRefactoredDeployment(
                 naming_convention=self.naming_convention,
-                environment="development"
+                demo_mode=True  # Use 10-minute TTL for visible aging during demo
             )
             
             # Deploy data

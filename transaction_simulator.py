@@ -275,16 +275,23 @@ class TransactionSimulator:
             
             collection = self.database.collection(collection_name)
             
-            # Step 1: Update current configuration to historical (set real expired timestamp)
+            # Step 1: Update current configuration to historical (set expired timestamp and TTL)
             old_config = change.old_config.copy()
-            old_config["expired"] = change.timestamp.timestamp()  # Now subject to TTL
+            expired_timestamp = change.timestamp.timestamp()
+            old_config["expired"] = expired_timestamp  # For time travel queries
+            old_config["ttlExpireAt"] = expired_timestamp + TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS  # TTL deletion timestamp
             
             collection.update(old_config)
-            print(f"   [HISTORICAL] Converted {change.entity_key} to historical (expired={old_config['expired']})")
+            print(f"   [HISTORICAL] Converted {change.entity_key} to historical (expired={old_config['expired']}, ttlExpireAt={old_config['ttlExpireAt']})")
             
-            # Step 2: Insert new current configuration
-            collection.insert(change.new_config)
-            print(f"   [CURRENT] Created new current config {change.new_config['_key']} (expired={NEVER_EXPIRES})")
+            # Step 2: Insert new current configuration (no TTL field for current configs)
+            new_config = change.new_config.copy()
+            # Ensure current configurations don't have ttlExpireAt field
+            if "ttlExpireAt" in new_config:
+                del new_config["ttlExpireAt"]
+            
+            collection.insert(new_config)
+            print(f"   [CURRENT] Created new current config {new_config['_key']} (expired={NEVER_EXPIRES}, no TTL)")
             
             # Step 3: Update version edges if they exist
             self._update_version_edges(change)

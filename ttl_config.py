@@ -28,10 +28,10 @@ class TTLStrategy(Enum):
 class TTLIndexConfiguration:
     """Configuration for a single TTL index."""
     collection_name: str
-    field_name: str = "expired"
+    field_name: str = "ttlExpireAt"  # Separate field for TTL timestamps
     expire_after_seconds: int = 0  # Expire when timestamp is reached
     strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY
-    sparse: bool = TTLConstants.TTL_SPARSE_INDEX  # Skip documents where expired = sys.maxsize
+    sparse: bool = TTLConstants.TTL_SPARSE_INDEX  # Skip documents where ttlExpireAt is null/undefined
     selectivity_estimate: float = TTLConstants.TTL_SELECTIVITY_ESTIMATE  # Estimate of documents affected
     
     def to_arango_index_spec(self) -> Dict[str, Any]:
@@ -187,6 +187,41 @@ def create_snake_case_ttl_configuration(tenant_id: str,
         ]
     )
     return config
+
+
+def create_demo_ttl_configuration(tenant_id: str,
+                                 strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY) -> TTLConfiguration:
+    """Create TTL configuration with short TTL period for demonstration purposes."""
+    from ttl_constants import TTLConstants
+    
+    return TTLConfiguration(
+        tenant_id=tenant_id,
+        strategy=strategy,
+        default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 10 minutes
+        preserve_current_configs=True
+    )
+
+
+def create_demo_snake_case_ttl_configuration(tenant_id: str,
+                                           strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY) -> TTLConfiguration:
+    """Create snake_case TTL configuration with short TTL period for demonstration purposes."""
+    from ttl_constants import TTLConstants
+    
+    return TTLConfiguration(
+        tenant_id=tenant_id,
+        strategy=strategy,
+        default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 10 minutes
+        preserve_current_configs=True,
+        vertex_collections=[
+            "device", "software", "location",
+            "device_proxy_in", "device_proxy_out",
+            "software_proxy_in", "software_proxy_out"
+        ],
+        edge_collections=[
+            "has_connection", "has_location",
+            "has_device_software", "has_version"
+        ]
+    )
 
 
 # Example usage and testing
