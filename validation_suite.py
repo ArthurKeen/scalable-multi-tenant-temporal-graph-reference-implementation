@@ -610,46 +610,46 @@ class TimeTravelValidationSuite:
             return False
     
     def validate_mdi_prefix_indexes(self) -> bool:
-        """Validate that ZKD multi-dimensional indexes exist and function correctly."""
+        """Validate that MDI-prefix multi-dimensional indexes exist and function correctly."""
         try:
-            print(f"[ANALYSIS] Validating ZKD Multi-Dimensional Indexes...")
+            print(f"[ANALYSIS] Validating MDI-Prefix Multi-Dimensional Indexes...")
             
-            # Collections that should have ZKD multi-dimensional indexes
-            collections_with_zkd = ["Device", "Software", "hasVersion"]
-            expected_zkd_indexes = [
-                "idx_device_zkd_temporal",
-                "idx_software_zkd_temporal", 
-                "idx_version_zkd_temporal"
+            # Collections that should have MDI-prefix multi-dimensional indexes
+            collections_with_mdi = ["Device", "Software", "hasVersion"]
+            expected_mdi_indexes = [
+                "idx_device_mdi_temporal",
+                "idx_software_mdi_temporal", 
+                "idx_version_mdi_temporal"
             ]
             
-            zkd_indexes_found = 0
+            mdi_indexes_found = 0
             
-            for i, collection_name in enumerate(collections_with_zkd):
+            for i, collection_name in enumerate(collections_with_mdi):
                 try:
                     collection = self.database.collection(collection_name)
                     indexes = collection.indexes()
                     
-                    # Look for ZKD index
-                    zkd_index = None
+                    # Look for MDI index
+                    mdi_index = None
                     for idx in indexes:
-                        if idx.get('type') == 'zkd' and idx.get('name') == expected_zkd_indexes[i]:
-                            zkd_index = idx
+                        if idx.get('type') == 'mdi' and idx.get('name') == expected_mdi_indexes[i]:
+                            mdi_index = idx
                             break
                     
-                    if zkd_index:
-                        fields = zkd_index.get('fields', [])
-                        unique = zkd_index.get('unique', False)
-                        sparse = zkd_index.get('sparse', False)
-                        print(f"   [FOUND] {collection_name}: {zkd_index['name']} on {fields} (unique={unique}, sparse={sparse})")
-                        zkd_indexes_found += 1
+                    if mdi_index:
+                        fields = mdi_index.get('fields', [])
+                        unique = mdi_index.get('unique', False)
+                        sparse = mdi_index.get('sparse', False)
+                        print(f"   [FOUND] {collection_name}: {mdi_index['name']} on {fields} (unique={unique}, sparse={sparse})")
+                        mdi_indexes_found += 1
                     else:
-                        print(f"   [MISSING] {collection_name}: No ZKD index found")
+                        print(f"   [MISSING] {collection_name}: No MDI index found")
                         
                 except Exception as e:
                     print(f"   [ERROR] Could not check {collection_name}: {e}")
             
-            # Test a temporal query to verify ZKD index usage
-            if zkd_indexes_found > 0:
+            # Test a temporal query to verify MDI index usage
+            if mdi_indexes_found > 0:
                 import time
                 current_time = time.time()
                 
@@ -664,12 +664,12 @@ class TimeTravelValidationSuite:
                 start_time = time.time()
                 results = self.execute_and_display_query(
                     temporal_query, 
-                    "ZKD Multi-Dimensional Temporal Query Test",
+                    "MDI-Prefix Multi-Dimensional Temporal Query Test",
                     {"point_in_time": current_time}
                 )
                 query_time = time.time() - start_time
                 
-                print(f"   [PERF] ZKD temporal query: {len(results)} results in {query_time:.4f} seconds")
+                print(f"   [PERF] MDI temporal query: {len(results)} results in {query_time:.4f} seconds")
                 
                 # Try to get execution plan to verify index usage
                 try:
@@ -677,28 +677,28 @@ class TimeTravelValidationSuite:
                     nodes = plan.get('plan', {}).get('nodes', [])
                     index_nodes = [node for node in nodes if node.get('type') == 'IndexNode']
                     
-                    zkd_used = False
+                    mdi_used = False
                     for node in index_nodes:
                         indexes = node.get('indexes', [])
                         for idx in indexes:
-                            if idx.get('type') == 'zkd':
-                                print(f"   [SUCCESS] ZKD multi-dimensional index used in query execution")
-                                zkd_used = True
+                            if idx.get('type') == 'mdi':
+                                print(f"   [SUCCESS] MDI-prefix multi-dimensional index used in query execution")
+                                mdi_used = True
                                 break
                     
-                    if not zkd_used and index_nodes:
+                    if not mdi_used and index_nodes:
                         print(f"   [INFO] Other index types used in query execution")
                         
                 except Exception as e:
                     print(f"   [WARNING] Could not analyze execution plan: {e}")
             
-            success_rate = zkd_indexes_found / len(collections_with_zkd)
-            print(f"   [SUMMARY] ZKD multi-dimensional indexes: {zkd_indexes_found}/{len(collections_with_zkd)} found ({success_rate:.1%})")
+            success_rate = mdi_indexes_found / len(collections_with_mdi)
+            print(f"   [SUMMARY] MDI-prefix multi-dimensional indexes: {mdi_indexes_found}/{len(collections_with_mdi)} found ({success_rate:.1%})")
             
-            return zkd_indexes_found >= len(collections_with_zkd) // 2  # At least half should exist
+            return mdi_indexes_found >= len(collections_with_mdi) // 2  # At least half should exist
             
         except Exception as e:
-            print(f"   [ERROR] ZKD multi-dimensional index validation failed: {str(e)}")
+            print(f"   [ERROR] MDI-prefix multi-dimensional index validation failed: {str(e)}")
             return False
     
     def run_comprehensive_validation(self) -> Dict[str, bool]:
@@ -725,7 +725,7 @@ class TimeTravelValidationSuite:
             ("Cross-Entity Relationships", self.validate_cross_entity_relationships),
             ("Performance Improvements", self.validate_performance_improvements),
             ("Data Consistency", self.validate_data_consistency),
-            ("ZKD Multi-Dimensional Indexes", self.validate_mdi_prefix_indexes)
+            ("MDI-Prefix Multi-Dimensional Indexes", self.validate_mdi_prefix_indexes)
         ]
         
         results = {"connection": True}

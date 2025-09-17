@@ -236,33 +236,33 @@ class TimeTravelRefactoredDeployment:
                     "name": "idx_software_temporal"
                 },
                 
-                # Multi-dimensional indexes (ZKD) for optimal temporal range queries
+                # Multi-dimensional indexes (MDI-prefix) for optimal temporal range queries
                 {
                     "collection": "Device",
-                    "type": "zkd",
+                    "type": "mdi",
                     "fields": ["created", "expired"],
                     "fieldValueTypes": "double",
                     "unique": False,
                     "sparse": False,
-                    "name": "idx_device_zkd_temporal"
+                    "name": "idx_device_mdi_temporal"
                 },
                 {
                     "collection": "Software",
-                    "type": "zkd",
+                    "type": "mdi",
                     "fields": ["created", "expired"],
                     "fieldValueTypes": "double",
                     "unique": False,
                     "sparse": False,
-                    "name": "idx_software_zkd_temporal"
+                    "name": "idx_software_mdi_temporal"
                 },
                 {
                     "collection": "hasVersion",
-                    "type": "zkd",
+                    "type": "mdi",
                     "fields": ["created", "expired"],
                     "fieldValueTypes": "double",
                     "unique": False,
                     "sparse": False,
-                    "name": "idx_version_zkd_temporal"
+                    "name": "idx_version_mdi_temporal"
                 },
                 {
                     "collection": "hasVersion",
@@ -335,7 +335,7 @@ class TimeTravelRefactoredDeployment:
                             'sparse': index_config.get("sparse", False)
                         })
                         field_names = ", ".join(index_config["fields"])
-                        print(f"   [ZKD] Created ZKD multi-dimensional index: {index_config['name']} on [{field_names}]")
+                        print(f"   [MDI] Created MDI-prefix multi-dimensional index: {index_config['name']} on [{field_names}]")
                     
                     else:
                         print(f"   [SKIP] Unknown index type: {index_config['type']}")
@@ -549,6 +549,46 @@ class TimeTravelRefactoredDeployment:
         except Exception as e:
             print(f"[ERROR] Error verifying deployment: {str(e)}")
             return False
+
+    def deploy_all_tenant_data(self) -> bool:
+        """Deploy all tenant data to the database with collections and indexes."""
+        try:
+            print("[DEPLOY] Starting complete deployment with MDI-prefix indexes...")
+            
+            # Step 1: Connect to cluster
+            if not self.connect_to_cluster():
+                return False
+            
+            # Step 2: Create/recreate database
+            if not self.drop_and_recreate_database():
+                return False
+            
+            # Step 3: Create collections
+            if not self.create_refactored_collections():
+                return False
+            
+            # Step 4: Create indexes (including MDI-prefix indexes)
+            if not self.create_refactored_indexes():
+                return False
+            
+            # Step 5: Load tenant data
+            if not self.load_refactored_data():
+                return False
+            
+            # Step 6: Create named graphs
+            if not self.create_refactored_named_graphs():
+                return False
+            
+            # Step 7: Verify deployment
+            if not self.verify_deployment():
+                return False
+            
+            print(f"\n[SUCCESS] Complete deployment with MDI-prefix indexes successful!")
+            return True
+            
+        except Exception as e:
+            print(f"[ERROR] Complete deployment failed: {e}")
+            return False
     
     def deploy_time_travel_refactored(self) -> bool:
         """Execute complete deployment of time travel refactored data."""
@@ -616,7 +656,3 @@ def main():
     else:
         print(f"\n[ERROR] Deployment failed!")
         sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()

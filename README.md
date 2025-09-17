@@ -28,7 +28,7 @@ Both conventions maintain **consistent structure** with Subject-Predicate-Object
 
 ### Temporal Data Management
 - **Time Travel Blueprint** with `created`, `expired` timestamps
-- **ZKD Multi-Dimensional Indexes** for optimal temporal range query performance on `created` and `expired` fields
+- **MDI-Prefix Multi-Dimensional Indexes** for optimal temporal range query performance on `created` and `expired` fields
 - **TTL (Time-To-Live) Indexes** for automatic aging of historical data with configurable expiration periods
 - **Current vs Historical TTL Strategy**: Current configurations never expire (`expired = NEVER_EXPIRES`), historical configurations age out automatically
 - **Historical Versioning** via `hasVersion` edges for device and software configurations
@@ -316,10 +316,11 @@ graph TB
 - `ttlExpireAt`: TTL field for historical document aging (only present on historical documents)
 - Current vs Historical strategy: Current configs have no TTL, historical configs age out
 
-**ZKD Multi-Dimensional Indexes:**
-- Optimized temporal range queries on `created` and `expired` fields
+**MDI-Prefix Multi-Dimensional Indexes:**
+- Optimized temporal range queries on `created` and `expired` fields (timestamp data)
 - Enhanced performance for time travel and point-in-time queries
 - Applied to Device, Software, and hasVersion collections
+- Correctly implements the time travel blueprint recommendation for temporal data
 
 **TTL (Time-To-Live) Indexes:**
 - Automatic aging of historical data with configurable expiration periods

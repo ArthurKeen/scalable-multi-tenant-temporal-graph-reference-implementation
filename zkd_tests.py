@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-ZKD Multi-Dimensional Index Testing Suite
+MDI-Prefix Multi-Dimensional Index Testing Suite
 
-Tests ZKD multi-dimensional index performance and functionality for temporal queries
-on created/expired fields. Validates that ZKD indexes improve query
+Tests MDI-prefix multi-dimensional index performance and functionality for temporal queries
+on created/expired fields. Validates that MDI-prefix indexes improve query
 performance for time travel range queries.
 """
 
@@ -19,8 +19,8 @@ from centralized_credentials import CredentialsManager
 from database_utilities import DatabaseConnectionManager, QueryExecutor
 
 
-class ZKDIndexTester:
-    """Test suite for ZKD multi-dimensional index functionality and performance."""
+class MDIIndexTester:
+    """Test suite for MDI-prefix multi-dimensional index functionality and performance."""
     
     def __init__(self, show_queries: bool = True):
         self.show_queries = show_queries
@@ -55,9 +55,9 @@ class ZKDIndexTester:
         print(f"\n[TEST] Verifying ZKD multi-dimensional indexes exist...")
         
         expected_indexes = [
-            ("Device", "idx_device_zkd_temporal"),
-            ("Software", "idx_software_zkd_temporal"),
-            ("hasVersion", "idx_version_zkd_temporal")
+            ("Device", "idx_device_mdi_temporal"),
+            ("Software", "idx_software_mdi_temporal"),
+            ("hasVersion", "idx_version_mdi_temporal")
         ]
         
         all_found = True
