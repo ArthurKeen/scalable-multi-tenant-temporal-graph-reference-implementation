@@ -1123,9 +1123,12 @@ class AutomatedDemoWalkthrough:
             
             print(f"\n[BALANCE] STEP 3: REBALANCE SHARDS")
             print(f"   [MATH] Optimal Balance Achieved:")
-            print(f"      - Total SmartGraphs: 16 (8 initial + 8 new)")
-            print(f"      - Database Servers: 4 (3 original + 1 added)")
-            print(f"      - Graphs per Server: 4 (perfectly balanced)")
+            total_tenants = 8 + tenant_count  # 8 initial + actual new tenants added
+            total_servers = 4  # 3 original + 1 added
+            graphs_per_server = total_tenants // total_servers
+            print(f"      - Total SmartGraphs: {total_tenants} (8 initial + {tenant_count} new)")
+            print(f"      - Database Servers: {total_servers} (3 original + 1 added)")
+            print(f"      - Graphs per Server: {graphs_per_server} (perfectly balanced)")
             print(f"      - This demonstrates ideal shard distribution!")
             print()
             
@@ -1168,9 +1171,10 @@ class AutomatedDemoWalkthrough:
                     print(f"   [TIP] Rebalancing ensures optimal performance!")
             
             print(f"\n[CHART] SCALING IMPACT ANALYSIS:")
-            print(f"   [STAT] Before scaling: 4 tenants")
-            print(f"   [STAT] After scaling: {tenant_count + 4} tenants ({tenant_count} added)")
-            print(f"   [BOOST] Capacity increase: {((tenant_count + 4) / 4 - 1) * 100:.0f}%")
+            initial_tenants = 8
+            print(f"   [STAT] Before scaling: {initial_tenants} tenants")
+            print(f"   [STAT] After scaling: {tenant_count + initial_tenants} tenants ({tenant_count} added)")
+            print(f"   [BOOST] Capacity increase: {((tenant_count + initial_tenants) / initial_tenants - 1) * 100:.0f}%")
             print(f"   [SPEED] Performance optimization: Server addition + shard rebalancing")
             print(f"   [SECURE] Data isolation: Maintained across all tenants")
             
@@ -1179,7 +1183,7 @@ class AutomatedDemoWalkthrough:
             
             scale_out_results = {
                 "new_tenants_added": tenant_count,
-                "total_tenants": 4 + tenant_count,
+                "total_tenants": initial_tenants + tenant_count,
                 "cluster_analysis_completed": True,
                 "shard_analysis_completed": True,
                 "zero_downtime_maintained": True
