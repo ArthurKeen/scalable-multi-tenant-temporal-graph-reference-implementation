@@ -808,7 +808,7 @@ python3 src/data_generation/asset_generator.py --naming snake_case
 # - Device/software/location counts per tenant
 
 # Then generate with custom settings
-python3 src/data_generation/asset_generator.py
+PYTHONPATH=. python3 src/data_generation/asset_generator.py
 ```
 
 #### Option C: Single Tenant Testing
@@ -819,7 +819,7 @@ python3 src/data_generation/asset_generator.py
 # - Set SOFTWARE_COUNT = 10
 # - Set LOCATION_COUNT = 2
 
-python3 src/data_generation/asset_generator.py
+PYTHONPATH=. python3 src/data_generation/asset_generator.py
 ```
 
 #### Step 3: Deploy to Database
@@ -827,21 +827,23 @@ python3 src/data_generation/asset_generator.py
 **Recommended: Use the Interactive Demo Walkthrough**
 ```bash
 # Complete guided demonstration (automatic database creation)
-python3 demos/automated_demo_walkthrough.py --interactive
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 
 # Quick automated run for testing
-python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
 ```
+
+**Note**: `PYTHONPATH=.` is required due to the modular folder structure (`src/`, `demos/`, etc.)
 
 **Alternative: Manual deployment methods**
 
 #### Option A: Fresh Database Deployment
 ```bash
 # Deploy with camelCase naming (default)
-python3 src/database/database_deployment.py
+PYTHONPATH=. python3 src/database/database_deployment.py
 
 # Deploy with snake_case naming
-python3 src/database/database_deployment.py --naming snake_case
+PYTHONPATH=. python3 src/database/database_deployment.py --naming snake_case
 
 # This will:
 # 1. Create/recreate the database
