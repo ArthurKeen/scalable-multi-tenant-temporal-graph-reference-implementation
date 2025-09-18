@@ -115,7 +115,8 @@ class ApplicationPaths:
     @classmethod
     def initialize_default(cls) -> 'ApplicationPaths':
         """Initialize with default project structure."""
-        project_root = Path(__file__).parent
+        # Go up two levels: src/config -> src -> project_root
+        project_root = Path(__file__).parent.parent.parent
         return cls(
             project_root=project_root,
             data_directory=project_root / 'data',

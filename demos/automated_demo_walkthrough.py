@@ -435,7 +435,7 @@ class AutomatedDemoWalkthrough:
         """Section 2: Multi-Tenant Data Generation."""
         self.print_section_header(
             "DATA GENERATION", 
-            "Generating multi-tenant network asset data with 4 tenants by default"
+            "Generating multi-tenant network asset data with 8 tenants by default"
         )
         
         self.print_subsection(
@@ -444,10 +444,10 @@ class AutomatedDemoWalkthrough:
         )
         
         print("Tenant Setup:")
-        print("- Acme Corp (Scale Factor: 1)")
-        print("- Global Enterprises (Scale Factor: 2)")  
-        print("- TechStart Inc (Scale Factor: 3)")
-        print("- Enterprise Solutions (Scale Factor: 1)")
+        print("- 8 diverse tenant configurations with varying scale factors")
+        print("- Realistic enterprise names and configurations")  
+        print("- Different data volumes per tenant for testing diversity")
+        print("- Complete tenant isolation within shared collections")
         print()
         
         print("Data Types Generated per Tenant:")
