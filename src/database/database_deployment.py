@@ -362,9 +362,9 @@ class TimeTravelRefactoredDeployment:
                         expire_minutes = index_config["expireAfter"] / 60 if index_config["expireAfter"] > 0 else 0
                         print(f"   [TTL] Created TTL index: {index_config['name']} (expire after {expire_minutes} minutes)")
                     
-                    elif index_config["type"] == "zkd":
+                    elif index_config["type"] == "mdi":
                         collection.add_index({
-                            'type': 'zkd',
+                            'type': 'mdi',
                             'fields': index_config["fields"],
                             'name': index_config.get("name"),
                             'fieldValueTypes': index_config.get("fieldValueTypes", "double"),
