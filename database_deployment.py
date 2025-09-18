@@ -20,7 +20,7 @@ from centralized_credentials import CredentialsManager, DatabaseConstants
 from config_management import get_config, NamingConvention
 from ttl_config import (create_ttl_configuration, create_snake_case_ttl_configuration, 
                        create_demo_ttl_configuration, create_demo_snake_case_ttl_configuration, TTLManager)
-from ttl_constants import DEFAULT_TTL_DAYS
+from ttl_constants import DEFAULT_TTL_DAYS, TTLConstants
 
 
 class TimeTravelRefactoredDeployment:
@@ -38,12 +38,12 @@ class TimeTravelRefactoredDeployment:
         
         # Initialize TTL configuration
         if demo_mode:
-            # Use short TTL periods for demo (10 minutes)
+            # Use short TTL periods for demo (5 minutes)
             if naming_convention == NamingConvention.SNAKE_CASE:
                 self.ttl_config = create_demo_snake_case_ttl_configuration("deployment")
             else:
                 self.ttl_config = create_demo_ttl_configuration("deployment")
-            print(f"[DEMO] Using demo TTL configuration (10 minutes)")
+            print(f"[DEMO] Using demo TTL configuration ({TTLConstants.DEMO_TTL_EXPIRE_MINUTES} minutes)")
         else:
             # Use production TTL periods (30 days)
             if naming_convention == NamingConvention.SNAKE_CASE:
@@ -71,14 +71,22 @@ class TimeTravelRefactoredDeployment:
             else:
                 print(f"   Connected: {version_info}")
             
-            # Connect to target database
+            # Connect to target database or create it if it doesn't exist
             if self.sys_db.has_database(self.creds.database_name):
                 self.database = self.client.db(self.creds.database_name, **CredentialsManager.get_database_params())
-                print(f"[DONE] Connected to database: {self.creds.database_name}")
+                print(f"[DONE] Connected to existing database: {self.creds.database_name}")
                 return True
             else:
-                print(f"[ERROR] Database '{self.creds.database_name}' not found")
-                return False
+                print(f"[INFO] Database '{self.creds.database_name}' not found - creating it...")
+                try:
+                    # Create the database
+                    self.sys_db.create_database(self.creds.database_name)
+                    self.database = self.client.db(self.creds.database_name, **CredentialsManager.get_database_params())
+                    print(f"[DONE] Created and connected to database: {self.creds.database_name}")
+                    return True
+                except Exception as create_error:
+                    print(f"[ERROR] Failed to create database '{self.creds.database_name}': {create_error}")
+                    return False
                 
         except Exception as e:
             print(f"[ERROR] Connection failed: {str(e)}")
@@ -275,22 +283,39 @@ class TimeTravelRefactoredDeployment:
             # Add TTL indexes for historical document aging
             ttl_specs = self.ttl_manager.get_arango_index_specs()
             for ttl_spec in ttl_specs:
-                # Extract collection name from TTL spec name (format: ttl_CollectionName_expired)
+                # Extract collection name from TTL spec name (format: ttl_CollectionName_ttlExpireAt)
                 spec_parts = ttl_spec["name"].split("_")
                 if len(spec_parts) >= 3:
-                    base_collection_name = spec_parts[1]  # Get the collection name part
-                    # Use the collection name directly as it's already in the correct naming convention
-                    collection_name = self.app_config.get_collection_name(base_collection_name)
-                    if collection_name:
-                        index_configs.append({
-                            "collection": collection_name,
-                            "type": "ttl",
-                            "fields": ttl_spec["fields"],
-                            "name": ttl_spec["name"],
-                            "expireAfter": ttl_spec["expireAfter"],
-                            "sparse": ttl_spec["sparse"],
-                            "selectivityEstimate": ttl_spec["selectivityEstimate"]
-                        })
+                    base_collection_name = spec_parts[1]  # Get the collection name part (e.g., "Device")
+                    
+                    # Map PascalCase collection names to logical names for config lookup
+                    logical_name_mapping = {
+                        "Device": "devices",
+                        "Software": "software", 
+                        "Location": "locations",
+                        "DeviceProxyIn": "device_ins",
+                        "DeviceProxyOut": "device_outs",
+                        "SoftwareProxyIn": "software_ins",
+                        "SoftwareProxyOut": "software_outs",
+                        "hasConnection": "connections",
+                        "hasLocation": "has_locations",
+                        "hasDeviceSoftware": "has_device_software",
+                        "hasVersion": "versions"
+                    }
+                    
+                    logical_name = logical_name_mapping.get(base_collection_name)
+                    if logical_name:
+                        collection_name = self.app_config.get_collection_name(logical_name)
+                        if collection_name:
+                            index_configs.append({
+                                "collection": collection_name,
+                                "type": "ttl",
+                                "fields": ttl_spec["fields"],
+                                "name": ttl_spec["name"],
+                                "expireAfter": ttl_spec["expireAfter"],
+                                "sparse": ttl_spec["sparse"],
+                                "selectivityEstimate": ttl_spec["selectivityEstimate"]
+                            })
             
             for index_config in index_configs:
                 collection_name = index_config["collection"]
@@ -314,6 +339,18 @@ class TimeTravelRefactoredDeployment:
                         print(f"   [DONE] Created hash index: {index_config['name']}")
                     
                     elif index_config["type"] == "ttl":
+                        # Drop existing TTL index if it exists (to ensure correct expireAfter value)
+                        try:
+                            existing_indexes = collection.indexes()
+                            for existing_idx in existing_indexes:
+                                if existing_idx.get('name') == index_config.get("name"):
+                                    collection.delete_index(existing_idx['id'])
+                                    print(f"   [TTL] Dropped existing TTL index: {index_config['name']}")
+                                    break
+                        except Exception as e:
+                            print(f"   [INFO] No existing TTL index to drop: {e}")
+                        
+                        # Create new TTL index with correct configuration
                         collection.add_index({
                             'type': 'ttl',
                             'fields': index_config["fields"],
@@ -322,8 +359,8 @@ class TimeTravelRefactoredDeployment:
                             'sparse': index_config.get("sparse", True),
                             'selectivityEstimate': index_config.get("selectivityEstimate", 0.1)
                         })
-                        expire_days = index_config["expireAfter"] // 86400 if index_config["expireAfter"] > 0 else 0
-                        print(f"   [TTL] Created TTL index: {index_config['name']} (expire after {expire_days} days)")
+                        expire_minutes = index_config["expireAfter"] / 60 if index_config["expireAfter"] > 0 else 0
+                        print(f"   [TTL] Created TTL index: {index_config['name']} (expire after {expire_minutes} minutes)")
                     
                     elif index_config["type"] == "zkd":
                         collection.add_index({
@@ -640,7 +677,7 @@ def main():
     parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
                        help="Naming convention for collections and properties (default: camelCase)")
     parser.add_argument("--demo-mode", action="store_true",
-                       help="Use short TTL periods (10 minutes) for demonstration purposes")
+                       help="Use short TTL periods (5 minutes) for demonstration purposes")
     
     args = parser.parse_args()
     

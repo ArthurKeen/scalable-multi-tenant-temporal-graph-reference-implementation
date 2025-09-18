@@ -285,7 +285,7 @@ class TransactionSimulator:
             old_config = change.old_config.copy()
             expired_timestamp = change.timestamp.timestamp()
             old_config["expired"] = expired_timestamp  # For time travel queries
-            old_config["ttlExpireAt"] = expired_timestamp + TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS  # TTL deletion timestamp
+            old_config["ttlExpireAt"] = expired_timestamp + TTLConstants.DEMO_TTL_EXPIRE_SECONDS  # TTL deletion timestamp (5 minutes for demo)
             
             collection.update(old_config)
             print(f"   [HISTORICAL] Converted {change.entity_key} to historical (expired={old_config['expired']}, ttlExpireAt={old_config['ttlExpireAt']})")
@@ -298,6 +298,21 @@ class TransactionSimulator:
             
             collection.insert(new_config)
             print(f"   [CURRENT] Created new current config {new_config['_key']} (expired={NEVER_EXPIRES}, no TTL)")
+            
+            # Output full vertex IDs for graph visualization
+            old_vertex_id = f"{collection_name}/{change.entity_key}"
+            new_vertex_id = f"{collection_name}/{new_config['_key']}"
+            ttl_expire_minutes = TTLConstants.DEMO_TTL_EXPIRE_SECONDS // 60
+            
+            print(f"\n   [GRAPH] GRAPH VISUALIZATION IDs:")
+            print(f"   [BEFORE] BEFORE (Historical): {old_vertex_id}")
+            print(f"      [TTL] Will be deleted by TTL in {ttl_expire_minutes} minutes")
+            print(f"   [AFTER] AFTER (Current): {new_vertex_id}")
+            print(f"      [NEVER] Never expires (current configuration)")
+            print(f"   [COPY] Copy these IDs to paste into Graph Visualizer:")
+            print(f"      Historical: {old_vertex_id}")
+            print(f"      Current: {new_vertex_id}")
+            print()
             
             # Step 3: Update version edges if they exist
             self._update_version_edges(change)
@@ -314,18 +329,19 @@ class TransactionSimulator:
         try:
             version_collection_name = self.app_config.get_collection_name("versions")
             if not version_collection_name:
+                print(f"   [VERSION] No version collection found, skipping edge updates")
                 return
             
             version_collection = self.database.collection(version_collection_name)
             
-            # Find existing version edges for this entity
-            aql = f"""
+            # Find existing version edges that reference the old configuration
+            aql_find_old_edges = f"""
             FOR edge IN {version_collection_name}
-                FILTER edge._to LIKE "{change.entity_key}%"
+                FILTER edge._to == "{change.old_config['_id']}" OR edge._from == "{change.old_config['_id']}"
                 RETURN edge
             """
             
-            cursor = self.database.aql.execute(aql)
+            cursor = self.database.aql.execute(aql_find_old_edges)
             existing_edges = list(cursor)
             
             # Update existing edges to historical
@@ -333,12 +349,162 @@ class TransactionSimulator:
                 edge["expired"] = change.timestamp.timestamp()
                 version_collection.update(edge)
             
-            # Create new version edges for the new configuration
-            # This is simplified - in a real implementation, you'd need to find the correct proxy keys
-            print(f"   [VERSION] Updated {len(existing_edges)} version edges")
+            print(f"   [VERSION] Expired {len(existing_edges)} old version edges")
+            
+            # For Software entities, create new hasVersion edges to maintain graph connectivity
+            if change.entity_type == "software":
+                self._create_software_version_edges(change, version_collection)
+            elif change.entity_type == "device":
+                self._create_device_version_edges(change, version_collection)
             
         except Exception as e:
             print(f"[WARNING] Failed to update version edges: {str(e)}")
+    
+    def _create_software_version_edges(self, change: ConfigurationChange, version_collection):
+        """Create hasVersion edges for new Software configuration."""
+        try:
+            # Extract base entity name from the old key to find proxy keys
+            old_key = change.entity_key
+            key_parts = old_key.split("_")
+            if len(key_parts) < 2:
+                print(f"   [VERSION] Cannot parse entity key format: {old_key}")
+                return
+            
+            tenant_id = key_parts[0]
+            entity_base = key_parts[1]  # e.g., "software3-0"
+            
+            # Remove the "-0" suffix to get the proxy base name
+            if "-" in entity_base:
+                proxy_base = entity_base.split("-")[0]  # "software3"
+            else:
+                proxy_base = entity_base
+            
+            # Find the SoftwareProxyIn and SoftwareProxyOut keys (same key for both)
+            proxy_in_key = f"{tenant_id}_{proxy_base}"
+            proxy_out_key = f"{tenant_id}_{proxy_base}"
+            
+            # Verify proxies exist
+            proxy_in_collection = self.database.collection("SoftwareProxyIn")
+            proxy_out_collection = self.database.collection("SoftwareProxyOut")
+            
+            proxy_in_exists = proxy_in_collection.has(proxy_in_key)
+            proxy_out_exists = proxy_out_collection.has(proxy_out_key)
+            
+            if not proxy_in_exists or not proxy_out_exists:
+                print(f"   [VERSION] Proxy vertices not found: ProxyIn={proxy_in_exists}, ProxyOut={proxy_out_exists}")
+                return
+            
+            # Construct the full document ID (collection/key)
+            collection_name = self.app_config.get_collection_name("software")
+            new_software_id = f"{collection_name}/{change.new_config['_key']}"
+            
+            # Create hasVersion edge from SoftwareProxyIn to new Software
+            incoming_edge = {
+                "_key": f"version_in_{change.new_config['_key']}",
+                "_from": f"SoftwareProxyIn/{proxy_in_key}",
+                "_to": new_software_id,
+                "_fromType": "SoftwareProxyIn",
+                "_toType": "Software",
+                "created": change.timestamp.timestamp(),
+                "expired": NEVER_EXPIRES,
+                "tenantId": change.new_config.get("tenantId", tenant_id)
+            }
+            
+            # Create hasVersion edge from new Software to SoftwareProxyOut
+            outgoing_edge = {
+                "_key": f"version_out_{change.new_config['_key']}",
+                "_from": new_software_id,
+                "_to": f"SoftwareProxyOut/{proxy_out_key}",
+                "_fromType": "Software",
+                "_toType": "SoftwareProxyOut",
+                "created": change.timestamp.timestamp(),
+                "expired": NEVER_EXPIRES,
+                "tenantId": change.new_config.get("tenantId", tenant_id)
+            }
+            
+            # Insert the new edges
+            version_collection.insert(incoming_edge)
+            version_collection.insert(outgoing_edge)
+            
+            print(f"   [VERSION] Created hasVersion edges: ProxyIn→Software→ProxyOut")
+            print(f"            Incoming: {incoming_edge['_key']}")
+            print(f"            Outgoing: {outgoing_edge['_key']}")
+            
+        except Exception as e:
+            print(f"   [VERSION] Failed to create software version edges: {str(e)}")
+    
+    def _create_device_version_edges(self, change: ConfigurationChange, version_collection):
+        """Create hasVersion edges for new Device configuration."""
+        try:
+            # Extract base entity name from the old key to find proxy keys
+            old_key = change.entity_key
+            key_parts = old_key.split("_")
+            if len(key_parts) < 2:
+                print(f"   [VERSION] Cannot parse entity key format: {old_key}")
+                return
+            
+            tenant_id = key_parts[0]
+            entity_base = key_parts[1]  # e.g., "device1-0"
+            
+            # Remove the "-0" suffix to get the proxy base name
+            if "-" in entity_base:
+                proxy_base = entity_base.split("-")[0]  # "device1"
+            else:
+                proxy_base = entity_base
+            
+            # Find the DeviceProxyIn and DeviceProxyOut keys (same key for both)
+            proxy_in_key = f"{tenant_id}_{proxy_base}"
+            proxy_out_key = f"{tenant_id}_{proxy_base}"
+            
+            # Verify proxies exist
+            proxy_in_collection = self.database.collection("DeviceProxyIn")
+            proxy_out_collection = self.database.collection("DeviceProxyOut")
+            
+            proxy_in_exists = proxy_in_collection.has(proxy_in_key)
+            proxy_out_exists = proxy_out_collection.has(proxy_out_key)
+            
+            if not proxy_in_exists or not proxy_out_exists:
+                print(f"   [VERSION] Proxy vertices not found: ProxyIn={proxy_in_exists}, ProxyOut={proxy_out_exists}")
+                return
+            
+            # Construct the full document ID (collection/key)
+            collection_name = self.app_config.get_collection_name("devices")
+            new_device_id = f"{collection_name}/{change.new_config['_key']}"
+            
+            # Create hasVersion edge from DeviceProxyIn to new Device
+            incoming_edge = {
+                "_key": f"version_in_{change.new_config['_key']}",
+                "_from": f"DeviceProxyIn/{proxy_in_key}",
+                "_to": new_device_id,
+                "_fromType": "DeviceProxyIn",
+                "_toType": "Device",
+                "created": change.timestamp.timestamp(),
+                "expired": NEVER_EXPIRES,
+                "tenantId": change.new_config.get("tenantId", tenant_id)
+            }
+            
+            # Create hasVersion edge from new Device to DeviceProxyOut
+            outgoing_edge = {
+                "_key": f"version_out_{change.new_config['_key']}",
+                "_from": new_device_id,
+                "_to": f"DeviceProxyOut/{proxy_out_key}",
+                "_fromType": "Device",
+                "_toType": "DeviceProxyOut",
+                "created": change.timestamp.timestamp(),
+                "expired": NEVER_EXPIRES,
+                "tenantId": change.new_config.get("tenantId", tenant_id)
+            }
+            
+            # Insert the new edges
+            version_collection.insert(incoming_edge)
+            version_collection.insert(outgoing_edge)
+            
+            print(f"   [VERSION] Created hasVersion edges: ProxyIn→Device→ProxyOut")
+            print(f"            Incoming: {incoming_edge['_key']}")
+            print(f"            Outgoing: {outgoing_edge['_key']}")
+            
+        except Exception as e:
+            print(f"   [VERSION] Failed to create device version edges: {str(e)}")
     
     def run_simulation_batch(self, device_count: int = 3, software_count: int = 3) -> Dict[str, Any]:
         """Run a batch of configuration change simulations."""
@@ -355,7 +521,7 @@ class TransactionSimulator:
         }
         
         # Simulate device changes
-        current_devices = self.find_current_configurations("Device", device_count)
+        current_devices = self.find_current_configurations("devices", device_count)
         print(f"   Found {len(current_devices)} current device configurations")
         
         for device in current_devices[:device_count]:
@@ -373,7 +539,7 @@ class TransactionSimulator:
             results["total_changes"] += 1
         
         # Simulate software changes
-        current_software = self.find_current_configurations("Software", software_count)
+        current_software = self.find_current_configurations("software", software_count)
         print(f"   Found {len(current_software)} current software configurations")
         
         for software in current_software[:software_count]:

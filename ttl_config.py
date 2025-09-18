@@ -197,7 +197,7 @@ def create_demo_ttl_configuration(tenant_id: str,
     return TTLConfiguration(
         tenant_id=tenant_id,
         strategy=strategy,
-        default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 10 minutes
+        default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 5 minutes
         preserve_current_configs=True
     )
 
@@ -210,7 +210,7 @@ def create_demo_snake_case_ttl_configuration(tenant_id: str,
     return TTLConfiguration(
         tenant_id=tenant_id,
         strategy=strategy,
-        default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 10 minutes
+        default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 5 minutes
         preserve_current_configs=True,
         vertex_collections=[
             "device", "software", "location",

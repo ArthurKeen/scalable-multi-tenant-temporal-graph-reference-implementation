@@ -48,7 +48,7 @@ The primary objective is to create a fully automated, end-to-end demo lifecycle 
 
 ### 3.1 Data Generation Refactoring
 
-The `network-asset-management-data-gen` repository will be refactored to meet the following data generation requirements:
+The `scalable-multi-tenant-temporal-network-asset-management-demo` repository provides comprehensive demonstration capabilities including data generation, API functionality, and interactive demos:
 
 * **Tenant-Specific Data:** The script must generate distinct, partitioned data sets for multiple tenants. Each tenant's data will be part of its own disjoint smartgraph.
 
