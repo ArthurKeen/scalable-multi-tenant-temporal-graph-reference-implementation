@@ -670,24 +670,27 @@ The demo now addresses common concerns about transaction and TTL visibility:
 
 ```mermaid
 graph TD
-    A[Start Demo] --> B[Step 1: Generate Data]
+    A[Start Demo] --> A0[Step 0: Database Reset]
+    A0 --> B[Step 1: Generate Data]
     B --> C[Step 2: Deploy to DB]
     C --> D[Step 3: Initial Validation]
-    D --> E[Step 4: Transaction Simulation]
+    D --> E[Step 4: Temporal TTL Transactions]
     E --> F[Step 5: TTL Demonstration]
     F --> G[Step 6: Scale-Out Demo]
     G --> H[Step 7: Final Validation]
     H --> I[Demo Complete]
     
-    B --> B1[Create 4 Tenants<br/>Generate Assets<br/>Support camelCase/snake_case]
+    A0 --> A01[Clean Database<br/>Reset Collections<br/>Clear Tenant Registry]
+    B --> B1[Create 8 Tenants<br/>Generate Assets<br/>Support camelCase/snake_case]
     C --> C1[Deploy Collections<br/>Create Indexes<br/>Setup SmartGraphs]
     D --> D1[Verify Deployment<br/>Check Tenant Isolation<br/>Test Time Travel]
     E --> E1[Simulate Device Changes<br/>Simulate Software Updates<br/>Apply TTL Strategy]
     F --> F1[Device Maintenance Cycle<br/>Software Upgrade Rollback<br/>Historical Data Aging]
-    G --> G1[Add New Tenants<br/>Analyze Cluster<br/>Rebalance Shards]
+    G --> G1[Add 8 New Tenants<br/>Add 1 DB Server<br/>Rebalance 16 Graphs]
     H --> H1[Data Integrity Check<br/>Isolation Verification<br/>Performance Validation]
     
     style A fill:#e1f5fe
+    style A0 fill:#ffebee
     style I fill:#e8f5e8
     style E fill:#fff3e0
     style F fill:#fff3e0
@@ -706,13 +709,14 @@ The **automated walkthrough** provides a guided tour of all system capabilities 
 - **[STATS] Results summaries** after each section
 
 #### Walkthrough Sections:
+0. **Database Reset and Cleanup** - Clean state for fresh demonstration
 1. **System Introduction** - Overview and capabilities
-2. **Data Generation** - Multi-tenant data creation
+2. **Data Generation** - Multi-tenant data creation (8 tenants)
 3. **Database Deployment** - SmartGraphs and indexes
 4. **Initial Validation** - System integrity checks
-5. **Transaction Simulation** - Configuration changes with TTL
+5. **Temporal TTL Transactions** - Configuration changes with TTL
 6. **TTL Demonstration** - Time travel scenarios
-7. **Scale-Out Demo** - Horizontal scaling capabilities
+7. **Scale-Out Demo** - Add 8 tenants, 1 server, rebalance 16 graphs
 8. **Final Validation** - Comprehensive system verification
 9. **Demo Summary** - Results and achievements
 
