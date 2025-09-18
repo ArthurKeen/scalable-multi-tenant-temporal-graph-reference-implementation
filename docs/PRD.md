@@ -131,6 +131,7 @@ A series of scripts must be developed to manage the entire demo lifecycle. These
 - **FR6.2**: Implement hash indexes on document `_key` for quick lookups
 - **FR6.3**: Create temporal range indexes on observation timestamps
 - **FR6.4**: Optimize edge indexing for time travel query performance
+- **FR6.5**: Ensure index configuration and processing logic consistency (config type must match code conditions)
 
 ### Non-Functional Requirements
 
@@ -151,6 +152,11 @@ A series of scripts must be developed to manage the entire demo lifecycle. These
 - **NFR3.1**: Clean separation between tenant-aware and core generation logic
 - **NFR3.2**: Configurable parameters via external configuration
 - **NFR3.3**: Comprehensive logging and error handling
+
+#### NFR4: Code Quality and Consistency
+- **NFR4.1**: Index configuration changes must include corresponding logic updates
+- **NFR4.2**: Configuration-driven features require validation that config types match processing logic
+- **NFR4.3**: Breaking changes to data structures must include comprehensive testing of dependent code
 
 ## Technical Architecture
 
@@ -340,6 +346,11 @@ Each tenant will have a disjoint smartgraph with:
 - [ ] Bulk tenant data generation
 - [ ] Tenant metadata management
 - [ ] Data validation and integrity checks
+
+### Code Quality and Consistency
+- [ ] Index configuration types match processing logic conditions
+- [ ] All configured index types are successfully created (no "Unknown index type" errors)
+- [ ] Configuration changes include corresponding implementation updates
 
 ## Risks and Mitigation
 
