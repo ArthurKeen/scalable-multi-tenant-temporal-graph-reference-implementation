@@ -394,7 +394,7 @@ class AutomatedDemoWalkthrough:
             print("[WARNING] Database reset failed - demo may show unexpected results")
             self.pause_for_observation("Continue anyway? Press Enter to proceed...", 2)
         else:
-            print("[SUCCESS] Database reset complete - ready for fresh 4-tenant demo")
+            print("[SUCCESS] Database reset complete - ready for fresh 8-tenant demo")
             self.pause_for_observation("Database is now clean. Ready to generate fresh data?", 2)
         
         self.sections_completed.append("database_reset")
@@ -419,7 +419,7 @@ class AutomatedDemoWalkthrough:
         
         print("Demo Flow Overview:")
         print("0. Database Reset and Cleanup")
-        print("1. Initial Data Generation (4 tenants by default)")
+        print("1. Initial Data Generation (8 tenants by default)")
         print("2. Database Deployment with SmartGraphs")
         print("3. Initial Validation and Testing")
         print("4. Temporal TTL Transactions Demonstration")
