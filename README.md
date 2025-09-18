@@ -15,31 +15,31 @@ Modern enterprises increasingly need **scalable SaaS platforms** that can serve 
 
 This architecture pattern is particularly valuable for **hosted enterprise solutions** where relationship modeling and temporal analysis are critical:
 
-**🏢 Network Asset Management (IAM/Security)**
+**Network Asset Management (IAM/Security)**
 - Track devices, software, users, and their relationships over time
 - Analyze security incidents by replaying network state at specific timestamps
 - Monitor configuration changes and their downstream effects
 - Demonstrate compliance with historical audit trails
 
-**🔐 Identity and Access Management (IAM)**
+**Identity and Access Management (IAM)**
 - Model complex user-role-resource relationships across organizational hierarchies
 - Track permission changes and access patterns over time
 - Analyze privilege escalation and de-escalation workflows
 - Support compliance auditing with temporal queries
 
-**🛡️ Cybersecurity and Threat Intelligence**
+**Cybersecurity and Threat Intelligence**
 - Map attack vectors across interconnected systems and timeframes
 - Track malware propagation through network relationships
 - Analyze behavioral patterns across historical incident data
 - Correlate threat indicators across multiple tenant environments
 
-**☁️ Cloud Infrastructure Management**
+**Cloud Infrastructure Management**
 - Model complex dependencies between services, containers, and infrastructure
 - Track resource allocation and utilization patterns over time
 - Analyze cost attribution across organizational units and time periods
 - Support capacity planning with historical usage data
 
-**📊 Business Process Intelligence**
+**Business Process Intelligence**
 - Track workflow states and transitions across complex business processes
 - Analyze process performance and bottlenecks over time
 - Model organizational structures and their evolution
@@ -310,8 +310,8 @@ The demo implements a sophisticated **"Current vs Historical" TTL strategy** usi
    ```
 
 3. **TTL Index Behavior**:
-   - **Current configs**: No `ttlExpireAt` field → Ignored by sparse TTL index (never deleted)
-   - **Historical configs**: `ttlExpireAt = 1234567890.123` → Will be deleted when timestamp is reached
+   - **Current configs**: No `ttlExpireAt` field -> Ignored by sparse TTL index (never deleted)
+   - **Historical configs**: `ttlExpireAt = 1234567890.123` -> Will be deleted when timestamp is reached
    - **Automatic cleanup**: ArangoDB automatically removes expired historical documents
 
 **Key Constants**:
@@ -634,19 +634,19 @@ Use this if you see more than 4 tenants in the ArangoDB interface, or if you wan
 
 The demo now addresses common concerns about transaction and TTL visibility:
 
-**🔍 Database Visibility**
+**Database Visibility**
 - **Pre-Transaction State**: Shows specific documents to watch before changes
 - **Watch List**: Provides exact document keys to monitor in ArangoDB Web Interface
 - **Field-Level Tracking**: Shows `expired` and `ttlExpireAt` field changes in real-time
 - **Interactive Pauses**: Allows time to check database state during the demo
 
-**⚡ Unified Transaction + TTL Process**
+**Unified Transaction + TTL Process**
 - **Immediate TTL Activation**: Transactions set TTL fields immediately (not separately)
 - **Real-Time Impact**: Shows historical documents get `ttlExpireAt` timestamps
 - **Current vs Historical**: Demonstrates current configs never expire, historical configs age out
 - **10-Minute Demo TTL**: Accelerated aging for visible demonstration
 
-**📊 Step-by-Step Process**
+**Step-by-Step Process**
 1. **Database State**: Shows current documents before transactions
 2. **Transaction Execution**: Updates configurations with immediate TTL field setting
 3. **Field Verification**: Confirms TTL timestamps are set on historical documents
@@ -1120,37 +1120,33 @@ python3 src/validation/validation_suite.py
 ## Project Structure
 
 ```
-├── asset_generator.py              # Main data generator with naming conventions
-├── config_management.py            # Centralized configuration system
-├── tenant_config.py                # Tenant modeling and utilities
-├── data_generation_config.py       # Generation parameters and constants
-├── data_generation_utils.py        # Reusable utility functions
-├── database_deployment.py          # ArangoDB Oasis deployment
-├── validation_suite.py             # Comprehensive naming convention validation
-├── test_suite.py                   # Complete test framework
-├── oasis_cluster_setup.py          # Enterprise cluster management (see note below)
-├── centralized_credentials.py      # Secure credential management
-├── database_utilities.py           # Database utility functions
-├── time_travel_demo_queries.py     # Advanced traversal queries and time travel demos
-├── unified_transaction_ttl_demo.py # Unified transaction + TTL demonstration
-├── automated_demo_walkthrough.py   # Interactive demo presentation script (ENHANCED)
-├── transaction_simulator.py        # Real transaction execution with TTL management (ENHANCED)
-├── scale_out_manager.py            # Cluster scaling and tenant addition management
-├── ttl_demo_scenarios.py          # TTL aging demonstration scenarios
-├── ttl_constants.py               # TTL configuration constants (5-minute demo mode)
-├── reset_database.py              # Database cleanup utility for demo preparation
-├── fix_transaction_simulation_bug.py # Fix for orphaned configuration bug
-├── fix_multiple_current_configs.py # Fix for multiple current configs bug
-├── ttl_bug_fix.py                  # TTL field diagnosis and fix tool
-├── ENHANCED_TIME_TRAVEL_DEMO.md    # Documentation for enhanced capabilities
-├── docs/
-│   ├── PRD.md                      # Product Requirements Document
-│   └── CLAUDE.md                   # Development session notes
-├── data/
-│   ├── tenant_{id}/                # Generated tenant data directories
-│   └── tenant_registry_time_travel.json  # Tenant metadata registry
-├── logs/                           # Application logs
-└── reports/                        # Validation reports
+- src/config/config_management.py            # Centralized configuration system
+- src/config/tenant_config.py                # Tenant modeling and utilities
+- src/data_generation/data_generation_config.py       # Generation parameters and constants
+- src/data_generation/data_generation_utils.py        # Reusable utility functions
+- src/database/database_deployment.py          # ArangoDB Oasis deployment
+- src/validation/validation_suite.py             # Comprehensive naming convention validation
+- src/validation/test_suite.py                   # Complete test framework
+- src/database/oasis_cluster_setup.py          # Enterprise cluster management (see note below)
+- src/config/centralized_credentials.py      # Secure credential management
+- src/database/database_utilities.py           # Database utility functions
+- demos/time_travel_demo_queries.py     # Advanced traversal queries and time travel demos
+- demos/unified_transaction_ttl_demo.py # Unified transaction + TTL demonstration
+- demos/automated_demo_walkthrough.py   # Interactive demo presentation script (ENHANCED)
+- src/simulation/transaction_simulator.py        # Real transaction execution with TTL management (ENHANCED)
+- src/simulation/scale_out_manager.py            # Cluster scaling and tenant addition management
+- src/ttl/ttl_demo_scenarios.py          # TTL aging demonstration scenarios
+- src/ttl/ttl_constants.py               # TTL configuration constants (5-minute demo mode)
+- tools/reset_database.py              # Database cleanup utility for demo preparation
+- docs/ENHANCED_TIME_TRAVEL_DEMO.md    # Documentation for enhanced capabilities
+- docs/
+  - docs/PRD.md                      # Product Requirements Document
+  - docs/CLAUDE.md                   # Development session notes
+- data/
+  - data/tenant_{id}/                # Generated tenant data directories
+  - data/tenant_registry_time_travel.json  # Tenant metadata registry
+- logs/                           # Application logs
+- reports/                        # Validation reports
 ```
 
 ## Architecture Notes
