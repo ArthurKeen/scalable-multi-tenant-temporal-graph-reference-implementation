@@ -336,8 +336,8 @@ For demonstration purposes, the system supports **Demo Mode** with accelerated T
 # Deploy with demo mode (10-minute TTL)
 python3 database_deployment.py --demo-mode
 
-# Run comprehensive demo (automatically uses demo mode)
-python3 comprehensive_demo.py
+# Run interactive demo walkthrough (automatically uses demo mode)
+python3 automated_demo_walkthrough.py --interactive
 ```
 
 **Demo TTL Behavior**:
@@ -592,10 +592,10 @@ python3 automated_demo_walkthrough.py --auto-advance --pause-duration 5
 **[RUN] Fast Complete Demo**
 ```bash
 # Run the complete demonstration (all steps automated)
-python3 comprehensive_demo.py --save-report
+python3 automated_demo_walkthrough.py --interactive
 
 # Run with snake_case naming convention
-python3 comprehensive_demo.py --naming snake_case --save-report
+python3 automated_demo_walkthrough.py --interactive
 ```
 
 **[QUICK START] Demo Launcher (Easy Access)**

@@ -38,7 +38,6 @@ def main():
         print("You can now run:")
         print("  python3 automated_demo_walkthrough.py --interactive")
         print("  python3 demo_launcher.py")
-        print("  python3 comprehensive_demo.py")
         return 0
     else:
         print("\n" + "=" * 60)

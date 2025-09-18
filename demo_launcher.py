@@ -82,20 +82,14 @@ def run_automated_walkthrough_auto():
 
 
 def run_comprehensive_demo():
-    """Run the comprehensive demo."""
-    print("Starting Comprehensive Demo (Fast Mode)")
-    print("   → Complete system demonstration")
-    print("   → All steps automated")
+    """Run the comprehensive demo with interactive walkthrough."""
+    print("Starting Comprehensive Demo - Interactive Walkthrough")
+    print("   → Complete system demonstration with guided explanations")
+    print("   → Professional presentation mode with pauses")
     print()
     
-    naming = input("Select naming convention (camelCase/snake_case) [camelCase]: ").strip()
-    if not naming or naming.lower() not in ['camelcase', 'snake_case']:
-        naming = "camelCase"
-    
-    save_report = input("Save demonstration report? (y/N): ").strip().lower()
-    report_flag = "--save-report" if save_report.startswith('y') else ""
-    
-    os.system(f"python3 comprehensive_demo.py --naming {naming} {report_flag}")
+    print("Launching interactive demo walkthrough...")
+    os.system("python3 automated_demo_walkthrough.py --interactive")
 
 
 def run_individual_components():
