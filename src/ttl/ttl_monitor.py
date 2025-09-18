@@ -12,8 +12,8 @@ import sys
 from typing import Dict, List, Any
 from arango import ArangoClient
 
-from centralized_credentials import CredentialsManager
-from ttl_constants import TTLConstants
+from src.config.centralized_credentials import CredentialsManager
+from src.ttl.ttl_constants import TTLConstants
 
 
 class TTLMonitor:

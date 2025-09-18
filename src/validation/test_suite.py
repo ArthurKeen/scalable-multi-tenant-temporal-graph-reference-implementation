@@ -15,14 +15,14 @@ from dataclasses import dataclass
 from typing import Dict, List, Any
 
 # Import modules to test
-from config_management import (
+from src.config.config_management import (
     ConfigurationManager, DatabaseCredentials, ApplicationPaths,
     CollectionConfiguration, GenerationLimits
 )
-from centralized_credentials import CredentialsManager
-from tenant_config import TenantConfig, TenantNamingConvention, create_tenant_config
-from data_generation_config import DeviceType, SoftwareType
-from data_generation_utils import (
+from src.config.centralized_credentials import CredentialsManager
+from src.config.tenant_config import TenantConfig, TenantNamingConvention, create_tenant_config
+from src.data_generation.data_generation_config import DeviceType, SoftwareType
+from src.data_generation.data_generation_utils import (
     KeyGenerator, RandomDataGenerator, DocumentEnhancer, FileManager
 )
 
@@ -163,7 +163,7 @@ class TestDataGeneration(unittest.TestCase):
     
     def test_random_data_generator_device_types(self):
         """Test random data generator device type selection."""
-        from data_generation_config import NetworkConfig, DataGenerationLimits
+        from src.data_generation.data_generation_config import NetworkConfig, DataGenerationLimits
         
         network_config = NetworkConfig()
         limits = DataGenerationLimits()
@@ -356,7 +356,7 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(naming.database_name, "network_assets_demo")
         
         # Test SmartGraph configuration generation
-        from tenant_config import SmartGraphDefinition
+        from src.config.tenant_config import SmartGraphDefinition
         smartgraph_def = SmartGraphDefinition(naming)
         config = smartgraph_def.get_smartgraph_config()
         

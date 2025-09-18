@@ -15,8 +15,8 @@ from arango import ArangoClient
 from pathlib import Path
 
 # Import our utilities
-from centralized_credentials import CredentialsManager
-from database_utilities import DatabaseConnectionManager, QueryExecutor
+from src.config.centralized_credentials import CredentialsManager
+from src.database.database_utilities import DatabaseConnectionManager, QueryExecutor
 
 
 class MDIIndexTester:
@@ -95,7 +95,7 @@ class MDIIndexTester:
         
         # Get current timestamp for testing
         current_time = time.time()
-        from ttl_constants import TTLConstants
+        from src.ttl.ttl_constants import TTLConstants
         past_time = current_time - TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS  # 30 days ago
         future_time = current_time + TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS  # 30 days from now
         

@@ -8,7 +8,7 @@ Eliminates hard-coded values and provides consistent defaults.
 from typing import Dict, List, Any
 from dataclasses import dataclass
 from enum import Enum
-from generation_constants import GENERATION_CONSTANTS, NETWORK_CONSTANTS, LOCATION_CONSTANTS, OS_CONSTANTS
+from src.config.generation_constants import GENERATION_CONSTANTS, NETWORK_CONSTANTS, LOCATION_CONSTANTS, OS_CONSTANTS
 
 
 class DeviceType(Enum):

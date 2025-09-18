@@ -15,7 +15,7 @@ from enum import Enum
 
 
 # Import centralized credentials to avoid duplication
-from centralized_credentials import DatabaseCredentials, CredentialsManager
+from src.config.centralized_credentials import DatabaseCredentials, CredentialsManager
 
 
 class NamingConvention(Enum):

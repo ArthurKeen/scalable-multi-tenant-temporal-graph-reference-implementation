@@ -17,9 +17,9 @@ import sys
 import datetime
 import time
 from typing import Dict, List, Any, Optional
-from centralized_credentials import CredentialsManager
+from src.config.centralized_credentials import CredentialsManager
 from arango import ArangoClient
-from ttl_constants import NEVER_EXPIRES
+from src.ttl.ttl_constants import NEVER_EXPIRES
 
 class TimeTravelQueryDemonstrator:
     """Demonstrate comprehensive time travel queries and TTL aging."""

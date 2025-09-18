@@ -18,8 +18,8 @@ from pathlib import Path
 from arango import ArangoClient
 
 # Import centralized credentials
-from centralized_credentials import CredentialsManager
-from database_utilities import QueryExecutor
+from src.config.centralized_credentials import CredentialsManager
+from src.database.database_utilities import QueryExecutor
 
 
 class TimeTravelValidationSuite:

@@ -25,13 +25,13 @@ from arango.exceptions import (
 )
 
 # Import project modules
-from centralized_credentials import CredentialsManager
-from config_management import get_config, NamingConvention
-from tenant_config import TenantConfig, TenantNamingConvention, SmartGraphDefinition, create_tenant_config
-from ttl_constants import TTLConstants, TTLMessages, DEFAULT_TTL_DAYS
-from asset_generator import TimeTravelRefactoredGenerator
-from database_deployment import TimeTravelRefactoredDeployment
-from oasis_cluster_setup import OasisClusterManager
+from src.config.centralized_credentials import CredentialsManager
+from src.config.config_management import get_config, NamingConvention
+from src.config.tenant_config import TenantConfig, TenantNamingConvention, SmartGraphDefinition, create_tenant_config
+from src.ttl.ttl_constants import TTLConstants, TTLMessages, DEFAULT_TTL_DAYS
+from src.data_generation.asset_generator import TimeTravelRefactoredGenerator
+from src.database.database_deployment import TimeTravelRefactoredDeployment
+from src.database.oasis_cluster_setup import OasisClusterManager
 
 
 @dataclass

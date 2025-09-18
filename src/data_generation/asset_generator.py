@@ -18,10 +18,10 @@ from typing import Dict, List, Any, Tuple
 from pathlib import Path
 
 # Import centralized configuration
-from config_management import get_config, initialize_logging, NamingConvention
-from tenant_config import TenantConfig, TenantNamingConvention, create_tenant_config
-from ttl_constants import NEVER_EXPIRES
-from data_generation_utils import (
+from src.config.config_management import get_config, initialize_logging, NamingConvention
+from src.config.tenant_config import TenantConfig, TenantNamingConvention, create_tenant_config
+from src.ttl.ttl_constants import NEVER_EXPIRES
+from src.data_generation.data_generation_utils import (
     DocumentEnhancer, RandomDataGenerator, KeyGenerator,
     ConfigurationManager as DataConfigManager, FileManager, LocationDataProvider,
     SmartGraphConfigGenerator
@@ -38,7 +38,7 @@ class TimeTravelRefactoredGenerator:
         self.naming = TenantNamingConvention(tenant_config.tenant_id)
         
         # Initialize data generation components
-        from data_generation_config import NetworkConfig, DataGenerationLimits
+        from src.data_generation.data_generation_config import NetworkConfig, DataGenerationLimits
         self.network_config = NetworkConfig()
         self.limits = DataGenerationLimits()
         self.random_gen = RandomDataGenerator(self.network_config, self.limits)
@@ -123,7 +123,7 @@ class TimeTravelRefactoredGenerator:
         
         for i, device_proxy_in in enumerate(device_proxy_ins):
             device_type_str = device_proxy_in["type"]
-            from data_generation_config import DeviceType
+            from src.data_generation.data_generation_config import DeviceType
             device_type = DeviceType(device_type_str)
             
             os_version = self.random_gen.select_os_version(device_type)
@@ -308,7 +308,7 @@ class TimeTravelRefactoredGenerator:
         
         for i, software_proxy_in in enumerate(software_proxy_ins):
             software_type_str = software_proxy_in["type"]
-            from data_generation_config import SoftwareType
+            from src.data_generation.data_generation_config import SoftwareType
             software_type = SoftwareType(software_type_str)
             
             software_version = software_proxy_in["version"]

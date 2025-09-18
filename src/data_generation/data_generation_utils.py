@@ -9,10 +9,10 @@ import uuid
 import datetime
 from typing import Dict, List, Any, Optional, Union
 from pathlib import Path
-from generation_constants import NETWORK_CONSTANTS
+from src.config.generation_constants import NETWORK_CONSTANTS
 
-from tenant_config import TenantConfig, TenantNamingConvention, TemporalDataModel
-from data_generation_config import (
+from src.config.tenant_config import TenantConfig, TenantNamingConvention, TemporalDataModel
+from src.data_generation.data_generation_config import (
     DeviceType, ConnectionType, SoftwareType, NetworkConfig, DataGenerationLimits,
     DEVICE_OS_VERSIONS, SOFTWARE_VERSIONS, DEFAULT_LOCATIONS_DATA,
     SMARTGRAPH_DEFAULTS, FILE_NAMES
@@ -35,10 +35,10 @@ class DocumentEnhancer:
         For proxy collections (DeviceProxyIn/DeviceProxyOut), only adds tenant attributes.
         """
         if is_proxy:
-            from tenant_config import TemporalDataModel
+            from src.config.tenant_config import TemporalDataModel
             return TemporalDataModel.add_proxy_attributes(document, tenant_config)
         else:
-            from tenant_config import TemporalDataModel
+            from src.config.tenant_config import TemporalDataModel
             return TemporalDataModel.add_temporal_attributes(
                 document,
                 timestamp=timestamp,
@@ -390,7 +390,7 @@ class SmartGraphConfigGenerator:
         Returns:
             Complete SmartGraph configuration
         """
-        from tenant_config import SmartGraphDefinition
+        from src.config.tenant_config import SmartGraphDefinition
         
         naming = TenantNamingConvention(tenant_config.tenant_id)
         smartgraph_def = SmartGraphDefinition(naming)

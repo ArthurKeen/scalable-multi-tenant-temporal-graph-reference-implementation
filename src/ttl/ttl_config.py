@@ -11,7 +11,7 @@ from typing import Dict, List, Any, Optional
 from enum import Enum
 
 # Import centralized constants
-from ttl_constants import (
+from src.ttl.ttl_constants import (
     TTLConstants, TTLMessages, TTLConfigurationFactory, TTLUtilities,
     DEFAULT_TTL_DAYS, NEVER_EXPIRES, TTL_SELECTIVITY
 )
@@ -192,7 +192,7 @@ def create_snake_case_ttl_configuration(tenant_id: str,
 def create_demo_ttl_configuration(tenant_id: str,
                                  strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY) -> TTLConfiguration:
     """Create TTL configuration with short TTL period for demonstration purposes."""
-    from ttl_constants import TTLConstants
+    from src.ttl.ttl_constants import TTLConstants
     
     return TTLConfiguration(
         tenant_id=tenant_id,
@@ -205,7 +205,7 @@ def create_demo_ttl_configuration(tenant_id: str,
 def create_demo_snake_case_ttl_configuration(tenant_id: str,
                                            strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY) -> TTLConfiguration:
     """Create snake_case TTL configuration with short TTL period for demonstration purposes."""
-    from ttl_constants import TTLConstants
+    from src.ttl.ttl_constants import TTLConstants
     
     return TTLConfiguration(
         tenant_id=tenant_id,

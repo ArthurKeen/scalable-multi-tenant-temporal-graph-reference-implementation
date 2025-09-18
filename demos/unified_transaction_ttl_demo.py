@@ -17,11 +17,11 @@ import sys
 import time
 import datetime
 from typing import Dict, List, Any, Optional
-from centralized_credentials import CredentialsManager
+from src.config.centralized_credentials import CredentialsManager
 from arango import ArangoClient
-from ttl_constants import NEVER_EXPIRES, TTLConstants
-from transaction_simulator import TransactionSimulator
-from config_management import NamingConvention
+from src.ttl.ttl_constants import NEVER_EXPIRES, TTLConstants
+from src.simulation.transaction_simulator import TransactionSimulator
+from src.config.config_management import NamingConvention
 
 class UnifiedTransactionTTLDemo:
     """Demonstrate unified transaction simulation with real-time TTL aging."""

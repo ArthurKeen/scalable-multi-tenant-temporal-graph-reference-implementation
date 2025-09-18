@@ -62,9 +62,9 @@ except ImportError:
     )
 
 # Import our tenant configuration and centralized credentials
-from tenant_config import TenantConfig, TenantNamingConvention, SmartGraphDefinition
-from data_generation_config import DATABASE_CONFIG
-from centralized_credentials import CredentialsManager
+from src.config.tenant_config import TenantConfig, TenantNamingConvention, SmartGraphDefinition
+from src.data_generation.data_generation_config import DATABASE_CONFIG
+from src.config.centralized_credentials import CredentialsManager
 
 
 class OasisClusterManager:

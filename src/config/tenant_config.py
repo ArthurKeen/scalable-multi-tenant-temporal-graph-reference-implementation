@@ -18,7 +18,7 @@ import sys
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 from enum import Enum
-from ttl_constants import NEVER_EXPIRES
+from src.ttl.ttl_constants import NEVER_EXPIRES
 
 
 class TenantStatus(Enum):
@@ -73,7 +73,7 @@ class TenantConfig:
         # Set TTL expire seconds from constants if not provided
         if self.ttl_expire_after_seconds is None:
             try:
-                from ttl_constants import TTLConstants, NEVER_EXPIRES
+                from src.ttl.ttl_constants import TTLConstants, NEVER_EXPIRES
                 self.ttl_expire_after_seconds = TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS
             except ImportError:
                 self.ttl_expire_after_seconds = TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS  # Fallback to 30 days
@@ -210,7 +210,7 @@ class TemporalDataModel:
         # TTL field management: only historical documents get ttlExpireAt timestamp
         if expired != NEVER_EXPIRES:
             # Historical document - set TTL deletion timestamp
-            from ttl_constants import TTLConstants
+            from src.ttl.ttl_constants import TTLConstants
             enhanced_doc["ttlExpireAt"] = expired + TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS
         # Current documents (expired = NEVER_EXPIRES) don't get ttlExpireAt field
         

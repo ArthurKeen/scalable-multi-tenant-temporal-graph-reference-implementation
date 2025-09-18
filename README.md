@@ -175,10 +175,10 @@ The system includes a comprehensive, interactive demo walkthrough script that gu
 
 ```bash
 # Interactive mode (recommended for live presentations)
-python3 automated_demo_walkthrough.py --interactive
+python3 demos/automated_demo_walkthrough.py --interactive
 
 # Automated mode (for testing and development)
-python3 automated_demo_walkthrough.py --auto-advance --pause-duration 2
+python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
 ```
 
 #### Demo Flow Structure
@@ -334,10 +334,10 @@ For demonstration purposes, the system supports **Demo Mode** with accelerated T
 **Demo Mode Activation**:
 ```bash
 # Deploy with demo mode (10-minute TTL)
-python3 database_deployment.py --demo-mode
+python3 src/database/database_deployment.py --demo-mode
 
 # Run interactive demo walkthrough (automatically uses demo mode)
-python3 automated_demo_walkthrough.py --interactive
+python3 demos/automated_demo_walkthrough.py --interactive
 ```
 
 **Demo TTL Behavior**:
@@ -348,13 +348,13 @@ python3 automated_demo_walkthrough.py --interactive
 **TTL Monitoring Commands**:
 ```bash
 # Show current TTL status
-python3 ttl_monitor.py --status-only
+python3 src/ttl/ttl_monitor.py --status-only
 
 # Live monitoring for 15 minutes
-python3 ttl_monitor.py --duration 15
+python3 src/ttl/ttl_monitor.py --duration 15
 
 # Custom monitoring (5 minutes, refresh every 10 seconds)  
-python3 ttl_monitor.py --duration 5 --refresh 10
+python3 src/ttl/ttl_monitor.py --duration 5 --refresh 10
 ```
 
 **Demo Timeline Example**:
@@ -576,10 +576,10 @@ graph TB
 **[TARGET] Enhanced Automated Walkthrough (Recommended for First-Time Users)**
 ```bash
 # Interactive guided demonstration with database visibility
-python3 automated_demo_walkthrough.py --interactive
+python3 demos/automated_demo_walkthrough.py --interactive
 
 # Auto-advancing demonstration with timed pauses
-python3 automated_demo_walkthrough.py --auto-advance --pause-duration 5
+python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 5
 ```
 
 **NEW: Enhanced Transaction + TTL Demo Features**
@@ -592,16 +592,16 @@ python3 automated_demo_walkthrough.py --auto-advance --pause-duration 5
 **[RUN] Fast Complete Demo**
 ```bash
 # Run the complete demonstration (all steps automated)
-python3 automated_demo_walkthrough.py --interactive
+python3 demos/automated_demo_walkthrough.py --interactive
 
 # Run with snake_case naming convention
-python3 automated_demo_walkthrough.py --interactive
+python3 demos/automated_demo_walkthrough.py --interactive
 ```
 
 **[QUICK START] Demo Launcher (Easy Access)**
 ```bash
 # Interactive menu with all demo options
-python3 demo_launcher.py
+python3 demos/demo_launcher.py
 ```
 
 > **Note**: All scripts use `python3` for compatibility with pyenv and modern Python installations. If you encounter `python: command not found` errors, the scripts have been updated to use `python3` automatically.
@@ -609,28 +609,16 @@ python3 demo_launcher.py
 **[NEW] Advanced Time Travel Demonstrations**
 ```bash
 # Complex graph traversal queries with time travel
-python3 time_travel_demo_queries.py
+python3 demos/time_travel_demo_queries.py
 
 # Unified transaction + TTL with real-time aging
-python3 unified_transaction_ttl_demo.py
+python3 demos/unified_transaction_ttl_demo.py
 ```
 
-**[TOOLS] Bug Fix and Diagnostic Tools**
-```bash
-# Fix orphaned configurations (transaction simulation bug)
-python3 fix_transaction_simulation_bug.py
-
-# Fix multiple current configurations issue
-python3 fix_multiple_current_configs.py
-
-# Diagnose and fix TTL field issues
-python3 ttl_bug_fix.py
-```
-
-**[REFRESH] Database Reset (Clean Start)**
+**[TOOLS] Database Management**
 ```bash
 # Reset database to clean state before demos
-python3 reset_database.py
+python3 tools/reset_database.py
 ```
 Use this if you see more than 4 tenants in the ArangoDB interface, or if you want to ensure a completely fresh demo start.
 
@@ -717,13 +705,13 @@ The **automated walkthrough** provides a guided tour of all system capabilities 
 #### Usage Options:
 ```bash
 # Interactive mode (recommended for presentations)
-python3 automated_demo_walkthrough.py --interactive
+python3 demos/automated_demo_walkthrough.py --interactive
 
 # Auto-advance mode (for unattended demos)
-python3 automated_demo_walkthrough.py --auto-advance --pause-duration 3
+python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 3
 
 # View all options
-python3 automated_demo_walkthrough.py --help
+python3 demos/automated_demo_walkthrough.py --help
 ```
 
 ### Individual Demo Components
@@ -732,25 +720,25 @@ For running specific parts of the demonstration:
 
 ```bash
 # Data Generation Only (4 tenants by default)
-python3 asset_generator.py --naming camelCase --environment development
+python3 src/data_generation/asset_generator.py --naming camelCase --environment development
 
 # Generate specific number of tenants
-python3 asset_generator.py --tenants 6 --naming camelCase --environment development
+python3 src/data_generation/asset_generator.py --tenants 6 --naming camelCase --environment development
 
 # Database Deployment Only  
-python3 database_deployment.py --naming camelCase
+python3 src/database/database_deployment.py --naming camelCase
 
 # Transaction Simulation Only
-python3 transaction_simulator.py --naming camelCase --devices 5 --software 3
+python3 src/simulation/transaction_simulator.py --naming camelCase --devices 5 --software 3
 
 # TTL Demo Scenarios Only
-python3 ttl_demo_scenarios.py --naming camelCase
+python3 src/ttl/ttl_demo_scenarios.py --naming camelCase
 
 # Scale-Out Demo Only
-python3 scale_out_demo.py --naming camelCase --save-report
+python3 demos/scale_out_demo.py --naming camelCase --save-report
 
 # Validation Only
-python3 validation_suite.py
+python3 src/validation/validation_suite.py
 ```
 
 ### Prerequisites
@@ -783,10 +771,10 @@ Choose your data generation approach:
 #### Option A: Default Generation (Recommended)
 ```bash
 # Generate data with camelCase naming (default)
-python3 asset_generator.py
+python3 src/data_generation/asset_generator.py
 
 # Generate data with snake_case naming
-python3 asset_generator.py --naming snake_case
+python3 src/data_generation/asset_generator.py --naming snake_case
 
 # This creates:
 # - Acme Corp (1x scale): ~1,095 documents
@@ -802,7 +790,7 @@ python3 asset_generator.py --naming snake_case
 # - Device/software/location counts per tenant
 
 # Then generate with custom settings
-python3 asset_generator.py
+python3 src/data_generation/asset_generator.py
 ```
 
 #### Option C: Single Tenant Testing
@@ -813,7 +801,7 @@ python3 asset_generator.py
 # - Set SOFTWARE_COUNT = 10
 # - Set LOCATION_COUNT = 2
 
-python3 asset_generator.py
+python3 src/data_generation/asset_generator.py
 ```
 
 #### Step 3: Deploy to Database
@@ -821,10 +809,10 @@ python3 asset_generator.py
 **Recommended: Use the Interactive Demo Walkthrough**
 ```bash
 # Complete guided demonstration (automatic database creation)
-python3 automated_demo_walkthrough.py --interactive
+python3 demos/automated_demo_walkthrough.py --interactive
 
 # Quick automated run for testing
-python3 automated_demo_walkthrough.py --auto-advance --pause-duration 2
+python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
 ```
 
 **Alternative: Manual deployment methods**
@@ -832,10 +820,10 @@ python3 automated_demo_walkthrough.py --auto-advance --pause-duration 2
 #### Option A: Fresh Database Deployment
 ```bash
 # Deploy with camelCase naming (default)
-python3 database_deployment.py
+python3 src/database/database_deployment.py
 
 # Deploy with snake_case naming
-python3 database_deployment.py --naming snake_case
+python3 src/database/database_deployment.py --naming snake_case
 
 # This will:
 # 1. Create/recreate the database
@@ -864,7 +852,7 @@ Run comprehensive validation:
 
 ```bash
 # Full validation suite
-python3 validation_suite.py
+python3 src/validation/validation_suite.py
 
 # Quick database check
 python database_utilities.py
@@ -881,8 +869,8 @@ If you encounter `python: command not found` errors:
 
 ```bash
 # Use python3 instead of python (already updated in all scripts)
-python3 demo_launcher.py
-python3 automated_demo_walkthrough.py --interactive
+python3 demos/demo_launcher.py
+python3 demos/automated_demo_walkthrough.py --interactive
 
 # Check your Python installation
 which python3
@@ -948,7 +936,7 @@ python scale_out_manager.py --operation add-tenant --tenant-name "New Corp" --sc
 python scale_out_manager.py --operation add-tenants
 
 # Run complete scale-out demonstration
-python3 scale_out_demo.py --save-report
+python3 demos/scale_out_demo.py --save-report
 ```
 
 ### Database Server Scaling
@@ -983,8 +971,8 @@ Choose between two supported naming conventions:
 
 #### camelCase (Default)
 ```bash
-python3 asset_generator.py --naming camelCase
-python3 database_deployment.py --naming camelCase
+python3 src/data_generation/asset_generator.py --naming camelCase
+python3 src/database/database_deployment.py --naming camelCase
 ```
 **Collections Created:**
 - Vertex: `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`, `SoftwareProxyIn`, `SoftwareProxyOut`
@@ -992,8 +980,8 @@ python3 database_deployment.py --naming camelCase
 
 #### snake_case
 ```bash
-python3 asset_generator.py --naming snake_case
-python3 database_deployment.py --naming snake_case
+python3 src/data_generation/asset_generator.py --naming snake_case
+python3 src/database/database_deployment.py --naming snake_case
 ```
 **Collections Created:**
 - Vertex: `device`, `device_proxy_in`, `device_proxy_out`, `location`, `software`, `software_proxy_in`, `software_proxy_out`
@@ -1033,49 +1021,49 @@ Each tenant gets:
 ### Scenario 1: Demo/Development
 ```bash
 # Minimal data for testing with camelCase
-python3 asset_generator.py --environment development
-python3 database_deployment.py --naming camelCase
+python3 src/data_generation/asset_generator.py --environment development
+python3 src/database/database_deployment.py --naming camelCase
 
 # Or with snake_case naming
-python3 asset_generator.py --environment development --naming snake_case
-python3 database_deployment.py --naming snake_case
+python3 src/data_generation/asset_generator.py --environment development --naming snake_case
+python3 src/database/database_deployment.py --naming snake_case
 ```
 
 ### Scenario 2: Multi-Tenant Production
 ```bash
 # Full-scale multi-tenant deployment with camelCase (default)
-python3 asset_generator.py
-python3 database_deployment.py
-python3 validation_suite.py
+python3 src/data_generation/asset_generator.py
+python3 src/database/database_deployment.py
+python3 src/validation/validation_suite.py
 
 # Or with snake_case naming
-python3 asset_generator.py --naming snake_case
-python3 database_deployment.py --naming snake_case
-python3 validation_suite.py
+python3 src/data_generation/asset_generator.py --naming snake_case
+python3 src/database/database_deployment.py --naming snake_case
+python3 src/validation/validation_suite.py
 ```
 
 ### Scenario 3: Custom Enterprise Setup
 ```bash
 # 1. Customize tenant_config.py with your tenants
 # 2. Adjust scale factors as needed
-python3 asset_generator.py
-python3 database_deployment.py
+python3 src/data_generation/asset_generator.py
+python3 src/database/database_deployment.py
 
 # 3. Verify tenant isolation
-python3 validation_suite.py
+python3 src/validation/validation_suite.py
 ```
 
 ### Scenario 4: Add New Tenants
 ```bash
 # 1. Add new tenant configs to tenant_config.py
 # 2. Generate data (preserves existing tenants)
-python3 asset_generator.py
+python3 src/data_generation/asset_generator.py
 
 # 3. Deploy only new tenants
 python oasis_cluster_setup.py
 
 # 4. Validate isolation maintained
-python3 validation_suite.py
+python3 src/validation/validation_suite.py
 ```
 
 ## Generated Data
@@ -1120,7 +1108,7 @@ python test_suite.py
 
 ### Naming Convention Validation
 ```bash
-python3 validation_suite.py
+python3 src/validation/validation_suite.py
 ```
 - **Collection Naming**: 100% compliant
 - **Property Naming**: 100% compliant  
@@ -1183,7 +1171,7 @@ For **production environments** requiring strict data isolation, use the full cl
 - **True SmartGraphs**: Physical separation with tenant-specific collections
 - **Complete Isolation**: Each tenant gets dedicated collection shards
 - **Enterprise Features**: Full lifecycle management and compliance support
-- **Usage**: Call `python3 oasis_cluster_setup.py` for production deployment
+- **Usage**: Call `python3 src/database/oasis_cluster_setup.py` for production deployment
 
 **When to use each approach:**
 
@@ -1263,7 +1251,7 @@ All settings are managed through `config_management.py`:
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
 3. **Run** tests: `python test_suite.py`
-4. **Validate** compliance: `python3 validation_suite.py`
+4. **Validate** compliance: `python3 src/validation/validation_suite.py`
 5. **Commit** changes: `git commit -m 'Add amazing feature'`
 6. **Push** to branch: `git push origin feature/amazing-feature`
 7. **Open** a Pull Request

@@ -18,11 +18,11 @@ from pathlib import Path
 from arango import ArangoClient
 
 # Import project modules
-from centralized_credentials import CredentialsManager
-from config_management import get_config, NamingConvention
-from transaction_simulator import TransactionSimulator
-from database_utilities import QueryExecutor
-from ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS
+from src.config.centralized_credentials import CredentialsManager
+from src.config.config_management import get_config, NamingConvention
+from src.simulation.transaction_simulator import TransactionSimulator
+from src.database.database_utilities import QueryExecutor
+from src.ttl.ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS
 
 
 class TTLDemoScenarios:

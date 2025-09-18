@@ -16,11 +16,11 @@ from typing import Dict, List, Any
 from arango import ArangoClient
 
 # Import centralized credentials and configuration
-from centralized_credentials import CredentialsManager, DatabaseConstants
-from config_management import get_config, NamingConvention
-from ttl_config import (create_ttl_configuration, create_snake_case_ttl_configuration, 
+from src.config.centralized_credentials import CredentialsManager, DatabaseConstants
+from src.config.config_management import get_config, NamingConvention
+from src.ttl.ttl_config import (create_ttl_configuration, create_snake_case_ttl_configuration, 
                        create_demo_ttl_configuration, create_demo_snake_case_ttl_configuration, TTLManager)
-from ttl_constants import DEFAULT_TTL_DAYS, TTLConstants
+from src.ttl.ttl_constants import DEFAULT_TTL_DAYS, TTLConstants
 
 
 class TimeTravelRefactoredDeployment:

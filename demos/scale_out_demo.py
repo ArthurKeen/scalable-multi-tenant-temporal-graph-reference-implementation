@@ -20,13 +20,13 @@ from typing import Dict, List, Any
 from pathlib import Path
 
 # Import scale-out components
-from scale_out_manager import (
+from src.simulation.scale_out_manager import (
     TenantAdditionManager, DatabaseServerManager, ShardRebalancingManager,
     ScaleOutMetrics
 )
-from config_management import NamingConvention
-from validation_suite import TimeTravelValidationSuite
-from database_utilities import DatabaseConnectionManager
+from src.config.config_management import NamingConvention
+from src.validation.validation_suite import TimeTravelValidationSuite
+from src.database.database_utilities import DatabaseConnectionManager
 
 
 class ScaleOutDemonstration:

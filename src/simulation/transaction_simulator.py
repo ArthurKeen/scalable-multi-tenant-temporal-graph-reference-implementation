@@ -18,13 +18,13 @@ from dataclasses import dataclass
 from arango import ArangoClient
 
 # Import project modules
-from centralized_credentials import CredentialsManager
-from database_utilities import QueryExecutor
-from config_management import get_config, NamingConvention
-from ttl_config import TTLManager, create_ttl_configuration, create_snake_case_ttl_configuration
-from ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS
-from data_generation_utils import KeyGenerator, RandomDataGenerator
-from data_generation_config import NetworkConfig, DataGenerationLimits
+from src.config.centralized_credentials import CredentialsManager
+from src.database.database_utilities import QueryExecutor
+from src.config.config_management import get_config, NamingConvention
+from src.ttl.ttl_config import TTLManager, create_ttl_configuration, create_snake_case_ttl_configuration
+from src.ttl.ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS
+from src.data_generation.data_generation_utils import KeyGenerator, RandomDataGenerator
+from src.data_generation.data_generation_config import NetworkConfig, DataGenerationLimits
 
 
 @dataclass

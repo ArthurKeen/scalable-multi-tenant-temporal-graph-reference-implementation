@@ -13,7 +13,7 @@ from arango import ArangoClient
 from pathlib import Path
 import json
 
-from centralized_credentials import CredentialsManager, DatabaseConstants, get_collection_name
+from src.config.centralized_credentials import CredentialsManager, DatabaseConstants, get_collection_name
 
 
 class QueryExecutor:

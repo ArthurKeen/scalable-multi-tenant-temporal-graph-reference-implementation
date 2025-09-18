@@ -18,12 +18,12 @@ from pathlib import Path
 from typing import Dict, Any
 
 # Import demo components
-from config_management import NamingConvention
-from validation_suite import TimeTravelValidationSuite
-from scale_out_manager import TenantAdditionManager, DatabaseServerManager, ShardRebalancingManager
-from transaction_simulator import TransactionSimulator
-from ttl_demo_scenarios import TTLDemoScenarios
-from centralized_credentials import CredentialsManager
+from src.config.config_management import NamingConvention
+from src.validation.validation_suite import TimeTravelValidationSuite
+from src.simulation.scale_out_manager import TenantAdditionManager, DatabaseServerManager, ShardRebalancingManager
+from src.simulation.transaction_simulator import TransactionSimulator
+from src.ttl.ttl_demo_scenarios import TTLDemoScenarios
+from src.config.centralized_credentials import CredentialsManager
 from arango import ArangoClient
 
 
@@ -272,7 +272,7 @@ class AutomatedDemoWalkthrough:
                 return
                 
             import time
-            from ttl_constants import TTLConstants
+            from src.ttl.ttl_constants import TTLConstants
             
             current_time = time.time()
             
@@ -464,7 +464,7 @@ class AutomatedDemoWalkthrough:
         # Run data generation
         print("Starting data generation...")
         try:
-            from asset_generator import generate_time_travel_refactored_demo
+            from src.data_generation.asset_generator import generate_time_travel_refactored_demo
             result = generate_time_travel_refactored_demo(
                 tenant_count=4,
                 environment="development",
@@ -510,7 +510,7 @@ class AutomatedDemoWalkthrough:
         # Run database deployment
         print("Starting database deployment...")
         try:
-            from database_deployment import TimeTravelRefactoredDeployment
+            from src.database.database_deployment import TimeTravelRefactoredDeployment
             deployment = TimeTravelRefactoredDeployment(
                 naming_convention=NamingConvention.CAMEL_CASE,
                 demo_mode=True  # Use 5-minute TTL for visible aging during demo
@@ -870,7 +870,7 @@ class AutomatedDemoWalkthrough:
         # Run TTL demonstration with actual aging
         print("Starting TTL demonstration...")
         try:
-            from ttl_constants import TTLConstants
+            from src.ttl.ttl_constants import TTLConstants
             import time
             
             print(f"\n[TTL] TTL AGING DEMONSTRATION")
