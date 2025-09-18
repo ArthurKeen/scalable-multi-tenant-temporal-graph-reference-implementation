@@ -22,7 +22,7 @@ from src.config.config_management import get_config, initialize_logging, NamingC
 from src.config.tenant_config import TenantConfig, TenantNamingConvention, create_tenant_config
 from src.ttl.ttl_constants import NEVER_EXPIRES
 from src.data_generation.data_generation_utils import (
-    DocumentEnhancer, RandomDataGenerator, KeyGenerator,
+    PropertyNameGenerator, DocumentEnhancer, RandomDataGenerator, KeyGenerator,
     ConfigurationManager as DataConfigManager, FileManager, LocationDataProvider,
     SmartGraphConfigGenerator
 )
@@ -136,18 +136,21 @@ class TimeTravelRefactoredGenerator:
             )
             current_created = datetime.datetime.now()
             
+            # Get property names based on naming convention
+            device_props = PropertyNameGenerator.get_device_properties(self.naming_convention)
+            
             current_config = {
                 "_key": current_device_key,
-                "name": f"{self.tenant_config.tenant_name} {device_type.value} {model}",
-                "type": device_type.value,
-                "model": model,
-                "serialNumber": str(uuid.uuid4()),
-                "ipAddress": self.random_gen.generate_ip_address(),
-                "macAddress": self.random_gen.generate_mac_address(),
-                "operatingSystem": os_version.split(" ")[0],
-                "osVersion": os_version,
-                "hostName": self.random_gen.generate_hostname(self.tenant_config.tenant_id, i + 1),
-                "firewallRules": self.network_config.DEFAULT_FIREWALL_RULES.copy()
+                device_props["name"]: f"{self.tenant_config.tenant_name} {device_type.value} {model}",
+                device_props["type"]: device_type.value,
+                device_props["model"]: model,
+                device_props["serial_number"]: str(uuid.uuid4()),
+                device_props["ip_address"]: self.random_gen.generate_ip_address(),
+                device_props["mac_address"]: self.random_gen.generate_mac_address(),
+                device_props["operating_system"]: os_version.split(" ")[0],
+                device_props["os_version"]: os_version,
+                device_props["host_name"]: self.random_gen.generate_hostname(self.tenant_config.tenant_id, i + 1),
+                device_props["firewall_rules"]: self.network_config.DEFAULT_FIREWALL_RULES.copy()
             }
             current_config = DocumentEnhancer.add_tenant_attributes(
                 current_config, self.tenant_config, current_created
@@ -320,14 +323,17 @@ class TimeTravelRefactoredGenerator:
             )
             current_created = datetime.datetime.now()
             
+            # Get property names based on naming convention
+            software_props = PropertyNameGenerator.get_software_properties(self.naming_convention)
+            
             current_config = {
                 "_key": current_software_key,
-                "name": software_proxy_in["name"],
-                "type": software_type.value,
-                "version": software_version,
+                software_props["name"]: software_proxy_in["name"],
+                software_props["type"]: software_type.value,
+                software_props["version"]: software_version,
                 # Flattened configuration - no configurationHistory array
-                "portNumber": self.random_gen.generate_software_port(),
-                "isEnabled": True
+                software_props["port_number"]: self.random_gen.generate_software_port(),
+                software_props["is_enabled"]: True
             }
             current_config = DocumentEnhancer.add_tenant_attributes(
                 current_config, self.tenant_config, current_created
@@ -364,11 +370,12 @@ class TimeTravelRefactoredGenerator:
             )
             previous_config["_key"] = key
             
-            # Ensure W3C OWL property naming
+            # Ensure proper property naming based on naming convention
+            software_props = PropertyNameGenerator.get_software_properties(self.naming_convention)
             if "port" in previous_config:
-                previous_config["portNumber"] = previous_config.pop("port")
+                previous_config[software_props["port_number"]] = previous_config.pop("port")
             if "enabled" in previous_config:
-                previous_config["isEnabled"] = previous_config.pop("enabled")
+                previous_config[software_props["is_enabled"]] = previous_config.pop("enabled")
             
             # Set temporal timestamps
             created = datetime.datetime.now() - datetime.timedelta(

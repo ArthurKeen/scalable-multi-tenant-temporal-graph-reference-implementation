@@ -1,0 +1,31 @@
+{
+  "tenants": {
+    "421e66cc91be": {
+      "tenantName": "Acme Corp",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_421e66cc91be_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_421e66cc91be",
+      "scaleFactor": 1,
+      "createdAt": "2025-09-18T17:21:22.489785",
+      "tenantDescription": "Multi-tenant demo organization #1 with scale factor 1"
+    }
+  },
+  "summary": {
+    "totalTenants": 1,
+    "totalDocuments": 1095,
+    "sharedDatabase": "network_assets_demo",
+    "generatedAt": "2025-09-18T17:21:22.509457",
+    "environment": "production",
+    "owlCompliant": true,
+    "timeTravel": {
+      "refactored": true,
+      "consistentPattern": true,
+      "deviceTimeTravel": "DeviceProxyIn \u27f7 Device \u27f7 DeviceProxyOut",
+      "softwareTimeTravel": "SoftwareProxyIn \u27f7 Software \u27f7 SoftwareProxyOut",
+      "unifiedVersionCollection": true,
+      "softwareConfigurationHistory": "Removed - flattened to versioned documents"
+    }
+  }
+}

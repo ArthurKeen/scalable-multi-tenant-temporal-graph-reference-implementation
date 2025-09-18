@@ -12,11 +12,92 @@ from pathlib import Path
 from src.config.generation_constants import NETWORK_CONSTANTS
 
 from src.config.tenant_config import TenantConfig, TenantNamingConvention, TemporalDataModel
+from src.config.config_management import NamingConvention
 from src.data_generation.data_generation_config import (
     DeviceType, ConnectionType, SoftwareType, NetworkConfig, DataGenerationLimits,
     DEVICE_OS_VERSIONS, SOFTWARE_VERSIONS, DEFAULT_LOCATIONS_DATA,
     SMARTGRAPH_DEFAULTS, FILE_NAMES
 )
+
+
+class PropertyNameGenerator:
+    """Generates property names based on naming convention to eliminate hardcoding."""
+    
+    @staticmethod
+    def get_device_properties(naming_convention: NamingConvention) -> Dict[str, str]:
+        """Get device property names for the specified naming convention."""
+        if naming_convention == NamingConvention.SNAKE_CASE:
+            return {
+                "name": "name",
+                "type": "type", 
+                "model": "model",
+                "serial_number": "serial_number",
+                "ip_address": "ip_address",
+                "mac_address": "mac_address",
+                "operating_system": "operating_system",
+                "os_version": "os_version",
+                "host_name": "host_name",
+                "firewall_rules": "firewall_rules"
+            }
+        else:  # NamingConvention.CAMEL_CASE (default)
+            return {
+                "name": "name",
+                "type": "type",
+                "model": "model", 
+                "serial_number": "serialNumber",
+                "ip_address": "ipAddress",
+                "mac_address": "macAddress",
+                "operating_system": "operatingSystem",
+                "os_version": "osVersion",
+                "host_name": "hostName",
+                "firewall_rules": "firewallRules"
+            }
+    
+    @staticmethod
+    def get_software_properties(naming_convention: NamingConvention) -> Dict[str, str]:
+        """Get software property names for the specified naming convention."""
+        if naming_convention == NamingConvention.SNAKE_CASE:
+            return {
+                "name": "name",
+                "type": "type",
+                "version": "version",
+                "port_number": "port_number", 
+                "is_enabled": "is_enabled",
+                "startup_command": "startup_command",
+                "config_file_path": "config_file_path"
+            }
+        else:  # NamingConvention.CAMEL_CASE (default)
+            return {
+                "name": "name",
+                "type": "type",
+                "version": "version",
+                "port_number": "portNumber",
+                "is_enabled": "isEnabled", 
+                "startup_command": "startupCommand",
+                "config_file_path": "configFilePath"
+            }
+    
+    @staticmethod
+    def get_location_properties(naming_convention: NamingConvention) -> Dict[str, str]:
+        """Get location property names for the specified naming convention."""
+        if naming_convention == NamingConvention.SNAKE_CASE:
+            return {
+                "name": "name",
+                "location_type": "location_type",
+                "address": "address",
+                "city": "city",
+                "country": "country",
+                "coordinates": "coordinates"
+            }
+        else:  # NamingConvention.CAMEL_CASE (default)
+            return {
+                "name": "name",
+                "location_type": "locationType",
+                "address": "address", 
+                "city": "city",
+                "country": "country",
+                "coordinates": "coordinates"
+            }
 
 
 class DocumentEnhancer:
