@@ -364,7 +364,7 @@ class TimeTravelRefactoredDeployment:
                     
                     elif index_config["type"] == "mdi":
                         collection.add_index({
-                            'type': 'mdi',
+                            'type': 'mdi-prefix',
                             'fields': index_config["fields"],
                             'name': index_config.get("name"),
                             'fieldValueTypes': index_config.get("fieldValueTypes", "double"),
