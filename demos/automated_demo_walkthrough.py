@@ -30,13 +30,14 @@ from arango import ArangoClient
 class AutomatedDemoWalkthrough:
     """Provides an automated, guided walkthrough of the entire system demonstration."""
     
-    def __init__(self, interactive: bool = True):
+    def __init__(self, interactive: bool = True, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
         """Initialize the demo walkthrough."""
         self.demo_id = f"walkthrough_{int(datetime.datetime.now().timestamp())}"
         self.start_time = datetime.datetime.now()
         self.sections_completed = []
         self.pause_duration = 3  # Default pause between sections
         self.interactive_mode = interactive
+        self.naming_convention = naming_convention
         
         # Database connection for reset functionality
         self.client = None
@@ -72,6 +73,37 @@ class AutomatedDemoWalkthrough:
         except Exception as e:
             print(f"[ERROR] Database connection failed: {e}")
             return False
+    
+    def _get_file_mappings(self) -> Dict[str, str]:
+        """Get file to collection mappings based on naming convention."""
+        if self.naming_convention == NamingConvention.SNAKE_CASE:
+            return {
+                'device.json': 'Device',
+                'device_proxy_in.json': 'DeviceProxyIn', 
+                'device_proxy_out.json': 'DeviceProxyOut',
+                'software.json': 'Software',
+                'software_proxy_in.json': 'SoftwareProxyIn',
+                'software_proxy_out.json': 'SoftwareProxyOut',
+                'location.json': 'Location',
+                'has_connection.json': 'hasConnection',
+                'has_location.json': 'hasLocation', 
+                'has_device_software.json': 'hasDeviceSoftware',
+                'has_version.json': 'hasVersion'
+            }
+        else:  # NamingConvention.CAMEL_CASE
+            return {
+                'Device.json': 'Device',
+                'DeviceProxyIn.json': 'DeviceProxyIn', 
+                'DeviceProxyOut.json': 'DeviceProxyOut',
+                'Software.json': 'Software',
+                'SoftwareProxyIn.json': 'SoftwareProxyIn',
+                'SoftwareProxyOut.json': 'SoftwareProxyOut',
+                'Location.json': 'Location',
+                'hasConnection.json': 'hasConnection',
+                'hasLocation.json': 'hasLocation', 
+                'hasDeviceSoftware.json': 'hasDeviceSoftware',
+                'hasVersion.json': 'hasVersion'
+            }
     
     def reset_database(self) -> bool:
         """Reset the database to ensure a clean demo start."""
@@ -433,9 +465,10 @@ class AutomatedDemoWalkthrough:
     
     def section_2_data_generation(self):
         """Section 2: Multi-Tenant Data Generation."""
+        naming_display = "camelCase" if self.naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
         self.print_section_header(
             "DATA GENERATION", 
-            "Generating multi-tenant network asset data with 8 tenants by default"
+            f"Generating multi-tenant network asset data with 8 tenants by default ({naming_display})"
         )
         
         self.print_subsection(
@@ -468,7 +501,7 @@ class AutomatedDemoWalkthrough:
             result = generate_time_travel_refactored_demo(
                 tenant_count=8,
                 environment="development",
-                naming_convention=NamingConvention.CAMEL_CASE
+                naming_convention=self.naming_convention
             )
             
             self.print_results_summary(result, "Data Generation")
@@ -1044,7 +1077,7 @@ class AutomatedDemoWalkthrough:
         print("Starting scale-out operations...")
         try:
             print("Adding new tenants dynamically...")
-            tenant_manager = TenantAdditionManager(NamingConvention.CAMEL_CASE)
+            tenant_manager = TenantAdditionManager(self.naming_convention)
             
             # Actually add the new tenants
             new_tenants = [
@@ -1214,20 +1247,8 @@ class AutomatedDemoWalkthrough:
                 print(f"     [ERROR] Tenant data directory not found: {tenant_data_path}")
                 return False
             
-            # File to collection mappings
-            file_mappings = {
-                'Device.json': 'Device',
-                'DeviceProxyIn.json': 'DeviceProxyIn', 
-                'DeviceProxyOut.json': 'DeviceProxyOut',
-                'Software.json': 'Software',
-                'SoftwareProxyIn.json': 'SoftwareProxyIn',
-                'SoftwareProxyOut.json': 'SoftwareProxyOut',
-                'Location.json': 'Location',
-                'hasConnection.json': 'hasConnection',
-                'hasLocation.json': 'hasLocation', 
-                'hasDeviceSoftware.json': 'hasDeviceSoftware',
-                'hasVersion.json': 'hasVersion'
-            }
+            # File to collection mappings (based on naming convention)
+            file_mappings = self._get_file_mappings()
             
             total_loaded = 0
             
@@ -1504,8 +1525,17 @@ def main():
         default=3,
         help="Duration of automatic pauses in seconds (default: 3)"
     )
+    parser.add_argument(
+        "--naming", 
+        choices=["camelCase", "snake_case"], 
+        default="camelCase",
+        help="Naming convention for properties and files (default: camelCase)"
+    )
     
     args = parser.parse_args()
+    
+    # Convert naming argument to enum
+    naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
     
     # Determine interactive mode based on terminal availability and arguments
     if args.auto_advance:
@@ -1518,7 +1548,7 @@ def main():
     
     try:
         # Initialize and run the demo walkthrough
-        demo_walkthrough = AutomatedDemoWalkthrough(interactive=interactive)
+        demo_walkthrough = AutomatedDemoWalkthrough(interactive=interactive, naming_convention=naming_convention)
         result = demo_walkthrough.run_automated_walkthrough(
             interactive=interactive,
             pause_duration=args.pause_duration
