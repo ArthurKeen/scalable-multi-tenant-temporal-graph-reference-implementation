@@ -100,6 +100,7 @@ A series of scripts must be developed to manage the entire demo lifecycle. These
 - **FR2.6**: Add `_fromType` and `_toType` attributes to edge documents for vertex-centric indexing
 - **FR2.7**: Increase default data generation size by 10-100x for scale-out demonstrations
 - **FR2.8**: Generate continuous "keep-alive" data streams for ongoing demo operations
+- **FR2.9**: Support dual naming conventions (camelCase default, snake_case alternative) configurable per tenant
 
 #### FR3: SmartGraph Configuration
 - **FR3.1**: Create disjoint smartgraph definitions for each tenant
@@ -158,21 +159,24 @@ A series of scripts must be developed to manage the entire demo lifecycle. These
 - **Scope**: All collections, edges, and file names include tenant context
 - **Metadata**: Tenant configuration stored separately from generated data
 
-### W3C OWL Naming Conventions
+### Naming Convention Support
 
+The system supports **dual naming conventions** to accommodate different organizational preferences and technical requirements:
+
+#### Default: camelCase (W3C OWL Compliant)
 Following W3C OWL standards for professional data modeling:
 
-#### Vertex Collections
+**Vertex Collections**
 - **Format**: PascalCase, singular form
-- **Examples**: `Device`, `Location`, `Software`, `DeviceIn`, `DeviceOut`
+- **Examples**: `Device`, `Location`, `Software`, `DeviceProxyIn`, `DeviceProxyOut`
 - **Rationale**: Represents entity classes/types in RDF ontologies
 
-#### Edge Collections  
+**Edge Collections**  
 - **Format**: camelCase, singular form
-- **Examples**: `hasConnection`, `hasLocation`, `hasSoftware`, `version`
+- **Examples**: `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`
 - **Rationale**: Represents predicates/relationships in RDF ontologies
 
-#### Property Names
+**Property Names**
 - **Single Values**: camelCase, singular form
   - Examples: `deviceType`, `ipAddress`, `macAddress`, `serialNumber`
 - **Lists/Arrays**: camelCase, plural form  
@@ -180,33 +184,107 @@ Following W3C OWL standards for professional data modeling:
 - **Sub-documents**: camelCase, singular form
   - Examples: `location` (GeoJSON), `softwareVersion`
 
-#### Collection Naming Convention (Updated)
+#### Alternative: snake_case (Technical/Database Standard)
+For organizations preferring database-friendly naming:
+
+**Vertex Collections**
+- **Format**: snake_case, singular form
+- **Examples**: `device`, `location`, `software`, `device_proxy_in`, `device_proxy_out`
+- **Rationale**: Consistent with SQL database conventions
+
+**Edge Collections**
+- **Format**: snake_case, singular form
+- **Examples**: `has_connection`, `has_location`, `has_device_software`, `has_version`
+- **Rationale**: Readable and consistent with technical documentation
+
+**Property Names**
+- **Single Values**: snake_case, singular form
+  - Examples: `device_type`, `ip_address`, `mac_address`, `serial_number`
+- **Lists/Arrays**: snake_case, plural form
+  - Examples: `firewall_rules`, `configuration_history`, `edge_definitions`
+- **Sub-documents**: snake_case, singular form
+  - Examples: `location_data`, `software_version`
+
+#### Convention Selection
+- **Default**: camelCase (automatically applied unless specified otherwise)
+- **Configuration**: Selectable via `NamingConvention.CAMEL_CASE` or `NamingConvention.SNAKE_CASE`
+- **Consistency**: Once selected, the convention applies to all collections, properties, and files within a tenant
+- **Isolation**: Different tenants can use different naming conventions simultaneously
+
+#### Collection Naming Examples
+
+**camelCase (Default)**
 ```
+# Vertex Collections
 Device (tenant-scoped via smartGraph attribute)
-DeviceIn (tenant-scoped via smartGraph attribute)  
-DeviceOut (tenant-scoped via smartGraph attribute)
+DeviceProxyIn (tenant-scoped via smartGraph attribute)  
+DeviceProxyOut (tenant-scoped via smartGraph attribute)
 Location (tenant-scoped via smartGraph attribute)
 Software (tenant-scoped via smartGraph attribute)
+SoftwareProxyIn (tenant-scoped via smartGraph attribute)
+SoftwareProxyOut (tenant-scoped via smartGraph attribute)
+
+# Edge Collections  
 hasConnection (tenant-scoped via smartGraph attribute)
 hasLocation (tenant-scoped via smartGraph attribute)
-hasSoftware (tenant-scoped via smartGraph attribute)
-version (tenant-scoped via smartGraph attribute)
+hasDeviceSoftware (tenant-scoped via smartGraph attribute)
+hasVersion (tenant-scoped via smartGraph attribute)
+```
+
+**snake_case (Alternative)**
+```
+# Vertex Collections
+device (tenant-scoped via smartGraph attribute)
+device_proxy_in (tenant-scoped via smartGraph attribute)
+device_proxy_out (tenant-scoped via smartGraph attribute)
+location (tenant-scoped via smartGraph attribute)
+software (tenant-scoped via smartGraph attribute)
+software_proxy_in (tenant-scoped via smartGraph attribute)
+software_proxy_out (tenant-scoped via smartGraph attribute)
+
+# Edge Collections
+has_connection (tenant-scoped via smartGraph attribute)
+has_location (tenant-scoped via smartGraph attribute)
+has_device_software (tenant-scoped via smartGraph attribute)
+has_version (tenant-scoped via smartGraph attribute)
 ```
 
 ### File Structure
+
+**camelCase (Default)**
 ```
 data/
 ├── tenant_{tenant_id}/
 │   ├── Device.json
-│   ├── DeviceIn.json
-│   ├── DeviceOut.json
+│   ├── DeviceProxyIn.json
+│   ├── DeviceProxyOut.json
 │   ├── Location.json
 │   ├── Software.json
+│   ├── SoftwareProxyIn.json
+│   ├── SoftwareProxyOut.json
 │   ├── hasConnection.json
 │   ├── hasLocation.json
-│   ├── hasSoftware.json
-│   └── version.json
-└── tenants.json (tenant metadata)
+│   ├── hasDeviceSoftware.json
+│   └── hasVersion.json
+└── tenant_registry_time_travel.json (tenant metadata)
+```
+
+**snake_case (Alternative)**
+```
+data/
+├── tenant_{tenant_id}/
+│   ├── device.json
+│   ├── device_proxy_in.json
+│   ├── device_proxy_out.json
+│   ├── location.json
+│   ├── software.json
+│   ├── software_proxy_in.json
+│   ├── software_proxy_out.json
+│   ├── has_connection.json
+│   ├── has_location.json
+│   ├── has_device_software.json
+│   └── has_version.json
+└── tenant_registry_time_travel.json (tenant metadata)
 ```
 
 ### SmartGraph Definition
@@ -242,6 +320,8 @@ Each tenant will have a disjoint smartgraph with:
 - [ ] Each tenant has complete set of network asset data
 - [ ] No cross-tenant data references or contamination
 - [ ] Configurable parameters per tenant (devices, locations, software)
+- [ ] Support both camelCase (default) and snake_case naming conventions
+- [ ] Naming convention consistency within each tenant
 
 ### SmartGraph Integration
 - [ ] Generate valid ArangoDB smartgraph definitions
