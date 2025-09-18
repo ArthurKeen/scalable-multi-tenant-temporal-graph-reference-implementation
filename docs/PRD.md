@@ -293,6 +293,61 @@ data/
 └── tenant_registry_time_travel.json (tenant metadata)
 ```
 
+## Demo and Presentation Capabilities
+
+### Interactive Demo Walkthrough
+
+The system includes a comprehensive automated demo script that supports both naming conventions for live presentations and development testing.
+
+#### Command-Line Interface
+
+**Basic Usage:**
+```bash
+# Interactive mode with camelCase (default)
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
+
+# Interactive mode with snake_case  
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive --naming snake_case
+
+# Automated mode for testing
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --auto-advance --naming snake_case
+```
+
+**Available Flags:**
+- `--interactive`: Force interactive mode with manual pauses
+- `--auto-advance`: Run in automatic mode with timed pauses  
+- `--pause-duration N`: Duration of automatic pauses in seconds (default: 3)
+- `--naming {camelCase,snake_case}`: Naming convention for properties and files (default: camelCase)
+
+#### Naming Convention Integration
+
+The demo script dynamically adapts to the selected naming convention:
+
+**File Import Mappings:**
+- **camelCase**: `Device.json` → `Device` collection, `hasConnection.json` → `hasConnection` collection
+- **snake_case**: `device.json` → `Device` collection, `has_connection.json` → `hasConnection` collection
+
+**Property Generation:**
+- **camelCase**: `serialNumber`, `ipAddress`, `portNumber`, `isEnabled`
+- **snake_case**: `serial_number`, `ip_address`, `port_number`, `is_enabled`
+
+**Data Generation Consistency:**
+- All 8 demo tenants use the same naming convention
+- Scale-out operations maintain naming convention consistency
+- Database deployment adapts file mappings automatically
+
+#### Demo Flow Coverage
+
+The interactive demo supports both naming conventions across all sections:
+1. **Database Reset and Cleanup** - Convention-aware file cleanup
+2. **Data Generation** - PropertyNameGenerator integration  
+3. **Database Deployment** - Dynamic file mapping
+4. **Initial Validation** - Convention-agnostic queries
+5. **Temporal TTL Transactions** - Property-aware updates
+6. **Time Travel Demonstration** - Naming-independent temporal queries
+7. **Scale-Out Operations** - Consistent convention for new tenants
+8. **Final Validation** - Comprehensive testing across conventions
+
 ### SmartGraph Definition
 Each tenant will have a disjoint smartgraph with:
 - **Graph Name**: `tenant_{tenant_id}_network_assets`
@@ -328,6 +383,13 @@ Each tenant will have a disjoint smartgraph with:
 - [ ] Configurable parameters per tenant (devices, locations, software)
 - [ ] Support both camelCase (default) and snake_case naming conventions
 - [ ] Naming convention consistency within each tenant
+
+### Demo and Presentation
+- [ ] Interactive demo script supports both naming conventions via `--naming` flag
+- [ ] Demo workflow adapts file mappings automatically based on selected convention
+- [ ] All demo sections (data generation, deployment, scale-out) maintain naming consistency
+- [ ] PropertyNameGenerator eliminates hardcoded property names across all demo components
+- [ ] Backward compatibility maintained (camelCase remains default behavior)
 
 ### SmartGraph Integration
 - [ ] Generate valid ArangoDB smartgraph definitions

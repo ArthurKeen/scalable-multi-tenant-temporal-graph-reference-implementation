@@ -175,11 +175,26 @@ The system includes a comprehensive, interactive demo walkthrough script that gu
 
 ```bash
 # Interactive mode (recommended for live presentations)
-python3 demos/automated_demo_walkthrough.py --interactive
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
+
+# Interactive mode with snake_case naming convention
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive --naming snake_case
 
 # Automated mode (for testing and development)
-python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
+
+# Automated mode with snake_case naming convention
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --auto-advance --naming snake_case --pause-duration 2
 ```
+
+#### Naming Convention Options
+
+The demo supports two naming conventions for properties and file names:
+
+- **`--naming camelCase`** (default): Uses `serialNumber`, `ipAddress`, `Device.json`, `hasConnection.json`
+- **`--naming snake_case`**: Uses `serial_number`, `ip_address`, `device.json`, `has_connection.json`
+
+Both conventions generate identical data structures and relationships, only the property names and file names differ. This allows demonstration of the system's flexibility for different coding standards and organizational preferences.
 
 #### Demo Flow Structure
 
