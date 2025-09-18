@@ -185,12 +185,12 @@ python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
 
 **Step 0: Database Reset and Cleanup**
 - Automatically clears previous demo data
-- Ensures consistent 4-tenant baseline
+- Ensures consistent 8-tenant baseline
 - Removes existing collections and graphs
 - Resets tenant registry for fresh demonstration
 
 **Step 1: Initial Data Generation**
-- Generates 4 diverse tenant configurations
+- Generates 8 diverse tenant configurations
 - Creates realistic network asset relationships
 - Implements temporal data model with TTL fields
 - Produces tenant-specific JSON data files
@@ -620,15 +620,29 @@ python3 demos/unified_transaction_ttl_demo.py
 # Reset database to clean state before demos
 python3 tools/reset_database.py
 ```
-Use this if you see more than 4 tenants in the ArangoDB interface, or if you want to ensure a completely fresh demo start.
+Use this if you see more than 8 tenants in the ArangoDB interface, or if you want to ensure a completely fresh demo start.
 
 **The comprehensive demo includes:**
-1. **Initial Data Generation** - Multi-tenant network asset data (4 tenants by default)
+1. **Initial Data Generation** - Multi-tenant network asset data (8 tenants by default)
 2. **Database Deployment** - Collections, indexes, and SmartGraphs
 3. **Enhanced Transaction + TTL Demo** - Configuration changes with immediate TTL activation and database visibility
 4. **TTL Demonstration** - Time travel scenarios
-5. **Scale-Out Demo** - Dynamic tenant addition and cluster analysis
+5. **Scale-Out Demo** - Dynamic tenant addition and cluster analysis (8 initial + 8 new = 16 total tenants)
 6. **Comprehensive Validation** - Data integrity and isolation checks
+
+### Enhanced Scale-Out Demo Features
+
+**Optimized for Balanced Shard Distribution:**
+- **Initial Configuration**: 8 tenants across 3 database servers
+- **Scale-Out Process**: Add 8 additional tenants dynamically  
+- **Server Addition**: Add 1 additional database server (3 -> 4 servers)
+- **Perfect Balance**: 16 SmartGraphs distributed evenly across 4 servers (4 graphs per server)
+- **Visual Impact**: Clear demonstration of optimal shard rebalancing
+
+**Scale-Out Tenant Companies:**
+- CloudSync Systems, DataFlow Corp, NetWork Industries
+- SecureNet Solutions, GlobalTech Networks, ConnectWise Infrastructure  
+- NextGen Communications, Unified Systems Corp
 
 ### Enhanced Transaction + TTL Demo Features
 

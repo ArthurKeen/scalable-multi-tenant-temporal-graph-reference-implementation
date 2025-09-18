@@ -640,7 +640,7 @@ class TimeTravelRefactoredGenerator:
         }
 
 
-def generate_time_travel_refactored_demo(tenant_count: int = 4, environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
+def generate_time_travel_refactored_demo(tenant_count: int = 8, environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
     """Generate time travel refactored multi-tenant demo."""
     
     convention_name = "camelCase" if naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
