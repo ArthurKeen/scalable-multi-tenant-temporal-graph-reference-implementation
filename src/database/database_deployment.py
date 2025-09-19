@@ -30,6 +30,11 @@ class TimeTravelRefactoredDeployment:
         self.naming_convention = naming_convention
         self.demo_mode = demo_mode
         self.app_config = get_config("production", naming_convention)
+        
+        # Add config_manager for consistency with other classes
+        from src.config.config_management import ConfigurationManager
+        self.config_manager = ConfigurationManager("production", naming_convention)
+        
         creds = CredentialsManager.get_database_credentials()
         self.client = ArangoClient(hosts=creds.endpoint)
         self.sys_db = None
