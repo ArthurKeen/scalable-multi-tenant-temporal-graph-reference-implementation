@@ -168,17 +168,17 @@ class TimeTravelRefactoredDeployment:
         try:
             print(f"\n[ANALYSIS] Creating time travel refactored indexes...")
             
-            # Refactored index configurations
+            # Refactored index configurations (naming convention aware)
             index_configs = [
                 # Hash indexes for quick key lookups
                 {
-                    "collection": "Device",
+                    "collection": self.config_manager.get_collection_name("devices"),
                     "type": "hash",
                     "fields": ["_key"],
                     "name": "idx_devices_key"
                 },
                 {
-                    "collection": "Software",
+                    "collection": self.config_manager.get_collection_name("software"),
                     "type": "hash", 
                     "fields": ["_key"],
                     "name": "idx_software_key"
@@ -186,31 +186,31 @@ class TimeTravelRefactoredDeployment:
                 
                 # Vertex-centric indexes for graph performance (EXPANDED for Software)
                 {
-                    "collection": "hasConnection",
+                    "collection": self.config_manager.get_collection_name("connections"),
                     "type": "persistent",
                     "fields": ["_from", "_toType"],
                     "name": "idx_connections_from_totype"
                 },
                 {
-                    "collection": "hasConnection", 
+                    "collection": self.config_manager.get_collection_name("connections"), 
                     "type": "persistent",
                     "fields": ["_to", "_fromType"],
                     "name": "idx_connections_to_fromtype"
                 },
                 {
-                    "collection": "hasLocation",
+                    "collection": self.config_manager.get_collection_name("has_locations"),
                     "type": "persistent", 
                     "fields": ["_from", "_toType"],
                     "name": "idx_locations_from_totype"
                 },
                 {
-                    "collection": "hasDeviceSoftware",  # NEW
+                    "collection": self.config_manager.get_collection_name("has_device_software"),
                     "type": "persistent",
                     "fields": ["_from", "_toType"], 
                     "name": "idx_device_software_from_totype"
                 },
                 {
-                    "collection": "hasDeviceSoftware",  # NEW
+                    "collection": self.config_manager.get_collection_name("has_device_software"),
                     "type": "persistent",
                     "fields": ["_to", "_fromType"], 
                     "name": "idx_device_software_to_fromtype"
@@ -218,13 +218,13 @@ class TimeTravelRefactoredDeployment:
                 
                 # UNIFIED version collection indexes (handles Device + Software)
                 {
-                    "collection": "hasVersion",
+                    "collection": self.config_manager.get_collection_name("versions"),
                     "type": "persistent",
                     "fields": ["_from", "_toType"],
                     "name": "idx_version_from_totype"
                 },
                 {
-                    "collection": "hasVersion",
+                    "collection": self.config_manager.get_collection_name("versions"),
                     "type": "persistent",
                     "fields": ["_to", "_fromType"],
                     "name": "idx_version_to_fromtype"
@@ -232,13 +232,13 @@ class TimeTravelRefactoredDeployment:
                 
                 # Temporal range indexes for time travel queries (EXPANDED)
                 {
-                    "collection": "Device",
+                    "collection": self.config_manager.get_collection_name("devices"),
                     "type": "persistent",
                     "fields": ["created", "expired"],
                     "name": "idx_device_temporal"
                 },
                 {
-                    "collection": "Software",  # NEW
+                    "collection": self.config_manager.get_collection_name("software"),
                     "type": "persistent",
                     "fields": ["created", "expired"],
                     "name": "idx_software_temporal"
@@ -246,7 +246,7 @@ class TimeTravelRefactoredDeployment:
                 
                 # Multi-dimensional indexes (MDI-prefix) for optimal temporal range queries
                 {
-                    "collection": "Device",
+                    "collection": self.config_manager.get_collection_name("devices"),
                     "type": "mdi",
                     "fields": ["created", "expired"],
                     "fieldValueTypes": "double",
@@ -255,7 +255,7 @@ class TimeTravelRefactoredDeployment:
                     "name": "idx_device_mdi_temporal"
                 },
                 {
-                    "collection": "Software",
+                    "collection": self.config_manager.get_collection_name("software"),
                     "type": "mdi",
                     "fields": ["created", "expired"],
                     "fieldValueTypes": "double",
@@ -264,7 +264,7 @@ class TimeTravelRefactoredDeployment:
                     "name": "idx_software_mdi_temporal"
                 },
                 {
-                    "collection": "hasVersion",
+                    "collection": self.config_manager.get_collection_name("versions"),
                     "type": "mdi",
                     "fields": ["created", "expired"],
                     "fieldValueTypes": "double",
@@ -273,7 +273,7 @@ class TimeTravelRefactoredDeployment:
                     "name": "idx_version_mdi_temporal"
                 },
                 {
-                    "collection": "hasVersion",
+                    "collection": self.config_manager.get_collection_name("versions"),
                     "type": "persistent",
                     "fields": ["created", "expired"],
                     "name": "idx_version_temporal"
@@ -399,19 +399,19 @@ class TimeTravelRefactoredDeployment:
                 print(f"[ERROR] No tenant data directories found in {data_dir}")
                 return False
             
-            # Time travel refactored file to collection mappings
+            # Time travel refactored file to collection mappings (naming convention aware)
             file_mappings = {
-                "Device.json": "Device",
-                "DeviceProxyIn.json": "DeviceProxyIn",
-                "DeviceProxyOut.json": "DeviceProxyOut",
-                "Location.json": "Location",
-                "Software.json": "Software",
-                "SoftwareProxyIn.json": "SoftwareProxyIn",      # NEW
-                "SoftwareProxyOut.json": "SoftwareProxyOut",    # NEW
-                "hasConnection.json": "hasConnection",
-                "hasLocation.json": "hasLocation",
-                "hasDeviceSoftware.json": "hasDeviceSoftware",  # NEW
-                "hasVersion.json": "hasVersion"  # UNIFIED
+                "Device.json": self.config_manager.get_collection_name("devices"),
+                "DeviceProxyIn.json": self.config_manager.get_collection_name("device_ins"),
+                "DeviceProxyOut.json": self.config_manager.get_collection_name("device_outs"),
+                "Location.json": self.config_manager.get_collection_name("locations"),
+                "Software.json": self.config_manager.get_collection_name("software"),
+                "SoftwareProxyIn.json": self.config_manager.get_collection_name("software_ins"),      # NEW
+                "SoftwareProxyOut.json": self.config_manager.get_collection_name("software_outs"),    # NEW
+                "hasConnection.json": self.config_manager.get_collection_name("connections"),
+                "hasLocation.json": self.config_manager.get_collection_name("has_locations"),
+                "hasDeviceSoftware.json": self.config_manager.get_collection_name("has_device_software"),  # NEW
+                "hasVersion.json": self.config_manager.get_collection_name("versions")  # UNIFIED
             }
             
             total_loaded = 0

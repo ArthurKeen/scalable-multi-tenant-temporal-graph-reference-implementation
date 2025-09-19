@@ -117,11 +117,21 @@ class TimeTravelValidationSuite:
             return False
     
     def validate_software_refactoring(self) -> bool:
-        """Validate that Software collection is properly refactored."""
+        """Validate that Software collection is properly refactored with naming convention awareness."""
         print(f"\n[ANALYSIS] Validating Software Refactoring...")
         
         try:
-            software_collection = self.database.collection("Software")
+            # Get software collection name based on naming convention
+            if self.naming_convention.value == "camelCase":
+                software_collection_name = "Software"
+                port_prop = "portNumber"
+                enabled_prop = "isEnabled"
+            else:  # snake_case
+                software_collection_name = "software"
+                port_prop = "port_number"
+                enabled_prop = "is_enabled"
+            
+            software_collection = self.database.collection(software_collection_name)
             
             # Check sample documents
             samples = software_collection.all(limit=10)
@@ -134,11 +144,11 @@ class TimeTravelValidationSuite:
                     print(f"   [ERROR] Document {doc['_key']} still has configurationHistory")
                 else:
                     refactored_count += 1
-                    # Check for flattened configuration
-                    if "portNumber" in doc and "isEnabled" in doc:
+                    # Check for flattened configuration with naming convention aware properties
+                    if port_prop in doc and enabled_prop in doc:
                         print(f"   [DONE] Document {doc['_key']} has flattened configuration")
                     else:
-                        print(f"   [WARNING]  Document {doc['_key']} missing flattened config attributes")
+                        print(f"   [WARNING]  Document {doc['_key']} missing flattened config attributes ({port_prop}, {enabled_prop})")
             
             if old_structure_count > 0:
                 print(f"[ERROR] Software refactoring incomplete: {old_structure_count} documents still have old structure")
