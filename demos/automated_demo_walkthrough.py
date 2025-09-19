@@ -119,16 +119,30 @@ class AutomatedDemoWalkthrough:
             return False
         
         try:
-            # Collections to clear for a fresh start
-            collections_to_clear = [
-                'Device', 'DeviceProxyIn', 'DeviceProxyOut',
-                'Software', 'SoftwareProxyIn', 'SoftwareProxyOut', 
-                'Location',
-                'hasConnection', 'hasLocation', 'hasDeviceSoftware', 'hasVersion'
-            ]
+            # Get collections for both naming conventions
+            from src.config.config_management import ConfigurationManager
+            
+            # Get both camelCase and snake_case collection names
+            camel_config = ConfigurationManager("development", NamingConvention.CAMEL_CASE)
+            snake_config = ConfigurationManager("development", NamingConvention.SNAKE_CASE)
+            
+            # Collect all possible collection names
+            collections_to_clear = set()
+            
+            # Add camelCase collections
+            for logical_name in ['devices', 'device_ins', 'device_outs', 'software', 'software_ins', 'software_outs', 'locations']:
+                collections_to_clear.add(camel_config.get_collection_name(logical_name))
+            for logical_name in ['connections', 'has_locations', 'has_device_software', 'versions']:
+                collections_to_clear.add(camel_config.get_collection_name(logical_name))
+            
+            # Add snake_case collections
+            for logical_name in ['devices', 'device_ins', 'device_outs', 'software', 'software_ins', 'software_outs', 'locations']:
+                collections_to_clear.add(snake_config.get_collection_name(logical_name))
+            for logical_name in ['connections', 'has_locations', 'has_device_software', 'versions']:
+                collections_to_clear.add(snake_config.get_collection_name(logical_name))
             
             cleared_count = 0
-            for collection_name in collections_to_clear:
+            for collection_name in sorted(collections_to_clear):
                 if self.database.has_collection(collection_name):
                     collection = self.database.collection(collection_name)
                     result = collection.truncate()
