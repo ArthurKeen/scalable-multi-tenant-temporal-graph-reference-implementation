@@ -126,7 +126,7 @@ class AutomatedDemoWalkthrough:
             camel_config = ConfigurationManager("development", NamingConvention.CAMEL_CASE)
             snake_config = ConfigurationManager("development", NamingConvention.SNAKE_CASE)
             
-            # Collect all possible collection names
+            # Simply truncate collections to clear data (don't drop them)
             collections_to_clear = set()
             
             # Add camelCase collections
@@ -142,21 +142,13 @@ class AutomatedDemoWalkthrough:
                 collections_to_clear.add(snake_config.get_collection_name(logical_name))
             
             cleared_count = 0
-            dropped_count = 0
             for collection_name in sorted(collections_to_clear):
                 if self.database.has_collection(collection_name):
                     try:
-                        # First truncate to clear data
                         collection = self.database.collection(collection_name)
                         collection.truncate()
                         cleared_count += 1
                         print(f"   [CLEAR] {collection_name} collection cleared")
-                        
-                        # For mixed collection issue, also drop empty collections from other naming conventions
-                        if collection.count() == 0:
-                            self.database.delete_collection(collection_name)
-                            dropped_count += 1
-                            print(f"   [DROP] {collection_name} empty collection dropped")
                     except Exception as e:
                         print(f"   [WARNING] Could not clear {collection_name}: {e}")
             
@@ -189,7 +181,7 @@ class AutomatedDemoWalkthrough:
                         shutil.rmtree(tenant_dir)
                         print(f"   [CLEAR] Tenant data directory {tenant_dir.name} removed")
             
-            print(f"[SUCCESS] Database reset complete - {cleared_count} collections cleared, {dropped_count} empty collections dropped")
+            print(f"[SUCCESS] Database reset complete - {cleared_count} collections cleared")
             return True
             
         except Exception as e:
@@ -730,9 +722,13 @@ class AutomatedDemoWalkthrough:
             
             print("[QUERY] Finding target documents to modify...")
             
-            # Find current software configurations (since device query might have issues)
-            aql_software = """
-            FOR doc IN Software
+            # Find current software configurations - use correct collection name for naming convention
+            from src.config.config_management import ConfigurationManager
+            config_manager = ConfigurationManager("development", self.naming_convention)
+            software_collection = config_manager.get_collection_name("software")
+            
+            aql_software = f"""
+            FOR doc IN {software_collection}
                 FILTER doc.expired == 9223372036854775807
                 LIMIT 4
                 RETURN doc
@@ -748,7 +744,7 @@ class AutomatedDemoWalkthrough:
                 software_key = software["_key"]
                 
                 target_doc = {
-                    "collection": "Software",
+                    "collection": software_collection,
                     "key": software_key,
                     "name": software.get("name", "Unknown"),
                     "type": software.get("type", "Unknown"),
@@ -797,7 +793,10 @@ class AutomatedDemoWalkthrough:
             
             print(f"[STEP 4] Recommended Graph Exploration:")
             print(f"   1. Click 'Start with vertices'")
-            print(f"   2. Enter vertex ID: Software/{target_documents[0]['key']}")
+            if target_documents:
+                print(f"   2. Enter vertex ID: {target_documents[0]['collection']}/{target_documents[0]['key']}")
+            else:
+                print(f"   2. Enter vertex ID: (no target documents found)")
             print(f"   3. Set traversal depth: 2-3")
             print(f"   4. Click 'Start'")
             print(f"   5. Explore the Software <- hasDeviceSoftware <- Device connections")
