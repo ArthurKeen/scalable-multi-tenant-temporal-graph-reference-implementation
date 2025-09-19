@@ -249,32 +249,23 @@ class TimeTravelRefactoredDeployment:
                     "name": "idx_software_temporal"
                 },
                 
-                # Multi-dimensional indexes (MDI-prefix) for optimal temporal range queries
+                # Multi-dimensional indexes (fallback to persistent for compatibility)
                 {
                     "collection": self.config_manager.get_collection_name("devices"),
-                    "type": "mdi",
+                    "type": "persistent",
                     "fields": ["created", "expired"],
-                    "fieldValueTypes": "double",
-                    "unique": False,
-                    "sparse": False,
                     "name": "idx_device_mdi_temporal"
                 },
                 {
                     "collection": self.config_manager.get_collection_name("software"),
-                    "type": "mdi",
+                    "type": "persistent",
                     "fields": ["created", "expired"],
-                    "fieldValueTypes": "double",
-                    "unique": False,
-                    "sparse": False,
                     "name": "idx_software_mdi_temporal"
                 },
                 {
                     "collection": self.config_manager.get_collection_name("versions"),
-                    "type": "mdi",
+                    "type": "persistent",
                     "fields": ["created", "expired"],
-                    "fieldValueTypes": "double",
-                    "unique": False,
-                    "sparse": False,
                     "name": "idx_version_mdi_temporal"
                 },
                 {
