@@ -450,67 +450,104 @@ hasVersion        # Unified time travel: Device & Software versioning (EXPANDED)
 
 ```mermaid
 graph TB
-    subgraph "ArangoDB Oasis: network_assets_demo"
-        subgraph "Tenant A: Acme Corp (SmartGraph Partition)"
-            direction TB
-            DA[Device<br/>Network devices<br/>tenantId: uuid_A]
-            DPIA[DeviceProxyIn<br/>Input proxies<br/>tenantId: uuid_A]
-            DPOA[DeviceProxyOut<br/>Output proxies<br/>tenantId: uuid_A]
-            SA[Software<br/>Software installs<br/>tenantId: uuid_A]
-            SPIA[SoftwareProxyIn<br/>Input proxies<br/>tenantId: uuid_A]
-            SPOA[SoftwareProxyOut<br/>Output proxies<br/>tenantId: uuid_A]
-            LA[Location<br/>Physical sites<br/>tenantId: uuid_A]
+    subgraph "ArangoDB Oasis: network_assets_demo Database"
+        subgraph "Shared Physical Collections (Logically Separated by tenantId)"
+            subgraph "Vertex Collections"
+                DEVICE[Device<br/>All tenant devices<br/>Partitioned by tenantId]
+                DPI[DeviceProxyIn<br/>All tenant device proxies<br/>Partitioned by tenantId]
+                DPO[DeviceProxyOut<br/>All tenant device proxies<br/>Partitioned by tenantId]
+                SOFTWARE[Software<br/>All tenant software<br/>Partitioned by tenantId]
+                SPI[SoftwareProxyIn<br/>All tenant software proxies<br/>Partitioned by tenantId]
+                SPO[SoftwareProxyOut<br/>All tenant software proxies<br/>Partitioned by tenantId]
+                LOCATION[Location<br/>All tenant locations<br/>Partitioned by tenantId]
+            end
+            
+            subgraph "Edge Collections"
+                HASVERSION[hasVersion<br/>All tenant version edges<br/>Unified time travel]
+                HASCONNECTION[hasConnection<br/>All tenant network links<br/>Partitioned by tenantId]
+                HASLOCATION[hasLocation<br/>All tenant device placement<br/>Partitioned by tenantId]
+                HASDEVICESOFTWARE[hasDeviceSoftware<br/>All tenant software installations<br/>Partitioned by tenantId]
+            end
         end
         
-        subgraph "Tenant B: Global Enterprises (SmartGraph Partition)"  
-            direction TB
-            DB[Device<br/>Network devices<br/>tenantId: uuid_B]
-            DPIB[DeviceProxyIn<br/>Input proxies<br/>tenantId: uuid_B]
-            DPOB[DeviceProxyOut<br/>Output proxies<br/>tenantId: uuid_B]
-            SB[Software<br/>Software installs<br/>tenantId: uuid_B]
-            SPIB[SoftwareProxyIn<br/>Input proxies<br/>tenantId: uuid_B]
-            SPOB[SoftwareProxyOut<br/>Output proxies<br/>tenantId: uuid_B]
-            LB[Location<br/>Physical sites<br/>tenantId: uuid_B]
-        end
-        
-        subgraph "Shared Collections (Logically Separated)"
-            VC[hasVersion<br/>Unified time travel<br/>All tenant hasVersion edges]
-            HC[hasConnection<br/>Network links<br/>Tenant-isolated edges]
-            HL[hasLocation<br/>Device placement<br/>Tenant-isolated edges]
-            HDS[hasDeviceSoftware<br/>Device->Software<br/>Tenant-isolated edges]
+        subgraph "Logical Tenant Views (Query-Time Isolation)"
+            subgraph "Tenant A: Acme Corp"
+                DA[Device Documents<br/>WHERE tenantId = 'uuid_A']
+                DPIA[DeviceProxyIn Documents<br/>WHERE tenantId = 'uuid_A']
+                DPOA[DeviceProxyOut Documents<br/>WHERE tenantId = 'uuid_A']
+                SA[Software Documents<br/>WHERE tenantId = 'uuid_A']
+                SPIA[SoftwareProxyIn Documents<br/>WHERE tenantId = 'uuid_A']
+                SPOA[SoftwareProxyOut Documents<br/>WHERE tenantId = 'uuid_A']
+                LA[Location Documents<br/>WHERE tenantId = 'uuid_A']
+            end
+            
+            subgraph "Tenant B: Global Enterprises"
+                DB[Device Documents<br/>WHERE tenantId = 'uuid_B']
+                DPIB[DeviceProxyIn Documents<br/>WHERE tenantId = 'uuid_B']
+                DPOB[DeviceProxyOut Documents<br/>WHERE tenantId = 'uuid_B']
+                SB[Software Documents<br/>WHERE tenantId = 'uuid_B']
+                SPIB[SoftwareProxyIn Documents<br/>WHERE tenantId = 'uuid_B']
+                SPOB[SoftwareProxyOut Documents<br/>WHERE tenantId = 'uuid_B']
+                LB[Location Documents<br/>WHERE tenantId = 'uuid_B']
+            end
         end
     end
     
-    %% Tenant A relationships (corrected logic)
-    DPOA -.->|hasConnection<br/>Isolated by tenantId| DPIA
-    DPOA -.->|hasLocation<br/>Isolated by tenantId| LA
-    DPOA -.->|hasDeviceSoftware<br/>CORRECTED: Out->In<br/>Isolated by tenantId| SPIA
+    %% Physical collection relationships
+    DEVICE -.->|Contains| DA
+    DEVICE -.->|Contains| DB
+    DPI -.->|Contains| DPIA
+    DPI -.->|Contains| DPIB
+    DPO -.->|Contains| DPOA
+    DPO -.->|Contains| DPOB
+    SOFTWARE -.->|Contains| SA
+    SOFTWARE -.->|Contains| SB
+    SPI -.->|Contains| SPIA
+    SPI -.->|Contains| SPIB
+    SPO -.->|Contains| SPOA
+    SPO -.->|Contains| SPOB
+    LOCATION -.->|Contains| LA
+    LOCATION -.->|Contains| LB
     
-    %% Tenant B relationships (corrected logic)
-    DPOB -.->|hasConnection<br/>Isolated by tenantId| DPIB
-    DPOB -.->|hasLocation<br/>Isolated by tenantId| LB  
-    DPOB -.->|hasDeviceSoftware<br/>CORRECTED: Out->In<br/>Isolated by tenantId| SPIB
+    %% Tenant A logical relationships
+    DPOA -.->|Filtered by tenantId| DPIA
+    DPOA -.->|Filtered by tenantId| LA
+    DPOA -.->|Filtered by tenantId| SPIA
     
-    %% Time travel patterns (unified hasVersion collection)
-    DPIA -.->|hasVersion<br/>Time travel| DA
-    DA -.->|hasVersion<br/>Time travel| DPOA
-    SPIA -.->|hasVersion<br/>Time travel| SA
-    SA -.->|hasVersion<br/>Time travel| SPOA
-
-    DPIB -.->|hasVersion<br/>Time travel| DB
-    DB -.->|hasVersion<br/>Time travel| DPOB
-    SPIB -.->|hasVersion<br/>Time travel| SB
-    SB -.->|hasVersion<br/>Time travel| SPOB
+    %% Tenant B logical relationships  
+    DPOB -.->|Filtered by tenantId| DPIB
+    DPOB -.->|Filtered by tenantId| LB
+    DPOB -.->|Filtered by tenantId| SPIB
     
-    classDef tenantA fill:#ffebee,stroke:#c62828,stroke-width:3px
-    classDef tenantB fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
-    classDef shared fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
-    classDef corrected fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+    classDef sharedCollection fill:#fff3e0,stroke:#ef6c00,stroke-width:3px
+    classDef tenantA fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef tenantB fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef logicalView fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
     
+    class DEVICE,DPI,DPO,SOFTWARE,SPI,SPO,LOCATION,HASVERSION,HASCONNECTION,HASLOCATION,HASDEVICESOFTWARE sharedCollection
     class DA,DPIA,DPOA,SA,SPIA,SPOA,LA tenantA
     class DB,DPIB,DPOB,SB,SPIB,SPOB,LB tenantB
-    class VC,HC,HL,HDS shared
 ```
+
+### Architecture Explanation
+
+**Physical Layer (Shared Collections):**
+- **ALL collections are shared** across tenants in the same ArangoDB database
+- **Vertex Collections** (`Device`, `Software`, etc.) contain documents from all tenants  
+- **Edge Collections** (`hasConnection`, `hasVersion`, etc.) contain relationships from all tenants
+- **tenantId field** in every document provides the partition key for logical separation
+
+**Logical Layer (Query-Time Isolation):**
+- **Tenant-specific queries** filter by `tenantId` to access only relevant documents
+- **SmartGraph definitions** ensure tenant isolation at the application layer
+- **Complete data separation** achieved through consistent tenantId filtering
+- **No cross-tenant access** possible without explicit tenantId knowledge
+
+**Benefits of This Architecture:**
+- **Infrastructure Efficiency**: Single database serves multiple tenants
+- **Data Isolation**: Complete logical separation with physical co-location
+- **Horizontal Scaling**: Add database servers to handle more tenants
+- **Cost Effectiveness**: Shared resources with isolated data access
 
 ### Key Design Patterns
 
