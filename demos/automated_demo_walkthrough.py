@@ -1382,7 +1382,7 @@ class AutomatedDemoWalkthrough:
         # Run final validation
         print("Starting final validation suite...")
         try:
-            validator = TimeTravelValidationSuite(show_queries=True)
+            validator = TimeTravelValidationSuite(show_queries=True, naming_convention=self.naming_convention)
             
             if validator.connect_to_database():
                 # Run actual final validations with query display
