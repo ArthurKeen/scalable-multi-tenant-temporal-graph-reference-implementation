@@ -550,7 +550,7 @@ class AutomatedDemoWalkthrough:
         try:
             from src.database.database_deployment import TimeTravelRefactoredDeployment
             deployment = TimeTravelRefactoredDeployment(
-                naming_convention=NamingConvention.CAMEL_CASE,
+                naming_convention=self.naming_convention,
                 demo_mode=True  # Use 5-minute TTL for visible aging during demo
             )
             
