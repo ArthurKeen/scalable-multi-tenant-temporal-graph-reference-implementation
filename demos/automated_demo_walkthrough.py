@@ -1304,27 +1304,41 @@ class AutomatedDemoWalkthrough:
                 print(f"     [INFO] Unified graph {graph_name} already exists")
                 return True
             
-            # Define graph configuration for all tenant data
+            # Get collection names based on naming convention
+            from src.config.config_management import ConfigurationManager
+            config_manager = ConfigurationManager("development", self.naming_convention)
+            
+            # Define graph configuration using correct naming convention
             edge_definitions = [
                 {
-                    "edge_collection": "hasConnection",
-                    "from_vertex_collections": ["DeviceProxyOut"],
-                    "to_vertex_collections": ["DeviceProxyIn"]
+                    "edge_collection": config_manager.get_collection_name("connections"),
+                    "from_vertex_collections": [config_manager.get_collection_name("device_outs")],
+                    "to_vertex_collections": [config_manager.get_collection_name("device_ins")]
                 },
                 {
-                    "edge_collection": "hasDeviceSoftware",
-                    "from_vertex_collections": ["DeviceProxyOut"],
-                    "to_vertex_collections": ["SoftwareProxyIn"]
+                    "edge_collection": config_manager.get_collection_name("has_device_software"),
+                    "from_vertex_collections": [config_manager.get_collection_name("device_outs")],
+                    "to_vertex_collections": [config_manager.get_collection_name("software_ins")]
                 },
                 {
-                    "edge_collection": "hasLocation", 
-                    "from_vertex_collections": ["DeviceProxyOut"],
-                    "to_vertex_collections": ["Location"]
+                    "edge_collection": config_manager.get_collection_name("has_locations"), 
+                    "from_vertex_collections": [config_manager.get_collection_name("device_outs")],
+                    "to_vertex_collections": [config_manager.get_collection_name("locations")]
                 },
                 {
-                    "edge_collection": "hasVersion",
-                    "from_vertex_collections": ["Device", "DeviceProxyIn", "Software", "SoftwareProxyIn"],
-                    "to_vertex_collections": ["Device", "DeviceProxyOut", "Software", "SoftwareProxyOut"]
+                    "edge_collection": config_manager.get_collection_name("versions"),
+                    "from_vertex_collections": [
+                        config_manager.get_collection_name("devices"), 
+                        config_manager.get_collection_name("device_ins"), 
+                        config_manager.get_collection_name("software"), 
+                        config_manager.get_collection_name("software_ins")
+                    ],
+                    "to_vertex_collections": [
+                        config_manager.get_collection_name("devices"), 
+                        config_manager.get_collection_name("device_outs"), 
+                        config_manager.get_collection_name("software"), 
+                        config_manager.get_collection_name("software_outs")
+                    ]
                 }
             ]
             
