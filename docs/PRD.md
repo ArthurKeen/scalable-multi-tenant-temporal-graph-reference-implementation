@@ -1,8 +1,8 @@
-# Product Requirements Document: Multi-Tenant Scale-Out Demo
+# Product Requirements Document: Scalable Multi-Tenant Temporal Graph Reference Implementation
 
 ## 1. Overview
 
-This document outlines the requirements for developing a demonstration of ArangoDB's capabilities for multi-tenant graph scale-out and temporal data management. The demo will use the existing Network Asset Management data generation repository to showcase how a system can be designed to handle disjoint data sets (one per tenant), scale horizontally on demand, and automatically manage the lifecycle of temporal data using Time-to-Live (TTL) indexes.
+This document outlines the requirements for a comprehensive reference implementation showcasing ArangoDB's capabilities for scalable multi-tenant temporal graph architectures. The reference implementation provides production-ready patterns for tenant isolation, horizontal scale-out, and temporal data lifecycle management, using network asset management as a concrete demonstration domain.
 
 This refactoring of the network asset management demo will support multi-tenant architecture using ArangoDB disjoint smartgraphs, with each tenant having a completely isolated smartgraph containing their network assets, devices, locations, and relationships.
 
@@ -48,7 +48,7 @@ The primary objective is to create a fully automated, end-to-end demo lifecycle 
 
 ### 3.1 Data Generation Refactoring
 
-The `scalable-multi-tenant-temporal-network-asset-management-demo` repository provides comprehensive demonstration capabilities including data generation, API functionality, and interactive demos:
+The `scalable-multi-tenant-temporal-graph-reference-implementation` repository provides comprehensive reference architecture patterns including data generation, deployment automation, and interactive demonstrations:
 
 * **Tenant-Specific Data:** The script must generate distinct, partitioned data sets for multiple tenants. Each tenant's data will be part of its own disjoint smartgraph.
 

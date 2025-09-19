@@ -25,13 +25,14 @@ def print_demo_options():
     """Print available demo options."""
     print("Available Demo Options:")
     print()
-    print("1. Automated Walkthrough (Interactive)")
-    print("   → Guided demonstration with explanations and pauses")
-    print("   → Best for learning and presentations")
+    print("1. Automated Walkthrough (Interactive) 🎯 PRESENTATION MODE")
+    print("   → Clean, demo-friendly output with validation sections SKIPPED")
+    print("   → Perfect for live presentations - no information overload")
+    print("   → Add --verbose for detailed technical output + validation")
     print()
-    print("2. Automated Walkthrough (Auto-Advance)")
-    print("   → Continuous demonstration with timed pauses")
-    print("   → Best for unattended demonstrations")
+    print("2. Automated Walkthrough (Auto-Advance) 🎯 PRESENTATION MODE")
+    print("   → Clean, continuous demonstration with validation sections SKIPPED")
+    print("   → Add --verbose for detailed technical output + validation")
     print()
     print("3. Comprehensive Demo (Fast)")
     print("   → Complete system demonstration without walkthrough")
@@ -55,9 +56,13 @@ def run_automated_walkthrough_interactive():
     print("   → Press Enter at each pause to continue")
     print("   → Press Ctrl+C to exit at any time")
     print()
+    
+    verbose = input("Enable verbose mode? (y/N): ").strip().lower()
+    verbose_flag = " --verbose" if verbose in ['y', 'yes'] else ""
+    
     input("Press Enter to begin...")
     
-    os.system("python3 automated_demo_walkthrough.py --interactive")
+    os.system(f"python3 automated_demo_walkthrough.py --interactive{verbose_flag}")
 
 
 def run_automated_walkthrough_auto():
@@ -78,7 +83,10 @@ def run_automated_walkthrough_auto():
         print("[ERROR] Invalid duration, using default of 3 seconds")
         pause_duration = 3
     
-    os.system(f"python3 automated_demo_walkthrough.py --auto-advance --pause-duration {pause_duration}")
+    verbose = input("Enable verbose mode? (y/N): ").strip().lower()
+    verbose_flag = " --verbose" if verbose in ['y', 'yes'] else ""
+    
+    os.system(f"python3 automated_demo_walkthrough.py --auto-advance --pause-duration {pause_duration}{verbose_flag}")
 
 
 def run_comprehensive_demo():

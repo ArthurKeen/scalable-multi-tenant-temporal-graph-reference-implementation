@@ -1,4 +1,4 @@
-# Multi-Tenant Network Asset Management Demo
+# Scalable Multi-Tenant Temporal Graph Reference Implementation
 
 ## Why Scalable Multi-Tenancy with Time-Traveling Graphs?
 
@@ -45,9 +45,9 @@ This architecture pattern is particularly valuable for **hosted enterprise solut
 - Model organizational structures and their evolution
 - Support regulatory compliance with complete audit trails
 
-### Demo Focus: Network Asset Management
+### Reference Implementation Focus: Network Asset Management
 
-This demonstration uses **network asset management** as a representative example to showcase the core capabilities of multi-tenant time-traveling graphs. The patterns demonstrated here - device relationships, configuration tracking, temporal queries, and tenant isolation - apply directly to all the use cases mentioned above.
+This reference implementation uses **network asset management** as a concrete example to demonstrate scalable multi-tenant temporal graph patterns. The architectural patterns shown here - entity relationships, configuration tracking, temporal queries, and tenant isolation - provide reusable templates for enterprise applications across multiple domains.
 
 **What You'll See Demonstrated:**
 - Multiple isolated tenants sharing infrastructure while maintaining data separation
@@ -61,7 +61,7 @@ This demonstration uses **network asset management** as a representative example
 
 ## Technical Implementation
 
-A comprehensive multi-tenant network asset management system built with ArangoDB, demonstrating proper naming conventions, disjoint SmartGraphs, and temporal data modeling.
+A comprehensive reference implementation showcasing scalable multi-tenant temporal graph architectures with ArangoDB, featuring production-ready patterns for tenant isolation, time travel capabilities, and horizontal scale-out.
 
 ## Core Technical Features
 

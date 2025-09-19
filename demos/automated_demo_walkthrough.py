@@ -3,10 +3,10 @@
 Automated Demo Walkthrough Script
 
 This script provides a guided, interactive demonstration of the multi-tenant
-network asset management system, walking through all major features with
+scalable multi-tenant temporal graph reference implementation, walking through all major features with
 explanations and pauses for observation.
 
-Author: Network Asset Management Demo
+Author: Scalable Multi-Tenant Temporal Graph Reference Implementation
 """
 
 import time
@@ -30,13 +30,14 @@ from arango import ArangoClient
 class AutomatedDemoWalkthrough:
     """Provides an automated, guided walkthrough of the entire system demonstration."""
     
-    def __init__(self, interactive: bool = True):
+    def __init__(self, interactive: bool = True, verbose: bool = False):
         """Initialize the demo walkthrough."""
         self.demo_id = f"walkthrough_{int(datetime.datetime.now().timestamp())}"
         self.start_time = datetime.datetime.now()
         self.sections_completed = []
         self.pause_duration = 3  # Default pause between sections
         self.interactive_mode = interactive
+        self.verbose = verbose
         
         # Database connection for reset functionality
         self.client = None
@@ -44,11 +45,56 @@ class AutomatedDemoWalkthrough:
         
         print("=" * 80)
         print("AUTOMATED DEMO WALKTHROUGH")
-        print("Multi-Tenant Network Asset Management System")
+        print("Scalable Multi-Tenant Temporal Graph Reference Implementation")
         print("=" * 80)
-        print(f"Demo ID: {self.demo_id}")
-        print(f"Start Time: {self.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+        if self.verbose:
+            print(f"Demo ID: {self.demo_id}")
+            print(f"Start Time: {self.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"Interactive Mode: {self.interactive_mode}")
+            print(f"Verbose Mode: {self.verbose}")
         print()
+    
+    def demo_print(self, message: str, level: str = "info"):
+        """Smart printing based on verbose mode."""
+        if level == "critical":
+            # Always show critical messages
+            print(message)
+        elif level == "verbose" and self.verbose:
+            # Show detailed info only in verbose mode
+            print(message)
+        elif level == "info" and not self.verbose:
+            # Show simplified info in presentation mode
+            print(message)
+        elif level == "debug" and self.verbose:
+            # Show debug info only in verbose mode
+            print(message)
+    
+    def demo_progress(self, step: int, total: int, message: str, details: str = None):
+        """Show progress in presentation-friendly way."""
+        if self.verbose and details:
+            print(f"[{step}/{total}] {message}")
+            print(f"    {details}")
+        else:
+            print(f"[{step}/{total}] {message}")
+    
+    def demo_section_start(self, title: str, description: str = None):
+        """Start a demo section with appropriate formatting."""
+        print("\n" + "="*60)
+        print(f"  {title.upper()}")
+        if description and not self.verbose:
+            print(f"  {description}")
+        print("="*60)
+        if self.verbose and description:
+            print(f"Description: {description}")
+            print()
+    
+    def demo_manual_prompt(self, action: str, details: str = None):
+        """Highlight manual demo actions for presenter."""
+        print("\n" + "🎯" + " "*3 + "MANUAL DEMO POINT" + " "*3 + "🎯")
+        print(f"👉 {action}")
+        if details and self.verbose:
+            print(f"   Details: {details}")
+        print("🎯" * 25)
     
     def pause_for_observation(self, message: str = "Press Enter to continue...", duration: int = None):
         """Pause the demo for observation or user input."""
@@ -166,36 +212,47 @@ class AutomatedDemoWalkthrough:
     
     def _show_manual_demo_hints(self):
         """Show manual demo hints for ArangoDB Web Interface demonstration."""
-        print("\n" + "=" * 70)
-        print("MANUAL DEMO HINTS: ArangoDB Web Interface Exploration")
-        print("=" * 70)
-        print("Now is a perfect time to demonstrate the ArangoDB Web Interface!")
-        print()
         
-        print("[HINT 1] COLLECTION DASHBOARD DEMONSTRATION")
-        print("-" * 50)
-        print("URL: https://1d53cdf6fad0.arangodb.cloud:8529")
-        print("Login with your cluster credentials")
-        print()
-        print("Steps to show:")
-        print("1. Click 'COLLECTIONS' in the main menu")
-        print("2. Explore the multi-tenant collections:")
-        print("   - Device: Show document count and sample documents")
-        print("   - DeviceProxyIn/DeviceProxyOut: Explain proxy pattern")
-        print("   - Software: Show temporal versioning")
-        print("   - SoftwareProxyIn/SoftwareProxyOut: Explain software proxies")
-        print("   - Location: Show geographic data")
-        print("3. Click on any collection to view:")
-        print("   - Document count and storage size")
-        print("   - Sample documents with tenant isolation")
-        print("   - Index information (MDI-prefix indexes)")
-        print("4. Show a sample document structure:")
-        print("   - Tenant-specific fields")
-        print("   - Temporal fields (created, expired, ttlExpireAt)")
-        print("   - Naming convention compliance")
-        print()
+        self.demo_manual_prompt(
+            "Switch to ArangoDB Web Interface for visualization",
+            "https://1d53cdf6fad0.arangodb.cloud:8529"
+        )
         
-        print("[HINT 2] GRAPH VISUALIZER DEMONSTRATION")
+        if not self.verbose:
+            print("\n📊 Key Demo Points:")
+            print("   • Collections: Show tenant isolation and document counts")
+            print("   • Graphs: Visualize multi-tenant network topology")  
+            print("   • Indexes: Highlight optimized MDI-prefixed temporal indexes")
+            print("   • Data: Sample documents with temporal fields")
+        else:
+            print("\n" + "=" * 70)
+            print("DETAILED MANUAL DEMO HINTS: ArangoDB Web Interface")
+            print("=" * 70)
+            print("URL: https://1d53cdf6fad0.arangodb.cloud:8529")
+            print("Login with your cluster credentials")
+            print()
+            
+            print("[HINT 1] COLLECTION DASHBOARD DEMONSTRATION")
+            print("-" * 50)
+            print("Steps to show:")
+            print("1. Click 'COLLECTIONS' in the main menu")
+            print("2. Explore the multi-tenant collections:")
+            print("   - Device: Show document count and sample documents")
+            print("   - DeviceProxyIn/DeviceProxyOut: Explain proxy pattern")
+            print("   - Software: Show temporal versioning")
+            print("   - SoftwareProxyIn/SoftwareProxyOut: Explain software proxies")
+            print("   - Location: Show geographic data")
+            print("3. Click on any collection to view:")
+            print("   - Document count and storage size")
+            print("   - Sample documents with tenant isolation")
+            print("   - Index information (MDI-prefix indexes)")
+            print("4. Show a sample document structure:")
+            print("   - Tenant-specific fields")
+            print("   - Temporal fields (created, expired, ttlExpireAt)")
+            print("   - Naming convention compliance")
+            print()
+            
+            print("[HINT 2] GRAPH VISUALIZER DEMONSTRATION")
         print("-" * 50)
         print("Steps to show:")
         print("1. Click 'GRAPHS' in the main menu")
@@ -224,7 +281,7 @@ class AutomatedDemoWalkthrough:
         print()
         print("A. Show tenant isolation:")
         print("   FOR d IN Device")
-        print("   COLLECT tenant = d.tenant WITH COUNT INTO count")
+        print("   COLLECT tenant = d.tenantId WITH COUNT INTO count")
         print("   RETURN {tenant: tenant, devices: count}")
         print()
         print("B. Show current vs historical configurations:")
@@ -233,9 +290,11 @@ class AutomatedDemoWalkthrough:
         print("   RETURN {key: s._key, name: s.name, version: s.version}")
         print()
         print("C. Show network topology:")
+        print("   WITH DeviceProxyOut, DeviceProxyIn")
         print("   FOR d IN Device")
-        print("   FOR connected IN 1..2 OUTBOUND d hasConnection")
-        print("   RETURN {from: d.name, to: connected.name}")
+        print("   FOR proxy IN 1..1 OUTBOUND d hasVersion")
+        print("   FOR connected IN 1..2 OUTBOUND proxy hasConnection")
+        print("   RETURN {device: d.name, proxy: proxy._key, connected: connected._key}")
         print()
         print("D. Show MDI-prefix index usage:")
         print("   FOR d IN Device")
@@ -282,7 +341,7 @@ class AutomatedDemoWalkthrough:
             FILTER HAS(doc, "ttlExpireAt")
             RETURN {
                 key: doc._key,
-                tenant: doc.tenant,
+                tenant: doc.tenantId,
                 name: doc.name,
                 ttlExpireAt: doc.ttlExpireAt,
                 timeLeft: doc.ttlExpireAt - @currentTime,
@@ -403,7 +462,7 @@ class AutomatedDemoWalkthrough:
         """Section 1: System Introduction and Overview."""
         self.print_section_header(
             "SYSTEM INTRODUCTION", 
-            "Overview of the multi-tenant network asset management system capabilities"
+            "Overview of the scalable multi-tenant temporal graph reference implementation capabilities"
         )
         
         print("MULTI-TENANT NETWORK ASSET MANAGEMENT SYSTEM")
@@ -482,33 +541,28 @@ class AutomatedDemoWalkthrough:
     
     def section_3_database_deployment(self):
         """Section 3: Database Deployment and Setup."""
-        self.print_section_header(
+        self.demo_section_start(
             "DATABASE DEPLOYMENT", 
-            "Deploying multi-tenant data to ArangoDB with unified graph and TTL indexes"
+            "Deploying multi-tenant data to ArangoDB with optimized indexes"
         )
         
-        self.print_subsection(
-            "Deployment Components",
-            "Creating collections, indexes, and unified graph configurations"
-        )
+        self.demo_print("Deployment Process:", "verbose")
+        self.demo_print("- Collection Creation (vertex and edge collections)", "verbose")
+        self.demo_print("- Index Configuration (performance and TTL indexes)", "verbose")
+        self.demo_print("- Unified Graph Setup (single graph for all tenant visualization)", "verbose")
+        self.demo_print("- TTL Index Creation (automatic historical data aging)", "verbose")
+        self.demo_print("- Data Import (JSON files to collections)", "verbose")
+        self.demo_print("", "verbose")
         
-        print("Deployment Process:")
-        print("- Collection Creation (vertex and edge collections)")
-        print("- Index Configuration (performance and TTL indexes)")
-        print("- Unified Graph Setup (single graph for all tenant visualization)")
-        print("- TTL Index Creation (automatic historical data aging)")
-        print("- Data Import (JSON files to collections)")
-        print()
+        self.demo_print("Collections Created:", "verbose")
+        self.demo_print("- Vertex: Device, DeviceProxyIn, DeviceProxyOut, Software, SoftwareProxyIn, SoftwareProxyOut, Location", "verbose")
+        self.demo_print("- Edge: hasConnection, hasLocation, hasDeviceSoftware, hasVersion", "verbose")
+        self.demo_print("", "verbose")
         
-        print("Collections Created:")
-        print("- Vertex: Device, DeviceProxyIn, DeviceProxyOut, Software, SoftwareProxyIn, SoftwareProxyOut, Location")
-        print("- Edge: hasConnection, hasLocation, hasDeviceSoftware, hasVersion")
-        print()
-        
-        self.pause_for_observation("Watch the database deployment process...")
+        self.pause_for_observation("Ready to deploy database..." if not self.verbose else "Watch the database deployment process...")
         
         # Run database deployment
-        print("Starting database deployment...")
+        self.demo_progress(1, 4, "Starting database deployment...")
         try:
             from src.database.database_deployment import TimeTravelRefactoredDeployment
             deployment = TimeTravelRefactoredDeployment(
@@ -517,16 +571,15 @@ class AutomatedDemoWalkthrough:
             )
             
             # Actually run the deployment instead of simulating
-            print("Connecting to cluster...")
+            self.demo_progress(2, 4, "Connecting to cluster...", "Establishing connection to ArangoDB Oasis")
             if deployment.connect_to_cluster():
-                print("Creating collections and indexes...")
+                self.demo_progress(3, 4, "Creating collections and indexes...", "Setting up optimized database schema")
                 deployment.create_refactored_collections()
                 deployment.create_refactored_indexes()
                 
-                print("Loading data to collections...")
+                self.demo_progress(4, 4, "Loading data and creating graph...", "Importing tenant data and building unified graph")
                 deployment.load_refactored_data()
                 
-                print("Creating unified network graph...")
                 # Create unified graph instead of per-tenant graphs
                 self._ensure_unified_graph()
                 
@@ -537,16 +590,16 @@ class AutomatedDemoWalkthrough:
                     if deployment.database.has_collection(coll_name):
                         count = deployment.database.collection(coll_name).count()
                         total_docs += count
-                        print(f"   {coll_name}: {count} documents")
+                        self.demo_print(f"   {coll_name}: {count} documents", "verbose")
                 
                 if total_docs > 0:
-                    print(f"[SUCCESS] Database deployment completed successfully - {total_docs} documents imported")
+                    print(f"✅ Database deployment successful - {total_docs} documents imported")
                     
                     # Add manual demo hints for ArangoDB Web Interface
                     self._show_manual_demo_hints()
                     
                 else:
-                    print(f"[WARNING] Database deployment completed but no data imported - check data files")
+                    print(f"⚠️  Database deployment completed but no data imported - check data files")
             else:
                 print("[ERROR] Failed to connect to cluster for deployment")
             
@@ -678,29 +731,60 @@ class AutomatedDemoWalkthrough:
             cursor = self.database.aql.execute(aql_software)
             current_software = list(cursor)
             
-            print(f"\n[TARGET SELECTION] Documents that will be modified:")
-            print("-" * 60)
-            
-            for i, software in enumerate(current_software[:2]):
-                software_key = software["_key"]
+            if not self.verbose:
+                # PRESENTATION MODE - Clean, copy-friendly format
+                print(f"\n🎯 SOFTWARE IDs TO COPY FOR VISUALIZER:")
+                print("="*60)
                 
-                target_doc = {
-                    "collection": "Software",
-                    "key": software_key,
-                    "name": software.get("name", "Unknown"),
-                    "type": software.get("type", "Unknown"),
-                    "current_state": software
-                }
+                for i, software in enumerate(current_software[:2]):
+                    software_id = software["_id"]
+                    software_key = software["_key"]
+                    
+                    target_doc = {
+                        "collection": "Software",
+                        "key": software_key,
+                        "name": software.get("name", "Unknown"),
+                        "type": software.get("type", "Unknown"),
+                        "current_state": software
+                    }
+                    
+                    target_documents.append(target_doc)
+                    
+                    print(f"📋 SOFTWARE {i+1}:")
+                    print(f"   COPY THIS → {software_id}")
+                    print(f"   Name: {software.get('name', 'Unknown')} ({software.get('type', 'Unknown')})")
+                    print()
                 
-                target_documents.append(target_doc)
+                self.demo_manual_prompt(
+                    "Use the CURRENT software IDs above in ArangoDB Graph Visualizer",
+                    "Show these BEFORE the transaction to see the original state"
+                )
+            else:
+                # VERBOSE MODE - Full technical detail
+                print(f"\n[TARGET SELECTION] Documents that will be modified:")
+                print("-" * 60)
                 
-                print(f"   [SOFTWARE {i+1}] Software/{software_key}")
-                print(f"      Name: {software.get('name', 'Unknown')}")
-                print(f"      Type: {software.get('type', 'Unknown')}")
-                print(f"      Port: {software.get('portNumber', 'N/A')}")
-                print(f"      Enabled: {software.get('isEnabled', 'N/A')}")
-                print(f"      Version: {software.get('version', 'N/A')}")
-                print(f"      Created: {software.get('created', 'N/A')}")
+                for i, software in enumerate(current_software[:2]):
+                    software_key = software["_key"]
+                    
+                    target_doc = {
+                        "collection": "Software",
+                        "key": software_key,
+                        "name": software.get("name", "Unknown"),
+                        "type": software.get("type", "Unknown"),
+                        "current_state": software
+                    }
+                    
+                    target_documents.append(target_doc)
+                    
+                    print(f"   [SOFTWARE {i+1}] Software/{software_key}")
+                    print(f"      ID: {software['_id']}")
+                    print(f"      Name: {software.get('name', 'Unknown')}")
+                    print(f"      Type: {software.get('type', 'Unknown')}")
+                    print(f"      Port: {software.get('portNumber', 'N/A')}")
+                    print(f"      Enabled: {software.get('isEnabled', 'N/A')}")
+                    print(f"      Version: {software.get('version', 'N/A')}")
+                    print(f"      Created: {software.get('created', 'N/A')}")
                 print(f"      Expired: {software.get('expired', 'N/A')} (NEVER_EXPIRES)")
                 print(f"      TTL Field: {software.get('ttlExpireAt', 'NOT SET')}")
                 print()
@@ -802,23 +886,66 @@ class AutomatedDemoWalkthrough:
         print("="*60)
         
         try:
-            print("[VERIFICATION] Check these documents NOW in ArangoDB:")
-            print("-" * 60)
-            for doc in target_documents:
-                collection = doc["collection"]
-                key = doc["key"]
-                print(f"   1. Query: FOR doc IN {collection} FILTER doc._key == '{key}' RETURN doc")
-                print(f"   2. Query: FOR doc IN {collection} FILTER STARTS_WITH(doc._key, '{key}') RETURN doc")
-                print(f"      (Look for new versions of the document with TTL timestamps)")
+            if not self.verbose:
+                # PRESENTATION MODE - Find and highlight new software IDs
+                print("🔍 FINDING NEW SOFTWARE IDs CREATED BY TRANSACTIONS...")
                 print()
-            
-            print("[GRAPH IMPACT] Updated graph paths to explore:")
-            print("-" * 60)
-            for doc in target_documents:
-                software_key = doc["key"]
-                print(f"   Software/{software_key} -> hasVersion -> [multiple Software versions]")
-                print(f"   <- hasDeviceSoftware <- DeviceProxyOut <- Device")
-            print()
+                
+                # Query for newly created software documents
+                for i, doc in enumerate(target_documents):
+                    original_key = doc["key"]
+                    
+                    # Find new software versions created by transaction
+                    aql_new_software = f"""
+                    FOR software IN Software
+                        FILTER STARTS_WITH(software._key, "{original_key}")
+                        FILTER software._key != "{original_key}"
+                        SORT software.created DESC
+                        LIMIT 2
+                        RETURN {{
+                            id: software._id,
+                            key: software._key,
+                            name: software.name,
+                            type: software.type,
+                            created: software.created
+                        }}
+                    """
+                    
+                    cursor = self.database.aql.execute(aql_new_software)
+                    new_software = list(cursor)
+                    
+                    if new_software:
+                        print(f"🎯 NEW SOFTWARE {i+1} IDs TO COPY FOR VISUALIZER:")
+                        print("="*60)
+                        for j, software in enumerate(new_software):
+                            print(f"📋 NEW VERSION {j+1}:")
+                            print(f"   COPY THIS → {software['id']}")
+                            print(f"   Name: {software['name']} ({software['type']})")
+                            print()
+                    
+                self.demo_manual_prompt(
+                    "Use the NEW software IDs above in ArangoDB Graph Visualizer",
+                    "These are the newly created software configurations from the transaction"
+                )
+            else:
+                # VERBOSE MODE - Full technical detail
+                print("[VERIFICATION] Check these documents NOW in ArangoDB:")
+                print("-" * 60)
+                for doc in target_documents:
+                    collection = doc["collection"]
+                    key = doc["key"]
+                    print(f"   1. Query: FOR doc IN {collection} FILTER doc._key == '{key}' RETURN doc")
+                    print(f"   2. Query: FOR doc IN {collection} FILTER STARTS_WITH(doc._key, '{key}') RETURN doc")
+                    print(f"      (Look for new versions of the document with TTL timestamps)")
+                    print()
+                
+                print("[GRAPH IMPACT] Updated graph paths to explore:")
+                print("-" * 60)
+                for doc in target_documents:
+                    software_key = doc["key"]
+                    print(f"   Software/{software_key} -> hasVersion -> [multiple Software versions]")
+                    print(f"   <- hasDeviceSoftware <- DeviceProxyOut <- Device")
+                print()
             
         except Exception as e:
             print(f"[ERROR] Failed to show after state: {e}")
@@ -1388,26 +1515,41 @@ class AutomatedDemoWalkthrough:
         print(f"   - Start Time: {self.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"   - End Time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"   - Total Duration: {duration.total_seconds():.1f} seconds")
-        print(f"   - Sections Completed: {len(self.sections_completed)}/10")
+        total_sections = 10 if self.verbose else 8
+        print(f"   - Sections Completed: {len(self.sections_completed)}/{total_sections}")
+        if not self.verbose:
+            print("   - Mode: Presentation (validation sections skipped for demo flow)")
+        else:
+            print("   - Mode: Verbose (all validation sections included)")
         print()
         
         print("Key Achievements:")
-        print("   [SUCCESS] Multi-tenant data generation (4 tenants)")
+        print("   [SUCCESS] Multi-tenant data generation")
         print("   [SUCCESS] Database deployment with SmartGraphs")
-        print("   [SUCCESS] Comprehensive validation suite")
+        if self.verbose:
+            print("   [SUCCESS] Comprehensive validation suite")
         print("   [SUCCESS] Temporal TTL transactions demonstration")
         print("   [SUCCESS] Time travel demonstration")
-        print("   [SUCCESS] Scale-out capabilities (7 total tenants)")
-        print("   [SUCCESS] Final system validation")
+        print("   [SUCCESS] Scale-out capabilities")
+        if self.verbose:
+            print("   [SUCCESS] Final system validation")
         print()
         
-        print("System Capabilities Demonstrated:")
-        print("   - Multi-tenant architecture with complete isolation")
-        print("   - Time travel with TTL for historical data management")
-        print("   - Temporal TTL transactions for realistic data lifecycle scenarios")
-        print("   - Horizontal scale-out for enterprise growth")
-        print("   - Comprehensive validation and testing")
-        print("   - Production-ready enterprise deployment")
+        if not self.verbose:
+            print("System Capabilities Demonstrated:")
+            print("   ✅ Multi-tenant architecture with complete isolation")
+            print("   ✅ Time travel with TTL for historical data management")
+            print("   ✅ Temporal TTL transactions for realistic scenarios")
+            print("   ✅ Horizontal scale-out for enterprise growth")
+            print("   ✅ Production-ready enterprise deployment")
+        else:
+            print("System Capabilities Demonstrated:")
+            print("   - Multi-tenant architecture with complete isolation")
+            print("   - Time travel with TTL for historical data management")
+            print("   - Temporal TTL transactions for realistic data lifecycle scenarios")
+            print("   - Horizontal scale-out for enterprise growth")
+            print("   - Comprehensive validation and testing")
+            print("   - Production-ready enterprise deployment")
         print()
         
         print("The multi-tenant network asset management system")
@@ -1437,8 +1579,11 @@ class AutomatedDemoWalkthrough:
             # Section 3: Database Deployment
             self.section_3_database_deployment()
             
-            # Section 4: Initial Validation
-            self.section_4_initial_validation()
+            # Section 4: Initial Validation (optional in presentation mode)
+            if self.verbose:
+                self.section_4_initial_validation()
+            else:
+                self.demo_print("✅ Database deployment validated - ready for demonstrations", "info")
             
             # Section 5: Temporal TTL Transactions
             self.section_5_temporal_ttl_transactions()
@@ -1449,16 +1594,20 @@ class AutomatedDemoWalkthrough:
             # Section 7: Scale-Out Demonstration
             self.section_7_scale_out_demonstration()
             
-            # Section 8: Final Validation
-            self.section_8_final_validation()
+            # Section 8: Final Validation (optional in presentation mode)
+            if self.verbose:
+                self.section_8_final_validation()
+            else:
+                self.demo_print("✅ All demonstrations completed successfully", "info")
             
             # Section 9: Demo Summary
             self.section_9_demo_summary()
             
+            total_sections = 10 if self.verbose else 8  # Skip validation sections in presentation mode
             return {
                 "status": "completed",
                 "sections_completed": len(self.sections_completed),
-                "total_sections": 10,
+                "total_sections": total_sections,
                 "duration": (datetime.datetime.now() - self.start_time).total_seconds()
             }
             
@@ -1504,6 +1653,11 @@ def main():
         default=3,
         help="Duration of automatic pauses in seconds (default: 3)"
     )
+    parser.add_argument(
+        "--verbose", 
+        action="store_true",
+        help="Show detailed technical output (default: clean presentation mode)"
+    )
     
     args = parser.parse_args()
     
@@ -1518,7 +1672,7 @@ def main():
     
     try:
         # Initialize and run the demo walkthrough
-        demo_walkthrough = AutomatedDemoWalkthrough(interactive=interactive)
+        demo_walkthrough = AutomatedDemoWalkthrough(interactive=interactive, verbose=args.verbose)
         result = demo_walkthrough.run_automated_walkthrough(
             interactive=interactive,
             pause_duration=args.pause_duration
