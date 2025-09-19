@@ -153,7 +153,7 @@ class TimeTravelRefactoredGenerator:
                 device_props["firewall_rules"]: self.network_config.DEFAULT_FIREWALL_RULES.copy()
             }
             current_config = DocumentEnhancer.add_tenant_attributes(
-                current_config, self.tenant_config, current_created
+                current_config, self.tenant_config, current_created, naming_convention=self.naming_convention
             )
             devices.append(current_config)
             
@@ -246,7 +246,7 @@ class TimeTravelRefactoredGenerator:
             expired = previous_config["created"]  # Historical records expire when replaced
             
             previous_config = DocumentEnhancer.add_tenant_attributes(
-                previous_config, self.tenant_config, created, expired
+                previous_config, self.tenant_config, created, expired, naming_convention=self.naming_convention
             )
             historical_devices.append(previous_config)
             
@@ -283,7 +283,7 @@ class TimeTravelRefactoredGenerator:
                 "version": software_version
             }
             software_proxy_in = DocumentEnhancer.add_tenant_attributes(
-                software_proxy_in, self.tenant_config, is_proxy=True
+                software_proxy_in, self.tenant_config, is_proxy=True, naming_convention=self.naming_convention
             )
             software_proxy_ins.append(software_proxy_in)
             
@@ -295,7 +295,7 @@ class TimeTravelRefactoredGenerator:
                 "version": software_version
             }
             software_proxy_out = DocumentEnhancer.add_tenant_attributes(
-                software_proxy_out, self.tenant_config, is_proxy=True
+                software_proxy_out, self.tenant_config, is_proxy=True, naming_convention=self.naming_convention
             )
             software_proxy_outs.append(software_proxy_out)
         
@@ -336,7 +336,7 @@ class TimeTravelRefactoredGenerator:
                 software_props["is_enabled"]: True
             }
             current_config = DocumentEnhancer.add_tenant_attributes(
-                current_config, self.tenant_config, current_created
+                current_config, self.tenant_config, current_created, naming_convention=self.naming_convention
             )
             software.append(current_config)
             
@@ -384,7 +384,7 @@ class TimeTravelRefactoredGenerator:
             expired = previous_config["created"]  # Historical records expire when replaced
             
             previous_config = DocumentEnhancer.add_tenant_attributes(
-                previous_config, self.tenant_config, created, expired
+                previous_config, self.tenant_config, created, expired, naming_convention=self.naming_convention
             )
             historical_software.append(previous_config)
             

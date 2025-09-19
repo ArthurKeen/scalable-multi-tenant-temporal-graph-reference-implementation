@@ -76,33 +76,38 @@ class AutomatedDemoWalkthrough:
     
     def _get_file_mappings(self) -> Dict[str, str]:
         """Get file to collection mappings based on naming convention."""
+        from src.config.config_management import ConfigurationManager
+        
+        # Use ConfigurationManager to get correct collection names
+        config_manager = ConfigurationManager("development", self.naming_convention)
+        
         if self.naming_convention == NamingConvention.SNAKE_CASE:
             return {
-                'device.json': 'Device',
-                'device_proxy_in.json': 'DeviceProxyIn', 
-                'device_proxy_out.json': 'DeviceProxyOut',
-                'software.json': 'Software',
-                'software_proxy_in.json': 'SoftwareProxyIn',
-                'software_proxy_out.json': 'SoftwareProxyOut',
-                'location.json': 'Location',
-                'has_connection.json': 'hasConnection',
-                'has_location.json': 'hasLocation', 
-                'has_device_software.json': 'hasDeviceSoftware',
-                'has_version.json': 'hasVersion'
+                'device.json': config_manager.get_collection_name('devices'),
+                'device_proxy_in.json': config_manager.get_collection_name('device_ins'), 
+                'device_proxy_out.json': config_manager.get_collection_name('device_outs'),
+                'software.json': config_manager.get_collection_name('software'),
+                'software_proxy_in.json': config_manager.get_collection_name('software_ins'),
+                'software_proxy_out.json': config_manager.get_collection_name('software_outs'),
+                'location.json': config_manager.get_collection_name('locations'),
+                'has_connection.json': config_manager.get_collection_name('connections'),
+                'has_location.json': config_manager.get_collection_name('has_locations'), 
+                'has_device_software.json': config_manager.get_collection_name('has_device_software'),
+                'has_version.json': config_manager.get_collection_name('versions')
             }
         else:  # NamingConvention.CAMEL_CASE
             return {
-                'Device.json': 'Device',
-                'DeviceProxyIn.json': 'DeviceProxyIn', 
-                'DeviceProxyOut.json': 'DeviceProxyOut',
-                'Software.json': 'Software',
-                'SoftwareProxyIn.json': 'SoftwareProxyIn',
-                'SoftwareProxyOut.json': 'SoftwareProxyOut',
-                'Location.json': 'Location',
-                'hasConnection.json': 'hasConnection',
-                'hasLocation.json': 'hasLocation', 
-                'hasDeviceSoftware.json': 'hasDeviceSoftware',
-                'hasVersion.json': 'hasVersion'
+                'Device.json': config_manager.get_collection_name('devices'),
+                'DeviceProxyIn.json': config_manager.get_collection_name('device_ins'), 
+                'DeviceProxyOut.json': config_manager.get_collection_name('device_outs'),
+                'Software.json': config_manager.get_collection_name('software'),
+                'SoftwareProxyIn.json': config_manager.get_collection_name('software_ins'),
+                'SoftwareProxyOut.json': config_manager.get_collection_name('software_outs'),
+                'Location.json': config_manager.get_collection_name('locations'),
+                'hasConnection.json': config_manager.get_collection_name('connections'),
+                'hasLocation.json': config_manager.get_collection_name('has_locations'), 
+                'hasDeviceSoftware.json': config_manager.get_collection_name('has_device_software'),
+                'hasVersion.json': config_manager.get_collection_name('versions')
             }
     
     def reset_database(self) -> bool:

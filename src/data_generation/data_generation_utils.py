@@ -37,7 +37,8 @@ class PropertyNameGenerator:
                 "operating_system": "operating_system",
                 "os_version": "os_version",
                 "host_name": "host_name",
-                "firewall_rules": "firewall_rules"
+                "firewall_rules": "firewall_rules",
+                "tenant_id": "tenant_id"
             }
         else:  # NamingConvention.CAMEL_CASE (default)
             return {
@@ -50,7 +51,8 @@ class PropertyNameGenerator:
                 "operating_system": "operatingSystem",
                 "os_version": "osVersion",
                 "host_name": "hostName",
-                "firewall_rules": "firewallRules"
+                "firewall_rules": "firewallRules",
+                "tenant_id": "tenantId"
             }
     
     @staticmethod
@@ -64,7 +66,8 @@ class PropertyNameGenerator:
                 "port_number": "port_number", 
                 "is_enabled": "is_enabled",
                 "startup_command": "startup_command",
-                "config_file_path": "config_file_path"
+                "config_file_path": "config_file_path",
+                "tenant_id": "tenant_id"
             }
         else:  # NamingConvention.CAMEL_CASE (default)
             return {
@@ -74,7 +77,8 @@ class PropertyNameGenerator:
                 "port_number": "portNumber",
                 "is_enabled": "isEnabled", 
                 "startup_command": "startupCommand",
-                "config_file_path": "configFilePath"
+                "config_file_path": "configFilePath",
+                "tenant_id": "tenantId"
             }
     
     @staticmethod
@@ -87,7 +91,8 @@ class PropertyNameGenerator:
                 "address": "address",
                 "city": "city",
                 "country": "country",
-                "coordinates": "coordinates"
+                "coordinates": "coordinates",
+                "tenant_id": "tenant_id"
             }
         else:  # NamingConvention.CAMEL_CASE (default)
             return {
@@ -96,7 +101,8 @@ class PropertyNameGenerator:
                 "address": "address", 
                 "city": "city",
                 "country": "country",
-                "coordinates": "coordinates"
+                "coordinates": "coordinates",
+                "tenant_id": "tenantId"
             }
 
 
@@ -108,24 +114,38 @@ class DocumentEnhancer:
                             tenant_config: TenantConfig,
                             timestamp: Optional[datetime.datetime] = None,
                             expired: Optional[int] = None,
-                            is_proxy: bool = False) -> Dict[str, Any]:
+                            is_proxy: bool = False,
+                            naming_convention: Optional[NamingConvention] = None) -> Dict[str, Any]:
         """
         Add temporal attributes and tenant key to any document.
         
         Consolidates the common pattern of adding temporal data and tenant isolation.
         For proxy collections (DeviceProxyIn/DeviceProxyOut), only adds tenant attributes.
         """
+        # Determine tenant property name
+        if naming_convention == NamingConvention.SNAKE_CASE:
+            tenant_prop = "tenant_id"
+        else:
+            tenant_prop = "tenantId"
+        
         if is_proxy:
             from src.config.tenant_config import TemporalDataModel
-            return TemporalDataModel.add_proxy_attributes(document, tenant_config)
+            enhanced_doc = document.copy()
+            if tenant_config is not None:
+                enhanced_doc[tenant_prop] = tenant_config.tenant_id
+            return enhanced_doc
         else:
             from src.config.tenant_config import TemporalDataModel
-            return TemporalDataModel.add_temporal_attributes(
+            enhanced_doc = TemporalDataModel.add_temporal_attributes(
                 document,
                 timestamp=timestamp,
                 expired=expired,
-                tenant_config=tenant_config
+                tenant_config=None  # We'll add tenant manually with correct property name
             )
+            # Add tenant with correct property name
+            if tenant_config is not None:
+                enhanced_doc[tenant_prop] = tenant_config.tenant_id
+            return enhanced_doc
     
     @staticmethod
     def create_edge_document(key: str,
