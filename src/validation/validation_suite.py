@@ -25,12 +25,18 @@ from src.database.database_utilities import QueryExecutor
 class TimeTravelValidationSuite:
     """Comprehensive validation suite for time travel refactoring."""
     
-    def __init__(self, show_queries: bool = False):
+    def __init__(self, show_queries: bool = False, naming_convention=None):
+        from src.config.config_management import NamingConvention, ConfigurationManager
+        
         creds = CredentialsManager.get_database_credentials()
         self.client = ArangoClient(hosts=creds.endpoint)
         self.database = None
         self.validation_results = {}
         self.show_queries = show_queries
+        
+        # Set up naming convention support
+        self.naming_convention = naming_convention or NamingConvention.CAMEL_CASE
+        self.config_manager = ConfigurationManager("development", self.naming_convention)
         
     def connect_to_database(self) -> bool:
         """Connect to the ArangoDB Oasis database."""
@@ -53,15 +59,22 @@ class TimeTravelValidationSuite:
         print(f"\n[ANALYSIS] Validating Collection Structure...")
         
         try:
-            # Expected collections after refactoring
+            # Get expected collections based on naming convention
             expected_vertex_collections = [
-                "Device", "DeviceProxyIn", "DeviceProxyOut",
-                "Software", "SoftwareProxyIn", "SoftwareProxyOut",
-                "Location"
+                self.config_manager.get_collection_name("devices"),
+                self.config_manager.get_collection_name("device_ins"),
+                self.config_manager.get_collection_name("device_outs"),
+                self.config_manager.get_collection_name("software"),
+                self.config_manager.get_collection_name("software_ins"),
+                self.config_manager.get_collection_name("software_outs"),
+                self.config_manager.get_collection_name("locations")
             ]
             
             expected_edge_collections = [
-                "hasConnection", "hasLocation", "hasDeviceSoftware", "hasVersion"
+                self.config_manager.get_collection_name("connections"),
+                self.config_manager.get_collection_name("has_locations"),
+                self.config_manager.get_collection_name("has_device_software"),
+                self.config_manager.get_collection_name("versions")
             ]
             
             # Validate vertex collections
@@ -194,17 +207,18 @@ class TimeTravelValidationSuite:
             print(f"\n   [SYSTEM] Testing system-wide time travel functionality...")
             
             # Test point-in-time query for devices (all tenants)
-            device_query = """
-            FOR device IN Device
+            device_collection = self.config_manager.get_collection_name("devices")
+            device_query = f"""
+            FOR device IN {device_collection}
               FILTER device.created <= @point_in_time AND device.expired > @point_in_time
               LIMIT 5
-              RETURN {
+              RETURN {{
                 key: device._key,
                 name: device.name,
                 type: device.type,
                 created: device.created,
                 expired: device.expired
-              }
+              }}
             """
             
             point_in_time = datetime.datetime.now().timestamp()
@@ -219,11 +233,12 @@ class TimeTravelValidationSuite:
                 print(f"      [DONE] Device: {result['name']} (created: {result['created']})")
             
             # Test point-in-time query for software (all tenants)
-            software_query = """
-            FOR software IN Software
+            software_collection = self.config_manager.get_collection_name("software")
+            software_query = f"""
+            FOR software IN {software_collection}
               FILTER software.created <= @point_in_time AND software.expired > @point_in_time
               LIMIT 5
-              RETURN {
+              RETURN {{
                 key: software._key,
                 name: software.name,
                 type: software.type,
@@ -231,7 +246,7 @@ class TimeTravelValidationSuite:
                 enabled: software.isEnabled,
                 created: software.created,
                 expired: software.expired
-              }
+              }}
             """
             
             software_results = self.execute_and_display_query(
@@ -248,8 +263,8 @@ class TimeTravelValidationSuite:
             print(f"\n   [TENANT] Testing tenant-specific time travel functionality...")
             
             # Get a sample tenant ID for isolated testing
-            tenant_query = """
-            FOR device IN Device
+            tenant_query = f"""
+            FOR device IN {device_collection}
               LIMIT 1
               RETURN REGEX_SPLIT(device._key, "_")[0]
             """
@@ -264,19 +279,19 @@ class TimeTravelValidationSuite:
                 print(f"   [TENANT] Testing isolation for tenant: {sample_tenant}")
                 
                 # Test tenant-specific device query
-                tenant_device_query = """
-                FOR device IN Device
+                tenant_device_query = f"""
+                FOR device IN {device_collection}
                   FILTER STARTS_WITH(device._key, @tenant_prefix)
                   FILTER device.created <= @point_in_time AND device.expired > @point_in_time
                   LIMIT 3
-                  RETURN {
+                  RETURN {{
                     key: device._key,
                     name: device.name,
                     type: device.type,
                     tenant: REGEX_SPLIT(device._key, "_")[0],
                     created: device.created,
                     expired: device.expired
-                  }
+                  }}
                 """
                 
                 tenant_device_results = self.execute_and_display_query(

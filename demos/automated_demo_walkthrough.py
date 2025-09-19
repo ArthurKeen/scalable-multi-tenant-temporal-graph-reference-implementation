@@ -636,7 +636,7 @@ class AutomatedDemoWalkthrough:
         # Run validation
         print("Starting validation suite...")
         try:
-            validator = TimeTravelValidationSuite(show_queries=True)
+            validator = TimeTravelValidationSuite(show_queries=True, naming_convention=self.naming_convention)
             if validator.connect_to_database():
                 # Run actual validations with query display
                 validation_results = {
