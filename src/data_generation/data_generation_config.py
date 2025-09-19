@@ -180,7 +180,7 @@ GENERATION_DEFAULTS: Dict[str, int] = {
     "num_config_changes": 5
 }
 
-# W3C OWL compliant collection and file naming conventions
+# camelCase collection and file naming conventions
 COLLECTION_NAMES: Dict[str, str] = {
     # Vertex collections (PascalCase, singular)
     "devices": "Device",

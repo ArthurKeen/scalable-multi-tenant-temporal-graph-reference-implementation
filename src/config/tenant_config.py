@@ -114,7 +114,7 @@ class TenantNamingConvention:
     def smartgraph_attribute(self) -> str:
         return "tenantId"
     
-    # W3C OWL compliant collection names (shared across all tenants)
+    # camelCase collection names (shared across all tenants)
     @property 
     def device_collection(self) -> str:
         return "Device"
@@ -135,7 +135,7 @@ class TenantNamingConvention:
     def software_collection(self) -> str:
         return "Software"
     
-    # Edge collection names (camelCase, singular - W3C OWL)
+    # Edge collection names (camelCase, singular)
     @property
     def has_connection_collection(self) -> str:
         return "hasConnection"

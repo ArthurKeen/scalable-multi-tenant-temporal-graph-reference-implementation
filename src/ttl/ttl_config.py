@@ -69,9 +69,9 @@ class TTLConfiguration:
         """Initialize default collections if not provided."""
         if self.vertex_collections is None:
             self.vertex_collections = [
-                "Device", "Software", "Location",
-                "DeviceProxyIn", "DeviceProxyOut", 
-                "SoftwareProxyIn", "SoftwareProxyOut"
+                "Device", "Software"
+                # NOTE: Location excluded - static reference data, not temporal
+                # NOTE: Proxy collections excluded - they don't contain temporal data or ttlExpireAt fields
             ]
         
         if self.edge_collections is None:

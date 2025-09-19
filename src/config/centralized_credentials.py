@@ -90,7 +90,7 @@ class CredentialsManager:
 class DatabaseConstants:
     """Database-related constants."""
     
-    # Collection names (W3C OWL naming conventions)
+    # Collection names (camelCase naming conventions)
     VERTEX_COLLECTIONS = {
         "device": "Device",
         "device_proxy_in": "DeviceProxyIn", 
@@ -123,7 +123,7 @@ class DatabaseConstants:
 
 
 def get_collection_name(logical_name: str) -> str:
-    """Get W3C OWL compliant collection name."""
+    """Get camelCase compliant collection name."""
     all_collections = {**DatabaseConstants.VERTEX_COLLECTIONS, **DatabaseConstants.EDGE_COLLECTIONS}
     return all_collections.get(logical_name, logical_name)
 

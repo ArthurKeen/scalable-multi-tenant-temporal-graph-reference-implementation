@@ -295,21 +295,7 @@ class OasisClusterManager:
                     "name": "idx_software_from_totype"
                 },
                 
-                # Hash indexes for quick key lookups (FR6.2)
-                {
-                    "collection": "Device",
-                    "type": "hash",
-                    "fields": ["_key"],
-                    "name": "idx_devices_key"
-                },
-                
-                # Temporal range indexes for time travel queries (FR6.3) - using created/expired
-                {
-                    "collection": "version",
-                    "type": "persistent",
-                    "fields": ["created", "expired"],
-                    "name": "idx_versions_temporal"
-                }
+                # NOTE: Redundant indexes removed - primary index handles _key, MDI handles temporal queries
             ]
             
             for index_config in index_configs:

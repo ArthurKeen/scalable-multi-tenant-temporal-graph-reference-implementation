@@ -170,19 +170,7 @@ class TimeTravelRefactoredDeployment:
             
             # Refactored index configurations
             index_configs = [
-                # Hash indexes for quick key lookups
-                {
-                    "collection": "Device",
-                    "type": "hash",
-                    "fields": ["_key"],
-                    "name": "idx_devices_key"
-                },
-                {
-                    "collection": "Software",
-                    "type": "hash", 
-                    "fields": ["_key"],
-                    "name": "idx_software_key"
-                },
+                # NOTE: _key fields already have automatic primary indexes, so no hash indexes needed
                 
                 # Vertex-centric indexes for graph performance (EXPANDED for Software)
                 {
@@ -230,26 +218,15 @@ class TimeTravelRefactoredDeployment:
                     "name": "idx_version_to_fromtype"
                 },
                 
-                # Temporal range indexes for time travel queries (EXPANDED)
-                {
-                    "collection": "Device",
-                    "type": "persistent",
-                    "fields": ["created", "expired"],
-                    "name": "idx_device_temporal"
-                },
-                {
-                    "collection": "Software",  # NEW
-                    "type": "persistent",
-                    "fields": ["created", "expired"],
-                    "name": "idx_software_temporal"
-                },
+                # NOTE: Redundant persistent temporal indexes removed - MDI-prefixed indexes below provide superior performance
                 
-                # Multi-dimensional indexes (MDI-prefix) for optimal temporal range queries
+                # Multi-dimensional indexes (MDI-prefixed) for optimal temporal range queries
                 {
                     "collection": "Device",
                     "type": "mdi",
                     "fields": ["created", "expired"],
                     "fieldValueTypes": "double",
+                    "prefixFields": ["created"],
                     "unique": False,
                     "sparse": False,
                     "name": "idx_device_mdi_temporal"
@@ -259,6 +236,7 @@ class TimeTravelRefactoredDeployment:
                     "type": "mdi",
                     "fields": ["created", "expired"],
                     "fieldValueTypes": "double",
+                    "prefixFields": ["created"],
                     "unique": False,
                     "sparse": False,
                     "name": "idx_software_mdi_temporal"
@@ -268,16 +246,12 @@ class TimeTravelRefactoredDeployment:
                     "type": "mdi",
                     "fields": ["created", "expired"],
                     "fieldValueTypes": "double",
+                    "prefixFields": ["created"],
                     "unique": False,
                     "sparse": False,
                     "name": "idx_version_mdi_temporal"
-                },
-                {
-                    "collection": "hasVersion",
-                    "type": "persistent",
-                    "fields": ["created", "expired"],
-                    "name": "idx_version_temporal"
                 }
+                # NOTE: Redundant idx_version_temporal removed - idx_version_mdi_temporal provides superior performance
             ]
             
             # Add TTL indexes for historical document aging
@@ -364,15 +338,17 @@ class TimeTravelRefactoredDeployment:
                     
                     elif index_config["type"] == "mdi":
                         collection.add_index({
-                            'type': 'mdi-prefix',
+                            'type': 'mdi-prefixed',
                             'fields': index_config["fields"],
                             'name': index_config.get("name"),
                             'fieldValueTypes': index_config.get("fieldValueTypes", "double"),
+                            'prefixFields': index_config.get("prefixFields", [index_config["fields"][0]]),  # Use first field as prefix
                             'unique': index_config.get("unique", False),
                             'sparse': index_config.get("sparse", False)
                         })
                         field_names = ", ".join(index_config["fields"])
-                        print(f"   [MDI] Created MDI-prefix multi-dimensional index: {index_config['name']} on [{field_names}]")
+                        prefix_fields = ", ".join(index_config.get("prefixFields", [index_config["fields"][0]]))
+                        print(f"   [MDI] Created MDI-prefixed multi-dimensional index: {index_config['name']} on [{field_names}] with prefix [{prefix_fields}]")
                     
                     else:
                         print(f"   [SKIP] Unknown index type: {index_config['type']}")
