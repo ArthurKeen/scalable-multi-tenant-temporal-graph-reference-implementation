@@ -85,16 +85,16 @@ A comprehensive reference implementation showcasing scalable multi-tenant tempor
 
 ### Naming Conventions
 
-The system supports two naming conventions:
+The system uses camelCase naming convention:
 
-#### Option 1: camelCase (Default)
+#### camelCase
 - **Vertex Collections** (PascalCase, singular): `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`
 - **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`
 - **Property Naming** (camelCase): `name`, `type`, `model`, `version`, `ipAddress`, `created`, `expired`
 
-#### Option 2: snake_case
+#### Planned future snake_case option
 - **Vertex Collections** (snake_case, singular): `device`, `device_proxy_in`, `device_proxy_out`, `location`, `software`
-- **Edge Collections** (snake_case, singular): `has_connection`, `has_location`, `has_device_software`, `has_version`
+- **Edge Collections** (screaming_snake_case, singular): `HAS_CONNECTION`, `HAS_LOCATION`, `HAS_DEVICE_SOFTWARE`, `HAS_VERSION`
 - **Property Naming** (snake_case): `name`, `type`, `model`, `version`, `ip_address`, `created`, `expired`
 
 Both conventions maintain **consistent structure** with Subject-Predicate-Object relationships.
