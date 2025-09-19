@@ -473,27 +473,37 @@ class TimeTravelRefactoredDeployment:
             for tenant_id, tenant_info in registry["tenants"].items():
                 graph_name = tenant_info["smartGraphName"]
                 
-                # Define refactored edge relationships
+                # Define refactored edge relationships (naming convention aware)
                 edge_definitions = [
                     {
-                        "edge_collection": "hasConnection",
-                        "from_vertex_collections": ["DeviceProxyOut"],
-                        "to_vertex_collections": ["DeviceProxyIn"]
+                        "edge_collection": self.config_manager.get_collection_name("connections"),
+                        "from_vertex_collections": [self.config_manager.get_collection_name("device_outs")],
+                        "to_vertex_collections": [self.config_manager.get_collection_name("device_ins")]
                     },
                     {
-                        "edge_collection": "hasLocation",
-                        "from_vertex_collections": ["DeviceProxyOut"],
-                        "to_vertex_collections": ["Location"]
+                        "edge_collection": self.config_manager.get_collection_name("has_locations"),
+                        "from_vertex_collections": [self.config_manager.get_collection_name("device_outs")],
+                        "to_vertex_collections": [self.config_manager.get_collection_name("locations")]
                     },
                     {
-                        "edge_collection": "hasDeviceSoftware",  # NEW - CORRECTED LOGIC
-                        "from_vertex_collections": ["DeviceProxyOut"],
-                        "to_vertex_collections": ["SoftwareProxyIn"]
+                        "edge_collection": self.config_manager.get_collection_name("has_device_software"),  # NEW - CORRECTED LOGIC
+                        "from_vertex_collections": [self.config_manager.get_collection_name("device_outs")],
+                        "to_vertex_collections": [self.config_manager.get_collection_name("software_ins")]
                     },
                     {
-                        "edge_collection": "hasVersion",  # UNIFIED - handles both Device and Software
-                        "from_vertex_collections": ["DeviceProxyIn", "Device", "SoftwareProxyIn", "Software"],
-                        "to_vertex_collections": ["Device", "DeviceProxyOut", "Software", "SoftwareProxyOut"]
+                        "edge_collection": self.config_manager.get_collection_name("versions"),  # UNIFIED - handles both Device and Software
+                        "from_vertex_collections": [
+                            self.config_manager.get_collection_name("device_ins"), 
+                            self.config_manager.get_collection_name("devices"), 
+                            self.config_manager.get_collection_name("software_ins"), 
+                            self.config_manager.get_collection_name("software")
+                        ],
+                        "to_vertex_collections": [
+                            self.config_manager.get_collection_name("devices"), 
+                            self.config_manager.get_collection_name("device_outs"), 
+                            self.config_manager.get_collection_name("software"), 
+                            self.config_manager.get_collection_name("software_outs")
+                        ]
                     }
                 ]
                 

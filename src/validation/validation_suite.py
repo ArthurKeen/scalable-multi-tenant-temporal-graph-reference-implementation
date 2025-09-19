@@ -206,20 +206,33 @@ class TimeTravelValidationSuite:
             # First, test system-wide queries (multi-tenant validation)
             print(f"\n   [SYSTEM] Testing system-wide time travel functionality...")
             
-            # Test point-in-time query for devices (all tenants)
-            device_collection = self.config_manager.get_collection_name("devices")
-            device_query = f"""
-            FOR device IN {device_collection}
-              FILTER device.created <= @point_in_time AND device.expired > @point_in_time
-              LIMIT 5
-              RETURN {{
-                key: device._key,
-                name: device.name,
-                type: device.type,
-                created: device.created,
-                expired: device.expired
-              }}
-            """
+            # Use separate hardwired queries for each naming convention (safer than dynamic generation)
+            if self.naming_convention.value == "camelCase":
+                device_query = """
+                FOR device IN Device
+                  FILTER device.created <= @point_in_time AND device.expired > @point_in_time
+                  LIMIT 5
+                  RETURN {
+                    key: device._key,
+                    name: device.name,
+                    type: device.type,
+                    created: device.created,
+                    expired: device.expired
+                  }
+                """
+            else:  # snake_case
+                device_query = """
+                FOR device IN device
+                  FILTER device.created <= @point_in_time AND device.expired > @point_in_time
+                  LIMIT 5
+                  RETURN {
+                    key: device._key,
+                    name: device.name,
+                    type: device.type,
+                    created: device.created,
+                    expired: device.expired
+                  }
+                """
             
             point_in_time = datetime.datetime.now().timestamp()
             device_results = self.execute_and_display_query(
@@ -232,22 +245,37 @@ class TimeTravelValidationSuite:
             for result in device_results[:3]:
                 print(f"      [DONE] Device: {result['name']} (created: {result['created']})")
             
-            # Test point-in-time query for software (all tenants)
-            software_collection = self.config_manager.get_collection_name("software")
-            software_query = f"""
-            FOR software IN {software_collection}
-              FILTER software.created <= @point_in_time AND software.expired > @point_in_time
-              LIMIT 5
-              RETURN {{
-                key: software._key,
-                name: software.name,
-                type: software.type,
-                port: software.portNumber,
-                enabled: software.isEnabled,
-                created: software.created,
-                expired: software.expired
-              }}
-            """
+            # Test point-in-time query for software (all tenants) - separate hardwired queries
+            if self.naming_convention.value == "camelCase":
+                software_query = """
+                FOR software IN Software
+                  FILTER software.created <= @point_in_time AND software.expired > @point_in_time
+                  LIMIT 5
+                  RETURN {
+                    key: software._key,
+                    name: software.name,
+                    type: software.type,
+                    port: software.portNumber,
+                    enabled: software.isEnabled,
+                    created: software.created,
+                    expired: software.expired
+                  }
+                """
+            else:  # snake_case
+                software_query = """
+                FOR software IN software
+                  FILTER software.created <= @point_in_time AND software.expired > @point_in_time
+                  LIMIT 5
+                  RETURN {
+                    key: software._key,
+                    name: software.name,
+                    type: software.type,
+                    port: software.port_number,
+                    enabled: software.is_enabled,
+                    created: software.created,
+                    expired: software.expired
+                  }
+                """
             
             software_results = self.execute_and_display_query(
                 software_query,
@@ -262,12 +290,19 @@ class TimeTravelValidationSuite:
             # Now test tenant-specific queries (SmartGraph isolation validation)
             print(f"\n   [TENANT] Testing tenant-specific time travel functionality...")
             
-            # Get a sample tenant ID for isolated testing
-            tenant_query = f"""
-            FOR device IN {device_collection}
-              LIMIT 1
-              RETURN REGEX_SPLIT(device._key, "_")[0]
-            """
+            # Get a sample tenant ID for isolated testing - separate hardwired queries
+            if self.naming_convention.value == "camelCase":
+                tenant_query = """
+                FOR device IN Device
+                  LIMIT 1
+                  RETURN REGEX_SPLIT(device._key, "_")[0]
+                """
+            else:  # snake_case
+                tenant_query = """
+                FOR device IN device
+                  LIMIT 1
+                  RETURN REGEX_SPLIT(device._key, "_")[0]
+                """
             
             tenant_results = self.execute_and_display_query(
                 tenant_query,
@@ -278,21 +313,37 @@ class TimeTravelValidationSuite:
                 sample_tenant = tenant_results[0]
                 print(f"   [TENANT] Testing isolation for tenant: {sample_tenant}")
                 
-                # Test tenant-specific device query
-                tenant_device_query = f"""
-                FOR device IN {device_collection}
-                  FILTER STARTS_WITH(device._key, @tenant_prefix)
-                  FILTER device.created <= @point_in_time AND device.expired > @point_in_time
-                  LIMIT 3
-                  RETURN {{
-                    key: device._key,
-                    name: device.name,
-                    type: device.type,
-                    tenant: REGEX_SPLIT(device._key, "_")[0],
-                    created: device.created,
-                    expired: device.expired
-                  }}
-                """
+                # Test tenant-specific device query - separate hardwired queries
+                if self.naming_convention.value == "camelCase":
+                    tenant_device_query = """
+                    FOR device IN Device
+                      FILTER STARTS_WITH(device._key, @tenant_prefix)
+                      FILTER device.created <= @point_in_time AND device.expired > @point_in_time
+                      LIMIT 3
+                      RETURN {
+                        key: device._key,
+                        name: device.name,
+                        type: device.type,
+                        tenant: REGEX_SPLIT(device._key, "_")[0],
+                        created: device.created,
+                        expired: device.expired
+                      }
+                    """
+                else:  # snake_case
+                    tenant_device_query = """
+                    FOR device IN device
+                      FILTER STARTS_WITH(device._key, @tenant_prefix)
+                      FILTER device.created <= @point_in_time AND device.expired > @point_in_time
+                      LIMIT 3
+                      RETURN {
+                        key: device._key,
+                        name: device.name,
+                        type: device.type,
+                        tenant: REGEX_SPLIT(device._key, "_")[0],
+                        created: device.created,
+                        expired: device.expired
+                      }
+                    """
                 
                 tenant_device_results = self.execute_and_display_query(
                     tenant_device_query,
@@ -331,13 +382,19 @@ class TimeTravelValidationSuite:
             # Validate that we have time travel data (unless database is completely empty)
             if len(device_results) == 0 and len(software_results) == 0:
                 # Check if database is completely empty (fresh start) vs deployment failure
-                total_docs_query = "RETURN LENGTH(Device) + LENGTH(Software) + LENGTH(Location)"
+                if self.naming_convention.value == "camelCase":
+                    total_docs_query = "RETURN LENGTH(Device) + LENGTH(Software) + LENGTH(Location)"
+                    device_coll, software_coll, location_coll = "Device", "Software", "Location"
+                else:  # snake_case
+                    total_docs_query = "RETURN LENGTH(device) + LENGTH(software) + LENGTH(location)"
+                    device_coll, software_coll, location_coll = "device", "software", "location"
+                
                 total_docs = self.execute_and_display_query(total_docs_query, "Total Documents Check")
                 if total_docs and total_docs[0] == 0:
                     # Check if collections even exist (deployment ran vs complete reset)
-                    if (self.database.has_collection("Device") and 
-                        self.database.has_collection("Software") and 
-                        self.database.has_collection("Location")):
+                    if (self.database.has_collection(device_coll) and 
+                        self.database.has_collection(software_coll) and 
+                        self.database.has_collection(location_coll)):
                         print(f"   [WARNING] Collections exist but are empty - possible deployment failure")
                         print(f"   [INFO] Continuing validation assuming pre-deployment state")
                         return True
@@ -448,34 +505,63 @@ class TimeTravelValidationSuite:
         print(f"\n[ANALYSIS] Validating Cross-Entity Relationships...")
         
         try:
-            # Test Device → Software relationship query (corrected logical flow)
-            cross_entity_query = """
-            WITH DeviceProxyOut, SoftwareProxyIn, hasDeviceSoftware, Device, Software, hasVersion
-            FOR hasDevSoft IN hasDeviceSoftware
-              LIMIT 3
-              
-              // Find the device that connects TO this DeviceProxyOut (Device → DeviceProxyOut)
-              FOR version_to_device_proxy IN hasVersion
-                FILTER version_to_device_proxy._to == hasDevSoft._from
-                FILTER version_to_device_proxy._fromType == "Device"
-                LET device = DOCUMENT(version_to_device_proxy._from)
-                
-                // Find the software that connects FROM this SoftwareProxyIn (SoftwareProxyIn → Software)
-                FOR version_to_software IN hasVersion
-                  FILTER version_to_software._from == hasDevSoft._to
-                  FILTER version_to_software._toType == "Software"
-                  LET software = DOCUMENT(version_to_software._to)
+            # Test Device → Software relationship query - separate hardwired queries
+            if self.naming_convention.value == "camelCase":
+                cross_entity_query = """
+                WITH DeviceProxyOut, SoftwareProxyIn, hasDeviceSoftware, Device, Software, hasVersion
+                FOR hasDevSoft IN hasDeviceSoftware
+                  LIMIT 3
                   
-                  RETURN {
-                    device: device.name,
-                    deviceKey: device._key,
-                    software: software.name,
-                    softwareKey: software._key,
-                    softwarePort: software.portNumber,
-                    softwareEnabled: software.isEnabled,
-                    flow: "Device → DeviceProxyOut → SoftwareProxyIn → Software"
-                  }
-            """
+                  // Find the device that connects TO this DeviceProxyOut (Device → DeviceProxyOut)
+                  FOR version_to_device_proxy IN hasVersion
+                    FILTER version_to_device_proxy._to == hasDevSoft._from
+                    FILTER version_to_device_proxy._fromType == "Device"
+                    LET device = DOCUMENT(version_to_device_proxy._from)
+                    
+                    // Find the software that connects FROM this SoftwareProxyIn (SoftwareProxyIn → Software)
+                    FOR version_to_software IN hasVersion
+                      FILTER version_to_software._from == hasDevSoft._to
+                      FILTER version_to_software._toType == "Software"
+                      LET software = DOCUMENT(version_to_software._to)
+                      
+                      RETURN {
+                        device: device.name,
+                        deviceKey: device._key,
+                        software: software.name,
+                        softwareKey: software._key,
+                        softwarePort: software.portNumber,
+                        softwareEnabled: software.isEnabled,
+                        flow: "Device → DeviceProxyOut → SoftwareProxyIn → Software"
+                      }
+                """
+            else:  # snake_case
+                cross_entity_query = """
+                WITH device_proxy_out, software_proxy_in, has_device_software, device, software, has_version
+                FOR hasDevSoft IN has_device_software
+                  LIMIT 3
+                  
+                  // Find the device that connects TO this device_proxy_out (device → device_proxy_out)
+                  FOR version_to_device_proxy IN has_version
+                    FILTER version_to_device_proxy._to == hasDevSoft._from
+                    FILTER version_to_device_proxy._fromType == "device"
+                    LET device_doc = DOCUMENT(version_to_device_proxy._from)
+                    
+                    // Find the software that connects FROM this software_proxy_in (software_proxy_in → software)
+                    FOR version_to_software IN has_version
+                      FILTER version_to_software._from == hasDevSoft._to
+                      FILTER version_to_software._toType == "software"
+                      LET software_doc = DOCUMENT(version_to_software._to)
+                      
+                      RETURN {
+                        device: device_doc.name,
+                        deviceKey: device_doc._key,
+                        software: software_doc.name,
+                        softwareKey: software_doc._key,
+                        softwarePort: software_doc.port_number,
+                        softwareEnabled: software_doc.is_enabled,
+                        flow: "device → device_proxy_out → software_proxy_in → software"
+                      }
+                """
             
             cross_results = self.execute_and_display_query(
                 cross_entity_query,
@@ -488,18 +574,20 @@ class TimeTravelValidationSuite:
                 print(f"         Flow: {result['flow']}")
             
             # Validate hasDeviceSoftware collection exists and has data
-            has_device_software = self.database.collection("hasDeviceSoftware")
+            device_software_coll = self.config_manager.get_collection_name("has_device_software")
+            has_device_software = self.database.collection(device_software_coll)
             relationship_count = has_device_software.count()
             print(f"   [DATA] hasDeviceSoftware edges: {relationship_count}")
             
             if relationship_count == 0:
                 # Check if database is empty (fresh start)
-                device_count = self.database.collection("Device").count()
+                device_coll = self.config_manager.get_collection_name("devices")
+                device_count = self.database.collection(device_coll).count()
                 if device_count == 0:
                     print(f"   [INFO] Database is empty - cross-entity validation skipped for fresh start")
                     return True
                 else:
-                    print(f"   [ERROR] No hasDeviceSoftware relationships found but database has devices")
+                    print(f"   [ERROR] No {device_software_coll} relationships found but database has devices")
                     return False
             
             # Sample relationship structure
@@ -580,17 +668,27 @@ class TimeTravelValidationSuite:
         print(f"\n[ANALYSIS] Validating Data Consistency...")
         
         try:
-            # Check Device proxy → Device consistency
-            device_proxy_count = self.database.collection("DeviceProxyIn").count()
-            device_version_edges = self.database.collection("hasVersion").find({"_fromType": "DeviceProxyIn"}).count()
+            # Check Device proxy → Device consistency (naming convention aware)
+            device_proxy_coll = self.config_manager.get_collection_name("device_ins")
+            software_proxy_coll = self.config_manager.get_collection_name("software_ins")
+            version_coll = self.config_manager.get_collection_name("versions")
             
-            print(f"   [DATA] DeviceProxyIn: {device_proxy_count}, Device version edges: {device_version_edges}")
+            device_proxy_count = self.database.collection(device_proxy_coll).count()
+            if self.naming_convention.value == "camelCase":
+                device_version_edges = self.database.collection(version_coll).find({"_fromType": "DeviceProxyIn"}).count()
+            else:  # snake_case
+                device_version_edges = self.database.collection(version_coll).find({"_fromType": "device_proxy_in"}).count()
+            
+            print(f"   [DATA] {device_proxy_coll}: {device_proxy_count}, Device version edges: {device_version_edges}")
             
             # Check Software proxy → Software consistency
-            software_proxy_count = self.database.collection("SoftwareProxyIn").count()
-            software_version_edges = self.database.collection("hasVersion").find({"_fromType": "SoftwareProxyIn"}).count()
+            software_proxy_count = self.database.collection(software_proxy_coll).count()
+            if self.naming_convention.value == "camelCase":
+                software_version_edges = self.database.collection(version_coll).find({"_fromType": "SoftwareProxyIn"}).count()
+            else:  # snake_case
+                software_version_edges = self.database.collection(version_coll).find({"_fromType": "software_proxy_in"}).count()
             
-            print(f"   [DATA] SoftwareProxyIn: {software_proxy_count}, Software version edges: {software_version_edges}")
+            print(f"   [DATA] {software_proxy_coll}: {software_proxy_count}, Software version edges: {software_version_edges}")
             
             # Validate each proxy has at least one version
             if device_proxy_count > 0 and device_version_edges == 0:
