@@ -67,18 +67,14 @@ class TTLConfiguration:
     
     def __post_init__(self):
         """Initialize default collections if not provided."""
+        # Note: TTL collections should be set explicitly by the calling code
+        # to match the chosen naming convention (camelCase vs snake_case).
+        # This prevents hardcoded collection names from forcing creation of unwanted collections.
         if self.vertex_collections is None:
-            self.vertex_collections = [
-                "Device", "Software", "Location",
-                "DeviceProxyIn", "DeviceProxyOut", 
-                "SoftwareProxyIn", "SoftwareProxyOut"
-            ]
+            self.vertex_collections = []
         
         if self.edge_collections is None:
-            self.edge_collections = [
-                "hasConnection", "hasLocation", 
-                "hasDeviceSoftware", "hasVersion"
-            ]
+            self.edge_collections = []
     
     def get_ttl_index_configs(self) -> List[TTLIndexConfiguration]:
         """Generate TTL index configurations for all collections."""
@@ -156,13 +152,22 @@ class TTLManager:
 def create_ttl_configuration(tenant_id: str, 
                            expire_after_days: int = DEFAULT_TTL_DAYS,
                            strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY) -> TTLConfiguration:
-    """Create a TTL configuration with sensible defaults."""
+    """Create a camelCase TTL configuration with sensible defaults."""
     config_params = TTLConfigurationFactory.create_ttl_config_params(tenant_id, expire_after_days)
     return TTLConfiguration(
         tenant_id=config_params["tenant_id"],
         strategy=strategy,
         default_expire_after_seconds=config_params["expire_after_seconds"],
-        preserve_current_configs=True
+        preserve_current_configs=True,
+        vertex_collections=[
+            "Device", "Software", "Location",
+            "DeviceProxyIn", "DeviceProxyOut",
+            "SoftwareProxyIn", "SoftwareProxyOut"
+        ],
+        edge_collections=[
+            "hasConnection", "hasLocation",
+            "hasDeviceSoftware", "hasVersion"
+        ]
     )
 
 
@@ -191,14 +196,23 @@ def create_snake_case_ttl_configuration(tenant_id: str,
 
 def create_demo_ttl_configuration(tenant_id: str,
                                  strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY) -> TTLConfiguration:
-    """Create TTL configuration with short TTL period for demonstration purposes."""
+    """Create camelCase TTL configuration with short TTL period for demonstration purposes."""
     from src.ttl.ttl_constants import TTLConstants
     
     return TTLConfiguration(
         tenant_id=tenant_id,
         strategy=strategy,
         default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 5 minutes
-        preserve_current_configs=True
+        preserve_current_configs=True,
+        vertex_collections=[
+            "Device", "Software", "Location",
+            "DeviceProxyIn", "DeviceProxyOut",
+            "SoftwareProxyIn", "SoftwareProxyOut"
+        ],
+        edge_collections=[
+            "hasConnection", "hasLocation",
+            "hasDeviceSoftware", "hasVersion"
+        ]
     )
 
 

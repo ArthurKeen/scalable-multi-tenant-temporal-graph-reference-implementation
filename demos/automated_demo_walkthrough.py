@@ -142,12 +142,23 @@ class AutomatedDemoWalkthrough:
                 collections_to_clear.add(snake_config.get_collection_name(logical_name))
             
             cleared_count = 0
+            dropped_count = 0
             for collection_name in sorted(collections_to_clear):
                 if self.database.has_collection(collection_name):
-                    collection = self.database.collection(collection_name)
-                    result = collection.truncate()
-                    cleared_count += 1
-                    print(f"   [CLEAR] {collection_name} collection cleared")
+                    try:
+                        # First truncate to clear data
+                        collection = self.database.collection(collection_name)
+                        collection.truncate()
+                        cleared_count += 1
+                        print(f"   [CLEAR] {collection_name} collection cleared")
+                        
+                        # For mixed collection issue, also drop empty collections from other naming conventions
+                        if collection.count() == 0:
+                            self.database.delete_collection(collection_name)
+                            dropped_count += 1
+                            print(f"   [DROP] {collection_name} empty collection dropped")
+                    except Exception as e:
+                        print(f"   [WARNING] Could not clear {collection_name}: {e}")
             
             # Clear any existing graphs
             graphs_to_remove = []
@@ -178,7 +189,7 @@ class AutomatedDemoWalkthrough:
                         shutil.rmtree(tenant_dir)
                         print(f"   [CLEAR] Tenant data directory {tenant_dir.name} removed")
             
-            print(f"[SUCCESS] Database reset complete - {cleared_count} collections cleared")
+            print(f"[SUCCESS] Database reset complete - {cleared_count} collections cleared, {dropped_count} empty collections dropped")
             return True
             
         except Exception as e:
