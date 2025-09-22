@@ -393,3 +393,50 @@ Each tenant will have a disjoint smartgraph with:
 - Configuration management system for tenant and cluster parameters
 - TTL index support in ArangoDB
 - Satellite graph capability for device taxonomy replication
+
+## 6. Alert Management System (NEW)
+
+### 6.1 Alert System Requirements
+
+The reference implementation will be enhanced with a comprehensive alert management system that demonstrates real-time monitoring capabilities integrated with the temporal graph architecture.
+
+#### Alert Sources
+- **Device-Generated Alerts**: Hardware failures, connectivity issues, performance thresholds, security events
+- **Software-Generated Alerts**: Application crashes, service unavailability, performance degradation, security vulnerabilities
+
+#### Alert Architecture
+- **Alert Collection**: Vertex collection containing alert events with TTL management
+- **hasAlert Relationships**: Edge collection connecting DeviceProxyOut/SoftwareProxyOut to Alert entities
+- **Event-Based Design**: Alerts are events (not configurations), no time travel versioning needed
+- **TTL Lifecycle**: Active alerts (no TTL) → Resolved alerts (TTL-enabled for automatic cleanup)
+
+#### Alert Data Model
+```
+Alert (Vertex Collection):
+- alertType: "hardware", "software", "security", "performance", "connectivity"
+- severity: "critical", "warning", "info"
+- status: "active", "acknowledged", "resolved"
+- message: Human-readable alert description
+- created/expired: Timestamp fields for lifecycle management
+- ttlExpireAt: TTL field for resolved alert cleanup (30 days)
+- metadata: JSON object with alert-specific data
+
+hasAlert (Edge Collection):
+- _from: DeviceProxyOut/_key OR SoftwareProxyOut/_key
+- _to: Alert/_key
+- created/expired: Timestamp fields for relationship lifecycle
+- ttlExpireAt: TTL field for relationship cleanup
+- relationshipType: "generated_by"
+```
+
+#### Alert Simulation Capabilities
+- **Real-time Alert Generation**: Simulate device and software alerts during demonstrations
+- **Alert Resolution Workflows**: Demonstrate alert lifecycle from active to resolved
+- **Correlation Queries**: Show related alerts across devices, software, and locations
+- **TTL Demonstration**: Watch resolved alerts age out automatically
+
+#### Integration Requirements
+- **Multi-Tenant Isolation**: Complete tenant separation for alert data
+- **Demo Integration**: Add alert section to automated walkthrough
+- **Performance Optimization**: Indexes on alertType, severity, tenantId, status
+- **Monitoring Queries**: Real-time alert status and trending capabilities

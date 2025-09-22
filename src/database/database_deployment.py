@@ -127,7 +127,8 @@ class TimeTravelRefactoredDeployment:
                 {"name": self.app_config.get_collection_name("locations"), "type": "vertex"},
                 {"name": self.app_config.get_collection_name("software"), "type": "vertex"},
                 {"name": self.app_config.get_collection_name("software_ins"), "type": "vertex"},
-                {"name": self.app_config.get_collection_name("software_outs"), "type": "vertex"}
+                {"name": self.app_config.get_collection_name("software_outs"), "type": "vertex"},
+                {"name": self.app_config.get_collection_name("alerts"), "type": "vertex"}
             ]
             
             # Edge collections using configuration
@@ -135,7 +136,8 @@ class TimeTravelRefactoredDeployment:
                 {"name": self.app_config.get_collection_name("connections"), "type": "edge"},
                 {"name": self.app_config.get_collection_name("has_locations"), "type": "edge"},
                 {"name": self.app_config.get_collection_name("has_device_software"), "type": "edge"},
-                {"name": self.app_config.get_collection_name("versions"), "type": "edge"}
+                {"name": self.app_config.get_collection_name("versions"), "type": "edge"},
+                {"name": self.app_config.get_collection_name("has_alerts"), "type": "edge"}
             ]
             
             # Create vertex collections

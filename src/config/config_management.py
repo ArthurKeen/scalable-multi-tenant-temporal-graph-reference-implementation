@@ -157,7 +157,8 @@ class CollectionConfiguration:
             "locations": "Location",
             "software": "Software",
             "software_ins": "SoftwareProxyIn",
-            "software_outs": "SoftwareProxyOut"
+            "software_outs": "SoftwareProxyOut",
+            "alerts": "Alert"
         }
         
         edge_collections = {
@@ -165,7 +166,8 @@ class CollectionConfiguration:
             "has_locations": "hasLocation", 
             "has_software": "hasSoftware",
             "has_device_software": "hasDeviceSoftware",
-            "versions": "hasVersion"
+            "versions": "hasVersion",
+            "has_alerts": "hasAlert"
         }
         
         file_mappings = {
@@ -176,11 +178,13 @@ class CollectionConfiguration:
             "Software": "Software.json",
             "SoftwareProxyIn": "SoftwareProxyIn.json",
             "SoftwareProxyOut": "SoftwareProxyOut.json",
+            "Alert": "Alert.json",
             "hasConnection": "hasConnection.json",
             "hasLocation": "hasLocation.json",
             "hasSoftware": "hasSoftware.json",
             "hasDeviceSoftware": "hasDeviceSoftware.json",
             "hasVersion": "hasVersion.json",
+            "hasAlert": "hasAlert.json",
             "smartgraph_config": "smartgraph_config.json"
         }
         
@@ -201,7 +205,8 @@ class CollectionConfiguration:
             "locations": "location",
             "software": "software",
             "software_ins": "software_proxy_in",
-            "software_outs": "software_proxy_out"
+            "software_outs": "software_proxy_out",
+            "alerts": "alert"
         }
         
         edge_collections = {
@@ -209,7 +214,8 @@ class CollectionConfiguration:
             "has_locations": "has_location", 
             "has_software": "has_software",
             "has_device_software": "has_device_software",
-            "versions": "has_version"
+            "versions": "has_version",
+            "has_alerts": "has_alert"
         }
         
         file_mappings = {
@@ -220,11 +226,13 @@ class CollectionConfiguration:
             "software": "software.json",
             "software_proxy_in": "software_proxy_in.json",
             "software_proxy_out": "software_proxy_out.json",
+            "alert": "alert.json",
             "has_connection": "has_connection.json",
             "has_location": "has_location.json",
             "has_software": "has_software.json",
             "has_device_software": "has_device_software.json",
             "has_version": "has_version.json",
+            "has_alert": "has_alert.json",
             "smartgraph_config": "smartgraph_config.json"
         }
         

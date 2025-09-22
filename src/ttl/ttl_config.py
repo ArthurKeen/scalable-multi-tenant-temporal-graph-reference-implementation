@@ -69,15 +69,16 @@ class TTLConfiguration:
         """Initialize default collections if not provided."""
         if self.vertex_collections is None:
             self.vertex_collections = [
-                "Device", "Software"
+                "Device", "Software", "Alert"
                 # NOTE: Location excluded - static reference data, not temporal
                 # NOTE: Proxy collections excluded - they don't contain temporal data or ttlExpireAt fields
+                # NOTE: Alert included - resolved alerts age out with TTL
             ]
         
         if self.edge_collections is None:
             self.edge_collections = [
                 "hasConnection", "hasLocation", 
-                "hasDeviceSoftware", "hasVersion"
+                "hasDeviceSoftware", "hasVersion", "hasAlert"
             ]
     
     def get_ttl_index_configs(self) -> List[TTLIndexConfiguration]:
