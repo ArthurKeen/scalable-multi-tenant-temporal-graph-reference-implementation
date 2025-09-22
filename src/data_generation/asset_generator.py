@@ -26,6 +26,7 @@ from src.data_generation.data_generation_utils import (
     ConfigurationManager as DataConfigManager, FileManager, LocationDataProvider,
     SmartGraphConfigGenerator
 )
+from src.data_generation.alert_generator import AlertGenerator
 
 
 class TimeTravelRefactoredGenerator:
@@ -687,11 +688,33 @@ def generate_time_travel_refactored_demo(tenant_count: int = 8, environment: str
     total_documents = 0
     
     # Generate data for each tenant
+    alert_generator = AlertGenerator(naming_convention)
+    
     for tenant_config in tenant_configs:
         generator = TimeTravelRefactoredGenerator(tenant_config, environment, naming_convention)
         tenant_result = generator.generate_all_data()
         results[tenant_config.tenant_id] = tenant_result
         total_documents += sum(tenant_result["data_counts"].values())
+        
+        # Generate alert data for this tenant
+        print(f"[ALERT] Generating alerts for tenant: {tenant_config.tenant_name}")
+        tenant_data_dir = app_config.paths.get_tenant_data_path(tenant_config.tenant_id)
+        
+        try:
+            alert_documents, hasAlert_edges = alert_generator.generate_alert_data(
+                tenant_data_dir, 
+                active_ratio=0.7  # 70% active alerts, 30% resolved
+            )
+            alert_generator.save_alert_data(tenant_data_dir, alert_documents, hasAlert_edges)
+            
+            # Update document counts
+            results[tenant_config.tenant_id]["data_counts"]["Alert"] = len(alert_documents)
+            results[tenant_config.tenant_id]["data_counts"]["hasAlert"] = len(hasAlert_edges)
+            total_documents += len(alert_documents) + len(hasAlert_edges)
+            
+        except Exception as e:
+            print(f"[WARNING] Failed to generate alerts for tenant {tenant_config.tenant_name}: {e}")
+            # Continue with other tenants even if alert generation fails
     
     # Generate centralized tenant registry
     tenant_registry = {
