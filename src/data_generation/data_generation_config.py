@@ -180,43 +180,11 @@ GENERATION_DEFAULTS: Dict[str, int] = {
     "num_config_changes": 5
 }
 
-# camelCase collection and file naming conventions
-COLLECTION_NAMES: Dict[str, str] = {
-    # Vertex collections (PascalCase, singular)
-    "devices": "Device",
-    "device_ins": "DeviceProxyIn", 
-    "device_outs": "DeviceProxyOut",
-    "locations": "Location",
-    "software": "Software",
-    "software_ins": "SoftwareProxyIn",  # New
-    "software_outs": "SoftwareProxyOut",  # New
-    # Edge collections (camelCase, singular)
-    "connections": "hasConnection",
-    "has_locations": "hasLocation", 
-    "has_software": "hasSoftware",
-    "has_device_software": "hasDeviceSoftware",  # New - clearer naming
-    "versions": "version"
-}
+# NOTE: Collection and file name definitions moved to src/config/config_management.py
+# This eliminates duplication and provides single source of truth.
+# Use ConfigurationManager.get_collection_name() and .get_file_name() instead.
 
-# File naming conventions (updated for proxy collections)
-FILE_NAMES: Dict[str, str] = {
-    "devices": "Device.json",
-    "device_ins": "DeviceProxyIn.json", 
-    "device_outs": "DeviceProxyOut.json",
-    "locations": "Location.json",
-    "software": "Software.json",
-    "software_ins": "SoftwareProxyIn.json",  # New
-    "software_outs": "SoftwareProxyOut.json",  # New
-    "connections": "hasConnection.json",
-    "has_locations": "hasLocation.json",
-    "has_software": "hasSoftware.json",
-    "has_device_software": "hasDeviceSoftware.json",  # New
-    "versions": "hasVersion.json",
-    "smartgraph_config": "smartgraph_config.json",
-    "tenant_registry": "tenant_registry.json"
-}
-
-# Shared database configuration
+# Shared database configuration - TODO: Move to environment variables
 DATABASE_CONFIG: Dict[str, str] = {
     "shared_database_name": "network_assets_demo",
     "satellite_graph_name": "satellite_device_taxonomy"

@@ -96,6 +96,43 @@ class SystemConstants:
     PERFORMANCE_THRESHOLD_SECONDS: float = 1.0
 
 
+@dataclass 
+class DatabaseConstants:
+    """Database configuration constants."""
+    
+    # Default database name (should be overridden by environment variable)
+    DEFAULT_DATABASE_NAME: str = "network_assets_demo"
+    
+    # Graph names
+    MAIN_GRAPH_NAME: str = "network_assets_graph"
+    SATELLITE_GRAPH_NAME: str = "satellite_device_taxonomy"
+    
+    # Index naming patterns
+    TTL_INDEX_PREFIX: str = "ttl_"
+    MDI_INDEX_PREFIX: str = "mdi_"
+    HASH_INDEX_PREFIX: str = "idx_"
+
+
+@dataclass
+class AlertConstants:
+    """Alert system constants."""
+    
+    # Keywords to filter from alert names
+    FILTERED_NAME_KEYWORDS: List[str] = None
+    
+    # Fallback names
+    DEVICE_NAME_FALLBACK: str = "Device"
+    SOFTWARE_NAME_FALLBACK: str = "Software"
+    
+    # Alert name format
+    ALERT_NAME_FORMAT: str = "{severity} {alert_type}: {source_name}"
+    
+    def __post_init__(self):
+        """Initialize filtered keywords list."""
+        if self.FILTERED_NAME_KEYWORDS is None:
+            self.FILTERED_NAME_KEYWORDS = ['proxy', 'out', 'in']
+
+
 @dataclass
 class LocationConstants:
     """Location and geographic constants."""

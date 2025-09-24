@@ -28,6 +28,7 @@ from src.config.config_management import get_config, NamingConvention
 from src.config.centralized_credentials import CredentialsManager
 from src.ttl.ttl_constants import TTLConstants, NEVER_EXPIRES
 from src.data_generation.alert_generator import AlertType, AlertSeverity, AlertStatus, AlertTemplate
+from src.utils.alert_naming import create_alert_name
 
 
 class AlertSimulator:
@@ -67,16 +68,14 @@ class AlertSimulator:
         
         created_time = int(datetime.now().timestamp())
         
-        # Extract meaningful device identifier
-        proxy_name = device_proxy.get('name', 'Unknown device')
-        name_parts = proxy_name.split()
-        meaningful_parts = [part for part in name_parts if part.lower() not in ['proxy', 'out', 'in']]
-        device_name = meaningful_parts[-1] if meaningful_parts else 'Device'
+        # Generate alert name using centralized utility
+        device_name = device_proxy.get('name', 'Unknown device')
+        alert_name = create_alert_name("critical", "hardware", device_name, "device")
         alert_doc = {
             "_key": alert_key,
             "_id": alert_id,
             "tenantId": tenant_id,
-            "name": f"Critical Hardware: {device_name}",
+            "name": alert_name,
             "alertType": AlertType.HARDWARE.value,
             "severity": AlertSeverity.CRITICAL.value,
             "status": AlertStatus.ACTIVE.value,
@@ -130,16 +129,14 @@ class AlertSimulator:
         
         created_time = int(datetime.now().timestamp())
         
-        # Extract meaningful software identifier
-        proxy_name = software_proxy.get('name', 'Unknown software')
-        name_parts = proxy_name.split()
-        meaningful_parts = [part for part in name_parts if part.lower() not in ['proxy', 'out', 'in']]
-        software_name = meaningful_parts[-1] if meaningful_parts else 'Software'
+        # Generate alert name using centralized utility
+        software_name = software_proxy.get('name', 'Unknown software')
+        alert_name = create_alert_name("warning", "performance", software_name, "software")
         alert_doc = {
             "_key": alert_key,
             "_id": alert_id,
             "tenantId": tenant_id,
-            "name": f"Warning Performance: {software_name}",
+            "name": alert_name,
             "alertType": AlertType.PERFORMANCE.value,
             "severity": AlertSeverity.WARNING.value,
             "status": AlertStatus.ACTIVE.value,
@@ -193,16 +190,14 @@ class AlertSimulator:
         
         created_time = int(datetime.now().timestamp())
         
-        # Extract meaningful device identifier  
-        proxy_name = device_proxy.get('name', 'Unknown device')
-        name_parts = proxy_name.split()
-        meaningful_parts = [part for part in name_parts if part.lower() not in ['proxy', 'out', 'in']]
-        device_name = meaningful_parts[-1] if meaningful_parts else 'Device'
+        # Generate alert name using centralized utility
+        device_name = device_proxy.get('name', 'Unknown device')
+        alert_name = create_alert_name("critical", "connectivity", device_name, "device")
         alert_doc = {
             "_key": alert_key,
             "_id": alert_id,
             "tenantId": tenant_id,
-            "name": f"Critical Connectivity: {device_name}",
+            "name": alert_name,
             "alertType": AlertType.CONNECTIVITY.value,
             "severity": AlertSeverity.CRITICAL.value,
             "status": AlertStatus.ACTIVE.value,
