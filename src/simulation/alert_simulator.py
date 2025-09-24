@@ -245,21 +245,25 @@ class AlertSimulator:
         else:
             ttl_expire_at = resolved_time + (30 * 24 * 60 * 60)  # 30 days
         
-        # Update alert document
-        updated_alert = self.alerts_collection.update({"_key": alert_key}, {
+        # Update alert document using replace (more reliable than update for this collection)
+        alert_doc = self.alerts_collection.get(alert_key)
+        alert_doc.update({
             "status": AlertStatus.RESOLVED.value,
             "expired": resolved_time,
             "ttlExpireAt": ttl_expire_at,
             "resolution_notes": "Resolved via simulation"
         })
+        updated_alert = self.alerts_collection.replace(alert_doc)
         
-        # Update hasAlert relationship
+        # Update hasAlert relationship using replace method
         hasAlert_edges = list(self.hasAlert_collection.find({"_to": alert["_id"]}))
         for edge in hasAlert_edges:
-            self.hasAlert_collection.update({"_key": edge["_key"]}, {
+            edge_doc = self.hasAlert_collection.get(edge["_key"])
+            edge_doc.update({
                 "expired": resolved_time,
                 "ttlExpireAt": ttl_expire_at
             })
+            self.hasAlert_collection.replace(edge_doc)
         
         return {
             "alert_key": alert_key,
