@@ -19,6 +19,7 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 from enum import Enum
 from src.ttl.ttl_constants import NEVER_EXPIRES
+from src.config.generation_constants import DatabaseConstants
 
 
 class TenantStatus(Enum):
@@ -60,7 +61,7 @@ class TenantConfig:
     temporal_attribute_name: str = "expired"  # TTL applies to expired field
     
     # Database and graph configuration (FR3.1, FR3.7)
-    database_name: str = "network_assets_demo"  # Shared database for all tenants
+    database_name: str = DatabaseConstants().DEFAULT_DATABASE_NAME  # Shared database for all tenants
     smartgraph_attribute: Optional[str] = None  # If None, auto-generated
     
     # Metadata
@@ -104,7 +105,7 @@ class TenantNamingConvention:
     # Database and graph names (FR3.1, FR3.7)
     @property
     def database_name(self) -> str:
-        return "network_assets_demo"  # Shared database for all tenants using disjoint smartgraphs
+        return DatabaseConstants().DEFAULT_DATABASE_NAME  # Shared database for all tenants using disjoint smartgraphs
     
     @property
     def smartgraph_name(self) -> str:

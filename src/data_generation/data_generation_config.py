@@ -184,8 +184,11 @@ GENERATION_DEFAULTS: Dict[str, int] = {
 # This eliminates duplication and provides single source of truth.
 # Use ConfigurationManager.get_collection_name() and .get_file_name() instead.
 
-# Shared database configuration - TODO: Move to environment variables
+# Shared database configuration - Uses constants to eliminate hardcoding
+from src.config.generation_constants import DatabaseConstants
+
+_db_constants = DatabaseConstants()
 DATABASE_CONFIG: Dict[str, str] = {
-    "shared_database_name": "network_assets_demo",
-    "satellite_graph_name": "satellite_device_taxonomy"
+    "shared_database_name": _db_constants.DEFAULT_DATABASE_NAME,
+    "satellite_graph_name": _db_constants.SATELLITE_GRAPH_NAME
 }
