@@ -413,6 +413,7 @@ The reference implementation will be enhanced with a comprehensive alert managem
 #### Alert Data Model
 ```
 Alert (Vertex Collection):
+- name: Concise label for graph visualization (e.g., "Critical Hardware: Router")
 - alertType: "hardware", "software", "security", "performance", "connectivity"
 - severity: "critical", "warning", "info"
 - status: "active", "acknowledged", "resolved"
@@ -420,6 +421,7 @@ Alert (Vertex Collection):
 - created/expired: Timestamp fields for lifecycle management
 - ttlExpireAt: TTL field for resolved alert cleanup (30 days)
 - metadata: JSON object with alert-specific data
+- tenantId: Multi-tenant isolation identifier
 
 hasAlert (Edge Collection):
 - _from: DeviceProxyOut/_key OR SoftwareProxyOut/_key
@@ -427,6 +429,7 @@ hasAlert (Edge Collection):
 - created/expired: Timestamp fields for relationship lifecycle
 - ttlExpireAt: TTL field for relationship cleanup
 - relationshipType: "generated_by"
+- tenantId: Multi-tenant isolation identifier
 ```
 
 #### Alert Simulation Capabilities
@@ -440,3 +443,14 @@ hasAlert (Edge Collection):
 - **Demo Integration**: Add alert section to automated walkthrough
 - **Performance Optimization**: Indexes on alertType, severity, tenantId, status
 - **Monitoring Queries**: Real-time alert status and trending capabilities
+- **Graph Visualization**: hasAlert edge definition integrated into SmartGraph for complete visualization
+- **Name-based Discovery**: Concise alert names enable rapid identification in graph visualizer
+
+#### Implementation Status: ✅ COMPLETE
+- **Alert Generation**: Realistic alerts from DeviceProxyOut and SoftwareProxyOut ✅
+- **Alert Resolution**: Working lifecycle management with TTL activation ✅
+- **Graph Integration**: hasAlert edges fully visualizable in ArangoDB Graph Visualizer ✅
+- **Multi-tenant Support**: Complete tenant isolation for all alert data ✅
+- **TTL Management**: Resolved alerts automatically age out (demo: 5min, production: 30 days) ✅
+- **Real-time Simulation**: On-demand alert generation during demonstrations ✅
+- **Name Properties**: Enhanced visualization with meaningful alert names ✅
