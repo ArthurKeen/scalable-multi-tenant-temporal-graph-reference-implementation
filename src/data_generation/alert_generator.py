@@ -239,10 +239,23 @@ class AlertGenerator:
         metadata = self._randomize_metadata(template.metadata_template, source_type)
         message = template.message_template.format(**metadata)
         
+        # Generate concise name for visualization
+        proxy_name = proxy.get('name', 'Unknown')
+        # Extract meaningful device/software identifier (avoid "proxy", "out", "in")
+        name_parts = proxy_name.split()
+        meaningful_parts = [part for part in name_parts if part.lower() not in ['proxy', 'out', 'in']]
+        if meaningful_parts:
+            # Take last meaningful part or device type
+            source_name = meaningful_parts[-1]
+        else:
+            source_name = 'Device'
+        alert_name = f"{template.severity.value.title()} {template.alert_type.value.title()}: {source_name}"
+        
         alert_doc = {
             "_key": alert_key,
             "_id": alert_id,
             "tenantId": proxy["tenantId"],
+            "name": alert_name,
             "alertType": template.alert_type.value,
             "severity": template.severity.value,
             "status": AlertStatus.ACTIVE.value if is_active else AlertStatus.RESOLVED.value,

@@ -67,10 +67,16 @@ class AlertSimulator:
         
         created_time = int(datetime.now().timestamp())
         
+        # Extract meaningful device identifier
+        proxy_name = device_proxy.get('name', 'Unknown device')
+        name_parts = proxy_name.split()
+        meaningful_parts = [part for part in name_parts if part.lower() not in ['proxy', 'out', 'in']]
+        device_name = meaningful_parts[-1] if meaningful_parts else 'Device'
         alert_doc = {
             "_key": alert_key,
             "_id": alert_id,
             "tenantId": tenant_id,
+            "name": f"Critical Hardware: {device_name}",
             "alertType": AlertType.HARDWARE.value,
             "severity": AlertSeverity.CRITICAL.value,
             "status": AlertStatus.ACTIVE.value,
@@ -124,10 +130,16 @@ class AlertSimulator:
         
         created_time = int(datetime.now().timestamp())
         
+        # Extract meaningful software identifier
+        proxy_name = software_proxy.get('name', 'Unknown software')
+        name_parts = proxy_name.split()
+        meaningful_parts = [part for part in name_parts if part.lower() not in ['proxy', 'out', 'in']]
+        software_name = meaningful_parts[-1] if meaningful_parts else 'Software'
         alert_doc = {
             "_key": alert_key,
             "_id": alert_id,
             "tenantId": tenant_id,
+            "name": f"Warning Performance: {software_name}",
             "alertType": AlertType.PERFORMANCE.value,
             "severity": AlertSeverity.WARNING.value,
             "status": AlertStatus.ACTIVE.value,
@@ -181,10 +193,16 @@ class AlertSimulator:
         
         created_time = int(datetime.now().timestamp())
         
+        # Extract meaningful device identifier  
+        proxy_name = device_proxy.get('name', 'Unknown device')
+        name_parts = proxy_name.split()
+        meaningful_parts = [part for part in name_parts if part.lower() not in ['proxy', 'out', 'in']]
+        device_name = meaningful_parts[-1] if meaningful_parts else 'Device'
         alert_doc = {
             "_key": alert_key,
             "_id": alert_id,
             "tenantId": tenant_id,
+            "name": f"Critical Connectivity: {device_name}",
             "alertType": AlertType.CONNECTIVITY.value,
             "severity": AlertSeverity.CRITICAL.value,
             "status": AlertStatus.ACTIVE.value,
