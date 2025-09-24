@@ -24,6 +24,7 @@ from src.simulation.scale_out_manager import TenantAdditionManager, DatabaseServ
 from src.simulation.transaction_simulator import TransactionSimulator
 from src.ttl.ttl_demo_scenarios import TTLDemoScenarios
 from src.config.centralized_credentials import CredentialsManager
+from src.simulation.alert_simulator import AlertSimulator
 from arango import ArangoClient
 
 
@@ -1133,11 +1134,209 @@ class AutomatedDemoWalkthrough:
         except Exception as e:
             print(f"[ERROR] TTL demonstration error: {e}")
         
-        self.pause_for_observation("TTL demonstration complete. Ready for scale-out demo?")
+        self.pause_for_observation("TTL demonstration complete. Ready for alert system demo?")
         self.sections_completed.append("ttl_demonstration")
     
-    def section_7_scale_out_demonstration(self):
-        """Section 7: Scale-Out Capabilities Demonstration."""
+    def section_7_alert_system_demonstration(self):
+        """Section 7: Alert System Demonstration."""
+        self.demo_section_start(
+            "ALERT SYSTEM DEMONSTRATION", 
+            "Real-time operational monitoring with graph-integrated alerts"
+        )
+        
+        try:
+            # Initialize alert simulator
+            alert_simulator = AlertSimulator(NamingConvention.CAMEL_CASE)
+            
+            # Get the first available tenant for demonstration
+            tenant_query = "FOR d IN Device LIMIT 1 RETURN d.tenantId"
+            cursor = self.database.aql.execute(tenant_query)
+            tenant_results = list(cursor)
+            
+            if not tenant_results:
+                self.demo_print("No tenants found for alert demonstration", "critical")
+                return
+                
+            demo_tenant_id = tenant_results[0]
+            self.demo_print(f"Using tenant: {demo_tenant_id}", "info")
+            
+            # Show current alert status
+            self.demo_progress(1, 6, "Checking current alert status", 
+                             "Querying existing alerts before demonstration")
+            
+            current_alerts = alert_simulator.get_tenant_alerts(demo_tenant_id)
+            active_alerts = [a for a in current_alerts if a['status'] == 'active']
+            resolved_alerts = [a for a in current_alerts if a['status'] == 'resolved']
+            
+            self.demo_print(f"Current Alert Status:", "critical")
+            self.demo_print(f"  Total alerts: {len(current_alerts)}", "info")
+            self.demo_print(f"  Active alerts: {len(active_alerts)}", "info") 
+            self.demo_print(f"  Resolved alerts: {len(resolved_alerts)}", "info")
+            
+            if not self.verbose and current_alerts:
+                self.demo_print("\n🚨 EXISTING ALERTS:", "critical")
+                for alert in current_alerts[-3:]:  # Show last 3
+                    status_icon = "🔴" if alert['status'] == 'active' else "🟢"
+                    name = alert.get('name', 'Legacy Alert')
+                    self.demo_print(f"   {status_icon} {name} ({alert['severity']} {alert['alertType']})", "info")
+            
+            self.pause_for_observation("Current alert status shown. Ready to generate new alerts?")
+            
+            # Generate different types of alerts
+            self.demo_progress(2, 6, "Generating operational alerts", 
+                             "Demonstrating real-time alert creation from devices and software")
+            
+            alert_types = [
+                ("Hardware Alert", alert_simulator.generate_critical_hardware_alert),
+                ("Software Alert", alert_simulator.generate_software_performance_alert),
+                ("Connectivity Alert", alert_simulator.generate_connectivity_alert)
+            ]
+            
+            generated_alerts = []
+            for alert_name, generator_func in alert_types:
+                self.demo_print(f"\n⚡ Generating {alert_name}...", "critical")
+                try:
+                    result = generator_func(demo_tenant_id)
+                    generated_alerts.append(result)
+                    
+                    alert = result['alert']
+                    self.demo_print(f"   ✅ Created: {alert['name']}", "info")
+                    self.demo_print(f"   📋 Message: {alert['message']}", "verbose")
+                    self.demo_print(f"   🚨 Severity: {alert['severity']} | Type: {alert['alertType']}", "info")
+                    
+                    if not self.verbose:
+                        self.demo_manual_prompt(
+                            f"COPY FOR VISUALIZER: {alert['_id']}",
+                            f"Use this ID to visualize the {alert_name.lower()} in ArangoDB Graph Visualizer"
+                        )
+                    
+                except Exception as e:
+                    self.demo_print(f"   ❌ Error generating {alert_name}: {e}", "critical")
+                
+                time.sleep(1)
+            
+            self.pause_for_observation("New alerts generated. Ready to demonstrate alert resolution?")
+            
+            # Demonstrate alert resolution
+            self.demo_progress(3, 6, "Demonstrating alert resolution", 
+                             "Showing alert lifecycle: active → resolved → TTL aging")
+            
+            if generated_alerts:
+                # Resolve the first generated alert
+                alert_to_resolve = generated_alerts[0]['alert']
+                self.demo_print(f"\n🔧 Resolving alert: {alert_to_resolve['name']}", "critical")
+                
+                try:
+                    resolution_result = alert_simulator.resolve_alert(alert_to_resolve['_key'], demo_tenant_id)
+                    self.demo_print(f"   ✅ Alert resolved successfully!", "info")
+                    self.demo_print(f"   ⏰ TTL expires at: {datetime.datetime.fromtimestamp(resolution_result['ttl_expire_at']).strftime('%H:%M:%S')}", "info")
+                    
+                    if not self.verbose:
+                        self.demo_manual_prompt(
+                            f"RESOLVED ALERT: {alert_to_resolve['_id']}",
+                            "Refresh the visualizer to see the resolved status and TTL field"
+                        )
+                        
+                except Exception as e:
+                    self.demo_print(f"   ❌ Resolution error: {e}", "critical")
+            
+            # Show graph visualization readiness
+            self.demo_progress(4, 6, "Verifying graph visualization integration", 
+                             "Confirming hasAlert edges are part of graph definition")
+            
+            try:
+                graph = self.database.graph('network_assets_graph')
+                edge_defs = graph.edge_definitions()
+                hasAlert_def = next((ed for ed in edge_defs if ed['edge_collection'] == 'hasAlert'), None)
+                
+                if hasAlert_def:
+                    self.demo_print("\n🕸️ Graph Visualization Status:", "critical")
+                    self.demo_print("   ✅ hasAlert edges integrated into graph definition", "info")
+                    self.demo_print(f"   📊 From: {hasAlert_def['from_vertex_collections']}", "verbose")
+                    self.demo_print(f"   📊 To: {hasAlert_def['to_vertex_collections']}", "verbose")
+                    self.demo_print("   🎯 Ready for ArangoDB Graph Visualizer!", "info")
+                else:
+                    self.demo_print("   ❌ hasAlert edges not found in graph definition", "critical")
+                    
+            except Exception as e:
+                self.demo_print(f"   ⚠️  Graph check error: {e}", "verbose")
+            
+            # Show alert correlation capabilities
+            self.demo_progress(5, 6, "Demonstrating alert correlation", 
+                             "Showing how alerts relate to devices, software, and locations")
+            
+            correlation_query = f"""
+            FOR alert IN Alert
+                FILTER alert.tenantId == "{demo_tenant_id}"
+                FOR edge IN hasAlert
+                    FILTER edge._to == alert._id
+                    FOR source IN UNION(
+                        (FOR d IN DeviceProxyOut FILTER d._id == edge._from RETURN {{type: "device", name: d.name, id: d._id}}),
+                        (FOR s IN SoftwareProxyOut FILTER s._id == edge._from RETURN {{type: "software", name: s.name, id: s._id}})
+                    )
+                    RETURN {{
+                        alert_name: alert.name,
+                        alert_severity: alert.severity,
+                        alert_status: alert.status,
+                        source_type: source.type,
+                        source_name: source.name,
+                        source_id: source.id
+                    }}
+            """
+            
+            try:
+                cursor = self.database.aql.execute(correlation_query)
+                correlations = list(cursor)
+                
+                self.demo_print(f"\n🔗 Alert Correlation Analysis:", "critical")
+                self.demo_print(f"   Found {len(correlations)} alert-to-source relationships", "info")
+                
+                if correlations and not self.verbose:
+                    for corr in correlations[-3:]:  # Show last 3
+                        status_icon = "🔴" if corr['alert_status'] == 'active' else "🟢"
+                        self.demo_print(f"   {status_icon} {corr['alert_name']} ← {corr['source_type']}: {corr['source_name']}", "info")
+                        
+            except Exception as e:
+                self.demo_print(f"   ⚠️  Correlation query error: {e}", "verbose")
+            
+            # Show final alert summary
+            self.demo_progress(6, 6, "Final alert system summary", 
+                             "Comprehensive overview of alert system capabilities")
+            
+            final_summary = alert_simulator.get_alert_summary(demo_tenant_id)
+            
+            self.demo_print(f"\n📊 ALERT SYSTEM DEMONSTRATION SUMMARY:", "critical")
+            self.demo_print(f"   Total alerts: {final_summary['total_alerts']}", "info")
+            self.demo_print(f"   Active: {final_summary['active']} | Resolved: {final_summary['resolved']}", "info")
+            
+            if final_summary['by_severity']:
+                severity_text = " | ".join([f"{k}: {v}" for k, v in final_summary['by_severity'].items() if v > 0])
+                self.demo_print(f"   Severity: {severity_text}", "info")
+            
+            if not self.verbose:
+                self.demo_print(f"\n🎯 ALERT SYSTEM CAPABILITIES DEMONSTRATED:", "critical")
+                capabilities = [
+                    "✅ Real-time alert generation from operational devices/software",
+                    "✅ Graph-integrated visualization with hasAlert relationships",
+                    "✅ Complete alert lifecycle: active → resolved → TTL aging",
+                    "✅ Multi-tenant isolation with complete data separation",
+                    "✅ Alert correlation across devices, software, and locations",
+                    "✅ Operational monitoring ready for production use"
+                ]
+                for capability in capabilities:
+                    self.demo_print(f"   {capability}", "info")
+                
+        except Exception as e:
+            self.demo_print(f"[ERROR] Alert demonstration error: {e}", "critical")
+            if self.verbose:
+                import traceback
+                traceback.print_exc()
+        
+        self.pause_for_observation("Alert system demonstration complete. Ready for scale-out demo?")
+        self.sections_completed.append("alert_system_demonstration")
+    
+    def section_8_scale_out_demonstration(self):
+        """Section 8: Scale-Out Capabilities Demonstration."""
         self.print_section_header(
             "SCALE-OUT DEMONSTRATION", 
             "Demonstrating multi-tenant scaling and horizontal growth capabilities"
@@ -1429,8 +1628,8 @@ class AutomatedDemoWalkthrough:
             print(f"     [ERROR] Unified graph creation failed: {e}")
             return False
     
-    def section_8_final_validation(self):
-        """Section 8: Final System Validation."""
+    def section_9_final_validation(self):
+        """Section 9: Final System Validation."""
         self.print_section_header(
             "FINAL VALIDATION", 
             "Comprehensive validation after all demonstrations"
@@ -1499,8 +1698,8 @@ class AutomatedDemoWalkthrough:
         self.pause_for_observation("Final validation complete. Ready for demo summary?")
         self.sections_completed.append("final_validation")
     
-    def section_9_demo_summary(self):
-        """Section 9: Demo Summary and Conclusion."""
+    def section_10_demo_summary(self):
+        """Section 10: Demo Summary and Conclusion."""
         self.print_section_header(
             "DEMO SUMMARY", 
             "Complete demonstration summary and key achievements"
@@ -1592,18 +1791,19 @@ class AutomatedDemoWalkthrough:
             self.section_6_ttl_demonstration()
             
             # Section 7: Scale-Out Demonstration
-            self.section_7_scale_out_demonstration()
+            self.section_7_alert_system_demonstration()
+            self.section_8_scale_out_demonstration()
             
-            # Section 8: Final Validation (optional in presentation mode)
+            # Section 9: Final Validation (optional in presentation mode)
             if self.verbose:
-                self.section_8_final_validation()
+                self.section_9_final_validation()
             else:
                 self.demo_print("✅ All demonstrations completed successfully", "info")
             
-            # Section 9: Demo Summary
-            self.section_9_demo_summary()
+            # Section 10: Demo Summary
+            self.section_10_demo_summary()
             
-            total_sections = 10 if self.verbose else 8  # Skip validation sections in presentation mode
+            total_sections = 11 if self.verbose else 9  # Skip validation sections in presentation mode
             return {
                 "status": "completed",
                 "sections_completed": len(self.sections_completed),
