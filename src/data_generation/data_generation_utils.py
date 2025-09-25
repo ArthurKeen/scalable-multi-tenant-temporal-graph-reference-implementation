@@ -15,7 +15,7 @@ from src.config.tenant_config import TenantConfig, TenantNamingConvention, Tempo
 from src.data_generation.data_generation_config import (
     DeviceType, ConnectionType, SoftwareType, NetworkConfig, DataGenerationLimits,
     DEVICE_OS_VERSIONS, SOFTWARE_VERSIONS, DEFAULT_LOCATIONS_DATA,
-    SMARTGRAPH_DEFAULTS, FILE_NAMES
+    SMARTGRAPH_DEFAULTS
 )
 
 
@@ -325,20 +325,23 @@ class FileManager:
                 "versions": app_config.get_file_name(app_config.get_collection_name("versions"))
             }
         else:
-            # Fallback to hardcoded names for backward compatibility
+            # Use default naming convention (camelCase) when no config provided
+            from src.config.config_management import get_config, NamingConvention
+            default_config = get_config("production", NamingConvention.CAMEL_CASE)
+            
             file_mapping = {
-                "devices": FILE_NAMES["devices"],
-                "device_ins": FILE_NAMES["device_ins"], 
-                "device_outs": FILE_NAMES["device_outs"],
-                "locations": FILE_NAMES["locations"],
-                "software": FILE_NAMES["software"],
-                "software_ins": FILE_NAMES["software_ins"],
-                "software_outs": FILE_NAMES["software_outs"],
-                "connections": FILE_NAMES["connections"],
-                "has_locations": FILE_NAMES["has_locations"],
-                "has_software": FILE_NAMES["has_software"],
-                "has_device_software": FILE_NAMES["has_device_software"],
-                "versions": FILE_NAMES["versions"]
+                "devices": default_config.get_file_name(default_config.get_collection_name("devices")),
+                "device_ins": default_config.get_file_name(default_config.get_collection_name("device_ins")), 
+                "device_outs": default_config.get_file_name(default_config.get_collection_name("device_outs")),
+                "locations": default_config.get_file_name(default_config.get_collection_name("locations")),
+                "software": default_config.get_file_name(default_config.get_collection_name("software")),
+                "software_ins": default_config.get_file_name(default_config.get_collection_name("software_ins")),
+                "software_outs": default_config.get_file_name(default_config.get_collection_name("software_outs")),
+                "connections": default_config.get_file_name(default_config.get_collection_name("connections")),
+                "has_locations": default_config.get_file_name(default_config.get_collection_name("has_locations")),
+                "has_software": default_config.get_file_name(default_config.get_collection_name("has_software")),
+                "has_device_software": default_config.get_file_name(default_config.get_collection_name("has_device_software")),
+                "versions": default_config.get_file_name(default_config.get_collection_name("versions"))
             }
         
         total_documents = 0
