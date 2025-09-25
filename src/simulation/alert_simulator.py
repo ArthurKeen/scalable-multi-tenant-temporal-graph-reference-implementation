@@ -29,7 +29,7 @@ from src.config.centralized_credentials import CredentialsManager
 from src.ttl.ttl_constants import TTLConstants, NEVER_EXPIRES
 from src.data_generation.alert_generator import AlertType, AlertSeverity, AlertStatus, AlertTemplate
 from src.utils.alert_naming import create_alert_name
-from src.config.generation_constants import NetworkConstants
+from src.config.generation_constants import GenerationConstants
 
 
 class AlertSimulator:
@@ -209,7 +209,7 @@ class AlertSimulator:
                 "device_name": device_proxy.get('name'),
                 "interface": "eth0",
                 "connection_type": "ethernet",
-                "target_ip": f"{NetworkConstants().IP_SUBNET_BASE}.1.1",
+                "target_ip": f"{GenerationConstants().IP_SUBNET_BASE}.1.1",
                 "last_seen": created_time - 30
             }
         }

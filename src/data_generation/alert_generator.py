@@ -25,7 +25,7 @@ sys.path.insert(0, str(project_root))
 from src.config.config_management import get_config, NamingConvention
 from src.ttl.ttl_constants import TTLConstants, NEVER_EXPIRES
 from src.utils.alert_naming import alert_namer
-from src.config.generation_constants import NetworkConstants
+from src.config.generation_constants import GenerationConstants
 
 
 class AlertType(Enum):
@@ -99,7 +99,7 @@ class AlertGenerator:
                 AlertType.CONNECTIVITY,
                 AlertSeverity.CRITICAL,
                 "Connection to {target_ip} failed - interface {interface} down",
-                {"target_ip": f"{NetworkConstants().IP_SUBNET_BASE}.1.100", "interface": "eth0", "connection_type": "ethernet"},
+                {"target_ip": f"{GenerationConstants().IP_SUBNET_BASE}.1.100", "interface": "eth0", "connection_type": "ethernet"},
                 ["device"]
             ),
             AlertTemplate(
@@ -124,7 +124,7 @@ class AlertGenerator:
                 AlertType.SECURITY,
                 AlertSeverity.CRITICAL,
                 "Multiple failed SSH login attempts: {attempts} from {source_ip}",
-                {"attempts": 15, "source_ip": f"{NetworkConstants().IP_SUBNET_BASE}.1.200", "service": "ssh"},
+                {"attempts": 15, "source_ip": f"{GenerationConstants().IP_SUBNET_BASE}.1.200", "service": "ssh"},
                 ["device"]
             ),
             
