@@ -12,6 +12,10 @@ import sys
 import os
 from pathlib import Path
 
+# Get the project root directory
+PROJECT_ROOT = Path(__file__).parent.parent.absolute()
+PYTHONPATH = str(PROJECT_ROOT)
+
 
 def print_banner():
     """Print the demo launcher banner."""
@@ -64,7 +68,8 @@ def run_automated_walkthrough_interactive():
     
     input("Press Enter to begin...")
     
-    os.system(f"python3 automated_demo_walkthrough.py --interactive{verbose_flag}")
+    demo_script = PROJECT_ROOT / "demos" / "automated_demo_walkthrough.py"
+    os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 {demo_script} --interactive{verbose_flag}")
 
 
 def run_automated_walkthrough_auto():
@@ -88,7 +93,8 @@ def run_automated_walkthrough_auto():
     verbose = input("Enable verbose mode? (y/N): ").strip().lower()
     verbose_flag = " --verbose" if verbose in ['y', 'yes'] else ""
     
-    os.system(f"python3 automated_demo_walkthrough.py --auto-advance --pause-duration {pause_duration}{verbose_flag}")
+    demo_script = PROJECT_ROOT / "demos" / "automated_demo_walkthrough.py"
+    os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 {demo_script} --auto-advance --pause-duration {pause_duration}{verbose_flag}")
 
 
 def run_comprehensive_demo():
@@ -99,7 +105,8 @@ def run_comprehensive_demo():
     print()
     
     print("Launching interactive demo walkthrough...")
-    os.system("python3 automated_demo_walkthrough.py --interactive")
+    demo_script = PROJECT_ROOT / "demos" / "automated_demo_walkthrough.py"
+    os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 {demo_script} --interactive")
 
 
 def run_individual_components():
