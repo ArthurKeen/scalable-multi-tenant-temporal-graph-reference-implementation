@@ -1,0 +1,108 @@
+{
+  "tenants": {
+    "71192f7d83d7": {
+      "tenantName": "Acme Corp",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_71192f7d83d7_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_71192f7d83d7",
+      "scaleFactor": 1,
+      "createdAt": "2025-09-24T18:34:21.124289",
+      "tenantDescription": "Multi-tenant demo organization #1 with scale factor 1"
+    },
+    "d6d10ad20b0b": {
+      "tenantName": "Global Enterprises",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_d6d10ad20b0b_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_d6d10ad20b0b",
+      "scaleFactor": 2,
+      "createdAt": "2025-09-24T18:34:21.128147",
+      "tenantDescription": "Multi-tenant demo organization #2 with scale factor 2"
+    },
+    "35fe367c1b97": {
+      "tenantName": "TechStart Inc",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_35fe367c1b97_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_35fe367c1b97",
+      "scaleFactor": 3,
+      "createdAt": "2025-09-24T18:34:21.128207",
+      "tenantDescription": "Multi-tenant demo organization #3 with scale factor 3"
+    },
+    "4dde458eb456": {
+      "tenantName": "Enterprise Solutions",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_4dde458eb456_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_4dde458eb456",
+      "scaleFactor": 1,
+      "createdAt": "2025-09-24T18:34:21.133890",
+      "tenantDescription": "Multi-tenant demo organization #4 with scale factor 1"
+    },
+    "289b5c8201a1": {
+      "tenantName": "CloudSync Systems",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_289b5c8201a1_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_289b5c8201a1",
+      "scaleFactor": 2,
+      "createdAt": "2025-09-24T18:34:21.134625",
+      "tenantDescription": "Multi-tenant demo organization #5 with scale factor 2"
+    },
+    "3b3c1d1becbb": {
+      "tenantName": "DataFlow Corp",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_3b3c1d1becbb_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_3b3c1d1becbb",
+      "scaleFactor": 3,
+      "createdAt": "2025-09-24T18:34:21.134682",
+      "tenantDescription": "Multi-tenant demo organization #6 with scale factor 3"
+    },
+    "93856ce5eb41": {
+      "tenantName": "NetWork Industries",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_93856ce5eb41_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_93856ce5eb41",
+      "scaleFactor": 1,
+      "createdAt": "2025-09-24T18:34:21.134725",
+      "tenantDescription": "Multi-tenant demo organization #7 with scale factor 1"
+    },
+    "8a4a0b530302": {
+      "tenantName": "Digital Dynamics",
+      "tenantStatus": "provisioning",
+      "databaseName": "network_assets_demo",
+      "smartGraphName": "tenant_8a4a0b530302_network_assets",
+      "smartGraphAttribute": "tenantId",
+      "dataDirectory": "/Users/arthurkeen/code/network-asset-management-demo/data/tenant_8a4a0b530302",
+      "scaleFactor": 2,
+      "createdAt": "2025-09-24T18:34:21.134742",
+      "tenantDescription": "Multi-tenant demo organization #8 with scale factor 2"
+    }
+  },
+  "summary": {
+    "totalTenants": 8,
+    "totalDocuments": 16425,
+    "sharedDatabase": "network_assets_demo",
+    "generatedAt": "2025-09-24T18:34:21.606869",
+    "environment": "development",
+    "owlCompliant": true,
+    "timeTravel": {
+      "refactored": true,
+      "consistentPattern": true,
+      "deviceTimeTravel": "DeviceProxyIn \u27f7 Device \u27f7 DeviceProxyOut",
+      "softwareTimeTravel": "SoftwareProxyIn \u27f7 Software \u27f7 SoftwareProxyOut",
+      "unifiedVersionCollection": true,
+      "softwareConfigurationHistory": "Removed - flattened to versioned documents"
+    }
+  }
+}

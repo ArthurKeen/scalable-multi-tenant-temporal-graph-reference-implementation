@@ -472,6 +472,11 @@ class TimeTravelRefactoredDeployment:
                         "edge_collection": "hasVersion",  # UNIFIED - handles both Device and Software
                         "from_vertex_collections": ["DeviceProxyIn", "Device", "SoftwareProxyIn", "Software"],
                         "to_vertex_collections": ["Device", "DeviceProxyOut", "Software", "SoftwareProxyOut"]
+                    },
+                    {
+                        "edge_collection": "hasAlert",  # ALERT SYSTEM - operational monitoring
+                        "from_vertex_collections": ["DeviceProxyOut", "SoftwareProxyOut"],
+                        "to_vertex_collections": ["Alert"]
                     }
                 ]
                 

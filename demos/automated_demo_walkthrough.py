@@ -1588,7 +1588,28 @@ class AutomatedDemoWalkthrough:
             # Check if unified graph already exists
             if self.database.has_graph(graph_name):
                 print(f"     [INFO] Unified graph {graph_name} already exists")
-                return True
+                # Check if hasAlert edges are defined
+                graph = self.database.graph(graph_name)
+                edge_defs = graph.edge_definitions()
+                hasAlert_exists = any(ed['edge_collection'] == 'hasAlert' for ed in edge_defs)
+                
+                if hasAlert_exists:
+                    print(f"     [INFO] hasAlert edges already defined in graph")
+                    return True
+                else:
+                    print(f"     [INFO] Adding hasAlert edges to existing graph")
+                    try:
+                        # Add hasAlert edge definition to existing graph
+                        graph.create_edge_definition(
+                            edge_collection='hasAlert',
+                            from_vertex_collections=['DeviceProxyOut', 'SoftwareProxyOut'],
+                            to_vertex_collections=['Alert']
+                        )
+                        print(f"     [GRAPH] Added hasAlert edges to unified graph")
+                        return True
+                    except Exception as e:
+                        print(f"     [WARNING] Could not add hasAlert edges: {e}")
+                        return True  # Continue anyway since main graph exists
             
             # Define graph configuration for all tenant data
             edge_definitions = [
@@ -1611,6 +1632,11 @@ class AutomatedDemoWalkthrough:
                     "edge_collection": "hasVersion",
                     "from_vertex_collections": ["Device", "DeviceProxyIn", "Software", "SoftwareProxyIn"],
                     "to_vertex_collections": ["Device", "DeviceProxyOut", "Software", "SoftwareProxyOut"]
+                },
+                {
+                    "edge_collection": "hasAlert",
+                    "from_vertex_collections": ["DeviceProxyOut", "SoftwareProxyOut"],
+                    "to_vertex_collections": ["Alert"]
                 }
             ]
             
