@@ -124,32 +124,33 @@ def run_individual_components():
     print()
     
     try:
-        choice = int(input("Select component (0-6): "))
+        choice_str = safe_input("Select component (0-6): ", "0")
+        choice = int(choice_str) if choice_str else 0
         
         if choice == 0:
             return
         elif choice == 1:
-            tenants = input("Number of tenants (default: 4): ").strip() or "4"
-            naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
-            os.system(f"python3 asset_generator.py --tenants {tenants} --naming {naming} --environment development")
+            tenants = safe_input("Number of tenants (default: 4): ", "4")
+            naming = safe_input("Naming convention (camelCase/snake_case) [camelCase]: ", "camelCase")
+            os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 src/data_generation/asset_generator.py --tenants {tenants} --naming {naming} --environment development")
         elif choice == 2:
-            naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
-            os.system(f"python3 database_deployment.py --naming {naming}")
+            naming = safe_input("Naming convention (camelCase/snake_case) [camelCase]: ", "camelCase")
+            os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 src/database/database_deployment.py --naming {naming}")
         elif choice == 3:
-            naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
-            devices = input("Number of device changes (default: 5): ").strip() or "5"
-            software = input("Number of software changes (default: 3): ").strip() or "3"
-            os.system(f"python3 transaction_simulator.py --naming {naming} --devices {devices} --software {software}")
+            naming = safe_input("Naming convention (camelCase/snake_case) [camelCase]: ", "camelCase")
+            devices = safe_input("Number of device changes (default: 5): ", "5")
+            software = safe_input("Number of software changes (default: 3): ", "3")
+            os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 src/simulation/transaction_simulator.py --naming {naming} --devices {devices} --software {software}")
         elif choice == 4:
-            naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
-            os.system(f"python3 ttl_demo_scenarios.py --naming {naming}")
+            naming = safe_input("Naming convention (camelCase/snake_case) [camelCase]: ", "camelCase")
+            os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 demos/unified_transaction_ttl_demo.py --naming {naming}")
         elif choice == 5:
-            naming = input("Naming convention (camelCase/snake_case) [camelCase]: ").strip() or "camelCase"
-            save_report = input("Save report? (y/N): ").strip().lower()
+            naming = safe_input("Naming convention (camelCase/snake_case) [camelCase]: ", "camelCase")
+            save_report = safe_input("Save report? (y/N): ", "n").lower()
             report_flag = "--save-report" if save_report.startswith('y') else ""
-            os.system(f"python3 scale_out_demo.py --naming {naming} {report_flag}")
+            os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 demos/scale_out_demo.py --naming {naming} {report_flag}")
         elif choice == 6:
-            os.system("python3 validation_suite.py")
+            os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 src/validation/validation_suite.py")
         else:
             print("[ERROR] Invalid choice")
             
@@ -166,7 +167,7 @@ def run_validation_only():
     print("   → No data generation or changes")
     print()
     
-    os.system("python3 validation_suite.py")
+    os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 src/validation/validation_suite.py")
 
 
 def check_environment():
