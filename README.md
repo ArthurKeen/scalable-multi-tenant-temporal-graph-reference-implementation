@@ -88,13 +88,13 @@ A comprehensive reference implementation showcasing scalable multi-tenant tempor
 The system uses camelCase naming convention:
 
 #### camelCase
-- **Vertex Collections** (PascalCase, singular): `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`
-- **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`
+- **Vertex Collections** (PascalCase, singular): `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`, `Alert`
+- **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`, `hasAlert`
 - **Property Naming** (camelCase): `name`, `type`, `model`, `version`, `ipAddress`, `created`, `expired`
 
 #### Planned future snake_case option
-- **Vertex Collections** (snake_case, singular): `device`, `device_proxy_in`, `device_proxy_out`, `location`, `software`
-- **Edge Collections** (screaming_snake_case, singular): `HAS_CONNECTION`, `HAS_LOCATION`, `HAS_DEVICE_SOFTWARE`, `HAS_VERSION`
+- **Vertex Collections** (snake_case, singular): `device`, `device_proxy_in`, `device_proxy_out`, `location`, `software`, `alert`
+- **Edge Collections** (screaming_snake_case, singular): `HAS_CONNECTION`, `HAS_LOCATION`, `HAS_DEVICE_SOFTWARE`, `HAS_VERSION`, `HAS_ALERT`
 - **Property Naming** (snake_case): `name`, `type`, `model`, `version`, `ip_address`, `created`, `expired`
 
 Both conventions maintain **consistent structure** with Subject-Predicate-Object relationships.
@@ -395,6 +395,7 @@ graph TB
         SPI[SoftwareProxyIn<br/>Software input proxies<br/>Lightweight, no temporal data]
         SPO[SoftwareProxyOut<br/>Software output proxies<br/>Lightweight, no temporal data]
         L[Location<br/>Physical locations<br/>GeoJSON coordinates]
+        A[Alert<br/>System alerts<br/>TTL-aged operational events]
     end
     
     %% Edge Collections (camelCase, singular)
@@ -416,11 +417,17 @@ graph TB
     SPI -->|hasVersion<br/>Software version in<br/>temporal evolution| S
     S -->|hasVersion<br/>Software version out<br/>temporal evolution| SPO
     
+    %% Alert System (operational monitoring)
+    DPO -->|hasAlert<br/>Device alerts<br/>operational events| A
+    SPO -->|hasAlert<br/>Software alerts<br/>operational events| A
+    
     %% Tenant isolation indicator
     classDef tenantBox fill:#e1f5fe,stroke:#01579b,stroke-width:2px
     classDef newFeature fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
+    classDef alertFeature fill:#fff3e0,stroke:#e65100,stroke-width:2px
     class D,DPI,DPO,L tenantBox
     class S,SPI,SPO newFeature
+    class A alertFeature
 ```
 
 > **Detailed Graph Model**: See [graph_model_diagram.md](./graph_model_diagram.md) for comprehensive schema documentation, query examples, and design patterns.
@@ -436,6 +443,7 @@ Software          # Software installations with versioned temporal data (REFACTO
 SoftwareProxyIn   # Software input proxies (lightweight, no temporal data) - NEW
 SoftwareProxyOut  # Software output proxies (lightweight, no temporal data) - NEW
 Location          # Physical locations with GeoJSON coordinates
+Alert             # System alerts with TTL-aged operational events - NEW
 ```
 
 **Edge Collections (Relationships):**
@@ -444,6 +452,7 @@ hasConnection     # DeviceProxyOut -> DeviceProxyIn connections
 hasLocation       # DeviceProxyOut -> Location assignments
 hasDeviceSoftware # DeviceProxyOut -> SoftwareProxyIn installations (CORRECTED)
 hasVersion        # Unified time travel: Device & Software versioning (EXPANDED)
+hasAlert          # DeviceProxyOut/SoftwareProxyOut -> Alert relationships - NEW
 ```
 
 ### Multi-Tenant Architecture
@@ -460,6 +469,7 @@ graph TB
                 SPI[SoftwareProxyIn<br/>All tenant software proxies<br/>Partitioned by tenantId]
                 SPO[SoftwareProxyOut<br/>All tenant software proxies<br/>Partitioned by tenantId]
                 LOCATION[Location<br/>All tenant locations<br/>Partitioned by tenantId]
+                ALERT[Alert<br/>All tenant alerts<br/>Partitioned by tenantId]
             end
             
             subgraph "Edge Collections"
@@ -467,6 +477,7 @@ graph TB
                 HASCONNECTION[hasConnection<br/>All tenant network links<br/>Partitioned by tenantId]
                 HASLOCATION[hasLocation<br/>All tenant device placement<br/>Partitioned by tenantId]
                 HASDEVICESOFTWARE[hasDeviceSoftware<br/>All tenant software installations<br/>Partitioned by tenantId]
+                HASALERT[hasAlert<br/>All tenant alert relationships<br/>Partitioned by tenantId]
             end
         end
         
