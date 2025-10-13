@@ -63,10 +63,10 @@ def run_automated_walkthrough_interactive():
     print("   → Press Ctrl+C to exit at any time")
     print()
     
-    verbose = input("Enable verbose mode? (y/N): ").strip().lower()
+    verbose = safe_input("Enable verbose mode? (y/N): ", "n").lower()
     verbose_flag = " --verbose" if verbose in ['y', 'yes'] else ""
     
-    input("Press Enter to begin...")
+    safe_input("Press Enter to begin...", "")
     
     demo_script = PROJECT_ROOT / "demos" / "automated_demo_walkthrough.py"
     os.system(f"cd {PROJECT_ROOT} && PYTHONPATH={PYTHONPATH} python3 {demo_script} --interactive{verbose_flag}")
@@ -80,7 +80,7 @@ def run_automated_walkthrough_auto():
     print()
     
     try:
-        pause_duration = input("Enter pause duration in seconds (default: 3): ").strip()
+        pause_duration = safe_input("Enter pause duration in seconds (default: 3): ", "3")
         if not pause_duration:
             pause_duration = "3"
         
@@ -90,7 +90,7 @@ def run_automated_walkthrough_auto():
         print("[ERROR] Invalid duration, using default of 3 seconds")
         pause_duration = 3
     
-    verbose = input("Enable verbose mode? (y/N): ").strip().lower()
+    verbose = safe_input("Enable verbose mode? (y/N): ", "n").lower()
     verbose_flag = " --verbose" if verbose in ['y', 'yes'] else ""
     
     demo_script = PROJECT_ROOT / "demos" / "automated_demo_walkthrough.py"
@@ -169,16 +169,60 @@ def run_validation_only():
     os.system("python3 validation_suite.py")
 
 
+def check_environment():
+    """Check if required environment variables are set."""
+    required_vars = ["ARANGO_ENDPOINT", "ARANGO_USERNAME", "ARANGO_PASSWORD", "ARANGO_DATABASE"]
+    missing_vars = [var for var in required_vars if not os.getenv(var)]
+    
+    if missing_vars:
+        print("❌ ENVIRONMENT SETUP REQUIRED")
+        print("=" * 50)
+        print("The following environment variables must be set before running the demo:")
+        print()
+        for var in missing_vars:
+            print(f"   ❌ {var}")
+        print()
+        print("📋 SETUP INSTRUCTIONS:")
+        print("   export ARANGO_ENDPOINT='https://your-cluster.arangodb.cloud:8529'")
+        print("   export ARANGO_USERNAME='root'")
+        print("   export ARANGO_PASSWORD='your-password'")
+        print("   export ARANGO_DATABASE='network_assets_demo'")
+        print()
+        print("🔧 Or create a .env file in the project root with:")
+        print("   ARANGO_ENDPOINT=https://your-cluster.arangodb.cloud:8529")
+        print("   ARANGO_USERNAME=root")
+        print("   ARANGO_PASSWORD=your-password")
+        print("   ARANGO_DATABASE=network_assets_demo")
+        print()
+        return False
+    return True
+
+
+def safe_input(prompt, default=""):
+    """Safe input handling for non-interactive environments."""
+    try:
+        return input(prompt).strip()
+    except EOFError:
+        print(f"\n[INFO] Non-interactive environment detected, using default: {default}")
+        return default
+
+
 def main():
     """Main demo launcher function."""
+    
+    # Check environment first
+    if not check_environment():
+        print("Please set the required environment variables and try again.")
+        return
+    
     while True:
         try:
             print_banner()
             print_demo_options()
             
-            choice = input("Select demo option (0-5): ").strip()
+            choice = safe_input("Select demo option (0-5): ", "0")
             
-            if choice == "0":
+            if choice == "0" or choice == "":
                 print("Thank you for using the demo system!")
                 sys.exit(0)
             elif choice == "1":
@@ -195,14 +239,14 @@ def main():
                 print("[ERROR] Invalid choice. Please select 0-5.")
             
             print("\n" + "="*80)
-            input("Press Enter to return to main menu...")
+            safe_input("Press Enter to return to main menu...", "")
             
         except KeyboardInterrupt:
             print("\n\nDemo launcher interrupted. Goodbye!")
             sys.exit(0)
         except Exception as e:
             print(f"\n[ERROR] Demo launcher error: {e}")
-            input("Press Enter to continue...")
+            safe_input("Press Enter to continue...", "")
 
 
 if __name__ == "__main__":
