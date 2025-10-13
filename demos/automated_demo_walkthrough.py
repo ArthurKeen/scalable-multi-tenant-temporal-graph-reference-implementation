@@ -91,11 +91,11 @@ class AutomatedDemoWalkthrough:
     
     def demo_manual_prompt(self, action: str, details: str = None):
         """Highlight manual demo actions for presenter."""
-        print("\n" + "🎯" + " "*3 + "MANUAL DEMO POINT" + " "*3 + "🎯")
-        print(f"👉 {action}")
+        print("\n" + "=" + " "*3 + "MANUAL DEMO POINT" + " "*3 + "=")
+        print(f"-> {action}")
         if details and self.verbose:
             print(f"   Details: {details}")
-        print("🎯" * 25)
+        print("=" * 25)
     
     def pause_for_observation(self, message: str = "Press Enter to continue...", duration: int = None):
         """Pause the demo for observation or user input."""
@@ -220,7 +220,7 @@ class AutomatedDemoWalkthrough:
         )
         
         if not self.verbose:
-            print("\n📊 Key Demo Points:")
+            print("\nKey Demo Points:")
             print("   • Collections: Show tenant isolation and document counts")
             print("   • Graphs: Visualize multi-tenant network topology")  
             print("   • Indexes: Highlight optimized MDI-prefixed temporal indexes")
@@ -594,13 +594,13 @@ class AutomatedDemoWalkthrough:
                         self.demo_print(f"   {coll_name}: {count} documents", "verbose")
                 
                 if total_docs > 0:
-                    print(f"✅ Database deployment successful - {total_docs} documents imported")
+                    print(f"[SUCCESS] Database deployment successful - {total_docs} documents imported")
                     
                     # Add manual demo hints for ArangoDB Web Interface
                     self._show_manual_demo_hints()
                     
                 else:
-                    print(f"⚠️  Database deployment completed but no data imported - check data files")
+                    print(f"[WARNING] Database deployment completed but no data imported - check data files")
             else:
                 print("[ERROR] Failed to connect to cluster for deployment")
             
@@ -734,7 +734,7 @@ class AutomatedDemoWalkthrough:
             
             if not self.verbose:
                 # PRESENTATION MODE - Clean, copy-friendly format
-                print(f"\n🎯 SOFTWARE IDs TO COPY FOR VISUALIZER:")
+                print(f"\nSOFTWARE IDs TO COPY FOR VISUALIZER:")
                 print("="*60)
                 
                 for i, software in enumerate(current_software[:2]):
@@ -751,7 +751,7 @@ class AutomatedDemoWalkthrough:
                     
                     target_documents.append(target_doc)
                     
-                    print(f"📋 SOFTWARE {i+1}:")
+                    print(f"SOFTWARE {i+1}:")
                     print(f"   COPY THIS → {software_id}")
                     print(f"   Name: {software.get('name', 'Unknown')} ({software.get('type', 'Unknown')})")
                     print()
@@ -889,7 +889,7 @@ class AutomatedDemoWalkthrough:
         try:
             if not self.verbose:
                 # PRESENTATION MODE - Find and highlight new software IDs
-                print("🔍 FINDING NEW SOFTWARE IDs CREATED BY TRANSACTIONS...")
+                print("FINDING NEW SOFTWARE IDs CREATED BY TRANSACTIONS...")
                 print()
                 
                 # Query for newly created software documents
@@ -916,10 +916,10 @@ class AutomatedDemoWalkthrough:
                     new_software = list(cursor)
                     
                     if new_software:
-                        print(f"🎯 NEW SOFTWARE {i+1} IDs TO COPY FOR VISUALIZER:")
+                        print(f"NEW SOFTWARE {i+1} IDs TO COPY FOR VISUALIZER:")
                         print("="*60)
                         for j, software in enumerate(new_software):
-                            print(f"📋 NEW VERSION {j+1}:")
+                            print(f"NEW VERSION {j+1}:")
                             print(f"   COPY THIS → {software['id']}")
                             print(f"   Name: {software['name']} ({software['type']})")
                             print()
@@ -1174,9 +1174,9 @@ class AutomatedDemoWalkthrough:
             self.demo_print(f"  Resolved alerts: {len(resolved_alerts)}", "info")
             
             if not self.verbose and current_alerts:
-                self.demo_print("\n🚨 EXISTING ALERTS:", "critical")
+                self.demo_print("\nEXISTING ALERTS:", "critical")
                 for alert in current_alerts[-3:]:  # Show last 3
-                    status_icon = "🔴" if alert['status'] == 'active' else "🟢"
+                    status_icon = "[ACTIVE]" if alert['status'] == 'active' else "[RESOLVED]"
                     name = alert.get('name', 'Legacy Alert')
                     self.demo_print(f"   {status_icon} {name} ({alert['severity']} {alert['alertType']})", "info")
             
@@ -1194,15 +1194,15 @@ class AutomatedDemoWalkthrough:
             
             generated_alerts = []
             for alert_name, generator_func in alert_types:
-                self.demo_print(f"\n⚡ Generating {alert_name}...", "critical")
+                self.demo_print(f"\nGenerating {alert_name}...", "critical")
                 try:
                     result = generator_func(demo_tenant_id)
                     generated_alerts.append(result)
                     
                     alert = result['alert']
-                    self.demo_print(f"   ✅ Created: {alert['name']}", "info")
-                    self.demo_print(f"   📋 Message: {alert['message']}", "verbose")
-                    self.demo_print(f"   🚨 Severity: {alert['severity']} | Type: {alert['alertType']}", "info")
+                    self.demo_print(f"   [SUCCESS] Created: {alert['name']}", "info")
+                    self.demo_print(f"   Message: {alert['message']}", "verbose")
+                    self.demo_print(f"   Severity: {alert['severity']} | Type: {alert['alertType']}", "info")
                     
                     if not self.verbose:
                         self.demo_manual_prompt(
@@ -1211,7 +1211,7 @@ class AutomatedDemoWalkthrough:
                         )
                     
                 except Exception as e:
-                    self.demo_print(f"   ❌ Error generating {alert_name}: {e}", "critical")
+                    self.demo_print(f"   [ERROR] Error generating {alert_name}: {e}", "critical")
                 
                 time.sleep(1)
             
@@ -1224,11 +1224,11 @@ class AutomatedDemoWalkthrough:
             if generated_alerts:
                 # Resolve the first generated alert
                 alert_to_resolve = generated_alerts[0]['alert']
-                self.demo_print(f"\n🔧 Resolving alert: {alert_to_resolve['name']}", "critical")
+                self.demo_print(f"\nResolving alert: {alert_to_resolve['name']}", "critical")
                 
                 try:
                     resolution_result = alert_simulator.resolve_alert(alert_to_resolve['_key'], demo_tenant_id)
-                    self.demo_print(f"   ✅ Alert resolved successfully!", "info")
+                    self.demo_print(f"   [SUCCESS] Alert resolved successfully!", "info")
                     self.demo_print(f"   ⏰ TTL expires at: {datetime.datetime.fromtimestamp(resolution_result['ttl_expire_at']).strftime('%H:%M:%S')}", "info")
                     
                     if not self.verbose:
@@ -1238,7 +1238,7 @@ class AutomatedDemoWalkthrough:
                         )
                         
                 except Exception as e:
-                    self.demo_print(f"   ❌ Resolution error: {e}", "critical")
+                    self.demo_print(f"   [ERROR] Resolution error: {e}", "critical")
             
             # Show graph visualization readiness
             self.demo_progress(4, 6, "Verifying graph visualization integration", 
@@ -1250,16 +1250,16 @@ class AutomatedDemoWalkthrough:
                 hasAlert_def = next((ed for ed in edge_defs if ed['edge_collection'] == 'hasAlert'), None)
                 
                 if hasAlert_def:
-                    self.demo_print("\n🕸️ Graph Visualization Status:", "critical")
-                    self.demo_print("   ✅ hasAlert edges integrated into graph definition", "info")
-                    self.demo_print(f"   📊 From: {hasAlert_def['from_vertex_collections']}", "verbose")
-                    self.demo_print(f"   📊 To: {hasAlert_def['to_vertex_collections']}", "verbose")
-                    self.demo_print("   🎯 Ready for ArangoDB Graph Visualizer!", "info")
+                    self.demo_print("\nGraph Visualization Status:", "critical")
+                    self.demo_print("   [SUCCESS] hasAlert edges integrated into graph definition", "info")
+                    self.demo_print(f"   From: {hasAlert_def['from_vertex_collections']}", "verbose")
+                    self.demo_print(f"   To: {hasAlert_def['to_vertex_collections']}", "verbose")
+                    self.demo_print("   Ready for ArangoDB Graph Visualizer!", "info")
                 else:
-                    self.demo_print("   ❌ hasAlert edges not found in graph definition", "critical")
+                    self.demo_print("   [ERROR] hasAlert edges not found in graph definition", "critical")
                     
             except Exception as e:
-                self.demo_print(f"   ⚠️  Graph check error: {e}", "verbose")
+                self.demo_print(f"   [WARNING] Graph check error: {e}", "verbose")
             
             # Show alert correlation capabilities
             self.demo_progress(5, 6, "Demonstrating alert correlation", 
@@ -1288,16 +1288,16 @@ class AutomatedDemoWalkthrough:
                 cursor = self.database.aql.execute(correlation_query)
                 correlations = list(cursor)
                 
-                self.demo_print(f"\n🔗 Alert Correlation Analysis:", "critical")
+                self.demo_print(f"\nAlert Correlation Analysis:", "critical")
                 self.demo_print(f"   Found {len(correlations)} alert-to-source relationships", "info")
                 
                 if correlations and not self.verbose:
                     for corr in correlations[-3:]:  # Show last 3
-                        status_icon = "🔴" if corr['alert_status'] == 'active' else "🟢"
+                        status_icon = "[ACTIVE]" if corr['alert_status'] == 'active' else "[RESOLVED]"
                         self.demo_print(f"   {status_icon} {corr['alert_name']} ← {corr['source_type']}: {corr['source_name']}", "info")
                         
             except Exception as e:
-                self.demo_print(f"   ⚠️  Correlation query error: {e}", "verbose")
+                self.demo_print(f"   [WARNING] Correlation query error: {e}", "verbose")
             
             # Show final alert summary
             self.demo_progress(6, 6, "Final alert system summary", 
@@ -1305,7 +1305,7 @@ class AutomatedDemoWalkthrough:
             
             final_summary = alert_simulator.get_alert_summary(demo_tenant_id)
             
-            self.demo_print(f"\n📊 ALERT SYSTEM DEMONSTRATION SUMMARY:", "critical")
+            self.demo_print(f"\nALERT SYSTEM DEMONSTRATION SUMMARY:", "critical")
             self.demo_print(f"   Total alerts: {final_summary['total_alerts']}", "info")
             self.demo_print(f"   Active: {final_summary['active']} | Resolved: {final_summary['resolved']}", "info")
             
@@ -1314,14 +1314,14 @@ class AutomatedDemoWalkthrough:
                 self.demo_print(f"   Severity: {severity_text}", "info")
             
             if not self.verbose:
-                self.demo_print(f"\n🎯 ALERT SYSTEM CAPABILITIES DEMONSTRATED:", "critical")
+                self.demo_print(f"\nALERT SYSTEM CAPABILITIES DEMONSTRATED:", "critical")
                 capabilities = [
-                    "✅ Real-time alert generation from operational devices/software",
-                    "✅ Graph-integrated visualization with hasAlert relationships",
-                    "✅ Complete alert lifecycle: active → resolved → TTL aging",
-                    "✅ Multi-tenant isolation with complete data separation",
-                    "✅ Alert correlation across devices, software, and locations",
-                    "✅ Operational monitoring ready for production use"
+                    "[SUCCESS] Real-time alert generation from operational devices/software",
+                    "[SUCCESS] Graph-integrated visualization with hasAlert relationships",
+                    "[SUCCESS] Complete alert lifecycle: active → resolved → TTL aging",
+                    "[SUCCESS] Multi-tenant isolation with complete data separation",
+                    "[SUCCESS] Alert correlation across devices, software, and locations",
+                    "[SUCCESS] Operational monitoring ready for production use"
                 ]
                 for capability in capabilities:
                     self.demo_print(f"   {capability}", "info")
@@ -1331,6 +1331,113 @@ class AutomatedDemoWalkthrough:
             if self.verbose:
                 import traceback
                 traceback.print_exc()
+        
+    def section_7_alert_system_demonstration(self):
+        """Section 7: Alert System Demonstration."""
+        self.demo_section_start(
+            "ALERT SYSTEM DEMONSTRATION", 
+            "Real-time operational monitoring with graph-integrated alerts"
+        )
+        
+        try:
+            # Initialize alert simulator
+            alert_simulator = AlertSimulator(NamingConvention.CAMEL_CASE)
+            
+            # Get the first available tenant for demonstration
+            tenant_query = "FOR d IN Device LIMIT 1 RETURN d.tenantId"
+            cursor = self.database.aql.execute(tenant_query)
+            tenant_results = list(cursor)
+            
+            if not tenant_results:
+                self.demo_print("No tenants found for alert demonstration", "critical")
+                return
+                
+            demo_tenant_id = tenant_results[0]
+            self.demo_print(f"Using tenant: {demo_tenant_id}", "info")
+            
+            # Show current alert status briefly
+            self.demo_progress(1, 4, "Checking current alert status")
+            current_alerts = alert_simulator.get_tenant_alerts(demo_tenant_id)
+            active_count = len([a for a in current_alerts if a['status'] == 'active'])
+            resolved_count = len([a for a in current_alerts if a['status'] == 'resolved'])
+            
+            self.demo_print(f"Current Alert Status:", "info")
+            self.demo_print(f"  Total alerts: {len(current_alerts)}", "info")
+            self.demo_print(f"  Active: {active_count} | Resolved: {resolved_count}", "info")
+            
+            # Generate alerts with clear visualizer instructions
+            self.demo_progress(2, 4, "Generating operational alerts")
+            
+            alert_types = [
+                ("Hardware Alert", alert_simulator.generate_critical_hardware_alert),
+                ("Software Alert", alert_simulator.generate_software_performance_alert),
+                ("Connectivity Alert", alert_simulator.generate_connectivity_alert)
+            ]
+            
+            print(f"\n{'='*60}")
+            print("VISUALIZER START SET - COPY THESE IDs:")
+            print(f"{'='*60}")
+            
+            generated_alerts = []
+            for i, (alert_name, generator_func) in enumerate(alert_types, 1):
+                try:
+                    result = generator_func(demo_tenant_id)
+                    generated_alerts.append(result)
+                    alert = result['alert']
+                    
+                    print(f"{i}. {alert['name']}")
+                    print(f"   ID: {alert['_id']}")
+                    print(f"   Type: {alert['severity']} {alert['alertType']}")
+                    print()
+                    
+                except Exception as e:
+                    self.demo_print(f"   [ERROR] Error generating {alert_name}: {e}", "critical")
+            
+            print(f"{'='*60}")
+            print("WHAT TO LOOK FOR IN VISUALIZER:")
+            print("• Alert vertices connected to DeviceProxyOut/SoftwareProxyOut")
+            print("• hasAlert edges showing alert relationships")
+            print("• Alert properties: severity, alertType, status, message")
+            print("• Multi-tenant isolation (only this tenant's data)")
+            print(f"{'='*60}")
+            
+            self.pause_for_observation("Copy the alert IDs above to visualizer start set. Press Enter when ready for resolution demo.")
+            
+            # Demonstrate alert resolution
+            self.demo_progress(3, 4, "Demonstrating alert resolution")
+            
+            if generated_alerts:
+                alert_to_resolve = generated_alerts[0]['alert']
+                self.demo_print(f"Resolving: {alert_to_resolve['name']}", "info")
+                
+                try:
+                    resolution_result = alert_simulator.resolve_alert(alert_to_resolve['_key'], demo_tenant_id)
+                    ttl_time = datetime.datetime.fromtimestamp(resolution_result['ttl_expire_at']).strftime('%H:%M:%S')
+                    
+                    print(f"\n{'='*40}")
+                    print("RESOLVED ALERT:")
+                    print(f"ID: {alert_to_resolve['_id']}")
+                    print(f"Status: RESOLVED (TTL expires at {ttl_time})")
+                    print("Refresh visualizer to see status change")
+                    print(f"{'='*40}")
+                        
+                except Exception as e:
+                    self.demo_print(f"[ERROR] Resolution error: {e}", "critical")
+            
+            # Final summary
+            self.demo_progress(4, 4, "Alert system summary")
+            
+            final_alerts = alert_simulator.get_tenant_alerts(demo_tenant_id)
+            final_active = len([a for a in final_alerts if a['status'] == 'active'])
+            final_resolved = len([a for a in final_alerts if a['status'] == 'resolved'])
+            
+            print(f"\nFINAL STATUS:")
+            print(f"  Total alerts: {len(final_alerts)}")
+            print(f"  Active: {final_active} | Resolved: {final_resolved}")
+            print(f"  Graph integration: hasAlert edges ready for visualization")
+            
+        except Exception as e:
+            self.demo_print(f"[ERROR] Alert system demonstration error: {e}", "critical")
         
         self.pause_for_observation("Alert system demonstration complete. Ready for scale-out demo?")
         self.sections_completed.append("alert_system_demonstration")
@@ -1762,11 +1869,11 @@ class AutomatedDemoWalkthrough:
         
         if not self.verbose:
             print("System Capabilities Demonstrated:")
-            print("   ✅ Multi-tenant architecture with complete isolation")
-            print("   ✅ Time travel with TTL for historical data management")
-            print("   ✅ Temporal TTL transactions for realistic scenarios")
-            print("   ✅ Horizontal scale-out for enterprise growth")
-            print("   ✅ Production-ready enterprise deployment")
+            print("   [SUCCESS] Multi-tenant architecture with complete isolation")
+            print("   [SUCCESS] Time travel with TTL for historical data management")
+            print("   [SUCCESS] Temporal TTL transactions for realistic scenarios")
+            print("   [SUCCESS] Horizontal scale-out for enterprise growth")
+            print("   [SUCCESS] Production-ready enterprise deployment")
         else:
             print("System Capabilities Demonstrated:")
             print("   - Multi-tenant architecture with complete isolation")
@@ -1808,7 +1915,7 @@ class AutomatedDemoWalkthrough:
             if self.verbose:
                 self.section_4_initial_validation()
             else:
-                self.demo_print("✅ Database deployment validated - ready for demonstrations", "info")
+                self.demo_print("[SUCCESS] Database deployment validated - ready for demonstrations", "info")
             
             # Section 5: Temporal TTL Transactions
             self.section_5_temporal_ttl_transactions()
@@ -1824,7 +1931,7 @@ class AutomatedDemoWalkthrough:
             if self.verbose:
                 self.section_9_final_validation()
             else:
-                self.demo_print("✅ All demonstrations completed successfully", "info")
+                self.demo_print("[SUCCESS] All demonstrations completed successfully", "info")
             
             # Section 10: Demo Summary
             self.section_10_demo_summary()
