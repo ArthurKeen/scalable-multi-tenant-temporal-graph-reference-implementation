@@ -69,16 +69,18 @@ class TTLConfiguration:
         """Initialize default collections if not provided."""
         if self.vertex_collections is None:
             self.vertex_collections = [
-                "Device", "Software", "Alert"
+                "Device", "Software", "Alert", "Class"
                 # NOTE: Location excluded - static reference data, not temporal
                 # NOTE: Proxy collections excluded - they don't contain temporal data or ttlExpireAt fields
                 # NOTE: Alert included - resolved alerts age out with TTL
+                # NOTE: Class included - taxonomy classes can evolve over time
             ]
         
         if self.edge_collections is None:
             self.edge_collections = [
                 "hasConnection", "hasLocation", 
-                "hasDeviceSoftware", "hasVersion", "hasAlert"
+                "hasDeviceSoftware", "hasVersion", "hasAlert",
+                "type", "subClassOf"
             ]
     
     def get_ttl_index_configs(self) -> List[TTLIndexConfiguration]:
@@ -178,13 +180,14 @@ def create_snake_case_ttl_configuration(tenant_id: str,
         default_expire_after_seconds=config_params["expire_after_seconds"],
         preserve_current_configs=True,
         vertex_collections=[
-            "device", "software", "location",
-            "device_proxy_in", "device_proxy_out",
-            "software_proxy_in", "software_proxy_out"
+            "device", "software", "alert", "class"
+            # NOTE: location excluded - static reference data
+            # NOTE: proxy collections excluded - no temporal data
         ],
         edge_collections=[
             "has_connection", "has_location",
-            "has_device_software", "has_version"
+            "has_device_software", "has_version", "has_alert",
+            "type", "sub_class_of"
         ]
     )
     return config
@@ -214,13 +217,14 @@ def create_demo_snake_case_ttl_configuration(tenant_id: str,
         default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 5 minutes
         preserve_current_configs=True,
         vertex_collections=[
-            "device", "software", "location",
-            "device_proxy_in", "device_proxy_out",
-            "software_proxy_in", "software_proxy_out"
+            "device", "software", "alert", "class"
+            # NOTE: location excluded - static reference data
+            # NOTE: proxy collections excluded - no temporal data
         ],
         edge_collections=[
             "has_connection", "has_location",
-            "has_device_software", "has_version"
+            "has_device_software", "has_version", "has_alert",
+            "type", "sub_class_of"
         ]
     )
 

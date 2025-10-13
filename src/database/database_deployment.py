@@ -128,7 +128,8 @@ class TimeTravelRefactoredDeployment:
                 {"name": self.app_config.get_collection_name("software"), "type": "vertex"},
                 {"name": self.app_config.get_collection_name("software_ins"), "type": "vertex"},
                 {"name": self.app_config.get_collection_name("software_outs"), "type": "vertex"},
-                {"name": self.app_config.get_collection_name("alerts"), "type": "vertex"}
+                {"name": self.app_config.get_collection_name("alerts"), "type": "vertex"},
+                {"name": self.app_config.get_collection_name("classes"), "type": "vertex"}
             ]
             
             # Edge collections using configuration
@@ -137,7 +138,9 @@ class TimeTravelRefactoredDeployment:
                 {"name": self.app_config.get_collection_name("has_locations"), "type": "edge"},
                 {"name": self.app_config.get_collection_name("has_device_software"), "type": "edge"},
                 {"name": self.app_config.get_collection_name("versions"), "type": "edge"},
-                {"name": self.app_config.get_collection_name("has_alerts"), "type": "edge"}
+                {"name": self.app_config.get_collection_name("has_alerts"), "type": "edge"},
+                {"name": self.app_config.get_collection_name("types"), "type": "edge"},
+                {"name": self.app_config.get_collection_name("subclass_of"), "type": "edge"}
             ]
             
             # Create vertex collections
@@ -477,6 +480,16 @@ class TimeTravelRefactoredDeployment:
                         "edge_collection": "hasAlert",  # ALERT SYSTEM - operational monitoring
                         "from_vertex_collections": ["DeviceProxyOut", "SoftwareProxyOut"],
                         "to_vertex_collections": ["Alert"]
+                    },
+                    {
+                        "edge_collection": "type",  # TAXONOMY - device/software classification
+                        "from_vertex_collections": ["Device", "Software"],
+                        "to_vertex_collections": ["Class"]
+                    },
+                    {
+                        "edge_collection": "subClassOf",  # TAXONOMY - class hierarchy
+                        "from_vertex_collections": ["Class"],
+                        "to_vertex_collections": ["Class"]
                     }
                 ]
                 

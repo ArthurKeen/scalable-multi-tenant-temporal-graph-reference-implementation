@@ -148,6 +148,10 @@ class TenantNamingConvention:
     def alert_collection(self) -> str:
         return "Alert"
     
+    @property
+    def class_collection(self) -> str:
+        return "Class"
+    
     # Edge collection names (camelCase, singular)
     @property
     def has_connection_collection(self) -> str:
@@ -168,6 +172,14 @@ class TenantNamingConvention:
     @property
     def has_alert_collection(self) -> str:
         return "hasAlert"
+    
+    @property
+    def type_collection(self) -> str:
+        return "type"
+    
+    @property
+    def subclass_of_collection(self) -> str:
+        return "subClassOf"
     
     # File paths for data generation output (FR2.4)
     @property
@@ -334,6 +346,25 @@ class SmartGraphDefinition:
                 "to_vertex_collections": [
                     self.naming.alert_collection
                 ]
+            },
+            {
+                "edge_collection": self.naming.type_collection,
+                "from_vertex_collections": [
+                    self.naming.device_collection,
+                    self.naming.software_collection
+                ],
+                "to_vertex_collections": [
+                    self.naming.class_collection
+                ]
+            },
+            {
+                "edge_collection": self.naming.subclass_of_collection,
+                "from_vertex_collections": [
+                    self.naming.class_collection
+                ],
+                "to_vertex_collections": [
+                    self.naming.class_collection
+                ]
             }
         ]
     
@@ -347,7 +378,8 @@ class SmartGraphDefinition:
             self.naming.software_collection,
             self.naming.software_in_collection,
             self.naming.software_out_collection,
-            self.naming.alert_collection
+            self.naming.alert_collection,
+            self.naming.class_collection
         ]
     
     def get_smartgraph_config(self) -> Dict[str, Any]:
