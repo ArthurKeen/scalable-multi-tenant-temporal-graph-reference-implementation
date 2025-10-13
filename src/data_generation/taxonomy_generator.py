@@ -204,6 +204,12 @@ class TaxonomyGenerator:
         type_edges = []
         device_classes = DEVICE_TAXONOMY.get_all_classes()
         
+        # Create mapping of class keys to generated document keys
+        # In a real implementation, this would use the actual generated class documents
+        class_doc_mapping = {}
+        for class_key in device_classes.keys():
+            class_doc_mapping[class_key] = f"class_{class_key}_{uuid.uuid4().hex[:8]}"
+        
         for device in devices:
             # Classify device based on its properties
             class_key = self._classify_device(device)
@@ -212,7 +218,7 @@ class TaxonomyGenerator:
                 # Create type edge
                 edge = self._create_type_edge(
                     from_entity=device,
-                    to_class_key=class_key,
+                    to_class_doc_key=class_doc_mapping[class_key],
                     tenant_id=tenant_id,
                     confidence=self._calculate_classification_confidence(device, class_key)
                 )
@@ -235,6 +241,11 @@ class TaxonomyGenerator:
         type_edges = []
         software_classes = SOFTWARE_TAXONOMY.get_all_classes()
         
+        # Create mapping of class keys to generated document keys
+        class_doc_mapping = {}
+        for class_key in software_classes.keys():
+            class_doc_mapping[class_key] = f"class_{class_key}_{uuid.uuid4().hex[:8]}"
+        
         for software in software_list:
             # Classify software based on its properties
             class_key = self._classify_software(software)
@@ -243,7 +254,7 @@ class TaxonomyGenerator:
                 # Create type edge
                 edge = self._create_type_edge(
                     from_entity=software,
-                    to_class_key=class_key, 
+                    to_class_doc_key=class_doc_mapping[class_key],
                     tenant_id=tenant_id,
                     confidence=self._calculate_classification_confidence(software, class_key)
                 )
@@ -328,7 +339,7 @@ class TaxonomyGenerator:
         # Default to generic software
         return "software"
     
-    def _create_type_edge(self, from_entity: Dict[str, Any], to_class_key: str, 
+    def _create_type_edge(self, from_entity: Dict[str, Any], to_class_doc_key: str, 
                          tenant_id: str, confidence: float) -> Dict[str, Any]:
         """Create a type edge document."""
         edge_key = f"type_{uuid.uuid4().hex[:8]}"
@@ -338,7 +349,7 @@ class TaxonomyGenerator:
             "_key": edge_key,
             "_id": f"{self.app_config.get_collection_name('types')}/{edge_key}",
             "_from": from_entity["_id"],
-            "_to": f"{self.app_config.get_collection_name('classes')}/class_{to_class_key}_{uuid.uuid4().hex[:8]}",
+            "_to": f"{self.app_config.get_collection_name('classes')}/{to_class_doc_key}",
             "relationshipType": "instanceOf",
             "confidence": confidence,
             "classifiedAt": datetime.datetime.now().isoformat()
