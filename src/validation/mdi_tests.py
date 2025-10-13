@@ -418,7 +418,7 @@ def main():
     args = parser.parse_args()
     
     # Run tests
-    tester = ZKDIndexTester(show_queries=not args.quiet)
+    tester = MDIIndexTester(show_queries=not args.quiet)
     results = tester.run_comprehensive_tests()
     
     # Save results if requested
