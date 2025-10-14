@@ -883,6 +883,22 @@ class AutomatedDemoWalkthrough:
                 if software_changes:
                     for i, change in enumerate(software_changes):
                         print(f"[DEBUG] Change {i+1}: {change.entity_key} -> {change.new_config.get('_key', 'No key')}")
+                    
+                    # Update target_documents to match the actual changed documents
+                    target_documents = []
+                    for change in software_changes:
+                        target_doc = {
+                            "collection": self.config_manager.get_collection_name("software"),
+                            "key": change.entity_key,  # The original key that was modified
+                            "name": change.old_config.get("name", "Unknown"),
+                            "type": change.old_config.get("type", "Unknown"),
+                            "new_key": change.new_config.get("_key", "No key")  # The new key created
+                        }
+                        target_documents.append(target_doc)
+                    
+                    print(f"[DEBUG] Updated target_documents to match actual changes:")
+                    for i, doc in enumerate(target_documents):
+                        print(f"[DEBUG] Target {i+1}: {doc['key']} -> {doc['new_key']}")
                 
                 print(f"\n[IMMEDIATE IMPACT] TTL fields have been set on historical documents!")
                 print(f"   Transaction timestamp: {transaction_timestamp.timestamp()}")
@@ -1026,9 +1042,53 @@ class AutomatedDemoWalkthrough:
                         "These are the newly created software configurations from the transaction"
                     )
             else:
-                print("⚠️  No new IDs found - transaction may not have completed successfully")
-                print("   Check the transaction logs above for any errors")
-                print("   Debug information shown above to help identify the issue")
+                # If no new IDs found through search, use the new_key information from target_documents
+                print("🔍 No IDs found through search, checking transaction results...")
+                if hasattr(self, 'target_documents') and target_documents:
+                    direct_new_ids = []
+                    for doc in target_documents:
+                        if 'new_key' in doc and doc['new_key'] != 'No key':
+                            collection_name = doc['collection']
+                            new_id = f"{collection_name}/{doc['new_key']}"
+                            direct_new_ids.append({
+                                'id': new_id,
+                                'key': doc['new_key'],
+                                'name': doc['name'],
+                                'type': doc['type'],
+                                'original_key': doc['key']
+                            })
+                    
+                    if direct_new_ids:
+                        print(f"📋 NEW DOCUMENT IDs FROM TRANSACTION RESULTS (Total: {len(direct_new_ids)}):")
+                        print("-" * 60)
+                        
+                        for i, new_doc in enumerate(direct_new_ids, 1):
+                            print(f"{i}. NEW ID: {new_doc['id']}")
+                            print(f"   Name: {new_doc['name']}")
+                            print(f"   Type: {new_doc['type']}")
+                            print(f"   Key: {new_doc['key']}")
+                            print(f"   Original: {new_doc['original_key']} → {new_doc['key']}")
+                            print()
+                        
+                        print("🎯 COPY THESE IDs FOR VISUALIZATION:")
+                        print("-" * 40)
+                        for i, new_doc in enumerate(direct_new_ids, 1):
+                            print(f"{i}. {new_doc['id']}")
+                        print()
+                        
+                        if not self.verbose:
+                            self.demo_manual_prompt(
+                                f"NEW SOFTWARE IDs: {', '.join([doc['id'] for doc in direct_new_ids])}",
+                                "These are the newly created software configurations from the transaction"
+                            )
+                    else:
+                        print("⚠️  No new IDs found - transaction may not have completed successfully")
+                        print("   Check the transaction logs above for any errors")
+                        print("   Debug information shown above to help identify the issue")
+                else:
+                    print("⚠️  No new IDs found - transaction may not have completed successfully")
+                    print("   Check the transaction logs above for any errors")
+                    print("   Debug information shown above to help identify the issue")
             
             if self.verbose:
                 print("\n[TECHNICAL DETAILS] Database state analysis:")
