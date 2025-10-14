@@ -869,21 +869,14 @@ class AutomatedDemoWalkthrough:
         print()
         
         try:
-            simulator = TransactionSimulator(NamingConvention.CAMEL_CASE, show_queries=True)
+            simulator = TransactionSimulator(NamingConvention.CAMEL_CASE, show_queries=False)
             
-            print(f"[DEBUG] Connecting transaction simulator to database...")
             if simulator.connect_to_database():
-                print(f"[DEBUG] Transaction simulator connected successfully")
-                
                 # Simulate software configuration changes
                 print("[SOFTWARE TRANSACTIONS] Updating software configurations...")
                 software_changes = simulator.simulate_software_configuration_changes(software_count=2)
                 
-                print(f"[DEBUG] Transaction simulator returned {len(software_changes) if software_changes else 0} changes")
                 if software_changes:
-                    for i, change in enumerate(software_changes):
-                        print(f"[DEBUG] Change {i+1}: {change.entity_key} -> {change.new_config.get('_key', 'No key')}")
-                    
                     # Update target_documents to match the actual changed documents
                     target_documents = []
                     for change in software_changes:
@@ -895,10 +888,6 @@ class AutomatedDemoWalkthrough:
                             "new_key": change.new_config.get("_key", "No key")  # The new key created
                         }
                         target_documents.append(target_doc)
-                    
-                    print(f"[DEBUG] Updated target_documents to match actual changes:")
-                    for i, doc in enumerate(target_documents):
-                        print(f"[DEBUG] Target {i+1}: {doc['key']} -> {doc['new_key']}")
                 
                 print(f"\n[IMMEDIATE IMPACT] TTL fields have been set on historical documents!")
                 print(f"   Transaction timestamp: {transaction_timestamp.timestamp()}")
@@ -933,13 +922,6 @@ class AutomatedDemoWalkthrough:
             print("🆕 DIRECTLY LISTING NEW IDs CREATED:")
             print("="*50)
             
-            # Debug: Show what we're looking for
-            print(f"[DEBUG] Transaction timestamp: {transaction_timestamp.timestamp()}")
-            print(f"[DEBUG] Target documents: {len(target_documents)}")
-            for i, doc in enumerate(target_documents):
-                print(f"[DEBUG] Target {i+1}: {doc['key']} ({doc.get('name', 'Unknown')})")
-            print()
-            
             new_ids_created = []
             
             # Query for newly created software documents
@@ -956,9 +938,6 @@ class AutomatedDemoWalkthrough:
                         base_key_pattern = original_key
                 else:
                     base_key_pattern = original_key
-                
-                print(f"[DEBUG] Searching for new versions of: {original_key}")
-                print(f"[DEBUG] Base pattern: {base_key_pattern}")
                 
                 # Find new software versions created by transaction
                 aql_new_software = f"""
@@ -978,16 +957,11 @@ class AutomatedDemoWalkthrough:
                     }}
                 """
                 
-                print(f"[DEBUG] Query: {aql_new_software.strip()}")
-                
                 cursor = self.database.aql.execute(aql_new_software, bind_vars={"transaction_start": transaction_timestamp.timestamp()})
                 new_software = list(cursor)
                 
-                print(f"[DEBUG] Query returned {len(new_software)} results")
-                
                 if new_software:
                     for software in new_software:
-                        print(f"[DEBUG] Found: {software}")
                         new_ids_created.append({
                             'id': software['id'],
                             'key': software['key'],
@@ -995,27 +969,6 @@ class AutomatedDemoWalkthrough:
                             'type': software['type'],
                             'original_key': original_key
                         })
-                else:
-                    # Debug: Check if ANY new software was created recently
-                    debug_query = f"""
-                    FOR software IN Software
-                        FILTER software.created >= @transaction_start
-                        SORT software.created DESC
-                        LIMIT 5
-                        RETURN {{
-                            id: software._id,
-                            key: software._key,
-                            name: software.name,
-                            created: software.created,
-                            expired: software.expired
-                        }}
-                    """
-                    debug_cursor = self.database.aql.execute(debug_query, bind_vars={"transaction_start": transaction_timestamp.timestamp()})
-                    debug_results = list(debug_cursor)
-                    print(f"[DEBUG] Recent software (any): {len(debug_results)} found")
-                    for result in debug_results:
-                        print(f"[DEBUG] Recent: {result}")
-                print()
             
             # Display all new IDs in a clean, direct format
             if new_ids_created:
@@ -1043,7 +996,6 @@ class AutomatedDemoWalkthrough:
                     )
             else:
                 # If no new IDs found through search, use the new_key information from target_documents
-                print("🔍 No IDs found through search, checking transaction results...")
                 if hasattr(self, 'target_documents') and target_documents:
                     direct_new_ids = []
                     for doc in target_documents:
@@ -1084,29 +1036,9 @@ class AutomatedDemoWalkthrough:
                     else:
                         print("⚠️  No new IDs found - transaction may not have completed successfully")
                         print("   Check the transaction logs above for any errors")
-                        print("   Debug information shown above to help identify the issue")
                 else:
                     print("⚠️  No new IDs found - transaction may not have completed successfully")
                     print("   Check the transaction logs above for any errors")
-                    print("   Debug information shown above to help identify the issue")
-            
-            if self.verbose:
-                print("\n[TECHNICAL DETAILS] Database state analysis:")
-                print("-" * 60)
-                for doc in target_documents:
-                    collection = doc["collection"]
-                    key = doc["key"]
-                    print(f"   Original: {collection}/{key}")
-                    print(f"   Query: FOR doc IN {collection} FILTER STARTS_WITH(doc._key, '{key}') RETURN doc")
-                    print()
-                
-                print("[GRAPH IMPACT] Updated graph paths to explore:")
-                print("-" * 60)
-                for new_doc in new_ids_created:
-                    software_key = new_doc["key"]
-                    print(f"   Software/{software_key} -> hasVersion -> [multiple Software versions]")
-                    print(f"   <- hasDeviceSoftware <- DeviceProxyOut <- Device")
-                print()
             
         except Exception as e:
             print(f"[ERROR] Failed to show new IDs: {e}")
