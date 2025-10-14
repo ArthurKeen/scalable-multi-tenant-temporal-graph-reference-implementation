@@ -870,11 +870,19 @@ class AutomatedDemoWalkthrough:
         
         try:
             simulator = TransactionSimulator(NamingConvention.CAMEL_CASE, show_queries=True)
+            
+            print(f"[DEBUG] Connecting transaction simulator to database...")
             if simulator.connect_to_database():
+                print(f"[DEBUG] Transaction simulator connected successfully")
                 
                 # Simulate software configuration changes
                 print("[SOFTWARE TRANSACTIONS] Updating software configurations...")
                 software_changes = simulator.simulate_software_configuration_changes(software_count=2)
+                
+                print(f"[DEBUG] Transaction simulator returned {len(software_changes) if software_changes else 0} changes")
+                if software_changes:
+                    for i, change in enumerate(software_changes):
+                        print(f"[DEBUG] Change {i+1}: {change.entity_key} -> {change.new_config.get('_key', 'No key')}")
                 
                 print(f"\n[IMMEDIATE IMPACT] TTL fields have been set on historical documents!")
                 print(f"   Transaction timestamp: {transaction_timestamp.timestamp()}")
