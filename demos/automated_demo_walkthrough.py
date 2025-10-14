@@ -248,6 +248,7 @@ class AutomatedDemoWalkthrough:
             print("\n" + "=" * 70)
             print("DETAILED MANUAL DEMO HINTS: ArangoDB Web Interface")
             print("=" * 70)
+            creds = CredentialsManager.get_database_credentials()
             print(f"URL: {creds.endpoint}")
             print("Login with your cluster credentials")
             print()
@@ -300,24 +301,30 @@ class AutomatedDemoWalkthrough:
         print("Click 'QUERIES' and try these sample queries:")
         print()
         print("A. Show tenant isolation:")
-        print("   FOR d IN Device")
+        device_collection = self.config_manager.get_collection_name("devices")
+        print(f"   FOR d IN {device_collection}")
         print("   COLLECT tenant = d.tenantId WITH COUNT INTO count")
         print("   RETURN {tenant: tenant, devices: count}")
         print()
         print("B. Show current vs historical configurations:")
-        print("   FOR s IN Software")
+        software_collection = self.config_manager.get_collection_name("software")
+        print(f"   FOR s IN {software_collection}")
         print("   FILTER s.expired == 9223372036854775807")
         print("   RETURN {key: s._key, name: s.name, version: s.version}")
         print()
         print("C. Show network topology:")
-        print("   WITH DeviceProxyOut, DeviceProxyIn")
-        print("   FOR d IN Device")
-        print("   FOR proxy IN 1..1 OUTBOUND d hasVersion")
-        print("   FOR connected IN 1..2 OUTBOUND proxy hasConnection")
+        device_out_collection = self.config_manager.get_collection_name("device_outs")
+        device_in_collection = self.config_manager.get_collection_name("device_ins")
+        version_collection = self.config_manager.get_collection_name("versions")
+        connection_collection = self.config_manager.get_collection_name("connections")
+        print(f"   WITH {device_out_collection}, {device_in_collection}")
+        print(f"   FOR d IN {device_collection}")
+        print(f"   FOR proxy IN 1..1 OUTBOUND d {version_collection}")
+        print(f"   FOR connected IN 1..2 OUTBOUND proxy {connection_collection}")
         print("   RETURN {device: d.name, proxy: proxy._key, connected: connected._key}")
         print()
         print("D. Show MDI-prefix index usage:")
-        print("   FOR d IN Device")
+        print(f"   FOR d IN {device_collection}")
         print("   FILTER d.created >= 1234567890 AND d.expired <= 9999999999")
         print("   RETURN d.name")
         print()
@@ -356,10 +363,11 @@ class AutomatedDemoWalkthrough:
             current_time = time.time()
             
             # Check for documents with TTL fields, distinguishing demo vs production TTL
-            ttl_query = """
-            FOR doc IN Software
+            software_collection = self.config_manager.get_collection_name("software")
+            ttl_query = f"""
+            FOR doc IN {software_collection}
             FILTER HAS(doc, "ttlExpireAt")
-            RETURN {
+            RETURN {{
                 key: doc._key,
                 tenant: doc.tenantId,
                 name: doc.name,
@@ -367,7 +375,7 @@ class AutomatedDemoWalkthrough:
                 timeLeft: doc.ttlExpireAt - @currentTime,
                 status: doc.ttlExpireAt > @currentTime ? "ACTIVE" : "EXPIRED",
                 isDemo: doc.ttlExpireAt < (@currentTime + 86400)
-            }
+            }}
             """
             
             try:
@@ -741,8 +749,9 @@ class AutomatedDemoWalkthrough:
             print("[QUERY] Finding target documents to modify...")
             
             # Find current software configurations (since device query might have issues)
-            aql_software = """
-            FOR doc IN Software
+            software_collection = self.config_manager.get_collection_name("software")
+            aql_software = f"""
+            FOR doc IN {software_collection}
                 FILTER doc.expired == 9223372036854775807
                 LIMIT 4
                 RETURN doc
@@ -940,8 +949,9 @@ class AutomatedDemoWalkthrough:
                     base_key_pattern = original_key
                 
                 # Find new software versions created by transaction
+                software_collection = self.config_manager.get_collection_name("software")
                 aql_new_software = f"""
-                FOR software IN Software
+                FOR software IN {software_collection}
                     FILTER STARTS_WITH(software._key, "{base_key_pattern}-")
                     FILTER software._key != "{original_key}"
                     FILTER software.expired == 9223372036854775807
@@ -1109,8 +1119,9 @@ class AutomatedDemoWalkthrough:
                 aging_threshold = current_time - (TTLConstants.DEMO_TTL_EXPIRE_SECONDS - 60)  # Documents created in last 4 minutes
                 
                 # Count documents that should age out soon
+                software_collection = self.config_manager.get_collection_name("software")
                 aging_query = f'''
-                FOR doc IN Software
+                FOR doc IN {software_collection}
                   FILTER HAS(doc, "ttlExpireAt")
                   FILTER doc.ttlExpireAt > {current_time}
                   FILTER doc.ttlExpireAt < {current_time + 360}  // Next 6 minutes
@@ -1134,8 +1145,9 @@ class AutomatedDemoWalkthrough:
                     expire_minutes = TTLConstants.DEMO_TTL_EXPIRE_SECONDS // 60
                     print(f"\n[DEMO] DEMONSTRATION: Wait {expire_minutes} minutes to see TTL aging in action")
                     print(f"   [TIP] SUGGESTION: After {expire_minutes} minutes, run these queries to verify aging:")
-                    print(f"      FOR doc IN Software FILTER HAS(doc, 'ttlExpireAt') RETURN doc  // Should return fewer results")
-                    print(f"      FOR doc IN Software FILTER doc.expired == 9223372036854775807 RETURN doc  // Current configs only")
+                    software_collection = self.config_manager.get_collection_name("software")
+                    print(f"      FOR doc IN {software_collection} FILTER HAS(doc, 'ttlExpireAt') RETURN doc  // Should return fewer results")
+                    print(f"      FOR doc IN {software_collection} FILTER doc.expired == 9223372036854775807 RETURN doc  // Current configs only")
                     print()
                     
                     if self.interactive_mode:
@@ -1162,15 +1174,16 @@ class AutomatedDemoWalkthrough:
                             
                             # Verify aging worked - check for demo TTL vs production TTL separately
                             current_time = time.time()
-                            ttl_analysis_query = """
-                            FOR doc IN Software 
+                            software_collection = self.config_manager.get_collection_name("software")
+                            ttl_analysis_query = f"""
+                            FOR doc IN {software_collection} 
                             FILTER HAS(doc, 'ttlExpireAt')
-                            RETURN {
+                            RETURN {{
                                 key: doc._key,
                                 ttlExpireAt: doc.ttlExpireAt,
                                 expired: doc.ttlExpireAt < @currentTime,
                                 isDemo: doc.ttlExpireAt < (@currentTime + 86400)
-                            }
+                            }}
                             """
                             
                             ttl_docs = list(self.database.aql.execute(ttl_analysis_query, bind_vars={"currentTime": current_time}))
@@ -1193,7 +1206,8 @@ class AutomatedDemoWalkthrough:
                             print(f"\n[WEB] ArangoDB Web UI Monitoring:")
                             print(f"   URL: https://1d53cdf6fad0.arangodb.cloud:8529")
                             print(f"   [QUERY] Run this query to monitor TTL documents:")
-                            print(f"      FOR doc IN Software FILTER HAS(doc, 'ttlExpireAt') RETURN {{")
+                            software_collection = self.config_manager.get_collection_name("software")
+                            print(f"      FOR doc IN {software_collection} FILTER HAS(doc, 'ttlExpireAt') RETURN {{")
                             print(f"        key: doc._key,")
                             print(f"        ttlExpireAt: doc.ttlExpireAt,")
                             print(f"        timeLeft: doc.ttlExpireAt - DATE_NOW()/1000")
@@ -1243,7 +1257,8 @@ class AutomatedDemoWalkthrough:
             alert_simulator = AlertSimulator(NamingConvention.CAMEL_CASE)
             
             # Get the first available tenant for demonstration
-            tenant_query = "FOR d IN Device LIMIT 1 RETURN d.tenantId"
+            device_collection = self.config_manager.get_collection_name("devices")
+            tenant_query = f"FOR d IN {device_collection} LIMIT 1 RETURN d.tenantId"
             cursor = self.database.aql.execute(tenant_query)
             tenant_results = list(cursor)
             
@@ -1359,14 +1374,18 @@ class AutomatedDemoWalkthrough:
             self.demo_progress(5, 6, "Demonstrating alert correlation", 
                              "Showing how alerts relate to devices, software, and locations")
             
+            alert_collection = self.config_manager.get_collection_name("alerts")
+            has_alert_collection = self.config_manager.get_collection_name("has_alerts")
+            device_out_collection = self.config_manager.get_collection_name("device_outs")
+            software_out_collection = self.config_manager.get_collection_name("software_outs")
             correlation_query = f"""
-            FOR alert IN Alert
+            FOR alert IN {alert_collection}
                 FILTER alert.tenantId == "{demo_tenant_id}"
-                FOR edge IN hasAlert
+                FOR edge IN {has_alert_collection}
                     FILTER edge._to == alert._id
                     FOR source IN UNION(
-                        (FOR d IN DeviceProxyOut FILTER d._id == edge._from RETURN {{type: "device", name: d.name, id: d._id}}),
-                        (FOR s IN SoftwareProxyOut FILTER s._id == edge._from RETURN {{type: "software", name: s.name, id: s._id}})
+                        (FOR d IN {device_out_collection} FILTER d._id == edge._from RETURN {{type: "device", name: d.name, id: d._id}}),
+                        (FOR s IN {software_out_collection} FILTER s._id == edge._from RETURN {{type: "software", name: s.name, id: s._id}})
                     )
                     RETURN {{
                         alert_name: alert.name,
@@ -1426,116 +1445,6 @@ class AutomatedDemoWalkthrough:
                 import traceback
                 traceback.print_exc()
         
-    def section_7_alert_system_demonstration(self):
-        """Section 7: Alert System Demonstration."""
-        self.demo_section_start(
-            "ALERT SYSTEM DEMONSTRATION", 
-            "Real-time operational monitoring with graph-integrated alerts"
-        )
-        
-        try:
-            # Initialize alert simulator
-            alert_simulator = AlertSimulator(NamingConvention.CAMEL_CASE)
-            
-            # Get the first available tenant for demonstration
-            tenant_query = "FOR d IN Device LIMIT 1 RETURN d.tenantId"
-            cursor = self.database.aql.execute(tenant_query)
-            tenant_results = list(cursor)
-            
-            if not tenant_results:
-                self.demo_print("No tenants found for alert demonstration", "critical")
-                return
-                
-            demo_tenant_id = tenant_results[0]
-            self.demo_print(f"Using tenant: {demo_tenant_id}", "info")
-            
-            # Show current alert status briefly
-            self.demo_progress(1, 4, "Checking current alert status")
-            current_alerts = alert_simulator.get_tenant_alerts(demo_tenant_id)
-            active_count = len([a for a in current_alerts if a['status'] == 'active'])
-            resolved_count = len([a for a in current_alerts if a['status'] == 'resolved'])
-            
-            self.demo_print(f"Current Alert Status:", "info")
-            self.demo_print(f"  Total alerts: {len(current_alerts)}", "info")
-            self.demo_print(f"  Active: {active_count} | Resolved: {resolved_count}", "info")
-            
-            # Generate alerts with clear visualizer instructions
-            self.demo_progress(2, 4, "Generating operational alerts")
-            
-            alert_types = [
-                ("Hardware Alert", alert_simulator.generate_critical_hardware_alert),
-                ("Software Alert", alert_simulator.generate_software_performance_alert),
-                ("Connectivity Alert", alert_simulator.generate_connectivity_alert)
-            ]
-            
-            print(f"\n{'='*60}")
-            print("VISUALIZER START SET - COPY THESE IDs:")
-            print(f"{'='*60}")
-            
-            generated_alerts = []
-            for i, (alert_name, generator_func) in enumerate(alert_types, 1):
-                try:
-                    result = generator_func(demo_tenant_id)
-                    generated_alerts.append(result)
-                    alert = result['alert']
-                    
-                    print(f"{i}. {alert['name']}")
-                    print(f"   ID: {alert['_id']}")
-                    print(f"   Type: {alert['severity']} {alert['alertType']}")
-                    print()
-                    
-                except Exception as e:
-                    self.demo_print(f"   [ERROR] Error generating {alert_name}: {e}", "critical")
-            
-            print(f"{'='*60}")
-            print("WHAT TO LOOK FOR IN VISUALIZER:")
-            print("• Alert vertices connected to DeviceProxyOut/SoftwareProxyOut")
-            print("• hasAlert edges showing alert relationships")
-            print("• Alert properties: severity, alertType, status, message")
-            print("• Multi-tenant isolation (only this tenant's data)")
-            print(f"{'='*60}")
-            
-            self.pause_for_observation("Copy the alert IDs above to visualizer start set. Press Enter when ready for resolution demo.")
-            
-            # Demonstrate alert resolution
-            self.demo_progress(3, 4, "Demonstrating alert resolution")
-            
-            if generated_alerts:
-                alert_to_resolve = generated_alerts[0]['alert']
-                self.demo_print(f"Resolving: {alert_to_resolve['name']}", "info")
-                
-                try:
-                    resolution_result = alert_simulator.resolve_alert(alert_to_resolve['_key'], demo_tenant_id)
-                    ttl_time = datetime.datetime.fromtimestamp(resolution_result['ttl_expire_at']).strftime('%H:%M:%S')
-                    
-                    print(f"\n{'='*40}")
-                    print("RESOLVED ALERT:")
-                    print(f"ID: {alert_to_resolve['_id']}")
-                    print(f"Status: RESOLVED (TTL expires at {ttl_time})")
-                    print("Refresh visualizer to see status change")
-                    print(f"{'='*40}")
-                        
-                except Exception as e:
-                    self.demo_print(f"[ERROR] Resolution error: {e}", "critical")
-            
-            # Final summary
-            self.demo_progress(4, 4, "Alert system summary")
-            
-            final_alerts = alert_simulator.get_tenant_alerts(demo_tenant_id)
-            final_active = len([a for a in final_alerts if a['status'] == 'active'])
-            final_resolved = len([a for a in final_alerts if a['status'] == 'resolved'])
-            
-            print(f"\nFINAL STATUS:")
-            print(f"  Total alerts: {len(final_alerts)}")
-            print(f"  Active: {final_active} | Resolved: {final_resolved}")
-            print(f"  Graph integration: hasAlert edges ready for visualization")
-            
-        except Exception as e:
-            self.demo_print(f"[ERROR] Alert system demonstration error: {e}", "critical")
-        
-        self.pause_for_observation("Alert system demonstration complete. Ready for taxonomy demo?")
-        self.sections_completed.append("alert_system_demonstration")
-    
     def section_8_taxonomy_system_demonstration(self):
         """Section 8: Taxonomy System Demonstration."""
         self.print_section_header(
@@ -1625,20 +1534,23 @@ class AutomatedDemoWalkthrough:
             
             # Query 4: Show software classifications
             self.demo_print("4. SOFTWARE CLASSIFICATIONS (Sample):", "query")
-            software_class_query = """
-            FOR software IN Software
+            software_collection = self.config_manager.get_collection_name("software")
+            type_collection = self.config_manager.get_collection_name("types")
+            class_collection = self.config_manager.get_collection_name("classes")
+            software_class_query = f"""
+            FOR software IN {software_collection}
                 FILTER software.tenantId == @tenant_id
-                FOR type_edge IN type
+                FOR type_edge IN {type_collection}
                     FILTER type_edge._from == software._id
-                    FOR class IN Class
+                    FOR class IN {class_collection}
                         FILTER class._id == type_edge._to
                         LIMIT 5
-                        RETURN {
+                        RETURN {{
                             software: software.name,
                             version: software.version,
                             class: class.name,
                             confidence: type_edge.confidence
-                        }
+                        }}
             """
             
             software_results = database.aql.execute(software_class_query, bind_vars={"tenant_id": demo_tenant_id})
@@ -1650,15 +1562,17 @@ class AutomatedDemoWalkthrough:
             self.demo_print("5. SEMANTIC PATH TRAVERSAL:", "query")
             self.demo_print("Find all routers and their subclasses:", "info")
             
-            router_query = """
-            FOR router_class IN Class
+            class_collection = self.config_manager.get_collection_name("classes")
+            subclass_collection = self.config_manager.get_collection_name("subclass_of")
+            router_query = f"""
+            FOR router_class IN {class_collection}
                 FILTER router_class.name == "Router"
-                FOR subclass IN 1..3 INBOUND router_class subClassOf
-                    RETURN DISTINCT {
+                FOR subclass IN 1..3 INBOUND router_class {subclass_collection}
+                    RETURN DISTINCT {{
                         class: subclass.name,
                         type: subclass.classType,
                         depth: LENGTH(subclass)
-                    }
+                    }}
             """
             
             router_results = database.aql.execute(router_query)
