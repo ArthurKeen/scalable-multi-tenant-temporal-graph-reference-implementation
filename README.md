@@ -545,8 +545,8 @@ PYTHONPATH=. python3 src/data_generation/asset_generator.py
 # Database Deployment Only  
 PYTHONPATH=. python3 src/database/database_deployment.py
 
-# TTL Demo Scenarios Only
-PYTHONPATH=. python3 src/ttl/ttl_demo_scenarios.py
+# Transaction Simulation Only
+PYTHONPATH=. python3 src/simulation/transaction_simulator.py --devices 5 --software 3
 
 # Validation Only
 PYTHONPATH=. python3 src/validation/validation_suite.py
@@ -689,9 +689,6 @@ PYTHONPATH=. python3 src/database/database_deployment.py
 # Transaction Simulation Only
 PYTHONPATH=. python3 src/simulation/transaction_simulator.py --devices 5 --software 3
 
-# TTL Demo Scenarios Only
-PYTHONPATH=. python3 src/ttl/ttl_demo_scenarios.py
-
 # Validation Only
 PYTHONPATH=. python3 src/validation/validation_suite.py
 ```
@@ -794,7 +791,7 @@ PYTHONPATH=. python3 src/database/database_deployment.py --naming snake_case
 ```bash
 # Load new tenant data into existing database
 # (Preserves existing data, adds new tenants)
-python oasis_cluster_setup.py
+PYTHONPATH=. python3 src/database/database_deployment.py --incremental
 
 # This will:
 # 1. Connect to existing database
@@ -809,13 +806,10 @@ Run comprehensive validation:
 
 ```bash
 # Full validation suite
-python3 src/validation/validation_suite.py
+PYTHONPATH=. python3 src/validation/validation_suite.py
 
 # Quick database check
-python database_utilities.py
-
-# Test suite (development validation)
-python test_suite.py
+PYTHONPATH=. python3 src/database/database_utilities.py
 ```
 
 ## Troubleshooting
@@ -826,7 +820,6 @@ If you encounter `python: command not found` errors:
 
 ```bash
 # Use python3 instead of python (already updated in all scripts)
-python3 demos/demo_launcher.py
 python3 demos/automated_demo_walkthrough.py --interactive
 
 # Check your Python installation
@@ -858,26 +851,28 @@ export ARANGO_DATABASE="network_assets_demo"
 
 ### Bug Fixes and Diagnostic Tools
 
-**Orphaned Configuration Issue**
-If Software configurations appear disconnected in the graph:
+**System Validation and Diagnostics**
+Run comprehensive validation to identify and diagnose issues:
 ```bash
-python3 fix_transaction_simulation_bug.py
-```
-This fixes configurations created by transaction simulation that lack proper hasVersion edges.
+# Full system validation
+PYTHONPATH=. python3 src/validation/validation_suite.py
 
-**Multiple Current Configurations**
-If software entities have multiple "current" configurations:
-```bash
-python3 fix_multiple_current_configs.py
+# Database utilities and diagnostics  
+PYTHONPATH=. python3 src/database/database_utilities.py
 ```
-This ensures each software entity has exactly one current configuration.
 
-**TTL Field Issues**
-If TTL behavior seems incorrect:
+**TTL and Transaction Monitoring**
+Monitor TTL behavior and transaction results:
 ```bash
-python3 ttl_bug_fix.py
+# Monitor TTL aging in real-time
+PYTHONPATH=. python3 src/ttl/ttl_monitor.py --duration 15
+
+# Check TTL status
+PYTHONPATH=. python3 src/ttl/ttl_monitor.py --status-only
+
+# Run transaction simulation with monitoring
+PYTHONPATH=. python3 src/simulation/transaction_simulator.py --devices 5 --software 3
 ```
-This diagnoses and fixes TTL field inconsistencies in current vs historical documents.
 
 ## Scale-Out Capabilities
 
@@ -886,14 +881,14 @@ This diagnoses and fixes TTL field inconsistencies in current vs historical docu
 Add new tenants to existing database without disrupting operations:
 
 ```bash
-# Add single tenant
-python scale_out_manager.py --operation add-tenant --tenant-name "New Corp" --scale-factor 2
+# Add tenants using the scale-out manager
+PYTHONPATH=. python3 src/simulation/scale_out_manager.py --operation add-tenant --tenant-name "New Corp" --scale-factor 2
 
 # Add multiple demo tenants
-python scale_out_manager.py --operation add-tenants
+PYTHONPATH=. python3 src/simulation/scale_out_manager.py --operation add-tenants
 
-# Run complete scale-out demonstration
-python3 demos/scale_out_demo.py --save-report
+# Run complete scale-out demonstration via automated walkthrough
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 ```
 
 ### Database Server Scaling
@@ -902,10 +897,10 @@ Analyze cluster state to prepare for manual server addition:
 
 ```bash
 # Analyze current cluster state
-python scale_out_manager.py --operation server-info
+PYTHONPATH=. python3 src/simulation/scale_out_manager.py --operation server-info
 
 # Analyze shard distribution for rebalancing planning
-python scale_out_manager.py --operation shard-info
+PYTHONPATH=. python3 src/simulation/scale_out_manager.py --operation shard-info
 ```
 
 **Note**: Database server addition is performed manually through the ArangoDB Oasis web interface.
@@ -918,7 +913,7 @@ python scale_out_manager.py --operation shard-info
 - **Cost Efficiency**: Shared infrastructure with isolated data
 - **Operational Simplicity**: Centralized management with tenant autonomy
 
-See [SCALE_OUT_GUIDE.md](SCALE_OUT_GUIDE.md) for detailed instructions.
+For detailed scale-out instructions, see the Scale-Out Demo section in the automated walkthrough.
 
 ## Data Generation Options
 
@@ -1025,7 +1020,7 @@ hasVersion edges:        1,800  (temporal relationships)
 
 ### Test Coverage
 ```bash
-python test_suite.py
+PYTHONPATH=. python3 src/validation/test_suite.py
 ```
 - **Total Tests**: 21
 - **Success Rate**: 100%
@@ -1065,8 +1060,8 @@ python3 src/validation/validation_suite.py
   - simulation/
     - transaction_simulator.py        # Real transaction execution with TTL
     - alert_simulator.py              # Alert generation and lifecycle
+    - scale_out_manager.py            # Scale-out operations and tenant management
   - ttl/
-    - ttl_demo_scenarios.py          # TTL aging demonstration scenarios
     - ttl_constants.py               # TTL configuration constants
     - ttl_monitor.py                 # TTL monitoring utilities
 - demos/
@@ -1117,8 +1112,14 @@ export ARANGO_DATABASE="network_assets_demo"
 ```
 
 **Setup Instructions:**
-1. Copy `environment_variables.example` and set your actual credentials
-2. Source the environment variables: `source environment_variables.example`
+1. Set environment variables directly in your shell or create your own environment file
+2. Export the environment variables: 
+   ```bash
+   export ARANGO_ENDPOINT="https://your-cluster.arangodb.cloud:8529"
+   export ARANGO_USERNAME="root"  
+   export ARANGO_PASSWORD="your-secure-password"
+   export ARANGO_DATABASE="network_assets_demo"
+   ```
 3. Verify setup: `echo $ARANGO_ENDPOINT`
 
 ### Centralized Configuration
@@ -1170,8 +1171,8 @@ All settings are managed through `config_management.py`:
 
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
-3. **Run** tests: `python test_suite.py`
-4. **Validate** compliance: `python3 src/validation/validation_suite.py`
+3. **Run** tests: `PYTHONPATH=. python3 src/validation/test_suite.py`
+4. **Validate** compliance: `PYTHONPATH=. python3 src/validation/validation_suite.py`
 5. **Commit** changes: `git commit -m 'Add amazing feature'`
 6. **Push** to branch: `git push origin feature/amazing-feature`
 7. **Open** a Pull Request
