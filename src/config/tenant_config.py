@@ -243,7 +243,6 @@ class TemporalDataModel:
             # Use demo TTL if available for shorter aging periods
             if hasattr(TTLConstants, 'DEMO_TTL_EXPIRE_SECONDS'):
                 enhanced_doc["ttlExpireAt"] = expired + TTLConstants.DEMO_TTL_EXPIRE_SECONDS
-                print(f"DEBUG: Setting TTL for historical doc - expired={expired}, ttlExpireAt={enhanced_doc['ttlExpireAt']}, diff={TTLConstants.DEMO_TTL_EXPIRE_SECONDS}s")
             else:
                 enhanced_doc["ttlExpireAt"] = expired + TTLConstants.DEFAULT_TTL_EXPIRE_SECONDS
         # Current documents (expired = NEVER_EXPIRES) don't get ttlExpireAt field

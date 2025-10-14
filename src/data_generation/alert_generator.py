@@ -270,7 +270,6 @@ class AlertGenerator:
             # Use demo TTL if available for shorter aging periods
             if hasattr(TTLConstants, 'DEMO_TTL_EXPIRE_SECONDS'):
                 alert_doc["ttlExpireAt"] = alert_doc["expired"] + TTLConstants.DEMO_TTL_EXPIRE_SECONDS
-                print(f"DEBUG: Setting TTL for resolved alert - expired={alert_doc['expired']}, ttlExpireAt={alert_doc['ttlExpireAt']}, diff={TTLConstants.DEMO_TTL_EXPIRE_SECONDS}s")
             else:
                 # Production mode - 30 day TTL
                 alert_doc["ttlExpireAt"] = alert_doc["expired"] + (30 * 24 * 60 * 60)

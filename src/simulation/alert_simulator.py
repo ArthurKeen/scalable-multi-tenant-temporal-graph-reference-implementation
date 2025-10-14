@@ -254,10 +254,8 @@ class AlertSimulator:
         # FIXED: Use DEMO_TTL_EXPIRE_SECONDS directly instead of converting minutes
         if hasattr(TTLConstants, 'DEMO_TTL_EXPIRE_SECONDS'):
             ttl_expire_at = resolved_time + TTLConstants.DEMO_TTL_EXPIRE_SECONDS
-            print(f"DEBUG: resolved_time={resolved_time}, ttl_expire_at={ttl_expire_at}, diff={TTLConstants.DEMO_TTL_EXPIRE_SECONDS}s")
         else:
             ttl_expire_at = resolved_time + (30 * 24 * 60 * 60)  # 30 days
-            print(f"DEBUG: Using 30-day fallback TTL")
         
         # Update alert document using replace (more reliable than update for this collection)
         alert_doc = self.alerts_collection.get(alert_key)
@@ -277,7 +275,6 @@ class AlertSimulator:
                 "expired": resolved_time,
                 "ttlExpireAt": ttl_expire_at
             })
-            print(f"DEBUG: Updating edge {edge['_key']} - expired={resolved_time}, ttlExpireAt={ttl_expire_at}")
             self.hasAlert_collection.replace(edge_doc)
         
         return {
