@@ -898,90 +898,115 @@ class AutomatedDemoWalkthrough:
             print(f"[ERROR] Transaction execution failed: {e}")
             simulation_results = {"error": str(e)}
         
-        # Step 3: Show after state
+        # Step 3: Show after state with direct new ID listing
         self.pause_for_observation("Ready to analyze ACTUAL database state after transactions?")
         
         print("\n" + "="*60)
-        print("STEP 3: ACTUAL DATABASE STATE AFTER TRANSACTIONS")
+        print("STEP 3: NEW DOCUMENT IDs CREATED BY TRANSACTIONS")
         print("="*60)
         
         try:
-            if not self.verbose:
-                # PRESENTATION MODE - Find and highlight new software IDs
-                print("FINDING NEW SOFTWARE IDs CREATED BY TRANSACTIONS...")
-                print()
+            print("🆕 DIRECTLY LISTING NEW IDs CREATED:")
+            print("="*50)
+            
+            new_ids_created = []
+            
+            # Query for newly created software documents
+            for i, doc in enumerate(target_documents):
+                original_key = doc["key"]
                 
-                # Query for newly created software documents
-                for i, doc in enumerate(target_documents):
-                    original_key = doc["key"]
-                    
-                    # Extract base key for SmartGraph keys (e.g., "54e9effbbc3c:software1-0" -> "54e9effbbc3c:software1")
-                    if ":" in original_key and "-" in original_key:
-                        tenant_part, entity_part = original_key.split(":", 1)
-                        if "-" in entity_part:
-                            base_entity = entity_part.rsplit("-", 1)[0]
-                            base_key_pattern = f"{tenant_part}:{base_entity}"
-                        else:
-                            base_key_pattern = original_key
+                # Extract base key for SmartGraph keys (e.g., "54e9effbbc3c:software1-0" -> "54e9effbbc3c:software1")
+                if ":" in original_key and "-" in original_key:
+                    tenant_part, entity_part = original_key.split(":", 1)
+                    if "-" in entity_part:
+                        base_entity = entity_part.rsplit("-", 1)[0]
+                        base_key_pattern = f"{tenant_part}:{base_entity}"
                     else:
                         base_key_pattern = original_key
-                    
-                    # Find new software versions created by transaction
-                    aql_new_software = f"""
-                    FOR software IN Software
-                        FILTER STARTS_WITH(software._key, "{base_key_pattern}-")
-                        FILTER software._key != "{original_key}"
-                        FILTER software.expired == 9223372036854775807
-                        FILTER software.created >= @transaction_start
-                        SORT software.created DESC
-                        LIMIT 1
-                        RETURN {{
-                            id: software._id,
-                            key: software._key,
-                            name: software.name,
-                            type: software.type,
-                            created: software.created
-                        }}
-                    """
-                    
-                    cursor = self.database.aql.execute(aql_new_software, bind_vars={"transaction_start": transaction_timestamp.timestamp()})
-                    new_software = list(cursor)
-                    
-                    if new_software:
-                        print(f"NEW SOFTWARE {i+1} IDs TO COPY FOR VISUALIZER:")
-                        print("="*60)
-                        for j, software in enumerate(new_software):
-                            print(f"NEW VERSION {j+1}:")
-                            print(f"   COPY THIS → {software['id']}")
-                            print(f"   Name: {software['name']} ({software['type']})")
-                            print()
-                    
-                self.demo_manual_prompt(
-                    "Use the NEW software IDs above in ArangoDB Graph Visualizer",
-                    "These are the newly created software configurations from the transaction"
-                )
+                else:
+                    base_key_pattern = original_key
+                
+                # Find new software versions created by transaction
+                aql_new_software = f"""
+                FOR software IN Software
+                    FILTER STARTS_WITH(software._key, "{base_key_pattern}-")
+                    FILTER software._key != "{original_key}"
+                    FILTER software.expired == 9223372036854775807
+                    FILTER software.created >= @transaction_start
+                    SORT software.created DESC
+                    LIMIT 1
+                    RETURN {{
+                        id: software._id,
+                        key: software._key,
+                        name: software.name,
+                        type: software.type,
+                        created: software.created
+                    }}
+                """
+                
+                cursor = self.database.aql.execute(aql_new_software, bind_vars={"transaction_start": transaction_timestamp.timestamp()})
+                new_software = list(cursor)
+                
+                if new_software:
+                    for software in new_software:
+                        new_ids_created.append({
+                            'id': software['id'],
+                            'key': software['key'],
+                            'name': software['name'],
+                            'type': software['type'],
+                            'original_key': original_key
+                        })
+            
+            # Display all new IDs in a clean, direct format
+            if new_ids_created:
+                print(f"📋 NEW DOCUMENT IDs (Total: {len(new_ids_created)}):")
+                print("-" * 60)
+                
+                for i, new_doc in enumerate(new_ids_created, 1):
+                    print(f"{i}. NEW ID: {new_doc['id']}")
+                    print(f"   Name: {new_doc['name']}")
+                    print(f"   Type: {new_doc['type']}")
+                    print(f"   Key: {new_doc['key']}")
+                    print(f"   Original: {new_doc['original_key']} → {new_doc['key']}")
+                    print()
+                
+                print("🎯 COPY THESE IDs FOR VISUALIZATION:")
+                print("-" * 40)
+                for i, new_doc in enumerate(new_ids_created, 1):
+                    print(f"{i}. {new_doc['id']}")
+                print()
+                
+                if not self.verbose:
+                    self.demo_manual_prompt(
+                        f"NEW SOFTWARE IDs: {', '.join([doc['id'] for doc in new_ids_created])}",
+                        "These are the newly created software configurations from the transaction"
+                    )
             else:
-                # VERBOSE MODE - Full technical detail
-                print("[VERIFICATION] Check these documents NOW in ArangoDB:")
+                print("⚠️  No new IDs found - transaction may not have completed successfully")
+                print("   Check the transaction logs above for any errors")
+            
+            if self.verbose:
+                print("\n[TECHNICAL DETAILS] Database state analysis:")
                 print("-" * 60)
                 for doc in target_documents:
                     collection = doc["collection"]
                     key = doc["key"]
-                    print(f"   1. Query: FOR doc IN {collection} FILTER doc._key == '{key}' RETURN doc")
-                    print(f"   2. Query: FOR doc IN {collection} FILTER STARTS_WITH(doc._key, '{key}') RETURN doc")
-                    print(f"      (Look for new versions of the document with TTL timestamps)")
+                    print(f"   Original: {collection}/{key}")
+                    print(f"   Query: FOR doc IN {collection} FILTER STARTS_WITH(doc._key, '{key}') RETURN doc")
                     print()
                 
                 print("[GRAPH IMPACT] Updated graph paths to explore:")
                 print("-" * 60)
-                for doc in target_documents:
-                    software_key = doc["key"]
+                for new_doc in new_ids_created:
+                    software_key = new_doc["key"]
                     print(f"   Software/{software_key} -> hasVersion -> [multiple Software versions]")
                     print(f"   <- hasDeviceSoftware <- DeviceProxyOut <- Device")
                 print()
             
         except Exception as e:
-            print(f"[ERROR] Failed to show after state: {e}")
+            print(f"[ERROR] Failed to show new IDs: {e}")
+            import traceback
+            traceback.print_exc()
         
         # Results summary
         print("\n[ENHANCED TRANSACTION RESULTS]")
