@@ -13,7 +13,70 @@ from arango import ArangoClient
 from pathlib import Path
 import json
 
-from src.config.centralized_credentials import CredentialsManager, DatabaseConstants, get_collection_name
+from src.config.centralized_credentials import CredentialsManager, get_collection_name
+
+
+class DatabaseMixin:
+    """
+    Mixin class that provides standardized database connection functionality.
+    
+    Classes that inherit from this mixin get:
+    - Consistent database connection patterns
+    - Lazy initialization of client and database
+    - Error handling for connection issues
+    - Standardized credential management
+    
+    Usage:
+        class MyClass(DatabaseMixin):
+            def __init__(self):
+                super().__init__()
+                # Your initialization code
+    """
+    
+    def __init__(self, environment: str = "production"):
+        self.environment = environment
+        self.creds = CredentialsManager.get_database_credentials(environment)
+        self._client = None
+        self._database = None
+    
+    @property
+    def client(self) -> ArangoClient:
+        """Get ArangoDB client with lazy initialization."""
+        if self._client is None:
+            self._client = ArangoClient(hosts=self.creds.endpoint)
+        return self._client
+    
+    @property
+    def database(self):
+        """Get database connection with lazy initialization."""
+        if self._database is None:
+            self._database = self.client.db(
+                self.creds.database_name,
+                **CredentialsManager.get_database_params(self.environment)
+            )
+        return self._database
+    
+    def connect_to_database(self) -> bool:
+        """Connect to database and test connection."""
+        try:
+            version_info = self.database.version()
+            return True
+        except Exception as e:
+            print(f"[ERROR] Database connection failed: {str(e)}")
+            return False
+    
+    def execute_aql(self, query: str, bind_vars: Optional[Dict] = None) -> List[Dict]:
+        """Execute AQL query and return results."""
+        try:
+            return list(self.database.aql.execute(query, bind_vars=bind_vars or {}))
+        except Exception as e:
+            print(f"[ERROR] Query failed: {str(e)}")
+            return []
+    
+    def get_collection(self, logical_name: str):
+        """Get collection by logical name."""
+        collection_name = get_collection_name(logical_name)
+        return self.database.collection(collection_name)
 
 
 class QueryExecutor:
@@ -156,17 +219,23 @@ class CollectionUtility:
     @staticmethod
     def get_all_collection_names() -> Dict[str, str]:
         """Get all logical to actual collection name mappings."""
-        return {**DatabaseConstants.VERTEX_COLLECTIONS, **DatabaseConstants.EDGE_COLLECTIONS}
+        from src.config.config_management import get_config, NamingConvention
+        config = get_config("production", NamingConvention.CAMEL_CASE)
+        return {**config.get_all_vertex_collections(), **config.get_all_edge_collections()}
     
     @staticmethod
     def get_vertex_collections() -> Dict[str, str]:
         """Get vertex collection mappings."""
-        return DatabaseConstants.VERTEX_COLLECTIONS.copy()
+        from src.config.config_management import get_config, NamingConvention
+        config = get_config("production", NamingConvention.CAMEL_CASE)
+        return config.get_all_vertex_collections()
     
     @staticmethod
     def get_edge_collections() -> Dict[str, str]:
         """Get edge collection mappings."""
-        return DatabaseConstants.EDGE_COLLECTIONS.copy()
+        from src.config.config_management import get_config, NamingConvention
+        config = get_config("production", NamingConvention.CAMEL_CASE)
+        return config.get_all_edge_collections()
     
     @staticmethod
     def is_proxy_collection(collection_name: str) -> bool:

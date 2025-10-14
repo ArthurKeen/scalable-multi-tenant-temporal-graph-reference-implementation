@@ -18,50 +18,41 @@ from pathlib import Path
 from arango import ArangoClient
 
 # Import centralized credentials
+from src.database.database_utilities import DatabaseMixin, QueryExecutor
 from src.config.centralized_credentials import CredentialsManager
-from src.database.database_utilities import QueryExecutor
+from src.config.config_management import ConfigurationManager, NamingConvention
 
 
-class TimeTravelValidationSuite:
+class TimeTravelValidationSuite(DatabaseMixin):
     """Comprehensive validation suite for time travel refactoring."""
     
     def __init__(self, show_queries: bool = False):
-        creds = CredentialsManager.get_database_credentials()
-        self.client = ArangoClient(hosts=creds.endpoint)
-        self.database = None
+        super().__init__()  # Initialize DatabaseMixin
+        self.config_manager = ConfigurationManager("production", NamingConvention.CAMEL_CASE)
         self.validation_results = {}
         self.show_queries = show_queries
         
-    def connect_to_database(self) -> bool:
-        """Connect to the ArangoDB Oasis database."""
-        try:
-            creds = CredentialsManager.get_database_credentials()
-            self.database = self.client.db(creds.database_name, **CredentialsManager.get_database_params())
-            version_info = self.database.version()
-            print(f"[DONE] Connected to {creds.database_name}")
-            return True
-        except Exception as e:
-            print(f"[ERROR] Connection failed: {str(e)}")
-            return False
-    
-    def execute_and_display_query(self, query: str, query_name: str, bind_vars: Dict = None) -> List[Dict]:
-        """Execute a query and display it with results if show_queries is enabled."""
-        return QueryExecutor.execute_and_display_query(self.database, query, query_name, bind_vars, self.show_queries)
-    
     def validate_collection_structure(self) -> bool:
         """Validate that all required collections exist with correct structure."""
         print(f"\n[ANALYSIS] Validating Collection Structure...")
         
         try:
-            # Expected collections after refactoring
+            # Get expected collections from configuration
             expected_vertex_collections = [
-                "Device", "DeviceProxyIn", "DeviceProxyOut",
-                "Software", "SoftwareProxyIn", "SoftwareProxyOut",
-                "Location"
+                self.config_manager.get_collection_name("devices"),
+                self.config_manager.get_collection_name("device_ins"),
+                self.config_manager.get_collection_name("device_outs"),
+                self.config_manager.get_collection_name("software"),
+                self.config_manager.get_collection_name("software_ins"),
+                self.config_manager.get_collection_name("software_outs"),
+                self.config_manager.get_collection_name("locations")
             ]
             
             expected_edge_collections = [
-                "hasConnection", "hasLocation", "hasDeviceSoftware", "hasVersion"
+                self.config_manager.get_collection_name("connections"),
+                self.config_manager.get_collection_name("has_locations"),
+                self.config_manager.get_collection_name("has_device_software"),
+                self.config_manager.get_collection_name("versions")
             ]
             
             # Validate vertex collections
@@ -108,7 +99,7 @@ class TimeTravelValidationSuite:
         print(f"\n[ANALYSIS] Validating Software Refactoring...")
         
         try:
-            software_collection = self.database.collection("Software")
+            software_collection = self.database.collection(self.config_manager.get_collection_name("software"))
             
             # Check sample documents
             samples = software_collection.all(limit=10)
@@ -320,9 +311,9 @@ class TimeTravelValidationSuite:
                 total_docs = self.execute_and_display_query(total_docs_query, "Total Documents Check")
                 if total_docs and total_docs[0] == 0:
                     # Check if collections even exist (deployment ran vs complete reset)
-                    if (self.database.has_collection("Device") and 
-                        self.database.has_collection("Software") and 
-                        self.database.has_collection("Location")):
+                    if (self.database.has_collection(self.config_manager.get_collection_name("devices")) and 
+                        self.database.has_collection(self.config_manager.get_collection_name("software")) and 
+                        self.database.has_collection(self.config_manager.get_collection_name("locations"))):
                         print(f"   [WARNING] Collections exist but are empty - possible deployment failure")
                         print(f"   [INFO] Continuing validation assuming pre-deployment state")
                         return True

@@ -40,6 +40,10 @@ class AutomatedDemoWalkthrough:
         self.interactive_mode = interactive
         self.verbose = verbose
         
+        # Initialize configuration manager
+        from src.config.config_management import get_config
+        self.config_manager = get_config("production", NamingConvention.CAMEL_CASE)
+        
         # Database connection for reset functionality
         self.client = None
         self.database = None
@@ -129,12 +133,27 @@ class AutomatedDemoWalkthrough:
             return False
         
         try:
-            # Collections to clear for a fresh start
+            # Collections to clear for a fresh start - use configuration manager for dynamic names
             collections_to_clear = [
-                'Device', 'DeviceProxyIn', 'DeviceProxyOut',
-                'Software', 'SoftwareProxyIn', 'SoftwareProxyOut', 
-                'Location',
-                'hasConnection', 'hasLocation', 'hasDeviceSoftware', 'hasVersion'
+                # Vertex collections
+                self.config_manager.get_collection_name("devices"),
+                self.config_manager.get_collection_name("device_ins"),
+                self.config_manager.get_collection_name("device_outs"),
+                self.config_manager.get_collection_name("software"),
+                self.config_manager.get_collection_name("software_ins"),
+                self.config_manager.get_collection_name("software_outs"),
+                self.config_manager.get_collection_name("locations"),
+                self.config_manager.get_collection_name("alerts"),
+                # Edge collections
+                self.config_manager.get_collection_name("connections"),
+                self.config_manager.get_collection_name("has_locations"),
+                self.config_manager.get_collection_name("has_device_software"),
+                self.config_manager.get_collection_name("versions"),
+                self.config_manager.get_collection_name("has_alerts"),
+                # Taxonomy collections (FIXED: these were missing!)
+                self.config_manager.get_collection_name("classes"),
+                self.config_manager.get_collection_name("types"),
+                self.config_manager.get_collection_name("subclass_of")
             ]
             
             cleared_count = 0
@@ -229,7 +248,7 @@ class AutomatedDemoWalkthrough:
             print("\n" + "=" * 70)
             print("DETAILED MANUAL DEMO HINTS: ArangoDB Web Interface")
             print("=" * 70)
-            print("URL: https://1d53cdf6fad0.arangodb.cloud:8529")
+            print(f"URL: {creds.endpoint}")
             print("Login with your cluster credentials")
             print()
             
@@ -257,7 +276,7 @@ class AutomatedDemoWalkthrough:
         print("-" * 50)
         print("Steps to show:")
         print("1. Click 'GRAPHS' in the main menu")
-        print("2. Select 'network_assets_graph' from the graph list")
+        print("2. Select 'network_assets_smartgraph' from the graph list")
         print("3. In the Graph Visualizer:")
         print("   - Set maximum depth to 3-4 for good visualization")
         print("   - Start with a Device or Location vertex")
@@ -742,7 +761,7 @@ class AutomatedDemoWalkthrough:
                     software_key = software["_key"]
                     
                     target_doc = {
-                        "collection": "Software",
+                        "collection": self.config_manager.get_collection_name("software"),
                         "key": software_key,
                         "name": software.get("name", "Unknown"),
                         "type": software.get("type", "Unknown"),
@@ -769,7 +788,7 @@ class AutomatedDemoWalkthrough:
                     software_key = software["_key"]
                     
                     target_doc = {
-                        "collection": "Software",
+                        "collection": self.config_manager.get_collection_name("software"),
                         "key": software_key,
                         "name": software.get("name", "Unknown"),
                         "type": software.get("type", "Unknown"),
@@ -801,7 +820,7 @@ class AutomatedDemoWalkthrough:
             print(f"   Database: {creds.database_name}")
             print()
             
-            print(f"[STEP 2] Go to GRAPHS tab -> network_assets_graph")
+            print(f"[STEP 2] Go to GRAPHS tab -> network_assets_smartgraph")
             print()
             
             print(f"[STEP 3] Use these START VERTICES to explore the graph:")
@@ -896,13 +915,26 @@ class AutomatedDemoWalkthrough:
                 for i, doc in enumerate(target_documents):
                     original_key = doc["key"]
                     
+                    # Extract base key for SmartGraph keys (e.g., "54e9effbbc3c:software1-0" -> "54e9effbbc3c:software1")
+                    if ":" in original_key and "-" in original_key:
+                        tenant_part, entity_part = original_key.split(":", 1)
+                        if "-" in entity_part:
+                            base_entity = entity_part.rsplit("-", 1)[0]
+                            base_key_pattern = f"{tenant_part}:{base_entity}"
+                        else:
+                            base_key_pattern = original_key
+                    else:
+                        base_key_pattern = original_key
+                    
                     # Find new software versions created by transaction
                     aql_new_software = f"""
                     FOR software IN Software
-                        FILTER STARTS_WITH(software._key, "{original_key}")
+                        FILTER STARTS_WITH(software._key, "{base_key_pattern}-")
                         FILTER software._key != "{original_key}"
+                        FILTER software.expired == 9223372036854775807
+                        FILTER software.created >= @transaction_start
                         SORT software.created DESC
-                        LIMIT 2
+                        LIMIT 1
                         RETURN {{
                             id: software._id,
                             key: software._key,
@@ -912,7 +944,7 @@ class AutomatedDemoWalkthrough:
                         }}
                     """
                     
-                    cursor = self.database.aql.execute(aql_new_software)
+                    cursor = self.database.aql.execute(aql_new_software, bind_vars={"transaction_start": transaction_timestamp.timestamp()})
                     new_software = list(cursor)
                     
                     if new_software:
@@ -1245,7 +1277,7 @@ class AutomatedDemoWalkthrough:
                              "Confirming hasAlert edges are part of graph definition")
             
             try:
-                graph = self.database.graph('network_assets_graph')
+                graph = self.database.graph('network_assets_smartgraph')
                 edge_defs = graph.edge_definitions()
                 hasAlert_def = next((ed for ed in edge_defs if ed['edge_collection'] == 'hasAlert'), None)
                 
@@ -1439,11 +1471,164 @@ class AutomatedDemoWalkthrough:
         except Exception as e:
             self.demo_print(f"[ERROR] Alert system demonstration error: {e}", "critical")
         
-        self.pause_for_observation("Alert system demonstration complete. Ready for scale-out demo?")
+        self.pause_for_observation("Alert system demonstration complete. Ready for taxonomy demo?")
         self.sections_completed.append("alert_system_demonstration")
     
-    def section_8_scale_out_demonstration(self):
-        """Section 8: Scale-Out Capabilities Demonstration."""
+    def section_8_taxonomy_system_demonstration(self):
+        """Section 8: Taxonomy System Demonstration."""
+        self.print_section_header(
+            "TAXONOMY SYSTEM DEMONSTRATION", 
+            "Demonstrating hierarchical classification and semantic relationships"
+        )
+        
+        try:
+            # Get demo tenant for queries
+            demo_tenant_id = "bfd693075495"
+            
+            self.demo_print("TAXONOMY OVERVIEW:", "info")
+            self.demo_print("The taxonomy system provides hierarchical classification of devices and software", "info")
+            self.demo_print("- Class hierarchy: NetworkDevice -> Router -> EdgeRouter", "info") 
+            self.demo_print("- Type relationships: Device/Software -> Class (instanceOf)", "info")
+            self.demo_print("- Inheritance: Class -> Class (subClassOf)", "info")
+            print()
+            
+            # Connect to database for queries
+            self.demo_print("Connecting to database for taxonomy queries...", "info")
+            if not self.connect_to_database():
+                raise Exception("Failed to connect to database")
+            
+            database = self.database
+            
+            # Query 1: Show class hierarchy
+            self.demo_print("1. CLASS HIERARCHY OVERVIEW:", "query")
+            class_collection = self.config_manager.get_collection_name("classes")
+            hierarchy_query = f"""
+            FOR class IN {class_collection}
+                FILTER class.tenantId == @tenant_id OR class.tenantId == null
+                COLLECT classType = class.classType WITH COUNT INTO count
+                RETURN {{classType: classType, count: count}}
+            """
+            
+            hierarchy_result = database.aql.execute(hierarchy_query, bind_vars={"tenant_id": demo_tenant_id})
+            for result in hierarchy_result:
+                print(f"   {result['classType']}: {result['count']} classes")
+            print()
+            
+            # Query 2: Show device classifications
+            self.demo_print("2. DEVICE CLASSIFICATIONS (Sample):", "query")
+            device_collection = self.config_manager.get_collection_name("devices")
+            type_collection = self.config_manager.get_collection_name("types")
+            device_class_query = f"""
+            FOR device IN {device_collection}
+                FILTER device.tenantId == @tenant_id
+                FOR type_edge IN {type_collection}
+                    FILTER type_edge._from == device._id
+                    FOR class IN {class_collection}
+                        FILTER class._id == type_edge._to
+                        LIMIT 5
+                        RETURN {{
+                            device: device.name,
+                            deviceType: device.type,
+                            class: class.name,
+                            confidence: type_edge.confidence
+                        }}
+            """
+            
+            device_results = database.aql.execute(device_class_query, bind_vars={"tenant_id": demo_tenant_id})
+            for result in device_results:
+                print(f"   {result['device']} ({result['deviceType']}) -> {result['class']} (confidence: {result['confidence']:.2f})")
+            print()
+            
+            # Query 3: Show inheritance relationships
+            self.demo_print("3. CLASS INHERITANCE RELATIONSHIPS:", "query")
+            subclass_collection = self.config_manager.get_collection_name("subclass_of")
+            inheritance_query = f"""
+            FOR edge IN {subclass_collection}
+                FOR parent IN {class_collection}
+                    FILTER parent._id == edge._to
+                    FOR child IN {class_collection}
+                        FILTER child._id == edge._from
+                        LIMIT 8
+                        RETURN {{
+                            child: child.name,
+                            parent: parent.name,
+                            relationship: "subClassOf"
+                        }}
+            """
+            
+            inheritance_results = database.aql.execute(inheritance_query)
+            for result in inheritance_results:
+                print(f"   {result['child']} -> {result['parent']} ({result['relationship']})")
+            print()
+            
+            # Query 4: Show software classifications
+            self.demo_print("4. SOFTWARE CLASSIFICATIONS (Sample):", "query")
+            software_class_query = """
+            FOR software IN Software
+                FILTER software.tenantId == @tenant_id
+                FOR type_edge IN type
+                    FILTER type_edge._from == software._id
+                    FOR class IN Class
+                        FILTER class._id == type_edge._to
+                        LIMIT 5
+                        RETURN {
+                            software: software.name,
+                            version: software.version,
+                            class: class.name,
+                            confidence: type_edge.confidence
+                        }
+            """
+            
+            software_results = database.aql.execute(software_class_query, bind_vars={"tenant_id": demo_tenant_id})
+            for result in software_results:
+                print(f"   {result['software']} v{result['version']} -> {result['class']} (confidence: {result['confidence']:.2f})")
+            print()
+            
+            # Query 5: Semantic path queries
+            self.demo_print("5. SEMANTIC PATH TRAVERSAL:", "query")
+            self.demo_print("Find all routers and their subclasses:", "info")
+            
+            router_query = """
+            FOR router_class IN Class
+                FILTER router_class.name == "Router"
+                FOR subclass IN 1..3 INBOUND router_class subClassOf
+                    RETURN DISTINCT {
+                        class: subclass.name,
+                        type: subclass.classType,
+                        depth: LENGTH(subclass)
+                    }
+            """
+            
+            router_results = database.aql.execute(router_query)
+            for result in router_results:
+                indent = "  " * (result.get('depth', 0) + 1)
+                print(f"{indent}{result['class']} ({result['type']})")
+            print()
+            
+            # Visualizer instructions
+            print(f"{'='*60}")
+            print("TAXONOMY VISUALIZER INSTRUCTIONS:")
+            print(f"{'='*60}")
+            print("To explore taxonomy in the graph visualizer:")
+            print("1. Add Class vertices to start set (search for 'Router', 'Database', etc.)")
+            print("2. Look for:")
+            print("   • subClassOf edges showing inheritance (Class -> Class)")
+            print("   • type edges showing classification (Device/Software -> Class)")
+            print("   • Hierarchical structure: NetworkDevice -> Router -> EdgeRouter")
+            print("3. Key observations:")
+            print("   • Multi-level inheritance hierarchies")
+            print("   • Automatic device/software classification")
+            print("   • Semantic relationships for advanced querying")
+            print(f"{'='*60}")
+            
+        except Exception as e:
+            self.demo_print(f"[ERROR] Taxonomy system demonstration error: {e}", "critical")
+        
+        self.pause_for_observation("Taxonomy system demonstration complete. Ready for scale-out demo?")
+        self.sections_completed.append("taxonomy_system_demonstration")
+    
+    def section_9_scale_out_demonstration(self):
+        """Section 9: Scale-Out Capabilities Demonstration."""
         self.print_section_header(
             "SCALE-OUT DEMONSTRATION", 
             "Demonstrating multi-tenant scaling and horizontal growth capabilities"
@@ -1505,7 +1690,7 @@ class AutomatedDemoWalkthrough:
                                 tenant_count += 1
                                 print(f"     [SUCCESS] {tenant_name} added successfully")
                                 print(f"     [DATA] Tenant ID: {tenant_config.tenant_id}")
-                                print(f"     [GRAPH] Data visible in unified network_assets_graph")
+                                print(f"     [GRAPH] Data visible in unified network_assets_smartgraph")
                             else:
                                 print(f"     [WARNING] Data imported but unified graph verification failed for {tenant_name}")
                         else:
@@ -1690,67 +1875,112 @@ class AutomatedDemoWalkthrough:
                 if not self.connect_to_database():
                     return False
             
-            graph_name = "network_assets_graph"
+            graph_name = "network_assets_smartgraph"  # Use SmartGraph created by deployment
             
             # Check if unified graph already exists
             if self.database.has_graph(graph_name):
-                print(f"     [INFO] Unified graph {graph_name} already exists")
+                print(f"     [INFO] SmartGraph {graph_name} already exists")
                 # Check if hasAlert edges are defined
                 graph = self.database.graph(graph_name)
                 edge_defs = graph.edge_definitions()
                 hasAlert_exists = any(ed['edge_collection'] == 'hasAlert' for ed in edge_defs)
+                type_exists = any(ed['edge_collection'] == 'type' for ed in edge_defs)
                 
-                if hasAlert_exists:
-                    print(f"     [INFO] hasAlert edges already defined in graph")
+                if hasAlert_exists and type_exists:
+                    print(f"     [INFO] All required edges already defined in SmartGraph")
                     return True
-                else:
-                    print(f"     [INFO] Adding hasAlert edges to existing graph")
+                elif not hasAlert_exists:
+                    print(f"     [INFO] Adding hasAlert edges to existing SmartGraph")
                     try:
                         # Add hasAlert edge definition to existing graph
                         graph.create_edge_definition(
-                            edge_collection='hasAlert',
-                            from_vertex_collections=['DeviceProxyOut', 'SoftwareProxyOut'],
-                            to_vertex_collections=['Alert']
+                            edge_collection=self.config_manager.get_collection_name("has_alerts"),
+                            from_vertex_collections=[
+                                self.config_manager.get_collection_name("device_outs"), 
+                                self.config_manager.get_collection_name("software_outs")
+                            ],
+                            to_vertex_collections=[self.config_manager.get_collection_name("alerts")]
                         )
-                        print(f"     [GRAPH] Added hasAlert edges to unified graph")
+                        print(f"     [GRAPH] Added hasAlert edges to SmartGraph")
                         return True
                     except Exception as e:
                         print(f"     [WARNING] Could not add hasAlert edges: {e}")
+                        return True  # Continue anyway since main graph exists
+                elif not type_exists:
+                    print(f"     [INFO] Adding type edges to existing SmartGraph")
+                    try:
+                        # Add type edge definition to existing graph
+                        graph.create_edge_definition(
+                            edge_collection=self.config_manager.get_collection_name("types"),
+                            from_vertex_collections=[
+                                self.config_manager.get_collection_name("devices"), 
+                                self.config_manager.get_collection_name("software")
+                            ],
+                            to_vertex_collections=[self.config_manager.get_collection_name("classes")]
+                        )
+                        print(f"     [GRAPH] Added type edges to SmartGraph")
+                        return True
+                    except Exception as e:
+                        print(f"     [WARNING] Could not add type edges: {e}")
                         return True  # Continue anyway since main graph exists
             
             # Define graph configuration for all tenant data
             edge_definitions = [
                 {
-                    "edge_collection": "hasConnection",
-                    "from_vertex_collections": ["DeviceProxyOut"],
-                    "to_vertex_collections": ["DeviceProxyIn"]
+                    "edge_collection": self.config_manager.get_collection_name("connections"),
+                    "from_vertex_collections": [self.config_manager.get_collection_name("device_outs")],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("device_ins")]
                 },
                 {
-                    "edge_collection": "hasDeviceSoftware",
-                    "from_vertex_collections": ["DeviceProxyOut"],
-                    "to_vertex_collections": ["SoftwareProxyIn"]
+                    "edge_collection": self.config_manager.get_collection_name("has_device_software"),
+                    "from_vertex_collections": [self.config_manager.get_collection_name("device_outs")],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("software_ins")]
                 },
                 {
-                    "edge_collection": "hasLocation", 
-                    "from_vertex_collections": ["DeviceProxyOut"],
-                    "to_vertex_collections": ["Location"]
+                    "edge_collection": self.config_manager.get_collection_name("has_locations"), 
+                    "from_vertex_collections": [self.config_manager.get_collection_name("device_outs")],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("locations")]
                 },
                 {
-                    "edge_collection": "hasVersion",
-                    "from_vertex_collections": ["Device", "DeviceProxyIn", "Software", "SoftwareProxyIn"],
-                    "to_vertex_collections": ["Device", "DeviceProxyOut", "Software", "SoftwareProxyOut"]
+                    "edge_collection": self.config_manager.get_collection_name("versions"),
+                    "from_vertex_collections": [
+                        self.config_manager.get_collection_name("devices"), 
+                        self.config_manager.get_collection_name("device_ins"), 
+                        self.config_manager.get_collection_name("software"), 
+                        self.config_manager.get_collection_name("software_ins")
+                    ],
+                    "to_vertex_collections": [
+                        self.config_manager.get_collection_name("devices"), 
+                        self.config_manager.get_collection_name("device_outs"), 
+                        self.config_manager.get_collection_name("software"), 
+                        self.config_manager.get_collection_name("software_outs")
+                    ]
                 },
                 {
-                    "edge_collection": "hasAlert",
-                    "from_vertex_collections": ["DeviceProxyOut", "SoftwareProxyOut"],
-                    "to_vertex_collections": ["Alert"]
+                    "edge_collection": self.config_manager.get_collection_name("has_alerts"),
+                    "from_vertex_collections": [
+                        self.config_manager.get_collection_name("device_outs"), 
+                        self.config_manager.get_collection_name("software_outs")
+                    ],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("alerts")]
+                },
+                {
+                    "edge_collection": self.config_manager.get_collection_name("types"),
+                    "from_vertex_collections": [
+                        self.config_manager.get_collection_name("devices"), 
+                        self.config_manager.get_collection_name("software")
+                    ],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("classes")]
                 }
             ]
             
-            # Create unified graph for all tenant visualization
+            # Create SmartGraph if it doesn't exist (should have been created by deployment)
+            print(f"     [WARNING] SmartGraph {graph_name} not found - creating basic graph for demo")
             graph = self.database.create_graph(
                 name=graph_name,
                 edge_definitions=edge_definitions
+                # Note: This creates a regular graph, not SmartGraph
+                # SmartGraph should be created by database deployment
             )
             
             print(f"     [GRAPH] Created unified graph: {graph_name}")
@@ -1761,8 +1991,8 @@ class AutomatedDemoWalkthrough:
             print(f"     [ERROR] Unified graph creation failed: {e}")
             return False
     
-    def section_9_final_validation(self):
-        """Section 9: Final System Validation."""
+    def section_10_final_validation(self):
+        """Section 10: Final System Validation."""
         self.print_section_header(
             "FINAL VALIDATION", 
             "Comprehensive validation after all demonstrations"
@@ -1831,8 +2061,8 @@ class AutomatedDemoWalkthrough:
         self.pause_for_observation("Final validation complete. Ready for demo summary?")
         self.sections_completed.append("final_validation")
     
-    def section_10_demo_summary(self):
-        """Section 10: Demo Summary and Conclusion."""
+    def section_11_demo_summary(self):
+        """Section 11: Demo Summary and Conclusion."""
         self.print_section_header(
             "DEMO SUMMARY", 
             "Complete demonstration summary and key achievements"
@@ -1847,7 +2077,7 @@ class AutomatedDemoWalkthrough:
         print(f"   - Start Time: {self.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"   - End Time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"   - Total Duration: {duration.total_seconds():.1f} seconds")
-        total_sections = 10 if self.verbose else 8
+        total_sections = 12 if self.verbose else 10
         print(f"   - Sections Completed: {len(self.sections_completed)}/{total_sections}")
         if not self.verbose:
             print("   - Mode: Presentation (validation sections skipped for demo flow)")
@@ -1862,6 +2092,8 @@ class AutomatedDemoWalkthrough:
             print("   [SUCCESS] Comprehensive validation suite")
         print("   [SUCCESS] Temporal TTL transactions demonstration")
         print("   [SUCCESS] Time travel demonstration")
+        print("   [SUCCESS] Alert system with operational events")
+        print("   [SUCCESS] Taxonomy system with semantic classification")
         print("   [SUCCESS] Scale-out capabilities")
         if self.verbose:
             print("   [SUCCESS] Final system validation")
@@ -1872,6 +2104,8 @@ class AutomatedDemoWalkthrough:
             print("   [SUCCESS] Multi-tenant architecture with complete isolation")
             print("   [SUCCESS] Time travel with TTL for historical data management")
             print("   [SUCCESS] Temporal TTL transactions for realistic scenarios")
+            print("   [SUCCESS] Alert system for operational event management")
+            print("   [SUCCESS] Taxonomy system for semantic classification")
             print("   [SUCCESS] Horizontal scale-out for enterprise growth")
             print("   [SUCCESS] Production-ready enterprise deployment")
         else:
@@ -1879,6 +2113,8 @@ class AutomatedDemoWalkthrough:
             print("   - Multi-tenant architecture with complete isolation")
             print("   - Time travel with TTL for historical data management")
             print("   - Temporal TTL transactions for realistic data lifecycle scenarios")
+            print("   - Alert system for operational event management")
+            print("   - Taxonomy system for semantic classification and inheritance")
             print("   - Horizontal scale-out for enterprise growth")
             print("   - Comprehensive validation and testing")
             print("   - Production-ready enterprise deployment")
@@ -1923,20 +2159,25 @@ class AutomatedDemoWalkthrough:
             # Section 6: TTL Demonstration
             self.section_6_ttl_demonstration()
             
-            # Section 7: Scale-Out Demonstration
+            # Section 7: Alert System Demonstration
             self.section_7_alert_system_demonstration()
-            self.section_8_scale_out_demonstration()
             
-            # Section 9: Final Validation (optional in presentation mode)
+            # Section 8: Taxonomy System Demonstration
+            self.section_8_taxonomy_system_demonstration()
+            
+            # Section 9: Scale-Out Demonstration
+            self.section_9_scale_out_demonstration()
+            
+            # Section 10: Final Validation (optional in presentation mode)
             if self.verbose:
-                self.section_9_final_validation()
+                self.section_10_final_validation()
             else:
                 self.demo_print("[SUCCESS] All demonstrations completed successfully", "info")
             
-            # Section 10: Demo Summary
-            self.section_10_demo_summary()
+            # Section 11: Demo Summary
+            self.section_11_demo_summary()
             
-            total_sections = 11 if self.verbose else 9  # Skip validation sections in presentation mode
+            total_sections = 12 if self.verbose else 10  # Skip validation sections in presentation mode
             return {
                 "status": "completed",
                 "sections_completed": len(self.sections_completed),

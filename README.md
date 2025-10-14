@@ -87,17 +87,12 @@ A comprehensive reference implementation showcasing scalable multi-tenant tempor
 
 The system uses camelCase naming convention:
 
-#### camelCase
-- **Vertex Collections** (PascalCase, singular): `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`, `Alert`
-- **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`, `hasAlert`
-- **Property Naming** (camelCase): `name`, `type`, `model`, `version`, `ipAddress`, `created`, `expired`
+#### camelCase (Current Implementation)
+- **Vertex Collections** (PascalCase, singular): `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`, `SoftwareProxyIn`, `SoftwareProxyOut`, `Class`, `Alert`
+- **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`, `type`, `subClassOf`, `hasAlert`
+- **Property Naming** (camelCase): `name`, `type`, `model`, `version`, `ipAddress`, `created`, `expired`, `tenantId`
 
-#### Planned future snake_case option
-- **Vertex Collections** (snake_case, singular): `device`, `device_proxy_in`, `device_proxy_out`, `location`, `software`, `alert`
-- **Edge Collections** (screaming_snake_case, singular): `HAS_CONNECTION`, `HAS_LOCATION`, `HAS_DEVICE_SOFTWARE`, `HAS_VERSION`, `HAS_ALERT`
-- **Property Naming** (snake_case): `name`, `type`, `model`, `version`, `ip_address`, `created`, `expired`
-
-Both conventions maintain **consistent structure** with Subject-Predicate-Object relationships.
+The system maintains **consistent structure** with Subject-Predicate-Object relationships and full SmartGraph + Satellite architecture support.
 
 ## Prerequisites for Demo Presentation
 
@@ -193,25 +188,28 @@ python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
 - Generates 8 diverse tenant configurations
 - Creates realistic network asset relationships
 - Implements temporal data model with TTL fields
+- Generates taxonomy classifications (100% coverage)
 - Produces tenant-specific JSON data files
 
 **Step 2: Database Deployment with SmartGraphs**
 - Automatically creates database if not exists
-- Deploys collections with MDI-prefix indexes
-- Configures SmartGraphs for tenant isolation
+- Deploys SmartGraph collections with MDI-prefix indexes
+- Creates Satellite collections for taxonomy metadata
+- Configures unified SmartGraph for tenant isolation
 - Loads multi-tenant data with proper partitioning
 
 **Step 3: Initial Validation and Testing**
 - Verifies tenant isolation and data integrity
 - Validates naming convention compliance
 - Tests MDI-prefix index functionality
-- Confirms SmartGraph configuration
+- Confirms SmartGraph + Satellite configuration
+- Validates taxonomy classification coverage
 
 **Step 4: Temporal TTL Transactions Demonstration**
 - Executes real database transactions (not simulations)
 - Creates new configuration versions with TTL timestamps
 - Demonstrates temporal data lifecycle management
-- Shows automatic aging of historical records (5-minute TTL for demo)
+- Shows automatic aging of historical records (10-minute TTL for demo)
 
 **Step 5: Time Travel Demonstration**
 - Queries historical data within TTL window
@@ -225,7 +223,19 @@ python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
 - Shows dynamic tenant addition capabilities
 - Validates performance optimization
 
-**Step 7: Final Validation**
+**Step 7: Alert System Demonstration**
+- Generates real-time operational alerts
+- Demonstrates alert lifecycle management
+- Shows cross-entity alert correlation
+- Validates SmartGraph alert integration
+
+**Step 8: Taxonomy System Demonstration**
+- Explores hierarchical device/software classification
+- Demonstrates Class inheritance relationships
+- Shows type edge connectivity (Device/Software -> Class)
+- Validates cross-graph taxonomy queries
+
+**Step 9: Final Validation**
 - Comprehensive system validation
 - Performance metric analysis
 - Tenant isolation verification
@@ -269,92 +279,55 @@ python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
 - **Hands-on Practice**: Recommended 2-3 practice runs before live demonstration
 
 ### Temporal Data Management
-- **Time Travel Blueprint** with `created`, `expired` timestamps
-- **MDI-Prefix Multi-Dimensional Indexes** for optimal temporal range query performance on `created` and `expired` fields
-- **TTL (Time-To-Live) Indexes** for automatic aging of historical data with configurable expiration periods
-- **Current vs Historical TTL Strategy**: Current configurations never expire (`expired = NEVER_EXPIRES`), historical configurations age out automatically
-- **Historical Versioning** via `hasVersion` edges for device and software configurations
+
+**Time Travel Architecture:**
+- **Time Travel Blueprint** with `created`, `expired` timestamps for point-in-time queries
+- **MDI-Prefix Multi-Dimensional Indexes** for optimal temporal range query performance
+- **Historical Versioning** via unified `hasVersion` edges for device and software configurations
 - **Standardized Properties**: Generic `name`, `type`, `model`, `version` across all collections
-- **Temporal Query Capabilities** for point-in-time analysis with enhanced performance
-- **Transaction Simulation** for realistic configuration changes with proper TTL timestamp management
 
-#### TTL Index Implementation Details
+**TTL (Time-To-Live) Strategy:**
+- **Current vs Historical Strategy**: Current configurations never expire (`expired = NEVER_EXPIRES`), historical configurations age out automatically
+- **Dual-Field Approach**: 
+  - `expired` field for time travel queries (`expired > point_in_time`)
+  - `ttlExpireAt` field for ArangoDB TTL indexes (automatic deletion)
+- **Production TTL**: 30 days for historical data lifecycle management
+- **Demo TTL**: 10 minutes for visible aging demonstration
+- **Sparse TTL Indexes**: Only historical documents have `ttlExpireAt` field
 
-The demo implements a sophisticated **"Current vs Historical" TTL strategy** using separate fields for time travel and TTL:
-
-**Properties Used**:
-- **`expired` field**: Used exclusively for time travel queries (`expired > point_in_time`)
-- **`ttlExpireAt` field**: Used exclusively by ArangoDB's TTL indexes for automatic document deletion
-
-**TTL Configuration**:
-- **TTL Index Field**: `ttlExpireAt` (separate timestamp field)
-- **TTL Expire Mode**: `expireAfter: 0` (expire when timestamp is reached)
-- **Production TTL Period**: 30 days (configurable via `DEFAULT_TTL_EXPIRE_DAYS`)
-- **Demo TTL Period**: 10 minutes (configurable via `DEMO_TTL_EXPIRE_MINUTES`)
-- **Sparse Index**: `true` (skips documents where `ttlExpireAt` is null/undefined)
-
-**Transaction Process** (when new Device/Software configuration is added):
-
-1. **New Configuration Creation**:
-   ```
-   new_config.created = now()
-   new_config.expired = NEVER_EXPIRES  # sys.maxsize - never expires
-   # No ttlExpireAt field - will never be deleted by TTL
-   ```
-
-2. **Old Configuration Update**:
-   ```
-   old_config.expired = now()  # For time travel queries
-   old_config.ttlExpireAt = now() + TTL_INTERVAL  # TTL deletion timestamp
-   # TTL will delete this document when ttlExpireAt timestamp is reached
-   ```
-
-3. **TTL Index Behavior**:
-   - **Current configs**: No `ttlExpireAt` field -> Ignored by sparse TTL index (never deleted)
-   - **Historical configs**: `ttlExpireAt = 1234567890.123` -> Will be deleted when timestamp is reached
-   - **Automatic cleanup**: ArangoDB automatically removes expired historical documents
-
-**Key Constants**:
-- `NEVER_EXPIRES = sys.maxsize` (9223372036854775807) - used for `expired` field
-- `DEFAULT_TTL_EXPIRE_SECONDS = 2592000` (30 days) - added to `expired` for `ttlExpireAt`
-- `TTL_SPARSE_INDEX = true` (performance optimization)
-
-**Field Separation Benefits**:
-- **Time travel queries** remain fast and predictable using `expired`
-- **TTL deletion** operates independently using `ttlExpireAt`
-- **Current configurations** are permanently preserved (no `ttlExpireAt` field)
-- **Historical configurations** age out automatically after 30 days
-
-This approach ensures clean separation of concerns between time travel functionality and data lifecycle management.
+**Transaction Process:**
+1. **New Configuration**: `created = now()`, `expired = NEVER_EXPIRES`, no `ttlExpireAt`
+2. **Old Configuration**: `expired = now()`, `ttlExpireAt = now() + TTL_INTERVAL`
+3. **Automatic Cleanup**: ArangoDB removes expired historical documents when `ttlExpireAt` timestamp is reached
 
 #### Demo Mode TTL Configuration
 
 For demonstration purposes, the system supports **Demo Mode** with accelerated TTL aging:
 
-**Demo Mode Activation**:
+**Demo Mode Activation:**
 ```bash
 # Deploy with demo mode (10-minute TTL)
-python3 src/database/database_deployment.py --demo-mode
+PYTHONPATH=. python3 src/database/database_deployment.py --demo-mode
 
 # Run interactive demo walkthrough (automatically uses demo mode)
-python3 demos/automated_demo_walkthrough.py --interactive
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 ```
 
-**Demo TTL Behavior**:
+**Demo TTL Behavior:**
 - **Historical documents**: Age out after 10 minutes instead of 30 days
 - **Visible aging**: Allows observers to see TTL cleanup during demo
 - **Real-time monitoring**: Use `ttl_monitor.py` to watch aging process
 
-**TTL Monitoring Commands**:
+**TTL Monitoring Commands:**
 ```bash
 # Show current TTL status
-python3 src/ttl/ttl_monitor.py --status-only
+PYTHONPATH=. python3 src/ttl/ttl_monitor.py --status-only
 
 # Live monitoring for 15 minutes
-python3 src/ttl/ttl_monitor.py --duration 15
+PYTHONPATH=. python3 src/ttl/ttl_monitor.py --duration 15
 
 # Custom monitoring (5 minutes, refresh every 10 seconds)  
-python3 src/ttl/ttl_monitor.py --duration 5 --refresh 10
+PYTHONPATH=. python3 src/ttl/ttl_monitor.py --duration 5 --refresh 10
 ```
 
 **Demo Timeline Example**:
@@ -386,212 +359,133 @@ python3 src/ttl/ttl_monitor.py --duration 5 --refresh 10
 
 ```mermaid
 graph TB
-    %% Vertex Collections (PascalCase, singular)
-    subgraph "Vertex Collections"
-        D[Device<br/>Network devices<br/>Versioned temporal data]
-        DPI[DeviceProxyIn<br/>Device input proxies<br/>Lightweight, no temporal data]
-        DPO[DeviceProxyOut<br/>Device output proxies<br/>Lightweight, no temporal data]
-        S[Software<br/>Software installations<br/>Versioned temporal data]
-        SPI[SoftwareProxyIn<br/>Software input proxies<br/>Lightweight, no temporal data]
-        SPO[SoftwareProxyOut<br/>Software output proxies<br/>Lightweight, no temporal data]
-        L[Location<br/>Physical locations<br/>GeoJSON coordinates]
-        A[Alert<br/>System alerts<br/>TTL-aged operational events]
+    %% SmartGraph Collections (Tenant-Isolated)
+    subgraph "SmartGraph: network_assets_smartgraph"
+        subgraph "Vertex Collections (Sharded by tenantId)"
+            D[Device<br/>Network devices<br/>Versioned temporal data]
+            DPI[DeviceProxyIn<br/>Device input proxies<br/>Lightweight, no temporal data]
+            DPO[DeviceProxyOut<br/>Device output proxies<br/>Lightweight, no temporal data]
+            S[Software<br/>Software installations<br/>Versioned temporal data]
+            SPI[SoftwareProxyIn<br/>Software input proxies<br/>Lightweight, no temporal data]
+            SPO[SoftwareProxyOut<br/>Software output proxies<br/>Lightweight, no temporal data]
+            L[Location<br/>Physical locations<br/>GeoJSON coordinates]
+            A[Alert<br/>System alerts<br/>TTL-aged operational events]
+        end
+        
+        subgraph "Edge Collections (Sharded by tenantId)"
+            %% Network connections between devices
+            DPO -->|hasConnection<br/>Network links<br/>bandwidth, latency| DPI
+            
+            %% Device location relationships
+            DPO -->|hasLocation<br/>Physical placement<br/>geographical data| L
+            
+            %% Device-Software relationships
+            DPO -->|hasDeviceSoftware<br/>Device software installation<br/>device -> software| SPI
+            
+            %% Unified Time Travel (Device & Software)
+            DPI -->|hasVersion<br/>Device version in<br/>temporal evolution| D
+            D -->|hasVersion<br/>Device version out<br/>temporal evolution| DPO
+            SPI -->|hasVersion<br/>Software version in<br/>temporal evolution| S
+            S -->|hasVersion<br/>Software version out<br/>temporal evolution| SPO
+            
+            %% Alert System (operational monitoring)
+            DPO -->|hasAlert<br/>Device alerts<br/>operational events| A
+            SPO -->|hasAlert<br/>Software alerts<br/>operational events| A
+            
+            %% Cross-Graph Classification (SmartGraph -> Satellite)
+            D -->|type<br/>Device classification<br/>instanceOf relationship| C
+            S -->|type<br/>Software classification<br/>instanceOf relationship| C
+        end
     end
     
-    %% Edge Collections (camelCase, singular)
+    %% Satellite Collections (Replicated Across All Nodes)
+    subgraph "Satellite Graph: taxonomy_satellite_graph"
+        subgraph "Taxonomy Collections (Global Metadata)"
+            C[Class<br/>Taxonomy classes<br/>Hierarchical classification]
+        end
+        
+        subgraph "Taxonomy Relationships"
+            C -->|subClassOf<br/>Class inheritance<br/>hierarchical structure| C
+        end
+    end
     
-    %% Network connections between devices
-    DPO -->|hasConnection<br/>Network links<br/>bandwidth, latency| DPI
+    %% Styling
+    classDef smartGraph fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    classDef satellite fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    classDef crossGraph fill:#fff3e0,stroke:#e65100,stroke-width:2px
     
-    %% Device location relationships
-    DPO -->|hasLocation<br/>Physical placement<br/>geographical data| L
-    
-    %% Device-Software relationships (CORRECTED LOGIC)
-    DPO -->|hasDeviceSoftware<br/>Device software installation<br/>device -> software| SPI
-    
-    %% Device Time Travel (existing pattern)
-    DPI -->|hasVersion<br/>Device version in<br/>temporal evolution| D
-    D -->|hasVersion<br/>Device version out<br/>temporal evolution| DPO
-    
-    %% Software Time Travel (NEW pattern)
-    SPI -->|hasVersion<br/>Software version in<br/>temporal evolution| S
-    S -->|hasVersion<br/>Software version out<br/>temporal evolution| SPO
-    
-    %% Alert System (operational monitoring)
-    DPO -->|hasAlert<br/>Device alerts<br/>operational events| A
-    SPO -->|hasAlert<br/>Software alerts<br/>operational events| A
-    
-    %% Tenant isolation indicator
-    classDef tenantBox fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef newFeature fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
-    classDef alertFeature fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    class D,DPI,DPO,L tenantBox
-    class S,SPI,SPO newFeature
-    class A alertFeature
+    class D,DPI,DPO,S,SPI,SPO,L,A smartGraph
+    class C satellite
 ```
 
-> **Detailed Graph Model**: See [graph_model_diagram.md](./graph_model_diagram.md) for comprehensive schema documentation, query examples, and design patterns.
+> **Architecture**: Unified SmartGraph for tenant-isolated data with Satellite Graph for shared taxonomy metadata. Cross-graph `type` edges connect tenant entities to global classification system.
 
 ### Collection Structure
 
-**Vertex Collections (Entities):**
+**SmartGraph Collections (Tenant-Isolated):**
 ```
 Device            # Network devices with versioned temporal data
 DeviceProxyIn     # Device input proxies (lightweight, no temporal data)
 DeviceProxyOut    # Device output proxies (lightweight, no temporal data)  
-Software          # Software installations with versioned temporal data (REFACTORED)
-SoftwareProxyIn   # Software input proxies (lightweight, no temporal data) - NEW
-SoftwareProxyOut  # Software output proxies (lightweight, no temporal data) - NEW
+Software          # Software installations with versioned temporal data
+SoftwareProxyIn   # Software input proxies (lightweight, no temporal data)
+SoftwareProxyOut  # Software output proxies (lightweight, no temporal data)
 Location          # Physical locations with GeoJSON coordinates
-Alert             # System alerts with TTL-aged operational events - NEW
+Alert             # System alerts with TTL-aged operational events
 ```
 
-**Edge Collections (Relationships):**
+**Satellite Collections (Global Metadata):**
+```
+Class             # Taxonomy classes (shared across all tenants)
+```
+
+**SmartGraph Edge Collections (Tenant-Isolated):**
 ```
 hasConnection     # DeviceProxyOut -> DeviceProxyIn connections
 hasLocation       # DeviceProxyOut -> Location assignments
-hasDeviceSoftware # DeviceProxyOut -> SoftwareProxyIn installations (CORRECTED)
-hasVersion        # Unified time travel: Device & Software versioning (EXPANDED)
-hasAlert          # DeviceProxyOut/SoftwareProxyOut -> Alert relationships - NEW
+hasDeviceSoftware # DeviceProxyOut -> SoftwareProxyIn installations
+hasVersion        # Unified time travel: Device & Software versioning
+hasAlert          # DeviceProxyOut/SoftwareProxyOut -> Alert relationships
+type              # Device/Software -> Class classifications (cross-graph)
 ```
 
-### Multi-Tenant Architecture
-
-```mermaid
-graph TB
-    subgraph "ArangoDB Oasis: network_assets_demo Database"
-        subgraph "Shared Physical Collections (Logically Separated by tenantId)"
-            subgraph "Vertex Collections"
-                DEVICE[Device<br/>All tenant devices<br/>Partitioned by tenantId]
-                DPI[DeviceProxyIn<br/>All tenant device proxies<br/>Partitioned by tenantId]
-                DPO[DeviceProxyOut<br/>All tenant device proxies<br/>Partitioned by tenantId]
-                SOFTWARE[Software<br/>All tenant software<br/>Partitioned by tenantId]
-                SPI[SoftwareProxyIn<br/>All tenant software proxies<br/>Partitioned by tenantId]
-                SPO[SoftwareProxyOut<br/>All tenant software proxies<br/>Partitioned by tenantId]
-                LOCATION[Location<br/>All tenant locations<br/>Partitioned by tenantId]
-                ALERT[Alert<br/>All tenant alerts<br/>Partitioned by tenantId]
-            end
-            
-            subgraph "Edge Collections"
-                HASVERSION[hasVersion<br/>All tenant version edges<br/>Unified time travel]
-                HASCONNECTION[hasConnection<br/>All tenant network links<br/>Partitioned by tenantId]
-                HASLOCATION[hasLocation<br/>All tenant device placement<br/>Partitioned by tenantId]
-                HASDEVICESOFTWARE[hasDeviceSoftware<br/>All tenant software installations<br/>Partitioned by tenantId]
-                HASALERT[hasAlert<br/>All tenant alert relationships<br/>Partitioned by tenantId]
-            end
-        end
-        
-        subgraph "Logical Tenant Views (Query-Time Isolation)"
-            subgraph "Tenant A: Acme Corp"
-                DA[Device Documents<br/>WHERE tenantId = 'uuid_A']
-                DPIA[DeviceProxyIn Documents<br/>WHERE tenantId = 'uuid_A']
-                DPOA[DeviceProxyOut Documents<br/>WHERE tenantId = 'uuid_A']
-                SA[Software Documents<br/>WHERE tenantId = 'uuid_A']
-                SPIA[SoftwareProxyIn Documents<br/>WHERE tenantId = 'uuid_A']
-                SPOA[SoftwareProxyOut Documents<br/>WHERE tenantId = 'uuid_A']
-                LA[Location Documents<br/>WHERE tenantId = 'uuid_A']
-            end
-            
-            subgraph "Tenant B: Global Enterprises"
-                DB[Device Documents<br/>WHERE tenantId = 'uuid_B']
-                DPIB[DeviceProxyIn Documents<br/>WHERE tenantId = 'uuid_B']
-                DPOB[DeviceProxyOut Documents<br/>WHERE tenantId = 'uuid_B']
-                SB[Software Documents<br/>WHERE tenantId = 'uuid_B']
-                SPIB[SoftwareProxyIn Documents<br/>WHERE tenantId = 'uuid_B']
-                SPOB[SoftwareProxyOut Documents<br/>WHERE tenantId = 'uuid_B']
-                LB[Location Documents<br/>WHERE tenantId = 'uuid_B']
-            end
-        end
-    end
-    
-    %% Physical collection relationships
-    DEVICE -.->|Contains| DA
-    DEVICE -.->|Contains| DB
-    DPI -.->|Contains| DPIA
-    DPI -.->|Contains| DPIB
-    DPO -.->|Contains| DPOA
-    DPO -.->|Contains| DPOB
-    SOFTWARE -.->|Contains| SA
-    SOFTWARE -.->|Contains| SB
-    SPI -.->|Contains| SPIA
-    SPI -.->|Contains| SPIB
-    SPO -.->|Contains| SPOA
-    SPO -.->|Contains| SPOB
-    LOCATION -.->|Contains| LA
-    LOCATION -.->|Contains| LB
-    
-    %% Tenant A logical relationships
-    DPOA -.->|Filtered by tenantId| DPIA
-    DPOA -.->|Filtered by tenantId| LA
-    DPOA -.->|Filtered by tenantId| SPIA
-    
-    %% Tenant B logical relationships  
-    DPOB -.->|Filtered by tenantId| DPIB
-    DPOB -.->|Filtered by tenantId| LB
-    DPOB -.->|Filtered by tenantId| SPIB
-    
-    classDef sharedCollection fill:#fff3e0,stroke:#ef6c00,stroke-width:3px
-    classDef tenantA fill:#ffebee,stroke:#c62828,stroke-width:2px
-    classDef tenantB fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
-    classDef logicalView fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    
-    class DEVICE,DPI,DPO,SOFTWARE,SPI,SPO,LOCATION,HASVERSION,HASCONNECTION,HASLOCATION,HASDEVICESOFTWARE sharedCollection
-    class DA,DPIA,DPOA,SA,SPIA,SPOA,LA tenantA
-    class DB,DPIB,DPOB,SB,SPIB,SPOB,LB tenantB
+**Satellite Edge Collections (Global Metadata):**
 ```
-
-### Architecture Explanation
-
-**Physical Layer (Shared Collections):**
-- **ALL collections are shared** across tenants in the same ArangoDB database
-- **Vertex Collections** (`Device`, `Software`, etc.) contain documents from all tenants  
-- **Edge Collections** (`hasConnection`, `hasVersion`, etc.) contain relationships from all tenants
-- **tenantId field** in every document provides the partition key for logical separation
-
-**Logical Layer (Query-Time Isolation):**
-- **Tenant-specific queries** filter by `tenantId` to access only relevant documents
-- **SmartGraph definitions** ensure tenant isolation at the application layer
-- **Complete data separation** achieved through consistent tenantId filtering
-- **No cross-tenant access** possible without explicit tenantId knowledge
-
-**Benefits of This Architecture:**
-- **Infrastructure Efficiency**: Single database serves multiple tenants
-- **Data Isolation**: Complete logical separation with physical co-location
-- **Horizontal Scaling**: Add database servers to handle more tenants
-- **Cost Effectiveness**: Shared resources with isolated data access
+subClassOf        # Class -> Class inheritance relationships
+```
 
 ### Key Design Patterns
 
 **1. Consistent Proxy Pattern for Performance**
 - **Device**: `DeviceProxyIn`/`DeviceProxyOut` act as lightweight connection points
-- **Software**: `SoftwareProxyIn`/`SoftwareProxyOut` act as lightweight connection points (NEW)
+- **Software**: `SoftwareProxyIn`/`SoftwareProxyOut` act as lightweight connection points
 - Core collections (`Device`, `Software`) hold full temporal data
 - Reduces edge collection bloat while maintaining referential integrity
 
 **2. Unified Temporal Versioning**
 - **Generic `hasVersion` collection** handles all time travel relationships
 - **Device**: `DeviceProxyIn` <-> `Device` <-> `DeviceProxyOut` 
-- **Software**: `SoftwareProxyIn` <-> `Software` <-> `SoftwareProxyOut` (NEW)
+- **Software**: `SoftwareProxyIn` <-> `Software` <-> `SoftwareProxyOut`
 - **Consistent queries** across all temporal entities
 - Historical configurations preserved with `created`/`expired` timestamps
 
-**3. Software Configuration Refactoring**
-- **REMOVED**: `configurationHistory` array (complex nested structure)
-- **ADDED**: Flattened software configurations as versioned documents
-- **BENEFIT**: Same time travel pattern as Device collection
-- **RESULT**: Simpler queries and uniform temporal data model
+**3. SmartGraph + Satellite Architecture**
+- **SmartGraph Collections**: Tenant-isolated data with automatic sharding by `tenantId`
+- **Satellite Collections**: Global taxonomy metadata replicated across all nodes
+- **Cross-Graph Relationships**: `type` edges connect tenant entities to shared taxonomy
+- **Complete Isolation**: Physical separation ensures enterprise-grade security
 
-**4. Dual Naming Convention Support**
-- **camelCase (default)**: `Device`, `hasConnection`, `deviceId` 
-- **snake_case (optional)**: `device`, `has_connection`, `device_id`
-- **Vertices**: PascalCase/lowercase, singular (`Device`/`device`, `Software`/`software`)
-- **Edges**: camelCase/snake_case, singular (`hasConnection`/`has_connection`)
-- **Properties**: camelCase/snake_case for consistency
+**4. Taxonomy Classification System**
+- **100% Coverage**: Every device and software entity has a `type` edge to its class
+- **Hierarchical Structure**: Classes connected via `subClassOf` inheritance relationships  
+- **Fallback Classification**: Automatic assignment to base classes if specific classification fails
+- **Consistent Metadata**: Same taxonomy hierarchy available to all tenants
 
-**5. Multi-Tenant Isolation**
-- Disjoint SmartGraphs using `tenantId` as partition key
-- Complete data isolation within shared collections
-- Horizontal scale-out capability with tenant-based sharding
+**5. Alert System Integration**
+- **Operational Monitoring**: Real-time alert generation from devices and software
+- **TTL-Managed Lifecycle**: Alerts automatically age out based on resolution status
+- **SmartGraph Integration**: Alert relationships properly isolated by tenant
+- **Cross-Entity Correlation**: Alerts can originate from any monitored entity
 
 ### Data Model
 
@@ -621,62 +515,52 @@ graph TB
 
 ### Quick Start - Demo Options
 
-**[TARGET] Enhanced Automated Walkthrough (Recommended for First-Time Users)**
+**[RECOMMENDED] Interactive Automated Walkthrough**
 ```bash
 # Interactive guided demonstration with database visibility
-python3 demos/automated_demo_walkthrough.py --interactive
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 
 # Auto-advancing demonstration with timed pauses
-python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 5
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 5
 ```
 
-**NEW: Enhanced Transaction + TTL Demo Features**
+**Enhanced Demo Features:**
 - **ACTUAL database state** shown before and after transactions
 - **Specific document keys** provided for ArangoDB Web Interface monitoring
 - **Graph visualization guidance** with exact vertex paths to explore
 - **Real-time TTL field activation** during transaction execution
 - **Complete visibility** into "Current vs Historical" TTL strategy
 
-**[RUN] Fast Complete Demo**
-```bash
-# Run the complete demonstration (all steps automated)
-python3 demos/automated_demo_walkthrough.py --interactive
-
-# Run with snake_case naming convention
-python3 demos/automated_demo_walkthrough.py --interactive
-```
-
-**[QUICK START] Demo Launcher (Easy Access)**
-```bash
-# Interactive menu with all demo options
-python3 demos/demo_launcher.py
-```
-
-> **Note**: All scripts use `python3` for compatibility with pyenv and modern Python installations. If you encounter `python: command not found` errors, the scripts have been updated to use `python3` automatically.
-
-**[NEW] Advanced Time Travel Demonstrations**
-```bash
-# Complex graph traversal queries with time travel
-python3 demos/time_travel_demo_queries.py
-
-# Unified transaction + TTL with real-time aging
-python3 demos/unified_transaction_ttl_demo.py
-```
-
 **[TOOLS] Database Management**
 ```bash
 # Reset database to clean state before demos
-python3 tools/reset_database.py
+PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --reset-only
 ```
-Use this if you see more than 8 tenants in the ArangoDB interface, or if you want to ensure a completely fresh demo start.
+
+**Individual Demo Components**
+```bash
+# Data Generation Only
+PYTHONPATH=. python3 src/data_generation/asset_generator.py
+
+# Database Deployment Only  
+PYTHONPATH=. python3 src/database/database_deployment.py
+
+# TTL Demo Scenarios Only
+PYTHONPATH=. python3 src/ttl/ttl_demo_scenarios.py
+
+# Validation Only
+PYTHONPATH=. python3 src/validation/validation_suite.py
+```
 
 **The comprehensive demo includes:**
-1. **Initial Data Generation** - Multi-tenant network asset data (8 tenants by default)
-2. **Database Deployment** - Collections, indexes, and SmartGraphs
+1. **Initial Data Generation** - Multi-tenant network asset data (8 tenants by default) with complete taxonomy classification
+2. **Database Deployment** - SmartGraph collections, Satellite collections, and unified graph architecture
 3. **Enhanced Transaction + TTL Demo** - Configuration changes with immediate TTL activation and database visibility
-4. **TTL Demonstration** - Time travel scenarios
+4. **Time Travel Demonstration** - Historical queries and point-in-time analysis scenarios
 5. **Scale-Out Demo** - Dynamic tenant addition and cluster analysis (8 initial + 8 new = 16 total tenants)
-6. **Comprehensive Validation** - Data integrity and isolation checks
+6. **Alert System Demo** - Real-time operational monitoring with alert lifecycle management
+7. **Taxonomy System Demo** - Hierarchical classification exploration and cross-graph taxonomy queries
+8. **Comprehensive Validation** - Data integrity, tenant isolation, and enterprise readiness checks
 
 ### Enhanced Scale-Out Demo Features
 
@@ -723,26 +607,32 @@ graph TD
     B --> C[Step 2: Deploy to DB]
     C --> D[Step 3: Initial Validation]
     D --> E[Step 4: Temporal TTL Transactions]
-    E --> F[Step 5: TTL Demonstration]
+    E --> F[Step 5: Time Travel Demo]
     F --> G[Step 6: Scale-Out Demo]
-    G --> H[Step 7: Final Validation]
-    H --> I[Demo Complete]
+    G --> H[Step 7: Alert System Demo]
+    H --> I[Step 8: Taxonomy Demo]
+    I --> J[Step 9: Final Validation]
+    J --> K[Demo Complete]
     
     A0 --> A01[Clean Database<br/>Reset Collections<br/>Clear Tenant Registry]
-    B --> B1[Create 8 Tenants<br/>Generate Assets<br/>Support camelCase/snake_case]
-    C --> C1[Deploy Collections<br/>Create Indexes<br/>Setup SmartGraphs]
-    D --> D1[Verify Deployment<br/>Check Tenant Isolation<br/>Test Time Travel]
+    B --> B1[Create 8 Tenants<br/>Generate Assets<br/>Create Taxonomy Classifications]
+    C --> C1[Deploy SmartGraph Collections<br/>Create Satellite Collections<br/>Setup Unified Graph]
+    D --> D1[Verify Deployment<br/>Check Tenant Isolation<br/>Validate Taxonomy Coverage]
     E --> E1[Simulate Device Changes<br/>Simulate Software Updates<br/>Apply TTL Strategy]
-    F --> F1[Device Maintenance Cycle<br/>Software Upgrade Rollback<br/>Historical Data Aging]
-    G --> G1[Add 8 New Tenants<br/>Add 1 DB Server<br/>Rebalance 16 Graphs]
-    H --> H1[Data Integrity Check<br/>Isolation Verification<br/>Performance Validation]
+    F --> F1[Historical Data Queries<br/>Point-in-Time Analysis<br/>Temporal Range Queries]
+    G --> G1[Add New Tenants<br/>Add DB Server<br/>Rebalance Shards]
+    H --> H1[Generate Alerts<br/>Alert Lifecycle<br/>Cross-Entity Correlation]
+    I --> I1[Class Hierarchy<br/>Type Relationships<br/>Cross-Graph Queries]
+    J --> J1[Data Integrity Check<br/>Isolation Verification<br/>Performance Validation]
     
     style A fill:#e1f5fe
     style A0 fill:#ffebee
-    style I fill:#e8f5e8
+    style K fill:#e8f5e8
     style E fill:#fff3e0
     style F fill:#fff3e0
     style G fill:#f3e5f5
+    style H fill:#ffebee
+    style I fill:#e8f5e8
 ```
 
 ### Automated Demo Walkthrough
@@ -759,14 +649,16 @@ The **automated walkthrough** provides a guided tour of all system capabilities 
 #### Walkthrough Sections:
 0. **Database Reset and Cleanup** - Clean state for fresh demonstration
 1. **System Introduction** - Overview and capabilities
-2. **Data Generation** - Multi-tenant data creation (8 tenants)
-3. **Database Deployment** - SmartGraphs and indexes
-4. **Initial Validation** - System integrity checks
+2. **Data Generation** - Multi-tenant data creation (8 tenants) with taxonomy
+3. **Database Deployment** - SmartGraphs, Satellite collections, and indexes
+4. **Initial Validation** - System integrity and taxonomy coverage checks
 5. **Temporal TTL Transactions** - Configuration changes with TTL
-6. **TTL Demonstration** - Time travel scenarios
-7. **Scale-Out Demo** - Add 8 tenants, 1 server, rebalance 16 graphs
-8. **Final Validation** - Comprehensive system verification
-9. **Demo Summary** - Results and achievements
+6. **Time Travel Demonstration** - Historical queries and point-in-time analysis
+7. **Scale-Out Demo** - Add tenants, servers, rebalance shards
+8. **Alert System Demonstration** - Real-time operational monitoring
+9. **Taxonomy System Demonstration** - Hierarchical classification and cross-graph queries
+10. **Final Validation** - Comprehensive system verification
+11. **Demo Summary** - Results and achievements
 
 #### Usage Options:
 ```bash
@@ -785,26 +677,23 @@ python3 demos/automated_demo_walkthrough.py --help
 For running specific parts of the demonstration:
 
 ```bash
-# Data Generation Only (4 tenants by default)
-python3 src/data_generation/asset_generator.py --naming camelCase --environment development
+# Data Generation Only
+PYTHONPATH=. python3 src/data_generation/asset_generator.py
 
 # Generate specific number of tenants
-python3 src/data_generation/asset_generator.py --tenants 6 --naming camelCase --environment development
+PYTHONPATH=. python3 src/data_generation/asset_generator.py --tenants 6
 
 # Database Deployment Only  
-python3 src/database/database_deployment.py --naming camelCase
+PYTHONPATH=. python3 src/database/database_deployment.py
 
 # Transaction Simulation Only
-python3 src/simulation/transaction_simulator.py --naming camelCase --devices 5 --software 3
+PYTHONPATH=. python3 src/simulation/transaction_simulator.py --devices 5 --software 3
 
 # TTL Demo Scenarios Only
-python3 src/ttl/ttl_demo_scenarios.py --naming camelCase
-
-# Scale-Out Demo Only
-python3 demos/scale_out_demo.py --naming camelCase --save-report
+PYTHONPATH=. python3 src/ttl/ttl_demo_scenarios.py
 
 # Validation Only
-python3 src/validation/validation_suite.py
+PYTHONPATH=. python3 src/validation/validation_suite.py
 ```
 
 ### Prerequisites
@@ -1033,30 +922,6 @@ See [SCALE_OUT_GUIDE.md](SCALE_OUT_GUIDE.md) for detailed instructions.
 
 ## Data Generation Options
 
-### Naming Convention Options
-
-Choose between two supported naming conventions:
-
-#### camelCase (Default)
-```bash
-python3 src/data_generation/asset_generator.py --naming camelCase
-python3 src/database/database_deployment.py --naming camelCase
-```
-**Collections Created:**
-- Vertex: `Device`, `DeviceProxyIn`, `DeviceProxyOut`, `Location`, `Software`, `SoftwareProxyIn`, `SoftwareProxyOut`
-- Edge: `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`
-
-#### snake_case
-```bash
-python3 src/data_generation/asset_generator.py --naming snake_case
-python3 src/database/database_deployment.py --naming snake_case
-```
-**Collections Created:**
-- Vertex: `device`, `device_proxy_in`, `device_proxy_out`, `location`, `software`, `software_proxy_in`, `software_proxy_out`
-- Edge: `has_connection`, `has_location`, `has_device_software`, `has_version`
-
-**Important:** Use the same naming convention for both data generation and deployment.
-
 ### Scale Factors
 Control data volume per tenant:
 - **1x scale**: 60 devices, 90 software, 5 locations
@@ -1065,7 +930,7 @@ Control data volume per tenant:
 - **5x scale**: 300 devices, 450 software, 25 locations
 
 ### Tenant Customization
-Edit `tenant_config.py` to modify:
+Edit `src/config/tenant_config.py` to modify:
 ```python
 # Example custom tenant
 create_tenant_config(
@@ -1083,55 +948,47 @@ Each tenant gets:
 - **SoftwareProxy entities**: Software connection points
 - **Location entities**: Geographic placement data
 - **Relationship edges**: Network topology and associations
+- **Taxonomy classifications**: Device/Software -> Class relationships
 
 ## Deployment Scenarios
 
 ### Scenario 1: Demo/Development
 ```bash
-# Minimal data for testing with camelCase
-python3 src/data_generation/asset_generator.py --environment development
-python3 src/database/database_deployment.py --naming camelCase
-
-# Or with snake_case naming
-python3 src/data_generation/asset_generator.py --environment development --naming snake_case
-python3 src/database/database_deployment.py --naming snake_case
+# Minimal data for testing
+PYTHONPATH=. python3 src/data_generation/asset_generator.py --environment development
+PYTHONPATH=. python3 src/database/database_deployment.py
 ```
 
 ### Scenario 2: Multi-Tenant Production
 ```bash
-# Full-scale multi-tenant deployment with camelCase (default)
-python3 src/data_generation/asset_generator.py
-python3 src/database/database_deployment.py
-python3 src/validation/validation_suite.py
-
-# Or with snake_case naming
-python3 src/data_generation/asset_generator.py --naming snake_case
-python3 src/database/database_deployment.py --naming snake_case
-python3 src/validation/validation_suite.py
+# Full-scale multi-tenant deployment
+PYTHONPATH=. python3 src/data_generation/asset_generator.py
+PYTHONPATH=. python3 src/database/database_deployment.py
+PYTHONPATH=. python3 src/validation/validation_suite.py
 ```
 
 ### Scenario 3: Custom Enterprise Setup
 ```bash
-# 1. Customize tenant_config.py with your tenants
+# 1. Customize src/config/tenant_config.py with your tenants
 # 2. Adjust scale factors as needed
-python3 src/data_generation/asset_generator.py
-python3 src/database/database_deployment.py
+PYTHONPATH=. python3 src/data_generation/asset_generator.py
+PYTHONPATH=. python3 src/database/database_deployment.py
 
 # 3. Verify tenant isolation
-python3 src/validation/validation_suite.py
+PYTHONPATH=. python3 src/validation/validation_suite.py
 ```
 
 ### Scenario 4: Add New Tenants
 ```bash
-# 1. Add new tenant configs to tenant_config.py
+# 1. Add new tenant configs to src/config/tenant_config.py
 # 2. Generate data (preserves existing tenants)
-python3 src/data_generation/asset_generator.py
+PYTHONPATH=. python3 src/data_generation/asset_generator.py
 
 # 3. Deploy only new tenants
-python oasis_cluster_setup.py
+PYTHONPATH=. python3 src/database/database_deployment.py --incremental
 
 # 4. Validate isolation maintained
-python3 src/validation/validation_suite.py
+PYTHONPATH=. python3 src/validation/validation_suite.py
 ```
 
 ## Generated Data
@@ -1188,64 +1045,63 @@ python3 src/validation/validation_suite.py
 ## Project Structure
 
 ```
-- src/config/config_management.py            # Centralized configuration system
-- src/config/tenant_config.py                # Tenant modeling and utilities
-- src/data_generation/data_generation_config.py       # Generation parameters and constants
-- src/data_generation/data_generation_utils.py        # Reusable utility functions
-- src/database/database_deployment.py          # ArangoDB Oasis deployment
-- src/validation/validation_suite.py             # Comprehensive naming convention validation
-- src/validation/test_suite.py                   # Complete test framework
-- src/database/oasis_cluster_setup.py          # Enterprise cluster management (see note below)
-- src/config/centralized_credentials.py      # Secure credential management
-- src/database/database_utilities.py           # Database utility functions
-- demos/time_travel_demo_queries.py     # Advanced traversal queries and time travel demos
-- demos/unified_transaction_ttl_demo.py # Unified transaction + TTL demonstration
-- demos/automated_demo_walkthrough.py   # Interactive demo presentation script (ENHANCED)
-- src/simulation/transaction_simulator.py        # Real transaction execution with TTL management (ENHANCED)
-- src/simulation/scale_out_manager.py            # Cluster scaling and tenant addition management
-- src/ttl/ttl_demo_scenarios.py          # TTL aging demonstration scenarios
-- src/ttl/ttl_constants.py               # TTL configuration constants (5-minute demo mode)
-- tools/reset_database.py              # Database cleanup utility for demo preparation
-- docs/ENHANCED_TIME_TRAVEL_DEMO.md    # Documentation for enhanced capabilities
-- docs/
-  - docs/PRD.md                      # Product Requirements Document
-  - docs/CLAUDE.md                   # Development session notes
+- src/
+  - config/
+    - config_management.py            # Centralized configuration system
+    - tenant_config.py                # Tenant modeling and utilities  
+    - centralized_credentials.py      # Secure credential management
+    - taxonomy_constants.py           # Taxonomy class definitions
+  - data_generation/
+    - asset_generator.py              # Main data generation engine
+    - data_generation_config.py       # Generation parameters and constants
+    - data_generation_utils.py        # Reusable utility functions
+    - taxonomy_generator.py           # Taxonomy classification system
+    - alert_generator.py              # Alert system data generation
+  - database/
+    - database_deployment.py          # ArangoDB deployment and setup
+    - database_utilities.py           # Database utility functions
+  - validation/
+    - validation_suite.py             # Comprehensive system validation
+  - simulation/
+    - transaction_simulator.py        # Real transaction execution with TTL
+    - alert_simulator.py              # Alert generation and lifecycle
+  - ttl/
+    - ttl_demo_scenarios.py          # TTL aging demonstration scenarios
+    - ttl_constants.py               # TTL configuration constants
+    - ttl_monitor.py                 # TTL monitoring utilities
+- demos/
+  - automated_demo_walkthrough.py    # Interactive demo presentation script
 - data/
-  - data/tenant_{id}/                # Generated tenant data directories
-  - data/tenant_registry_time_travel.json  # Tenant metadata registry
-- logs/                           # Application logs
-- reports/                        # Validation reports
+  - tenant_{id}/                     # Generated tenant data directories
+  - tenant_registry_time_travel.json # Tenant metadata registry
+- assets/                            # Documentation images and diagrams
+- docs/                              # Additional documentation
+- logs/                              # Application logs
+- reports/                           # Validation and performance reports
 ```
 
 ## Architecture Notes
 
-### Multi-Tenant Approach
+### SmartGraph + Satellite Architecture
 
-This demo uses a **simplified shared collection approach** for easy demonstration and development:
+The system uses **ArangoDB SmartGraphs with Satellite Collections** for optimal multi-tenant isolation and performance:
 
-- **Shared Collections**: All tenants use the same `Device`, `Software`, `Location` collections
-- **Logical Isolation**: Tenant separation via key prefixes (`tenant_id_entity_id`)
-- **Unified Graph**: Single `network_assets_graph` shows all tenant data with visual separation
-- **Quick Setup**: No complex SmartGraph configuration required
+**SmartGraph Collections:**
+- **Tenant Data Isolation**: All tenant-specific collections use `tenantId` as the SmartGraph attribute
+- **Automatic Sharding**: Documents are automatically distributed based on `tenantId`  
+- **Complete Separation**: Each tenant's data is physically isolated on specific shards
+- **Cross-Tenant Prevention**: Impossible to access other tenant's data without explicit `tenantId`
 
-### Enterprise Alternative: `oasis_cluster_setup.py`
+**Satellite Collections:**
+- **Global Metadata**: Taxonomy classes shared across all tenants
+- **High Availability**: Replicated to all cluster nodes for optimal read performance
+- **Consistent Classification**: Same taxonomy hierarchy available to all tenants
 
-For **production environments** requiring strict data isolation, use the full cluster setup:
-
-- **True SmartGraphs**: Physical separation with tenant-specific collections
-- **Complete Isolation**: Each tenant gets dedicated collection shards
-- **Enterprise Features**: Full lifecycle management and compliance support
-- **Usage**: Call `python3 src/database/oasis_cluster_setup.py` for production deployment
-
-**When to use each approach:**
-
-| Feature | Demo Approach | Enterprise Approach |
-|---------|---------------|-------------------|
-| **Development/Testing** | [YES] Recommended | [WARNING] Complex setup |
-| **Production SaaS** | [WARNING] Limited isolation | [YES] Full isolation |
-| **Compliance Requirements** | [NO] Logical only | [YES] Physical separation |
-| **Performance** | [YES] Simple queries | [YES] Optimized per tenant |
-| **Setup Complexity** | [YES] Minimal | [WARNING] Full configuration |
+**Benefits:**
+- **Enterprise-Grade Isolation**: Physical separation ensures complete tenant security
+- **Linear Scalability**: Add database servers to handle more tenants seamlessly
+- **Optimal Performance**: Local data access with globally available metadata
+- **Cost Efficiency**: Shared infrastructure with isolated data access
 
 ## Configuration
 

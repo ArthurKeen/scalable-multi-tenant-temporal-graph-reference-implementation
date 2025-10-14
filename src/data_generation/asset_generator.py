@@ -23,8 +23,8 @@ from src.config.tenant_config import TenantConfig, TenantNamingConvention, creat
 from src.ttl.ttl_constants import NEVER_EXPIRES
 from src.data_generation.data_generation_utils import (
     DocumentEnhancer, RandomDataGenerator, KeyGenerator,
-    ConfigurationManager as DataConfigManager, FileManager, LocationDataProvider,
-    SmartGraphConfigGenerator
+    DeviceConfigurationManager, FileManager, LocationDataProvider,
+    SmartGraphConfigGenerator, EntityGenerator
 )
 from src.data_generation.alert_generator import AlertGenerator
 from src.data_generation.taxonomy_generator import TaxonomyGenerator
@@ -44,7 +44,7 @@ class TimeTravelRefactoredGenerator:
         self.network_config = NetworkConfig()
         self.limits = DataGenerationLimits()
         self.random_gen = RandomDataGenerator(self.network_config, self.limits)
-        self.config_manager = DataConfigManager(self.random_gen)
+        self.config_manager = DeviceConfigurationManager(self.random_gen)
         self.location_provider = LocationDataProvider()
         
         # Setup logging
@@ -787,8 +787,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate multi-tenant network asset data")
     parser.add_argument("--tenants", type=int, default=4,
                        help="Number of tenants to generate (default: 4)")
-    parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
-                       help="Naming convention for collections and properties (default: camelCase)")
+    parser.add_argument("--naming", choices=["camelCase"], default="camelCase",
+                       help="Naming convention for collections and properties (camelCase only)")
     parser.add_argument("--environment", choices=["production", "development"], default="production",
                        help="Environment configuration (default: production)")
     

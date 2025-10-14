@@ -18,10 +18,10 @@ from dataclasses import dataclass
 from arango import ArangoClient
 
 # Import project modules
+from src.database.database_utilities import DatabaseMixin, QueryExecutor
 from src.config.centralized_credentials import CredentialsManager
-from src.database.database_utilities import QueryExecutor
 from src.config.config_management import get_config, NamingConvention
-from src.ttl.ttl_config import TTLManager, create_ttl_configuration, create_snake_case_ttl_configuration
+from src.ttl.ttl_config import TTLManager, create_ttl_configuration
 from src.ttl.ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS
 from src.data_generation.data_generation_utils import KeyGenerator, RandomDataGenerator
 from src.data_generation.data_generation_config import NetworkConfig, DataGenerationLimits
@@ -187,15 +187,48 @@ class TransactionSimulator:
             new_config["created"] = timestamp.timestamp()
             new_config["expired"] = NEVER_EXPIRES  # New current configuration
             
-            # Generate new key for the new configuration
-            key_parts = current_device["_key"].split("_")
-            if len(key_parts) >= 2:
-                tenant_id = key_parts[0]
-                entity_part = key_parts[1]  # e.g., "device1-0"
-                # Use microseconds to ensure uniqueness
+            # Generate new key with proper SmartGraph format (avoiding conflicts)
+            original_key = current_device["_key"]  # e.g., "ace9c0fd580b:device1-0"
+            
+            if ":" in original_key:
+                tenant_id, entity_part = original_key.split(":", 1)  # Split on colon for SmartGraph keys
+                
+                # Extract base entity and find next available version number
+                if "-" in entity_part:
+                    base_entity, version_str = entity_part.rsplit("-", 1)  # e.g., "device1", "0"
+                    try:
+                        # Find next available version by checking database for conflicts
+                        version_num = int(version_str)
+                        max_attempts = 100  # Prevent infinite loops
+                        attempts = 0
+                        
+                        while attempts < max_attempts:
+                            new_version = version_num + 1 + attempts
+                            new_key = f"{tenant_id}:{base_entity}-{new_version}"
+                            
+                            # Check if this key already exists in the database
+                            if not self.database.collection(self.app_config.get_collection_name("devices")).has(new_key):
+                                break
+                            attempts += 1
+                        else:
+                            # Fallback: use timestamp suffix if we can't find available version
+                            unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                            new_key = f"{tenant_id}:{base_entity}_{unique_suffix}"
+                            
+                    except ValueError:
+                        # Fallback: use timestamp suffix
+                        unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                        new_key = f"{tenant_id}:{entity_part}_{unique_suffix}"
+                else:
+                    # Fallback: use timestamp suffix  
+                    unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                    new_key = f"{tenant_id}:{entity_part}_{unique_suffix}"
+            else:
+                # Fallback for non-SmartGraph keys
                 unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
-                new_key = f"{tenant_id}_{entity_part}_{unique_suffix}"
-                new_config["_key"] = new_key
+                new_key = f"{original_key}_{unique_suffix}"
+            
+            new_config["_key"] = new_key
             
             return ConfigurationChange(
                 entity_type="device",
@@ -247,15 +280,48 @@ class TransactionSimulator:
             new_config["created"] = timestamp.timestamp()
             new_config["expired"] = NEVER_EXPIRES  # New current configuration
             
-            # Generate new key
-            key_parts = current_software["_key"].split("_")
-            if len(key_parts) >= 2:
-                tenant_id = key_parts[0]
-                entity_part = key_parts[1]  # e.g., "software3-0"
-                # Use microseconds to ensure uniqueness
+            # Generate new key with proper SmartGraph format (avoiding conflicts)
+            original_key = current_software["_key"]  # e.g., "ace9c0fd580b:software1-0"
+            
+            if ":" in original_key:
+                tenant_id, entity_part = original_key.split(":", 1)  # Split on colon for SmartGraph keys
+                
+                # Extract base entity and find next available version number
+                if "-" in entity_part:
+                    base_entity, version_str = entity_part.rsplit("-", 1)  # e.g., "software1", "0"
+                    try:
+                        # Find next available version by checking database for conflicts
+                        version_num = int(version_str)
+                        max_attempts = 100  # Prevent infinite loops
+                        attempts = 0
+                        
+                        while attempts < max_attempts:
+                            new_version = version_num + 1 + attempts
+                            new_key = f"{tenant_id}:{base_entity}-{new_version}"
+                            
+                            # Check if this key already exists in the database
+                            if not self.database.collection(self.app_config.get_collection_name("software")).has(new_key):
+                                break
+                            attempts += 1
+                        else:
+                            # Fallback: use timestamp suffix if we can't find available version
+                            unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                            new_key = f"{tenant_id}:{base_entity}_{unique_suffix}"
+                            
+                    except ValueError:
+                        # Fallback: use timestamp suffix
+                        unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                        new_key = f"{tenant_id}:{entity_part}_{unique_suffix}"
+                else:
+                    # Fallback: use timestamp suffix  
+                    unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                    new_key = f"{tenant_id}:{entity_part}_{unique_suffix}"
+            else:
+                # Fallback for non-SmartGraph keys
                 unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
-                new_key = f"{tenant_id}_{entity_part}_{unique_suffix}"
-                new_config["_key"] = new_key
+                new_key = f"{original_key}_{unique_suffix}"
+            
+            new_config["_key"] = new_key
             
             return ConfigurationChange(
                 entity_type="software",

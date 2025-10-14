@@ -86,46 +86,15 @@ class CredentialsManager:
         }
 
 
-# Constants for commonly used values
-class DatabaseConstants:
-    """Database-related constants."""
-    
-    # Collection names (camelCase naming conventions)
-    VERTEX_COLLECTIONS = {
-        "device": "Device",
-        "device_proxy_in": "DeviceProxyIn", 
-        "device_proxy_out": "DeviceProxyOut",
-        "software": "Software",
-        "software_proxy_in": "SoftwareProxyIn",
-        "software_proxy_out": "SoftwareProxyOut",
-        "location": "Location"
-    }
-    
-    EDGE_COLLECTIONS = {
-        "has_connection": "hasConnection",
-        "has_location": "hasLocation", 
-        "has_device_software": "hasDeviceSoftware",
-        "version": "version"
-    }
-    
-    # Time constants
-    SECONDS_PER_DAY = GENERATION_CONSTANTS.SECONDS_PER_DAY
-    TTL_90_DAYS = GENERATION_CONSTANTS.DEFAULT_TTL_SECONDS  # 90 days in seconds
-    MAX_TIMESTAMP = SYSTEM_CONSTANTS.MAX_TIMESTAMP  # sys.maxsize equivalent
-    
-    # Default ports for different services
-    DEFAULT_PORTS = {
-        "arangodb": NETWORK_CONSTANTS.ARANGODB_PORT,
-        "http": NETWORK_CONSTANTS.HTTP_PORT,
-        "https": NETWORK_CONSTANTS.HTTPS_PORT,
-        "ssh": 22
-    }
-
-
 def get_collection_name(logical_name: str) -> str:
-    """Get camelCase compliant collection name."""
-    all_collections = {**DatabaseConstants.VERTEX_COLLECTIONS, **DatabaseConstants.EDGE_COLLECTIONS}
-    return all_collections.get(logical_name, logical_name)
+    """
+    Get camelCase compliant collection name.
+    
+    DEPRECATED: Use ConfigurationManager.get_collection_name() instead.
+    """
+    from src.config.config_management import get_config, NamingConvention
+    config = get_config("production", NamingConvention.CAMEL_CASE)
+    return config.get_collection_name(logical_name)
 
 
 def get_database_connection():
