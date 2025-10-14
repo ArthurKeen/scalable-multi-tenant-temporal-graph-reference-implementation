@@ -287,8 +287,10 @@ class TransactionSimulator(DatabaseMixin):
         try:
             collection_name = self.app_config.get_collection_name(change.entity_type)
             if not collection_name:
+                print(f"[ERROR] No collection name found for entity type: {change.entity_type}")
                 return False
             
+            print(f"[DEBUG] Getting collection: {collection_name}")
             collection = self.database.collection(collection_name)
             
             # Step 1: Update current configuration to historical (set expired timestamp and TTL)
@@ -297,6 +299,7 @@ class TransactionSimulator(DatabaseMixin):
             old_config["expired"] = expired_timestamp  # For time travel queries
             old_config["ttlExpireAt"] = expired_timestamp + TTLConstants.DEMO_TTL_EXPIRE_SECONDS  # TTL deletion timestamp (5 minutes for demo)
             
+            print(f"[DEBUG] Updating old config {change.entity_key} to historical")
             collection.update(old_config)
             print(f"   [HISTORICAL] Converted {change.entity_key} to historical (expired={old_config['expired']}, ttlExpireAt={old_config['ttlExpireAt']})")
             
@@ -306,8 +309,27 @@ class TransactionSimulator(DatabaseMixin):
             if "ttlExpireAt" in new_config:
                 del new_config["ttlExpireAt"]
             
-            collection.insert(new_config)
-            print(f"   [CURRENT] Created new current config {new_config['_key']} (expired={NEVER_EXPIRES}, no TTL)")
+            print(f"[DEBUG] Inserting new config with key: {new_config.get('_key', 'NO KEY')}")
+            print(f"[DEBUG] New config data: {new_config}")
+            
+            try:
+                insert_result = collection.insert(new_config)
+                print(f"[DEBUG] Insert result: {insert_result}")
+                print(f"   [CURRENT] Created new current config {new_config['_key']} (expired={NEVER_EXPIRES}, no TTL)")
+                
+                # Verify the document was actually inserted
+                verify_query = f"FOR doc IN {collection_name} FILTER doc._key == @key RETURN doc"
+                verify_result = list(self.database.aql.execute(verify_query, bind_vars={"key": new_config['_key']}))
+                print(f"[DEBUG] Verification query returned {len(verify_result)} documents")
+                if verify_result:
+                    print(f"[DEBUG] Verified document exists: {verify_result[0]['_key']}")
+                else:
+                    print(f"[ERROR] Document not found after insert!")
+                    
+            except Exception as insert_error:
+                print(f"[ERROR] Failed to insert new config: {str(insert_error)}")
+                print(f"[ERROR] New config that failed: {new_config}")
+                return False
             
             # Output full vertex IDs for graph visualization
             old_vertex_id = f"{collection_name}/{change.entity_key}"
@@ -332,6 +354,8 @@ class TransactionSimulator(DatabaseMixin):
             
         except Exception as e:
             print(f"[ERROR] Failed to execute configuration change: {str(e)}")
+            import traceback
+            traceback.print_exc()
             return False
     
     def _update_version_edges(self, change: ConfigurationChange):
