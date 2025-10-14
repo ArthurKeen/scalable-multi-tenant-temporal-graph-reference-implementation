@@ -40,25 +40,17 @@ class ConfigurationChange:
     change_description: str
 
 
-class TransactionSimulator:
+class TransactionSimulator(DatabaseMixin):
     """Simulates realistic configuration change transactions."""
     
     def __init__(self, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE, show_queries: bool = False):
+        super().__init__()  # Initialize DatabaseMixin
         self.naming_convention = naming_convention
         self.app_config = get_config("production", naming_convention)
         self.show_queries = show_queries
         
-        # Database connection
-        creds = CredentialsManager.get_database_credentials()
-        self.client = ArangoClient(hosts=creds.endpoint)
-        self.database = None
-        self.creds = creds
-        
-        # TTL configuration
-        if naming_convention == NamingConvention.SNAKE_CASE:
-            self.ttl_config = create_snake_case_ttl_configuration("simulator", expire_after_days=DEFAULT_TTL_DAYS)
-        else:
-            self.ttl_config = create_ttl_configuration("simulator", expire_after_days=DEFAULT_TTL_DAYS)
+        # TTL configuration - use camelCase only (snake_case support removed)
+        self.ttl_config = create_ttl_configuration("simulator", expire_after_days=DEFAULT_TTL_DAYS)
         self.ttl_manager = TTLManager(self.ttl_config)
         
         # Data generation utilities
@@ -69,54 +61,6 @@ class TransactionSimulator:
         # Track simulated changes
         self.simulated_changes: List[ConfigurationChange] = []
     
-    def connect_to_database(self) -> bool:
-        """Connect to the ArangoDB database."""
-        try:
-            print(f"[CONNECT] Connecting to database for transaction simulation...")
-            self.database = self.client.db(
-                self.creds.database_name,
-                **CredentialsManager.get_database_params()
-            )
-            
-            # Test connection
-            collections = self.database.collections()
-            print(f"[CONNECT] Connected successfully - {len(collections)} collections found")
-            return True
-            
-        except Exception as e:
-            print(f"[ERROR] Failed to connect to database: {str(e)}")
-            return False
-    
-    def execute_and_display_query(self, query: str, query_name: str, bind_vars: Dict = None) -> List[Dict]:
-        """Execute a query and display it with results if show_queries is enabled."""
-        if self.show_queries:
-            print(f"\n[QUERY] {query_name}:")
-            print(f"   AQL: {query}")
-            if bind_vars:
-                print(f"   Variables: {bind_vars}")
-        
-        try:
-            cursor = self.database.aql.execute(query, bind_vars=bind_vars)
-            results = list(cursor)
-            
-            if self.show_queries:
-                print(f"   Results: {len(results)} documents returned")
-                if results and len(results) <= 3:  # Show sample results for small result sets
-                    for i, result in enumerate(results[:3]):
-                        if isinstance(result, dict):
-                            # Show key fields only
-                            sample = {k: v for k, v in result.items() if k in ['_key', '_id', 'name', 'type', 'created', 'expired']}
-                            print(f"   Sample {i+1}: {sample}")
-                elif results:
-                    print(f"   (Large result set - showing count only)")
-                print()
-            
-            return results
-        except Exception as e:
-            if self.show_queries:
-                print(f"   ERROR: {e}")
-                print()
-            raise e
     
     def find_current_configurations(self, entity_type: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Find current configurations for simulation."""
