@@ -77,10 +77,13 @@ class TransactionSimulator(DatabaseMixin):
                 RETURN doc
             """
             
-            results = self.execute_and_display_query(
-                aql, 
-                f"Find Current {entity_type.title()} Configurations"
-            )
+            results = self.execute_aql(aql)
+            
+            if self.show_queries:
+                print(f"[QUERY] Find Current {entity_type.title()} Configurations")
+                print(f"[AQL] {aql}")
+                print(f"[RESULTS] Found {len(results)} current {entity_type} configurations")
+            
             return results
             
         except Exception as e:
