@@ -1068,182 +1068,8 @@ class AutomatedDemoWalkthrough:
             print(f"   Graph visualization: GUIDED")
         print()
         
-        self.pause_for_observation("Enhanced transaction simulation complete. Ready for TTL demonstration?")
+        self.pause_for_observation("Enhanced transaction simulation complete. Ready for scale-out demonstration?")
         self.sections_completed.append("enhanced_transaction_simulation")
-    
-    def section_6_ttl_demonstration(self):
-        """Section 6: TTL and Time Travel Demonstration."""
-        self.print_section_header(
-            "TTL DEMONSTRATION", 
-            "Demonstrating time travel capabilities and TTL scenarios"
-        )
-        
-        self.print_subsection(
-            "Time Travel Scenarios",
-            "Real-world scenarios showing temporal query capabilities"
-        )
-        
-        print("Demo Scenarios:")
-        print("- Device Maintenance Cycle")
-        print("  * Device taken offline for maintenance")
-        print("  * Configuration changes during maintenance")
-        print("  * Device brought back online with new config")
-        print("  * Time travel queries show complete history")
-        print()
-        print("- Software Upgrade Rollback")
-        print("  * Software upgraded to new version")
-        print("  * Issues discovered with new version")
-        print("  * Rollback to previous configuration")
-        print("  * Time travel shows upgrade/rollback history")
-        print()
-        
-        self.pause_for_observation("Running TTL demonstration scenarios...")
-        
-        # Run TTL demonstration with actual aging
-        print("Starting TTL demonstration...")
-        try:
-            from src.ttl.ttl_constants import TTLConstants
-            import time
-            
-            print(f"\n[TTL] TTL AGING DEMONSTRATION")
-            print(f"=" * 60)
-            print(f"TTL Configuration:")
-            print(f"   [TIME] Historical data expires after: {TTLConstants.DEMO_TTL_EXPIRE_MINUTES} minutes")
-            print(f"   [NEVER] Current data: Never expires")
-            print(f"   [CHECK] Check interval: Real-time")
-            print()
-            
-            # Check if we have recent transaction data to observe aging
-            if self.connect_to_database():
-                current_time = time.time()
-                aging_threshold = current_time - (TTLConstants.DEMO_TTL_EXPIRE_SECONDS - 60)  # Documents created in last 4 minutes
-                
-                # Count documents that should age out soon
-                software_collection = self.config_manager.get_collection_name("software")
-                aging_query = f'''
-                FOR doc IN {software_collection}
-                  FILTER HAS(doc, "ttlExpireAt")
-                  FILTER doc.ttlExpireAt > {current_time}
-                  FILTER doc.ttlExpireAt < {current_time + 360}  // Next 6 minutes
-                  COLLECT tenant = REGEX_SPLIT(doc._key, "_")[0] WITH COUNT INTO docCount
-                  RETURN {{
-                    tenant: tenant,
-                    documents_aging: docCount,
-                    expire_time: {current_time + TTLConstants.DEMO_TTL_EXPIRE_SECONDS}
-                  }}
-                '''
-                
-                aging_docs = list(self.database.aql.execute(aging_query))
-                
-                if aging_docs:
-                    total_aging = sum(doc['documents_aging'] for doc in aging_docs)
-                    print(f"[STATUS] CURRENT TTL STATUS:")
-                    print(f"   [DOCS] Documents pending TTL deletion: {total_aging}")
-                    for doc in aging_docs:
-                        print(f"      * Tenant {doc['tenant']}: {doc['documents_aging']} documents")
-                    
-                    expire_minutes = TTLConstants.DEMO_TTL_EXPIRE_SECONDS // 60
-                    print(f"\n[DEMO] DEMONSTRATION: Wait {expire_minutes} minutes to see TTL aging in action")
-                    print(f"   [TIP] SUGGESTION: After {expire_minutes} minutes, run these queries to verify aging:")
-                    software_collection = self.config_manager.get_collection_name("software")
-                    print(f"      FOR doc IN {software_collection} FILTER HAS(doc, 'ttlExpireAt') RETURN doc  // Should return fewer results")
-                    print(f"      FOR doc IN {software_collection} FILTER doc.expired == 9223372036854775807 RETURN doc  // Current configs only")
-                    print()
-                    
-                    if self.interactive_mode:
-                        print(f"[CHOICE] INTERACTIVE OPTION:")
-                        print(f"   You can:")
-                        print(f"   1. Wait here for {expire_minutes} minutes to see real TTL aging")
-                        print(f"   2. Continue with demo and check aging later")
-                        print(f"   3. Open ArangoDB Web UI to monitor aging in real-time")
-                        print()
-                        choice = input(f"   Enter choice (1/2/3) or press Enter to continue: ").strip()
-                        
-                        if choice == "1":
-                            print(f"\n[WAIT] WAITING FOR TTL AGING ({expire_minutes} minutes)...")
-                            print(f"   Documents will be automatically deleted by ArangoDB TTL")
-                            
-                            # Wait with progress updates
-                            wait_seconds = TTLConstants.DEMO_TTL_EXPIRE_SECONDS
-                            for minute in range(1, expire_minutes + 1):
-                                time.sleep(60)  # Wait 1 minute
-                                remaining = expire_minutes - minute
-                                print(f"   [TIME] {minute}/{expire_minutes} minutes elapsed, {remaining} minutes remaining...")
-                            
-                            print(f"\n[DONE] TTL AGING COMPLETE! Verifying document deletion...")
-                            
-                            # Verify aging worked - check for demo TTL vs production TTL separately
-                            current_time = time.time()
-                            software_collection = self.config_manager.get_collection_name("software")
-                            ttl_analysis_query = f"""
-                            FOR doc IN {software_collection} 
-                            FILTER HAS(doc, 'ttlExpireAt')
-                            RETURN {{
-                                key: doc._key,
-                                ttlExpireAt: doc.ttlExpireAt,
-                                expired: doc.ttlExpireAt < @currentTime,
-                                isDemo: doc.ttlExpireAt < (@currentTime + 86400)
-                            }}
-                            """
-                            
-                            ttl_docs = list(self.database.aql.execute(ttl_analysis_query, bind_vars={"currentTime": current_time}))
-                            
-                            demo_expired = sum(1 for doc in ttl_docs if doc['isDemo'] and doc['expired'])
-                            demo_active = sum(1 for doc in ttl_docs if doc['isDemo'] and not doc['expired'])
-                            production_active = sum(1 for doc in ttl_docs if not doc['isDemo'])
-                            
-                            print(f"   [COUNT] Demo TTL documents (5-min): {demo_active} active, {demo_expired} expired")
-                            print(f"   [COUNT] Production TTL documents (30-day): {production_active} active")
-                            
-                            if demo_expired > 0:
-                                print(f"   [SUCCESS] {demo_expired} demo documents were cleaned up by TTL!")
-                            elif demo_active == 0:
-                                print(f"   [SUCCESS] All demo TTL documents were properly cleaned up!")
-                            else:
-                                print(f"   [WAIT] {demo_active} demo documents may still be processing for deletion")
-                        
-                        elif choice == "3":
-                            print(f"\n[WEB] ArangoDB Web UI Monitoring:")
-                            print(f"   URL: https://1d53cdf6fad0.arangodb.cloud:8529")
-                            print(f"   [QUERY] Run this query to monitor TTL documents:")
-                            software_collection = self.config_manager.get_collection_name("software")
-                            print(f"      FOR doc IN {software_collection} FILTER HAS(doc, 'ttlExpireAt') RETURN {{")
-                            print(f"        key: doc._key,")
-                            print(f"        ttlExpireAt: doc.ttlExpireAt,")
-                            print(f"        timeLeft: doc.ttlExpireAt - DATE_NOW()/1000")
-                            print(f"      }}")
-                    else:
-                        print(f"   [AUTO] NON-INTERACTIVE MODE: Continuing without waiting")
-                        print(f"   [TIP] To observe TTL aging, wait {expire_minutes} minutes and check document counts")
-                
-                else:
-                    print(f"[INFO] No recent transaction data found for TTL demonstration")
-                    print(f"   [TIP] Run transaction simulation first to create data with TTL")
-            
-            print(f"\n[BENEFITS] TTL BENEFITS DEMONSTRATED:")
-            print(f"   [DONE] Automatic cleanup of historical data")
-            print(f"   [DONE] Current configurations preserved indefinitely")
-            print(f"   [DONE] Time travel queries work within TTL window")
-            print(f"   [DONE] Database storage automatically optimized")
-            print(f"   [DONE] No manual intervention required")
-            
-            print("[SUCCESS] TTL demonstration completed successfully")
-            
-            ttl_results = {
-                "maintenance_cycle_demo": "[PASS]",
-                "upgrade_rollback_demo": "[PASS]",
-                "time_travel_queries": "[PASS]",
-                "ttl_aging_demo": "[PASS]",
-                "scenarios_completed": 2
-            }
-            
-            self.print_results_summary(ttl_results, "TTL Demonstration")
-            
-        except Exception as e:
-            print(f"[ERROR] TTL demonstration error: {e}")
-        
-        self.pause_for_observation("TTL demonstration complete. Ready for alert system demo?")
-        self.sections_completed.append("ttl_demonstration")
     
     def section_7_alert_system_demonstration(self):
         """Section 7: Alert System Demonstration."""
@@ -1603,8 +1429,8 @@ class AutomatedDemoWalkthrough:
         self.pause_for_observation("Taxonomy system demonstration complete. Ready for scale-out demo?")
         self.sections_completed.append("taxonomy_system_demonstration")
     
-    def section_9_scale_out_demonstration(self):
-        """Section 9: Scale-Out Capabilities Demonstration."""
+    def section_6_scale_out_demonstration(self):
+        """Section 6: Scale-Out Capabilities Demonstration."""
         self.print_section_header(
             "SCALE-OUT DEMONSTRATION", 
             "Demonstrating multi-tenant scaling and horizontal growth capabilities"
@@ -1967,8 +1793,8 @@ class AutomatedDemoWalkthrough:
             print(f"     [ERROR] Unified graph creation failed: {e}")
             return False
     
-    def section_10_final_validation(self):
-        """Section 10: Final System Validation."""
+    def section_9_final_validation(self):
+        """Section 9: Final System Validation."""
         self.print_section_header(
             "FINAL VALIDATION", 
             "Comprehensive validation after all demonstrations"
@@ -2037,8 +1863,8 @@ class AutomatedDemoWalkthrough:
         self.pause_for_observation("Final validation complete. Ready for demo summary?")
         self.sections_completed.append("final_validation")
     
-    def section_11_demo_summary(self):
-        """Section 11: Demo Summary and Conclusion."""
+    def section_10_demo_summary(self):
+        """Section 10: Demo Summary and Conclusion."""
         self.print_section_header(
             "DEMO SUMMARY", 
             "Complete demonstration summary and key achievements"
@@ -2132,28 +1958,25 @@ class AutomatedDemoWalkthrough:
             # Section 5: Temporal TTL Transactions
             self.section_5_temporal_ttl_transactions()
             
-            # Section 6: TTL Demonstration
-            self.section_6_ttl_demonstration()
+            # Section 6: Scale-Out Demonstration (MOVED UP)
+            self.section_6_scale_out_demonstration()
             
-            # Section 7: Alert System Demonstration
+            # Section 7: Alert System Demonstration  
             self.section_7_alert_system_demonstration()
             
             # Section 8: Taxonomy System Demonstration
             self.section_8_taxonomy_system_demonstration()
             
-            # Section 9: Scale-Out Demonstration
-            self.section_9_scale_out_demonstration()
-            
-            # Section 10: Final Validation (optional in presentation mode)
+            # Section 9: Final Validation (optional in presentation mode)
             if self.verbose:
-                self.section_10_final_validation()
+                self.section_9_final_validation()
             else:
                 self.demo_print("[SUCCESS] All demonstrations completed successfully", "info")
             
-            # Section 11: Demo Summary
-            self.section_11_demo_summary()
+            # Section 10: Demo Summary
+            self.section_10_demo_summary()
             
-            total_sections = 12 if self.verbose else 10  # Skip validation sections in presentation mode
+            total_sections = 11 if self.verbose else 9  # Skip validation sections in presentation mode
             return {
                 "status": "completed",
                 "sections_completed": len(self.sections_completed),

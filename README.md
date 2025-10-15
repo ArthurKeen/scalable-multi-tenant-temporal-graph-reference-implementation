@@ -92,7 +92,7 @@ The system uses camelCase naming convention:
 - **Edge Collections** (camelCase, singular): `hasConnection`, `hasLocation`, `hasDeviceSoftware`, `hasVersion`, `type`, `subClassOf`, `hasAlert`
 - **Property Naming** (camelCase): `name`, `type`, `model`, `version`, `ipAddress`, `created`, `expired`, `tenantId`
 
-The system maintains **consistent structure** with Subject-Predicate-Object relationships and full SmartGraph + Satellite architecture support.
+The system maintains **consistent structure** and full SmartGraph + Satellite architecture support.
 
 ## Prerequisites for Demo Presentation
 
