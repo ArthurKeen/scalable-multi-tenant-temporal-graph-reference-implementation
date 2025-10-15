@@ -67,19 +67,13 @@ class TTLConfiguration:
     
     def __post_init__(self):
         """Initialize default collections if not provided."""
+        # NOTE: No defaults provided - must be explicitly set by calling functions
+        # This prevents hardcoded collection names and ensures proper configuration
         if self.vertex_collections is None:
-            self.vertex_collections = [
-                "Device", "Software", "Alert"
-                # NOTE: Location excluded - static reference data, not temporal
-                # NOTE: Proxy collections excluded - they don't contain temporal data or ttlExpireAt fields
-                # NOTE: Alert included - resolved alerts age out with TTL
-            ]
+            self.vertex_collections = []
         
         if self.edge_collections is None:
-            self.edge_collections = [
-                "hasConnection", "hasLocation", 
-                "hasDeviceSoftware", "hasVersion", "hasAlert"
-            ]
+            self.edge_collections = []
     
     def get_ttl_index_configs(self) -> List[TTLIndexConfiguration]:
         """Generate TTL index configurations for all collections."""
@@ -157,13 +151,34 @@ class TTLManager:
 def create_ttl_configuration(tenant_id: str, 
                            expire_after_days: int = DEFAULT_TTL_DAYS,
                            strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY) -> TTLConfiguration:
-    """Create a TTL configuration with sensible defaults."""
+    """Create a TTL configuration with proper collection names."""
+    from src.config.config_management import get_config, NamingConvention
+    
     config_params = TTLConfigurationFactory.create_ttl_config_params(tenant_id, expire_after_days)
+    app_config = get_config("production", NamingConvention.CAMEL_CASE)
+    
     return TTLConfiguration(
         tenant_id=config_params["tenant_id"],
         strategy=strategy,
         default_expire_after_seconds=config_params["expire_after_seconds"],
-        preserve_current_configs=True
+        preserve_current_configs=True,
+        vertex_collections=[
+            app_config.get_collection_name("devices"),
+            app_config.get_collection_name("software"),
+            app_config.get_collection_name("alerts"),
+            app_config.get_collection_name("classes")
+            # NOTE: Location excluded - static reference data, not temporal
+            # NOTE: Proxy collections excluded - they don't contain temporal data
+        ],
+        edge_collections=[
+            app_config.get_collection_name("connections"),
+            app_config.get_collection_name("has_locations"),
+            app_config.get_collection_name("has_device_software"),
+            app_config.get_collection_name("versions"),
+            app_config.get_collection_name("has_alerts"),
+            app_config.get_collection_name("types"),
+            app_config.get_collection_name("subclass_of")
+        ]
     )
 
 
@@ -178,13 +193,14 @@ def create_snake_case_ttl_configuration(tenant_id: str,
         default_expire_after_seconds=config_params["expire_after_seconds"],
         preserve_current_configs=True,
         vertex_collections=[
-            "device", "software", "location",
-            "device_proxy_in", "device_proxy_out",
-            "software_proxy_in", "software_proxy_out"
+            "device", "software", "alert", "class"
+            # NOTE: location excluded - static reference data
+            # NOTE: proxy collections excluded - no temporal data
         ],
         edge_collections=[
             "has_connection", "has_location",
-            "has_device_software", "has_version"
+            "has_device_software", "has_version", "has_alert",
+            "type", "sub_class_of"
         ]
     )
     return config
@@ -194,19 +210,9 @@ def create_demo_ttl_configuration(tenant_id: str,
                                  strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY) -> TTLConfiguration:
     """Create TTL configuration with short TTL period for demonstration purposes."""
     from src.ttl.ttl_constants import TTLConstants
+    from src.config.config_management import get_config, NamingConvention
     
-    return TTLConfiguration(
-        tenant_id=tenant_id,
-        strategy=strategy,
-        default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 5 minutes
-        preserve_current_configs=True
-    )
-
-
-def create_demo_snake_case_ttl_configuration(tenant_id: str,
-                                           strategy: TTLStrategy = TTLStrategy.HISTORICAL_ONLY) -> TTLConfiguration:
-    """Create snake_case TTL configuration with short TTL period for demonstration purposes."""
-    from src.ttl.ttl_constants import TTLConstants
+    app_config = get_config("production", NamingConvention.CAMEL_CASE)
     
     return TTLConfiguration(
         tenant_id=tenant_id,
@@ -214,13 +220,19 @@ def create_demo_snake_case_ttl_configuration(tenant_id: str,
         default_expire_after_seconds=TTLConstants.DEMO_TTL_EXPIRE_SECONDS,  # 5 minutes
         preserve_current_configs=True,
         vertex_collections=[
-            "device", "software", "location",
-            "device_proxy_in", "device_proxy_out",
-            "software_proxy_in", "software_proxy_out"
+            app_config.get_collection_name("devices"),
+            app_config.get_collection_name("software"),
+            app_config.get_collection_name("alerts"),
+            app_config.get_collection_name("classes")
         ],
         edge_collections=[
-            "has_connection", "has_location",
-            "has_device_software", "has_version"
+            app_config.get_collection_name("connections"),
+            app_config.get_collection_name("has_locations"),
+            app_config.get_collection_name("has_device_software"),
+            app_config.get_collection_name("versions"),
+            app_config.get_collection_name("has_alerts"),
+            app_config.get_collection_name("types"),
+            app_config.get_collection_name("subclass_of")
         ]
     )
 

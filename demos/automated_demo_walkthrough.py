@@ -40,6 +40,10 @@ class AutomatedDemoWalkthrough:
         self.interactive_mode = interactive
         self.verbose = verbose
         
+        # Initialize configuration manager
+        from src.config.config_management import get_config
+        self.config_manager = get_config("production", NamingConvention.CAMEL_CASE)
+        
         # Database connection for reset functionality
         self.client = None
         self.database = None
@@ -129,12 +133,27 @@ class AutomatedDemoWalkthrough:
             return False
         
         try:
-            # Collections to clear for a fresh start
+            # Collections to clear for a fresh start - use configuration manager for dynamic names
             collections_to_clear = [
-                'Device', 'DeviceProxyIn', 'DeviceProxyOut',
-                'Software', 'SoftwareProxyIn', 'SoftwareProxyOut', 
-                'Location',
-                'hasConnection', 'hasLocation', 'hasDeviceSoftware', 'hasVersion'
+                # Vertex collections
+                self.config_manager.get_collection_name("devices"),
+                self.config_manager.get_collection_name("device_ins"),
+                self.config_manager.get_collection_name("device_outs"),
+                self.config_manager.get_collection_name("software"),
+                self.config_manager.get_collection_name("software_ins"),
+                self.config_manager.get_collection_name("software_outs"),
+                self.config_manager.get_collection_name("locations"),
+                self.config_manager.get_collection_name("alerts"),
+                # Edge collections
+                self.config_manager.get_collection_name("connections"),
+                self.config_manager.get_collection_name("has_locations"),
+                self.config_manager.get_collection_name("has_device_software"),
+                self.config_manager.get_collection_name("versions"),
+                self.config_manager.get_collection_name("has_alerts"),
+                # Taxonomy collections (FIXED: these were missing!)
+                self.config_manager.get_collection_name("classes"),
+                self.config_manager.get_collection_name("types"),
+                self.config_manager.get_collection_name("subclass_of")
             ]
             
             cleared_count = 0
@@ -229,7 +248,8 @@ class AutomatedDemoWalkthrough:
             print("\n" + "=" * 70)
             print("DETAILED MANUAL DEMO HINTS: ArangoDB Web Interface")
             print("=" * 70)
-            print("URL: https://1d53cdf6fad0.arangodb.cloud:8529")
+            creds = CredentialsManager.get_database_credentials()
+            print(f"URL: {creds.endpoint}")
             print("Login with your cluster credentials")
             print()
             
@@ -257,7 +277,7 @@ class AutomatedDemoWalkthrough:
         print("-" * 50)
         print("Steps to show:")
         print("1. Click 'GRAPHS' in the main menu")
-        print("2. Select 'network_assets_graph' from the graph list")
+        print("2. Select 'network_assets_smartgraph' from the graph list")
         print("3. In the Graph Visualizer:")
         print("   - Set maximum depth to 3-4 for good visualization")
         print("   - Start with a Device or Location vertex")
@@ -281,24 +301,30 @@ class AutomatedDemoWalkthrough:
         print("Click 'QUERIES' and try these sample queries:")
         print()
         print("A. Show tenant isolation:")
-        print("   FOR d IN Device")
+        device_collection = self.config_manager.get_collection_name("devices")
+        print(f"   FOR d IN {device_collection}")
         print("   COLLECT tenant = d.tenantId WITH COUNT INTO count")
         print("   RETURN {tenant: tenant, devices: count}")
         print()
         print("B. Show current vs historical configurations:")
-        print("   FOR s IN Software")
+        software_collection = self.config_manager.get_collection_name("software")
+        print(f"   FOR s IN {software_collection}")
         print("   FILTER s.expired == 9223372036854775807")
         print("   RETURN {key: s._key, name: s.name, version: s.version}")
         print()
         print("C. Show network topology:")
-        print("   WITH DeviceProxyOut, DeviceProxyIn")
-        print("   FOR d IN Device")
-        print("   FOR proxy IN 1..1 OUTBOUND d hasVersion")
-        print("   FOR connected IN 1..2 OUTBOUND proxy hasConnection")
+        device_out_collection = self.config_manager.get_collection_name("device_outs")
+        device_in_collection = self.config_manager.get_collection_name("device_ins")
+        version_collection = self.config_manager.get_collection_name("versions")
+        connection_collection = self.config_manager.get_collection_name("connections")
+        print(f"   WITH {device_out_collection}, {device_in_collection}")
+        print(f"   FOR d IN {device_collection}")
+        print(f"   FOR proxy IN 1..1 OUTBOUND d {version_collection}")
+        print(f"   FOR connected IN 1..2 OUTBOUND proxy {connection_collection}")
         print("   RETURN {device: d.name, proxy: proxy._key, connected: connected._key}")
         print()
         print("D. Show MDI-prefix index usage:")
-        print("   FOR d IN Device")
+        print(f"   FOR d IN {device_collection}")
         print("   FILTER d.created >= 1234567890 AND d.expired <= 9999999999")
         print("   RETURN d.name")
         print()
@@ -337,10 +363,11 @@ class AutomatedDemoWalkthrough:
             current_time = time.time()
             
             # Check for documents with TTL fields, distinguishing demo vs production TTL
-            ttl_query = """
-            FOR doc IN Software
+            software_collection = self.config_manager.get_collection_name("software")
+            ttl_query = f"""
+            FOR doc IN {software_collection}
             FILTER HAS(doc, "ttlExpireAt")
-            RETURN {
+            RETURN {{
                 key: doc._key,
                 tenant: doc.tenantId,
                 name: doc.name,
@@ -348,7 +375,7 @@ class AutomatedDemoWalkthrough:
                 timeLeft: doc.ttlExpireAt - @currentTime,
                 status: doc.ttlExpireAt > @currentTime ? "ACTIVE" : "EXPIRED",
                 isDemo: doc.ttlExpireAt < (@currentTime + 86400)
-            }
+            }}
             """
             
             try:
@@ -722,8 +749,9 @@ class AutomatedDemoWalkthrough:
             print("[QUERY] Finding target documents to modify...")
             
             # Find current software configurations (since device query might have issues)
-            aql_software = """
-            FOR doc IN Software
+            software_collection = self.config_manager.get_collection_name("software")
+            aql_software = f"""
+            FOR doc IN {software_collection}
                 FILTER doc.expired == 9223372036854775807
                 LIMIT 4
                 RETURN doc
@@ -742,7 +770,7 @@ class AutomatedDemoWalkthrough:
                     software_key = software["_key"]
                     
                     target_doc = {
-                        "collection": "Software",
+                        "collection": self.config_manager.get_collection_name("software"),
                         "key": software_key,
                         "name": software.get("name", "Unknown"),
                         "type": software.get("type", "Unknown"),
@@ -769,7 +797,7 @@ class AutomatedDemoWalkthrough:
                     software_key = software["_key"]
                     
                     target_doc = {
-                        "collection": "Software",
+                        "collection": self.config_manager.get_collection_name("software"),
                         "key": software_key,
                         "name": software.get("name", "Unknown"),
                         "type": software.get("type", "Unknown"),
@@ -801,7 +829,7 @@ class AutomatedDemoWalkthrough:
             print(f"   Database: {creds.database_name}")
             print()
             
-            print(f"[STEP 2] Go to GRAPHS tab -> network_assets_graph")
+            print(f"[STEP 2] Go to GRAPHS tab -> network_assets_smartgraph")
             print()
             
             print(f"[STEP 3] Use these START VERTICES to explore the graph:")
@@ -850,12 +878,25 @@ class AutomatedDemoWalkthrough:
         print()
         
         try:
-            simulator = TransactionSimulator(NamingConvention.CAMEL_CASE, show_queries=True)
+            simulator = TransactionSimulator(NamingConvention.CAMEL_CASE, show_queries=False)
+            
             if simulator.connect_to_database():
-                
                 # Simulate software configuration changes
                 print("[SOFTWARE TRANSACTIONS] Updating software configurations...")
                 software_changes = simulator.simulate_software_configuration_changes(software_count=2)
+                
+                if software_changes:
+                    # Update target_documents to match the actual changed documents
+                    target_documents = []
+                    for change in software_changes:
+                        target_doc = {
+                            "collection": self.config_manager.get_collection_name("software"),
+                            "key": change.entity_key,  # The original key that was modified
+                            "name": change.old_config.get("name", "Unknown"),
+                            "type": change.old_config.get("type", "Unknown"),
+                            "new_key": change.new_config.get("_key", "No key")  # The new key created
+                        }
+                        target_documents.append(target_doc)
                 
                 print(f"\n[IMMEDIATE IMPACT] TTL fields have been set on historical documents!")
                 print(f"   Transaction timestamp: {transaction_timestamp.timestamp()}")
@@ -879,77 +920,140 @@ class AutomatedDemoWalkthrough:
             print(f"[ERROR] Transaction execution failed: {e}")
             simulation_results = {"error": str(e)}
         
-        # Step 3: Show after state
+        # Step 3: Show after state with direct new ID listing
         self.pause_for_observation("Ready to analyze ACTUAL database state after transactions?")
         
         print("\n" + "="*60)
-        print("STEP 3: ACTUAL DATABASE STATE AFTER TRANSACTIONS")
+        print("STEP 3: NEW DOCUMENT IDs CREATED BY TRANSACTIONS")
         print("="*60)
         
         try:
-            if not self.verbose:
-                # PRESENTATION MODE - Find and highlight new software IDs
-                print("FINDING NEW SOFTWARE IDs CREATED BY TRANSACTIONS...")
-                print()
+            print("🆕 DIRECTLY LISTING NEW IDs CREATED:")
+            print("="*50)
+            
+            new_ids_created = []
+            
+            # Query for newly created software documents
+            for i, doc in enumerate(target_documents):
+                original_key = doc["key"]
                 
-                # Query for newly created software documents
-                for i, doc in enumerate(target_documents):
-                    original_key = doc["key"]
-                    
-                    # Find new software versions created by transaction
-                    aql_new_software = f"""
-                    FOR software IN Software
-                        FILTER STARTS_WITH(software._key, "{original_key}")
-                        FILTER software._key != "{original_key}"
-                        SORT software.created DESC
-                        LIMIT 2
-                        RETURN {{
-                            id: software._id,
-                            key: software._key,
-                            name: software.name,
-                            type: software.type,
-                            created: software.created
-                        }}
-                    """
-                    
-                    cursor = self.database.aql.execute(aql_new_software)
-                    new_software = list(cursor)
-                    
-                    if new_software:
-                        print(f"NEW SOFTWARE {i+1} IDs TO COPY FOR VISUALIZER:")
-                        print("="*60)
-                        for j, software in enumerate(new_software):
-                            print(f"NEW VERSION {j+1}:")
-                            print(f"   COPY THIS → {software['id']}")
-                            print(f"   Name: {software['name']} ({software['type']})")
-                            print()
-                    
-                self.demo_manual_prompt(
-                    "Use the NEW software IDs above in ArangoDB Graph Visualizer",
-                    "These are the newly created software configurations from the transaction"
-                )
-            else:
-                # VERBOSE MODE - Full technical detail
-                print("[VERIFICATION] Check these documents NOW in ArangoDB:")
+                # Extract base key for SmartGraph keys (e.g., "54e9effbbc3c:software1-0" -> "54e9effbbc3c:software1")
+                if ":" in original_key and "-" in original_key:
+                    tenant_part, entity_part = original_key.split(":", 1)
+                    if "-" in entity_part:
+                        base_entity = entity_part.rsplit("-", 1)[0]
+                        base_key_pattern = f"{tenant_part}:{base_entity}"
+                    else:
+                        base_key_pattern = original_key
+                else:
+                    base_key_pattern = original_key
+                
+                # Find new software versions created by transaction
+                software_collection = self.config_manager.get_collection_name("software")
+                aql_new_software = f"""
+                FOR software IN {software_collection}
+                    FILTER STARTS_WITH(software._key, "{base_key_pattern}-")
+                    FILTER software._key != "{original_key}"
+                    FILTER software.expired == 9223372036854775807
+                    FILTER software.created >= @transaction_start
+                    SORT software.created DESC
+                    LIMIT 1
+                    RETURN {{
+                        id: software._id,
+                        key: software._key,
+                        name: software.name,
+                        type: software.type,
+                        created: software.created
+                    }}
+                """
+                
+                cursor = self.database.aql.execute(aql_new_software, bind_vars={"transaction_start": transaction_timestamp.timestamp()})
+                new_software = list(cursor)
+                
+                if new_software:
+                    for software in new_software:
+                        new_ids_created.append({
+                            'id': software['id'],
+                            'key': software['key'],
+                            'name': software['name'],
+                            'type': software['type'],
+                            'original_key': original_key
+                        })
+            
+            # Display all new IDs in a clean, direct format
+            if new_ids_created:
+                print(f"📋 NEW DOCUMENT IDs (Total: {len(new_ids_created)}):")
                 print("-" * 60)
-                for doc in target_documents:
-                    collection = doc["collection"]
-                    key = doc["key"]
-                    print(f"   1. Query: FOR doc IN {collection} FILTER doc._key == '{key}' RETURN doc")
-                    print(f"   2. Query: FOR doc IN {collection} FILTER STARTS_WITH(doc._key, '{key}') RETURN doc")
-                    print(f"      (Look for new versions of the document with TTL timestamps)")
+                
+                for i, new_doc in enumerate(new_ids_created, 1):
+                    print(f"{i}. NEW ID: {new_doc['id']}")
+                    print(f"   Name: {new_doc['name']}")
+                    print(f"   Type: {new_doc['type']}")
+                    print(f"   Key: {new_doc['key']}")
+                    print(f"   Original: {new_doc['original_key']} → {new_doc['key']}")
                     print()
                 
-                print("[GRAPH IMPACT] Updated graph paths to explore:")
-                print("-" * 60)
-                for doc in target_documents:
-                    software_key = doc["key"]
-                    print(f"   Software/{software_key} -> hasVersion -> [multiple Software versions]")
-                    print(f"   <- hasDeviceSoftware <- DeviceProxyOut <- Device")
+                print("🎯 COPY THESE IDs FOR VISUALIZATION:")
+                print("-" * 40)
+                for i, new_doc in enumerate(new_ids_created, 1):
+                    print(f"{i}. {new_doc['id']}")
                 print()
+                
+                if not self.verbose:
+                    self.demo_manual_prompt(
+                        f"NEW SOFTWARE IDs: {', '.join([doc['id'] for doc in new_ids_created])}",
+                        "These are the newly created software configurations from the transaction"
+                    )
+            else:
+                # If no new IDs found through search, use the new_key information from target_documents
+                if hasattr(self, 'target_documents') and target_documents:
+                    direct_new_ids = []
+                    for doc in target_documents:
+                        if 'new_key' in doc and doc['new_key'] != 'No key':
+                            collection_name = doc['collection']
+                            new_id = f"{collection_name}/{doc['new_key']}"
+                            direct_new_ids.append({
+                                'id': new_id,
+                                'key': doc['new_key'],
+                                'name': doc['name'],
+                                'type': doc['type'],
+                                'original_key': doc['key']
+                            })
+                    
+                    if direct_new_ids:
+                        print(f"📋 NEW DOCUMENT IDs FROM TRANSACTION RESULTS (Total: {len(direct_new_ids)}):")
+                        print("-" * 60)
+                        
+                        for i, new_doc in enumerate(direct_new_ids, 1):
+                            print(f"{i}. NEW ID: {new_doc['id']}")
+                            print(f"   Name: {new_doc['name']}")
+                            print(f"   Type: {new_doc['type']}")
+                            print(f"   Key: {new_doc['key']}")
+                            print(f"   Original: {new_doc['original_key']} → {new_doc['key']}")
+                            print()
+                        
+                        print("🎯 COPY THESE IDs FOR VISUALIZATION:")
+                        print("-" * 40)
+                        for i, new_doc in enumerate(direct_new_ids, 1):
+                            print(f"{i}. {new_doc['id']}")
+                        print()
+                        
+                        if not self.verbose:
+                            self.demo_manual_prompt(
+                                f"NEW SOFTWARE IDs: {', '.join([doc['id'] for doc in direct_new_ids])}",
+                                "These are the newly created software configurations from the transaction"
+                            )
+                    else:
+                        print("⚠️  No new IDs found - transaction may not have completed successfully")
+                        print("   Check the transaction logs above for any errors")
+                else:
+                    print("⚠️  No new IDs found - transaction may not have completed successfully")
+                    print("   Check the transaction logs above for any errors")
             
         except Exception as e:
-            print(f"[ERROR] Failed to show after state: {e}")
+            print(f"[ERROR] Failed to show new IDs: {e}")
+            import traceback
+            traceback.print_exc()
         
         # Results summary
         print("\n[ENHANCED TRANSACTION RESULTS]")
@@ -964,178 +1068,8 @@ class AutomatedDemoWalkthrough:
             print(f"   Graph visualization: GUIDED")
         print()
         
-        self.pause_for_observation("Enhanced transaction simulation complete. Ready for TTL demonstration?")
+        self.pause_for_observation("Enhanced transaction simulation complete. Ready for scale-out demonstration?")
         self.sections_completed.append("enhanced_transaction_simulation")
-    
-    def section_6_ttl_demonstration(self):
-        """Section 6: TTL and Time Travel Demonstration."""
-        self.print_section_header(
-            "TTL DEMONSTRATION", 
-            "Demonstrating time travel capabilities and TTL scenarios"
-        )
-        
-        self.print_subsection(
-            "Time Travel Scenarios",
-            "Real-world scenarios showing temporal query capabilities"
-        )
-        
-        print("Demo Scenarios:")
-        print("- Device Maintenance Cycle")
-        print("  * Device taken offline for maintenance")
-        print("  * Configuration changes during maintenance")
-        print("  * Device brought back online with new config")
-        print("  * Time travel queries show complete history")
-        print()
-        print("- Software Upgrade Rollback")
-        print("  * Software upgraded to new version")
-        print("  * Issues discovered with new version")
-        print("  * Rollback to previous configuration")
-        print("  * Time travel shows upgrade/rollback history")
-        print()
-        
-        self.pause_for_observation("Running TTL demonstration scenarios...")
-        
-        # Run TTL demonstration with actual aging
-        print("Starting TTL demonstration...")
-        try:
-            from src.ttl.ttl_constants import TTLConstants
-            import time
-            
-            print(f"\n[TTL] TTL AGING DEMONSTRATION")
-            print(f"=" * 60)
-            print(f"TTL Configuration:")
-            print(f"   [TIME] Historical data expires after: {TTLConstants.DEMO_TTL_EXPIRE_MINUTES} minutes")
-            print(f"   [NEVER] Current data: Never expires")
-            print(f"   [CHECK] Check interval: Real-time")
-            print()
-            
-            # Check if we have recent transaction data to observe aging
-            if self.connect_to_database():
-                current_time = time.time()
-                aging_threshold = current_time - (TTLConstants.DEMO_TTL_EXPIRE_SECONDS - 60)  # Documents created in last 4 minutes
-                
-                # Count documents that should age out soon
-                aging_query = f'''
-                FOR doc IN Software
-                  FILTER HAS(doc, "ttlExpireAt")
-                  FILTER doc.ttlExpireAt > {current_time}
-                  FILTER doc.ttlExpireAt < {current_time + 360}  // Next 6 minutes
-                  COLLECT tenant = REGEX_SPLIT(doc._key, "_")[0] WITH COUNT INTO docCount
-                  RETURN {{
-                    tenant: tenant,
-                    documents_aging: docCount,
-                    expire_time: {current_time + TTLConstants.DEMO_TTL_EXPIRE_SECONDS}
-                  }}
-                '''
-                
-                aging_docs = list(self.database.aql.execute(aging_query))
-                
-                if aging_docs:
-                    total_aging = sum(doc['documents_aging'] for doc in aging_docs)
-                    print(f"[STATUS] CURRENT TTL STATUS:")
-                    print(f"   [DOCS] Documents pending TTL deletion: {total_aging}")
-                    for doc in aging_docs:
-                        print(f"      * Tenant {doc['tenant']}: {doc['documents_aging']} documents")
-                    
-                    expire_minutes = TTLConstants.DEMO_TTL_EXPIRE_SECONDS // 60
-                    print(f"\n[DEMO] DEMONSTRATION: Wait {expire_minutes} minutes to see TTL aging in action")
-                    print(f"   [TIP] SUGGESTION: After {expire_minutes} minutes, run these queries to verify aging:")
-                    print(f"      FOR doc IN Software FILTER HAS(doc, 'ttlExpireAt') RETURN doc  // Should return fewer results")
-                    print(f"      FOR doc IN Software FILTER doc.expired == 9223372036854775807 RETURN doc  // Current configs only")
-                    print()
-                    
-                    if self.interactive_mode:
-                        print(f"[CHOICE] INTERACTIVE OPTION:")
-                        print(f"   You can:")
-                        print(f"   1. Wait here for {expire_minutes} minutes to see real TTL aging")
-                        print(f"   2. Continue with demo and check aging later")
-                        print(f"   3. Open ArangoDB Web UI to monitor aging in real-time")
-                        print()
-                        choice = input(f"   Enter choice (1/2/3) or press Enter to continue: ").strip()
-                        
-                        if choice == "1":
-                            print(f"\n[WAIT] WAITING FOR TTL AGING ({expire_minutes} minutes)...")
-                            print(f"   Documents will be automatically deleted by ArangoDB TTL")
-                            
-                            # Wait with progress updates
-                            wait_seconds = TTLConstants.DEMO_TTL_EXPIRE_SECONDS
-                            for minute in range(1, expire_minutes + 1):
-                                time.sleep(60)  # Wait 1 minute
-                                remaining = expire_minutes - minute
-                                print(f"   [TIME] {minute}/{expire_minutes} minutes elapsed, {remaining} minutes remaining...")
-                            
-                            print(f"\n[DONE] TTL AGING COMPLETE! Verifying document deletion...")
-                            
-                            # Verify aging worked - check for demo TTL vs production TTL separately
-                            current_time = time.time()
-                            ttl_analysis_query = """
-                            FOR doc IN Software 
-                            FILTER HAS(doc, 'ttlExpireAt')
-                            RETURN {
-                                key: doc._key,
-                                ttlExpireAt: doc.ttlExpireAt,
-                                expired: doc.ttlExpireAt < @currentTime,
-                                isDemo: doc.ttlExpireAt < (@currentTime + 86400)
-                            }
-                            """
-                            
-                            ttl_docs = list(self.database.aql.execute(ttl_analysis_query, bind_vars={"currentTime": current_time}))
-                            
-                            demo_expired = sum(1 for doc in ttl_docs if doc['isDemo'] and doc['expired'])
-                            demo_active = sum(1 for doc in ttl_docs if doc['isDemo'] and not doc['expired'])
-                            production_active = sum(1 for doc in ttl_docs if not doc['isDemo'])
-                            
-                            print(f"   [COUNT] Demo TTL documents (5-min): {demo_active} active, {demo_expired} expired")
-                            print(f"   [COUNT] Production TTL documents (30-day): {production_active} active")
-                            
-                            if demo_expired > 0:
-                                print(f"   [SUCCESS] {demo_expired} demo documents were cleaned up by TTL!")
-                            elif demo_active == 0:
-                                print(f"   [SUCCESS] All demo TTL documents were properly cleaned up!")
-                            else:
-                                print(f"   [WAIT] {demo_active} demo documents may still be processing for deletion")
-                        
-                        elif choice == "3":
-                            print(f"\n[WEB] ArangoDB Web UI Monitoring:")
-                            print(f"   URL: https://1d53cdf6fad0.arangodb.cloud:8529")
-                            print(f"   [QUERY] Run this query to monitor TTL documents:")
-                            print(f"      FOR doc IN Software FILTER HAS(doc, 'ttlExpireAt') RETURN {{")
-                            print(f"        key: doc._key,")
-                            print(f"        ttlExpireAt: doc.ttlExpireAt,")
-                            print(f"        timeLeft: doc.ttlExpireAt - DATE_NOW()/1000")
-                            print(f"      }}")
-                    else:
-                        print(f"   [AUTO] NON-INTERACTIVE MODE: Continuing without waiting")
-                        print(f"   [TIP] To observe TTL aging, wait {expire_minutes} minutes and check document counts")
-                
-                else:
-                    print(f"[INFO] No recent transaction data found for TTL demonstration")
-                    print(f"   [TIP] Run transaction simulation first to create data with TTL")
-            
-            print(f"\n[BENEFITS] TTL BENEFITS DEMONSTRATED:")
-            print(f"   [DONE] Automatic cleanup of historical data")
-            print(f"   [DONE] Current configurations preserved indefinitely")
-            print(f"   [DONE] Time travel queries work within TTL window")
-            print(f"   [DONE] Database storage automatically optimized")
-            print(f"   [DONE] No manual intervention required")
-            
-            print("[SUCCESS] TTL demonstration completed successfully")
-            
-            ttl_results = {
-                "maintenance_cycle_demo": "[PASS]",
-                "upgrade_rollback_demo": "[PASS]",
-                "time_travel_queries": "[PASS]",
-                "ttl_aging_demo": "[PASS]",
-                "scenarios_completed": 2
-            }
-            
-            self.print_results_summary(ttl_results, "TTL Demonstration")
-            
-        except Exception as e:
-            print(f"[ERROR] TTL demonstration error: {e}")
-        
-        self.pause_for_observation("TTL demonstration complete. Ready for alert system demo?")
-        self.sections_completed.append("ttl_demonstration")
     
     def section_7_alert_system_demonstration(self):
         """Section 7: Alert System Demonstration."""
@@ -1149,7 +1083,8 @@ class AutomatedDemoWalkthrough:
             alert_simulator = AlertSimulator(NamingConvention.CAMEL_CASE)
             
             # Get the first available tenant for demonstration
-            tenant_query = "FOR d IN Device LIMIT 1 RETURN d.tenantId"
+            device_collection = self.config_manager.get_collection_name("devices")
+            tenant_query = f"FOR d IN {device_collection} LIMIT 1 RETURN d.tenantId"
             cursor = self.database.aql.execute(tenant_query)
             tenant_results = list(cursor)
             
@@ -1245,7 +1180,7 @@ class AutomatedDemoWalkthrough:
                              "Confirming hasAlert edges are part of graph definition")
             
             try:
-                graph = self.database.graph('network_assets_graph')
+                graph = self.database.graph('network_assets_smartgraph')
                 edge_defs = graph.edge_definitions()
                 hasAlert_def = next((ed for ed in edge_defs if ed['edge_collection'] == 'hasAlert'), None)
                 
@@ -1265,14 +1200,18 @@ class AutomatedDemoWalkthrough:
             self.demo_progress(5, 6, "Demonstrating alert correlation", 
                              "Showing how alerts relate to devices, software, and locations")
             
+            alert_collection = self.config_manager.get_collection_name("alerts")
+            has_alert_collection = self.config_manager.get_collection_name("has_alerts")
+            device_out_collection = self.config_manager.get_collection_name("device_outs")
+            software_out_collection = self.config_manager.get_collection_name("software_outs")
             correlation_query = f"""
-            FOR alert IN Alert
+            FOR alert IN {alert_collection}
                 FILTER alert.tenantId == "{demo_tenant_id}"
-                FOR edge IN hasAlert
+                FOR edge IN {has_alert_collection}
                     FILTER edge._to == alert._id
                     FOR source IN UNION(
-                        (FOR d IN DeviceProxyOut FILTER d._id == edge._from RETURN {{type: "device", name: d.name, id: d._id}}),
-                        (FOR s IN SoftwareProxyOut FILTER s._id == edge._from RETURN {{type: "software", name: s.name, id: s._id}})
+                        (FOR d IN {device_out_collection} FILTER d._id == edge._from RETURN {{type: "device", name: d.name, id: d._id}}),
+                        (FOR s IN {software_out_collection} FILTER s._id == edge._from RETURN {{type: "software", name: s.name, id: s._id}})
                     )
                     RETURN {{
                         alert_name: alert.name,
@@ -1332,118 +1271,166 @@ class AutomatedDemoWalkthrough:
                 import traceback
                 traceback.print_exc()
         
-    def section_7_alert_system_demonstration(self):
-        """Section 7: Alert System Demonstration."""
-        self.demo_section_start(
-            "ALERT SYSTEM DEMONSTRATION", 
-            "Real-time operational monitoring with graph-integrated alerts"
+    def section_8_taxonomy_system_demonstration(self):
+        """Section 8: Taxonomy System Demonstration."""
+        self.print_section_header(
+            "TAXONOMY SYSTEM DEMONSTRATION", 
+            "Demonstrating hierarchical classification and semantic relationships"
         )
         
         try:
-            # Initialize alert simulator
-            alert_simulator = AlertSimulator(NamingConvention.CAMEL_CASE)
+            # Get demo tenant for queries
+            demo_tenant_id = "bfd693075495"
             
-            # Get the first available tenant for demonstration
-            tenant_query = "FOR d IN Device LIMIT 1 RETURN d.tenantId"
-            cursor = self.database.aql.execute(tenant_query)
-            tenant_results = list(cursor)
+            self.demo_print("TAXONOMY OVERVIEW:", "info")
+            self.demo_print("The taxonomy system provides hierarchical classification of devices and software", "info")
+            self.demo_print("- Class hierarchy: NetworkDevice -> Router -> EdgeRouter", "info") 
+            self.demo_print("- Type relationships: Device/Software -> Class (instanceOf)", "info")
+            self.demo_print("- Inheritance: Class -> Class (subClassOf)", "info")
+            print()
             
-            if not tenant_results:
-                self.demo_print("No tenants found for alert demonstration", "critical")
-                return
-                
-            demo_tenant_id = tenant_results[0]
-            self.demo_print(f"Using tenant: {demo_tenant_id}", "info")
+            # Connect to database for queries
+            self.demo_print("Connecting to database for taxonomy queries...", "info")
+            if not self.connect_to_database():
+                raise Exception("Failed to connect to database")
             
-            # Show current alert status briefly
-            self.demo_progress(1, 4, "Checking current alert status")
-            current_alerts = alert_simulator.get_tenant_alerts(demo_tenant_id)
-            active_count = len([a for a in current_alerts if a['status'] == 'active'])
-            resolved_count = len([a for a in current_alerts if a['status'] == 'resolved'])
+            database = self.database
             
-            self.demo_print(f"Current Alert Status:", "info")
-            self.demo_print(f"  Total alerts: {len(current_alerts)}", "info")
-            self.demo_print(f"  Active: {active_count} | Resolved: {resolved_count}", "info")
+            # Query 1: Show class hierarchy
+            self.demo_print("1. CLASS HIERARCHY OVERVIEW:", "query")
+            class_collection = self.config_manager.get_collection_name("classes")
+            hierarchy_query = f"""
+            FOR class IN {class_collection}
+                FILTER class.tenantId == @tenant_id OR class.tenantId == null
+                COLLECT classType = class.classType WITH COUNT INTO count
+                RETURN {{classType: classType, count: count}}
+            """
             
-            # Generate alerts with clear visualizer instructions
-            self.demo_progress(2, 4, "Generating operational alerts")
+            hierarchy_result = database.aql.execute(hierarchy_query, bind_vars={"tenant_id": demo_tenant_id})
+            for result in hierarchy_result:
+                print(f"   {result['classType']}: {result['count']} classes")
+            print()
             
-            alert_types = [
-                ("Hardware Alert", alert_simulator.generate_critical_hardware_alert),
-                ("Software Alert", alert_simulator.generate_software_performance_alert),
-                ("Connectivity Alert", alert_simulator.generate_connectivity_alert)
-            ]
+            # Query 2: Show device classifications
+            self.demo_print("2. DEVICE CLASSIFICATIONS (Sample):", "query")
+            device_collection = self.config_manager.get_collection_name("devices")
+            type_collection = self.config_manager.get_collection_name("types")
+            device_class_query = f"""
+            FOR device IN {device_collection}
+                FILTER device.tenantId == @tenant_id
+                FOR type_edge IN {type_collection}
+                    FILTER type_edge._from == device._id
+                    FOR class IN {class_collection}
+                        FILTER class._id == type_edge._to
+                        LIMIT 5
+                        RETURN {{
+                            device: device.name,
+                            deviceType: device.type,
+                            class: class.name,
+                            confidence: type_edge.confidence
+                        }}
+            """
             
-            print(f"\n{'='*60}")
-            print("VISUALIZER START SET - COPY THESE IDs:")
+            device_results = database.aql.execute(device_class_query, bind_vars={"tenant_id": demo_tenant_id})
+            for result in device_results:
+                print(f"   {result['device']} ({result['deviceType']}) -> {result['class']} (confidence: {result['confidence']:.2f})")
+            print()
+            
+            # Query 3: Show inheritance relationships
+            self.demo_print("3. CLASS INHERITANCE RELATIONSHIPS:", "query")
+            subclass_collection = self.config_manager.get_collection_name("subclass_of")
+            inheritance_query = f"""
+            FOR edge IN {subclass_collection}
+                FOR parent IN {class_collection}
+                    FILTER parent._id == edge._to
+                    FOR child IN {class_collection}
+                        FILTER child._id == edge._from
+                        LIMIT 8
+                        RETURN {{
+                            child: child.name,
+                            parent: parent.name,
+                            relationship: "subClassOf"
+                        }}
+            """
+            
+            inheritance_results = database.aql.execute(inheritance_query)
+            for result in inheritance_results:
+                print(f"   {result['child']} -> {result['parent']} ({result['relationship']})")
+            print()
+            
+            # Query 4: Show software classifications
+            self.demo_print("4. SOFTWARE CLASSIFICATIONS (Sample):", "query")
+            software_collection = self.config_manager.get_collection_name("software")
+            type_collection = self.config_manager.get_collection_name("types")
+            class_collection = self.config_manager.get_collection_name("classes")
+            software_class_query = f"""
+            FOR software IN {software_collection}
+                FILTER software.tenantId == @tenant_id
+                FOR type_edge IN {type_collection}
+                    FILTER type_edge._from == software._id
+                    FOR class IN {class_collection}
+                        FILTER class._id == type_edge._to
+                        LIMIT 5
+                        RETURN {{
+                            software: software.name,
+                            version: software.version,
+                            class: class.name,
+                            confidence: type_edge.confidence
+                        }}
+            """
+            
+            software_results = database.aql.execute(software_class_query, bind_vars={"tenant_id": demo_tenant_id})
+            for result in software_results:
+                print(f"   {result['software']} v{result['version']} -> {result['class']} (confidence: {result['confidence']:.2f})")
+            print()
+            
+            # Query 5: Semantic path queries
+            self.demo_print("5. SEMANTIC PATH TRAVERSAL:", "query")
+            self.demo_print("Find all routers and their subclasses:", "info")
+            
+            class_collection = self.config_manager.get_collection_name("classes")
+            subclass_collection = self.config_manager.get_collection_name("subclass_of")
+            router_query = f"""
+            FOR router_class IN {class_collection}
+                FILTER router_class.name == "Router"
+                FOR subclass IN 1..3 INBOUND router_class {subclass_collection}
+                    RETURN DISTINCT {{
+                        class: subclass.name,
+                        type: subclass.classType,
+                        depth: LENGTH(subclass)
+                    }}
+            """
+            
+            router_results = database.aql.execute(router_query)
+            for result in router_results:
+                indent = "  " * (result.get('depth', 0) + 1)
+                print(f"{indent}{result['class']} ({result['type']})")
+            print()
+            
+            # Visualizer instructions
             print(f"{'='*60}")
-            
-            generated_alerts = []
-            for i, (alert_name, generator_func) in enumerate(alert_types, 1):
-                try:
-                    result = generator_func(demo_tenant_id)
-                    generated_alerts.append(result)
-                    alert = result['alert']
-                    
-                    print(f"{i}. {alert['name']}")
-                    print(f"   ID: {alert['_id']}")
-                    print(f"   Type: {alert['severity']} {alert['alertType']}")
-                    print()
-                    
-                except Exception as e:
-                    self.demo_print(f"   [ERROR] Error generating {alert_name}: {e}", "critical")
-            
+            print("TAXONOMY VISUALIZER INSTRUCTIONS:")
             print(f"{'='*60}")
-            print("WHAT TO LOOK FOR IN VISUALIZER:")
-            print("• Alert vertices connected to DeviceProxyOut/SoftwareProxyOut")
-            print("• hasAlert edges showing alert relationships")
-            print("• Alert properties: severity, alertType, status, message")
-            print("• Multi-tenant isolation (only this tenant's data)")
+            print("To explore taxonomy in the graph visualizer:")
+            print("1. Add Class vertices to start set (search for 'Router', 'Database', etc.)")
+            print("2. Look for:")
+            print("   • subClassOf edges showing inheritance (Class -> Class)")
+            print("   • type edges showing classification (Device/Software -> Class)")
+            print("   • Hierarchical structure: NetworkDevice -> Router -> EdgeRouter")
+            print("3. Key observations:")
+            print("   • Multi-level inheritance hierarchies")
+            print("   • Automatic device/software classification")
+            print("   • Semantic relationships for advanced querying")
             print(f"{'='*60}")
-            
-            self.pause_for_observation("Copy the alert IDs above to visualizer start set. Press Enter when ready for resolution demo.")
-            
-            # Demonstrate alert resolution
-            self.demo_progress(3, 4, "Demonstrating alert resolution")
-            
-            if generated_alerts:
-                alert_to_resolve = generated_alerts[0]['alert']
-                self.demo_print(f"Resolving: {alert_to_resolve['name']}", "info")
-                
-                try:
-                    resolution_result = alert_simulator.resolve_alert(alert_to_resolve['_key'], demo_tenant_id)
-                    ttl_time = datetime.datetime.fromtimestamp(resolution_result['ttl_expire_at']).strftime('%H:%M:%S')
-                    
-                    print(f"\n{'='*40}")
-                    print("RESOLVED ALERT:")
-                    print(f"ID: {alert_to_resolve['_id']}")
-                    print(f"Status: RESOLVED (TTL expires at {ttl_time})")
-                    print("Refresh visualizer to see status change")
-                    print(f"{'='*40}")
-                        
-                except Exception as e:
-                    self.demo_print(f"[ERROR] Resolution error: {e}", "critical")
-            
-            # Final summary
-            self.demo_progress(4, 4, "Alert system summary")
-            
-            final_alerts = alert_simulator.get_tenant_alerts(demo_tenant_id)
-            final_active = len([a for a in final_alerts if a['status'] == 'active'])
-            final_resolved = len([a for a in final_alerts if a['status'] == 'resolved'])
-            
-            print(f"\nFINAL STATUS:")
-            print(f"  Total alerts: {len(final_alerts)}")
-            print(f"  Active: {final_active} | Resolved: {final_resolved}")
-            print(f"  Graph integration: hasAlert edges ready for visualization")
             
         except Exception as e:
-            self.demo_print(f"[ERROR] Alert system demonstration error: {e}", "critical")
+            self.demo_print(f"[ERROR] Taxonomy system demonstration error: {e}", "critical")
         
-        self.pause_for_observation("Alert system demonstration complete. Ready for scale-out demo?")
-        self.sections_completed.append("alert_system_demonstration")
+        self.pause_for_observation("Taxonomy system demonstration complete. Ready for scale-out demo?")
+        self.sections_completed.append("taxonomy_system_demonstration")
     
-    def section_8_scale_out_demonstration(self):
-        """Section 8: Scale-Out Capabilities Demonstration."""
+    def section_6_scale_out_demonstration(self):
+        """Section 6: Scale-Out Capabilities Demonstration."""
         self.print_section_header(
             "SCALE-OUT DEMONSTRATION", 
             "Demonstrating multi-tenant scaling and horizontal growth capabilities"
@@ -1505,7 +1492,7 @@ class AutomatedDemoWalkthrough:
                                 tenant_count += 1
                                 print(f"     [SUCCESS] {tenant_name} added successfully")
                                 print(f"     [DATA] Tenant ID: {tenant_config.tenant_id}")
-                                print(f"     [GRAPH] Data visible in unified network_assets_graph")
+                                print(f"     [GRAPH] Data visible in unified network_assets_smartgraph")
                             else:
                                 print(f"     [WARNING] Data imported but unified graph verification failed for {tenant_name}")
                         else:
@@ -1690,67 +1677,112 @@ class AutomatedDemoWalkthrough:
                 if not self.connect_to_database():
                     return False
             
-            graph_name = "network_assets_graph"
+            graph_name = "network_assets_smartgraph"  # Use SmartGraph created by deployment
             
             # Check if unified graph already exists
             if self.database.has_graph(graph_name):
-                print(f"     [INFO] Unified graph {graph_name} already exists")
+                print(f"     [INFO] SmartGraph {graph_name} already exists")
                 # Check if hasAlert edges are defined
                 graph = self.database.graph(graph_name)
                 edge_defs = graph.edge_definitions()
                 hasAlert_exists = any(ed['edge_collection'] == 'hasAlert' for ed in edge_defs)
+                type_exists = any(ed['edge_collection'] == 'type' for ed in edge_defs)
                 
-                if hasAlert_exists:
-                    print(f"     [INFO] hasAlert edges already defined in graph")
+                if hasAlert_exists and type_exists:
+                    print(f"     [INFO] All required edges already defined in SmartGraph")
                     return True
-                else:
-                    print(f"     [INFO] Adding hasAlert edges to existing graph")
+                elif not hasAlert_exists:
+                    print(f"     [INFO] Adding hasAlert edges to existing SmartGraph")
                     try:
                         # Add hasAlert edge definition to existing graph
                         graph.create_edge_definition(
-                            edge_collection='hasAlert',
-                            from_vertex_collections=['DeviceProxyOut', 'SoftwareProxyOut'],
-                            to_vertex_collections=['Alert']
+                            edge_collection=self.config_manager.get_collection_name("has_alerts"),
+                            from_vertex_collections=[
+                                self.config_manager.get_collection_name("device_outs"), 
+                                self.config_manager.get_collection_name("software_outs")
+                            ],
+                            to_vertex_collections=[self.config_manager.get_collection_name("alerts")]
                         )
-                        print(f"     [GRAPH] Added hasAlert edges to unified graph")
+                        print(f"     [GRAPH] Added hasAlert edges to SmartGraph")
                         return True
                     except Exception as e:
                         print(f"     [WARNING] Could not add hasAlert edges: {e}")
+                        return True  # Continue anyway since main graph exists
+                elif not type_exists:
+                    print(f"     [INFO] Adding type edges to existing SmartGraph")
+                    try:
+                        # Add type edge definition to existing graph
+                        graph.create_edge_definition(
+                            edge_collection=self.config_manager.get_collection_name("types"),
+                            from_vertex_collections=[
+                                self.config_manager.get_collection_name("devices"), 
+                                self.config_manager.get_collection_name("software")
+                            ],
+                            to_vertex_collections=[self.config_manager.get_collection_name("classes")]
+                        )
+                        print(f"     [GRAPH] Added type edges to SmartGraph")
+                        return True
+                    except Exception as e:
+                        print(f"     [WARNING] Could not add type edges: {e}")
                         return True  # Continue anyway since main graph exists
             
             # Define graph configuration for all tenant data
             edge_definitions = [
                 {
-                    "edge_collection": "hasConnection",
-                    "from_vertex_collections": ["DeviceProxyOut"],
-                    "to_vertex_collections": ["DeviceProxyIn"]
+                    "edge_collection": self.config_manager.get_collection_name("connections"),
+                    "from_vertex_collections": [self.config_manager.get_collection_name("device_outs")],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("device_ins")]
                 },
                 {
-                    "edge_collection": "hasDeviceSoftware",
-                    "from_vertex_collections": ["DeviceProxyOut"],
-                    "to_vertex_collections": ["SoftwareProxyIn"]
+                    "edge_collection": self.config_manager.get_collection_name("has_device_software"),
+                    "from_vertex_collections": [self.config_manager.get_collection_name("device_outs")],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("software_ins")]
                 },
                 {
-                    "edge_collection": "hasLocation", 
-                    "from_vertex_collections": ["DeviceProxyOut"],
-                    "to_vertex_collections": ["Location"]
+                    "edge_collection": self.config_manager.get_collection_name("has_locations"), 
+                    "from_vertex_collections": [self.config_manager.get_collection_name("device_outs")],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("locations")]
                 },
                 {
-                    "edge_collection": "hasVersion",
-                    "from_vertex_collections": ["Device", "DeviceProxyIn", "Software", "SoftwareProxyIn"],
-                    "to_vertex_collections": ["Device", "DeviceProxyOut", "Software", "SoftwareProxyOut"]
+                    "edge_collection": self.config_manager.get_collection_name("versions"),
+                    "from_vertex_collections": [
+                        self.config_manager.get_collection_name("devices"), 
+                        self.config_manager.get_collection_name("device_ins"), 
+                        self.config_manager.get_collection_name("software"), 
+                        self.config_manager.get_collection_name("software_ins")
+                    ],
+                    "to_vertex_collections": [
+                        self.config_manager.get_collection_name("devices"), 
+                        self.config_manager.get_collection_name("device_outs"), 
+                        self.config_manager.get_collection_name("software"), 
+                        self.config_manager.get_collection_name("software_outs")
+                    ]
                 },
                 {
-                    "edge_collection": "hasAlert",
-                    "from_vertex_collections": ["DeviceProxyOut", "SoftwareProxyOut"],
-                    "to_vertex_collections": ["Alert"]
+                    "edge_collection": self.config_manager.get_collection_name("has_alerts"),
+                    "from_vertex_collections": [
+                        self.config_manager.get_collection_name("device_outs"), 
+                        self.config_manager.get_collection_name("software_outs")
+                    ],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("alerts")]
+                },
+                {
+                    "edge_collection": self.config_manager.get_collection_name("types"),
+                    "from_vertex_collections": [
+                        self.config_manager.get_collection_name("devices"), 
+                        self.config_manager.get_collection_name("software")
+                    ],
+                    "to_vertex_collections": [self.config_manager.get_collection_name("classes")]
                 }
             ]
             
-            # Create unified graph for all tenant visualization
+            # Create SmartGraph if it doesn't exist (should have been created by deployment)
+            print(f"     [WARNING] SmartGraph {graph_name} not found - creating basic graph for demo")
             graph = self.database.create_graph(
                 name=graph_name,
                 edge_definitions=edge_definitions
+                # Note: This creates a regular graph, not SmartGraph
+                # SmartGraph should be created by database deployment
             )
             
             print(f"     [GRAPH] Created unified graph: {graph_name}")
@@ -1847,7 +1879,7 @@ class AutomatedDemoWalkthrough:
         print(f"   - Start Time: {self.start_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"   - End Time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"   - Total Duration: {duration.total_seconds():.1f} seconds")
-        total_sections = 10 if self.verbose else 8
+        total_sections = 12 if self.verbose else 10
         print(f"   - Sections Completed: {len(self.sections_completed)}/{total_sections}")
         if not self.verbose:
             print("   - Mode: Presentation (validation sections skipped for demo flow)")
@@ -1862,6 +1894,8 @@ class AutomatedDemoWalkthrough:
             print("   [SUCCESS] Comprehensive validation suite")
         print("   [SUCCESS] Temporal TTL transactions demonstration")
         print("   [SUCCESS] Time travel demonstration")
+        print("   [SUCCESS] Alert system with operational events")
+        print("   [SUCCESS] Taxonomy system with semantic classification")
         print("   [SUCCESS] Scale-out capabilities")
         if self.verbose:
             print("   [SUCCESS] Final system validation")
@@ -1872,6 +1906,8 @@ class AutomatedDemoWalkthrough:
             print("   [SUCCESS] Multi-tenant architecture with complete isolation")
             print("   [SUCCESS] Time travel with TTL for historical data management")
             print("   [SUCCESS] Temporal TTL transactions for realistic scenarios")
+            print("   [SUCCESS] Alert system for operational event management")
+            print("   [SUCCESS] Taxonomy system for semantic classification")
             print("   [SUCCESS] Horizontal scale-out for enterprise growth")
             print("   [SUCCESS] Production-ready enterprise deployment")
         else:
@@ -1879,6 +1915,8 @@ class AutomatedDemoWalkthrough:
             print("   - Multi-tenant architecture with complete isolation")
             print("   - Time travel with TTL for historical data management")
             print("   - Temporal TTL transactions for realistic data lifecycle scenarios")
+            print("   - Alert system for operational event management")
+            print("   - Taxonomy system for semantic classification and inheritance")
             print("   - Horizontal scale-out for enterprise growth")
             print("   - Comprehensive validation and testing")
             print("   - Production-ready enterprise deployment")
@@ -1920,12 +1958,14 @@ class AutomatedDemoWalkthrough:
             # Section 5: Temporal TTL Transactions
             self.section_5_temporal_ttl_transactions()
             
-            # Section 6: TTL Demonstration
-            self.section_6_ttl_demonstration()
+            # Section 6: Scale-Out Demonstration (MOVED UP)
+            self.section_6_scale_out_demonstration()
             
-            # Section 7: Scale-Out Demonstration
+            # Section 7: Alert System Demonstration  
             self.section_7_alert_system_demonstration()
-            self.section_8_scale_out_demonstration()
+            
+            # Section 8: Taxonomy System Demonstration
+            self.section_8_taxonomy_system_demonstration()
             
             # Section 9: Final Validation (optional in presentation mode)
             if self.verbose:

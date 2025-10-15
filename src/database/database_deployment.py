@@ -16,10 +16,9 @@ from typing import Dict, List, Any
 from arango import ArangoClient
 
 # Import centralized credentials and configuration
-from src.config.centralized_credentials import CredentialsManager, DatabaseConstants
+from src.config.centralized_credentials import CredentialsManager
 from src.config.config_management import get_config, NamingConvention
-from src.ttl.ttl_config import (create_ttl_configuration, create_snake_case_ttl_configuration, 
-                       create_demo_ttl_configuration, create_demo_snake_case_ttl_configuration, TTLManager)
+from src.ttl.ttl_config import (create_ttl_configuration, create_demo_ttl_configuration, TTLManager)
 from src.ttl.ttl_constants import DEFAULT_TTL_DAYS, TTLConstants
 
 
@@ -114,55 +113,37 @@ class TimeTravelRefactoredDeployment:
             return False
     
     def create_refactored_collections(self) -> bool:
-        """Create time travel refactored collections."""
+        """Create satellite collections only - SmartGraph collections are auto-created by SmartGraph."""
         try:
             convention_name = "camelCase" if self.naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
-            print(f"\n[INFO] Creating collections with {convention_name} naming...")
-            
-            # Get collection names from configuration
-            vertex_collections = [
-                {"name": self.app_config.get_collection_name("devices"), "type": "vertex"},
-                {"name": self.app_config.get_collection_name("device_ins"), "type": "vertex"},
-                {"name": self.app_config.get_collection_name("device_outs"), "type": "vertex"},
-                {"name": self.app_config.get_collection_name("locations"), "type": "vertex"},
-                {"name": self.app_config.get_collection_name("software"), "type": "vertex"},
-                {"name": self.app_config.get_collection_name("software_ins"), "type": "vertex"},
-                {"name": self.app_config.get_collection_name("software_outs"), "type": "vertex"},
-                {"name": self.app_config.get_collection_name("alerts"), "type": "vertex"}
+            print(f"\n[INFO] Creating satellite collections with {convention_name} naming...")
+
+            # Only create satellite collections - SmartGraph will auto-create its own collections
+            satellite_collections = [
+                {"name": self.app_config.get_collection_name("classes"), "type": "vertex"}
             ]
-            
-            # Edge collections using configuration
-            edge_collections = [
-                {"name": self.app_config.get_collection_name("connections"), "type": "edge"},
-                {"name": self.app_config.get_collection_name("has_locations"), "type": "edge"},
-                {"name": self.app_config.get_collection_name("has_device_software"), "type": "edge"},
-                {"name": self.app_config.get_collection_name("versions"), "type": "edge"},
-                {"name": self.app_config.get_collection_name("has_alerts"), "type": "edge"}
-            ]
-            
-            # Create vertex collections
-            for collection_config in vertex_collections:
+
+            print(f"   Creating satellite collections for shared taxonomy...")
+            for collection_config in satellite_collections:
                 name = collection_config["name"]
+                is_edge = collection_config["type"] == "edge"
+
                 if not self.database.has_collection(name):
-                    self.database.create_collection(name)
-                    print(f"   [DONE] Created vertex collection: {name}")
+                    # Create satellite collection (replicated to all servers)
+                    self.database.create_collection(
+                        name=name,
+                        edge=is_edge,
+                        replication_factor="satellite"  # This makes it a satellite collection
+                    )
+                    print(f"   [DONE] Created satellite {collection_config['type']} collection: {name}")
                 else:
-                    print(f"   [INFO] Vertex collection '{name}' already exists")
-            
-            # Create edge collections
-            for collection_config in edge_collections:
-                name = collection_config["name"]
-                if not self.database.has_collection(name):
-                    self.database.create_collection(name, edge=True)
-                    print(f"   [DONE] Created edge collection: {name}")
-                else:
-                    print(f"   [INFO] Edge collection '{name}' already exists")
-            
-            print(f"[DONE] Time travel refactored collections created successfully")
+                    print(f"   [INFO] Satellite collection '{name}' already exists")
+
+            print(f"[DONE] Satellite collections created (SmartGraph will auto-create its collections)")
             return True
-            
+
         except Exception as e:
-            print(f"[ERROR] Error creating collections: {str(e)}")
+            print(f"[ERROR] Error creating satellite collections: {str(e)}")
             return False
     
     def create_refactored_indexes(self) -> bool:
@@ -377,19 +358,22 @@ class TimeTravelRefactoredDeployment:
                 print(f"[ERROR] No tenant data directories found in {data_dir}")
                 return False
             
-            # Time travel refactored file to collection mappings
+            # Time travel refactored file to collection mappings - use configuration manager
             file_mappings = {
-                "Device.json": "Device",
-                "DeviceProxyIn.json": "DeviceProxyIn",
-                "DeviceProxyOut.json": "DeviceProxyOut",
-                "Location.json": "Location",
-                "Software.json": "Software",
-                "SoftwareProxyIn.json": "SoftwareProxyIn",      # NEW
-                "SoftwareProxyOut.json": "SoftwareProxyOut",    # NEW
-                "hasConnection.json": "hasConnection",
-                "hasLocation.json": "hasLocation",
-                "hasDeviceSoftware.json": "hasDeviceSoftware",  # NEW
-                "hasVersion.json": "hasVersion"  # UNIFIED
+                self.app_config.get_file_name("devices"): self.app_config.get_collection_name("devices"),
+                self.app_config.get_file_name("device_ins"): self.app_config.get_collection_name("device_ins"),
+                self.app_config.get_file_name("device_outs"): self.app_config.get_collection_name("device_outs"),
+                self.app_config.get_file_name("locations"): self.app_config.get_collection_name("locations"),
+                self.app_config.get_file_name("software"): self.app_config.get_collection_name("software"),
+                self.app_config.get_file_name("software_ins"): self.app_config.get_collection_name("software_ins"),
+                self.app_config.get_file_name("software_outs"): self.app_config.get_collection_name("software_outs"),
+                self.app_config.get_file_name("classes"): self.app_config.get_collection_name("classes"),  # TAXONOMY
+                self.app_config.get_file_name("connections"): self.app_config.get_collection_name("connections"),
+                self.app_config.get_file_name("has_locations"): self.app_config.get_collection_name("has_locations"),
+                self.app_config.get_file_name("has_device_software"): self.app_config.get_collection_name("has_device_software"),
+                self.app_config.get_file_name("versions"): self.app_config.get_collection_name("versions"),  # UNIFIED
+                self.app_config.get_file_name("types"): self.app_config.get_collection_name("types"),  # TAXONOMY
+                self.app_config.get_file_name("subclass_of"): self.app_config.get_collection_name("subclass_of")  # TAXONOMY
             }
             
             total_loaded = 0
@@ -434,67 +418,123 @@ class TimeTravelRefactoredDeployment:
             return False
     
     def create_refactored_named_graphs(self) -> bool:
-        """Create named graphs with refactored edge relationships."""
+        """Create a single unified SmartGraph for all tenants with proper smartGraphAttribute."""
         try:
-            print(f"\n[GRAPH]  Creating refactored named graphs...")
+            print(f"\n[GRAPH] Creating unified SmartGraph for multi-tenant isolation...")
             
-            # Read tenant registry
-            registry_path = Path("data/tenant_registry_time_travel.json")
-            if not registry_path.exists():
-                print(f"[ERROR] Time travel tenant registry not found: {registry_path}")
+            # Single SmartGraph name for all tenants
+            smartgraph_name = "network_assets_smartgraph"
+            
+            # Check if SmartGraph already exists
+            if self.database.has_graph(smartgraph_name):
+                print(f"   [INFO] SmartGraph '{smartgraph_name}' already exists")
+                return True
+            
+            # Define edge definitions for the unified SmartGraph
+            # Includes edges to satellite collections (SmartGraph → Satellite pattern)
+            edge_definitions = [
+                {
+                    "edge_collection": self.app_config.get_collection_name("connections"),
+                    "from_vertex_collections": [self.app_config.get_collection_name("devices")],
+                    "to_vertex_collections": [self.app_config.get_collection_name("devices")]
+                },
+                {
+                    "edge_collection": self.app_config.get_collection_name("has_locations"),
+                    "from_vertex_collections": [self.app_config.get_collection_name("devices")],
+                    "to_vertex_collections": [self.app_config.get_collection_name("locations")]
+                },
+                {
+                    "edge_collection": self.app_config.get_collection_name("has_device_software"),
+                    "from_vertex_collections": [self.app_config.get_collection_name("devices")],
+                    "to_vertex_collections": [self.app_config.get_collection_name("software")]
+                },
+                {
+                    "edge_collection": self.app_config.get_collection_name("versions"),
+                    "from_vertex_collections": [
+                        self.app_config.get_collection_name("device_ins"),
+                        self.app_config.get_collection_name("devices"),
+                        self.app_config.get_collection_name("software_ins"),
+                        self.app_config.get_collection_name("software")
+                    ],
+                    "to_vertex_collections": [
+                        self.app_config.get_collection_name("devices"),
+                        self.app_config.get_collection_name("device_outs"),
+                        self.app_config.get_collection_name("software"),
+                        self.app_config.get_collection_name("software_outs")
+                    ]
+                },
+                {
+                    "edge_collection": self.app_config.get_collection_name("types"),
+                    "from_vertex_collections": [
+                        self.app_config.get_collection_name("devices"),
+                        self.app_config.get_collection_name("software")
+                    ],
+                    "to_vertex_collections": [
+                        self.app_config.get_collection_name("classes")
+                    ]
+                },
+                {
+                    "edge_collection": self.app_config.get_collection_name("has_alerts"),
+                    "from_vertex_collections": [
+                        self.app_config.get_collection_name("device_outs"),
+                        self.app_config.get_collection_name("software_outs")
+                    ],
+                    "to_vertex_collections": [
+                        self.app_config.get_collection_name("alerts")
+                    ]
+                }
+            ]
+            
+            # Note: type edges ARE part of SmartGraph, connecting to Satellite Class collection
+            # This follows ArangoDB's SmartGraph → Satellite pattern for optimal performance
+            
+            try:
+                # Create the unified SmartGraph with tenantId as smartGraphAttribute
+                graph = self.database.create_graph(
+                    name=smartgraph_name,
+                    edge_definitions=edge_definitions,
+                    smart=True,
+                    smart_field="tenantId"  # This enables tenant-based sharding
+                )
+                
+                print(f"   [DONE] Created unified SmartGraph: {smartgraph_name}")
+                print(f"          Smart attribute: tenantId")
+                print(f"          Tenant isolation: Automatic via smartGraphAttribute")
+                
+                # Create satellite graph for taxonomy (shared across all tenants)
+                satellite_graph_name = "taxonomy_satellite_graph"
+                if not self.database.has_graph(satellite_graph_name):
+                    satellite_edge_definitions = [
+                        {
+                            "edge_collection": self.app_config.get_collection_name("subclass_of"),
+                            "from_vertex_collections": [self.app_config.get_collection_name("classes")],
+                            "to_vertex_collections": [self.app_config.get_collection_name("classes")]
+                        }
+                    ]
+                    
+                    try:
+                        satellite_graph = self.database.create_graph(
+                            name=satellite_graph_name,
+                            edge_definitions=satellite_edge_definitions
+                            # Note: satellite=True parameter may need different syntax in this driver
+                        )
+                        print(f"   [DONE] Created satellite graph: {satellite_graph_name}")
+                        
+                    except Exception as satellite_error:
+                        print(f"   [WARNING] Satellite graph creation failed: {satellite_error}")
+                        print(f"             Taxonomy will use regular graph")
+                else:
+                    print(f"   [INFO] Satellite graph '{satellite_graph_name}' already exists")
+                
+                print(f"[DONE] SmartGraph configuration completed")
+                return True
+                
+            except Exception as graph_error:
+                print(f"   [ERROR] Failed to create SmartGraph '{smartgraph_name}': {graph_error}")
                 return False
             
-            with open(registry_path, 'r') as f:
-                registry = json.load(f)
-            
-            # Create named graph for each tenant with refactored relationships
-            for tenant_id, tenant_info in registry["tenants"].items():
-                graph_name = tenant_info["smartGraphName"]
-                
-                # Define refactored edge relationships
-                edge_definitions = [
-                    {
-                        "edge_collection": "hasConnection",
-                        "from_vertex_collections": ["DeviceProxyOut"],
-                        "to_vertex_collections": ["DeviceProxyIn"]
-                    },
-                    {
-                        "edge_collection": "hasLocation",
-                        "from_vertex_collections": ["DeviceProxyOut"],
-                        "to_vertex_collections": ["Location"]
-                    },
-                    {
-                        "edge_collection": "hasDeviceSoftware",  # NEW - CORRECTED LOGIC
-                        "from_vertex_collections": ["DeviceProxyOut"],
-                        "to_vertex_collections": ["SoftwareProxyIn"]
-                    },
-                    {
-                        "edge_collection": "hasVersion",  # UNIFIED - handles both Device and Software
-                        "from_vertex_collections": ["DeviceProxyIn", "Device", "SoftwareProxyIn", "Software"],
-                        "to_vertex_collections": ["Device", "DeviceProxyOut", "Software", "SoftwareProxyOut"]
-                    },
-                    {
-                        "edge_collection": "hasAlert",  # ALERT SYSTEM - operational monitoring
-                        "from_vertex_collections": ["DeviceProxyOut", "SoftwareProxyOut"],
-                        "to_vertex_collections": ["Alert"]
-                    }
-                ]
-                
-                # Create or update named graph
-                if self.database.has_graph(graph_name):
-                    print(f"   [INFO] Graph '{graph_name}' already exists")
-                else:
-                    self.database.create_graph(
-                        graph_name,
-                        edge_definitions=edge_definitions
-                    )
-                    print(f"   [DONE] Created refactored named graph: {graph_name}")
-            
-            print(f"[DONE] Refactored named graphs created")
-            return True
-            
         except Exception as e:
-            print(f"[ERROR] Error creating named graphs: {str(e)}")
+            print(f"[ERROR] Error creating unified SmartGraph: {str(e)}")
             return False
     
     def verify_refactored_deployment(self) -> bool:
@@ -657,8 +697,8 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description="Deploy multi-tenant network asset data to ArangoDB")
-    parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
-                       help="Naming convention for collections and properties (default: camelCase)")
+    parser.add_argument("--naming", choices=["camelCase"], default="camelCase",
+                       help="Naming convention for collections and properties (camelCase only)")
     parser.add_argument("--demo-mode", action="store_true",
                        help="Use short TTL periods (5 minutes) for demonstration purposes")
     

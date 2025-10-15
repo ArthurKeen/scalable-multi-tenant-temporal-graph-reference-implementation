@@ -18,10 +18,10 @@ from dataclasses import dataclass
 from arango import ArangoClient
 
 # Import project modules
+from src.database.database_utilities import DatabaseMixin, QueryExecutor
 from src.config.centralized_credentials import CredentialsManager
-from src.database.database_utilities import QueryExecutor
 from src.config.config_management import get_config, NamingConvention
-from src.ttl.ttl_config import TTLManager, create_ttl_configuration, create_snake_case_ttl_configuration
+from src.ttl.ttl_config import TTLManager, create_ttl_configuration
 from src.ttl.ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS
 from src.data_generation.data_generation_utils import KeyGenerator, RandomDataGenerator
 from src.data_generation.data_generation_config import NetworkConfig, DataGenerationLimits
@@ -40,25 +40,17 @@ class ConfigurationChange:
     change_description: str
 
 
-class TransactionSimulator:
+class TransactionSimulator(DatabaseMixin):
     """Simulates realistic configuration change transactions."""
     
     def __init__(self, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE, show_queries: bool = False):
+        super().__init__()  # Initialize DatabaseMixin
         self.naming_convention = naming_convention
         self.app_config = get_config("production", naming_convention)
         self.show_queries = show_queries
         
-        # Database connection
-        creds = CredentialsManager.get_database_credentials()
-        self.client = ArangoClient(hosts=creds.endpoint)
-        self.database = None
-        self.creds = creds
-        
-        # TTL configuration
-        if naming_convention == NamingConvention.SNAKE_CASE:
-            self.ttl_config = create_snake_case_ttl_configuration("simulator", expire_after_days=DEFAULT_TTL_DAYS)
-        else:
-            self.ttl_config = create_ttl_configuration("simulator", expire_after_days=DEFAULT_TTL_DAYS)
+        # TTL configuration - use camelCase only (snake_case support removed)
+        self.ttl_config = create_ttl_configuration("simulator", expire_after_days=DEFAULT_TTL_DAYS)
         self.ttl_manager = TTLManager(self.ttl_config)
         
         # Data generation utilities
@@ -69,54 +61,6 @@ class TransactionSimulator:
         # Track simulated changes
         self.simulated_changes: List[ConfigurationChange] = []
     
-    def connect_to_database(self) -> bool:
-        """Connect to the ArangoDB database."""
-        try:
-            print(f"[CONNECT] Connecting to database for transaction simulation...")
-            self.database = self.client.db(
-                self.creds.database_name,
-                **CredentialsManager.get_database_params()
-            )
-            
-            # Test connection
-            collections = self.database.collections()
-            print(f"[CONNECT] Connected successfully - {len(collections)} collections found")
-            return True
-            
-        except Exception as e:
-            print(f"[ERROR] Failed to connect to database: {str(e)}")
-            return False
-    
-    def execute_and_display_query(self, query: str, query_name: str, bind_vars: Dict = None) -> List[Dict]:
-        """Execute a query and display it with results if show_queries is enabled."""
-        if self.show_queries:
-            print(f"\n[QUERY] {query_name}:")
-            print(f"   AQL: {query}")
-            if bind_vars:
-                print(f"   Variables: {bind_vars}")
-        
-        try:
-            cursor = self.database.aql.execute(query, bind_vars=bind_vars)
-            results = list(cursor)
-            
-            if self.show_queries:
-                print(f"   Results: {len(results)} documents returned")
-                if results and len(results) <= 3:  # Show sample results for small result sets
-                    for i, result in enumerate(results[:3]):
-                        if isinstance(result, dict):
-                            # Show key fields only
-                            sample = {k: v for k, v in result.items() if k in ['_key', '_id', 'name', 'type', 'created', 'expired']}
-                            print(f"   Sample {i+1}: {sample}")
-                elif results:
-                    print(f"   (Large result set - showing count only)")
-                print()
-            
-            return results
-        except Exception as e:
-            if self.show_queries:
-                print(f"   ERROR: {e}")
-                print()
-            raise e
     
     def find_current_configurations(self, entity_type: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Find current configurations for simulation."""
@@ -133,10 +77,13 @@ class TransactionSimulator:
                 RETURN doc
             """
             
-            results = self.execute_and_display_query(
-                aql, 
-                f"Find Current {entity_type.title()} Configurations"
-            )
+            results = self.execute_aql(aql)
+            
+            if self.show_queries:
+                print(f"[QUERY] Find Current {entity_type.title()} Configurations")
+                print(f"[AQL] {aql}")
+                print(f"[RESULTS] Found {len(results)} current {entity_type} configurations")
+            
             return results
             
         except Exception as e:
@@ -187,15 +134,48 @@ class TransactionSimulator:
             new_config["created"] = timestamp.timestamp()
             new_config["expired"] = NEVER_EXPIRES  # New current configuration
             
-            # Generate new key for the new configuration
-            key_parts = current_device["_key"].split("_")
-            if len(key_parts) >= 2:
-                tenant_id = key_parts[0]
-                entity_part = key_parts[1]  # e.g., "device1-0"
-                # Use microseconds to ensure uniqueness
+            # Generate new key with proper SmartGraph format (avoiding conflicts)
+            original_key = current_device["_key"]  # e.g., "ace9c0fd580b:device1-0"
+            
+            if ":" in original_key:
+                tenant_id, entity_part = original_key.split(":", 1)  # Split on colon for SmartGraph keys
+                
+                # Extract base entity and find next available version number
+                if "-" in entity_part:
+                    base_entity, version_str = entity_part.rsplit("-", 1)  # e.g., "device1", "0"
+                    try:
+                        # Find next available version by checking database for conflicts
+                        version_num = int(version_str)
+                        max_attempts = 100  # Prevent infinite loops
+                        attempts = 0
+                        
+                        while attempts < max_attempts:
+                            new_version = version_num + 1 + attempts
+                            new_key = f"{tenant_id}:{base_entity}-{new_version}"
+                            
+                            # Check if this key already exists in the database
+                            if not self.database.collection(self.app_config.get_collection_name("devices")).has(new_key):
+                                break
+                            attempts += 1
+                        else:
+                            # Fallback: use timestamp suffix if we can't find available version
+                            unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                            new_key = f"{tenant_id}:{base_entity}_{unique_suffix}"
+                            
+                    except ValueError:
+                        # Fallback: use timestamp suffix
+                        unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                        new_key = f"{tenant_id}:{entity_part}_{unique_suffix}"
+                else:
+                    # Fallback: use timestamp suffix  
+                    unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                    new_key = f"{tenant_id}:{entity_part}_{unique_suffix}"
+            else:
+                # Fallback for non-SmartGraph keys
                 unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
-                new_key = f"{tenant_id}_{entity_part}_{unique_suffix}"
-                new_config["_key"] = new_key
+                new_key = f"{original_key}_{unique_suffix}"
+            
+            new_config["_key"] = new_key
             
             return ConfigurationChange(
                 entity_type="device",
@@ -247,15 +227,48 @@ class TransactionSimulator:
             new_config["created"] = timestamp.timestamp()
             new_config["expired"] = NEVER_EXPIRES  # New current configuration
             
-            # Generate new key
-            key_parts = current_software["_key"].split("_")
-            if len(key_parts) >= 2:
-                tenant_id = key_parts[0]
-                entity_part = key_parts[1]  # e.g., "software3-0"
-                # Use microseconds to ensure uniqueness
+            # Generate new key with proper SmartGraph format (avoiding conflicts)
+            original_key = current_software["_key"]  # e.g., "ace9c0fd580b:software1-0"
+            
+            if ":" in original_key:
+                tenant_id, entity_part = original_key.split(":", 1)  # Split on colon for SmartGraph keys
+                
+                # Extract base entity and find next available version number
+                if "-" in entity_part:
+                    base_entity, version_str = entity_part.rsplit("-", 1)  # e.g., "software1", "0"
+                    try:
+                        # Find next available version by checking database for conflicts
+                        version_num = int(version_str)
+                        max_attempts = 100  # Prevent infinite loops
+                        attempts = 0
+                        
+                        while attempts < max_attempts:
+                            new_version = version_num + 1 + attempts
+                            new_key = f"{tenant_id}:{base_entity}-{new_version}"
+                            
+                            # Check if this key already exists in the database
+                            if not self.database.collection(self.app_config.get_collection_name("software")).has(new_key):
+                                break
+                            attempts += 1
+                        else:
+                            # Fallback: use timestamp suffix if we can't find available version
+                            unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                            new_key = f"{tenant_id}:{base_entity}_{unique_suffix}"
+                            
+                    except ValueError:
+                        # Fallback: use timestamp suffix
+                        unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                        new_key = f"{tenant_id}:{entity_part}_{unique_suffix}"
+                else:
+                    # Fallback: use timestamp suffix  
+                    unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
+                    new_key = f"{tenant_id}:{entity_part}_{unique_suffix}"
+            else:
+                # Fallback for non-SmartGraph keys
                 unique_suffix = f"sim_{int(timestamp.timestamp())}_{timestamp.microsecond}"
-                new_key = f"{tenant_id}_{entity_part}_{unique_suffix}"
-                new_config["_key"] = new_key
+                new_key = f"{original_key}_{unique_suffix}"
+            
+            new_config["_key"] = new_key
             
             return ConfigurationChange(
                 entity_type="software",
@@ -277,6 +290,7 @@ class TransactionSimulator:
         try:
             collection_name = self.app_config.get_collection_name(change.entity_type)
             if not collection_name:
+                print(f"[ERROR] No collection name found for entity type: {change.entity_type}")
                 return False
             
             collection = self.database.collection(collection_name)
@@ -296,8 +310,13 @@ class TransactionSimulator:
             if "ttlExpireAt" in new_config:
                 del new_config["ttlExpireAt"]
             
-            collection.insert(new_config)
-            print(f"   [CURRENT] Created new current config {new_config['_key']} (expired={NEVER_EXPIRES}, no TTL)")
+            try:
+                insert_result = collection.insert(new_config)
+                print(f"   [CURRENT] Created new current config {new_config['_key']} (expired={NEVER_EXPIRES}, no TTL)")
+                    
+            except Exception as insert_error:
+                print(f"[ERROR] Failed to insert new config: {str(insert_error)}")
+                return False
             
             # Output full vertex IDs for graph visualization
             old_vertex_id = f"{collection_name}/{change.entity_key}"

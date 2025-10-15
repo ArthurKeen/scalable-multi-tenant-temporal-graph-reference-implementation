@@ -7,7 +7,7 @@ Reusable utility functions to eliminate code duplication in multi-tenant data ge
 import random
 import uuid
 import datetime
-from typing import Dict, List, Any, Optional, Union
+from typing import Dict, List, Any, Optional, Tuple, Union
 from pathlib import Path
 from src.config.generation_constants import NETWORK_CONSTANTS
 
@@ -58,10 +58,13 @@ class DocumentEnhancer:
         """
         Create a complete edge document with all required attributes.
         
+        Note: For SmartGraph compatibility, _key is NOT included to allow 
+        ArangoDB to auto-generate proper SmartGraph edge keys.
+        
         Eliminates duplication in edge creation across all generation functions.
         """
         edge = {
-            "_key": key,
+            # "_key": key,  # REMOVED: Let SmartGraph auto-generate proper edge keys
             "_from": f"{from_collection}/{from_key}",
             "_to": f"{to_collection}/{to_key}"
         }
@@ -164,7 +167,10 @@ class KeyGenerator:
     @staticmethod
     def generate_tenant_key(tenant_id: str, entity_type: str, index: int, version: Optional[int] = None) -> str:
         """
-        Generate a tenant-scoped key for any entity.
+        Generate a SmartGraph-compatible tenant-scoped key for any entity.
+        
+        Uses the tenantId: prefix format required for ArangoDB SmartGraphs
+        to ensure proper sharding based on the tenantId shard key.
         
         Args:
             tenant_id: Tenant identifier
@@ -173,9 +179,9 @@ class KeyGenerator:
             version: Optional version number for versioned entities
             
         Returns:
-            Formatted key string
+            SmartGraph-compatible key string with tenantId: prefix
         """
-        base_key = f"{tenant_id}_{entity_type}{index}"
+        base_key = f"{tenant_id}:{entity_type}{index}"
         if version is not None:
             return f"{base_key}-{version}"
         return base_key
@@ -196,12 +202,28 @@ class KeyGenerator:
         return KeyGenerator.generate_tenant_key(tenant_id, "hasSoftware", index)
     
     @staticmethod
-    def generate_version_key(prefix: str, device_key: str) -> str:
-        """Generate a key for version edges."""
-        return f"{prefix}-{device_key}"
+    def generate_version_key(prefix: str, entity_key: str) -> str:
+        """
+        Generate a SmartGraph-compatible key for version edges.
+        
+        Args:
+            prefix: Type prefix (e.g., 'device-in', 'software-out')
+            entity_key: Entity key (already contains tenantId: prefix)
+            
+        Returns:
+            SmartGraph-compatible key with tenantId: prefix
+        """
+        # Extract tenant ID from entity key (format: tenantId:entityType-version)
+        if ':' in entity_key:
+            tenant_id, entity_part = entity_key.split(':', 1)
+            # Create SmartGraph-compatible version key
+            return f"{tenant_id}:{prefix}-{entity_part}"
+        else:
+            # Fallback for keys without tenant prefix (shouldn't happen in SmartGraph)
+            return f"{prefix}-{entity_key}"
 
 
-class ConfigurationManager:
+class DeviceConfigurationManager:
     """Manages configuration changes and historical data."""
     
     def __init__(self, random_generator: RandomDataGenerator):
@@ -311,18 +333,21 @@ class FileManager:
         # Use app configuration for file names if provided, otherwise fall back to hardcoded names
         if app_config:
             file_mapping = {
-                "devices": app_config.get_file_name(app_config.get_collection_name("devices")),
-                "device_ins": app_config.get_file_name(app_config.get_collection_name("device_ins")), 
-                "device_outs": app_config.get_file_name(app_config.get_collection_name("device_outs")),
-                "locations": app_config.get_file_name(app_config.get_collection_name("locations")),
-                "software": app_config.get_file_name(app_config.get_collection_name("software")),
-                "software_ins": app_config.get_file_name(app_config.get_collection_name("software_ins")),
-                "software_outs": app_config.get_file_name(app_config.get_collection_name("software_outs")),
-                "connections": app_config.get_file_name(app_config.get_collection_name("connections")),
-                "has_locations": app_config.get_file_name(app_config.get_collection_name("has_locations")),
-                "has_software": app_config.get_file_name(app_config.get_collection_name("has_software")),
-                "has_device_software": app_config.get_file_name(app_config.get_collection_name("has_device_software")),
-                "versions": app_config.get_file_name(app_config.get_collection_name("versions"))
+                "devices": app_config.get_file_name("devices"),
+                "device_ins": app_config.get_file_name("device_ins"), 
+                "device_outs": app_config.get_file_name("device_outs"),
+                "locations": app_config.get_file_name("locations"),
+                "software": app_config.get_file_name("software"),
+                "software_ins": app_config.get_file_name("software_ins"),
+                "software_outs": app_config.get_file_name("software_outs"),
+                "classes": app_config.get_file_name("classes"),  # FIXED: Use logical name directly
+                "connections": app_config.get_file_name("connections"),
+                "has_locations": app_config.get_file_name("has_locations"),
+                "has_software": app_config.get_file_name("has_software"),
+                "has_device_software": app_config.get_file_name("has_device_software"),
+                "versions": app_config.get_file_name("versions"),
+                "types": app_config.get_file_name("types"),  # FIXED: Use logical name directly
+                "subclass_of": app_config.get_file_name("subclass_of")  # FIXED: Use logical name directly
             }
         else:
             # Use default naming convention (camelCase) when no config provided
@@ -330,18 +355,21 @@ class FileManager:
             default_config = get_config("production", NamingConvention.CAMEL_CASE)
             
             file_mapping = {
-                "devices": default_config.get_file_name(default_config.get_collection_name("devices")),
-                "device_ins": default_config.get_file_name(default_config.get_collection_name("device_ins")), 
-                "device_outs": default_config.get_file_name(default_config.get_collection_name("device_outs")),
-                "locations": default_config.get_file_name(default_config.get_collection_name("locations")),
-                "software": default_config.get_file_name(default_config.get_collection_name("software")),
-                "software_ins": default_config.get_file_name(default_config.get_collection_name("software_ins")),
-                "software_outs": default_config.get_file_name(default_config.get_collection_name("software_outs")),
-                "connections": default_config.get_file_name(default_config.get_collection_name("connections")),
-                "has_locations": default_config.get_file_name(default_config.get_collection_name("has_locations")),
-                "has_software": default_config.get_file_name(default_config.get_collection_name("has_software")),
-                "has_device_software": default_config.get_file_name(default_config.get_collection_name("has_device_software")),
-                "versions": default_config.get_file_name(default_config.get_collection_name("versions"))
+                "devices": default_config.get_file_name("devices"),
+                "device_ins": default_config.get_file_name("device_ins"), 
+                "device_outs": default_config.get_file_name("device_outs"),
+                "locations": default_config.get_file_name("locations"),
+                "software": default_config.get_file_name("software"),
+                "software_ins": default_config.get_file_name("software_ins"),
+                "software_outs": default_config.get_file_name("software_outs"),
+                "classes": default_config.get_file_name("classes"),  # FIXED: Use logical name directly
+                "connections": default_config.get_file_name("connections"),
+                "has_locations": default_config.get_file_name("has_locations"),
+                "has_software": default_config.get_file_name("has_software"),
+                "has_device_software": default_config.get_file_name("has_device_software"),
+                "versions": default_config.get_file_name("versions"),
+                "types": default_config.get_file_name("types"),  # FIXED: Use logical name directly
+                "subclass_of": default_config.get_file_name("subclass_of")  # FIXED: Use logical name directly
             }
         
         total_documents = 0
@@ -377,6 +405,100 @@ class LocationDataProvider:
     def get_all_locations(self) -> List[Dict[str, Any]]:
         """Get all available location data."""
         return self.locations_data.copy()
+
+
+class EntityGenerator:
+    """Generic entity generator to eliminate duplication between device and software generation."""
+    
+    def __init__(self, tenant_config: TenantConfig, random_gen: RandomDataGenerator, 
+                 network_config: DeviceConfigurationManager, logger):
+        self.tenant_config = tenant_config
+        self.random_gen = random_gen
+        self.network_config = network_config
+        self.logger = logger
+    
+    def generate_proxy_entities(self, entity_type: str, count: int, 
+                               type_selector_func, version_selector_func) -> Tuple[List[Dict], List[Dict]]:
+        """Generate ProxyIn and ProxyOut collections for any entity type."""
+        self.logger.info(f"Generating {count} {entity_type} proxies for tenant {self.tenant_config.tenant_name}")
+        
+        proxy_ins = []
+        proxy_outs = []
+        
+        for i in range(count):
+            selected_type = type_selector_func()
+            selected_version = version_selector_func(selected_type)
+            proxy_key = KeyGenerator.generate_tenant_key(
+                self.tenant_config.tenant_id, entity_type, i + 1
+            )
+            
+            # ProxyIn - no temporal attributes, only tenant key
+            proxy_in = {
+                "_key": proxy_key,
+                "name": f"{self.tenant_config.tenant_name} {selected_version.split(' ')[0]}",
+                "type": selected_type.value,
+                "version": selected_version
+            }
+            proxy_in = DocumentEnhancer.add_tenant_attributes(
+                proxy_in, self.tenant_config, is_proxy=True
+            )
+            proxy_ins.append(proxy_in)
+            
+            # ProxyOut - no temporal attributes, only tenant key  
+            proxy_out = {
+                "_key": proxy_key,
+                "name": f"{self.tenant_config.tenant_name} {selected_version.split(' ')[0]}",
+                "type": selected_type.value,
+                "version": selected_version
+            }
+            proxy_out = DocumentEnhancer.add_tenant_attributes(
+                proxy_out, self.tenant_config, is_proxy=True
+            )
+            proxy_outs.append(proxy_out)
+        
+        self.logger.info(f"Generated {len(proxy_ins)} {entity_type}ProxyIn and {len(proxy_outs)} {entity_type}ProxyOut entities")
+        return proxy_ins, proxy_outs
+    
+    def generate_entity_configurations(self, entity_type: str, proxy_entities: List[Dict],
+                                     config_generator_func, version_edge_creator_func,
+                                     historical_generator_func) -> Tuple[List[Dict], List[Dict]]:
+        """Generate entity configurations with time travel pattern."""
+        self.logger.info(f"Generating {len(proxy_entities)} {entity_type} configurations for tenant {self.tenant_config.tenant_name}")
+        
+        entities = []
+        versions = []
+        
+        for i, proxy_entity in enumerate(proxy_entities):
+            proxy_key = proxy_entity["_key"]
+            
+            # Generate current configuration
+            current_entity_key = KeyGenerator.generate_tenant_key(
+                self.tenant_config.tenant_id, entity_type, i + 1, 0
+            )
+            current_created = datetime.datetime.now()
+            
+            # Use provided config generator function
+            current_config = config_generator_func(proxy_entity, current_entity_key, i + 1)
+            current_config = DocumentEnhancer.add_tenant_attributes(
+                current_config, self.tenant_config, current_created
+            )
+            entities.append(current_config)
+            
+            # Create version edges for current configuration
+            current_versions = version_edge_creator_func(
+                entity_type, proxy_key, current_entity_key, current_created
+            )
+            versions.extend(current_versions)
+            
+            # Generate historical configurations
+            historical_entities, historical_versions = historical_generator_func(
+                current_config, proxy_key, i + 1
+            )
+            entities.extend(historical_entities)
+            versions.extend(historical_versions)
+        
+        self.logger.info(f"Generated {len(entities)} total {entity_type} configurations with time travel")
+        return entities, versions
 
 
 class SmartGraphConfigGenerator:

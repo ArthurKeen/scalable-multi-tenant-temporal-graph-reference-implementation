@@ -23,10 +23,11 @@ from src.config.tenant_config import TenantConfig, TenantNamingConvention, creat
 from src.ttl.ttl_constants import NEVER_EXPIRES
 from src.data_generation.data_generation_utils import (
     DocumentEnhancer, RandomDataGenerator, KeyGenerator,
-    ConfigurationManager as DataConfigManager, FileManager, LocationDataProvider,
-    SmartGraphConfigGenerator
+    DeviceConfigurationManager, FileManager, LocationDataProvider,
+    SmartGraphConfigGenerator, EntityGenerator
 )
 from src.data_generation.alert_generator import AlertGenerator
+from src.data_generation.taxonomy_generator import TaxonomyGenerator
 
 
 class TimeTravelRefactoredGenerator:
@@ -43,11 +44,14 @@ class TimeTravelRefactoredGenerator:
         self.network_config = NetworkConfig()
         self.limits = DataGenerationLimits()
         self.random_gen = RandomDataGenerator(self.network_config, self.limits)
-        self.config_manager = DataConfigManager(self.random_gen)
+        self.config_manager = DeviceConfigurationManager(self.random_gen)
         self.location_provider = LocationDataProvider()
         
         # Setup logging
         initialize_logging()
+        
+        # Initialize taxonomy generator
+        self.taxonomy_generator = TaxonomyGenerator(naming_convention)
         import logging
         self.logger = logging.getLogger(__name__)
     
@@ -598,6 +602,15 @@ class TimeTravelRefactoredGenerator:
         # Combine all version edges (unified collection)
         all_versions = device_versions + software_versions
         
+        # Generate taxonomy system
+        self.logger.info("Generating taxonomy classes and classifications")
+        taxonomy_data = self.taxonomy_generator.generate_taxonomy_for_tenant(self.tenant_config)
+        
+        # Generate type classifications for devices and software
+        device_type_edges = self.taxonomy_generator.generate_device_classifications(devices, self.tenant_config.tenant_id)
+        software_type_edges = self.taxonomy_generator.generate_software_classifications(software, self.tenant_config.tenant_id)
+        all_type_edges = device_type_edges + software_type_edges
+        
         # Organize data collections using centralized configuration
         data_collections = {
             "devices": devices,
@@ -607,10 +620,13 @@ class TimeTravelRefactoredGenerator:
             "software": software,
             "software_ins": software_proxy_ins,  # NEW
             "software_outs": software_proxy_outs,  # NEW
+            "classes": taxonomy_data["classes"],  # TAXONOMY - class hierarchy
             "connections": connections,
             "has_locations": has_locations,
             "has_device_software": has_device_software,  # NEW (replaces has_software)
-            "versions": all_versions  # UNIFIED - contains both device and software versions
+            "versions": all_versions,  # UNIFIED - contains both device and software versions
+            "types": all_type_edges,  # TAXONOMY - device/software classifications
+            "subclass_of": taxonomy_data["subclass_edges"]  # TAXONOMY - class inheritance
         }
         
         # Write data files using centralized file management
@@ -629,9 +645,11 @@ class TimeTravelRefactoredGenerator:
         print(f"   Device entities: {len(devices)} devices, {len(device_proxy_ins)} DeviceProxyIn, {len(device_proxy_outs)} DeviceProxyOut")
         print(f"   Software entities: {len(software)} software, {len(software_proxy_ins)} SoftwareProxyIn, {len(software_proxy_outs)} SoftwareProxyOut")
         print(f"   Location entities: {len(locations)} locations")
+        print(f"   Taxonomy entities: {len(taxonomy_data['classes'])} classes, {len(all_type_edges)} type classifications, {len(taxonomy_data['subclass_edges'])} inheritance relationships")
         print(f"   Relationship edges: {len(connections)} hasConnection, {len(has_locations)} hasLocation, {len(has_device_software)} hasDeviceSoftware")
         print(f"   Version edges: {len(all_versions)} version (unified - {len(device_versions)} device + {len(software_versions)} software)")
         print(f"   -> Consistent time travel pattern: Generic 'version' collection for all entities")
+        print(f"   -> Semantic taxonomy: Device/Software classification with inheritance hierarchies")
         
         return {
             "tenant_config": self.tenant_config,
@@ -769,8 +787,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate multi-tenant network asset data")
     parser.add_argument("--tenants", type=int, default=4,
                        help="Number of tenants to generate (default: 4)")
-    parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
-                       help="Naming convention for collections and properties (default: camelCase)")
+    parser.add_argument("--naming", choices=["camelCase"], default="camelCase",
+                       help="Naming convention for collections and properties (camelCase only)")
     parser.add_argument("--environment", choices=["production", "development"], default="production",
                        help="Environment configuration (default: production)")
     

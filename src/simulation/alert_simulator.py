@@ -64,7 +64,8 @@ class AlertSimulator:
         device_proxy = random.choice(device_proxies)
         
         # Generate critical alert
-        alert_key = f"alert_critical_{uuid.uuid4().hex[:8]}"
+        # Generate SmartGraph-compatible alert key with tenantId prefix
+        alert_key = f"{tenant_id}:alert_critical_{uuid.uuid4().hex[:8]}"
         alert_id = f"{self.app_config.get_collection_name('alerts')}/{alert_key}"
         
         created_time = int(datetime.now().timestamp())
@@ -92,11 +93,9 @@ class AlertSimulator:
             }
         }
         
-        # Create hasAlert relationship
-        edge_key = f"has_alert_{uuid.uuid4().hex[:8]}"
+        # Create hasAlert relationship (SmartGraph will auto-generate _key)
         hasAlert_edge = {
-            "_key": edge_key,
-            "_id": f"{self.app_config.get_collection_name('has_alerts')}/{edge_key}",
+            # "_key": edge_key,  # REMOVED: Let SmartGraph auto-generate proper edge keys
             "_from": device_proxy["_id"],
             "_to": alert_id,
             "tenantId": tenant_id,
@@ -125,7 +124,8 @@ class AlertSimulator:
         software_proxy = random.choice(software_proxies)
         
         # Generate performance warning
-        alert_key = f"alert_perf_{uuid.uuid4().hex[:8]}"
+        # Generate SmartGraph-compatible alert key with tenantId prefix
+        alert_key = f"{tenant_id}:alert_perf_{uuid.uuid4().hex[:8]}"
         alert_id = f"{self.app_config.get_collection_name('alerts')}/{alert_key}"
         
         created_time = int(datetime.now().timestamp())
@@ -153,11 +153,9 @@ class AlertSimulator:
             }
         }
         
-        # Create hasAlert relationship
-        edge_key = f"has_alert_{uuid.uuid4().hex[:8]}"
+        # Create hasAlert relationship (SmartGraph will auto-generate _key)
         hasAlert_edge = {
-            "_key": edge_key,
-            "_id": f"{self.app_config.get_collection_name('has_alerts')}/{edge_key}",
+            # "_key": edge_key,  # REMOVED: Let SmartGraph auto-generate proper edge keys
             "_from": software_proxy["_id"],
             "_to": alert_id,
             "tenantId": tenant_id,
@@ -186,7 +184,8 @@ class AlertSimulator:
         device_proxy = random.choice(device_proxies)
         
         # Generate connectivity alert
-        alert_key = f"alert_conn_{uuid.uuid4().hex[:8]}"
+        # Generate SmartGraph-compatible alert key with tenantId prefix
+        alert_key = f"{tenant_id}:alert_conn_{uuid.uuid4().hex[:8]}"
         alert_id = f"{self.app_config.get_collection_name('alerts')}/{alert_key}"
         
         created_time = int(datetime.now().timestamp())
@@ -214,11 +213,9 @@ class AlertSimulator:
             }
         }
         
-        # Create hasAlert relationship
-        edge_key = f"has_alert_{uuid.uuid4().hex[:8]}"
+        # Create hasAlert relationship (SmartGraph will auto-generate _key)
         hasAlert_edge = {
-            "_key": edge_key,
-            "_id": f"{self.app_config.get_collection_name('has_alerts')}/{edge_key}",
+            # "_key": edge_key,  # REMOVED: Let SmartGraph auto-generate proper edge keys
             "_from": device_proxy["_id"],
             "_to": alert_id,
             "tenantId": tenant_id,
@@ -257,10 +254,8 @@ class AlertSimulator:
         # FIXED: Use DEMO_TTL_EXPIRE_SECONDS directly instead of converting minutes
         if hasattr(TTLConstants, 'DEMO_TTL_EXPIRE_SECONDS'):
             ttl_expire_at = resolved_time + TTLConstants.DEMO_TTL_EXPIRE_SECONDS
-            print(f"DEBUG: resolved_time={resolved_time}, ttl_expire_at={ttl_expire_at}, diff={TTLConstants.DEMO_TTL_EXPIRE_SECONDS}s")
         else:
             ttl_expire_at = resolved_time + (30 * 24 * 60 * 60)  # 30 days
-            print(f"DEBUG: Using 30-day fallback TTL")
         
         # Update alert document using replace (more reliable than update for this collection)
         alert_doc = self.alerts_collection.get(alert_key)
@@ -280,7 +275,6 @@ class AlertSimulator:
                 "expired": resolved_time,
                 "ttlExpireAt": ttl_expire_at
             })
-            print(f"DEBUG: Updating edge {edge['_key']} - expired={resolved_time}, ttlExpireAt={ttl_expire_at}")
             self.hasAlert_collection.replace(edge_doc)
         
         return {

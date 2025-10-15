@@ -234,7 +234,8 @@ class AlertGenerator:
         created_time = self._generate_alert_timestamp()
         
         # Create alert document
-        alert_key = f"alert_{uuid.uuid4().hex[:8]}"
+        # Generate SmartGraph-compatible alert key with tenantId prefix
+        alert_key = f"{proxy['tenantId']}:alert_{uuid.uuid4().hex[:8]}"
         alert_id = f"{self.app_config.get_collection_name('alerts')}/{alert_key}"
         
         # Generate metadata with some randomization
@@ -269,16 +270,13 @@ class AlertGenerator:
             # Use demo TTL if available for shorter aging periods
             if hasattr(TTLConstants, 'DEMO_TTL_EXPIRE_SECONDS'):
                 alert_doc["ttlExpireAt"] = alert_doc["expired"] + TTLConstants.DEMO_TTL_EXPIRE_SECONDS
-                print(f"DEBUG: Setting TTL for resolved alert - expired={alert_doc['expired']}, ttlExpireAt={alert_doc['ttlExpireAt']}, diff={TTLConstants.DEMO_TTL_EXPIRE_SECONDS}s")
             else:
                 # Production mode - 30 day TTL
                 alert_doc["ttlExpireAt"] = alert_doc["expired"] + (30 * 24 * 60 * 60)
         
-        # Create hasAlert edge
-        edge_key = f"has_alert_{uuid.uuid4().hex[:8]}"
+        # Create hasAlert edge (SmartGraph will auto-generate _key)
         hasAlert_edge = {
-            "_key": edge_key,
-            "_id": f"{self.app_config.get_collection_name('has_alerts')}/{edge_key}",
+            # "_key": edge_key,  # REMOVED: Let SmartGraph auto-generate proper edge keys
             "_from": proxy["_id"],
             "_to": alert_id,
             "tenantId": proxy["tenantId"],
