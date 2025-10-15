@@ -217,23 +217,23 @@ python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
 - Demonstrates temporal range queries
 - Validates time travel blueprint implementation
 
-**Step 6: Scale-Out Operations**
-- Guides cluster server addition process
-- Demonstrates shard rebalancing procedures
-- Shows dynamic tenant addition capabilities
-- Validates performance optimization
-
-**Step 7: Alert System Demonstration**
+**Step 6: Alert System Demonstration**
 - Generates real-time operational alerts
 - Demonstrates alert lifecycle management
 - Shows cross-entity alert correlation
 - Validates SmartGraph alert integration
 
-**Step 8: Taxonomy System Demonstration**
+**Step 7: Taxonomy System Demonstration**
 - Explores hierarchical device/software classification
 - Demonstrates Class inheritance relationships
 - Shows type edge connectivity (Device/Software -> Class)
 - Validates cross-graph taxonomy queries
+
+**Step 8: Scale-Out Operations**
+- Guides cluster server addition process
+- Demonstrates shard rebalancing procedures
+- Shows dynamic tenant addition capabilities
+- Validates performance optimization
 
 **Step 9: Final Validation**
 - Comprehensive system validation
@@ -608,9 +608,9 @@ graph TD
     C --> D[Step 3: Initial Validation]
     D --> E[Step 4: Temporal TTL Transactions]
     E --> F[Step 5: Time Travel Demo]
-    F --> G[Step 6: Scale-Out Demo]
-    G --> H[Step 7: Alert System Demo]
-    H --> I[Step 8: Taxonomy Demo]
+    F --> G[Step 6: Alert System Demo]
+    G --> H[Step 7: Taxonomy Demo]
+    H --> I[Step 8: Scale-Out Demo]
     I --> J[Step 9: Final Validation]
     J --> K[Demo Complete]
     
@@ -620,9 +620,9 @@ graph TD
     D --> D1[Verify Deployment<br/>Check Tenant Isolation<br/>Validate Taxonomy Coverage]
     E --> E1[Simulate Device Changes<br/>Simulate Software Updates<br/>Apply TTL Strategy]
     F --> F1[Historical Data Queries<br/>Point-in-Time Analysis<br/>Temporal Range Queries]
-    G --> G1[Add New Tenants<br/>Add DB Server<br/>Rebalance Shards]
-    H --> H1[Generate Alerts<br/>Alert Lifecycle<br/>Cross-Entity Correlation]
-    I --> I1[Class Hierarchy<br/>Type Relationships<br/>Cross-Graph Queries]
+    G --> G1[Generate Alerts<br/>Alert Lifecycle<br/>Cross-Entity Correlation]
+    H --> H1[Class Hierarchy<br/>Type Relationships<br/>Cross-Graph Queries]
+    I --> I1[Add New Tenants<br/>Add DB Server<br/>Rebalance Shards]
     J --> J1[Data Integrity Check<br/>Isolation Verification<br/>Performance Validation]
     
     style A fill:#e1f5fe
@@ -653,12 +653,11 @@ The **automated walkthrough** provides a guided tour of all system capabilities 
 3. **Database Deployment** - SmartGraphs, Satellite collections, and indexes
 4. **Initial Validation** - System integrity and taxonomy coverage checks
 5. **Temporal TTL Transactions** - Configuration changes with TTL
-6. **Time Travel Demonstration** - Historical queries and point-in-time analysis
-7. **Scale-Out Demo** - Add tenants, servers, rebalance shards
-8. **Alert System Demonstration** - Real-time operational monitoring
-9. **Taxonomy System Demonstration** - Hierarchical classification and cross-graph queries
-10. **Final Validation** - Comprehensive system verification
-11. **Demo Summary** - Results and achievements
+6. **Alert System Demonstration** - Real-time operational monitoring
+7. **Taxonomy System Demonstration** - Hierarchical classification and cross-graph queries
+8. **Scale-Out Demo** - Add tenants, servers, rebalance shards
+9. **Final Validation** - Comprehensive system verification
+10. **Demo Summary** - Results and achievements
 
 #### Usage Options:
 ```bash

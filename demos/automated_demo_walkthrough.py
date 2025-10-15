@@ -1071,8 +1071,8 @@ class AutomatedDemoWalkthrough:
         self.pause_for_observation("Enhanced transaction simulation complete. Ready for scale-out demonstration?")
         self.sections_completed.append("enhanced_transaction_simulation")
     
-    def section_7_alert_system_demonstration(self):
-        """Section 7: Alert System Demonstration."""
+    def section_6_alert_system_demonstration(self):
+        """Section 6: Alert System Demonstration."""
         self.demo_section_start(
             "ALERT SYSTEM DEMONSTRATION", 
             "Real-time operational monitoring with graph-integrated alerts"
@@ -1271,8 +1271,8 @@ class AutomatedDemoWalkthrough:
                 import traceback
                 traceback.print_exc()
         
-    def section_8_taxonomy_system_demonstration(self):
-        """Section 8: Taxonomy System Demonstration."""
+    def section_7_taxonomy_system_demonstration(self):
+        """Section 7: Taxonomy System Demonstration."""
         self.print_section_header(
             "TAXONOMY SYSTEM DEMONSTRATION", 
             "Demonstrating hierarchical classification and semantic relationships"
@@ -1429,8 +1429,8 @@ class AutomatedDemoWalkthrough:
         self.pause_for_observation("Taxonomy system demonstration complete. Ready for scale-out demo?")
         self.sections_completed.append("taxonomy_system_demonstration")
     
-    def section_6_scale_out_demonstration(self):
-        """Section 6: Scale-Out Capabilities Demonstration."""
+    def section_8_scale_out_demonstration(self):
+        """Section 8: Scale-Out Capabilities Demonstration."""
         self.print_section_header(
             "SCALE-OUT DEMONSTRATION", 
             "Demonstrating multi-tenant scaling and horizontal growth capabilities"
@@ -1958,14 +1958,14 @@ class AutomatedDemoWalkthrough:
             # Section 5: Temporal TTL Transactions
             self.section_5_temporal_ttl_transactions()
             
-            # Section 6: Scale-Out Demonstration (MOVED UP)
-            self.section_6_scale_out_demonstration()
+            # Section 6: Alert System Demonstration
+            self.section_6_alert_system_demonstration()
             
-            # Section 7: Alert System Demonstration  
-            self.section_7_alert_system_demonstration()
+            # Section 7: Taxonomy System Demonstration  
+            self.section_7_taxonomy_system_demonstration()
             
-            # Section 8: Taxonomy System Demonstration
-            self.section_8_taxonomy_system_demonstration()
+            # Section 8: Scale-Out Demonstration (MOVED TO STEP 8)
+            self.section_8_scale_out_demonstration()
             
             # Section 9: Final Validation (optional in presentation mode)
             if self.verbose:
