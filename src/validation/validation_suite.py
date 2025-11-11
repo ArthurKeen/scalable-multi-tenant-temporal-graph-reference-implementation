@@ -31,6 +31,13 @@ class TimeTravelValidationSuite(DatabaseMixin):
         self.config_manager = ConfigurationManager("production", NamingConvention.CAMEL_CASE)
         self.validation_results = {}
         self.show_queries = show_queries
+    
+    def execute_and_display_query(self, query: str, query_name: str, bind_vars: Dict = None) -> List[Dict]:
+        """Execute a query and optionally display it with results."""
+        from src.database.database_utilities import QueryExecutor
+        return QueryExecutor.execute_and_display_query(
+            self.database, query, query_name, bind_vars, self.show_queries
+        )
         
     def validate_collection_structure(self) -> bool:
         """Validate that all required collections exist with correct structure."""
@@ -620,10 +627,12 @@ class TimeTravelValidationSuite(DatabaseMixin):
                     collection = self.database.collection(collection_name)
                     indexes = collection.indexes()
                     
-                    # Look for MDI index
+                    # Look for MDI index (type can be 'mdi' or 'mdi-prefixed')
                     mdi_index = None
                     for idx in indexes:
-                        if idx.get('type') == 'mdi' and idx.get('name') == expected_mdi_indexes[i]:
+                        idx_type = idx.get('type', '')
+                        idx_name = idx.get('name', '')
+                        if idx_name == expected_mdi_indexes[i] and ('mdi' in idx_type):
                             mdi_index = idx
                             break
                     
@@ -672,7 +681,8 @@ class TimeTravelValidationSuite(DatabaseMixin):
                     for node in index_nodes:
                         indexes = node.get('indexes', [])
                         for idx in indexes:
-                            if idx.get('type') == 'mdi':
+                            idx_type = idx.get('type', '')
+                            if 'mdi' in idx_type:
                                 print(f"   [SUCCESS] MDI-prefix multi-dimensional index used in query execution")
                                 mdi_used = True
                                 break
