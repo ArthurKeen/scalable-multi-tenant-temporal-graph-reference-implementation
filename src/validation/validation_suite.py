@@ -1,12 +1,18 @@
 """
 Time Travel Refactoring Validation Suite
 
+REQUIRES: Live ArangoDB connection (set ARANGO_* environment variables).
+
 Comprehensive testing for the refactored time travel implementation:
 - Software time travel pattern validation
 - Unified version collection testing
 - Query performance comparison
 - Data structure compliance
 - Cross-entity temporal queries
+
+Usage:
+    source setup_env.sh
+    PYTHONPATH=. python3 src/validation/validation_suite.py
 """
 
 import json

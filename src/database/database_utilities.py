@@ -8,12 +8,16 @@ Provides common utilities to eliminate duplicate code patterns:
 - Version edge creation
 """
 
+import logging
 from typing import Dict, List, Any, Optional, Tuple
 from arango import ArangoClient
+from arango.database import StandardDatabase
 from pathlib import Path
 import json
 
 from src.config.centralized_credentials import CredentialsManager, get_collection_name
+
+logger = logging.getLogger(__name__)
 
 
 class DatabaseMixin:
@@ -36,8 +40,8 @@ class DatabaseMixin:
     def __init__(self, environment: str = "production"):
         self.environment = environment
         self.creds = CredentialsManager.get_database_credentials(environment)
-        self._client = None
-        self._database = None
+        self._client: Optional[ArangoClient] = None
+        self._database: Optional[StandardDatabase] = None
     
     @property
     def client(self) -> ArangoClient:
@@ -47,7 +51,7 @@ class DatabaseMixin:
         return self._client
     
     @property
-    def database(self):
+    def database(self) -> StandardDatabase:
         """Get database connection with lazy initialization."""
         if self._database is None:
             self._database = self.client.db(
@@ -59,10 +63,10 @@ class DatabaseMixin:
     def connect_to_database(self) -> bool:
         """Connect to database and test connection."""
         try:
-            version_info = self.database.version()
+            self.database.version()
             return True
         except Exception as e:
-            print(f"[ERROR] Database connection failed: {str(e)}")
+            logger.error("Database connection failed: %s", e)
             return False
     
     def execute_aql(self, query: str, bind_vars: Optional[Dict] = None) -> List[Dict]:
@@ -70,7 +74,7 @@ class DatabaseMixin:
         try:
             return list(self.database.aql.execute(query, bind_vars=bind_vars or {}))
         except Exception as e:
-            print(f"[ERROR] Query failed: {str(e)}")
+            logger.error("Query failed: %s", e)
             return []
     
     def get_collection(self, logical_name: str):
@@ -97,10 +101,9 @@ class QueryExecutor:
             
             if show_queries:
                 print(f"   Results: {len(results)} documents returned")
-                if results and len(results) <= 3:  # Show sample results for small result sets
+                if results and len(results) <= 3:
                     for i, result in enumerate(results[:3]):
                         if isinstance(result, dict):
-                            # Show key fields only
                             sample = {k: v for k, v in result.items() if k in ['_key', '_id', 'name', 'type', 'created', 'expired']}
                             print(f"   Sample {i+1}: {sample}")
                         else:
@@ -113,37 +116,20 @@ class QueryExecutor:
         except Exception as e:
             if show_queries:
                 print(f"   [ERROR] Query failed: {e}")
+            logger.error("Query '%s' failed: %s", query_name, e)
             return []
 
 
-class DatabaseConnectionManager:
-    """Manages database connections and provides common operations."""
+class DatabaseConnectionManager(DatabaseMixin):
+    """
+    Manages database connections and provides common operations.
     
-    def __init__(self, environment: str = "production"):
-        self.environment = environment
-        self.creds = CredentialsManager.get_database_credentials(environment)
-        self._client = None
-        self._database = None
-    
-    @property
-    def client(self) -> ArangoClient:
-        """Get ArangoDB client (lazy initialization)."""
-        if self._client is None:
-            self._client = ArangoClient(hosts=self.creds.endpoint)
-        return self._client
-    
-    @property
-    def database(self):
-        """Get database connection (lazy initialization)."""
-        if self._database is None:
-            self._database = self.client.db(
-                self.creds.database_name,
-                **CredentialsManager.get_database_params(self.environment)
-            )
-        return self._database
+    Extends DatabaseMixin with additional convenience methods for
+    collection inspection and connection testing with verbose output.
+    """
     
     def connect_and_test(self) -> bool:
-        """Connect to database and test connection."""
+        """Connect to database and test connection with status output."""
         try:
             version_info = self.database.version()
             print(f"[DONE] Connected to {self.creds.database_name}")
@@ -151,21 +137,9 @@ class DatabaseConnectionManager:
                 print(f"   Version: {version_info.get('version', 'Unknown')}")
             return True
         except Exception as e:
-            print(f"[ERROR] Connection failed: {str(e)}")
+            logger.error("Connection failed: %s", e)
+            print(f"[ERROR] Connection failed: {e}")
             return False
-    
-    def execute_aql(self, query: str, bind_vars: Optional[Dict] = None) -> List[Dict]:
-        """Execute AQL query and return results."""
-        try:
-            return list(self.database.aql.execute(query, bind_vars=bind_vars or {}))
-        except Exception as e:
-            print(f"[ERROR] Query failed: {str(e)}")
-            return []
-    
-    def get_collection(self, logical_name: str):
-        """Get collection by logical name."""
-        collection_name = get_collection_name(logical_name)
-        return self.database.collection(collection_name)
     
     def collection_exists(self, logical_name: str) -> bool:
         """Check if collection exists."""
@@ -203,7 +177,12 @@ class QueryHelper:
     
     @staticmethod
     def cross_entity_traversal(start_collection: str, edge_collection: str, end_collection: str) -> str:
-        """Get template for cross-entity traversal."""
+        """
+        Get template for cross-entity traversal.
+        
+        Note: AQL does not support bind variables for collection names, so
+        f-string interpolation from trusted config values is the standard pattern.
+        """
         return f"""
         WITH {start_collection}, {edge_collection}, {end_collection}
         FOR start IN {start_collection}
@@ -260,7 +239,7 @@ class FileUtility:
             with open(file_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except Exception as e:
-            print(f"[ERROR] Error reading {file_path}: {e}")
+            logger.error("Error reading %s: %s", file_path, e)
             return {}
     
     @staticmethod
@@ -272,7 +251,7 @@ class FileUtility:
                 json.dump(data, f, indent=indent)
             return True
         except Exception as e:
-            print(f"[ERROR] Error writing {file_path}: {e}")
+            logger.error("Error writing %s: %s", file_path, e)
             return False
     
     @staticmethod
@@ -325,7 +304,6 @@ class ValidationHelper:
     
     def validate_tenant_isolation(self, tenant_id: str) -> bool:
         """Validate tenant isolation for specific tenant."""
-        # Sample query to check tenant isolation using standardized tenantId
         query = """
         FOR doc IN Device
           FILTER doc.tenantId == @tenant_id
@@ -340,10 +318,14 @@ class ValidationHelper:
         return len(results) > 0
     
     def validate_time_travel_pattern(self, collection_logical_name: str) -> Dict[str, int]:
-        """Validate time travel pattern for collection."""
+        """
+        Validate time travel pattern for collection.
+        
+        Note: AQL does not support bind variables for collection names, so
+        f-string interpolation from trusted config values is the standard pattern.
+        """
         collection_name = get_collection_name(collection_logical_name)
         
-        # Check for temporal attributes
         query = f"""
         FOR doc IN {collection_name}
           FILTER doc.created != null AND doc.expired != null
@@ -359,13 +341,11 @@ class ValidationHelper:
         }
 
 
-# Convenience function for getting a configured database manager
 def get_database_manager(environment: str = "production") -> DatabaseConnectionManager:
     """Get configured database manager."""
     return DatabaseConnectionManager(environment)
 
 
-# Convenience function for common validation
 def run_quick_validation(environment: str = "production") -> Dict[str, Any]:
     """Run quick validation of database structure."""
     db_manager = get_database_manager(environment)
@@ -378,7 +358,6 @@ def run_quick_validation(environment: str = "production") -> Dict[str, Any]:
     print("\n[ANALYSIS] Quick Database Validation:")
     collection_results = validator.validate_collection_structure()
     
-    # Check version collection specifically
     version_stats = validator.validate_time_travel_pattern("version")
     
     return {

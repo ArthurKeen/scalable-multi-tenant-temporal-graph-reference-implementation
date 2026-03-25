@@ -83,22 +83,23 @@ SmartGraph Attributes: tenant_{tenant_id}_attr (provides the disjoint partitioni
 Device Taxonomy: satellite_device_taxonomy (global)
 ```
 
-#### Temporal Data Model
+#### Temporal Data Model (As Implemented)
 ```
 All documents include:
-- _observed_at: timestamp for TTL and time travel
+- created: timestamp marking when this version became active
+- expired: timestamp marking when this version was superseded (NEVER_EXPIRES for current)
+- ttlExpireAt: timestamp for TTL index expiration (historical records only)
 - _key: hash-indexed for quick lookups
 Edge documents include:
 - _fromType: for vertex-centric indexing
 - _toType: for vertex-centric indexing
 ```
 
-#### Index Strategy
+#### Index Strategy (As Implemented)
 ```
 Vertex-centric: (_from, _toType), (_to, _fromType)
-Temporal: skiplist on _observed_at
-Hash: _key for quick lookups
-TTL: automatic expiration on _observed_at
+Temporal: MDI-prefixed indexes on [created, expired]
+TTL: automatic expiration on ttlExpireAt
 ```
 
 #### Configuration Strategy
@@ -128,16 +129,17 @@ TTL: automatic expiration on _observed_at
 - Initial project analysis and architecture review
 - PRD and documentation setup
 - PRD enhancement with scale-out demo requirements
-
-[IN PROGRESS]:
-- Tenant data model design (active)
-
-[PENDING]:
+- Tenant data model design
 - Generator refactoring for multi-tenant support
 - SmartGraph configuration implementation
-- Tenant management utilities
 - Data isolation verification
-- Testing and validation framework
+- Testing and validation framework (30/30 tests passing)
+- W3C OWL naming convention implementation
+- Code quality refactoring
+
+[REMAINING]:
+- Tenant lifecycle management utilities (FR4 partial)
+- Continuous data generation automation (FR2.8 architecture ready)
 
 ## PRD Compliance Monitoring
 
@@ -211,20 +213,10 @@ FR6: Index Optimization -> [DESIGN COMPLETED]
 - **Type safety**: Enums and dataclasses throughout
 - **Enterprise-ready**: Fully testable, extensible architecture
 
-## Next Steps
+## Remaining Work
 
-1. **Design tenant model** with specific naming conventions and data structures
-2. **Refactor asset generator** to support tenant-scoped data generation
-3. **Create tenant management utilities** for provisioning and lifecycle management
-4. **Implement SmartGraph configuration** for ArangoDB integration
-5. **Add comprehensive testing** for data isolation and integrity
-
-## Questions for User
-
-1. **Tenant Identification**: Preference for UUID vs. string-based tenant IDs?
-2. **Scalability Requirements**: Expected number of tenants and data volume per tenant?
-3. **Configuration Management**: Preference for JSON, YAML, or other configuration format?
-4. **Database Integration**: Need for automated ArangoDB setup or manual import process?
+1. **Tenant lifecycle management** - provisioning and teardown automation (FR4)
+2. **Continuous data generation** - streaming/keep-alive data feeds (FR2.8)
 
 ## Session History
 

@@ -1,0 +1,47 @@
+[project]
+name = "network-asset-management-demo"
+version = "1.0.0"
+description = "Scalable Multi-Tenant Temporal Graph Reference Implementation with ArangoDB"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Arthur Keen"},
+]
+dependencies = [
+    "python-arango>=8.0,<9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pre-commit",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "B008",  # do not perform function calls in argument defaults
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["src/validation"]
+python_files = ["test_*.py"]
+markers = [
+    "integration: tests that require a live ArangoDB connection",
+]

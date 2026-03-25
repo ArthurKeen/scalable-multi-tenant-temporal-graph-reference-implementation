@@ -1,7 +1,7 @@
 # Demo Handoff Guide
-**Multi-Tenant Temporal Graph Reference Implementation**  
-**For**: Demo Presentation  
-**System Status**: ✅ Fully Operational - All Tests Passing (100%)
+**Multi-Tenant Temporal Graph Reference Implementation**
+**For**: Demo Presentation
+**System Status**: Fully Operational - All Tests Passing (100%)
 
 ---
 
@@ -21,6 +21,10 @@ PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 ```
 
 That's it! The demo will guide you through everything with interactive pauses.
+
+> **Note**: `setup_env.sh` is not tracked in git. If you don't have one, copy
+> `environment_variables.example` to `setup_env.sh`, fill in your ArangoDB Oasis
+> credentials, then run `source setup_env.sh`. See the Configuration section below.
 
 ---
 
@@ -42,28 +46,44 @@ That's it! The demo will guide you through everything with interactive pauses.
 ### Required Before Demo
 
 1. **ArangoDB Cluster Access**
-   - URL: `https://9c12006b5b1e.arangodb.cloud:8529`
-   - Database: `disjoint-smartgraph-temporal-database`
-   - Credentials are in `setup_env.sh` (already configured)
+   - An ArangoDB Oasis cluster endpoint
+   - Credentials are in `setup_env.sh` (see Configuration below)
 
 2. **Python 3.8+**
    - Check: `python3 --version`
-   - Should show: Python 3.8 or higher
+   - Install dependencies: `pip install -r requirements.txt`
 
 3. **Project Directory**
-   - Location: `/Users/arthurkeen/code/network-asset-management-demo`
-   - All code and tests are ready to go
+   - Clone or locate the `network-asset-management-demo` repository
 
 4. **Web Browser**
    - For ArangoDB Web Interface visualization
-   - Login at: https://9c12006b5b1e.arangodb.cloud:8529
+   - Login at your cluster endpoint (`$ARANGO_ENDPOINT`)
+
+### Configuration
+
+The project uses environment variables for database credentials. A template is
+provided at `environment_variables.example`:
+
+```bash
+# Create your local credentials file
+cp environment_variables.example setup_env.sh
+
+# Edit setup_env.sh with your actual credentials:
+#   ARANGO_ENDPOINT - your cluster URL
+#   ARANGO_USERNAME - database username
+#   ARANGO_PASSWORD - database password
+#   ARANGO_DATABASE - database name (default: network_assets_demo)
+```
+
+`setup_env.sh` is gitignored and will not be committed.
 
 ### System Status Verification
 
 Before your demo, verify everything is working:
 
 ```bash
-cd /Users/arthurkeen/code/network-asset-management-demo
+cd /path/to/network-asset-management-demo
 source setup_env.sh
 
 # Run quick tests (should see 100% passing)
@@ -79,7 +99,7 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 ### Step 1: Navigate to Project
 
 ```bash
-cd /Users/arthurkeen/code/network-asset-management-demo
+cd /path/to/network-asset-management-demo
 ```
 
 ### Step 2: Set Environment Variables
@@ -90,21 +110,21 @@ source setup_env.sh
 
 **What this does**: 
 - Exports `ARANGO_ENDPOINT` (database URL)
-- Exports `ARANGO_USERNAME` (root)
-- Exports `ARANGO_PASSWORD` (already configured)
+- Exports `ARANGO_USERNAME` (database user)
+- Exports `ARANGO_PASSWORD` (database password)
 - Exports `ARANGO_DATABASE` (database name)
 
 **Verification**:
 ```bash
 echo $ARANGO_ENDPOINT
-# Should show: https://9c12006b5b1e.arangodb.cloud:8529
+# Should show your cluster URL
 ```
 
 ### Step 3: Open ArangoDB Web Interface (Optional but Recommended)
 
-1. Open browser to: https://9c12006b5b1e.arangodb.cloud:8529
+1. Open browser to your cluster endpoint (`$ARANGO_ENDPOINT`)
 2. Login with credentials from `setup_env.sh`
-3. Select database: `disjoint-smartgraph-temporal-database`
+3. Select your database (`$ARANGO_DATABASE`)
 4. Keep this open in a separate tab for visualization during demo
 
 ---
@@ -151,7 +171,7 @@ PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --auto-advance --pause-
 The interactive demo walks through 10 major sections:
 
 ### Section 0: Database Reset and Cleanup
-**Duration**: 1-2 minutes  
+**Duration**: 1-2 minutes
 **What happens**: Cleans previous demo data, ensures fresh start
 
 **Key Points to Mention**:
@@ -161,7 +181,7 @@ The interactive demo walks through 10 major sections:
 ---
 
 ### Section 1: Data Generation (8 Tenants)
-**Duration**: 2-3 minutes  
+**Duration**: 2-3 minutes
 **What happens**: Generates multi-tenant network asset data
 
 **Tenants Created**:
@@ -189,7 +209,7 @@ The interactive demo walks through 10 major sections:
 ---
 
 ### Section 2: Database Deployment with SmartGraphs
-**Duration**: 2-3 minutes  
+**Duration**: 2-3 minutes
 **What happens**: 
 - Creates SmartGraph collections
 - Loads tenant data with sharding
@@ -206,13 +226,13 @@ The interactive demo walks through 10 major sections:
 1. Navigate to "Collections"
 2. Show vertex collections: Device, Software, Location, etc.
 3. Show edge collections: hasConnection, hasDeviceSoftware, hasVersion
-4. Click on a collection → "Indexes" tab
+4. Click on a collection -> "Indexes" tab
 5. Point out MDI-prefixed indexes on created/expired fields
 
 ---
 
 ### Section 3: Initial Validation
-**Duration**: 1-2 minutes  
+**Duration**: 1-2 minutes
 **What happens**: Validates deployment, indexes, data integrity
 
 **Key Points to Mention**:
@@ -224,7 +244,7 @@ The interactive demo walks through 10 major sections:
 ---
 
 ### Section 4: Temporal TTL Transactions
-**Duration**: 2-3 minutes  
+**Duration**: 2-3 minutes
 **What happens**: 
 - Simulates configuration changes
 - Shows current vs historical strategy
@@ -238,7 +258,7 @@ The interactive demo walks through 10 major sections:
 
 **What to Show in Browser**:
 The demo provides specific document keys to inspect:
-1. Go to "Collections" → "Device"
+1. Go to "Collections" -> "Device"
 2. Search for the document keys shown in demo output
 3. Show `expired` and `ttlExpireAt` fields
 4. Explain the difference between current and historical
@@ -246,7 +266,7 @@ The demo provides specific document keys to inspect:
 ---
 
 ### Section 5: Time Travel Demonstration
-**Duration**: 2-3 minutes  
+**Duration**: 2-3 minutes
 **What happens**: 
 - Queries historical data
 - Shows point-in-time analysis
@@ -273,7 +293,7 @@ The demo provides specific document keys to inspect:
 ---
 
 ### Section 6: Alert System (If Deployed)
-**Duration**: 1-2 minutes  
+**Duration**: 1-2 minutes
 **What happens**: Shows operational monitoring capabilities
 
 **Key Points to Mention**:
@@ -284,7 +304,7 @@ The demo provides specific document keys to inspect:
 ---
 
 ### Section 7: Taxonomy System
-**Duration**: 1-2 minutes  
+**Duration**: 1-2 minutes
 **What happens**: Shows hierarchical classification
 
 **Key Points to Mention**:
@@ -295,7 +315,7 @@ The demo provides specific document keys to inspect:
 ---
 
 ### Section 8: Scale-Out Operations
-**Duration**: 3-5 minutes  
+**Duration**: 3-5 minutes
 **What happens**: 
 - Adds new tenants dynamically
 - Shows cluster management
@@ -315,7 +335,7 @@ The demo will pause and provide instructions for:
 ---
 
 ### Section 9: Final Validation
-**Duration**: 1-2 minutes  
+**Duration**: 1-2 minutes
 **What happens**: Comprehensive system check
 
 **Key Points to Mention**:
@@ -330,7 +350,7 @@ The demo will pause and provide instructions for:
 ### Key Visualizations in ArangoDB Web UI
 
 #### 1. Graph Visualizer
-1. Navigate to "Graphs" → `network_assets_smartgraph`
+1. Navigate to "Graphs" -> `network_assets_smartgraph`
 2. Click "Graph" icon to visualize
 3. Enter a tenant ID from demo output
 4. Show the network topology:
@@ -393,7 +413,7 @@ echo $ARANGO_DATABASE
 source setup_env.sh
 
 # 3. Verify connectivity
-ping 9c12006b5b1e.arangodb.cloud
+curl -s $ARANGO_ENDPOINT/_api/version
 ```
 
 ### Issue: "Module not found"
@@ -430,7 +450,7 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 **Symptoms**: Collections appear empty in ArangoDB UI
 
 **Solution**:
-1. Verify you selected the correct database: `disjoint-smartgraph-temporal-database`
+1. Verify you selected the correct database (`$ARANGO_DATABASE`)
 2. Check collection name matches: `Device`, `Software`, etc. (case-sensitive)
 3. Refresh the page (F5)
 
@@ -467,7 +487,7 @@ PYTHONPATH=. python3 tools/reset_database.py
 PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive --verbose
 ```
 
-**Shows**: Detailed SQL queries, technical logs, performance metrics
+**Shows**: Detailed AQL queries, technical logs, performance metrics
 
 ### Custom Pause Duration
 
@@ -512,31 +532,22 @@ PYTHONPATH=. python3 src/ttl/ttl_monitor.py --duration 15
 ### Business Value
 
 1. **Complete Tenant Isolation**: "Each customer's data is physically partitioned - impossible to cross-contaminate"
-
 2. **Temporal Analytics**: "Query your system state at any point in time for compliance and auditing"
-
 3. **Linear Scalability**: "Add tenants without performance degradation - tested with 8+ tenants"
-
 4. **Zero Downtime Operations**: "Add new customers while system stays online"
 
 ### Technical Highlights
 
 1. **SmartGraph Architecture**: "Automatic data sharding with unified query interface"
-
 2. **MDI-Prefixed Indexes**: "Multi-dimensional indexes optimize time travel queries"
-
 3. **TTL Lifecycle Management**: "Automatic historical data cleanup - current data never expires"
-
 4. **Production Ready**: "100% test coverage, enterprise-grade quality"
 
 ### Competitive Advantages
 
 1. **Time Travel Built-In**: Most graph databases require custom solutions
-
 2. **True Multi-Tenancy**: Not just logical separation - physical isolation
-
 3. **Automatic Scaling**: SmartGraphs handle distribution automatically
-
 4. **Operational Simplicity**: One database, complete isolation, unified management
 
 ---
@@ -580,9 +591,7 @@ PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 
 **Emergency Stop**: Press `Ctrl+C`
 
-**ArangoDB UI**: https://9c12006b5b1e.arangodb.cloud:8529
-
-**Database**: `disjoint-smartgraph-temporal-database`
+**ArangoDB UI**: `$ARANGO_ENDPOINT`
 
 **Test System**:
 ```bash
@@ -595,9 +604,8 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 
 ## Support Contacts
 
-**Primary Contact**: Arthur Keen  
-**GitHub**: https://github.com/ArthurKeen/scalable-multi-tenant-temporal-graph-reference-implementation  
-**Documentation**: See `README.md`, `TEST_SUMMARY.md`, `MDI_FIX_REPORT.md`
+**Primary Contact**: Arthur Keen
+**Documentation**: See `README.md`, `TEST_STATUS.md`
 
 ---
 
@@ -606,7 +614,7 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 Before you start your demo, verify:
 
 - [ ] Can access project directory
-- [ ] `setup_env.sh` sources successfully
+- [ ] `setup_env.sh` sources successfully (created from `environment_variables.example`)
 - [ ] Can connect to ArangoDB (browser login works)
 - [ ] Tests pass (run quick verification)
 - [ ] Have backup internet connection
@@ -620,19 +628,18 @@ Before you start your demo, verify:
 
 Your demo is successful if you've shown:
 
-✅ Multi-tenant data generation and isolation  
-✅ Database deployment with SmartGraphs  
-✅ Time travel queries with temporal data  
-✅ Performance metrics within targets  
-✅ System validation at 100%  
-✅ Scale-out capabilities (conceptually)  
+- [DONE] Multi-tenant data generation and isolation
+- [DONE] Database deployment with SmartGraphs
+- [DONE] Time travel queries with temporal data
+- [DONE] Performance metrics within targets
+- [DONE] System validation at 100%
+- [DONE] Scale-out capabilities (conceptually)
 
-**Good luck with your demo!** 🚀
+**Good luck with your demo!**
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: November 11, 2025  
-**System Status**: All tests passing (30/30 - 100%)  
+**Document Version**: 2.0
+**Last Updated**: March 2026
+**System Status**: All tests passing (30/30 - 100%)
 **Ready for**: Production demos and customer presentations
-

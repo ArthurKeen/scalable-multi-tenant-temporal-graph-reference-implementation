@@ -3,13 +3,13 @@
 
 ---
 
-## 🚀 Start Demo (3 Commands)
+## Start Demo (3 Commands)
 
 ```bash
 # 1. Go to project
-cd /Users/arthurkeen/code/network-asset-management-demo
+cd /path/to/network-asset-management-demo
 
-# 2. Set credentials
+# 2. Set credentials (see environment_variables.example if you need to create setup_env.sh)
 source setup_env.sh
 
 # 3. Run demo
@@ -18,9 +18,13 @@ PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 
 **That's it!** Press Enter at each pause to advance through the demo.
 
+> **Note**: `setup_env.sh` is not tracked in git. If you don't have one, copy
+> `environment_variables.example` to `setup_env.sh`, fill in your ArangoDB
+> credentials, then `source setup_env.sh`.
+
 ---
 
-## ⏱️ Demo Timeline (15-20 minutes)
+## Demo Timeline (15-20 minutes)
 
 | Section | Time | What Happens |
 |---------|------|--------------|
@@ -36,20 +40,20 @@ PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 
 ---
 
-## 🌐 ArangoDB Web UI
+## ArangoDB Web UI
 
-**URL**: https://9c12006b5b1e.arangodb.cloud:8529  
-**Database**: `disjoint-smartgraph-temporal-database`  
+**URL**: Your cluster endpoint (from `$ARANGO_ENDPOINT`)
+**Database**: Your database name (from `$ARANGO_DATABASE`)
 **Credentials**: In `setup_env.sh`
 
 ### What to Show:
-1. **Collections** → See all vertex/edge collections
-2. **Graphs** → Visualize network topology
-3. **Queries** → Run time travel queries
+1. **Collections** -> See all vertex/edge collections
+2. **Graphs** -> Visualize network topology
+3. **Queries** -> Run time travel queries
 
 ---
 
-## 💡 Key Talking Points
+## Key Talking Points
 
 ### Multi-Tenancy
 - "8 tenants with complete data isolation"
@@ -73,7 +77,7 @@ PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 
 ---
 
-## 🔍 Show in Browser
+## Show in Browser
 
 ### Time Travel Query Example:
 ```aql
@@ -85,26 +89,26 @@ FOR device IN Device
 ```
 
 ### Check MDI Indexes:
-1. Collections → Device → Indexes tab
+1. Collections -> Device -> Indexes tab
 2. Look for: `idx_device_mdi_temporal`
 3. Type: `mdi-prefixed` on `[created, expired]`
 
 ---
 
-## ⚠️ Troubleshooting
+## Troubleshooting
 
-**"Connection failed"**  
-→ Run: `source setup_env.sh`
+**"Connection failed"**
+-> Run: `source setup_env.sh`
 
-**"Module not found"**  
-→ Use: `PYTHONPATH=.` prefix
+**"Module not found"**
+-> Use: `PYTHONPATH=.` prefix
 
-**"Demo is slow"**  
-→ Normal! 21K docs takes 2-3 min
+**"Demo is slow"**
+-> Normal! 21K docs takes 2-3 min
 
 ---
 
-## ✅ Pre-Demo Checklist
+## Pre-Demo Checklist
 
 - [ ] Can access project directory
 - [ ] Environment variables set (`source setup_env.sh`)
@@ -114,32 +118,30 @@ FOR device IN Device
 
 ---
 
-## 🎯 Success Metrics
+## Success Metrics
 
 Demo is successful if you show:
-- ✅ Multi-tenant data generation
-- ✅ SmartGraph deployment
-- ✅ Time travel queries
-- ✅ 100% test validation
-- ✅ Performance metrics
+- [DONE] Multi-tenant data generation
+- [DONE] SmartGraph deployment
+- [DONE] Time travel queries
+- [DONE] 100% test validation
+- [DONE] Performance metrics
 
 ---
 
-## 📞 Emergency Contacts
+## Emergency Contacts
 
-**Primary**: Arthur Keen  
-**Docs**: See `DEMO_HANDOFF_GUIDE.md` for detailed walkthrough  
-**Repo**: https://github.com/ArthurKeen/scalable-multi-tenant-temporal-graph-reference-implementation
+**Primary**: Arthur Keen
+**Docs**: See `DEMO_HANDOFF_GUIDE.md` for detailed walkthrough
 
 ---
 
-## 🎬 Opening Line
+## Opening Line
 
 *"Today I'm demonstrating a production-ready reference implementation for multi-tenant temporal graph databases. We'll show complete tenant isolation, time travel capabilities, and horizontal scalability using ArangoDB SmartGraphs. Let's start by generating data for 8 tenants..."*
 
 ---
 
-**System Status**: ✅ All 30/30 tests passing (100%)  
-**Ready for**: Production demos  
-**Updated**: November 11, 2025
-
+**System Status**: All 30/30 tests passing (100%)
+**Ready for**: Production demos
+**Updated**: March 2026

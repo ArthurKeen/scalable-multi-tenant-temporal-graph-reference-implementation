@@ -90,7 +90,9 @@ def get_collection_name(logical_name: str) -> str:
     """
     Get camelCase compliant collection name.
     
-    DEPRECATED: Use ConfigurationManager.get_collection_name() instead.
+    Convenience wrapper around ConfigurationManager.get_collection_name()
+    for use in database utilities where a config manager instance is not
+    readily available.
     """
     from src.config.config_management import get_config, NamingConvention
     config = get_config("production", NamingConvention.CAMEL_CASE)

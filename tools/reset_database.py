@@ -11,7 +11,7 @@ Usage:
 """
 
 import sys
-from automated_demo_walkthrough import AutomatedDemoWalkthrough
+from demos.automated_demo_walkthrough import AutomatedDemoWalkthrough
 
 def main():
     """Reset the database to clean state."""
@@ -36,8 +36,7 @@ def main():
         print("=" * 60)
         print("The database is now clean and ready for a fresh demo.")
         print("You can now run:")
-        print("  python3 automated_demo_walkthrough.py --interactive")
-        print("  python3 demo_launcher.py")
+        print("  PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive")
         return 0
     else:
         print("\n" + "=" * 60)

@@ -397,14 +397,15 @@ class ConfigurationManager:
         return validation_results
 
 
-# Global configuration instance (default: camelCase)
-config = ConfigurationManager()
+# Global configuration instance - lazily initialized to avoid requiring
+# environment variables at import time (enables unit testing without DB).
+config = None
 
 
 def get_config(environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE) -> ConfigurationManager:
-    """Get global configuration instance."""
+    """Get global configuration instance (created on first call)."""
     global config
-    if config.environment != environment or config.naming_convention != naming_convention:
+    if config is None or config.environment != environment or config.naming_convention != naming_convention:
         config = ConfigurationManager(environment, naming_convention)
     return config
 

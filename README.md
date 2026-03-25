@@ -694,6 +694,7 @@ PYTHONPATH=. python3 src/validation/validation_suite.py
 
 ### Prerequisites
 - **Python 3.8+** with standard libraries
+- **python-arango** driver: `pip install -r requirements.txt`
 - **ArangoDB 3.12+** or ArangoDB Oasis cluster access
 - **Environment Variables** configured (see Configuration section below)
 
@@ -991,9 +992,7 @@ PYTHONPATH=. python3 src/validation/validation_suite.py
 
 The system generates complex multi-tenant network topologies with temporal relationships. Here's an example of the generated graph structure:
 
-![Network Asset Graph Visualization](assets/network-graph-visualization.png)
-
-*Example visualization showing the multi-tenant network topology with device proxies (blue nodes) connected via hasConnection edges (physical network), software entities (purple nodes) connected via hasDeviceSoftware and hasVersion relationships, demonstrating consistent naming conventions.*
+*The multi-tenant network topology features device proxies connected via hasConnection edges (physical network), software entities connected via hasDeviceSoftware and hasVersion relationships, demonstrating consistent naming conventions. Use the ArangoDB Graph Visualizer to explore the generated graph interactively.*
 
 ### Current Tenant Configuration
 - **Acme Corp** (1x scale): 1,095 documents
@@ -1068,7 +1067,7 @@ python3 src/validation/validation_suite.py
 - data/
   - tenant_{id}/                     # Generated tenant data directories
   - tenant_registry_time_travel.json # Tenant metadata registry
-- assets/                            # Documentation images and diagrams
+- assets/                            # Documentation assets (if any)
 - docs/                              # Additional documentation
 - logs/                              # Application logs
 - reports/                           # Validation and performance reports

@@ -37,13 +37,18 @@ Features:
 """
 
 import json
+import logging
 import sys
 import os
 from typing import Dict, List, Any, Optional
 from pathlib import Path
 
-# Add the arango-mcp-server to the path for direct usage
-sys.path.append('/Users/arthurkeen/code/arango-mcp-server')
+logger = logging.getLogger(__name__)
+
+# Optionally add external arango-mcp-server to path if configured
+_mcp_path = os.getenv('ARANGO_MCP_PATH')
+if _mcp_path:
+    sys.path.append(_mcp_path)
 
 try:
     from arango import ArangoClient
