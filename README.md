@@ -2,6 +2,8 @@
 
 A production-ready reference implementation for **multi-tenant temporal graph databases** using ArangoDB. Demonstrates tenant isolation via SmartGraphs, time-travel queries, TTL-based data lifecycle management, and horizontal scale-out -- all patterns reusable across network asset management, IAM, cybersecurity, and cloud infrastructure domains.
 
+![Network Asset Graph Visualization](assets/network-graph-visualization.png)
+
 ## Quick Start
 
 ```bash

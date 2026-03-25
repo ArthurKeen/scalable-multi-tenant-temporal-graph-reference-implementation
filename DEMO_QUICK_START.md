@@ -119,21 +119,14 @@ FOR device IN Device
 
 ---
 
-## Success Metrics
+## Success Criteria
 
-Demo is successful if you show:
-- [DONE] Multi-tenant data generation
-- [DONE] SmartGraph deployment
-- [DONE] Time travel queries
-- [DONE] 100% test validation
-- [DONE] Performance metrics
-
----
-
-## Emergency Contacts
-
-**Primary**: Arthur Keen
-**Docs**: See `docs/PRESENTER_GUIDE.md` for detailed walkthrough
+Demo is successful when you have shown:
+- Multi-tenant data generation and isolation
+- SmartGraph deployment with MDI indexes
+- Time travel queries with temporal filtering
+- Validation passing across all checks
+- Scale-out with zero-downtime tenant addition
 
 ---
 
@@ -143,6 +136,4 @@ Demo is successful if you show:
 
 ---
 
-**System Status**: All 30/30 tests passing (100%)
-**Ready for**: Production demos
-**Updated**: March 2026
+**Detailed guide**: See `docs/PRESENTER_GUIDE.md` for full walkthrough with talking points.

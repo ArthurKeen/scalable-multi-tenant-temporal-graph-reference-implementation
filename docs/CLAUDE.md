@@ -9,7 +9,7 @@
 ## Current State (as of November 2025)
 
 ### Architecture
-- **Language**: Python 3.8+
+- **Language**: Python 3.9+
 - **Database**: ArangoDB Oasis cluster with disjoint SmartGraphs
 - **Data Generator**: `asset_generator.py` (multi-tenant with time travel)
 - **Demo Orchestration**: `automated_demo_walkthrough.py`
@@ -135,7 +135,7 @@ FR6: Index Optimization -> [DESIGN COMPLETED]
 1. **Data isolation**: SmartGraph disjoint partitioning ensures complete tenant isolation
 2. **Temporal integrity**: All documents must include created/expired/ttlExpireAt
 3. **Edge metadata**: All edges must include _fromType/_toType for vertex-centric indexes
-4. **ArangoDB MCP**: Existing MCP service at ~/code/arango-mcp-server available for automation
+4. **ArangoDB MCP**: Existing MCP service available for automation (set ARANGO_MCP_PATH env var)
 
 Master Development Guide
 CRITICAL: NO UNICODE OR EMOJIS ALLOWED

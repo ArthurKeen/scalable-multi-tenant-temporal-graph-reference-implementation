@@ -606,7 +606,7 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 ## Support Contacts
 
 **Primary Contact**: Arthur Keen
-**Documentation**: See `README.md`, `DEMO_QUICK_START.md`, `TEST_STATUS.md`
+**Documentation**: See `README.md`, `DEMO_QUICK_START.md`, `docs/TEST_STATUS.md`
 
 ---
 
