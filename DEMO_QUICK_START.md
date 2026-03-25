@@ -68,7 +68,7 @@ PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 ### Performance
 - "Queries complete in ~0.1 seconds"
 - "MDI-prefixed indexes on created/expired"
-- "100% test coverage, production ready"
+- "30/30 tests passing, production ready"
 
 ### Scalability
 - "Linear scaling with tenant count"

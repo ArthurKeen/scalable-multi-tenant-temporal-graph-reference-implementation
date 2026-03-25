@@ -180,7 +180,7 @@ class TimeTravelValidationSuite(DatabaseMixin):
                         print(f"   [ERROR] Version edge {version['_key']} missing field: {field}")
                         return False
                 
-                print(f"   [DONE] Version edge {version['_key']}: {version['_fromType']} → {version['_toType']}")
+                print(f"   [DONE] Version edge {version['_key']}: {version['_fromType']} -> {version['_toType']}")
             
             print(f"[DONE] Unified hasVersion collection validation passed")
             return True
@@ -433,23 +433,23 @@ class TimeTravelValidationSuite(DatabaseMixin):
             return False
     
     def validate_cross_entity_relationships(self) -> bool:
-        """Validate cross-entity relationships (Device → Software)."""
+        """Validate cross-entity relationships (Device -> Software)."""
         print(f"\n[ANALYSIS] Validating Cross-Entity Relationships...")
         
         try:
-            # Test Device → Software relationship query (corrected logical flow)
+            # Test Device -> Software relationship query (corrected logical flow)
             cross_entity_query = """
             WITH DeviceProxyOut, SoftwareProxyIn, hasDeviceSoftware, Device, Software, hasVersion
             FOR hasDevSoft IN hasDeviceSoftware
               LIMIT 3
               
-              // Find the device that connects TO this DeviceProxyOut (Device → DeviceProxyOut)
+              // Find the device that connects TO this DeviceProxyOut (Device -> DeviceProxyOut)
               FOR version_to_device_proxy IN hasVersion
                 FILTER version_to_device_proxy._to == hasDevSoft._from
                 FILTER version_to_device_proxy._fromType == "Device"
                 LET device = DOCUMENT(version_to_device_proxy._from)
                 
-                // Find the software that connects FROM this SoftwareProxyIn (SoftwareProxyIn → Software)
+                // Find the software that connects FROM this SoftwareProxyIn (SoftwareProxyIn -> Software)
                 FOR version_to_software IN hasVersion
                   FILTER version_to_software._from == hasDevSoft._to
                   FILTER version_to_software._toType == "Software"
@@ -462,7 +462,7 @@ class TimeTravelValidationSuite(DatabaseMixin):
                     softwareKey: software._key,
                     softwarePort: software.portNumber,
                     softwareEnabled: software.isEnabled,
-                    flow: "Device → DeviceProxyOut → SoftwareProxyIn → Software"
+                    flow: "Device -> DeviceProxyOut -> SoftwareProxyIn -> Software"
                   }
             """
             
@@ -473,7 +473,7 @@ class TimeTravelValidationSuite(DatabaseMixin):
             
             print(f"   [DATA] Cross-entity query returned {len(cross_results)} relationships")
             for result in cross_results[:5]:
-                print(f"      [DONE] {result['device']} → {result['software']} (port: {result['softwarePort']})")
+                print(f"      [DONE] {result['device']} -> {result['software']} (port: {result['softwarePort']})")
                 print(f"         Flow: {result['flow']}")
             
             # Validate hasDeviceSoftware collection exists and has data
@@ -494,8 +494,8 @@ class TimeTravelValidationSuite(DatabaseMixin):
             # Sample relationship structure
             sample_relationship = has_device_software.all(limit=1)
             for rel in sample_relationship:
-                print(f"      [DONE] Sample relationship: {rel['_from']} → {rel['_to']}")
-                print(f"         Types: {rel['_fromType']} → {rel['_toType']}")
+                print(f"      [DONE] Sample relationship: {rel['_from']} -> {rel['_to']}")
+                print(f"         Types: {rel['_fromType']} -> {rel['_toType']}")
             
             print(f"[DONE] Cross-entity relationships validation passed")
             return True
@@ -569,13 +569,13 @@ class TimeTravelValidationSuite(DatabaseMixin):
         print(f"\n[ANALYSIS] Validating Data Consistency...")
         
         try:
-            # Check Device proxy → Device consistency
+            # Check Device proxy -> Device consistency
             device_proxy_count = self.database.collection("DeviceProxyIn").count()
             device_version_edges = self.database.collection("hasVersion").find({"_fromType": "DeviceProxyIn"}).count()
             
             print(f"   [DATA] DeviceProxyIn: {device_proxy_count}, Device version edges: {device_version_edges}")
             
-            # Check Software proxy → Software consistency
+            # Check Software proxy -> Software consistency
             software_proxy_count = self.database.collection("SoftwareProxyIn").count()
             software_version_edges = self.database.collection("hasVersion").find({"_fromType": "SoftwareProxyIn"}).count()
             
@@ -713,11 +713,11 @@ class TimeTravelValidationSuite(DatabaseMixin):
         print("[TEST] Network Asset Management Validation Suite")
         print("=" * 60)
         print("[ANALYSIS] Validating multi-tenant time travel implementation:")
-        print("   • Software time travel pattern")
-        print("   • Unified version collection")
-        print("   • Cross-entity relationships")
-        print("   • Query performance")
-        print("   • Data consistency")
+        print("   - Software time travel pattern")
+        print("   - Unified version collection")
+        print("   - Cross-entity relationships")
+        print("   - Query performance")
+        print("   - Data consistency")
         print()
         
         if not self.connect_to_database():

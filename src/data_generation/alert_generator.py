@@ -75,7 +75,7 @@ class AlertGenerator:
             AlertTemplate(
                 AlertType.HARDWARE,
                 AlertSeverity.CRITICAL,
-                "CPU temperature critical: {temperature}°C",
+                "CPU temperature critical: {temperature} deg C",
                 {"temperature": 85, "threshold": 80, "sensor": "cpu_temp"},
                 ["device"]
             ),
@@ -314,7 +314,7 @@ class AlertGenerator:
         """Add realistic randomization to alert metadata."""
         metadata = template_metadata.copy()
         
-        # Randomize numeric values by ±20%
+        # Randomize numeric values by +/-20%
         for key, value in metadata.items():
             if isinstance(value, (int, float)) and key != "threshold":
                 # Add some realistic variation 

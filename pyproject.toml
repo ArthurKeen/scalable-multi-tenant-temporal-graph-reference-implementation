@@ -4,7 +4,7 @@ version = "1.0.0"
 description = "Scalable Multi-Tenant Temporal Graph Reference Implementation with ArangoDB"
 readme = "README.md"
 license = {text = "MIT"}
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 authors = [
     {name = "Arthur Keen"},
 ]
@@ -20,7 +20,7 @@ dev = [
 
 [tool.ruff]
 line-length = 120
-target-version = "py38"
+target-version = "py39"
 
 [tool.ruff.lint]
 select = [
@@ -38,10 +38,3 @@ ignore = [
 
 [tool.ruff.lint.isort]
 known-first-party = ["src"]
-
-[tool.pytest.ini_options]
-testpaths = ["src/validation"]
-python_files = ["test_*.py"]
-markers = [
-    "integration: tests that require a live ArangoDB connection",
-]

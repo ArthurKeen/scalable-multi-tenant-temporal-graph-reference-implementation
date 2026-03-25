@@ -3,7 +3,7 @@
 Alert Simulation System
 
 Simulates real-time alert generation and resolution for demonstration purposes.
-Demonstrates alert lifecycle: generation → acknowledgment → resolution → TTL aging.
+Demonstrates alert lifecycle: generation -> acknowledgment -> resolution -> TTL aging.
 
 Author: Scalable Multi-Tenant Temporal Graph Reference Implementation
 """
@@ -81,7 +81,7 @@ class AlertSimulator:
             "alertType": AlertType.HARDWARE.value,
             "severity": AlertSeverity.CRITICAL.value,
             "status": AlertStatus.ACTIVE.value,
-            "message": f"CRITICAL: {device_proxy.get('name', 'Unknown device')} CPU temperature reached 92°C",
+            "message": f"CRITICAL: {device_proxy.get('name', 'Unknown device')} CPU temperature reached 92 deg C",
             "created": created_time,
             "expired": NEVER_EXPIRES,
             "metadata": {
@@ -345,19 +345,19 @@ class AlertSimulator:
                 generated_alerts.append(result)
                 
                 alert = result["alert"]
-                print(f"   ✅ Alert created: {alert['_key']}")
-                print(f"   📋 Message: {alert['message']}")
-                print(f"   🚨 Severity: {alert['severity']}")
-                print(f"   📅 Created: {datetime.fromtimestamp(alert['created']).strftime('%Y-%m-%d %H:%M:%S')}")
+                print(f"   [DONE] Alert created: {alert['_key']}")
+                print(f"   [INFO] Message: {alert['message']}")
+                print(f"   [ALERT] Severity: {alert['severity']}")
+                print(f"   [DATE] Created: {datetime.fromtimestamp(alert['created']).strftime('%Y-%m-%d %H:%M:%S')}")
                 
                 # Randomly resolve some alerts for demonstration
                 if random.random() < 0.3:  # 30% chance to resolve immediately
-                    print(f"   🔧 Resolving alert for demonstration...")
+                    print(f"   [FIX] Resolving alert for demonstration...")
                     resolution = self.resolve_alert(alert["_key"], tenant_id)
-                    print(f"   ✅ Alert resolved - TTL expires at {datetime.fromtimestamp(resolution['ttl_expire_at']).strftime('%Y-%m-%d %H:%M:%S')}")
+                    print(f"   [DONE] Alert resolved - TTL expires at {datetime.fromtimestamp(resolution['ttl_expire_at']).strftime('%Y-%m-%d %H:%M:%S')}")
                     
             except Exception as e:
-                print(f"   ❌ Error generating alert: {e}")
+                print(f"   [ERROR] Error generating alert: {e}")
                 
             time.sleep(1)  # Brief pause for demo effect
         

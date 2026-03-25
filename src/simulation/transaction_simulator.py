@@ -445,7 +445,7 @@ class TransactionSimulator(DatabaseMixin):
             version_collection.insert(incoming_edge)
             version_collection.insert(outgoing_edge)
             
-            print(f"   [VERSION] Created hasVersion edges: ProxyIn→Software→ProxyOut")
+            print(f"   [VERSION] Created hasVersion edges: ProxyIn->Software->ProxyOut")
             print(f"            Incoming: {incoming_edge['_key']}")
             print(f"            Outgoing: {outgoing_edge['_key']}")
             
@@ -518,7 +518,7 @@ class TransactionSimulator(DatabaseMixin):
             version_collection.insert(incoming_edge)
             version_collection.insert(outgoing_edge)
             
-            print(f"   [VERSION] Created hasVersion edges: ProxyIn→Device→ProxyOut")
+            print(f"   [VERSION] Created hasVersion edges: ProxyIn->Device->ProxyOut")
             print(f"            Incoming: {incoming_edge['_key']}")
             print(f"            Outgoing: {outgoing_edge['_key']}")
             

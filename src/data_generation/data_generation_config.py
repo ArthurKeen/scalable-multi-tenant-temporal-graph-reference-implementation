@@ -152,7 +152,7 @@ DEFAULT_LOCATIONS_DATA: List[Dict[str, Any]] = [
     {"name": "Singapore Hub", "address": "Marina Bay, Singapore", "lat": 1.2966, "lon": 103.8764},
     {"name": "Toronto Branch", "address": "Bay St, Toronto", "lat": 43.6532, "lon": -79.3832},
     {"name": "Mumbai Center", "address": "Nariman Point, Mumbai", "lat": 18.9220, "lon": 72.8347},
-    {"name": "São Paulo Office", "address": "Av. Paulista, São Paulo", "lat": -23.5505, "lon": -46.6333},
+    {"name": "Sao Paulo Office", "address": "Av. Paulista, Sao Paulo", "lat": -23.5505, "lon": -46.6333},
     {"name": "Cape Town Hub", "address": "V&A Waterfront, Cape Town", "lat": -33.9025, "lon": 18.4167}
 ]
 

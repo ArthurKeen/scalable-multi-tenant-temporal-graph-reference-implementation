@@ -221,11 +221,11 @@ class MDIIndexCreator:
                     print(f"   [TEMPORAL] {idx_name}: {idx_type} on {idx_fields}")
             
             if mdi_found:
-                print(f"   [STATUS] ✅ MDI indexes present")
+                print(f"   [STATUS] [DONE] MDI indexes present")
             elif temporal_found:
-                print(f"   [STATUS] ⚠️ Temporal indexes present (but not MDI)")
+                print(f"   [STATUS] [WARNING] Temporal indexes present (but not MDI)")
             else:
-                print(f"   [STATUS] ❌ No temporal/MDI indexes found")
+                print(f"   [STATUS] [ERROR] No temporal/MDI indexes found")
         
         print("\n" + "=" * 70)
 

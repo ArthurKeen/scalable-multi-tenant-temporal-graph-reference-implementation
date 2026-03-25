@@ -2,8 +2,8 @@
 Time Travel Refactored Multi-Tenant Generator
 
 Implements consistent time travel pattern across ALL collections:
-- Device: DeviceProxyIn ⟷ Device ⟷ DeviceProxyOut (existing)
-- Software: SoftwareProxyIn ⟷ Software ⟷ SoftwareProxyOut (NEW)
+- Device: DeviceProxyIn <-> Device <-> DeviceProxyOut (existing)
+- Software: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)
 - Generic 'version' collection for all time travel relationships
 - W3C OWL naming conventions
 - Multi-tenant disjoint SmartGraphs
@@ -447,7 +447,7 @@ class TimeTravelRefactoredGenerator:
         return connections
     
     def generate_has_location_edges(self, device_proxy_outs: List[Dict], locations: List[Dict]) -> List[Dict[str, Any]]:
-        """Generate hasLocation edges (Device → Location relationships)."""
+        """Generate hasLocation edges (Device -> Location relationships)."""
         self.logger.info("Generating hasLocation edges")
         
         has_locations = []
@@ -760,8 +760,8 @@ def generate_time_travel_refactored_demo(tenant_count: int = 8, environment: str
             "timeTravel": {
                 "refactored": True,
                 "consistentPattern": True,
-                "deviceTimeTravel": "DeviceProxyIn ⟷ Device ⟷ DeviceProxyOut",
-                "softwareTimeTravel": "SoftwareProxyIn ⟷ Software ⟷ SoftwareProxyOut",
+                "deviceTimeTravel": "DeviceProxyIn <-> Device <-> DeviceProxyOut",
+                "softwareTimeTravel": "SoftwareProxyIn <-> Software <-> SoftwareProxyOut",
                 "unifiedVersionCollection": True,
                 "softwareConfigurationHistory": "Removed - flattened to versioned documents"
             }

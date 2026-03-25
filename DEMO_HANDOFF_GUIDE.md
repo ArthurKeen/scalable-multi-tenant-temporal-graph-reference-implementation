@@ -254,7 +254,7 @@ The interactive demo walks through 10 major sections:
 - "Real database transactions, not simulations"
 - "Current configurations never expire"
 - "Historical configurations automatically age out"
-- "Demo mode: 10-minute TTL (production: 30 days)"
+- "Demo mode: 5-minute TTL (production: 30 days)"
 
 **What to Show in Browser**:
 The demo provides specific document keys to inspect:
@@ -523,7 +523,7 @@ PYTHONPATH=. python3 src/validation/validation_suite.py
 PYTHONPATH=. python3 src/ttl/ttl_monitor.py --duration 15
 ```
 
-**Shows**: Real-time countdown of documents aging out (10-minute demo TTL)
+**Shows**: Real-time countdown of documents aging out (5-minute demo TTL)
 
 ---
 

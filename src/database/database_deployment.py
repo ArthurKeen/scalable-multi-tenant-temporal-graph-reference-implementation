@@ -2,8 +2,8 @@
 Deploy Time Travel Refactored Data to ArangoDB Oasis
 
 Deploys the refactored time travel pattern with:
-- Device time travel: DeviceProxyIn ⟷ Device ⟷ DeviceProxyOut
-- Software time travel: SoftwareProxyIn ⟷ Software ⟷ SoftwareProxyOut (NEW)
+- Device time travel: DeviceProxyIn <-> Device <-> DeviceProxyOut
+- Software time travel: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)
 - Unified 'version' collection for all time travel relationships
 - New hasDeviceSoftware edge collection
 - W3C OWL naming conventions
@@ -431,7 +431,7 @@ class TimeTravelRefactoredDeployment:
                 return True
             
             # Define edge definitions for the unified SmartGraph
-            # Includes edges to satellite collections (SmartGraph → Satellite pattern)
+            # Includes edges to satellite collections (SmartGraph -> Satellite pattern)
             edge_definitions = [
                 {
                     "edge_collection": self.app_config.get_collection_name("connections"),
@@ -486,7 +486,7 @@ class TimeTravelRefactoredDeployment:
             ]
             
             # Note: type edges ARE part of SmartGraph, connecting to Satellite Class collection
-            # This follows ArangoDB's SmartGraph → Satellite pattern for optimal performance
+            # This follows ArangoDB's SmartGraph -> Satellite pattern for optimal performance
             
             try:
                 # Create the unified SmartGraph with tenantId as smartGraphAttribute
@@ -655,11 +655,11 @@ class TimeTravelRefactoredDeployment:
         print("[DEPLOY] Time Travel Refactored Database Deployment")
         print("=" * 60)
         print("[INFO] Deploying:")
-        print("   • Device time travel: DeviceProxyIn ⟷ Device ⟷ DeviceProxyOut")
-        print("   • Software time travel: SoftwareProxyIn ⟷ Software ⟷ SoftwareProxyOut (NEW)")
-        print("   • Unified 'version' collection for all time travel relationships")
-        print("   • New hasDeviceSoftware edge collection")
-        print("   • Software configurationHistory array removed (flattened)")
+        print("   - Device time travel: DeviceProxyIn <-> Device <-> DeviceProxyOut")
+        print("   - Software time travel: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)")
+        print("   - Unified 'version' collection for all time travel relationships")
+        print("   - New hasDeviceSoftware edge collection")
+        print("   - Software configurationHistory array removed (flattened)")
         print()
         
         # Execute deployment steps
@@ -683,11 +683,11 @@ class TimeTravelRefactoredDeployment:
         print(f"[DATA] Database: {self.creds.database_name}")
         print(f"[LINK] Endpoint: {self.creds.endpoint}")
         print(f"-> Time Travel Refactoring:")
-        print(f"   • Device: Existing pattern maintained")
-        print(f"   • Software: NEW time travel pattern implemented")
-        print(f"   • Unified version collection for consistent queries")
-        print(f"   • Software configurationHistory array eliminated")
-        print(f"   • W3C OWL naming conventions")
+        print(f"   - Device: Existing pattern maintained")
+        print(f"   - Software: NEW time travel pattern implemented")
+        print(f"   - Unified version collection for consistent queries")
+        print(f"   - Software configurationHistory array eliminated")
+        print(f"   - W3C OWL naming conventions")
         
         return True
 

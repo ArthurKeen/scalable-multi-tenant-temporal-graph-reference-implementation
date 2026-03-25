@@ -209,7 +209,7 @@ python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
 - Executes real database transactions (not simulations)
 - Creates new configuration versions with TTL timestamps
 - Demonstrates temporal data lifecycle management
-- Shows automatic aging of historical records (10-minute TTL for demo)
+- Shows automatic aging of historical records (5-minute TTL for demo)
 
 **Step 5: Time Travel Demonstration**
 - Queries historical data within TTL window
@@ -292,7 +292,7 @@ python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 2
   - `expired` field for time travel queries (`expired > point_in_time`)
   - `ttlExpireAt` field for ArangoDB TTL indexes (automatic deletion)
 - **Production TTL**: 30 days for historical data lifecycle management
-- **Demo TTL**: 10 minutes for visible aging demonstration
+- **Demo TTL**: 5 minutes for visible aging demonstration
 - **Sparse TTL Indexes**: Only historical documents have `ttlExpireAt` field
 
 **Transaction Process:**
@@ -306,7 +306,7 @@ For demonstration purposes, the system supports **Demo Mode** with accelerated T
 
 **Demo Mode Activation:**
 ```bash
-# Deploy with demo mode (10-minute TTL)
+# Deploy with demo mode (5-minute TTL)
 PYTHONPATH=. python3 src/database/database_deployment.py --demo-mode
 
 # Run interactive demo walkthrough (automatically uses demo mode)
@@ -314,7 +314,7 @@ PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 ```
 
 **Demo TTL Behavior:**
-- **Historical documents**: Age out after 10 minutes instead of 30 days
+- **Historical documents**: Age out after 5 minutes instead of 30 days
 - **Visible aging**: Allows observers to see TTL cleanup during demo
 - **Real-time monitoring**: Use `ttl_monitor.py` to watch aging process
 
@@ -349,7 +349,7 @@ PYTHONPATH=. python3 src/ttl/ttl_monitor.py --duration 5 --refresh 10
 - **Centralized Configuration Management** - No hard-wired values
 - **Code Quality Optimized** - Zero duplication, modular design, comprehensive documentation
 - **Security Best Practices** - Externalized credentials, input validation, type safety
-- **Comprehensive Test Suite** - 100% coverage with unit, integration, and compliance tests
+- **Comprehensive Test Suite** - 30/30 tests passing across unit, integration, and compliance suites
 - **Clean Code Architecture** - Modular, maintainable, dependency-injected design
 - **ArangoDB Oasis Integration** - Cloud-ready deployment
 
@@ -508,7 +508,7 @@ subClassOf        # Class -> Class inheritance relationships
 
 **TTL (Time-To-Live) Indexes:**
 - Automatic aging of historical data with configurable expiration periods
-- Demo mode: 10-minute TTL for visible aging demonstration
+- Demo mode: 5-minute TTL for visible aging demonstration
 - Production mode: 30-day TTL for practical data lifecycle management
 
 ## Getting Started
@@ -590,13 +590,13 @@ The demo now addresses common concerns about transaction and TTL visibility:
 - **Immediate TTL Activation**: Transactions set TTL fields immediately (not separately)
 - **Real-Time Impact**: Shows historical documents get `ttlExpireAt` timestamps
 - **Current vs Historical**: Demonstrates current configs never expire, historical configs age out
-- **10-Minute Demo TTL**: Accelerated aging for visible demonstration
+- **5-Minute Demo TTL**: Accelerated aging for visible demonstration
 
 **Step-by-Step Process**
 1. **Database State**: Shows current documents before transactions
 2. **Transaction Execution**: Updates configurations with immediate TTL field setting
 3. **Field Verification**: Confirms TTL timestamps are set on historical documents
-4. **Aging Monitoring**: Provides tools to watch documents age out in 10 minutes
+4. **Aging Monitoring**: Provides tools to watch documents age out in 5 minutes
 
 ### Demo Flow Diagram
 
@@ -728,10 +728,8 @@ python3 src/data_generation/asset_generator.py
 # Generate data with snake_case naming
 python3 src/data_generation/asset_generator.py --naming snake_case
 
-# This creates:
-# - Acme Corp (1x scale): ~1,095 documents
-# - Global Enterprises (2x scale): ~2,190 documents  
-# - Total: ~3,285 documents across all collections
+# Default demo generates 8 tenants with ~21,000+ documents total
+# Scale factors range from 1x to 3x per tenant
 ```
 
 #### Option B: Custom Tenant Configuration
@@ -994,24 +992,25 @@ The system generates complex multi-tenant network topologies with temporal relat
 
 *The multi-tenant network topology features device proxies connected via hasConnection edges (physical network), software entities connected via hasDeviceSoftware and hasVersion relationships, demonstrating consistent naming conventions. Use the ArangoDB Graph Visualizer to explore the generated graph interactively.*
 
-### Current Tenant Configuration
-- **Acme Corp** (1x scale): 1,095 documents
-- **Global Enterprises** (2x scale): 2,190 documents  
-- **Total**: 3,285 documents across shared collections
+### Default Demo Configuration
 
-### Document Distribution
+The demo generates **8 tenants** with varying scale factors (1x-3x), producing
+**~21,000+ documents** across all collections. Tenant count and scale factors
+are configurable in `src/config/tenant_config.py`.
+
+### Document Types (per tenant, at 1x scale)
 ```
-Device configurations:     360 (with temporal history)
-DeviceProxyIn entities:     60  (lightweight proxies)
-DeviceProxyOut entities:    60  (lightweight proxies)
-Location entities:          15  (GeoJSON coordinates)
-Software entities:         540  (with version history)
-SoftwareProxyIn entities:   90  (lightweight proxies)
-SoftwareProxyOut entities:  90  (lightweight proxies)
-Connection edges:           90  (network topology - DeviceProxyOut -> DeviceProxyIn)
-Location edges:             60  (device placement)
-Software edges:            120  (software installations)
-hasVersion edges:        1,800  (temporal relationships)
+Device configurations:      20 (with temporal history)
+DeviceProxyIn entities:     20 (lightweight proxies)
+DeviceProxyOut entities:    20 (lightweight proxies)
+Location entities:           5 (GeoJSON coordinates)
+Software entities:          30 (with version history)
+SoftwareProxyIn entities:   30 (lightweight proxies)
+SoftwareProxyOut entities:  30 (lightweight proxies)
+Connection edges:           30 (network topology)
+Location edges:             20 (device placement)
+Software edges:             40 (software installations)
+hasVersion edges:          600 (temporal relationships)
 ```
 
 ## Testing & Validation

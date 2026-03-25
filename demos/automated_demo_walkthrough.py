@@ -240,10 +240,10 @@ class AutomatedDemoWalkthrough:
         
         if not self.verbose:
             print("\nKey Demo Points:")
-            print("   • Collections: Show tenant isolation and document counts")
-            print("   • Graphs: Visualize multi-tenant network topology")  
-            print("   • Indexes: Highlight optimized MDI-prefixed temporal indexes")
-            print("   • Data: Sample documents with temporal fields")
+            print("   - Collections: Show tenant isolation and document counts")
+            print("   - Graphs: Visualize multi-tenant network topology")  
+            print("   - Indexes: Highlight optimized MDI-prefixed temporal indexes")
+            print("   - Data: Sample documents with temporal fields")
         else:
             print("\n" + "=" * 70)
             print("DETAILED MANUAL DEMO HINTS: ArangoDB Web Interface")
@@ -510,9 +510,11 @@ class AutomatedDemoWalkthrough:
         print("2. Database Deployment with SmartGraphs")
         print("3. Initial Validation and Testing")
         print("4. Temporal TTL Transactions Demonstration")
-        print("5. Time Travel Demonstration")
-        print("6. Scale-Out Operations")
-        print("7. Final Validation")
+        print("5. Alert System Demonstration")
+        print("6. Taxonomy System Demonstration")
+        print("7. Scale-Out Operations")
+        print("8. Final Validation")
+        print("9. Demo Summary")
         print()
         
         self.pause_for_observation("Ready to begin the comprehensive demonstration?")
@@ -729,8 +731,8 @@ class AutomatedDemoWalkthrough:
         print("TTL Strategy (Unified with Transactions):")
         print("- Transactions IMMEDIATELY set TTL fields on historical documents")
         print("- Current Configurations: expired = NEVER_EXPIRES (no ttlExpireAt)")
-        print("- Historical Configurations: expired = timestamp, ttlExpireAt = timestamp + 10min")
-        print("- Demo Mode: 10-minute TTL for visible aging")
+        print("- Historical Configurations: expired = timestamp, ttlExpireAt = timestamp + 5min")
+        print("- Demo Mode: 5-minute TTL for visible aging")
         print()
         
         # Step 1: Show actual before state
@@ -780,7 +782,7 @@ class AutomatedDemoWalkthrough:
                     target_documents.append(target_doc)
                     
                     print(f"SOFTWARE {i+1}:")
-                    print(f"   COPY THIS → {software_id}")
+                    print(f"   COPY THIS -> {software_id}")
                     print(f"   Name: {software.get('name', 'Unknown')} ({software.get('type', 'Unknown')})")
                     print()
                 
@@ -874,7 +876,7 @@ class AutomatedDemoWalkthrough:
         
         transaction_timestamp = datetime.datetime.now()
         print(f"[TRANSACTION TIME] {transaction_timestamp}")
-        print(f"[TTL EXPIRATION] {transaction_timestamp.timestamp() + 600} (in 10 minutes)")
+        print(f"[TTL EXPIRATION] {transaction_timestamp.timestamp() + 300} (in 5 minutes)")
         print()
         
         try:
@@ -900,8 +902,8 @@ class AutomatedDemoWalkthrough:
                 
                 print(f"\n[IMMEDIATE IMPACT] TTL fields have been set on historical documents!")
                 print(f"   Transaction timestamp: {transaction_timestamp.timestamp()}")
-                print(f"   TTL expiration: {transaction_timestamp.timestamp() + 600} (10 minutes from now)")
-                print(f"   Historical documents will auto-delete in 10 minutes")
+                print(f"   TTL expiration: {transaction_timestamp.timestamp() + 300} (5 minutes from now)")
+                print(f"   Historical documents will auto-delete in 5 minutes")
                 print(f"   Current documents (expired=9223372036854775807) never expire")
                 print()
                 
@@ -928,7 +930,7 @@ class AutomatedDemoWalkthrough:
         print("="*60)
         
         try:
-            print("🆕 DIRECTLY LISTING NEW IDs CREATED:")
+            print("[NEW] DIRECTLY LISTING NEW IDs CREATED:")
             print("="*50)
             
             new_ids_created = []
@@ -982,7 +984,7 @@ class AutomatedDemoWalkthrough:
             
             # Display all new IDs in a clean, direct format
             if new_ids_created:
-                print(f"📋 NEW DOCUMENT IDs (Total: {len(new_ids_created)}):")
+                print(f"[INFO] NEW DOCUMENT IDs (Total: {len(new_ids_created)}):")
                 print("-" * 60)
                 
                 for i, new_doc in enumerate(new_ids_created, 1):
@@ -990,10 +992,10 @@ class AutomatedDemoWalkthrough:
                     print(f"   Name: {new_doc['name']}")
                     print(f"   Type: {new_doc['type']}")
                     print(f"   Key: {new_doc['key']}")
-                    print(f"   Original: {new_doc['original_key']} → {new_doc['key']}")
+                    print(f"   Original: {new_doc['original_key']} -> {new_doc['key']}")
                     print()
                 
-                print("🎯 COPY THESE IDs FOR VISUALIZATION:")
+                print("[TARGET] COPY THESE IDs FOR VISUALIZATION:")
                 print("-" * 40)
                 for i, new_doc in enumerate(new_ids_created, 1):
                     print(f"{i}. {new_doc['id']}")
@@ -1021,7 +1023,7 @@ class AutomatedDemoWalkthrough:
                             })
                     
                     if direct_new_ids:
-                        print(f"📋 NEW DOCUMENT IDs FROM TRANSACTION RESULTS (Total: {len(direct_new_ids)}):")
+                        print(f"[INFO] NEW DOCUMENT IDs FROM TRANSACTION RESULTS (Total: {len(direct_new_ids)}):")
                         print("-" * 60)
                         
                         for i, new_doc in enumerate(direct_new_ids, 1):
@@ -1029,10 +1031,10 @@ class AutomatedDemoWalkthrough:
                             print(f"   Name: {new_doc['name']}")
                             print(f"   Type: {new_doc['type']}")
                             print(f"   Key: {new_doc['key']}")
-                            print(f"   Original: {new_doc['original_key']} → {new_doc['key']}")
+                            print(f"   Original: {new_doc['original_key']} -> {new_doc['key']}")
                             print()
                         
-                        print("🎯 COPY THESE IDs FOR VISUALIZATION:")
+                        print("[TARGET] COPY THESE IDs FOR VISUALIZATION:")
                         print("-" * 40)
                         for i, new_doc in enumerate(direct_new_ids, 1):
                             print(f"{i}. {new_doc['id']}")
@@ -1044,10 +1046,10 @@ class AutomatedDemoWalkthrough:
                                 "These are the newly created software configurations from the transaction"
                             )
                     else:
-                        print("⚠️  No new IDs found - transaction may not have completed successfully")
+                        print("[WARNING] No new IDs found - transaction may not have completed successfully")
                         print("   Check the transaction logs above for any errors")
                 else:
-                    print("⚠️  No new IDs found - transaction may not have completed successfully")
+                    print("[WARNING] No new IDs found - transaction may not have completed successfully")
                     print("   Check the transaction logs above for any errors")
             
         except Exception as e:
@@ -1154,7 +1156,7 @@ class AutomatedDemoWalkthrough:
             
             # Demonstrate alert resolution
             self.demo_progress(3, 6, "Demonstrating alert resolution", 
-                             "Showing alert lifecycle: active → resolved → TTL aging")
+                             "Showing alert lifecycle: active -> resolved -> TTL aging")
             
             if generated_alerts:
                 # Resolve the first generated alert
@@ -1164,7 +1166,7 @@ class AutomatedDemoWalkthrough:
                 try:
                     resolution_result = alert_simulator.resolve_alert(alert_to_resolve['_key'], demo_tenant_id)
                     self.demo_print(f"   [SUCCESS] Alert resolved successfully!", "info")
-                    self.demo_print(f"   ⏰ TTL expires at: {datetime.datetime.fromtimestamp(resolution_result['ttl_expire_at']).strftime('%H:%M:%S')}", "info")
+                    self.demo_print(f"   [TTL] TTL expires at: {datetime.datetime.fromtimestamp(resolution_result['ttl_expire_at']).strftime('%H:%M:%S')}", "info")
                     
                     if not self.verbose:
                         self.demo_manual_prompt(
@@ -1233,7 +1235,7 @@ class AutomatedDemoWalkthrough:
                 if correlations and not self.verbose:
                     for corr in correlations[-3:]:  # Show last 3
                         status_icon = "[ACTIVE]" if corr['alert_status'] == 'active' else "[RESOLVED]"
-                        self.demo_print(f"   {status_icon} {corr['alert_name']} ← {corr['source_type']}: {corr['source_name']}", "info")
+                        self.demo_print(f"   {status_icon} {corr['alert_name']} <- {corr['source_type']}: {corr['source_name']}", "info")
                         
             except Exception as e:
                 self.demo_print(f"   [WARNING] Correlation query error: {e}", "verbose")
@@ -1257,7 +1259,7 @@ class AutomatedDemoWalkthrough:
                 capabilities = [
                     "[SUCCESS] Real-time alert generation from operational devices/software",
                     "[SUCCESS] Graph-integrated visualization with hasAlert relationships",
-                    "[SUCCESS] Complete alert lifecycle: active → resolved → TTL aging",
+                    "[SUCCESS] Complete alert lifecycle: active -> resolved -> TTL aging",
                     "[SUCCESS] Multi-tenant isolation with complete data separation",
                     "[SUCCESS] Alert correlation across devices, software, and locations",
                     "[SUCCESS] Operational monitoring ready for production use"
@@ -1414,13 +1416,13 @@ class AutomatedDemoWalkthrough:
             print("To explore taxonomy in the graph visualizer:")
             print("1. Add Class vertices to start set (search for 'Router', 'Database', etc.)")
             print("2. Look for:")
-            print("   • subClassOf edges showing inheritance (Class -> Class)")
-            print("   • type edges showing classification (Device/Software -> Class)")
-            print("   • Hierarchical structure: NetworkDevice -> Router -> EdgeRouter")
+            print("   - subClassOf edges showing inheritance (Class -> Class)")
+            print("   - type edges showing classification (Device/Software -> Class)")
+            print("   - Hierarchical structure: NetworkDevice -> Router -> EdgeRouter")
             print("3. Key observations:")
-            print("   • Multi-level inheritance hierarchies")
-            print("   • Automatic device/software classification")
-            print("   • Semantic relationships for advanced querying")
+            print("   - Multi-level inheritance hierarchies")
+            print("   - Automatic device/software classification")
+            print("   - Semantic relationships for advanced querying")
             print(f"{'='*60}")
             
         except Exception as e:
