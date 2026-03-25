@@ -27,6 +27,10 @@ from src.ttl.ttl_constants import TTLConstants, NEVER_EXPIRES
 from src.utils.alert_naming import alert_namer
 from src.config.generation_constants import GenerationConstants
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class AlertType(Enum):
     """Types of alerts that can be generated."""
@@ -217,10 +221,10 @@ class AlertGenerator:
                 with open(file_path, 'r') as f:
                     return json.load(f)
             else:
-                print(f"[WARNING] Proxy file not found: {file_path}")
+                logger.warning(f"Proxy file not found: {file_path}")
                 return []
         except Exception as e:
-            print(f"[ERROR] Failed to load proxy data: {e}")
+            logger.error(f"Failed to load proxy data: {e}")
             return []
     
     def _generate_alert_from_proxy(self, proxy: Dict, source_type: str, active_ratio: float) -> Tuple[Dict, Dict]:
@@ -342,7 +346,7 @@ class AlertGenerator:
         with open(alert_file_path, 'w') as f:
             json.dump(alert_documents, f, indent=2)
         
-        print(f"   [ALERT] Saved {len(alert_documents)} alert documents to {alert_file_name}")
+        logger.info(f"   [ALERT] Saved {len(alert_documents)} alert documents to {alert_file_name}")
         
         # Save hasAlert edges
         hasAlert_collection_name = self.app_config.get_collection_name("has_alerts")
@@ -352,7 +356,7 @@ class AlertGenerator:
         with open(hasAlert_file_path, 'w') as f:
             json.dump(hasAlert_edges, f, indent=2)
             
-        print(f"   [ALERT] Saved {len(hasAlert_edges)} hasAlert edges to {hasAlert_file_name}")
+        logger.info(f"   [ALERT] Saved {len(hasAlert_edges)} hasAlert edges to {hasAlert_file_name}")
         
         # Print alert summary
         active_alerts = len([a for a in alert_documents if a["status"] == "active"])
@@ -363,33 +367,35 @@ class AlertGenerator:
             severity = alert["severity"]
             severity_counts[severity] = severity_counts.get(severity, 0) + 1
             
-        print(f"   [SUMMARY] {active_alerts} active, {resolved_alerts} resolved")
-        print(f"   [SUMMARY] Severity: {severity_counts}")
+        logger.info(f"   [SUMMARY] {active_alerts} active, {resolved_alerts} resolved")
+        logger.info(f"   [SUMMARY] Severity: {severity_counts}")
 
 
 def main():
     """Demo/test the alert generator."""
     import argparse
-    
+
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
+
     parser = argparse.ArgumentParser(description="Generate alert data for tenant")
     parser.add_argument("--tenant-dir", required=True, help="Tenant data directory")
     parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase")
     parser.add_argument("--active-ratio", type=float, default=0.7, help="Ratio of active alerts (0.0-1.0)")
-    
+
     args = parser.parse_args()
-    
+
     naming = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
     generator = AlertGenerator(naming)
-    
+
     tenant_dir = Path(args.tenant_dir)
     if not tenant_dir.exists():
-        print(f"[ERROR] Tenant directory not found: {tenant_dir}")
+        print(f"Tenant directory not found: {tenant_dir}")
         return
-        
+
     print(f"[INFO] Generating alerts for tenant: {tenant_dir.name}")
     alerts, edges = generator.generate_alert_data(tenant_dir, args.active_ratio)
     generator.save_alert_data(tenant_dir, alerts, edges)
-    print(f"[SUCCESS] Alert generation complete")
+    print("[SUCCESS] Alert generation complete")
 
 
 if __name__ == "__main__":

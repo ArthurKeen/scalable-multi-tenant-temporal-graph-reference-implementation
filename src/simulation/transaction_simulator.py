@@ -10,6 +10,7 @@ Simulates real-world configuration changes that:
 
 import sys
 import json
+import logging
 import datetime
 import random
 from typing import Dict, List, Any, Optional, Tuple
@@ -25,6 +26,8 @@ from src.ttl.ttl_config import TTLManager, create_ttl_configuration
 from src.ttl.ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS
 from src.data_generation.data_generation_utils import KeyGenerator, RandomDataGenerator
 from src.data_generation.data_generation_config import NetworkConfig, DataGenerationLimits
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -80,14 +83,14 @@ class TransactionSimulator(DatabaseMixin):
             results = self.execute_aql(aql)
             
             if self.show_queries:
-                print(f"[QUERY] Find Current {entity_type.title()} Configurations")
-                print(f"[AQL] {aql}")
-                print(f"[RESULTS] Found {len(results)} current {entity_type} configurations")
+                logger.info(f"[QUERY] Find Current {entity_type.title()} Configurations")
+                logger.info(f"[AQL] {aql}")
+                logger.info(f"[RESULTS] Found {len(results)} current {entity_type} configurations")
             
             return results
             
         except Exception as e:
-            print(f"[ERROR] Failed to find current {entity_type} configurations: {str(e)}")
+            logger.error(f"Failed to find current {entity_type} configurations: {str(e)}")
             return []
     
     def simulate_device_configuration_change(self, current_device: Dict[str, Any]) -> Optional[ConfigurationChange]:
@@ -189,7 +192,7 @@ class TransactionSimulator(DatabaseMixin):
             )
             
         except Exception as e:
-            print(f"[ERROR] Failed to simulate device configuration change: {str(e)}")
+            logger.error(f"Failed to simulate device configuration change: {str(e)}")
             return None
     
     def simulate_software_configuration_change(self, current_software: Dict[str, Any]) -> Optional[ConfigurationChange]:
@@ -282,7 +285,7 @@ class TransactionSimulator(DatabaseMixin):
             )
             
         except Exception as e:
-            print(f"[ERROR] Failed to simulate software configuration change: {str(e)}")
+            logger.error(f"Failed to simulate software configuration change: {str(e)}")
             return None
     
     def execute_configuration_change(self, change: ConfigurationChange) -> bool:
@@ -290,7 +293,7 @@ class TransactionSimulator(DatabaseMixin):
         try:
             collection_name = self.app_config.get_collection_name(change.entity_type)
             if not collection_name:
-                print(f"[ERROR] No collection name found for entity type: {change.entity_type}")
+                logger.error(f"No collection name found for entity type: {change.entity_type}")
                 return False
             
             collection = self.database.collection(collection_name)
@@ -302,7 +305,7 @@ class TransactionSimulator(DatabaseMixin):
             old_config["ttlExpireAt"] = expired_timestamp + TTLConstants.DEMO_TTL_EXPIRE_SECONDS  # TTL deletion timestamp (5 minutes for demo)
             
             collection.update(old_config)
-            print(f"   [HISTORICAL] Converted {change.entity_key} to historical (expired={old_config['expired']}, ttlExpireAt={old_config['ttlExpireAt']})")
+            logger.info(f"   [HISTORICAL] Converted {change.entity_key} to historical (expired={old_config['expired']}, ttlExpireAt={old_config['ttlExpireAt']})")
             
             # Step 2: Insert new current configuration (no TTL field for current configs)
             new_config = change.new_config.copy()
@@ -312,10 +315,10 @@ class TransactionSimulator(DatabaseMixin):
             
             try:
                 insert_result = collection.insert(new_config)
-                print(f"   [CURRENT] Created new current config {new_config['_key']} (expired={NEVER_EXPIRES}, no TTL)")
+                logger.info(f"   [CURRENT] Created new current config {new_config['_key']} (expired={NEVER_EXPIRES}, no TTL)")
                     
             except Exception as insert_error:
-                print(f"[ERROR] Failed to insert new config: {str(insert_error)}")
+                logger.error(f"Failed to insert new config: {str(insert_error)}")
                 return False
             
             # Output full vertex IDs for graph visualization
@@ -323,15 +326,15 @@ class TransactionSimulator(DatabaseMixin):
             new_vertex_id = f"{collection_name}/{new_config['_key']}"
             ttl_expire_minutes = TTLConstants.DEMO_TTL_EXPIRE_SECONDS // 60
             
-            print(f"\n   [GRAPH] GRAPH VISUALIZATION IDs:")
-            print(f"   [BEFORE] BEFORE (Historical): {old_vertex_id}")
-            print(f"      [TTL] Will be deleted by TTL in {ttl_expire_minutes} minutes")
-            print(f"   [AFTER] AFTER (Current): {new_vertex_id}")
-            print(f"      [NEVER] Never expires (current configuration)")
-            print(f"   [COPY] Copy these IDs to paste into Graph Visualizer:")
-            print(f"      Historical: {old_vertex_id}")
-            print(f"      Current: {new_vertex_id}")
-            print()
+            logger.info(f"\n   [GRAPH] GRAPH VISUALIZATION IDs:")
+            logger.info(f"   [BEFORE] BEFORE (Historical): {old_vertex_id}")
+            logger.info(f"      [TTL] Will be deleted by TTL in {ttl_expire_minutes} minutes")
+            logger.info(f"   [AFTER] AFTER (Current): {new_vertex_id}")
+            logger.info(f"      [NEVER] Never expires (current configuration)")
+            logger.info(f"   [COPY] Copy these IDs to paste into Graph Visualizer:")
+            logger.info(f"      Historical: {old_vertex_id}")
+            logger.info(f"      Current: {new_vertex_id}")
+            logger.info("")
             
             # Step 3: Update version edges if they exist
             self._update_version_edges(change)
@@ -340,7 +343,7 @@ class TransactionSimulator(DatabaseMixin):
             return True
             
         except Exception as e:
-            print(f"[ERROR] Failed to execute configuration change: {str(e)}")
+            logger.error(f"Failed to execute configuration change: {str(e)}")
             return False
     
     def _update_version_edges(self, change: ConfigurationChange):
@@ -348,7 +351,7 @@ class TransactionSimulator(DatabaseMixin):
         try:
             version_collection_name = self.app_config.get_collection_name("versions")
             if not version_collection_name:
-                print(f"   [VERSION] No version collection found, skipping edge updates")
+                logger.info(f"   [VERSION] No version collection found, skipping edge updates")
                 return
             
             version_collection = self.database.collection(version_collection_name)
@@ -368,7 +371,7 @@ class TransactionSimulator(DatabaseMixin):
                 edge["expired"] = change.timestamp.timestamp()
                 version_collection.update(edge)
             
-            print(f"   [VERSION] Expired {len(existing_edges)} old version edges")
+            logger.info(f"   [VERSION] Expired {len(existing_edges)} old version edges")
             
             # For Software entities, create new hasVersion edges to maintain graph connectivity
             if change.entity_type == "software":
@@ -377,7 +380,7 @@ class TransactionSimulator(DatabaseMixin):
                 self._create_device_version_edges(change, version_collection)
             
         except Exception as e:
-            print(f"[WARNING] Failed to update version edges: {str(e)}")
+            logger.warning(f"Failed to update version edges: {str(e)}")
     
     def _create_software_version_edges(self, change: ConfigurationChange, version_collection):
         """Create hasVersion edges for new Software configuration."""
@@ -386,7 +389,7 @@ class TransactionSimulator(DatabaseMixin):
             old_key = change.entity_key
             key_parts = old_key.split("_")
             if len(key_parts) < 2:
-                print(f"   [VERSION] Cannot parse entity key format: {old_key}")
+                logger.info(f"   [VERSION] Cannot parse entity key format: {old_key}")
                 return
             
             tenant_id = key_parts[0]
@@ -410,7 +413,7 @@ class TransactionSimulator(DatabaseMixin):
             proxy_out_exists = proxy_out_collection.has(proxy_out_key)
             
             if not proxy_in_exists or not proxy_out_exists:
-                print(f"   [VERSION] Proxy vertices not found: ProxyIn={proxy_in_exists}, ProxyOut={proxy_out_exists}")
+                logger.info(f"   [VERSION] Proxy vertices not found: ProxyIn={proxy_in_exists}, ProxyOut={proxy_out_exists}")
                 return
             
             # Construct the full document ID (collection/key)
@@ -445,12 +448,12 @@ class TransactionSimulator(DatabaseMixin):
             version_collection.insert(incoming_edge)
             version_collection.insert(outgoing_edge)
             
-            print(f"   [VERSION] Created hasVersion edges: ProxyIn->Software->ProxyOut")
-            print(f"            Incoming: {incoming_edge['_key']}")
-            print(f"            Outgoing: {outgoing_edge['_key']}")
+            logger.info(f"   [VERSION] Created hasVersion edges: ProxyIn->Software->ProxyOut")
+            logger.info(f"            Incoming: {incoming_edge['_key']}")
+            logger.info(f"            Outgoing: {outgoing_edge['_key']}")
             
         except Exception as e:
-            print(f"   [VERSION] Failed to create software version edges: {str(e)}")
+            logger.info(f"   [VERSION] Failed to create software version edges: {str(e)}")
     
     def _create_device_version_edges(self, change: ConfigurationChange, version_collection):
         """Create hasVersion edges for new Device configuration."""
@@ -459,7 +462,7 @@ class TransactionSimulator(DatabaseMixin):
             old_key = change.entity_key
             key_parts = old_key.split("_")
             if len(key_parts) < 2:
-                print(f"   [VERSION] Cannot parse entity key format: {old_key}")
+                logger.info(f"   [VERSION] Cannot parse entity key format: {old_key}")
                 return
             
             tenant_id = key_parts[0]
@@ -483,7 +486,7 @@ class TransactionSimulator(DatabaseMixin):
             proxy_out_exists = proxy_out_collection.has(proxy_out_key)
             
             if not proxy_in_exists or not proxy_out_exists:
-                print(f"   [VERSION] Proxy vertices not found: ProxyIn={proxy_in_exists}, ProxyOut={proxy_out_exists}")
+                logger.info(f"   [VERSION] Proxy vertices not found: ProxyIn={proxy_in_exists}, ProxyOut={proxy_out_exists}")
                 return
             
             # Construct the full document ID (collection/key)
@@ -518,17 +521,17 @@ class TransactionSimulator(DatabaseMixin):
             version_collection.insert(incoming_edge)
             version_collection.insert(outgoing_edge)
             
-            print(f"   [VERSION] Created hasVersion edges: ProxyIn->Device->ProxyOut")
-            print(f"            Incoming: {incoming_edge['_key']}")
-            print(f"            Outgoing: {outgoing_edge['_key']}")
+            logger.info(f"   [VERSION] Created hasVersion edges: ProxyIn->Device->ProxyOut")
+            logger.info(f"            Incoming: {incoming_edge['_key']}")
+            logger.info(f"            Outgoing: {outgoing_edge['_key']}")
             
         except Exception as e:
-            print(f"   [VERSION] Failed to create device version edges: {str(e)}")
+            logger.info(f"   [VERSION] Failed to create device version edges: {str(e)}")
     
     def run_simulation_batch(self, device_count: int = 3, software_count: int = 3) -> Dict[str, Any]:
         """Run a batch of configuration change simulations."""
-        print(f"\n[SIMULATION] Starting transaction simulation batch")
-        print(f"   Target: {device_count} device changes, {software_count} software changes")
+        logger.info(f"\n[SIMULATION] Starting transaction simulation batch")
+        logger.info(f"   Target: {device_count} device changes, {software_count} software changes")
         
         results = {
             "timestamp": datetime.datetime.now().isoformat(),
@@ -541,7 +544,7 @@ class TransactionSimulator(DatabaseMixin):
         
         # Simulate device changes
         current_devices = self.find_current_configurations("devices", device_count)
-        print(f"   Found {len(current_devices)} current device configurations")
+        logger.info(f"   Found {len(current_devices)} current device configurations")
         
         for device in current_devices[:device_count]:
             change = self.simulate_device_configuration_change(device)
@@ -559,7 +562,7 @@ class TransactionSimulator(DatabaseMixin):
         
         # Simulate software changes
         current_software = self.find_current_configurations("software", software_count)
-        print(f"   Found {len(current_software)} current software configurations")
+        logger.info(f"   Found {len(current_software)} current software configurations")
         
         for software in current_software[:software_count]:
             change = self.simulate_software_configuration_change(software)
@@ -575,17 +578,17 @@ class TransactionSimulator(DatabaseMixin):
                 results["error_count"] += 1
             results["total_changes"] += 1
         
-        print(f"\n[SIMULATION] Batch completed:")
-        print(f"   Total changes: {results['total_changes']}")
-        print(f"   Successful: {results['success_count']}")
-        print(f"   Errors: {results['error_count']}")
+        logger.info(f"\n[SIMULATION] Batch completed:")
+        logger.info(f"   Total changes: {results['total_changes']}")
+        logger.info(f"   Successful: {results['success_count']}")
+        logger.info(f"   Errors: {results['error_count']}")
         
         return results
     
     def simulate_device_configuration_changes(self, device_count: int = 3) -> List[ConfigurationChange]:
         """Simulate multiple device configuration changes."""
         try:
-            print(f"[SIMULATION] Starting {device_count} device configuration changes...")
+            logger.info(f"[SIMULATION] Starting {device_count} device configuration changes...")
             changes = []
             
             # Find current device configurations
@@ -596,22 +599,22 @@ class TransactionSimulator(DatabaseMixin):
                 if change:
                     if self.execute_configuration_change(change):
                         changes.append(change)
-                        print(f"   [CHANGE] {change.change_description}")
+                        logger.info(f"   [CHANGE] {change.change_description}")
                     else:
-                        print(f"   [ERROR] Failed to execute change for {device['_key']}")
+                        logger.error(f"Failed to execute change for {device['_key']}")
                 else:
-                    print(f"   [SKIP] No change generated for {device['_key']}")
+                    logger.info(f"   [SKIP] No change generated for {device['_key']}")
             
             return changes
             
         except Exception as e:
-            print(f"[ERROR] Failed to simulate device configuration changes: {str(e)}")
+            logger.error(f"Failed to simulate device configuration changes: {str(e)}")
             return []
     
     def simulate_software_configuration_changes(self, software_count: int = 3) -> List[ConfigurationChange]:
         """Simulate multiple software configuration changes."""
         try:
-            print(f"[SIMULATION] Starting {software_count} software configuration changes...")
+            logger.info(f"[SIMULATION] Starting {software_count} software configuration changes...")
             changes = []
             
             # Find current software configurations
@@ -622,16 +625,16 @@ class TransactionSimulator(DatabaseMixin):
                 if change:
                     if self.execute_configuration_change(change):
                         changes.append(change)
-                        print(f"   [CHANGE] {change.change_description}")
+                        logger.info(f"   [CHANGE] {change.change_description}")
                     else:
-                        print(f"   [ERROR] Failed to execute change for {software['_key']}")
+                        logger.error(f"Failed to execute change for {software['_key']}")
                 else:
-                    print(f"   [SKIP] No change generated for {software['_key']}")
+                    logger.info(f"   [SKIP] No change generated for {software['_key']}")
             
             return changes
             
         except Exception as e:
-            print(f"[ERROR] Failed to simulate software configuration changes: {str(e)}")
+            logger.error(f"Failed to simulate software configuration changes: {str(e)}")
             return []
     
     def get_simulation_summary(self) -> Dict[str, Any]:
@@ -652,7 +655,9 @@ class TransactionSimulator(DatabaseMixin):
 def main():
     """Main function for running transaction simulation."""
     import argparse
-    
+
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
+
     parser = argparse.ArgumentParser(description="Simulate configuration change transactions")
     parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
                        help="Naming convention (default: camelCase)")
@@ -660,32 +665,26 @@ def main():
                        help=f"Number of device configuration changes to simulate (default: {TTLConstants.DEFAULT_DEVICE_SIMULATION_COUNT})")
     parser.add_argument("--software", type=int, default=TTLConstants.DEFAULT_SOFTWARE_SIMULATION_COUNT,
                        help=f"Number of software configuration changes to simulate (default: {TTLConstants.DEFAULT_SOFTWARE_SIMULATION_COUNT})")
-    
+
     args = parser.parse_args()
-    
-    # Convert naming argument to enum
+
     naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
-    
-    # Create and run simulator
     simulator = TransactionSimulator(naming_convention)
-    
+
     if not simulator.connect_to_database():
-        print("[ERROR] Failed to connect to database")
+        print("Failed to connect to database")
         sys.exit(1)
-    
-    # Run simulation
+
     results = simulator.run_simulation_batch(args.devices, args.software)
-    
-    # Save results
+
     results_path = Path("reports") / f"transaction_simulation_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
     results_path.parent.mkdir(exist_ok=True)
-    
+
     with open(results_path, "w") as f:
         json.dump(results, f, indent=2)
-    
+
     print(f"\n[RESULTS] Simulation results saved to: {results_path}")
-    
-    # Print summary
+
     summary = simulator.get_simulation_summary()
     print(f"\n[SUMMARY] Transaction Simulation Summary:")
     print(f"   Total changes simulated: {summary['total_simulated_changes']}")

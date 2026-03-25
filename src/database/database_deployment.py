@@ -10,6 +10,7 @@ Deploys the refactored time travel pattern with:
 """
 
 import json
+import logging
 import sys
 from pathlib import Path
 from typing import Dict, List, Any
@@ -20,6 +21,8 @@ from src.config.centralized_credentials import CredentialsManager
 from src.config.config_management import get_config, NamingConvention
 from src.ttl.ttl_config import (create_ttl_configuration, create_demo_ttl_configuration, TTLManager)
 from src.ttl.ttl_constants import DEFAULT_TTL_DAYS, TTLConstants
+
+logger = logging.getLogger(__name__)
 
 
 class TimeTravelRefactoredDeployment:
@@ -42,22 +45,22 @@ class TimeTravelRefactoredDeployment:
                 self.ttl_config = create_demo_snake_case_ttl_configuration("deployment")
             else:
                 self.ttl_config = create_demo_ttl_configuration("deployment")
-            print(f"[DEMO] Using demo TTL configuration ({TTLConstants.DEMO_TTL_EXPIRE_MINUTES} minutes)")
+            logger.info(f"[DEMO] Using demo TTL configuration ({TTLConstants.DEMO_TTL_EXPIRE_MINUTES} minutes)")
         else:
             # Use production TTL periods (30 days)
             if naming_convention == NamingConvention.SNAKE_CASE:
                 self.ttl_config = create_snake_case_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
             else:
                 self.ttl_config = create_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
-            print(f"[PRODUCTION] Using production TTL configuration (30 days)")
+            logger.info(f"[PRODUCTION] Using production TTL configuration (30 days)")
         
         self.ttl_manager = TTLManager(self.ttl_config)
         
     def connect_to_cluster(self) -> bool:
         """Connect to ArangoDB Oasis cluster."""
         try:
-            print(f"[LINK] Connecting to ArangoDB Oasis cluster...")
-            print(f"   Endpoint: {self.creds.endpoint}")
+            logger.info(f"[LINK] Connecting to ArangoDB Oasis cluster...")
+            logger.info(f"   Endpoint: {self.creds.endpoint}")
             
             # Connect to system database
             self.sys_db = self.client.db('_system', **CredentialsManager.get_database_params())
@@ -65,65 +68,65 @@ class TimeTravelRefactoredDeployment:
             # Test connection
             version_info = self.sys_db.version()
             if isinstance(version_info, dict):
-                print(f"   Version: {version_info.get('version', 'Unknown')}")
-                print(f"   Server: {version_info.get('server', 'Unknown')}")
+                logger.info(f"   Version: {version_info.get('version', 'Unknown')}")
+                logger.info(f"   Server: {version_info.get('server', 'Unknown')}")
             else:
-                print(f"   Connected: {version_info}")
+                logger.info(f"   Connected: {version_info}")
             
             # Connect to target database or create it if it doesn't exist
             if self.sys_db.has_database(self.creds.database_name):
                 self.database = self.client.db(self.creds.database_name, **CredentialsManager.get_database_params())
-                print(f"[DONE] Connected to existing database: {self.creds.database_name}")
+                logger.info(f"[DONE] Connected to existing database: {self.creds.database_name}")
                 return True
             else:
-                print(f"[INFO] Database '{self.creds.database_name}' not found - creating it...")
+                logger.info(f"[INFO] Database '{self.creds.database_name}' not found - creating it...")
                 try:
                     # Create the database
                     self.sys_db.create_database(self.creds.database_name)
                     self.database = self.client.db(self.creds.database_name, **CredentialsManager.get_database_params())
-                    print(f"[DONE] Created and connected to database: {self.creds.database_name}")
+                    logger.info(f"[DONE] Created and connected to database: {self.creds.database_name}")
                     return True
                 except Exception as create_error:
-                    print(f"[ERROR] Failed to create database '{self.creds.database_name}': {create_error}")
+                    logger.error(f"Failed to create database '{self.creds.database_name}': {create_error}")
                     return False
                 
         except Exception as e:
-            print(f"[ERROR] Connection failed: {str(e)}")
+            logger.error(f"Connection failed: {str(e)}")
             return False
     
     def drop_and_recreate_database(self) -> bool:
         """Drop existing database and recreate with refactored structure."""
         try:
-            print(f"\n[DELETE]  Dropping existing database: {self.creds.database_name}")
+            logger.info(f"\n[DELETE]  Dropping existing database: {self.creds.database_name}")
             
             # Drop database if it exists
             if self.sys_db.has_database(self.creds.database_name):
                 self.sys_db.delete_database(self.creds.database_name)
-                print(f"   Dropped: {self.creds.database_name}")
+                logger.info(f"   Dropped: {self.creds.database_name}")
             
             # Create fresh database
             self.sys_db.create_database(self.creds.database_name)
             self.database = self.client.db(self.creds.database_name, **CredentialsManager.get_database_params())
-            print(f"[DONE] Created fresh database: {self.creds.database_name}")
+            logger.info(f"[DONE] Created fresh database: {self.creds.database_name}")
             
             return True
             
         except Exception as e:
-            print(f"[ERROR] Error recreating database: {str(e)}")
+            logger.error(f"Error recreating database: {str(e)}")
             return False
     
     def create_refactored_collections(self) -> bool:
         """Create satellite collections only - SmartGraph collections are auto-created by SmartGraph."""
         try:
             convention_name = "camelCase" if self.naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
-            print(f"\n[INFO] Creating satellite collections with {convention_name} naming...")
+            logger.info(f"\n[INFO] Creating satellite collections with {convention_name} naming...")
 
             # Only create satellite collections - SmartGraph will auto-create its own collections
             satellite_collections = [
                 {"name": self.app_config.get_collection_name("classes"), "type": "vertex"}
             ]
 
-            print(f"   Creating satellite collections for shared taxonomy...")
+            logger.info(f"   Creating satellite collections for shared taxonomy...")
             for collection_config in satellite_collections:
                 name = collection_config["name"]
                 is_edge = collection_config["type"] == "edge"
@@ -135,21 +138,21 @@ class TimeTravelRefactoredDeployment:
                         edge=is_edge,
                         replication_factor="satellite"  # This makes it a satellite collection
                     )
-                    print(f"   [DONE] Created satellite {collection_config['type']} collection: {name}")
+                    logger.info(f"   [DONE] Created satellite {collection_config['type']} collection: {name}")
                 else:
-                    print(f"   [INFO] Satellite collection '{name}' already exists")
+                    logger.info(f"   [INFO] Satellite collection '{name}' already exists")
 
-            print(f"[DONE] Satellite collections created (SmartGraph will auto-create its collections)")
+            logger.info(f"[DONE] Satellite collections created (SmartGraph will auto-create its collections)")
             return True
 
         except Exception as e:
-            print(f"[ERROR] Error creating satellite collections: {str(e)}")
+            logger.error(f"Error creating satellite collections: {str(e)}")
             return False
     
     def create_refactored_indexes(self) -> bool:
         """Create indexes optimized for time travel refactored structure."""
         try:
-            print(f"\n[ANALYSIS] Creating time travel refactored indexes...")
+            logger.info(f"\n[ANALYSIS] Creating time travel refactored indexes...")
             
             # Refactored index configurations
             index_configs = [
@@ -285,7 +288,7 @@ class TimeTravelRefactoredDeployment:
                             'fields': index_config["fields"],
                             'name': index_config.get("name")
                         })
-                        print(f"   [DONE] Created persistent index: {index_config['name']}")
+                        logger.info(f"   [DONE] Created persistent index: {index_config['name']}")
                         
                     elif index_config["type"] == "hash":
                         collection.add_index({
@@ -293,7 +296,7 @@ class TimeTravelRefactoredDeployment:
                             'fields': index_config["fields"],
                             'name': index_config.get("name")
                         })
-                        print(f"   [DONE] Created hash index: {index_config['name']}")
+                        logger.info(f"   [DONE] Created hash index: {index_config['name']}")
                     
                     elif index_config["type"] == "ttl":
                         # Drop existing TTL index if it exists (to ensure correct expireAfter value)
@@ -302,10 +305,10 @@ class TimeTravelRefactoredDeployment:
                             for existing_idx in existing_indexes:
                                 if existing_idx.get('name') == index_config.get("name"):
                                     collection.delete_index(existing_idx['id'])
-                                    print(f"   [TTL] Dropped existing TTL index: {index_config['name']}")
+                                    logger.info(f"   [TTL] Dropped existing TTL index: {index_config['name']}")
                                     break
                         except Exception as e:
-                            print(f"   [INFO] No existing TTL index to drop: {e}")
+                            logger.info(f"   [INFO] No existing TTL index to drop: {e}")
                         
                         # Create new TTL index with correct configuration
                         collection.add_index({
@@ -317,7 +320,7 @@ class TimeTravelRefactoredDeployment:
                             'selectivityEstimate': index_config.get("selectivityEstimate", 0.1)
                         })
                         expire_minutes = index_config["expireAfter"] / 60 if index_config["expireAfter"] > 0 else 0
-                        print(f"   [TTL] Created TTL index: {index_config['name']} (expire after {expire_minutes} minutes)")
+                        logger.info(f"   [TTL] Created TTL index: {index_config['name']} (expire after {expire_minutes} minutes)")
                     
                     elif index_config["type"] == "mdi":
                         collection.add_index({
@@ -331,31 +334,31 @@ class TimeTravelRefactoredDeployment:
                         })
                         field_names = ", ".join(index_config["fields"])
                         prefix_fields = ", ".join(index_config.get("prefixFields", [index_config["fields"][0]]))
-                        print(f"   [MDI] Created MDI-prefixed multi-dimensional index: {index_config['name']} on [{field_names}] with prefix [{prefix_fields}]")
+                        logger.info(f"   [MDI] Created MDI-prefixed multi-dimensional index: {index_config['name']} on [{field_names}] with prefix [{prefix_fields}]")
                     
                     else:
-                        print(f"   [SKIP] Unknown index type: {index_config['type']}")
+                        logger.info(f"   [SKIP] Unknown index type: {index_config['type']}")
                 else:
-                    print(f"   [SKIP] Collection not found: {collection_name}")
+                    logger.info(f"   [SKIP] Collection not found: {collection_name}")
             
-            print(f"[DONE] Time travel refactored indexes created (including TTL)")
+            logger.info(f"[DONE] Time travel refactored indexes created (including TTL)")
             return True
             
         except Exception as e:
-            print(f"[ERROR] Error creating indexes: {str(e)}")
+            logger.error(f"Error creating indexes: {str(e)}")
             return False
     
     def load_refactored_data(self) -> bool:
         """Load time travel refactored tenant data into collections."""
         try:
-            print(f"\n[DATA] Loading time travel refactored data...")
+            logger.info(f"\n[DATA] Loading time travel refactored data...")
             
             # Find tenant directories with refactored data
             data_dir = Path("data")
             tenant_dirs = [d for d in data_dir.iterdir() if d.is_dir() and d.name.startswith("tenant_")]
             
             if not tenant_dirs:
-                print(f"[ERROR] No tenant data directories found in {data_dir}")
+                logger.error(f"No tenant data directories found in {data_dir}")
                 return False
             
             # Time travel refactored file to collection mappings - use configuration manager
@@ -380,7 +383,7 @@ class TimeTravelRefactoredDeployment:
             
             for tenant_dir in tenant_dirs:
                 tenant_id = tenant_dir.name.replace("tenant_", "")
-                print(f"\n    Loading tenant: {tenant_id}")
+                logger.info(f"\n    Loading tenant: {tenant_id}")
                 
                 tenant_total = 0
                 
@@ -399,35 +402,35 @@ class TimeTravelRefactoredDeployment:
                             doc_count = len(data)
                             tenant_total += doc_count
                             total_loaded += doc_count
-                            print(f"      [DONE] {collection_name}: {doc_count} documents")
+                            logger.info(f"      [DONE] {collection_name}: {doc_count} documents")
                         else:
-                            print(f"      [INFO] {collection_name}: empty file")
+                            logger.info(f"      [INFO] {collection_name}: empty file")
                     else:
                         if filename in ["SoftwareProxyIn.json", "SoftwareProxyOut.json", "hasDeviceSoftware.json"]:
-                            print(f"      [WARNING]  {filename}: NEW collection - file not found (expected for old data)")
+                            logger.warning(f"      {filename}: NEW collection - file not found (expected for old data)")
                         else:
-                            print(f"      [WARNING]  {filename}: file not found")
+                            logger.warning(f"      {filename}: file not found")
                 
-                print(f"   [DATA] Tenant {tenant_id}: {tenant_total} documents loaded")
+                logger.info(f"   [DATA] Tenant {tenant_id}: {tenant_total} documents loaded")
             
-            print(f"\n[DONE] Total documents loaded: {total_loaded}")
+            logger.info(f"\n[DONE] Total documents loaded: {total_loaded}")
             return True
             
         except Exception as e:
-            print(f"[ERROR] Error loading data: {str(e)}")
+            logger.error(f"Error loading data: {str(e)}")
             return False
     
     def create_refactored_named_graphs(self) -> bool:
         """Create a single unified SmartGraph for all tenants with proper smartGraphAttribute."""
         try:
-            print(f"\n[GRAPH] Creating unified SmartGraph for multi-tenant isolation...")
+            logger.info(f"\n[GRAPH] Creating unified SmartGraph for multi-tenant isolation...")
             
             # Single SmartGraph name for all tenants
             smartgraph_name = "network_assets_smartgraph"
             
             # Check if SmartGraph already exists
             if self.database.has_graph(smartgraph_name):
-                print(f"   [INFO] SmartGraph '{smartgraph_name}' already exists")
+                logger.info(f"   [INFO] SmartGraph '{smartgraph_name}' already exists")
                 return True
             
             # Define edge definitions for the unified SmartGraph
@@ -497,9 +500,9 @@ class TimeTravelRefactoredDeployment:
                     smart_field="tenantId"  # This enables tenant-based sharding
                 )
                 
-                print(f"   [DONE] Created unified SmartGraph: {smartgraph_name}")
-                print(f"          Smart attribute: tenantId")
-                print(f"          Tenant isolation: Automatic via smartGraphAttribute")
+                logger.info(f"   [DONE] Created unified SmartGraph: {smartgraph_name}")
+                logger.info(f"          Smart attribute: tenantId")
+                logger.info(f"          Tenant isolation: Automatic via smartGraphAttribute")
                 
                 # Create satellite graph for taxonomy (shared across all tenants)
                 satellite_graph_name = "taxonomy_satellite_graph"
@@ -518,29 +521,29 @@ class TimeTravelRefactoredDeployment:
                             edge_definitions=satellite_edge_definitions
                             # Note: satellite=True parameter may need different syntax in this driver
                         )
-                        print(f"   [DONE] Created satellite graph: {satellite_graph_name}")
+                        logger.info(f"   [DONE] Created satellite graph: {satellite_graph_name}")
                         
                     except Exception as satellite_error:
-                        print(f"   [WARNING] Satellite graph creation failed: {satellite_error}")
-                        print(f"             Taxonomy will use regular graph")
+                        logger.warning(f"Satellite graph creation failed: {satellite_error}")
+                        logger.info(f"             Taxonomy will use regular graph")
                 else:
-                    print(f"   [INFO] Satellite graph '{satellite_graph_name}' already exists")
+                    logger.info(f"   [INFO] Satellite graph '{satellite_graph_name}' already exists")
                 
-                print(f"[DONE] SmartGraph configuration completed")
+                logger.info(f"[DONE] SmartGraph configuration completed")
                 return True
                 
             except Exception as graph_error:
-                print(f"   [ERROR] Failed to create SmartGraph '{smartgraph_name}': {graph_error}")
+                logger.error(f"Failed to create SmartGraph '{smartgraph_name}': {graph_error}")
                 return False
             
         except Exception as e:
-            print(f"[ERROR] Error creating unified SmartGraph: {str(e)}")
+            logger.error(f"Error creating unified SmartGraph: {str(e)}")
             return False
     
     def verify_refactored_deployment(self) -> bool:
         """Verify the refactored time travel deployment."""
         try:
-            print(f"\n[ANALYSIS] Verifying time travel refactored deployment...")
+            logger.info(f"\n[ANALYSIS] Verifying time travel refactored deployment...")
             
             # Check new Software proxy collections exist
             software_proxy_collections = ["SoftwareProxyIn", "SoftwareProxyOut"]
@@ -548,9 +551,9 @@ class TimeTravelRefactoredDeployment:
                 if self.database.has_collection(collection_name):
                     collection = self.database.collection(collection_name)
                     count = collection.count()
-                    print(f"   [DONE] {collection_name}: {count} documents")
+                    logger.info(f"   [DONE] {collection_name}: {count} documents")
                 else:
-                    print(f"   [WARNING]  {collection_name}: collection not found (may be from old data)")
+                    logger.warning(f"   {collection_name}: collection not found (may be from old data)")
             
             # Check Software collection is refactored (no configurationHistory)
             software_collection = self.database.collection("Software")
@@ -558,35 +561,35 @@ class TimeTravelRefactoredDeployment:
             
             for doc in sample_software:
                 if "configurationHistory" in doc:
-                    print(f"   [ERROR] Software still has configurationHistory: {doc['_key']}")
+                    logger.error(f"Software still has configurationHistory: {doc['_key']}")
                     return False
                 else:
-                    print(f"   [DONE] Software refactored (no configurationHistory): {doc['_key']}")
+                    logger.info(f"   [DONE] Software refactored (no configurationHistory): {doc['_key']}")
                 
                 # Check for flattened configuration
                 if "portNumber" in doc and "isEnabled" in doc:
-                    print(f"   [DONE] Software has flattened configuration: portNumber={doc.get('portNumber')}, isEnabled={doc.get('isEnabled')}")
+                    logger.info(f"   [DONE] Software has flattened configuration: portNumber={doc.get('portNumber')}, isEnabled={doc.get('isEnabled')}")
                 else:
-                    print(f"   [WARNING]  Software missing flattened configuration")
+                    logger.warning(f"   Software missing flattened configuration")
             
             # Check unified version collection has both device and software edges
             version_collection = self.database.collection("hasVersion")
             
             # Query for device version edges
             device_version_count = version_collection.find({"_fromType": "DeviceProxyIn"}).count()
-            print(f"   [DONE] Device version edges: {device_version_count}")
+            logger.info(f"   [DONE] Device version edges: {device_version_count}")
             
             # Query for software version edges  
             software_version_count = version_collection.find({"_fromType": "SoftwareProxyIn"}).count()
-            print(f"   [DONE] Software version edges: {software_version_count}")
+            logger.info(f"   [DONE] Software version edges: {software_version_count}")
             
             # Check hasDeviceSoftware collection
             if self.database.has_collection("hasDeviceSoftware"):
                 has_device_software = self.database.collection("hasDeviceSoftware")
                 count = has_device_software.count()
-                print(f"   [DONE] hasDeviceSoftware: {count} edges")
+                logger.info(f"   [DONE] hasDeviceSoftware: {count} edges")
             else:
-                print(f"   [WARNING]  hasDeviceSoftware: collection not found")
+                logger.warning(f"   hasDeviceSoftware: collection not found")
             
             # Verify all collections exist with correct names
             expected_collections = [
@@ -598,22 +601,22 @@ class TimeTravelRefactoredDeployment:
                 if self.database.has_collection(collection_name):
                     collection = self.database.collection(collection_name)
                     count = collection.count()
-                    print(f"   [DONE] {collection_name}: {count} documents")
+                    logger.info(f"   [DONE] {collection_name}: {count} documents")
                 else:
-                    print(f"[ERROR] Missing collection: {collection_name}")
+                    logger.error(f"Missing collection: {collection_name}")
                     return False
             
-            print(f"[DONE] Time travel refactored deployment verified successfully")
+            logger.info(f"[DONE] Time travel refactored deployment verified successfully")
             return True
             
         except Exception as e:
-            print(f"[ERROR] Error verifying deployment: {str(e)}")
+            logger.error(f"Error verifying deployment: {str(e)}")
             return False
 
     def deploy_all_tenant_data(self) -> bool:
         """Deploy all tenant data to the database with collections and indexes."""
         try:
-            print("[DEPLOY] Starting complete deployment with MDI-prefix indexes...")
+            logger.info("[DEPLOY] Starting complete deployment with MDI-prefix indexes...")
             
             # Step 1: Connect to cluster
             if not self.connect_to_cluster():
@@ -643,24 +646,24 @@ class TimeTravelRefactoredDeployment:
             if not self.verify_refactored_deployment():
                 return False
             
-            print(f"\n[SUCCESS] Complete deployment with MDI-prefix indexes successful!")
+            logger.info(f"\n[SUCCESS] Complete deployment with MDI-prefix indexes successful!")
             return True
             
         except Exception as e:
-            print(f"[ERROR] Complete deployment failed: {e}")
+            logger.error(f"Complete deployment failed: {e}")
             return False
     
     def deploy_time_travel_refactored(self) -> bool:
         """Execute complete deployment of time travel refactored data."""
-        print("[DEPLOY] Time Travel Refactored Database Deployment")
-        print("=" * 60)
-        print("[INFO] Deploying:")
-        print("   - Device time travel: DeviceProxyIn <-> Device <-> DeviceProxyOut")
-        print("   - Software time travel: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)")
-        print("   - Unified 'version' collection for all time travel relationships")
-        print("   - New hasDeviceSoftware edge collection")
-        print("   - Software configurationHistory array removed (flattened)")
-        print()
+        logger.info("[DEPLOY] Time Travel Refactored Database Deployment")
+        logger.info("=" * 60)
+        logger.info("[INFO] Deploying:")
+        logger.info("   - Device time travel: DeviceProxyIn <-> Device <-> DeviceProxyOut")
+        logger.info("   - Software time travel: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)")
+        logger.info("   - Unified 'version' collection for all time travel relationships")
+        logger.info("   - New hasDeviceSoftware edge collection")
+        logger.info("   - Software configurationHistory array removed (flattened)")
+        logger.info("")
         
         # Execute deployment steps
         steps = [
@@ -674,20 +677,20 @@ class TimeTravelRefactoredDeployment:
         ]
         
         for step_name, step_function in steps:
-            print(f"\n-> {step_name}...")
+            logger.info(f"\n-> {step_name}...")
             if not step_function():
-                print(f"[ERROR] Failed at step: {step_name}")
+                logger.error(f"Failed at step: {step_name}")
                 return False
         
-        print(f"\n[SUCCESS] Time travel refactored deployment completed successfully!")
-        print(f"[DATA] Database: {self.creds.database_name}")
-        print(f"[LINK] Endpoint: {self.creds.endpoint}")
-        print(f"-> Time Travel Refactoring:")
-        print(f"   - Device: Existing pattern maintained")
-        print(f"   - Software: NEW time travel pattern implemented")
-        print(f"   - Unified version collection for consistent queries")
-        print(f"   - Software configurationHistory array eliminated")
-        print(f"   - W3C OWL naming conventions")
+        logger.info(f"\n[SUCCESS] Time travel refactored deployment completed successfully!")
+        logger.info(f"[DATA] Database: {self.creds.database_name}")
+        logger.info(f"[LINK] Endpoint: {self.creds.endpoint}")
+        logger.info(f"-> Time Travel Refactoring:")
+        logger.info(f"   - Device: Existing pattern maintained")
+        logger.info(f"   - Software: NEW time travel pattern implemented")
+        logger.info(f"   - Unified version collection for consistent queries")
+        logger.info(f"   - Software configurationHistory array eliminated")
+        logger.info(f"   - W3C OWL naming conventions")
         
         return True
 
@@ -695,24 +698,29 @@ class TimeTravelRefactoredDeployment:
 def main():
     """Main deployment function."""
     import argparse
-    
+
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
+
     parser = argparse.ArgumentParser(description="Deploy multi-tenant network asset data to ArangoDB")
     parser.add_argument("--naming", choices=["camelCase"], default="camelCase",
                        help="Naming convention for collections and properties (camelCase only)")
     parser.add_argument("--demo-mode", action="store_true",
                        help="Use short TTL periods (5 minutes) for demonstration purposes")
-    
+
     args = parser.parse_args()
-    
-    # Convert naming argument to enum
+
     naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
-    
+
     deployment = TimeTravelRefactoredDeployment(naming_convention, demo_mode=args.demo_mode)
     success = deployment.deploy_time_travel_refactored()
-    
+
     if success:
         print(f"\n[DONE] Database updated with {args.naming} naming convention!")
         sys.exit(0)
     else:
-        print(f"\n[ERROR] Deployment failed!")
+        print("\nDeployment failed!")
         sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

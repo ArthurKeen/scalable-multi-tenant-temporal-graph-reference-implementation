@@ -260,37 +260,37 @@ has_version (tenant-scoped via smartGraph attribute)
 **camelCase (Default)**
 ```
 data/
-├── tenant_{tenant_id}/
-│   ├── Device.json
-│   ├── DeviceProxyIn.json
-│   ├── DeviceProxyOut.json
-│   ├── Location.json
-│   ├── Software.json
-│   ├── SoftwareProxyIn.json
-│   ├── SoftwareProxyOut.json
-│   ├── hasConnection.json
-│   ├── hasLocation.json
-│   ├── hasDeviceSoftware.json
-│   └── hasVersion.json
-└── tenant_registry_time_travel.json (tenant metadata)
+|-- tenant_{tenant_id}/
+|   |-- Device.json
+|   |-- DeviceProxyIn.json
+|   |-- DeviceProxyOut.json
+|   |-- Location.json
+|   |-- Software.json
+|   |-- SoftwareProxyIn.json
+|   |-- SoftwareProxyOut.json
+|   |-- hasConnection.json
+|   |-- hasLocation.json
+|   |-- hasDeviceSoftware.json
+|   +-- hasVersion.json
++-- tenant_registry_time_travel.json (tenant metadata)
 ```
 
 **snake_case (Alternative)**
 ```
 data/
-├── tenant_{tenant_id}/
-│   ├── device.json
-│   ├── device_proxy_in.json
-│   ├── device_proxy_out.json
-│   ├── location.json
-│   ├── software.json
-│   ├── software_proxy_in.json
-│   ├── software_proxy_out.json
-│   ├── has_connection.json
-│   ├── has_location.json
-│   ├── has_device_software.json
-│   └── has_version.json
-└── tenant_registry_time_travel.json (tenant metadata)
+|-- tenant_{tenant_id}/
+|   |-- device.json
+|   |-- device_proxy_in.json
+|   |-- device_proxy_out.json
+|   |-- location.json
+|   |-- software.json
+|   |-- software_proxy_in.json
+|   |-- software_proxy_out.json
+|   |-- has_connection.json
+|   |-- has_location.json
+|   |-- has_device_software.json
+|   +-- has_version.json
++-- tenant_registry_time_travel.json (tenant metadata)
 ```
 
 ### SmartGraph Definition
@@ -409,7 +409,7 @@ The reference implementation will be enhanced with a comprehensive alert managem
 - **Alert Collection**: Vertex collection containing alert events with TTL management
 - **hasAlert Relationships**: Edge collection connecting DeviceProxyOut/SoftwareProxyOut to Alert entities
 - **Event-Based Design**: Alerts are events (not configurations), no time travel versioning needed
-- **TTL Lifecycle**: Active alerts (no TTL) → Resolved alerts (TTL-enabled for automatic cleanup)
+- **TTL Lifecycle**: Active alerts (no TTL) -> Resolved alerts (TTL-enabled for automatic cleanup)
 
 #### Alert Data Model
 ```

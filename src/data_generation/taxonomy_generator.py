@@ -24,6 +24,10 @@ from src.config.tenant_config import TenantConfig, TemporalDataModel
 from src.ttl.ttl_constants import NEVER_EXPIRES
 from src.data_generation.data_generation_utils import KeyGenerator
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class TaxonomyGenerator:
     """Generate taxonomy classes and relationships for multi-tenant system."""
@@ -213,7 +217,7 @@ class TaxonomyGenerator:
         type_edges = []
         device_classes = DEVICE_TAXONOMY.get_all_classes()
         
-        print(f"[TAXONOMY] Generating device classifications for {len(devices)} devices")
+        logger.info(f"[TAXONOMY] Generating device classifications for {len(devices)} devices")
         
         # Use the stored class key mapping from generated documents
         # No need to generate new random keys - use the actual ones!
@@ -228,9 +232,9 @@ class TaxonomyGenerator:
                 fallback_class = "network_device"
                 if fallback_class in device_classes and fallback_class in self.class_key_mapping:
                     class_key = fallback_class
-                    print(f"[TAXONOMY] Device {device.get('name', device.get('_key'))} using fallback classification: {class_key}")
+                    logger.info(f"[TAXONOMY] Device {device.get('name', device.get('_key'))} using fallback classification: {class_key}")
                 else:
-                    print(f"[WARNING] No classification available for device {device.get('name', device.get('_key'))} - skipping type edge")
+                    logger.warning(f"No classification available for device {device.get('name', device.get('_key'))} - skipping type edge")
                     continue
             
             # Create type edge using actual generated class document key
@@ -242,7 +246,7 @@ class TaxonomyGenerator:
             )
             type_edges.append(edge)
         
-        print(f"[TAXONOMY] Generated {len(type_edges)} device type edges (100% coverage)")
+        logger.info(f"[TAXONOMY] Generated {len(type_edges)} device type edges (100% coverage)")
         return type_edges
     
     def generate_software_classifications(self, software_list: List[Dict[str, Any]], 
@@ -260,7 +264,7 @@ class TaxonomyGenerator:
         type_edges = []
         software_classes = SOFTWARE_TAXONOMY.get_all_classes()
         
-        print(f"[TAXONOMY] Generating software classifications for {len(software_list)} software entities")
+        logger.info(f"[TAXONOMY] Generating software classifications for {len(software_list)} software entities")
         
         # Use the stored class key mapping from generated documents
         # No need to generate new random keys - use the actual ones!
@@ -275,9 +279,9 @@ class TaxonomyGenerator:
                 fallback_class = "software"
                 if fallback_class in software_classes and fallback_class in self.class_key_mapping:
                     class_key = fallback_class
-                    print(f"[TAXONOMY] Software {software.get('name', software.get('_key'))} using fallback classification: {class_key}")
+                    logger.info(f"[TAXONOMY] Software {software.get('name', software.get('_key'))} using fallback classification: {class_key}")
                 else:
-                    print(f"[WARNING] No classification available for software {software.get('name', software.get('_key'))} - skipping type edge")
+                    logger.warning(f"No classification available for software {software.get('name', software.get('_key'))} - skipping type edge")
                     continue
             
             # Create type edge using actual generated class document key
@@ -289,7 +293,7 @@ class TaxonomyGenerator:
             )
             type_edges.append(edge)
         
-        print(f"[TAXONOMY] Generated {len(type_edges)} software type edges (100% coverage)")
+        logger.info(f"[TAXONOMY] Generated {len(type_edges)} software type edges (100% coverage)")
         return type_edges
     
     def _classify_device(self, device: Dict[str, Any]) -> Optional[str]:
@@ -435,6 +439,7 @@ class TaxonomyGenerator:
 
 # Example usage and testing
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
     print("=== TAXONOMY GENERATOR TEST ===")
     
     generator = TaxonomyGenerator()

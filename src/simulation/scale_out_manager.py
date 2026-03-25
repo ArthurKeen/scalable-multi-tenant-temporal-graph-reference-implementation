@@ -13,6 +13,7 @@ without disrupting existing tenant operations.
 
 import json
 import datetime
+import logging
 import sys
 import time
 from typing import Dict, List, Any, Optional, Tuple
@@ -32,6 +33,8 @@ from src.ttl.ttl_constants import TTLConstants, TTLMessages, DEFAULT_TTL_DAYS
 from src.data_generation.asset_generator import TimeTravelRefactoredGenerator
 from src.database.database_deployment import TimeTravelRefactoredDeployment
 from src.database.oasis_cluster_setup import OasisClusterManager
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -92,7 +95,7 @@ class TenantAdditionManager:
     def connect_to_database(self) -> bool:
         """Connect to existing database."""
         try:
-            print(f"[CONNECT] Connecting to existing database for tenant addition...")
+            logger.info(f"[CONNECT] Connecting to existing database for tenant addition...")
             self.database = self.client.db(
                 self.creds.database_name,
                 **CredentialsManager.get_database_params()
@@ -100,7 +103,7 @@ class TenantAdditionManager:
             
             # Test connection and get current state
             collections = self.database.collections()
-            print(f"[CONNECT] Connected successfully - {len(collections)} collections found")
+            logger.info(f"[CONNECT] Connected successfully - {len(collections)} collections found")
             
             # Connect cluster manager
             if not self.cluster_manager.connect():
@@ -112,7 +115,7 @@ class TenantAdditionManager:
             return True
             
         except Exception as e:
-            print(f"[ERROR] Failed to connect to database: {str(e)}")
+            logger.error(f"Failed to connect to database: {str(e)}")
             return False
     
     def get_current_tenants(self) -> List[str]:
@@ -147,7 +150,7 @@ class TenantAdditionManager:
             return tenant_ids
             
         except Exception as e:
-            print(f"[WARNING] Could not determine current tenants: {str(e)}")
+            logger.warning(f"Could not determine current tenants: {str(e)}")
             return []
     
     def _get_tenant_attribute_field(self) -> str:
@@ -167,9 +170,9 @@ class TenantAdditionManager:
     def generate_tenant_data(self, tenant_config: TenantConfig) -> bool:
         """Generate data for a new tenant."""
         try:
-            print(f"\n[GENERATE] Generating data for new tenant: {tenant_config.tenant_name}")
-            print(f"   Tenant ID: {tenant_config.tenant_id}")
-            print(f"   Scale factor: {tenant_config.scale_factor}")
+            logger.info(f"\n[GENERATE] Generating data for new tenant: {tenant_config.tenant_name}")
+            logger.info(f"   Tenant ID: {tenant_config.tenant_id}")
+            logger.info(f"   Scale factor: {tenant_config.scale_factor}")
             
             # Create generator for this tenant
             generator = TimeTravelRefactoredGenerator(
@@ -184,26 +187,26 @@ class TenantAdditionManager:
             if result:
                 data_counts = result.get("data_counts", {})
                 total_docs = sum(data_counts.values())
-                print(f"   [DONE] Generated {total_docs} documents")
-                print(f"   Data directory: {result.get('data_directory', 'Unknown')}")
+                logger.info(f"   [DONE] Generated {total_docs} documents")
+                logger.info(f"   Data directory: {result.get('data_directory', 'Unknown')}")
                 return True
             else:
-                print(f"   [ERROR] Failed to generate data")
+                logger.error(f"Failed to generate data")
                 return False
                 
         except Exception as e:
-            print(f"[ERROR] Failed to generate tenant data: {str(e)}")
+            logger.error(f"Failed to generate tenant data: {str(e)}")
             return False
     
     def deploy_tenant_to_database(self, tenant_config: TenantConfig) -> bool:
         """Deploy a new tenant's data to the existing database."""
         try:
-            print(f"\n[DEPLOY] Deploying tenant to database: {tenant_config.tenant_name}")
+            logger.info(f"\n[DEPLOY] Deploying tenant to database: {tenant_config.tenant_name}")
             
             # Load tenant data files
             tenant_data_path = self.app_config.paths.get_tenant_data_path(tenant_config.tenant_id)
             if not tenant_data_path.exists():
-                print(f"[ERROR] Tenant data directory not found: {tenant_data_path}")
+                logger.error(f"Tenant data directory not found: {tenant_data_path}")
                 return False
             
             # Get file mappings for collections
@@ -224,24 +227,24 @@ class TenantAdditionManager:
                         
                         doc_count = len(data)
                         total_loaded += doc_count
-                        print(f"   [DONE] {collection_name}: {doc_count} documents")
+                        logger.info(f"   [DONE] {collection_name}: {doc_count} documents")
                     else:
-                        print(f"   [INFO] {collection_name}: empty file")
+                        logger.info(f"   [INFO] {collection_name}: empty file")
                 else:
-                    print(f"   [WARNING] {filename}: file not found")
+                    logger.warning(f"   {filename}: file not found")
             
-            print(f"   [TOTAL] Loaded {total_loaded} documents for tenant {tenant_config.tenant_id}")
+            logger.info(f"   [TOTAL] Loaded {total_loaded} documents for tenant {tenant_config.tenant_id}")
             
             # Create SmartGraph for tenant
             if self.cluster_manager.create_tenant_smartgraph(tenant_config):
-                print(f"   [GRAPH] SmartGraph created for tenant")
+                logger.info(f"   [GRAPH] SmartGraph created for tenant")
             else:
-                print(f"   [WARNING] SmartGraph creation failed")
+                logger.warning(f"SmartGraph creation failed")
             
             return True
             
         except Exception as e:
-            print(f"[ERROR] Failed to deploy tenant to database: {str(e)}")
+            logger.error(f"Failed to deploy tenant to database: {str(e)}")
             return False
     
     def _get_file_mappings(self) -> Dict[str, str]:
@@ -264,9 +267,9 @@ class TenantAdditionManager:
                    description: str = "") -> Tuple[bool, TenantConfig]:
         """Add a complete new tenant to the existing database."""
         try:
-            print(f"\n{'='*60}")
-            print(f"ADDING NEW TENANT: {tenant_name}")
-            print(f"{'='*60}")
+            logger.info(f"\n{'='*60}")
+            logger.info(f"ADDING NEW TENANT: {tenant_name}")
+            logger.info(f"{'='*60}")
             
             # Create tenant configuration
             tenant_config = self.create_new_tenant(tenant_name, scale_factor, description)
@@ -282,27 +285,27 @@ class TenantAdditionManager:
             # Track added tenant
             self.added_tenants.append(tenant_config)
             
-            print(f"\n[SUCCESS] Tenant '{tenant_name}' added successfully!")
-            print(f"   Tenant ID: {tenant_config.tenant_id}")
-            print(f"   Scale factor: {tenant_config.scale_factor}")
-            print(f"   SmartGraph: tenant_{tenant_config.tenant_id}_network_assets")
+            logger.info(f"\n[SUCCESS] Tenant '{tenant_name}' added successfully!")
+            logger.info(f"   Tenant ID: {tenant_config.tenant_id}")
+            logger.info(f"   Scale factor: {tenant_config.scale_factor}")
+            logger.info(f"   SmartGraph: tenant_{tenant_config.tenant_id}_network_assets")
             
             return True, tenant_config
             
         except Exception as e:
-            print(f"[ERROR] Failed to add tenant: {str(e)}")
+            logger.error(f"Failed to add tenant: {str(e)}")
             return False, tenant_config
     
     def add_multiple_tenants(self, tenant_specs: List[Dict[str, Any]]) -> List[Tuple[bool, TenantConfig]]:
         """Add multiple tenants in sequence."""
         results = []
         
-        print(f"\n{'='*60}")
-        print(f"ADDING MULTIPLE TENANTS: {len(tenant_specs)} tenants")
-        print(f"{'='*60}")
+        logger.info(f"\n{'='*60}")
+        logger.info(f"ADDING MULTIPLE TENANTS: {len(tenant_specs)} tenants")
+        logger.info(f"{'='*60}")
         
         for i, spec in enumerate(tenant_specs, 1):
-            print(f"\n[TENANT {i}/{len(tenant_specs)}]")
+            logger.info(f"\n[TENANT {i}/{len(tenant_specs)}]")
             
             success, tenant_config = self.add_tenant(
                 tenant_name=spec.get("name", f"Tenant {i}"),
@@ -313,12 +316,12 @@ class TenantAdditionManager:
             results.append((success, tenant_config))
             
             if success:
-                print(f"[PROGRESS] {i}/{len(tenant_specs)} tenants added successfully")
+                logger.info(f"[PROGRESS] {i}/{len(tenant_specs)} tenants added successfully")
             else:
-                print(f"[ERROR] Failed to add tenant {i}/{len(tenant_specs)}")
+                logger.error(f"Failed to add tenant {i}/{len(tenant_specs)}")
         
         successful = sum(1 for success, _ in results if success)
-        print(f"\n[SUMMARY] Added {successful}/{len(tenant_specs)} tenants successfully")
+        logger.info(f"\n[SUMMARY] Added {successful}/{len(tenant_specs)} tenants successfully")
         
         return results
     
@@ -353,7 +356,7 @@ class DatabaseServerManager:
     def connect_to_cluster(self) -> bool:
         """Connect to ArangoDB cluster."""
         try:
-            print(f"[CONNECT] Connecting to ArangoDB cluster for server management...")
+            logger.info(f"[CONNECT] Connecting to ArangoDB cluster for server management...")
             
             # Connect to system database for cluster operations
             self.sys_db = self.client.db('_system', **CredentialsManager.get_database_params())
@@ -364,11 +367,11 @@ class DatabaseServerManager:
                 **CredentialsManager.get_database_params()
             )
             
-            print(f"[CONNECT] Connected to cluster successfully")
+            logger.info(f"[CONNECT] Connected to cluster successfully")
             return True
             
         except Exception as e:
-            print(f"[ERROR] Failed to connect to cluster: {str(e)}")
+            logger.error(f"Failed to connect to cluster: {str(e)}")
             return False
     
     def get_cluster_info(self) -> Dict[str, Any]:
@@ -407,7 +410,7 @@ class DatabaseServerManager:
             return cluster_info
             
         except Exception as e:
-            print(f"[ERROR] Failed to get cluster info: {str(e)}")
+            logger.error(f"Failed to get cluster info: {str(e)}")
             return {"error": str(e)}
     
     def get_scaling_recommendations(self, target_server_count: int = 2) -> Dict[str, Any]:
@@ -417,8 +420,8 @@ class DatabaseServerManager:
         Note: In ArangoDB Oasis, server addition is performed through
         the web interface. This provides analysis to support manual operations.
         """
-        print(f"\n[ANALYZE] Analyzing cluster for manual addition of {target_server_count} database server(s)")
-        print(f"[INFO] Server addition is performed manually via ArangoDB Oasis web interface")
+        logger.info(f"\n[ANALYZE] Analyzing cluster for manual addition of {target_server_count} database server(s)")
+        logger.info(f"[INFO] Server addition is performed manually via ArangoDB Oasis web interface")
         
         # Get current cluster state
         cluster_info = self.get_cluster_info()
@@ -448,11 +451,11 @@ class DatabaseServerManager:
             }
         }
         
-        print(f"[ANALYSIS] Server addition analysis completed")
-        print(f"   Target servers to add: {target_server_count}")
-        print(f"   Current collections: {len(cluster_info.get('collections', {}))}")
-        print(f"   Total documents: {cluster_info.get('total_documents', 0):,}")
-        print(f"   Ready for manual server addition via Oasis interface")
+        logger.info(f"[ANALYSIS] Server addition analysis completed")
+        logger.info(f"   Target servers to add: {target_server_count}")
+        logger.info(f"   Current collections: {len(cluster_info.get('collections', {}))}")
+        logger.info(f"   Total documents: {cluster_info.get('total_documents', 0):,}")
+        logger.info(f"   Ready for manual server addition via Oasis interface")
         
         return recommendations_result
 
@@ -475,13 +478,13 @@ class ShardRebalancingManager:
             )
             return True
         except Exception as e:
-            print(f"[ERROR] Failed to connect: {str(e)}")
+            logger.error(f"Failed to connect: {str(e)}")
             return False
     
     def get_shard_distribution(self) -> Dict[str, Any]:
         """Get current shard distribution information."""
         try:
-            print(f"[ANALYZE] Analyzing current shard distribution...")
+            logger.info(f"[ANALYZE] Analyzing current shard distribution...")
             
             collections = self.database.collections()
             shard_info = {
@@ -507,13 +510,13 @@ class ShardRebalancingManager:
                     
                     shard_info["total_shards"] += properties.get('numberOfShards', 1)
             
-            print(f"   [DONE] Analyzed {len(shard_info['collections'])} collections")
-            print(f"   Total shards: {shard_info['total_shards']}")
+            logger.info(f"   [DONE] Analyzed {len(shard_info['collections'])} collections")
+            logger.info(f"   Total shards: {shard_info['total_shards']}")
             
             return shard_info
             
         except Exception as e:
-            print(f"[ERROR] Failed to get shard distribution: {str(e)}")
+            logger.error(f"Failed to get shard distribution: {str(e)}")
             return {"error": str(e)}
     
     def simulate_shard_rebalancing(self) -> Dict[str, Any]:
@@ -523,7 +526,7 @@ class ShardRebalancingManager:
         Note: In ArangoDB Oasis, shard rebalancing is typically automatic
         or managed through the web interface.
         """
-        print(f"\n[SIMULATE] Simulating shard rebalancing operation")
+        logger.info(f"\n[SIMULATE] Simulating shard rebalancing operation")
         
         # Get current shard distribution
         shard_info = self.get_shard_distribution()
@@ -555,16 +558,16 @@ class ShardRebalancingManager:
             "estimated_duration": "5-15 minutes depending on data size"
         }
         
-        print(f"[SIMULATION] Shard rebalancing simulation completed")
-        print(f"   Collections to rebalance: {len(rebalancing_result['collections_affected'])}")
-        print(f"   Total shards: {rebalancing_result['total_shards']}")
+        logger.info(f"[SIMULATION] Shard rebalancing simulation completed")
+        logger.info(f"   Collections to rebalance: {len(rebalancing_result['collections_affected'])}")
+        logger.info(f"   Total shards: {rebalancing_result['total_shards']}")
         
         return rebalancing_result
     
     def analyze_shard_distribution(self) -> Dict[str, Any]:
         """Analyze and return detailed shard distribution information."""
         try:
-            print(f"\n[ANALYSIS] Analyzing shard distribution and balance...")
+            logger.info(f"\n[ANALYSIS] Analyzing shard distribution and balance...")
             
             # Get base shard information
             shard_info = self.get_shard_distribution()
@@ -609,23 +612,25 @@ class ShardRebalancingManager:
                 else:
                     analysis["recommendations"].append("Shard distribution appears balanced")
             
-            print(f"   [ANALYSIS] Complete - {analysis['balance_metrics']['total_collections']} collections analyzed")
-            print(f"   [SHARDS] Total: {analysis['balance_metrics']['total_shards']}")
+            logger.info(f"   [ANALYSIS] Complete - {analysis['balance_metrics']['total_collections']} collections analyzed")
+            logger.info(f"   [SHARDS] Total: {analysis['balance_metrics']['total_shards']}")
             
             for rec in analysis["recommendations"]:
-                print(f"   [RECOMMENDATION] {rec}")
+                logger.info(f"   [RECOMMENDATION] {rec}")
             
             return analysis
             
         except Exception as e:
-            print(f"[ERROR] Failed to analyze shard distribution: {str(e)}")
+            logger.error(f"Failed to analyze shard distribution: {str(e)}")
             return {"error": str(e)}
 
 
 def main():
     """Main function for testing scale-out capabilities."""
     import argparse
-    
+
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
+
     parser = argparse.ArgumentParser(description="Multi-tenant scale-out management")
     parser.add_argument("--operation", choices=["add-tenant", "add-tenants", "server-info", "shard-info"], 
                        default="add-tenant", help="Scale-out operation to perform")

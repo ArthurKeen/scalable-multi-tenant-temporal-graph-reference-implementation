@@ -9,6 +9,7 @@ Author: Scalable Multi-Tenant Temporal Graph Reference Implementation
 """
 
 import json
+import logging
 import random
 import uuid
 import sys
@@ -30,6 +31,8 @@ from src.ttl.ttl_constants import TTLConstants, NEVER_EXPIRES
 from src.data_generation.alert_generator import AlertType, AlertSeverity, AlertStatus, AlertTemplate
 from src.utils.alert_naming import create_alert_name
 from src.config.generation_constants import GenerationConstants
+
+logger = logging.getLogger(__name__)
 
 
 class AlertSimulator:
@@ -322,9 +325,9 @@ class AlertSimulator:
     
     def run_alert_simulation_demo(self, tenant_id: str, num_alerts: int = 5) -> List[Dict]:
         """Run a complete alert simulation demonstration."""
-        print(f"\n{'='*60}")
-        print(f"ALERT SIMULATION DEMO - Tenant: {tenant_id}")
-        print(f"{'='*60}")
+        logger.info(f"\n{'='*60}")
+        logger.info(f"ALERT SIMULATION DEMO - Tenant: {tenant_id}")
+        logger.info(f"{'='*60}")
         
         generated_alerts = []
         
@@ -338,43 +341,43 @@ class AlertSimulator:
         for i in range(num_alerts):
             alert_type, generator_func = random.choice(alert_generators)
             
-            print(f"\n[{i+1}/{num_alerts}] Generating {alert_type}...")
+            logger.info(f"\n[{i+1}/{num_alerts}] Generating {alert_type}...")
             
             try:
                 result = generator_func(tenant_id)
                 generated_alerts.append(result)
                 
                 alert = result["alert"]
-                print(f"   [DONE] Alert created: {alert['_key']}")
-                print(f"   [INFO] Message: {alert['message']}")
-                print(f"   [ALERT] Severity: {alert['severity']}")
-                print(f"   [DATE] Created: {datetime.fromtimestamp(alert['created']).strftime('%Y-%m-%d %H:%M:%S')}")
+                logger.info(f"   [DONE] Alert created: {alert['_key']}")
+                logger.info(f"   [INFO] Message: {alert['message']}")
+                logger.info(f"   [ALERT] Severity: {alert['severity']}")
+                logger.info(f"   [DATE] Created: {datetime.fromtimestamp(alert['created']).strftime('%Y-%m-%d %H:%M:%S')}")
                 
                 # Randomly resolve some alerts for demonstration
                 if random.random() < 0.3:  # 30% chance to resolve immediately
-                    print(f"   [FIX] Resolving alert for demonstration...")
+                    logger.info(f"   [FIX] Resolving alert for demonstration...")
                     resolution = self.resolve_alert(alert["_key"], tenant_id)
-                    print(f"   [DONE] Alert resolved - TTL expires at {datetime.fromtimestamp(resolution['ttl_expire_at']).strftime('%Y-%m-%d %H:%M:%S')}")
+                    logger.info(f"   [DONE] Alert resolved - TTL expires at {datetime.fromtimestamp(resolution['ttl_expire_at']).strftime('%Y-%m-%d %H:%M:%S')}")
                     
             except Exception as e:
-                print(f"   [ERROR] Error generating alert: {e}")
+                logger.error(f"Error generating alert: {e}")
                 
             time.sleep(1)  # Brief pause for demo effect
         
         # Show final summary
-        print(f"\n{'='*60}")
-        print("ALERT SIMULATION SUMMARY")
-        print(f"{'='*60}")
+        logger.info(f"\n{'='*60}")
+        logger.info("ALERT SIMULATION SUMMARY")
+        logger.info(f"{'='*60}")
         
         summary = self.get_alert_summary(tenant_id)
-        print(f"Total Alerts Generated: {len(generated_alerts)}")
-        print(f"Current Alert Status:")
-        print(f"  - Active: {summary['active']}")
-        print(f"  - Resolved: {summary['resolved']}")
-        print(f"Alert Severity Distribution:")
+        logger.info(f"Total Alerts Generated: {len(generated_alerts)}")
+        logger.info(f"Current Alert Status:")
+        logger.info(f"  - Active: {summary['active']}")
+        logger.info(f"  - Resolved: {summary['resolved']}")
+        logger.info(f"Alert Severity Distribution:")
         for severity, count in summary['by_severity'].items():
             if count > 0:
-                print(f"  - {severity.title()}: {count}")
+                logger.info(f"  - {severity.title()}: {count}")
         
         return generated_alerts
 
@@ -382,33 +385,33 @@ class AlertSimulator:
 def main():
     """Demo the alert simulation system."""
     import argparse
-    
+
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
+
     parser = argparse.ArgumentParser(description="Simulate alert generation and lifecycle")
     parser.add_argument("--tenant-id", required=True, help="Tenant ID to generate alerts for")
     parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase")
     parser.add_argument("--num-alerts", type=int, default=5, help="Number of alerts to generate")
     parser.add_argument("--type", choices=["hardware", "software", "connectivity"], help="Specific alert type to generate")
-    
+
     args = parser.parse_args()
-    
+
     naming = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
     simulator = AlertSimulator(naming)
-    
+
     if args.type:
-        # Generate specific type of alert
         print(f"[INFO] Generating {args.type} alert for tenant: {args.tenant_id}")
-        
+
         if args.type == "hardware":
             result = simulator.generate_critical_hardware_alert(args.tenant_id)
         elif args.type == "software":
             result = simulator.generate_software_performance_alert(args.tenant_id)
         elif args.type == "connectivity":
             result = simulator.generate_connectivity_alert(args.tenant_id)
-            
+
         print(f"[SUCCESS] Alert generated: {result['alert']['_key']}")
         print(f"[MESSAGE] {result['alert']['message']}")
     else:
-        # Run full simulation demo
         simulator.run_alert_simulation_demo(args.tenant_id, args.num_alerts)
 
 

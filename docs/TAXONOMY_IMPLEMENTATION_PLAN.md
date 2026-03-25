@@ -67,8 +67,8 @@ Add formal taxonomy support to the multi-tenant temporal graph with `Class` enti
 
 **New Collections:**
 - `Class` (vertex)
-- `type` (edge: Device/Software → Class)
-- `subClassOf` (edge: Class → Class)
+- `type` (edge: Device/Software -> Class)
+- `subClassOf` (edge: Class -> Class)
 
 ### Phase 2: Taxonomy Data Generation
 
@@ -82,57 +82,57 @@ Add formal taxonomy support to the multi-tenant temporal graph with `Class` enti
 #### Device Taxonomy
 ```
 NetworkDevice
-├── Router
-│   ├── EdgeRouter
-│   ├── CoreRouter  
-│   └── WirelessRouter
-├── Switch
-│   ├── L2Switch
-│   ├── L3Switch
-│   └── ManagedSwitch
-├── AccessPoint
-│   ├── IndoorAP
-│   └── OutdoorAP
-├── Firewall
-│   ├── NextGenFirewall
-│   └── StatefulFirewall
-└── LoadBalancer
-    ├── ApplicationLB
-    └── NetworkLB
+|-- Router
+|   |-- EdgeRouter
+|   |-- CoreRouter
+|   +-- WirelessRouter
+|-- Switch
+|   |-- L2Switch
+|   |-- L3Switch
+|   +-- ManagedSwitch
+|-- AccessPoint
+|   |-- IndoorAP
+|   +-- OutdoorAP
+|-- Firewall
+|   |-- NextGenFirewall
+|   +-- StatefulFirewall
++-- LoadBalancer
+    |-- ApplicationLB
+    +-- NetworkLB
 ```
 
 #### Software Taxonomy
 ```
 Software
-├── Database
-│   ├── RelationalDB
-│   │   ├── PostgreSQL
-│   │   ├── MySQL
-│   │   └── Oracle
-│   └── NoSQLDB
-│       ├── DocumentDB (MongoDB)
-│       ├── KeyValueDB (Redis)
-│       └── GraphDB (Neo4j, ArangoDB)
-├── WebServer
-│   ├── Apache
-│   ├── Nginx
-│   └── IIS
-├── OperatingSystem
-│   ├── Linux
-│   │   ├── Ubuntu
-│   │   ├── CentOS
-│   │   └── RedHat
-│   └── Windows
-│       ├── WindowsServer
-│       └── Windows10
-├── ApplicationServer
-│   ├── Tomcat
-│   ├── JBoss
-│   └── WebLogic
-└── Monitoring
-    ├── Prometheus
-    ├── Grafana
-    └── Nagios
+|-- Database
+|   |-- RelationalDB
+|   |   |-- PostgreSQL
+|   |   |-- MySQL
+|   |   +-- Oracle
+|   +-- NoSQLDB
+|       |-- DocumentDB (MongoDB)
+|       |-- KeyValueDB (Redis)
+|       +-- GraphDB (Neo4j, ArangoDB)
+|-- WebServer
+|   |-- Apache
+|   |-- Nginx
+|   +-- IIS
+|-- OperatingSystem
+|   |-- Linux
+|   |   |-- Ubuntu
+|   |   |-- CentOS
+|   |   +-- RedHat
+|   +-- Windows
+|       |-- WindowsServer
+|       +-- Windows10
+|-- ApplicationServer
+|   |-- Tomcat
+|   |-- JBoss
+|   +-- WebLogic
++-- Monitoring
+    |-- Prometheus
+    |-- Grafana
+    +-- Nagios
 ```
 
 ### Phase 3: Data Generation Integration
@@ -162,7 +162,7 @@ FOR d IN Device
   FILTER c.name == "Router"
   RETURN {device: d.name, type: c.name}
 
-// Find device hierarchy (device → class → superclass)  
+// Find device hierarchy (device -> class -> superclass)
 FOR d IN Device
   FOR c IN 1..1 OUTBOUND d type
   FOR sc IN 0..5 OUTBOUND c subClassOf

@@ -18,6 +18,10 @@ from src.data_generation.data_generation_config import (
     SMARTGRAPH_DEFAULTS
 )
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class DocumentEnhancer:
     """Centralized document enhancement utilities."""
@@ -379,9 +383,9 @@ class FileManager:
                 FileManager.write_json_file(file_path, data)
                 total_documents += len(data)
         
-        print(f"Generated {len(file_mapping)} data files for tenant '{tenant_config.tenant_name}' ({tenant_config.tenant_id})")
-        print(f"  -> {data_dir}")
-        print(f"  -> {total_documents} total documents")
+        logger.info(f"Generated {len(file_mapping)} data files for tenant '{tenant_config.tenant_name}' ({tenant_config.tenant_id})")
+        logger.info(f"  -> {data_dir}")
+        logger.info(f"  -> {total_documents} total documents")
 
 
 class LocationDataProvider:

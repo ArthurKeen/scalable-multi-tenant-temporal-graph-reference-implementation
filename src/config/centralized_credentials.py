@@ -65,18 +65,6 @@ class CredentialsManager:
         )
     
     @classmethod
-    def get_connection_string(cls, environment: str = "production") -> str:
-        """Get full connection string."""
-        creds = cls.get_database_credentials(environment)
-        return f"{creds.endpoint}/{creds.database_name}"
-    
-    @classmethod
-    def get_arango_client_params(cls, environment: str = "production") -> Dict[str, str]:
-        """Get parameters for ArangoClient constructor."""
-        creds = cls.get_database_credentials(environment)
-        return {"hosts": creds.endpoint}
-    
-    @classmethod
     def get_database_params(cls, environment: str = "production") -> Dict[str, str]:
         """Get parameters for database connection."""
         creds = cls.get_database_credentials(environment)
@@ -97,14 +85,3 @@ def get_collection_name(logical_name: str) -> str:
     from src.config.config_management import get_config, NamingConvention
     config = get_config("production", NamingConvention.CAMEL_CASE)
     return config.get_collection_name(logical_name)
-
-
-def get_database_connection():
-    """Get database connection using centralized credentials."""
-    from arango import ArangoClient
-    
-    creds = CredentialsManager.get_database_credentials()
-    client = ArangoClient(hosts=creds.endpoint)
-    database = client.db(creds.database_name, **CredentialsManager.get_database_params())
-    
-    return client, database
