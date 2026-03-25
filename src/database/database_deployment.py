@@ -640,7 +640,7 @@ class TimeTravelRefactoredDeployment:
                 return False
             
             # Step 7: Verify deployment
-            if not self.verify_deployment():
+            if not self.verify_refactored_deployment():
                 return False
             
             print(f"\n[SUCCESS] Complete deployment with MDI-prefix indexes successful!")

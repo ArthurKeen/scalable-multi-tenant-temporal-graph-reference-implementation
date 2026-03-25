@@ -128,7 +128,7 @@ class TenantAdditionManager:
             # Get unique tenant attributes (smartgraph partitioning keys)
             aql = f"""
             FOR doc IN {device_collection}
-                COLLECT tenant_attr = doc.{self._get_tenant_attribute_pattern()}
+                COLLECT tenant_attr = doc.{self._get_tenant_attribute_field()}
                 RETURN tenant_attr
             """
             

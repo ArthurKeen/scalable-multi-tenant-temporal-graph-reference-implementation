@@ -546,38 +546,6 @@ class TimeTravelRefactoredGenerator:
         self.logger.info(f"Connected {len(connected_software)} software entities (100% coverage)")
         return has_device_software
     
-    def create_historical_entity_connections(self, devices: List[Dict], software: List[Dict], 
-                                           connections: List[Dict], has_device_software: List[Dict]) -> List[Dict]:
-        """
-        REMOVED: Historical entity connections via hasConnection edges.
-        
-        According to W3C OWL architecture, hasConnection should ONLY exist between 
-        DeviceProxyOut and DeviceProxyIn. Temporal relationships are handled by 
-        hasVersion edges, not hasConnection.
-        
-        Historical entities are connected through the proper hasVersion temporal 
-        relationship pattern: ProxyIn -> Entity -> ProxyOut
-        """
-        self.logger.info("Skipping historical hasConnection edges - using proper hasVersion temporal relationships")
-        return []  # Return empty list - no historical hasConnection edges
-    
-    def create_software_proxy_connections(self, software_proxy_ins: List[Dict], software_proxy_outs: List[Dict], 
-                                        device_proxy_outs: List[Dict], existing_connections: List[Dict]) -> List[Dict]:
-        """
-        REMOVED: Software proxy connections via hasConnection edges.
-        
-        According to W3C OWL architecture, hasConnection should ONLY exist between 
-        DeviceProxyOut and DeviceProxyIn. Software proxies are connected to the 
-        network through hasDeviceSoftware edges (DeviceProxyOut -> SoftwareProxyIn)
-        and temporal hasVersion relationships.
-        
-        Software entities don't need hasConnection edges - they're connected through:
-        1. hasDeviceSoftware: DeviceProxyOut -> SoftwareProxyIn 
-        2. hasVersion: SoftwareProxyIn -> Software -> SoftwareProxyOut
-        """
-        self.logger.info("Skipping software proxy hasConnection edges - using proper hasDeviceSoftware and hasVersion relationships")
-        return []  # Return empty list - no software proxy hasConnection edges
-    
     # === MAIN GENERATION METHOD ===
     def generate_all_data(self) -> Dict[str, Any]:
         """Generate complete time travel refactored network asset data."""

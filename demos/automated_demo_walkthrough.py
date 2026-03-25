@@ -233,9 +233,10 @@ class AutomatedDemoWalkthrough:
     def _show_manual_demo_hints(self):
         """Show manual demo hints for ArangoDB Web Interface demonstration."""
         
+        creds = CredentialsManager.get_database_credentials()
         self.demo_manual_prompt(
             "Switch to ArangoDB Web Interface for visualization",
-            "https://1d53cdf6fad0.arangodb.cloud:8529"
+            creds.endpoint
         )
         
         if not self.verbose:
@@ -1511,7 +1512,8 @@ class AutomatedDemoWalkthrough:
             
             print(f"[STEP1] ANALYZE CURRENT CLUSTER STATE")
             print(f"   [WEB] Open ArangoDB Oasis Web Interface:")
-            print(f"      URL: https://1d53cdf6fad0.arangodb.cloud:8529")
+            creds = CredentialsManager.get_database_credentials()
+            print(f"      URL: {creds.endpoint}")
             print(f"   [CHECK] Check Cluster Status:")
             print(f"      * Navigate to 'CLUSTER' -> 'Nodes'")
             print(f"      * Review current server utilization")

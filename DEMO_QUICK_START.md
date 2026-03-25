@@ -3,23 +3,24 @@
 
 ---
 
-## Start Demo (3 Commands)
+## Start Demo
 
 ```bash
-# 1. Go to project
+# 1. Go to project and install dependencies
 cd /path/to/network-asset-management-demo
+pip install -r requirements.txt
 
-# 2. Set credentials (see environment_variables.example if you need to create setup_env.sh)
+# 2. Set credentials (first time: cp environment_variables.example setup_env.sh, then edit)
 source setup_env.sh
 
 # 3. Run demo
-PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
+make demo
 ```
 
 **That's it!** Press Enter at each pause to advance through the demo.
 
-> **Note**: `setup_env.sh` is not tracked in git. If you don't have one, copy
-> `environment_variables.example` to `setup_env.sh`, fill in your ArangoDB
+> **First time?** `setup_env.sh` is not in git. Create it:
+> `cp environment_variables.example setup_env.sh`, edit with your ArangoDB Oasis
 > credentials, then `source setup_env.sh`.
 
 ---
@@ -110,10 +111,10 @@ FOR device IN Device
 
 ## Pre-Demo Checklist
 
-- [ ] Can access project directory
+- [ ] Dependencies installed (`pip install -r requirements.txt`)
 - [ ] Environment variables set (`source setup_env.sh`)
 - [ ] Browser open to ArangoDB UI
-- [ ] Tests passing: `PYTHONPATH=. python3 src/validation/test_suite.py`
+- [ ] Tests passing: `make test`
 - [ ] Backup internet available
 
 ---
@@ -132,7 +133,7 @@ Demo is successful if you show:
 ## Emergency Contacts
 
 **Primary**: Arthur Keen
-**Docs**: See `DEMO_HANDOFF_GUIDE.md` for detailed walkthrough
+**Docs**: See `docs/PRESENTER_GUIDE.md` for detailed walkthrough
 
 ---
 

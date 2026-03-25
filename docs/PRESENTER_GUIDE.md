@@ -10,21 +10,22 @@
 If you're in a hurry, here's the fastest way to run the demo:
 
 ```bash
-# 1. Navigate to project directory
+# 1. Navigate to project and install dependencies
 cd /path/to/network-asset-management-demo
+pip install -r requirements.txt
 
 # 2. Set up database credentials
 source setup_env.sh
 
 # 3. Run interactive demo
-PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
+make demo
 ```
 
 That's it! The demo will guide you through everything with interactive pauses.
 
-> **Note**: `setup_env.sh` is not tracked in git. If you don't have one, copy
-> `environment_variables.example` to `setup_env.sh`, fill in your ArangoDB Oasis
-> credentials, then run `source setup_env.sh`. See the Configuration section below.
+> **First time?** `setup_env.sh` is not in git. Create it:
+> `cp environment_variables.example setup_env.sh`, edit with your ArangoDB Oasis
+> credentials, then `source setup_env.sh`. See the Configuration section below.
 
 ---
 
@@ -49,7 +50,7 @@ That's it! The demo will guide you through everything with interactive pauses.
    - An ArangoDB Oasis cluster endpoint
    - Credentials are in `setup_env.sh` (see Configuration below)
 
-2. **Python 3.8+**
+2. **Python 3.9+**
    - Check: `python3 --version`
    - Install dependencies: `pip install -r requirements.txt`
 
@@ -541,7 +542,7 @@ PYTHONPATH=. python3 src/ttl/ttl_monitor.py --duration 15
 1. **SmartGraph Architecture**: "Automatic data sharding with unified query interface"
 2. **MDI-Prefixed Indexes**: "Multi-dimensional indexes optimize time travel queries"
 3. **TTL Lifecycle Management**: "Automatic historical data cleanup - current data never expires"
-4. **Production Ready**: "100% test coverage, enterprise-grade quality"
+4. **Production Ready**: "30/30 tests passing, enterprise-grade quality"
 
 ### Competitive Advantages
 
@@ -576,7 +577,7 @@ PYTHONPATH=. python3 src/ttl/ttl_monitor.py --duration 15
 
 ### Closing (30 seconds)
 
-"So we've shown complete tenant isolation, temporal queries, automatic TTL management, and scale-out capabilities. The system is production-ready with 100% test coverage. All the code is available in the GitHub repository, and I'm happy to answer questions."
+"So we've shown complete tenant isolation, temporal queries, automatic TTL management, and scale-out capabilities. The system is production-ready with 30 out of 30 tests passing. All the code is available in the GitHub repository, and I'm happy to answer questions."
 
 ---
 
@@ -605,7 +606,7 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 ## Support Contacts
 
 **Primary Contact**: Arthur Keen
-**Documentation**: See `README.md`, `TEST_STATUS.md`
+**Documentation**: See `README.md`, `DEMO_QUICK_START.md`, `TEST_STATUS.md`
 
 ---
 
