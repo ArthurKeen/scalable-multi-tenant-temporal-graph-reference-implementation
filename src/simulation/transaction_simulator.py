@@ -672,7 +672,7 @@ def main():
     simulator = TransactionSimulator(naming_convention)
 
     if not simulator.connect_to_database():
-        print("Failed to connect to database")
+        logger.error("Failed to connect to database")
         sys.exit(1)
 
     results = simulator.run_simulation_batch(args.devices, args.software)
@@ -683,15 +683,15 @@ def main():
     with open(results_path, "w") as f:
         json.dump(results, f, indent=2)
 
-    print(f"\n[RESULTS] Simulation results saved to: {results_path}")
+    logger.info(f"\n[RESULTS] Simulation results saved to: {results_path}")
 
     summary = simulator.get_simulation_summary()
-    print(f"\n[SUMMARY] Transaction Simulation Summary:")
-    print(f"   Total changes simulated: {summary['total_simulated_changes']}")
-    print(f"   Device changes: {summary['device_changes']}")
-    print(f"   Software changes: {summary['software_changes']}")
-    print(f"   TTL Strategy: {summary['ttl_status']['strategy']}")
-    print(f"   TTL Expire After: {summary['ttl_status']['expire_after_days']} days")
+    logger.info(f"\n[SUMMARY] Transaction Simulation Summary:")
+    logger.info(f"   Total changes simulated: {summary['total_simulated_changes']}")
+    logger.info(f"   Device changes: {summary['device_changes']}")
+    logger.info(f"   Software changes: {summary['software_changes']}")
+    logger.info(f"   TTL Strategy: {summary['ttl_status']['strategy']}")
+    logger.info(f"   TTL Expire After: {summary['ttl_status']['expire_after_days']} days")
 
 
 if __name__ == "__main__":

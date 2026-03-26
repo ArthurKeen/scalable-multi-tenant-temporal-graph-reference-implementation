@@ -9,6 +9,7 @@ real-world scenarios that showcase:
 4. Realistic operational workflows
 """
 
+import logging
 import sys
 import json
 import datetime
@@ -23,6 +24,8 @@ from src.config.config_management import get_config, NamingConvention
 from src.simulation.transaction_simulator import TransactionSimulator
 from src.database.database_utilities import QueryExecutor
 from src.ttl.ttl_constants import TTLConstants, TTLMessages, TTLUtilities, NEVER_EXPIRES, DEFAULT_TTL_DAYS
+
+logger = logging.getLogger(__name__)
 
 
 class TTLDemoScenarios:
@@ -61,42 +64,42 @@ class TTLDemoScenarios:
             if not self.simulator.connect_to_database():
                 return False
             
-            print(f"[DEMO] Connected to database for TTL demo scenarios")
+            logger.info(f"[DEMO] Connected to database for TTL demo scenarios")
             return True
             
         except Exception as e:
-            print(f"[ERROR] Failed to connect: {str(e)}")
+            logger.error(f"[ERROR] Failed to connect: {str(e)}")
             return False
     
     def execute_and_display_query(self, query: str, query_name: str, bind_vars: Dict = None) -> List[Dict]:
         """Execute a query and display it with results if show_queries is enabled."""
         if self.show_queries:
-            print(f"\n[QUERY] {query_name}:")
-            print(f"   AQL: {query}")
+            logger.info(f"\n[QUERY] {query_name}:")
+            logger.info(f"   AQL: {query}")
             if bind_vars:
-                print(f"   Variables: {bind_vars}")
+                logger.info(f"   Variables: {bind_vars}")
         
         try:
             cursor = self.database.aql.execute(query, bind_vars=bind_vars)
             results = list(cursor)
             
             if self.show_queries:
-                print(f"   Results: {len(results)} documents returned")
+                logger.info(f"   Results: {len(results)} documents returned")
                 if results and len(results) <= 3:  # Show sample results for small result sets
                     for i, result in enumerate(results[:3]):
                         if isinstance(result, dict):
                             # Show key fields only
                             sample = {k: v for k, v in result.items() if k in ['_key', '_id', 'name', 'type', 'created', 'expired']}
-                            print(f"   Sample {i+1}: {sample}")
+                            logger.info(f"   Sample {i+1}: {sample}")
                 elif results:
-                    print(f"   (Large result set - showing count only)")
-                print()
+                    logger.info(f"   (Large result set - showing count only)")
+                logger.info("")
             
             return results
         except Exception as e:
             if self.show_queries:
-                print(f"   ERROR: {e}")
-                print()
+                logger.error(f"   ERROR: {e}")
+                logger.info("")
             raise e
     
     def scenario_1_device_maintenance_cycle(self) -> Dict[str, Any]:
@@ -109,9 +112,9 @@ class TTLDemoScenarios:
         - Time travel queries show before/after states
         - Historical data ages out automatically
         """
-        print(f"\n" + "="*60)
-        print(f"SCENARIO 1: Device Maintenance Cycle")
-        print(f"="*60)
+        logger.info(f"\n" + "="*60)
+        logger.info(f"SCENARIO 1: Device Maintenance Cycle")
+        logger.info(f"="*60)
         
         scenario_results = {
             "scenario": "device_maintenance_cycle",
@@ -120,18 +123,18 @@ class TTLDemoScenarios:
         }
         
         # Step 1: Find a current device configuration
-        print(f"\n[STEP 1] Finding current device configuration...")
+        logger.info(f"\n[STEP 1] Finding current device configuration...")
         current_devices = self.simulator.find_current_configurations("Device", 1)
         if not current_devices:
-            print(f"[ERROR] No current device configurations found")
+            logger.error(f"[ERROR] No current device configurations found")
             return scenario_results
         
         target_device = current_devices[0]
         device_key = target_device["_key"]
-        print(f"   Target device: {device_key}")
-        print(f"   Current hostname: {target_device.get('hostName', 'N/A')}")
+        logger.info(f"   Target device: {device_key}")
+        logger.info(f"   Current hostname: {target_device.get('hostName', 'N/A')}")
         never_expires_msg = "never expires" if target_device['expired'] == NEVER_EXPIRES else f"expires at {target_device['expired']}"
-        print(f"   Current expired: {target_device['expired']} ({never_expires_msg})")
+        logger.info(f"   Current expired: {target_device['expired']} ({never_expires_msg})")
         
         scenario_results["steps"].append({
             "step": 1,
@@ -144,13 +147,13 @@ class TTLDemoScenarios:
         # Step 2: Record "before" timestamp for time travel
         before_timestamp = datetime.datetime.now()
         self.demo_timestamps["before_maintenance"] = before_timestamp
-        print(f"\n[STEP 2] Recording 'before maintenance' timestamp: {before_timestamp}")
+        logger.info(f"\n[STEP 2] Recording 'before maintenance' timestamp: {before_timestamp}")
         
         # Step 3: Query current state at "before" time
-        print(f"\n[STEP 3] Querying device state before maintenance...")
+        logger.info(f"\n[STEP 3] Querying device state before maintenance...")
         before_query_result = self._query_device_at_time(device_key, before_timestamp)
         if before_query_result:
-            print(f"   Found device at {before_timestamp}: {before_query_result.get('hostName', 'N/A')}")
+            logger.info(f"   Found device at {before_timestamp}: {before_query_result.get('hostName', 'N/A')}")
         
         scenario_results["steps"].append({
             "step": 3,
@@ -160,28 +163,28 @@ class TTLDemoScenarios:
         })
         
         # Step 4: Simulate maintenance configuration change
-        print(f"\n[STEP 4] Simulating maintenance configuration change...")
+        logger.info(f"\n[STEP 4] Simulating maintenance configuration change...")
         change = self.simulator.simulate_device_configuration_change(target_device)
         if not change:
-            print(f"[ERROR] Failed to simulate configuration change")
+            logger.error(f"[ERROR] Failed to simulate configuration change")
             return scenario_results
         
-        print(f"   Change type: {change.change_type}")
-        print(f"   Description: {change.change_description}")
-        print(f"   Old hostname: {change.old_config.get('hostName', 'N/A')}")
-        print(f"   New hostname: {change.new_config.get('hostName', 'N/A')}")
+        logger.info(f"   Change type: {change.change_type}")
+        logger.info(f"   Description: {change.change_description}")
+        logger.info(f"   Old hostname: {change.old_config.get('hostName', 'N/A')}")
+        logger.info(f"   New hostname: {change.new_config.get('hostName', 'N/A')}")
         
         # Step 5: Execute the configuration change
-        print(f"\n[STEP 5] Executing configuration change transaction...")
+        logger.info(f"\n[STEP 5] Executing configuration change transaction...")
         if not self.simulator.execute_configuration_change(change):
-            print(f"[ERROR] Failed to execute configuration change")
+            logger.error(f"[ERROR] Failed to execute configuration change")
             return scenario_results
         
         after_timestamp = datetime.datetime.now()
         self.demo_timestamps["after_maintenance"] = after_timestamp
-        print(f"   Configuration change completed at: {after_timestamp}")
-        print(f"   Old config now historical (expired={change.old_config['expired']})")
-        print(f"   New config is current (expired={NEVER_EXPIRES})")
+        logger.info(f"   Configuration change completed at: {after_timestamp}")
+        logger.info(f"   Old config now historical (expired={change.old_config['expired']})")
+        logger.info(f"   New config is current (expired={NEVER_EXPIRES})")
         
         scenario_results["steps"].append({
             "step": 5,
@@ -194,19 +197,19 @@ class TTLDemoScenarios:
         })
         
         # Step 6: Demonstrate time travel queries
-        print(f"\n[STEP 6] Demonstrating time travel queries...")
+        logger.info(f"\n[STEP 6] Demonstrating time travel queries...")
         
         # Query at "before" time (should return old config)
         before_result = self._query_device_at_time(device_key, before_timestamp)
-        print(f"   Query at {before_timestamp.strftime('%H:%M:%S')}: {before_result.get('hostName', 'N/A') if before_result else 'Not found'}")
+        logger.info(f"   Query at {before_timestamp.strftime('%H:%M:%S')}: {before_result.get('hostName', 'N/A') if before_result else 'Not found'}")
         
         # Query at "after" time (should return new config)
         after_result = self._query_device_at_time(device_key, after_timestamp)
-        print(f"   Query at {after_timestamp.strftime('%H:%M:%S')}: {after_result.get('hostName', 'N/A') if after_result else 'Not found'}")
+        logger.info(f"   Query at {after_timestamp.strftime('%H:%M:%S')}: {after_result.get('hostName', 'N/A') if after_result else 'Not found'}")
         
         # Query at "now" (should return new config)
         now_result = self._query_device_at_time(device_key, datetime.datetime.now())
-        print(f"   Query at now: {now_result.get('hostName', 'N/A') if now_result else 'Not found'}")
+        logger.info(f"   Query at now: {now_result.get('hostName', 'N/A') if now_result else 'Not found'}")
         
         scenario_results["steps"].append({
             "step": 6,
@@ -217,16 +220,16 @@ class TTLDemoScenarios:
         })
         
         # Step 7: Show TTL status
-        print(f"\n[STEP 7] TTL Status and Aging Information...")
+        logger.info(f"\n[STEP 7] TTL Status and Aging Information...")
         ttl_status = self.simulator.ttl_manager.get_ttl_status_summary()
-        print(f"   TTL Strategy: {ttl_status['strategy']}")
-        print(f"   Historical data expires after: {ttl_status['expire_after_days']} days")
-        print(f"   Current configs preserved: {ttl_status['preserve_current_configs']}")
+        logger.info(f"   TTL Strategy: {ttl_status['strategy']}")
+        logger.info(f"   Historical data expires after: {ttl_status['expire_after_days']} days")
+        logger.info(f"   Current configs preserved: {ttl_status['preserve_current_configs']}")
         
         # Calculate when historical data will age out
         historical_expire_time = datetime.datetime.fromtimestamp(change.old_config['expired'])
         ttl_expire_time = historical_expire_time + datetime.timedelta(days=ttl_status['expire_after_days'])
-        print(f"   Historical config will age out at: {ttl_expire_time}")
+        logger.info(f"   Historical config will age out at: {ttl_expire_time}")
         
         scenario_results["steps"].append({
             "step": 7,
@@ -240,9 +243,9 @@ class TTLDemoScenarios:
         scenario_results["end_time"] = datetime.datetime.now().isoformat()
         scenario_results["success"] = True
         
-        print(f"\n[SUCCESS] Scenario 1 completed successfully!")
-        print(f"   Current config: Always available (expired = {NEVER_EXPIRES})")
-        print(f"   Historical config: Will age out via TTL in {ttl_status['expire_after_days']} days")
+        logger.info(f"\n[SUCCESS] Scenario 1 completed successfully!")
+        logger.info(f"   Current config: Always available (expired = {NEVER_EXPIRES})")
+        logger.info(f"   Historical config: Will age out via TTL in {ttl_status['expire_after_days']} days")
         
         return scenario_results
     
@@ -255,9 +258,9 @@ class TTLDemoScenarios:
         - Time travel to any point in the upgrade timeline
         - Historical versions aging out while current remains
         """
-        print(f"\n" + "="*60)
-        print(f"SCENARIO 2: Software Upgrade and Rollback Simulation")
-        print(f"="*60)
+        logger.info(f"\n" + "="*60)
+        logger.info(f"SCENARIO 2: Software Upgrade and Rollback Simulation")
+        logger.info(f"="*60)
         
         scenario_results = {
             "scenario": "software_upgrade_rollback",
@@ -267,20 +270,20 @@ class TTLDemoScenarios:
         }
         
         # Step 1: Find current software configuration
-        print(f"\n[STEP 1] Finding current software configuration...")
+        logger.info(f"\n[STEP 1] Finding current software configuration...")
         current_software = self.simulator.find_current_configurations("Software", 1)
         if not current_software:
-            print(f"[ERROR] No current software configurations found")
+            logger.error(f"[ERROR] No current software configurations found")
             return scenario_results
         
         target_software = current_software[0]
         software_key = target_software["_key"]
-        print(f"   Target software: {software_key}")
-        print(f"   Current port: {target_software.get('portNumber', 'N/A')}")
-        print(f"   Current enabled: {target_software.get('isEnabled', 'N/A')}")
+        logger.info(f"   Target software: {software_key}")
+        logger.info(f"   Current port: {target_software.get('portNumber', 'N/A')}")
+        logger.info(f"   Current enabled: {target_software.get('isEnabled', 'N/A')}")
         
         # Step 2: Simulate upgrade sequence (3 changes)
-        print(f"\n[STEP 2] Simulating software upgrade sequence...")
+        logger.info(f"\n[STEP 2] Simulating software upgrade sequence...")
         
         changes = []
         current_config = target_software
@@ -310,14 +313,14 @@ class TTLDemoScenarios:
                 }
                 scenario_results["timeline"].append(timeline_entry)
                 
-                print(f"   Change {i+1}: {change.change_description}")
-                print(f"      Port: {change.new_config.get('portNumber', 'N/A')}")
-                print(f"      Enabled: {change.new_config.get('isEnabled', 'N/A')}")
+                logger.info(f"   Change {i+1}: {change.change_description}")
+                logger.info(f"      Port: {change.new_config.get('portNumber', 'N/A')}")
+                logger.info(f"      Enabled: {change.new_config.get('isEnabled', 'N/A')}")
         
-        print(f"   Completed {len(changes)} configuration changes")
+        logger.info(f"   Completed {len(changes)} configuration changes")
         
         # Step 3: Demonstrate time travel across the timeline
-        print(f"\n[STEP 3] Time travel demonstration across upgrade timeline...")
+        logger.info(f"\n[STEP 3] Time travel demonstration across upgrade timeline...")
         
         time_travel_results = []
         for i, change in enumerate(changes):
@@ -332,7 +335,7 @@ class TTLDemoScenarios:
                     "port": result.get('portNumber', 'N/A'),
                     "enabled": result.get('isEnabled', 'N/A')
                 })
-                print(f"   Before change {i+1}: Port {result.get('portNumber', 'N/A')}, Enabled {result.get('isEnabled', 'N/A')}")
+                logger.info(f"   Before change {i+1}: Port {result.get('portNumber', 'N/A')}, Enabled {result.get('isEnabled', 'N/A')}")
         
         # Query current state
         current_result = self._query_software_at_time(software_key, datetime.datetime.now())
@@ -343,7 +346,7 @@ class TTLDemoScenarios:
                 "port": current_result.get('portNumber', 'N/A'),
                 "enabled": current_result.get('isEnabled', 'N/A')
             })
-            print(f"   Current state: Port {current_result.get('portNumber', 'N/A')}, Enabled {current_result.get('isEnabled', 'N/A')}")
+            logger.info(f"   Current state: Port {current_result.get('portNumber', 'N/A')}, Enabled {current_result.get('isEnabled', 'N/A')}")
         
         scenario_results["time_travel_results"] = time_travel_results
         
@@ -351,10 +354,10 @@ class TTLDemoScenarios:
         scenario_results["success"] = True
         scenario_results["total_changes"] = len(changes)
         
-        print(f"\n[SUCCESS] Scenario 2 completed successfully!")
-        print(f"   Total configuration changes: {len(changes)}")
-        print(f"   Historical versions: {len(changes)} (will age out via TTL)")
-        print(f"   Current version: 1 (never expires)")
+        logger.info(f"\n[SUCCESS] Scenario 2 completed successfully!")
+        logger.info(f"   Total configuration changes: {len(changes)}")
+        logger.info(f"   Historical versions: {len(changes)} (will age out via TTL)")
+        logger.info(f"   Current version: 1 (never expires)")
         
         return scenario_results
     
@@ -382,7 +385,7 @@ class TTLDemoScenarios:
             return results[0] if results else None
             
         except Exception as e:
-            print(f"[ERROR] Failed to query device at time: {str(e)}")
+            logger.error(f"[ERROR] Failed to query device at time: {str(e)}")
             return None
     
     def _query_software_at_time(self, software_key: str, timestamp: datetime.datetime) -> Optional[Dict[str, Any]]:
@@ -409,18 +412,18 @@ class TTLDemoScenarios:
             return results[0] if results else None
             
         except Exception as e:
-            print(f"[ERROR] Failed to query software at time: {str(e)}")
+            logger.error(f"[ERROR] Failed to query software at time: {str(e)}")
             return None
     
     def run_all_scenarios(self) -> Dict[str, Any]:
         """Run all demo scenarios and return comprehensive results."""
-        print(f"\n" + "="*80)
-        print(f"TTL TIME TRAVEL DEMO - COMPREHENSIVE SCENARIOS")
-        print(f"="*80)
-        print(f"Strategy: Current vs Historical TTL")
-        print(f"- Current configurations: Never expire (expired = {NEVER_EXPIRES})")
-        print(f"- Historical configurations: Age out via TTL after {DEFAULT_TTL_DAYS} days")
-        print(f"- Time travel queries: Work across both current and historical data")
+        logger.info(f"\n" + "="*80)
+        logger.info(f"TTL TIME TRAVEL DEMO - COMPREHENSIVE SCENARIOS")
+        logger.info(f"="*80)
+        logger.info(f"Strategy: Current vs Historical TTL")
+        logger.info(f"- Current configurations: Never expire (expired = {NEVER_EXPIRES})")
+        logger.info(f"- Historical configurations: Age out via TTL after {DEFAULT_TTL_DAYS} days")
+        logger.info(f"- Time travel queries: Work across both current and historical data")
         
         demo_results = {
             "demo_start": datetime.datetime.now().isoformat(),
@@ -434,7 +437,7 @@ class TTLDemoScenarios:
             scenario1_results = self.scenario_1_device_maintenance_cycle()
             demo_results["scenarios"]["device_maintenance_cycle"] = scenario1_results
         except Exception as e:
-            print(f"[ERROR] Scenario 1 failed: {str(e)}")
+            logger.error(f"[ERROR] Scenario 1 failed: {str(e)}")
             demo_results["scenarios"]["device_maintenance_cycle"] = {"error": str(e)}
         
         # Run Scenario 2
@@ -442,7 +445,7 @@ class TTLDemoScenarios:
             scenario2_results = self.scenario_2_software_upgrade_rollback()
             demo_results["scenarios"]["software_upgrade_rollback"] = scenario2_results
         except Exception as e:
-            print(f"[ERROR] Scenario 2 failed: {str(e)}")
+            logger.error(f"[ERROR] Scenario 2 failed: {str(e)}")
             demo_results["scenarios"]["software_upgrade_rollback"] = {"error": str(e)}
         
         demo_results["demo_end"] = datetime.datetime.now().isoformat()
@@ -451,13 +454,13 @@ class TTLDemoScenarios:
         successful_scenarios = len([s for s in demo_results["scenarios"].values() if s.get("success", False)])
         total_scenarios = len(demo_results["scenarios"])
         
-        print(f"\n" + "="*80)
-        print(f"DEMO SUMMARY")
-        print(f"="*80)
-        print(f"Successful scenarios: {successful_scenarios}/{total_scenarios}")
-        print(f"TTL Strategy: Current configurations never expire, historical age out")
-        print(f"Time Travel: Queries work seamlessly across current and historical data")
-        print(f"Operational Benefit: Current configs always available, historical cleanup automatic")
+        logger.info(f"\n" + "="*80)
+        logger.info(f"DEMO SUMMARY")
+        logger.info(f"="*80)
+        logger.info(f"Successful scenarios: {successful_scenarios}/{total_scenarios}")
+        logger.info(f"TTL Strategy: Current configurations never expire, historical age out")
+        logger.info(f"Time Travel: Queries work seamlessly across current and historical data")
+        logger.info(f"Operational Benefit: Current configs always available, historical cleanup automatic")
         
         return demo_results
 
@@ -465,6 +468,8 @@ class TTLDemoScenarios:
 def main():
     """Main function for running TTL demo scenarios."""
     import argparse
+    
+    logging.basicConfig(level=logging.INFO, format='%(message)s')
     
     parser = argparse.ArgumentParser(description="Run TTL time travel demo scenarios")
     parser.add_argument("--naming", choices=["camelCase", "snake_case"], default="camelCase",
@@ -481,7 +486,7 @@ def main():
     demo = TTLDemoScenarios(naming_convention)
     
     if not demo.connect_to_database():
-        print("[ERROR] Failed to connect to database")
+        logger.error("[ERROR] Failed to connect to database")
         sys.exit(1)
     
     # Run selected scenario(s)
@@ -499,7 +504,7 @@ def main():
     with open(results_path, "w") as f:
         json.dump(results, f, indent=2)
     
-    print(f"\n[RESULTS] Demo results saved to: {results_path}")
+    logger.info(f"\n[RESULTS] Demo results saved to: {results_path}")
 
 
 if __name__ == "__main__":

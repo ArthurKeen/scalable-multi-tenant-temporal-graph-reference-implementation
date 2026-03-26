@@ -389,13 +389,13 @@ def main():
 
     tenant_dir = Path(args.tenant_dir)
     if not tenant_dir.exists():
-        print(f"Tenant directory not found: {tenant_dir}")
+        logger.error(f"Tenant directory not found: {tenant_dir}")
         return
 
-    print(f"[INFO] Generating alerts for tenant: {tenant_dir.name}")
+    logger.info(f"[INFO] Generating alerts for tenant: {tenant_dir.name}")
     alerts, edges = generator.generate_alert_data(tenant_dir, args.active_ratio)
     generator.save_alert_data(tenant_dir, alerts, edges)
-    print("[SUCCESS] Alert generation complete")
+    logger.info("[SUCCESS] Alert generation complete")
 
 
 if __name__ == "__main__":

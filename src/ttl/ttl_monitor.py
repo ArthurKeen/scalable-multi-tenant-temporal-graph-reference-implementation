@@ -6,6 +6,7 @@ Monitors TTL expiration and shows live aging of historical documents
 during demonstration. Displays countdown timers and document counts.
 """
 
+import logging
 import time
 import datetime
 import sys
@@ -14,6 +15,8 @@ from arango import ArangoClient
 
 from src.config.centralized_credentials import CredentialsManager
 from src.ttl.ttl_constants import TTLConstants
+
+logger = logging.getLogger(__name__)
 
 
 class TTLMonitor:
@@ -32,7 +35,7 @@ class TTLMonitor:
             self.database = client.db(creds.database_name, **CredentialsManager.get_database_params())
             return True
         except Exception as e:
-            print(f"[ERROR] Database connection failed: {e}")
+            logger.error(f"[ERROR] Database connection failed: {e}")
             return False
     
     def get_document_counts(self) -> Dict[str, Dict[str, int]]:
@@ -76,7 +79,7 @@ class TTLMonitor:
                 }
                 
             except Exception as e:
-                print(f"[WARNING] Could not count {collection_name}: {e}")
+                logger.warning(f"[WARNING] Could not count {collection_name}: {e}")
                 counts[collection_name] = {"current": 0, "historical_pending": 0, "historical_expired": 0, "total_historical": 0}
         
         return counts
@@ -109,7 +112,7 @@ class TTLMonitor:
                         next_collection = collection_name
                         
             except Exception as e:
-                print(f"[WARNING] Could not check expiry for {collection_name}: {e}")
+                logger.warning(f"[WARNING] Could not check expiry for {collection_name}: {e}")
         
         if next_expiry:
             return {

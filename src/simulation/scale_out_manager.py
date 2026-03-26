@@ -659,11 +659,11 @@ def main():
         )
         
         if success:
-            print(f"\n[SUCCESS] Tenant addition completed successfully!")
+            logger.info(f"\n[SUCCESS] Tenant addition completed successfully!")
             summary = manager.get_tenant_addition_summary()
-            print(f"Summary: {json.dumps(summary, indent=2)}")
+            logger.info(f"Summary: {json.dumps(summary, indent=2)}")
         else:
-            print(f"\n[ERROR] Tenant addition failed!")
+            logger.error(f"\n[ERROR] Tenant addition failed!")
             sys.exit(1)
     
     elif args.operation == "add-tenants":
@@ -682,7 +682,7 @@ def main():
         results = manager.add_multiple_tenants(tenant_specs)
         successful = sum(1 for success, _ in results if success)
         
-        print(f"\n[FINAL] Added {successful}/{len(tenant_specs)} tenants successfully")
+        logger.info(f"\n[FINAL] Added {successful}/{len(tenant_specs)} tenants successfully")
     
     elif args.operation == "server-info":
         # Get server information
@@ -692,13 +692,13 @@ def main():
             sys.exit(1)
         
         cluster_info = server_manager.get_cluster_info()
-        print(f"\nCluster Information:")
-        print(json.dumps(cluster_info, indent=2))
+        logger.info(f"\nCluster Information:")
+        logger.info(json.dumps(cluster_info, indent=2))
         
         # Get scaling recommendations
         recommendations = server_manager.get_scaling_recommendations(2)
-        print(f"\nServer Addition Recommendations:")
-        print(json.dumps(recommendations, indent=2))
+        logger.info(f"\nServer Addition Recommendations:")
+        logger.info(json.dumps(recommendations, indent=2))
     
     elif args.operation == "shard-info":
         # Get shard information and simulate rebalancing
@@ -708,13 +708,13 @@ def main():
             sys.exit(1)
         
         shard_info = shard_manager.get_shard_distribution()
-        print(f"\nShard Distribution:")
-        print(json.dumps(shard_info, indent=2))
+        logger.info(f"\nShard Distribution:")
+        logger.info(json.dumps(shard_info, indent=2))
         
         # Simulate rebalancing
         rebalancing = shard_manager.simulate_shard_rebalancing()
-        print(f"\nShard Rebalancing Simulation:")
-        print(json.dumps(rebalancing, indent=2))
+        logger.info(f"\nShard Rebalancing Simulation:")
+        logger.info(json.dumps(rebalancing, indent=2))
 
 
 if __name__ == "__main__":

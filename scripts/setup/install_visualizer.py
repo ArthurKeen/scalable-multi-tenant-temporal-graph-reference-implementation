@@ -108,8 +108,8 @@ def _upsert_canvas_action(
         for extra in existing[1:]:
             try:
                 canvas_col.delete(extra["_key"])
-            except Exception:
-                pass
+            except Exception as e:
+                logger.warning(f"Failed to delete duplicate canvas action {extra['_key']}: {e}")
         doc = {
             "graphId": graph_name,
             "name": name,

@@ -516,8 +516,8 @@ def main():
     """Main function to test cluster setup and configuration."""
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-    print("[DEPLOY] ArangoDB Oasis Cluster Setup")
-    print("=" * 50)
+    logger.info("[DEPLOY] ArangoDB Oasis Cluster Setup")
+    logger.info("=" * 50)
 
     manager = OasisClusterManager()
 
@@ -530,14 +530,14 @@ def main():
     if not manager.create_shared_collections():
         return False
 
-    print("\n[DONE] Basic cluster setup complete!")
+    logger.info("\n[DONE] Basic cluster setup complete!")
 
     status = manager.get_cluster_status()
-    print(f"\n[DATA] Cluster Status:")
-    print(f"   Server version: {status.get('server_version', 'Unknown')}")
-    print(f"   Database: {status.get('database', {}).get('name', 'Unknown')}")
-    print(f"   Collections: {len(status.get('collections', {}))}")
-    print(f"   Total documents: {status.get('total_documents', 0)}")
+    logger.info(f"\n[DATA] Cluster Status:")
+    logger.info(f"   Server version: {status.get('server_version', 'Unknown')}")
+    logger.info(f"   Database: {status.get('database', {}).get('name', 'Unknown')}")
+    logger.info(f"   Collections: {len(status.get('collections', {}))}")
+    logger.info(f"   Total documents: {status.get('total_documents', 0)}")
 
     return True
 

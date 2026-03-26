@@ -11,6 +11,7 @@ Implements consistent time travel pattern across ALL collections:
 
 import json
 import datetime
+import logging
 import sys
 import uuid
 import random
@@ -28,6 +29,8 @@ from src.data_generation.data_generation_utils import (
 )
 from src.data_generation.alert_generator import AlertGenerator
 from src.data_generation.taxonomy_generator import TaxonomyGenerator
+
+logger = logging.getLogger(__name__)
 
 
 class AssetGenerator:
@@ -52,7 +55,6 @@ class AssetGenerator:
         
         # Initialize taxonomy generator
         self.taxonomy_generator = TaxonomyGenerator(naming_convention)
-        import logging
         self.logger = logging.getLogger(__name__)
     
     # === LOCATION COLLECTION (unchanged) ===
@@ -609,15 +611,15 @@ class AssetGenerator:
         total_documents = sum(len(data) for data in data_collections.values())
         self.logger.info(f"Completed data generation: {total_documents} total documents")
         
-        print(f"[DONE] Generated {total_documents} documents")
-        print(f"   Device entities: {len(devices)} devices, {len(device_proxy_ins)} DeviceProxyIn, {len(device_proxy_outs)} DeviceProxyOut")
-        print(f"   Software entities: {len(software)} software, {len(software_proxy_ins)} SoftwareProxyIn, {len(software_proxy_outs)} SoftwareProxyOut")
-        print(f"   Location entities: {len(locations)} locations")
-        print(f"   Taxonomy entities: {len(taxonomy_data['classes'])} classes, {len(all_type_edges)} type classifications, {len(taxonomy_data['subclass_edges'])} inheritance relationships")
-        print(f"   Relationship edges: {len(connections)} hasConnection, {len(has_locations)} hasLocation, {len(has_device_software)} hasDeviceSoftware")
-        print(f"   Version edges: {len(all_versions)} version (unified - {len(device_versions)} device + {len(software_versions)} software)")
-        print(f"   -> Consistent time travel pattern: Generic 'version' collection for all entities")
-        print(f"   -> Semantic taxonomy: Device/Software classification with inheritance hierarchies")
+        self.logger.info(f"[DONE] Generated {total_documents} documents")
+        self.logger.info(f"   Device entities: {len(devices)} devices, {len(device_proxy_ins)} DeviceProxyIn, {len(device_proxy_outs)} DeviceProxyOut")
+        self.logger.info(f"   Software entities: {len(software)} software, {len(software_proxy_ins)} SoftwareProxyIn, {len(software_proxy_outs)} SoftwareProxyOut")
+        self.logger.info(f"   Location entities: {len(locations)} locations")
+        self.logger.info(f"   Taxonomy entities: {len(taxonomy_data['classes'])} classes, {len(all_type_edges)} type classifications, {len(taxonomy_data['subclass_edges'])} inheritance relationships")
+        self.logger.info(f"   Relationship edges: {len(connections)} hasConnection, {len(has_locations)} hasLocation, {len(has_device_software)} hasDeviceSoftware")
+        self.logger.info(f"   Version edges: {len(all_versions)} version (unified - {len(device_versions)} device + {len(software_versions)} software)")
+        self.logger.info(f"   -> Consistent time travel pattern: Generic 'version' collection for all entities")
+        self.logger.info(f"   -> Semantic taxonomy: Device/Software classification with inheritance hierarchies")
         
         return {
             "tenant_config": self.tenant_config,
@@ -631,16 +633,16 @@ def generate_demo(tenant_count: int = 8, environment: str = "production", naming
     """Generate multi-tenant demo data."""
     
     convention_name = "camelCase" if naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
-    print(f"Multi-Tenant Network Asset Generation ({convention_name})")
-    print("=" * 60)
-    print("Time travel patterns:")
-    print("   - Device: DeviceProxyIn <-> Device <-> DeviceProxyOut")
-    print("   - Software: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)")
-    print("   - Generic 'version' collection for all time travel relationships")
-    print("   - Consistent temporal queries across all entities")
-    print(f"   - Naming convention: {convention_name}")
-    print(f"   - Tenant count: {tenant_count}")
-    print()
+    logger.info(f"Multi-Tenant Network Asset Generation ({convention_name})")
+    logger.info("=" * 60)
+    logger.info("Time travel patterns:")
+    logger.info("   - Device: DeviceProxyIn <-> Device <-> DeviceProxyOut")
+    logger.info("   - Software: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)")
+    logger.info("   - Generic 'version' collection for all time travel relationships")
+    logger.info("   - Consistent temporal queries across all entities")
+    logger.info(f"   - Naming convention: {convention_name}")
+    logger.info(f"   - Tenant count: {tenant_count}")
+    logger.info("")
     
     app_config = get_config(environment, naming_convention)
     
@@ -683,7 +685,7 @@ def generate_demo(tenant_count: int = 8, environment: str = "production", naming
         total_documents += sum(tenant_result["data_counts"].values())
         
         # Generate alert data for this tenant
-        print(f"[ALERT] Generating alerts for tenant: {tenant_config.tenant_name}")
+        logger.info(f"[ALERT] Generating alerts for tenant: {tenant_config.tenant_name}")
         tenant_data_dir = app_config.paths.get_tenant_data_path(tenant_config.tenant_id)
         
         try:
@@ -699,7 +701,7 @@ def generate_demo(tenant_count: int = 8, environment: str = "production", naming
             total_documents += len(alert_documents) + len(hasAlert_edges)
             
         except Exception as e:
-            print(f"[WARNING] Failed to generate alerts for tenant {tenant_config.tenant_name}: {e}")
+            logger.warning(f"[WARNING] Failed to generate alerts for tenant {tenant_config.tenant_name}: {e}")
             # Continue with other tenants even if alert generation fails
     
     # Generate centralized tenant registry
@@ -740,11 +742,11 @@ def generate_demo(tenant_count: int = 8, environment: str = "production", naming
     with open(registry_path, "w") as f:
         json.dump(tenant_registry, f, indent=2)
     
-    print(f"\n[SUCCESS] Data generation completed!")
-    print(f"[DATA] Generated {total_documents} documents across {len(tenant_configs)} tenants")
-    print(f" Registry: {registry_path}")
-    print(f"-> Time Travel: Consistent pattern across Device and Software")
-    print(f"[EDIT] Software: Removed configurationHistory array, now uses version edges")
+    logger.info(f"\n[SUCCESS] Data generation completed!")
+    logger.info(f"[DATA] Generated {total_documents} documents across {len(tenant_configs)} tenants")
+    logger.info(f" Registry: {registry_path}")
+    logger.info(f"-> Time Travel: Consistent pattern across Device and Software")
+    logger.info(f"[EDIT] Software: Removed configurationHistory array, now uses version edges")
     
     return results
 

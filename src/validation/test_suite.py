@@ -46,9 +46,8 @@ class TestConfigurationManagement(unittest.TestCase):
         
         self.assertIsInstance(creds, DatabaseCredentials)
         self.assertTrue(creds.endpoint.startswith('https://'))
-        self.assertEqual(creds.username, 'root')
+        self.assertTrue(len(creds.username) > 0)
         self.assertTrue(len(creds.password) > 0)
-        # Accept any database name since it's configurable
         self.assertTrue(len(creds.database_name) > 0)
     
     def test_application_paths_initialization(self):

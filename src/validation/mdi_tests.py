@@ -12,6 +12,7 @@ Usage:
     PYTHONPATH=. python3 src/validation/mdi_tests.py
 """
 
+import logging
 import time
 import sys
 from typing import Dict, List, Any, Optional
@@ -22,6 +23,8 @@ from pathlib import Path
 # Import our utilities
 from src.config.centralized_credentials import CredentialsManager
 from src.database.database_utilities import DatabaseConnectionManager, QueryExecutor
+
+logger = logging.getLogger(__name__)
 
 
 class MDIIndexTester:
@@ -38,11 +41,11 @@ class MDIIndexTester:
         try:
             self.database = self.db_manager.database
             if self.database.name:  # Test connection
-                print(f"[CONNECT] Connected to database for ZKD testing: {self.database.name}")
+                logger.info(f"[CONNECT] Connected to database for ZKD testing: {self.database.name}")
                 return True
             return False
         except Exception as e:
-            print(f"[ERROR] Database connection failed: {e}")
+            logger.error(f"[ERROR] Database connection failed: {e}")
             return False
     
     def get_collection_indexes(self, collection_name: str) -> List[Dict]:
@@ -52,12 +55,12 @@ class MDIIndexTester:
             indexes = collection.indexes()
             return indexes
         except Exception as e:
-            print(f"[ERROR] Failed to get indexes for {collection_name}: {e}")
+            logger.error(f"[ERROR] Failed to get indexes for {collection_name}: {e}")
             return []
     
     def verify_zkd_indexes_exist(self) -> bool:
         """Verify that ZKD multi-dimensional indexes exist on temporal collections."""
-        print(f"\n[TEST] Verifying ZKD multi-dimensional indexes exist...")
+        logger.info(f"\n[TEST] Verifying ZKD multi-dimensional indexes exist...")
         
         expected_indexes = [
             ("Device", "idx_device_mdi_temporal"),
@@ -78,25 +81,25 @@ class MDIIndexTester:
             
             if found_index:
                 fields = found_index.get('fields', [])
-                print(f"   [FOUND] {collection_name}.{expected_index_name}")
-                print(f"           Fields: {fields}")
-                print(f"           Type: {found_index.get('type')}")
-                print(f"           Unique: {found_index.get('unique', 'N/A')}")
-                print(f"           Sparse: {found_index.get('sparse', 'N/A')}")
+                logger.info(f"   [FOUND] {collection_name}.{expected_index_name}")
+                logger.info(f"           Fields: {fields}")
+                logger.info(f"           Type: {found_index.get('type')}")
+                logger.info(f"           Unique: {found_index.get('unique', 'N/A')}")
+                logger.info(f"           Sparse: {found_index.get('sparse', 'N/A')}")
             else:
-                print(f"   [MISSING] {collection_name}.{expected_index_name}")
+                logger.warning(f"   [MISSING] {collection_name}.{expected_index_name}")
                 all_found = False
         
         if all_found:
-            print(f"[SUCCESS] All ZKD multi-dimensional indexes found")
+            logger.info(f"[SUCCESS] All ZKD multi-dimensional indexes found")
         else:
-            print(f"[ERROR] Some ZKD multi-dimensional indexes are missing")
+            logger.error(f"[ERROR] Some ZKD multi-dimensional indexes are missing")
         
         return all_found
     
     def test_temporal_range_queries(self) -> Dict[str, Any]:
         """Test temporal range queries using ZKD multi-dimensional indexes."""
-        print(f"\n[TEST] Testing temporal range queries with ZKD multi-dimensional indexes...")
+        logger.info(f"\n[TEST] Testing temporal range queries with ZKD multi-dimensional indexes...")
         
         # Get current timestamp for testing
         current_time = time.time()
@@ -107,7 +110,7 @@ class MDIIndexTester:
         test_results = {}
         
         # Test 1: Point-in-time query (current active configurations)
-        print(f"\n   [QUERY] Testing point-in-time query (active configurations)...")
+        logger.info(f"\n   [QUERY] Testing point-in-time query (active configurations)...")
         query1 = """
         FOR device IN Device
           FILTER device.created <= @point_in_time 
@@ -134,7 +137,7 @@ class MDIIndexTester:
         }
         
         # Test 2: Range query (configurations created in a time window)
-        print(f"\n   [QUERY] Testing range query (configurations in time window)...")
+        logger.info(f"\n   [QUERY] Testing range query (configurations in time window)...")
         query2 = """
         FOR device IN Device
           FILTER device.created >= @start_time 
@@ -161,7 +164,7 @@ class MDIIndexTester:
         }
         
         # Test 3: Complex temporal overlap query
-        print(f"\n   [QUERY] Testing complex temporal overlap query...")
+        logger.info(f"\n   [QUERY] Testing complex temporal overlap query...")
         query3 = """
         FOR device IN Device
           FILTER device.created <= @end_time
@@ -189,7 +192,7 @@ class MDIIndexTester:
         }
         
         # Test 4: Software temporal query
-        print(f"\n   [QUERY] Testing software temporal query...")
+        logger.info(f"\n   [QUERY] Testing software temporal query...")
         query4 = """
         FOR software IN Software
           FILTER software.created <= @point_in_time 
@@ -217,7 +220,7 @@ class MDIIndexTester:
         }
         
         # Test 5: hasVersion edge temporal query
-        print(f"\n   [QUERY] Testing hasVersion edge temporal query...")
+        logger.info(f"\n   [QUERY] Testing hasVersion edge temporal query...")
         query5 = """
         FOR version IN hasVersion
           FILTER version.created <= @point_in_time 
@@ -248,7 +251,7 @@ class MDIIndexTester:
     
     def analyze_query_execution_plans(self) -> Dict[str, Any]:
         """Analyze query execution plans to verify ZKD index usage."""
-        print(f"\n[TEST] Analyzing query execution plans for ZKD index usage...")
+        logger.info(f"\n[TEST] Analyzing query execution plans for ZKD index usage...")
         
         plan_results = {}
         current_time = time.time()
@@ -267,8 +270,8 @@ class MDIIndexTester:
             plan = self.database.aql.explain(test_query, bind_vars={"point_in_time": current_time})
             
             if self.show_queries:
-                print(f"   [PLAN] Query execution plan analysis:")
-                print(f"   Query: Point-in-time temporal filter")
+                logger.info(f"   [PLAN] Query execution plan analysis:")
+                logger.info(f"   Query: Point-in-time temporal filter")
                 
                 # Look for index usage in the plan
                 nodes = plan.get('plan', {}).get('nodes', [])
@@ -279,24 +282,24 @@ class MDIIndexTester:
                     for idx in index_info:
                         index_type = idx.get('type', 'unknown')
                         index_fields = idx.get('fields', [])
-                        print(f"   Index {i+1}: Type={index_type}, Fields={index_fields}")
+                        logger.info(f"   Index {i+1}: Type={index_type}, Fields={index_fields}")
                         
                         if index_type == 'zkd':
-                            print(f"           [SUCCESS] ZKD multi-dimensional index detected in execution plan!")
+                            logger.info(f"           [SUCCESS] ZKD multi-dimensional index detected in execution plan!")
                             plan_results["zkd_index_used"] = True
                         else:
-                            print(f"           Index type: {index_type}")
+                            logger.info(f"           Index type: {index_type}")
                 
                 if not index_nodes:
-                    print(f"   [WARNING] No index nodes found in execution plan")
+                    logger.warning(f"   [WARNING] No index nodes found in execution plan")
                     plan_results["zkd_index_used"] = False
                 
                 # Analyze estimated costs
                 estimated_cost = plan.get('plan', {}).get('estimatedCost', 0)
                 estimated_nr_items = plan.get('plan', {}).get('estimatedNrItems', 0)
                 
-                print(f"   Estimated Cost: {estimated_cost}")
-                print(f"   Estimated Items: {estimated_nr_items}")
+                logger.info(f"   Estimated Cost: {estimated_cost}")
+                logger.info(f"   Estimated Items: {estimated_nr_items}")
                 
                 plan_results.update({
                     "estimated_cost": estimated_cost,
@@ -305,14 +308,14 @@ class MDIIndexTester:
                 })
             
         except Exception as e:
-            print(f"   [ERROR] Failed to analyze execution plan: {e}")
+            logger.error(f"   [ERROR] Failed to analyze execution plan: {e}")
             plan_results["plan_analyzed"] = False
         
         return plan_results
     
     def compare_index_performance(self) -> Dict[str, Any]:
         """Compare performance with and without ZKD indexes."""
-        print(f"\n[TEST] Comparing query performance with different index types...")
+        logger.info(f"\n[TEST] Comparing query performance with different index types...")
         
         # This is a simulation since we can't easily drop/recreate indexes
         # In practice, you would run these tests with and without ZKD indexes
@@ -332,7 +335,7 @@ class MDIIndexTester:
         iterations = 5
         total_time = 0
         
-        print(f"   [PERF] Running {iterations} iterations of temporal query...")
+        logger.info(f"   [PERF] Running {iterations} iterations of temporal query...")
         for i in range(iterations):
             start_time = time.time()
             results = list(self.database.aql.execute(temporal_query, bind_vars={"point_in_time": current_time}))
@@ -340,10 +343,10 @@ class MDIIndexTester:
             total_time += iteration_time
             
             if self.show_queries and i == 0:
-                print(f"   Iteration 1: {len(results)} results in {iteration_time:.4f} seconds")
+                logger.info(f"   Iteration 1: {len(results)} results in {iteration_time:.4f} seconds")
         
         avg_time = total_time / iterations
-        print(f"   Average time over {iterations} iterations: {avg_time:.4f} seconds")
+        logger.info(f"   Average time over {iterations} iterations: {avg_time:.4f} seconds")
         
         performance_results = {
             "average_query_time": avg_time,
@@ -356,9 +359,9 @@ class MDIIndexTester:
     
     def run_comprehensive_tests(self) -> Dict[str, Any]:
         """Run all ZKD multi-dimensional index tests."""
-        print(f"=" * 80)
-        print(f"ZKD MULTI-DIMENSIONAL INDEX COMPREHENSIVE TEST SUITE")
-        print(f"=" * 80)
+        logger.info("=" * 80)
+        logger.info("ZKD MULTI-DIMENSIONAL INDEX COMPREHENSIVE TEST SUITE")
+        logger.info("=" * 80)
         
         if not self.connect_to_database():
             return {"status": "failed", "error": "Database connection failed"}
@@ -371,8 +374,8 @@ class MDIIndexTester:
             all_results["indexes_verified"] = indexes_exist
             
             if not indexes_exist:
-                print(f"\n[ERROR] ZKD multi-dimensional indexes not found. Deploy them first using:")
-                print(f"   python3 database_deployment.py --naming camelCase")
+                logger.error(f"\n[ERROR] ZKD multi-dimensional indexes not found. Deploy them first using:")
+                logger.info(f"   python3 database_deployment.py --naming camelCase")
                 return {"status": "failed", "error": "ZKD indexes not found"}
             
             # Test 2: Test temporal range queries
@@ -388,25 +391,25 @@ class MDIIndexTester:
             all_results["performance"] = performance_results
             
             # Summary
-            print(f"\n" + "=" * 80)
-            print(f"ZKD MULTI-DIMENSIONAL INDEX TEST SUMMARY")
-            print(f"=" * 80)
+            logger.info("\n" + "=" * 80)
+            logger.info("ZKD MULTI-DIMENSIONAL INDEX TEST SUMMARY")
+            logger.info("=" * 80)
             
-            print(f"Indexes Verified: {'PASS' if indexes_exist else 'FAIL'}")
-            print(f"Temporal Queries: {len(query_results)} tests completed")
-            print(f"Execution Plans: {'Analyzed' if plan_results.get('plan_analyzed') else 'Failed'}")
-            print(f"Performance Test: {performance_results.get('average_query_time', 0):.4f}s average")
+            logger.info(f"Indexes Verified: {'PASS' if indexes_exist else 'FAIL'}")
+            logger.info(f"Temporal Queries: {len(query_results)} tests completed")
+            logger.info(f"Execution Plans: {'Analyzed' if plan_results.get('plan_analyzed') else 'Failed'}")
+            logger.info(f"Performance Test: {performance_results.get('average_query_time', 0):.4f}s average")
             
             if plan_results.get('zkd_index_used'):
-                print(f"[SUCCESS] ZKD multi-dimensional indexes are being used by query optimizer!")
+                logger.info(f"[SUCCESS] ZKD multi-dimensional indexes are being used by query optimizer!")
             else:
-                print(f"[WARNING] ZKD multi-dimensional indexes may not be utilized")
+                logger.warning(f"[WARNING] ZKD multi-dimensional indexes may not be utilized")
             
             all_results["status"] = "completed"
             return all_results
             
         except Exception as e:
-            print(f"\n[ERROR] Test suite failed: {e}")
+            logger.error(f"\n[ERROR] Test suite failed: {e}")
             import traceback
             traceback.print_exc()
             return {"status": "failed", "error": str(e)}
@@ -414,6 +417,8 @@ class MDIIndexTester:
 
 def main():
     """Run ZKD multi-dimensional index tests."""
+    logging.basicConfig(level=logging.INFO, format='%(message)s')
+    
     import argparse
     
     parser = argparse.ArgumentParser(description="Test ZKD multi-dimensional indexes for temporal queries")
@@ -432,14 +437,14 @@ def main():
         output_file = Path(args.save_results)
         with open(output_file, 'w') as f:
             json.dump(results, f, indent=2)
-        print(f"\n[SAVED] Test results saved to: {output_file}")
+        logger.info(f"\n[SAVED] Test results saved to: {output_file}")
     
     # Exit with appropriate code
     if results.get("status") == "completed":
-        print(f"\n[SUCCESS] All ZKD multi-dimensional index tests completed successfully!")
+        logger.info(f"\n[SUCCESS] All ZKD multi-dimensional index tests completed successfully!")
         sys.exit(0)
     else:
-        print(f"\n[FAILED] ZKD multi-dimensional index tests failed")
+        logger.error(f"\n[FAILED] ZKD multi-dimensional index tests failed")
         sys.exit(1)
 
 
