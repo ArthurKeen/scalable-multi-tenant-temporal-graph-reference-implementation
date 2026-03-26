@@ -14,9 +14,8 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 # 2. Configure credentials
-cp environment_variables.example setup_env.sh
-# Edit setup_env.sh with your ArangoDB Oasis credentials
-source setup_env.sh
+cp .env.example .env
+# Edit .env with your ArangoDB Oasis credentials
 
 # 3. Run the demo
 make demo
@@ -34,6 +33,9 @@ See [DEMO_QUICK_START.md](DEMO_QUICK_START.md) for a one-page presenter cheat sh
 |---------|-------------|
 | `make demo` | Run interactive demo (recommended) |
 | `make demo-auto` | Run auto-advancing demo |
+| `make deploy` | Deploy database (production TTL) |
+| `make deploy-demo` | Deploy database with demo TTL (5-minute expiry) |
+| `make visualizer` | Install/update visualizer assets (theme, queries, actions) |
 | `make test` | Run unit tests (no database required) |
 | `make validate` | Run database validation suite |
 | `make reset` | Reset database to clean state |
@@ -141,7 +143,7 @@ Edge metadata:
 Copy the template and fill in your ArangoDB Oasis credentials:
 
 ```bash
-cp environment_variables.example setup_env.sh
+cp .env.example .env
 ```
 
 | Variable | Description |
@@ -151,7 +153,7 @@ cp environment_variables.example setup_env.sh
 | `ARANGO_PASSWORD` | Database password |
 | `ARANGO_DATABASE` | Database name (default: `network_assets_demo`) |
 
-`setup_env.sh` is gitignored and will never be committed.
+`.env` is gitignored and will never be committed. Credentials are loaded automatically via `python-dotenv`.
 
 ### Tenant Configuration
 
@@ -204,7 +206,7 @@ docs/                       PRD, presenter guide, development notes
 
 **"Module not found"** -- All commands require `PYTHONPATH=.` (handled automatically by `make`). If running manually, prefix with `PYTHONPATH=.`.
 
-**"Connection failed"** -- Run `source setup_env.sh` and verify with `echo $ARANGO_ENDPOINT`.
+**"Connection failed"** -- Check that `.env` exists with correct credentials. Verify with `python3 -c "from dotenv import load_dotenv; load_dotenv(); import os; print(os.getenv('ARANGO_ENDPOINT'))"`.
 
 **"SmartGraph creation failed"** -- SmartGraphs require ArangoDB Enterprise Edition in cluster mode. Community Edition will not work.
 

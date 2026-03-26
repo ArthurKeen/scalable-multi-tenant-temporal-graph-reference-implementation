@@ -9,7 +9,6 @@ on created/expired fields. Validates that MDI-prefix indexes improve query
 performance for time travel range queries.
 
 Usage:
-    source setup_env.sh
     PYTHONPATH=. python3 src/validation/mdi_tests.py
 """
 

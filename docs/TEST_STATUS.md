@@ -35,7 +35,7 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 All 9 validations passing:
 
 1. Collection Structure
-2. Software Refactoring
+2. Software Structure
 3. Unified Version Collection
 4. Time Travel Queries
 5. Cross-Entity Relationships
@@ -99,7 +99,7 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 
 ### Database validation (requires ArangoDB connection):
 ```bash
-source setup_env.sh  # or set ARANGO_* environment variables
+# Ensure .env file is configured with ARANGO_* credentials
 PYTHONPATH=. python3 src/validation/validation_suite.py
 ```
 

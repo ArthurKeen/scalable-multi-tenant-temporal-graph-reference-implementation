@@ -14,8 +14,9 @@ If you're in a hurry, here's the fastest way to run the demo:
 cd /path/to/network-asset-management-demo
 pip install -r requirements.txt
 
-# 2. Set up database credentials
-source setup_env.sh
+# 2. Configure credentials (first time only)
+cp .env.example .env
+# Edit .env with your ArangoDB Oasis credentials
 
 # 3. Run interactive demo
 make demo
@@ -23,9 +24,9 @@ make demo
 
 That's it! The demo will guide you through everything with interactive pauses.
 
-> **First time?** `setup_env.sh` is not in git. Create it:
-> `cp environment_variables.example setup_env.sh`, edit with your ArangoDB Oasis
-> credentials, then `source setup_env.sh`. See the Configuration section below.
+> **First time?** `.env` is not in git. Create it from the template:
+> `cp .env.example .env`, then edit with your credentials. See the Configuration
+> section below.
 
 ---
 
@@ -48,7 +49,7 @@ That's it! The demo will guide you through everything with interactive pauses.
 
 1. **ArangoDB Cluster Access**
    - An ArangoDB Oasis cluster endpoint
-   - Credentials are in `setup_env.sh` (see Configuration below)
+   - Credentials are in `.env` (see Configuration below)
 
 2. **Python 3.9+**
    - Check: `python3 --version`
@@ -63,21 +64,22 @@ That's it! The demo will guide you through everything with interactive pauses.
 
 ### Configuration
 
-The project uses environment variables for database credentials. A template is
-provided at `environment_variables.example`:
+The project uses a `.env` file for database credentials. A template is
+provided at `.env.example`:
 
 ```bash
 # Create your local credentials file
-cp environment_variables.example setup_env.sh
+cp .env.example .env
 
-# Edit setup_env.sh with your actual credentials:
+# Edit .env with your actual credentials:
 #   ARANGO_ENDPOINT - your cluster URL
 #   ARANGO_USERNAME - database username
 #   ARANGO_PASSWORD - database password
 #   ARANGO_DATABASE - database name (default: network_assets_demo)
 ```
 
-`setup_env.sh` is gitignored and will not be committed.
+`.env` is gitignored and will not be committed. Credentials are loaded
+automatically via `python-dotenv`.
 
 ### System Status Verification
 
@@ -85,7 +87,6 @@ Before your demo, verify everything is working:
 
 ```bash
 cd /path/to/network-asset-management-demo
-source setup_env.sh
 
 # Run quick tests (should see 100% passing)
 PYTHONPATH=. python3 src/validation/test_suite.py
@@ -103,10 +104,12 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 cd /path/to/network-asset-management-demo
 ```
 
-### Step 2: Set Environment Variables
+### Step 2: Verify Credentials
+
+Ensure your `.env` file exists and has correct credentials:
 
 ```bash
-source setup_env.sh
+ls .env
 ```
 
 **What this does**: 
@@ -117,14 +120,14 @@ source setup_env.sh
 
 **Verification**:
 ```bash
-echo $ARANGO_ENDPOINT
+python3 -c "from dotenv import load_dotenv; load_dotenv(); import os; print(os.getenv('ARANGO_ENDPOINT'))"
 # Should show your cluster URL
 ```
 
 ### Step 3: Open ArangoDB Web Interface (Optional but Recommended)
 
-1. Open browser to your cluster endpoint (`$ARANGO_ENDPOINT`)
-2. Login with credentials from `setup_env.sh`
+1. Open browser to your cluster endpoint (from `.env`)
+2. Login with your credentials
 3. Select your database (`$ARANGO_DATABASE`)
 4. Keep this open in a separate tab for visualization during demo
 
@@ -406,15 +409,14 @@ The demo will pause and provide instructions for:
 
 **Solution**:
 ```bash
-# 1. Check environment variables are set
-echo $ARANGO_ENDPOINT
-echo $ARANGO_DATABASE
+# 1. Check .env file exists
+ls .env
 
-# 2. If empty, run:
-source setup_env.sh
+# 2. Verify credentials load correctly
+python3 -c "from dotenv import load_dotenv; load_dotenv(); import os; print(os.getenv('ARANGO_ENDPOINT'))"
 
-# 3. Verify connectivity
-curl -s $ARANGO_ENDPOINT/_api/version
+# 3. If .env is missing, create it:
+cp .env.example .env
 ```
 
 ### Issue: "Module not found"
@@ -586,7 +588,6 @@ PYTHONPATH=. python3 src/ttl/ttl_monitor.py --duration 15
 **Start Demo**:
 ```bash
 cd /path/to/project
-source setup_env.sh
 PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --interactive
 ```
 
@@ -615,7 +616,7 @@ PYTHONPATH=. python3 src/validation/test_suite.py
 Before you start your demo, verify:
 
 - [ ] Can access project directory
-- [ ] `setup_env.sh` sources successfully (created from `environment_variables.example`)
+- [ ] `.env` file configured (created from `.env.example`)
 - [ ] Can connect to ArangoDB (browser login works)
 - [ ] Tests pass (run quick verification)
 - [ ] Have backup internet connection

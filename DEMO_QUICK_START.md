@@ -10,8 +10,9 @@
 cd /path/to/network-asset-management-demo
 pip install -r requirements.txt
 
-# 2. Set credentials (first time: cp environment_variables.example setup_env.sh, then edit)
-source setup_env.sh
+# 2. Configure credentials (first time only)
+cp .env.example .env
+# Edit .env with your ArangoDB Oasis credentials
 
 # 3. Run demo
 make demo
@@ -19,9 +20,8 @@ make demo
 
 **That's it!** Press Enter at each pause to advance through the demo.
 
-> **First time?** `setup_env.sh` is not in git. Create it:
-> `cp environment_variables.example setup_env.sh`, edit with your ArangoDB Oasis
-> credentials, then `source setup_env.sh`.
+> **First time?** `.env` is not in git. Create it from the template:
+> `cp .env.example .env`, then edit with your credentials.
 
 ---
 
@@ -45,7 +45,7 @@ make demo
 
 **URL**: Your cluster endpoint (from `$ARANGO_ENDPOINT`)
 **Database**: Your database name (from `$ARANGO_DATABASE`)
-**Credentials**: In `setup_env.sh`
+**Credentials**: In `.env`
 
 ### What to Show:
 1. **Collections** -> See all vertex/edge collections
@@ -99,7 +99,7 @@ FOR device IN Device
 ## Troubleshooting
 
 **"Connection failed"**
--> Run: `source setup_env.sh`
+-> Check `.env` exists with correct credentials
 
 **"Module not found"**
 -> Use: `PYTHONPATH=.` prefix
@@ -112,7 +112,7 @@ FOR device IN Device
 ## Pre-Demo Checklist
 
 - [ ] Dependencies installed (`pip install -r requirements.txt`)
-- [ ] Environment variables set (`source setup_env.sh`)
+- [ ] Credentials configured (`.env` file)
 - [ ] Browser open to ArangoDB UI
 - [ ] Tests passing: `make test`
 - [ ] Backup internet available

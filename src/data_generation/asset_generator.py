@@ -1,5 +1,5 @@
 """
-Time Travel Refactored Multi-Tenant Generator
+Multi-Tenant Temporal Graph Generator
 
 Implements consistent time travel pattern across ALL collections:
 - Device: DeviceProxyIn <-> Device <-> DeviceProxyOut (existing)
@@ -30,8 +30,8 @@ from src.data_generation.alert_generator import AlertGenerator
 from src.data_generation.taxonomy_generator import TaxonomyGenerator
 
 
-class TimeTravelRefactoredGenerator:
-    """Complete refactored multi-tenant generator with consistent time travel patterns."""
+class AssetGenerator:
+    """Multi-tenant generator with consistent time travel patterns."""
     
     def __init__(self, tenant_config: TenantConfig, environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
         self.tenant_config = tenant_config
@@ -262,7 +262,7 @@ class TimeTravelRefactoredGenerator:
         
         return historical_devices, historical_versions
     
-    # === SOFTWARE TIME TRAVEL (NEW refactored pattern) ===
+    # === SOFTWARE TIME TRAVEL ===
     def generate_software_proxies(self) -> Tuple[List[Dict], List[Dict]]:
         """Generate SoftwareProxyIn and SoftwareProxyOut collections (no temporal attributes)."""
         self.logger.info(f"Generating {self.tenant_config.num_software} software proxies for tenant {self.tenant_config.tenant_name}")
@@ -548,8 +548,8 @@ class TimeTravelRefactoredGenerator:
     
     # === MAIN GENERATION METHOD ===
     def generate_all_data(self) -> Dict[str, Any]:
-        """Generate complete time travel refactored network asset data."""
-        self.logger.info(f"Starting time travel refactored data generation for tenant: {self.tenant_config.tenant_name} (Scale: {self.tenant_config.scale_factor}x)")
+        """Generate complete network asset data with time travel patterns."""
+        self.logger.info(f"Starting data generation for tenant: {self.tenant_config.tenant_name} (Scale: {self.tenant_config.scale_factor}x)")
         
         # Generate all data collections
         locations = self.generate_locations()
@@ -607,9 +607,9 @@ class TimeTravelRefactoredGenerator:
         FileManager.write_json_file(config_file, smartgraph_config)
         
         total_documents = sum(len(data) for data in data_collections.values())
-        self.logger.info(f"Completed time travel refactored data generation: {total_documents} total documents")
+        self.logger.info(f"Completed data generation: {total_documents} total documents")
         
-        print(f"[DONE] Generated {total_documents} time travel refactored documents")
+        print(f"[DONE] Generated {total_documents} documents")
         print(f"   Device entities: {len(devices)} devices, {len(device_proxy_ins)} DeviceProxyIn, {len(device_proxy_outs)} DeviceProxyOut")
         print(f"   Software entities: {len(software)} software, {len(software_proxy_ins)} SoftwareProxyIn, {len(software_proxy_outs)} SoftwareProxyOut")
         print(f"   Location entities: {len(locations)} locations")
@@ -627,8 +627,8 @@ class TimeTravelRefactoredGenerator:
         }
 
 
-def generate_time_travel_refactored_demo(tenant_count: int = 8, environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
-    """Generate time travel refactored multi-tenant demo."""
+def generate_demo(tenant_count: int = 8, environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
+    """Generate multi-tenant demo data."""
     
     convention_name = "camelCase" if naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
     print(f"Multi-Tenant Network Asset Generation ({convention_name})")
@@ -677,7 +677,7 @@ def generate_time_travel_refactored_demo(tenant_count: int = 8, environment: str
     alert_generator = AlertGenerator(naming_convention)
     
     for tenant_config in tenant_configs:
-        generator = TimeTravelRefactoredGenerator(tenant_config, environment, naming_convention)
+        generator = AssetGenerator(tenant_config, environment, naming_convention)
         tenant_result = generator.generate_all_data()
         results[tenant_config.tenant_id] = tenant_result
         total_documents += sum(tenant_result["data_counts"].values())
@@ -726,7 +726,7 @@ def generate_time_travel_refactored_demo(tenant_count: int = 8, environment: str
             "environment": environment,
             "owlCompliant": True,
             "timeTravel": {
-                "refactored": True,
+                "enabled": True,
                 "consistentPattern": True,
                 "deviceTimeTravel": "DeviceProxyIn <-> Device <-> DeviceProxyOut",
                 "softwareTimeTravel": "SoftwareProxyIn <-> Software <-> SoftwareProxyOut",
@@ -740,7 +740,7 @@ def generate_time_travel_refactored_demo(tenant_count: int = 8, environment: str
     with open(registry_path, "w") as f:
         json.dump(tenant_registry, f, indent=2)
     
-    print(f"\n[SUCCESS] Time travel refactored generation completed!")
+    print(f"\n[SUCCESS] Data generation completed!")
     print(f"[DATA] Generated {total_documents} documents across {len(tenant_configs)} tenants")
     print(f" Registry: {registry_path}")
     print(f"-> Time Travel: Consistent pattern across Device and Software")
@@ -765,5 +765,5 @@ if __name__ == "__main__":
     # Convert naming argument to enum
     naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
     
-    results = generate_time_travel_refactored_demo(args.tenants, args.environment, naming_convention)
+    results = generate_demo(args.tenants, args.environment, naming_convention)
     print(f"\n[DONE] Ready for deployment with {args.naming} naming convention!")

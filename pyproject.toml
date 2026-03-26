@@ -10,6 +10,7 @@ authors = [
 ]
 dependencies = [
     "python-arango>=8.0,<9.0",
+    "python-dotenv>=1.0,<2.0",
 ]
 
 [project.optional-dependencies]

@@ -211,15 +211,19 @@ class AlertGenerator:
         return alert_documents, hasAlert_edges
     
     def _load_proxy_data(self, tenant_data_dir: Path, logical_name: str) -> List[Dict]:
-        """Load proxy data from tenant directory."""
+        """Load proxy data from tenant directory, adding _id if missing."""
         try:
+            file_name = self.app_config.get_file_name(logical_name)
             collection_name = self.app_config.get_collection_name(logical_name)
-            file_name = self.app_config.get_file_name(collection_name)
             file_path = tenant_data_dir / file_name
-            
+
             if file_path.exists():
                 with open(file_path, 'r') as f:
-                    return json.load(f)
+                    docs = json.load(f)
+                for doc in docs:
+                    if "_id" not in doc and "_key" in doc:
+                        doc["_id"] = f"{collection_name}/{doc['_key']}"
+                return docs
             else:
                 logger.warning(f"Proxy file not found: {file_path}")
                 return []
@@ -338,24 +342,20 @@ class AlertGenerator:
     
     def save_alert_data(self, tenant_data_dir: Path, alert_documents: List[Dict], hasAlert_edges: List[Dict]):
         """Save alert data to tenant directory."""
-        # Save Alert documents
-        alert_collection_name = self.app_config.get_collection_name("alerts")
-        alert_file_name = self.app_config.get_file_name(alert_collection_name)
+        alert_file_name = self.app_config.get_file_name("alerts")
         alert_file_path = tenant_data_dir / alert_file_name
-        
+
         with open(alert_file_path, 'w') as f:
             json.dump(alert_documents, f, indent=2)
-        
+
         logger.info(f"   [ALERT] Saved {len(alert_documents)} alert documents to {alert_file_name}")
-        
-        # Save hasAlert edges
-        hasAlert_collection_name = self.app_config.get_collection_name("has_alerts")
-        hasAlert_file_name = self.app_config.get_file_name(hasAlert_collection_name)
+
+        hasAlert_file_name = self.app_config.get_file_name("has_alerts")
         hasAlert_file_path = tenant_data_dir / hasAlert_file_name
-        
+
         with open(hasAlert_file_path, 'w') as f:
             json.dump(hasAlert_edges, f, indent=2)
-            
+
         logger.info(f"   [ALERT] Saved {len(hasAlert_edges)} hasAlert edges to {hasAlert_file_name}")
         
         # Print alert summary

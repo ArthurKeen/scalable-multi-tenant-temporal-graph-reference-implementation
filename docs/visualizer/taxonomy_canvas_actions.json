@@ -1,0 +1,68 @@
+[
+  {
+    "_key": "show_subclasses",
+    "name": "Show Subclasses",
+    "title": "Show Subclasses",
+    "graphId": "taxonomy_satellite_graph",
+    "description": "Show all direct subclasses of the selected class",
+    "queryText": "LET node = DOCUMENT(@startNode)\nFOR child, edge IN 1..1 INBOUND node subClassOf\n  RETURN child",
+    "bindVariables": {
+      "startNode": ""
+    }
+  },
+  {
+    "_key": "show_parent_classes",
+    "name": "Show Parent Classes",
+    "title": "Show Parent Classes",
+    "graphId": "taxonomy_satellite_graph",
+    "description": "Show the parent class(es) of the selected class",
+    "queryText": "LET node = DOCUMENT(@startNode)\nFOR parent, edge IN 1..1 OUTBOUND node subClassOf\n  RETURN parent",
+    "bindVariables": {
+      "startNode": ""
+    }
+  },
+  {
+    "_key": "show_full_subtree",
+    "name": "Show Full Subtree",
+    "title": "Show Full Subtree",
+    "graphId": "taxonomy_satellite_graph",
+    "description": "Expand the complete subtree of descendants below the selected class",
+    "queryText": "LET node = DOCUMENT(@startNode)\nFOR v, e, p IN 0..5 INBOUND node subClassOf\n  RETURN DISTINCT v",
+    "bindVariables": {
+      "startNode": ""
+    }
+  },
+  {
+    "_key": "show_path_to_root",
+    "name": "Show Path to Root",
+    "title": "Show Path to Root",
+    "graphId": "taxonomy_satellite_graph",
+    "description": "Trace the full inheritance chain from the selected class up to the root ancestor",
+    "queryText": "LET node = DOCUMENT(@startNode)\nFOR v, e, p IN 0..10 OUTBOUND node subClassOf\n  RETURN DISTINCT v",
+    "bindVariables": {
+      "startNode": ""
+    }
+  },
+  {
+    "_key": "show_classified_assets",
+    "name": "Show Classified Assets",
+    "title": "Show Classified Assets",
+    "graphId": "taxonomy_satellite_graph",
+    "description": "Show devices and software classified as the selected class (via type edges)",
+    "queryText": "LET node = DOCUMENT(@startNode)\nFOR asset, edge IN 1..1 INBOUND node type\n  RETURN asset",
+    "bindVariables": {
+      "startNode": ""
+    }
+  },
+  {
+    "_key": "show_same_category",
+    "name": "Show Same Category",
+    "title": "Show Same Category",
+    "graphId": "taxonomy_satellite_graph",
+    "description": "Show all classes in the same category as the selected class",
+    "queryText": "LET node = DOCUMENT(@startNode)\nFOR c IN Class\n  FILTER c.category == node.category\n  RETURN c",
+    "bindVariables": {
+      "startNode": ""
+    }
+  }
+]

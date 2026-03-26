@@ -554,8 +554,8 @@ class AutomatedDemoWalkthrough:
         # Run data generation
         print("Starting data generation...")
         try:
-            from src.data_generation.asset_generator import generate_time_travel_refactored_demo
-            result = generate_time_travel_refactored_demo(
+            from src.data_generation.asset_generator import generate_demo
+            result = generate_demo(
                 tenant_count=8,
                 environment="development",
                 naming_convention=NamingConvention.CAMEL_CASE
@@ -595,8 +595,8 @@ class AutomatedDemoWalkthrough:
         # Run database deployment
         self.demo_progress(1, 4, "Starting database deployment...")
         try:
-            from src.database.database_deployment import TimeTravelRefactoredDeployment
-            deployment = TimeTravelRefactoredDeployment(
+            from src.database.database_deployment import DatabaseDeployment
+            deployment = DatabaseDeployment(
                 naming_convention=NamingConvention.CAMEL_CASE,
                 demo_mode=True  # Use 5-minute TTL for visible aging during demo
             )
@@ -605,11 +605,11 @@ class AutomatedDemoWalkthrough:
             self.demo_progress(2, 4, "Connecting to cluster...", "Establishing connection to ArangoDB Oasis")
             if deployment.connect_to_cluster():
                 self.demo_progress(3, 4, "Creating collections and indexes...", "Setting up optimized database schema")
-                deployment.create_refactored_collections()
-                deployment.create_refactored_indexes()
+                deployment.create_collections()
+                deployment.create_indexes()
                 
                 self.demo_progress(4, 4, "Loading data and creating graph...", "Importing tenant data and building unified graph")
-                deployment.load_refactored_data()
+                deployment.load_data()
                 
                 # Create unified graph instead of per-tenant graphs
                 self._ensure_unified_graph()
@@ -673,7 +673,7 @@ class AutomatedDemoWalkthrough:
                 # Run actual validations with query display
                 validation_results = {
                     "collection_structure": validator.validate_collection_structure(),
-                    "software_refactoring": validator.validate_software_refactoring(),
+                    "software_structure": validator.validate_software_structure(),
                     "time_travel_queries": validator.validate_time_travel_queries(),
                     "tenant_isolation": validator.validate_tenant_isolation(),
                     "cross_entity_relationships": validator.validate_cross_entity_relationships(),

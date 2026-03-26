@@ -1,0 +1,56 @@
+[
+  {
+    "_key": "taxonomy_full_hierarchy",
+    "title": "Taxonomy: Full Class Hierarchy",
+    "name": "Taxonomy: Full Class Hierarchy",
+    "description": "Return the complete taxonomy as a graph (all classes and subClassOf edges)",
+    "queryText": "FOR v IN Class\n  RETURN v",
+    "bindVariables": {}
+  },
+  {
+    "_key": "taxonomy_by_category",
+    "title": "Taxonomy: Classes by Category",
+    "name": "Taxonomy: Classes by Category",
+    "description": "List all taxonomy classes grouped by category with counts",
+    "queryText": "FOR c IN Class\n  COLLECT category = c.category INTO classes\n  SORT category\n  RETURN {\n    category: category,\n    count: LENGTH(classes),\n    classes: classes[*].c.name\n  }",
+    "bindVariables": {}
+  },
+  {
+    "_key": "taxonomy_roots",
+    "title": "Taxonomy: Root Classes (No Parent)",
+    "name": "Taxonomy: Root Classes (No Parent)",
+    "description": "Find root classes that have no parent (not the _from of any subClassOf edge)",
+    "queryText": "LET childKeys = (FOR e IN subClassOf RETURN PARSE_IDENTIFIER(e._from).key)\nFOR c IN Class\n  FILTER c._key NOT IN childKeys\n  SORT c.category, c.name\n  RETURN { name: c.name, category: c.category, description: c.description }",
+    "bindVariables": {}
+  },
+  {
+    "_key": "taxonomy_subtree",
+    "title": "Taxonomy: Subtree from Class",
+    "name": "Taxonomy: Subtree from Class",
+    "description": "Show all descendants of a given class (traverse subClassOf inbound to find children)",
+    "queryText": "FOR root IN Class\n  FILTER root.name == @className\n  FOR v, e, p IN 0..5 INBOUND root subClassOf\n    RETURN DISTINCT v",
+    "bindVariables": {
+      "className": "NetworkDevice"
+    }
+  },
+  {
+    "_key": "taxonomy_path_to_root",
+    "title": "Taxonomy: Path to Root",
+    "name": "Taxonomy: Path to Root",
+    "description": "Trace the inheritance chain from a leaf class up to its root ancestor",
+    "queryText": "FOR leaf IN Class\n  FILTER leaf.name == @className\n  FOR v, e, p IN 0..10 OUTBOUND leaf subClassOf\n    RETURN v",
+    "bindVariables": {
+      "className": "CoreRouter"
+    }
+  },
+  {
+    "_key": "taxonomy_devices_by_class",
+    "title": "Taxonomy: Devices Classified as Type",
+    "name": "Taxonomy: Devices Classified as Type",
+    "description": "Find all devices that are classified as a specific taxonomy class",
+    "queryText": "FOR cls IN Class\n  FILTER cls.name == @className\n  FOR device, edge IN 1..1 INBOUND cls type\n    FILTER IS_SAME_COLLECTION('Device', device)\n    RETURN {\n      device: device.name,\n      type: device.type,\n      ip: device.ipAddress,\n      tenant: device.tenantId,\n      confidence: edge.confidence\n    }",
+    "bindVariables": {
+      "className": "NetworkDevice"
+    }
+  }
+]

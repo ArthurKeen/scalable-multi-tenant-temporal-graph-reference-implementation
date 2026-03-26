@@ -1,5 +1,5 @@
 """
-Code Refactoring Utilities
+Database Utilities
 
 Provides common utilities to eliminate duplicate code patterns:
 - Database connection management

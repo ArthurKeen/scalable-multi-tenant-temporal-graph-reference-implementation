@@ -297,81 +297,75 @@ class TaxonomyGenerator:
         return type_edges
     
     def _classify_device(self, device: Dict[str, Any]) -> Optional[str]:
-        """Classify a device based on its properties."""
+        """Classify a device to a specific leaf taxonomy class.
+
+        Uses the device type and a stable random seed (from _key) so the same
+        device always gets the same classification across regenerations.
+        """
         device_type = device.get("type", "").lower()
-        device_name = device.get("name", "").lower()
-        
-        # Classification rules based on device properties
-        if "router" in device_type or "router" in device_name:
-            if "edge" in device_name or "border" in device_name:
-                return "edge_router"
-            elif "core" in device_name or "backbone" in device_name:
-                return "core_router" 
-            elif "wireless" in device_name or "wifi" in device_name:
-                return "wireless_router"
-            else:
-                return "router"
-        
-        elif "switch" in device_type or "switch" in device_name:
-            if "l3" in device_name or "layer3" in device_name:
-                return "l3_switch"
-            else:
-                return "l2_switch"
-        
-        elif "access" in device_type and "point" in device_type:
-            if "outdoor" in device_name:
-                return "outdoor_ap"
-            else:
-                return "indoor_ap"
-        
-        elif "firewall" in device_type or "firewall" in device_name:
-            if "next" in device_name and "gen" in device_name:
-                return "next_gen_firewall"
-            else:
-                return "firewall"
-        
-        elif "load" in device_type and "balancer" in device_type:
-            return "load_balancer"
-        
-        # Default to generic network device
+        device_key = device.get("_key", "")
+        rng = random.Random(device_key)
+
+        if "router" in device_type:
+            return rng.choice(["core_router", "edge_router", "wireless_router"])
+
+        if "switch" in device_type:
+            return rng.choice(["l2_switch", "l3_switch"])
+
+        if "firewall" in device_type:
+            return rng.choice(["firewall", "next_gen_firewall"])
+
+        if "iot" in device_type:
+            return rng.choice(["indoor_ap", "outdoor_ap", "indoor_ap"])
+
+        if "server" in device_type:
+            return rng.choice(["compute_device", "load_balancer"])
+
+        if "laptop" in device_type:
+            return "compute_device"
+
         return "network_device"
     
     def _classify_software(self, software: Dict[str, Any]) -> Optional[str]:
-        """Classify software based on its properties."""
+        """Classify software to a specific leaf taxonomy class.
+
+        Named software (PostgreSQL, MongoDB, etc.) maps directly. Generic
+        software gets a stable random leaf assignment seeded by _key.
+        """
         software_name = software.get("name", "").lower()
         software_type = software.get("type", "").lower()
-        
-        # Classification rules based on software properties
+        software_key = software.get("_key", "")
+        rng = random.Random(software_key)
+
         if "postgresql" in software_name or "postgres" in software_name:
             return "postgresql"
-        elif "mysql" in software_name:
+        if "mysql" in software_name:
             return "mysql"
-        elif "mongodb" in software_name or "mongo" in software_name:
+        if "mongodb" in software_name or "mongo" in software_name:
             return "mongodb"
-        elif "apache" in software_name and ("http" in software_name or "web" in software_type):
+        if "apache" in software_name:
             return "apache"
-        elif "nginx" in software_name:
+        if "nginx" in software_name:
             return "nginx"
-        elif "ubuntu" in software_name:
+        if "node" in software_name or "node.js" in software_name:
+            return rng.choice(["application_software", "web_server"])
+        if "docker" in software_name:
+            return "system_software"
+        if "ubuntu" in software_name:
             return "ubuntu"
-        elif "windows" in software_name:
+        if "windows" in software_name:
             return "windows"
-        elif "linux" in software_name:
+        if "linux" in software_name:
             return "linux"
-        
-        # Classify by type
-        elif "database" in software_type:
-            if "nosql" in software_type or "document" in software_type:
-                return "document_db"
-            else:
-                return "relational_db"
-        elif "web" in software_type and "server" in software_type:
+
+        if "database" in software_type:
+            return rng.choice(["relational_db", "document_db", "graph_db", "nosql_db"])
+        if "web" in software_type:
             return "web_server"
-        elif "operating" in software_type and "system" in software_type:
-            return "operating_system"
-        
-        # Default to generic software
-        return "software"
+        if "operating" in software_type:
+            return rng.choice(["ubuntu", "windows", "linux"])
+
+        return rng.choice(["application_software", "system_software"])
     
     def _create_type_edge(self, from_entity: Dict[str, Any], to_class_doc_key: str, 
                          tenant_id: str, confidence: float) -> Dict[str, Any]:

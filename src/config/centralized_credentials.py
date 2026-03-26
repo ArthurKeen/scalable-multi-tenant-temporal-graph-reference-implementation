@@ -8,7 +8,12 @@ to all connection parameters. Uses memory reference for ArangoDB Oasis cluster.
 import os
 from typing import Dict, Optional
 from dataclasses import dataclass
+
+from dotenv import load_dotenv
+
 from src.config.generation_constants import GENERATION_CONSTANTS, NETWORK_CONSTANTS, SYSTEM_CONSTANTS
+
+load_dotenv()
 
 
 @dataclass

@@ -1,11 +1,11 @@
 """
-Deploy Time Travel Refactored Data to ArangoDB Oasis
+Deploy Multi-Tenant Temporal Graph to ArangoDB Oasis
 
-Deploys the refactored time travel pattern with:
+Deploys the time travel pattern with:
 - Device time travel: DeviceProxyIn <-> Device <-> DeviceProxyOut
-- Software time travel: SoftwareProxyIn <-> Software <-> SoftwareProxyOut (NEW)
+- Software time travel: SoftwareProxyIn <-> Software <-> SoftwareProxyOut
 - Unified 'version' collection for all time travel relationships
-- New hasDeviceSoftware edge collection
+- hasDeviceSoftware edge collection
 - W3C OWL naming conventions
 """
 
@@ -25,8 +25,8 @@ from src.ttl.ttl_constants import DEFAULT_TTL_DAYS, TTLConstants
 logger = logging.getLogger(__name__)
 
 
-class TimeTravelRefactoredDeployment:
-    """Deploy time travel refactored data to ArangoDB Oasis."""
+class DatabaseDeployment:
+    """Deploy multi-tenant temporal graph data to ArangoDB Oasis."""
     
     def __init__(self, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE, demo_mode: bool = False):
         self.naming_convention = naming_convention
@@ -95,7 +95,7 @@ class TimeTravelRefactoredDeployment:
             return False
     
     def drop_and_recreate_database(self) -> bool:
-        """Drop existing database and recreate with refactored structure."""
+        """Drop existing database and recreate fresh."""
         try:
             logger.info(f"\n[DELETE]  Dropping existing database: {self.creds.database_name}")
             
@@ -115,7 +115,7 @@ class TimeTravelRefactoredDeployment:
             logger.error(f"Error recreating database: {str(e)}")
             return False
     
-    def create_refactored_collections(self) -> bool:
+    def create_collections(self) -> bool:
         """Create satellite collections only - SmartGraph collections are auto-created by SmartGraph."""
         try:
             convention_name = "camelCase" if self.naming_convention == NamingConvention.CAMEL_CASE else "snake_case"
@@ -149,12 +149,12 @@ class TimeTravelRefactoredDeployment:
             logger.error(f"Error creating satellite collections: {str(e)}")
             return False
     
-    def create_refactored_indexes(self) -> bool:
-        """Create indexes optimized for time travel refactored structure."""
+    def create_indexes(self) -> bool:
+        """Create indexes optimized for temporal queries and graph traversal."""
         try:
-            logger.info(f"\n[ANALYSIS] Creating time travel refactored indexes...")
+            logger.info(f"\n[ANALYSIS] Creating indexes...")
             
-            # Refactored index configurations
+            # Index configurations
             index_configs = [
                 # NOTE: _key fields already have automatic primary indexes, so no hash indexes needed
                 
@@ -341,19 +341,19 @@ class TimeTravelRefactoredDeployment:
                 else:
                     logger.info(f"   [SKIP] Collection not found: {collection_name}")
             
-            logger.info(f"[DONE] Time travel refactored indexes created (including TTL)")
+            logger.info(f"[DONE] Indexes created (including TTL)")
             return True
             
         except Exception as e:
             logger.error(f"Error creating indexes: {str(e)}")
             return False
     
-    def load_refactored_data(self) -> bool:
-        """Load time travel refactored tenant data into collections."""
+    def load_data(self) -> bool:
+        """Load tenant data into collections."""
         try:
-            logger.info(f"\n[DATA] Loading time travel refactored data...")
+            logger.info(f"\n[DATA] Loading tenant data...")
             
-            # Find tenant directories with refactored data
+            # Find tenant directories
             data_dir = Path("data")
             tenant_dirs = [d for d in data_dir.iterdir() if d.is_dir() and d.name.startswith("tenant_")]
             
@@ -361,7 +361,7 @@ class TimeTravelRefactoredDeployment:
                 logger.error(f"No tenant data directories found in {data_dir}")
                 return False
             
-            # Time travel refactored file to collection mappings - use configuration manager
+            # File to collection mappings
             file_mappings = {
                 self.app_config.get_file_name("devices"): self.app_config.get_collection_name("devices"),
                 self.app_config.get_file_name("device_ins"): self.app_config.get_collection_name("device_ins"),
@@ -376,7 +376,9 @@ class TimeTravelRefactoredDeployment:
                 self.app_config.get_file_name("has_device_software"): self.app_config.get_collection_name("has_device_software"),
                 self.app_config.get_file_name("versions"): self.app_config.get_collection_name("versions"),  # UNIFIED
                 self.app_config.get_file_name("types"): self.app_config.get_collection_name("types"),  # TAXONOMY
-                self.app_config.get_file_name("subclass_of"): self.app_config.get_collection_name("subclass_of")  # TAXONOMY
+                self.app_config.get_file_name("subclass_of"): self.app_config.get_collection_name("subclass_of"),  # TAXONOMY
+                self.app_config.get_file_name("alerts"): self.app_config.get_collection_name("alerts"),
+                self.app_config.get_file_name("has_alerts"): self.app_config.get_collection_name("has_alerts"),
             }
             
             total_loaded = 0
@@ -420,7 +422,7 @@ class TimeTravelRefactoredDeployment:
             logger.error(f"Error loading data: {str(e)}")
             return False
     
-    def create_refactored_named_graphs(self) -> bool:
+    def create_named_graphs(self) -> bool:
         """Create a single unified SmartGraph for all tenants with proper smartGraphAttribute."""
         try:
             logger.info(f"\n[GRAPH] Creating unified SmartGraph for multi-tenant isolation...")
@@ -435,21 +437,29 @@ class TimeTravelRefactoredDeployment:
             
             # Define edge definitions for the unified SmartGraph
             # Includes edges to satellite collections (SmartGraph -> Satellite pattern)
+            # Edge definitions must match the actual _from/_to collection
+            # patterns in the generated data:
+            #   hasConnection:     DeviceProxyOut → DeviceProxyIn
+            #   hasLocation:       DeviceProxyOut → Location
+            #   hasDeviceSoftware: DeviceProxyOut → SoftwareProxyIn
+            #   hasVersion:        ProxyIn → Entity → ProxyOut (for both Device and Software)
+            #   type:              Device/Software → Class (satellite)
+            #   hasAlert:          ProxyOut → Alert
             edge_definitions = [
                 {
                     "edge_collection": self.app_config.get_collection_name("connections"),
-                    "from_vertex_collections": [self.app_config.get_collection_name("devices")],
-                    "to_vertex_collections": [self.app_config.get_collection_name("devices")]
+                    "from_vertex_collections": [self.app_config.get_collection_name("device_outs")],
+                    "to_vertex_collections": [self.app_config.get_collection_name("device_ins")]
                 },
                 {
                     "edge_collection": self.app_config.get_collection_name("has_locations"),
-                    "from_vertex_collections": [self.app_config.get_collection_name("devices")],
+                    "from_vertex_collections": [self.app_config.get_collection_name("device_outs")],
                     "to_vertex_collections": [self.app_config.get_collection_name("locations")]
                 },
                 {
                     "edge_collection": self.app_config.get_collection_name("has_device_software"),
-                    "from_vertex_collections": [self.app_config.get_collection_name("devices")],
-                    "to_vertex_collections": [self.app_config.get_collection_name("software")]
+                    "from_vertex_collections": [self.app_config.get_collection_name("device_outs")],
+                    "to_vertex_collections": [self.app_config.get_collection_name("software_ins")]
                 },
                 {
                     "edge_collection": self.app_config.get_collection_name("versions"),
@@ -540,10 +550,10 @@ class TimeTravelRefactoredDeployment:
             logger.error(f"Error creating unified SmartGraph: {str(e)}")
             return False
     
-    def verify_refactored_deployment(self) -> bool:
-        """Verify the refactored time travel deployment."""
+    def verify_deployment(self) -> bool:
+        """Verify the deployment completed correctly."""
         try:
-            logger.info(f"\n[ANALYSIS] Verifying time travel refactored deployment...")
+            logger.info(f"\n[ANALYSIS] Verifying deployment...")
             
             # Check new Software proxy collections exist
             software_proxy_collections = ["SoftwareProxyIn", "SoftwareProxyOut"]
@@ -555,7 +565,7 @@ class TimeTravelRefactoredDeployment:
                 else:
                     logger.warning(f"   {collection_name}: collection not found (may be from old data)")
             
-            # Check Software collection is refactored (no configurationHistory)
+            # Check Software collection uses flattened structure (no configurationHistory)
             software_collection = self.database.collection("Software")
             sample_software = software_collection.all(limit=1)
             
@@ -564,7 +574,7 @@ class TimeTravelRefactoredDeployment:
                     logger.error(f"Software still has configurationHistory: {doc['_key']}")
                     return False
                 else:
-                    logger.info(f"   [DONE] Software refactored (no configurationHistory): {doc['_key']}")
+                    logger.info(f"   [DONE] Software structure valid (no configurationHistory): {doc['_key']}")
                 
                 # Check for flattened configuration
                 if "portNumber" in doc and "isEnabled" in doc:
@@ -606,11 +616,32 @@ class TimeTravelRefactoredDeployment:
                     logger.error(f"Missing collection: {collection_name}")
                     return False
             
-            logger.info(f"[DONE] Time travel refactored deployment verified successfully")
+            logger.info(f"[DONE] Deployment verified successfully")
             return True
             
         except Exception as e:
             logger.error(f"Error verifying deployment: {str(e)}")
+            return False
+
+    def install_visualizer_assets(self) -> bool:
+        """Install Graph Visualizer theme, saved queries, and canvas actions for all graphs."""
+        try:
+            from scripts.setup.install_visualizer import install_all
+
+            logger.info("\n[VIS] Installing Graph Visualizer customizations...")
+            results = install_all(self.database, database_name=self.creds.database_name)
+            for r in results:
+                graph_id = r["graph_id"]
+                if r.get("skipped"):
+                    logger.info(f"   [{graph_id}] SKIPPED (graph not found)")
+                    continue
+                logger.info(f"   [{graph_id}]")
+                logger.info(f"     Theme:          {r.get('theme_name', '?')} (isDefault=true)")
+                logger.info(f"     Saved queries:  {r.get('query_count', 0)}")
+                logger.info(f"     Canvas actions: {r.get('action_count', 0)}")
+            return True
+        except Exception as e:
+            logger.error(f"Visualizer installation failed: {e}")
             return False
 
     def deploy_all_tenant_data(self) -> bool:
@@ -626,24 +657,28 @@ class TimeTravelRefactoredDeployment:
             if not self.drop_and_recreate_database():
                 return False
             
-            # Step 3: Create collections
-            if not self.create_refactored_collections():
+            # Step 3: Create satellite collections
+            if not self.create_collections():
                 return False
             
-            # Step 4: Create indexes (including MDI-prefix indexes)
-            if not self.create_refactored_indexes():
+            # Step 4: Create named graphs (auto-creates SmartGraph vertex/edge collections)
+            if not self.create_named_graphs():
                 return False
             
-            # Step 5: Load tenant data
-            if not self.load_refactored_data():
+            # Step 5: Create indexes (collections now exist from SmartGraph)
+            if not self.create_indexes():
                 return False
             
-            # Step 6: Create named graphs
-            if not self.create_refactored_named_graphs():
+            # Step 6: Load tenant data
+            if not self.load_data():
                 return False
             
             # Step 7: Verify deployment
-            if not self.verify_refactored_deployment():
+            if not self.verify_deployment():
+                return False
+            
+            # Step 8: Install visualizer assets
+            if not self.install_visualizer_assets():
                 return False
             
             logger.info(f"\n[SUCCESS] Complete deployment with MDI-prefix indexes successful!")
@@ -653,9 +688,9 @@ class TimeTravelRefactoredDeployment:
             logger.error(f"Complete deployment failed: {e}")
             return False
     
-    def deploy_time_travel_refactored(self) -> bool:
-        """Execute complete deployment of time travel refactored data."""
-        logger.info("[DEPLOY] Time Travel Refactored Database Deployment")
+    def deploy(self) -> bool:
+        """Execute complete database deployment."""
+        logger.info("[DEPLOY] Multi-Tenant Temporal Graph Deployment")
         logger.info("=" * 60)
         logger.info("[INFO] Deploying:")
         logger.info("   - Device time travel: DeviceProxyIn <-> Device <-> DeviceProxyOut")
@@ -665,15 +700,17 @@ class TimeTravelRefactoredDeployment:
         logger.info("   - Software configurationHistory array removed (flattened)")
         logger.info("")
         
-        # Execute deployment steps
+        # SmartGraph creation must precede indexes and data loading because
+        # it auto-creates the vertex/edge collections (Device, Software, etc.)
         steps = [
             ("Connect to cluster", self.connect_to_cluster),
             ("Drop and recreate database", self.drop_and_recreate_database),
-            ("Create refactored collections", self.create_refactored_collections),
-            ("Create refactored indexes", self.create_refactored_indexes),
-            ("Load refactored data", self.load_refactored_data),
-            ("Create refactored named graphs", self.create_refactored_named_graphs),
-            ("Verify refactored deployment", self.verify_refactored_deployment)
+            ("Create collections", self.create_collections),
+            ("Create named graphs", self.create_named_graphs),
+            ("Create indexes", self.create_indexes),
+            ("Load data", self.load_data),
+            ("Verify deployment", self.verify_deployment),
+            ("Install visualizer assets", self.install_visualizer_assets),
         ]
         
         for step_name, step_function in steps:
@@ -682,14 +719,13 @@ class TimeTravelRefactoredDeployment:
                 logger.error(f"Failed at step: {step_name}")
                 return False
         
-        logger.info(f"\n[SUCCESS] Time travel refactored deployment completed successfully!")
+        logger.info(f"\n[SUCCESS] Deployment completed successfully!")
         logger.info(f"[DATA] Database: {self.creds.database_name}")
         logger.info(f"[LINK] Endpoint: {self.creds.endpoint}")
-        logger.info(f"-> Time Travel Refactoring:")
-        logger.info(f"   - Device: Existing pattern maintained")
-        logger.info(f"   - Software: NEW time travel pattern implemented")
+        logger.info(f"-> Architecture:")
+        logger.info(f"   - Device time travel: ProxyIn <-> Device <-> ProxyOut")
+        logger.info(f"   - Software time travel: ProxyIn <-> Software <-> ProxyOut")
         logger.info(f"   - Unified version collection for consistent queries")
-        logger.info(f"   - Software configurationHistory array eliminated")
         logger.info(f"   - W3C OWL naming conventions")
         
         return True
@@ -711,8 +747,8 @@ def main():
 
     naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
 
-    deployment = TimeTravelRefactoredDeployment(naming_convention, demo_mode=args.demo_mode)
-    success = deployment.deploy_time_travel_refactored()
+    deployment = DatabaseDeployment(naming_convention, demo_mode=args.demo_mode)
+    success = deployment.deploy()
 
     if success:
         print(f"\n[DONE] Database updated with {args.naming} naming convention!")

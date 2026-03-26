@@ -1,0 +1,99 @@
+[
+  {
+    "_key": "tenant_overview",
+    "title": "Tenant Overview",
+    "name": "Tenant Overview",
+    "description": "Summary of all tenants with device, software, and location counts",
+    "queryText": "FOR d IN Device\n  COLLECT tenant = d.tenantId\n  LET devices = LENGTH(FOR x IN Device FILTER x.tenantId == tenant RETURN 1)\n  LET software = LENGTH(FOR x IN Software FILTER x.tenantId == tenant RETURN 1)\n  LET locations = LENGTH(FOR x IN Location FILTER x.tenantId == tenant RETURN 1)\n  SORT devices DESC\n  RETURN {\n    tenantId: tenant,\n    devices: devices,\n    software: software,\n    locations: locations,\n    total: devices + software + locations\n  }",
+    "bindVariables": {}
+  },
+  {
+    "_key": "tenant_devices",
+    "title": "Devices for Tenant",
+    "name": "Devices for Tenant",
+    "description": "List all devices for a specific tenant with their details",
+    "queryText": "FOR d IN Device\n  FILTER d.tenantId == @tenantId\n  SORT d.type, d.name\n  RETURN {\n    key: d._key,\n    name: d.name,\n    type: d.type,\n    model: d.model,\n    ipAddress: d.ipAddress,\n    os: d.operatingSystem,\n    created: d.created\n  }",
+    "bindVariables": {
+      "tenantId": "1b45406a99d9"
+    }
+  },
+  {
+    "_key": "device_version_history",
+    "title": "Device Version History (Time Travel)",
+    "name": "Device Version History (Time Travel)",
+    "description": "Show all versions of a device through its ProxyIn -> hasVersion -> Device chain",
+    "queryText": "FOR proxy IN DeviceProxyIn\n  FILTER proxy.tenantId == @tenantId\n  FILTER proxy._key == @deviceProxy\n  FOR v, e IN 1..1 OUTBOUND proxy hasVersion\n    SORT e.created DESC\n    RETURN {\n      proxyName: proxy.name,\n      version: v.name,\n      model: v.model,\n      ipAddress: v.ipAddress,\n      os: v.operatingSystem,\n      osVersion: v.osVersion,\n      created: e.created,\n      expired: e.expired,\n      isCurrent: e.expired == 9223372036854775807\n    }",
+    "bindVariables": {
+      "tenantId": "1b45406a99d9",
+      "deviceProxy": "1b45406a99d9:device1"
+    }
+  },
+  {
+    "_key": "software_version_history",
+    "title": "Software Version History (Time Travel)",
+    "name": "Software Version History (Time Travel)",
+    "description": "Show all versions of a software instance through its ProxyIn -> hasVersion -> Software chain",
+    "queryText": "FOR proxy IN SoftwareProxyIn\n  FILTER proxy.tenantId == @tenantId\n  FILTER proxy._key == @softwareProxy\n  FOR v, e IN 1..1 OUTBOUND proxy hasVersion\n    SORT e.created DESC\n    RETURN {\n      proxyName: proxy.name,\n      version: v.name,\n      softwareVersion: v.version,\n      port: v.portNumber,\n      enabled: v.isEnabled,\n      created: e.created,\n      expired: e.expired,\n      isCurrent: e.expired == 9223372036854775807\n    }",
+    "bindVariables": {
+      "tenantId": "1b45406a99d9",
+      "softwareProxy": "1b45406a99d9:software1"
+    }
+  },
+  {
+    "_key": "point_in_time_snapshot",
+    "title": "Point-in-Time Snapshot (Time Travel)",
+    "name": "Point-in-Time Snapshot (Time Travel)",
+    "description": "Show all devices and software that were active at a specific point in time",
+    "queryText": "LET ts = @timestamp\nLET devices = (\n  FOR d IN Device\n    FILTER d.tenantId == @tenantId\n    FILTER d.created <= ts AND d.expired > ts\n    RETURN { collection: \"Device\", name: d.name, type: d.type, ip: d.ipAddress }\n)\nLET software = (\n  FOR s IN Software\n    FILTER s.tenantId == @tenantId\n    FILTER s.created <= ts AND s.expired > ts\n    RETURN { collection: \"Software\", name: s.name, type: s.type, version: s.version }\n)\nRETURN {\n  queryTime: ts,\n  activeDevices: LENGTH(devices),\n  activeSoftware: LENGTH(software),\n  devices: devices,\n  software: software\n}",
+    "bindVariables": {
+      "tenantId": "1b45406a99d9",
+      "timestamp": 1762881314
+    }
+  },
+  {
+    "_key": "tenant_isolation_proof",
+    "title": "Tenant Isolation Proof",
+    "name": "Tenant Isolation Proof",
+    "description": "Verify SmartGraph tenant isolation -- traverse from one tenant and confirm no cross-tenant leakage",
+    "queryText": "LET startTenant = @tenantId\nLET traversed = (\n  FOR d IN Device\n    FILTER d.tenantId == startTenant\n    LIMIT 5\n    FOR v, e, p IN 1..3 ANY d\n      hasConnection, hasLocation, hasDeviceSoftware, hasVersion\n      RETURN DISTINCT v.tenantId\n)\nLET uniqueTenants = UNIQUE(traversed)\nRETURN {\n  startTenant: startTenant,\n  tenantsReached: uniqueTenants,\n  isolationVerified: LENGTH(uniqueTenants) <= 1 OR (LENGTH(uniqueTenants) == 1 AND uniqueTenants[0] == startTenant),\n  traversalCount: LENGTH(traversed)\n}",
+    "bindVariables": {
+      "tenantId": "1b45406a99d9"
+    }
+  },
+  {
+    "_key": "network_topology",
+    "title": "Network Topology (Device Connections)",
+    "name": "Network Topology (Device Connections)",
+    "description": "Show the network topology for a tenant -- devices and their connections",
+    "queryText": "FOR c IN hasConnection\n  FILTER c.tenantId == @tenantId\n  LET fromProxy = DOCUMENT(c._from)\n  LET toProxy = DOCUMENT(c._to)\n  RETURN {\n    from: fromProxy.name,\n    to: toProxy.name,\n    connectionType: c.connectionType,\n    bandwidth: c.bandwidthCapacity,\n    latency: c.networkLatency\n  }",
+    "bindVariables": {
+      "tenantId": "1b45406a99d9"
+    }
+  },
+  {
+    "_key": "device_full_context",
+    "title": "Device Full Context (Software + Location + Taxonomy)",
+    "name": "Device Full Context (Software + Location + Taxonomy)",
+    "description": "For a given device, show its installed software, location, and taxonomy classification",
+    "queryText": "FOR d IN Device\n  FILTER d._key == @deviceKey\n  LET proxyOut = FIRST(FOR po IN DeviceProxyOut FILTER po._key == SPLIT(d._key, '-')[0] RETURN po)\n  LET software = (\n    FOR sw, e IN 2..2 OUTBOUND proxyOut hasDeviceSoftware, hasVersion\n      FILTER IS_SAME_COLLECTION('Software', sw)\n      RETURN { name: sw.name, version: sw.version, port: sw.portNumber, enabled: sw.isEnabled }\n  )\n  LET location = FIRST(\n    FOR loc, e IN 1..1 OUTBOUND proxyOut hasLocation\n      RETURN { name: loc.name, address: loc.streetAddress }\n  )\n  LET classes = (\n    FOR cls, e IN 1..1 OUTBOUND d type\n      RETURN { className: cls.name, category: cls.category, confidence: e.confidence }\n  )\n  RETURN {\n    device: d.name,\n    type: d.type,\n    ip: d.ipAddress,\n    os: CONCAT(d.operatingSystem, ' ', d.osVersion),\n    location: location,\n    software: software,\n    classification: classes\n  }",
+    "bindVariables": {
+      "deviceKey": "1b45406a99d9:device1-0"
+    }
+  },
+  {
+    "_key": "taxonomy_hierarchy",
+    "title": "Taxonomy Class Hierarchy",
+    "name": "Taxonomy Class Hierarchy",
+    "description": "Show the taxonomy class hierarchy from the satellite Class collection",
+    "queryText": "FOR c IN Class\n  COLLECT category = c.category INTO classes\n  SORT category\n  RETURN {\n    category: category,\n    classCount: LENGTH(classes),\n    classes: (\n      FOR cls IN classes\n        SORT cls.c.name\n        RETURN { name: cls.c.name, description: cls.c.description }\n    )\n  }",
+    "bindVariables": {}
+  },
+  {
+    "_key": "collection_statistics",
+    "title": "Collection Statistics",
+    "name": "Collection Statistics",
+    "description": "Document counts for all graph collections, broken down by tenant",
+    "queryText": "LET devicesByTenant = (FOR d IN Device COLLECT t = d.tenantId WITH COUNT INTO c RETURN {tenant: t, count: c})\nLET softwareByTenant = (FOR s IN Software COLLECT t = s.tenantId WITH COUNT INTO c RETURN {tenant: t, count: c})\nLET locationsByTenant = (FOR l IN Location COLLECT t = l.tenantId WITH COUNT INTO c RETURN {tenant: t, count: c})\nRETURN {\n  totalDevices: SUM(devicesByTenant[*].count),\n  totalSoftware: SUM(softwareByTenant[*].count),\n  totalLocations: SUM(locationsByTenant[*].count),\n  devicesByTenant: devicesByTenant,\n  softwareByTenant: softwareByTenant,\n  locationsByTenant: locationsByTenant\n}",
+    "bindVariables": {}
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "name": "Taxonomy Blueprint",
+  "description": "Color-coded theme for the taxonomy class hierarchy.",
+  "nodeConfigMap": {
+    "Class": {
+      "background": { "color": "#9333ea", "iconName": "fa6-solid:shapes" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "category", "description", "classKey"],
+      "rules": []
+    }
+  },
+  "edgeConfigMap": {
+    "subClassOf": {
+      "lineStyle": { "color": "#a78bfa", "thickness": 1.2 },
+      "arrowStyle": { "sourceArrowShape": "none", "targetArrowShape": "triangle" },
+      "hoverInfoAttributes": [],
+      "rules": [],
+      "labelStyle": { "color": "#1d2531" }
+    }
+  }
+}

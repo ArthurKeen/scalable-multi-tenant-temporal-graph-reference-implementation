@@ -1,0 +1,104 @@
+{
+  "name": "Network Assets Blueprint",
+  "description": "Color-coded theme for multi-tenant network asset management graph.",
+  "nodeConfigMap": {
+    "Device": {
+      "background": { "color": "#2563eb", "iconName": "fa6-solid:server" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "type", "model", "ipAddress", "macAddress", "operatingSystem", "osVersion", "tenantId"],
+      "rules": []
+    },
+    "DeviceProxyIn": {
+      "background": { "color": "#3b82f6", "iconName": "fa6-solid:right-to-bracket" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "type", "tenantId"],
+      "rules": []
+    },
+    "DeviceProxyOut": {
+      "background": { "color": "#60a5fa", "iconName": "fa6-solid:right-from-bracket" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "type", "tenantId"],
+      "rules": []
+    },
+    "Software": {
+      "background": { "color": "#16a34a", "iconName": "fa6-solid:cube" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "type", "version", "portNumber", "isEnabled", "tenantId"],
+      "rules": []
+    },
+    "SoftwareProxyIn": {
+      "background": { "color": "#22c55e", "iconName": "fa6-solid:right-to-bracket" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "type", "tenantId"],
+      "rules": []
+    },
+    "SoftwareProxyOut": {
+      "background": { "color": "#4ade80", "iconName": "fa6-solid:right-from-bracket" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "type", "tenantId"],
+      "rules": []
+    },
+    "Location": {
+      "background": { "color": "#ea580c", "iconName": "fa6-solid:location-dot" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "streetAddress", "tenantId"],
+      "rules": []
+    },
+    "Alert": {
+      "background": { "color": "#dc2626", "iconName": "fa6-solid:triangle-exclamation" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "severity", "tenantId"],
+      "rules": []
+    },
+    "Class": {
+      "background": { "color": "#9333ea", "iconName": "fa6-solid:shapes" },
+      "labelAttribute": "name",
+      "hoverInfoAttributes": ["name", "category", "description", "classKey"],
+      "rules": []
+    }
+  },
+  "edgeConfigMap": {
+    "hasConnection": {
+      "lineStyle": { "color": "#6366f1", "thickness": 1.2 },
+      "arrowStyle": { "sourceArrowShape": "none", "targetArrowShape": "triangle" },
+      "hoverInfoAttributes": ["connectionType", "bandwidthCapacity", "networkLatency"],
+      "rules": [],
+      "labelStyle": { "color": "#1d2531" }
+    },
+    "hasLocation": {
+      "lineStyle": { "color": "#f59e0b", "thickness": 1.0 },
+      "arrowStyle": { "sourceArrowShape": "none", "targetArrowShape": "triangle" },
+      "hoverInfoAttributes": ["_fromType", "_toType"],
+      "rules": [],
+      "labelStyle": { "color": "#1d2531" }
+    },
+    "hasDeviceSoftware": {
+      "lineStyle": { "color": "#14b8a6", "thickness": 1.0 },
+      "arrowStyle": { "sourceArrowShape": "none", "targetArrowShape": "triangle" },
+      "hoverInfoAttributes": ["_fromType", "_toType"],
+      "rules": [],
+      "labelStyle": { "color": "#1d2531" }
+    },
+    "hasVersion": {
+      "lineStyle": { "color": "#8b5cf6", "thickness": 1.0 },
+      "arrowStyle": { "sourceArrowShape": "none", "targetArrowShape": "triangle" },
+      "hoverInfoAttributes": ["_fromType", "_toType", "created"],
+      "rules": [],
+      "labelStyle": { "color": "#1d2531" }
+    },
+    "hasAlert": {
+      "lineStyle": { "color": "#ef4444", "thickness": 1.0 },
+      "arrowStyle": { "sourceArrowShape": "none", "targetArrowShape": "triangle" },
+      "hoverInfoAttributes": ["_fromType", "_toType"],
+      "rules": [],
+      "labelStyle": { "color": "#1d2531" }
+    },
+    "type": {
+      "lineStyle": { "color": "#a855f7", "thickness": 0.8 },
+      "arrowStyle": { "sourceArrowShape": "none", "targetArrowShape": "triangle" },
+      "hoverInfoAttributes": ["relationshipType", "confidence"],
+      "rules": [],
+      "labelStyle": { "color": "#1d2531" }
+    }
+  }
+}

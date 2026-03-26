@@ -1,9 +1,9 @@
 """
-Time Travel Refactoring Validation Suite
+Time Travel Validation Suite
 
 REQUIRES: Live ArangoDB connection (set ARANGO_* environment variables).
 
-Comprehensive testing for the refactored time travel implementation:
+Comprehensive testing for the time travel implementation:
 - Software time travel pattern validation
 - Unified version collection testing
 - Query performance comparison
@@ -11,7 +11,6 @@ Comprehensive testing for the refactored time travel implementation:
 - Cross-entity temporal queries
 
 Usage:
-    source setup_env.sh
     PYTHONPATH=. python3 src/validation/validation_suite.py
 """
 
@@ -30,7 +29,7 @@ from src.config.config_management import ConfigurationManager, NamingConvention
 
 
 class TimeTravelValidationSuite(DatabaseMixin):
-    """Comprehensive validation suite for time travel refactoring."""
+    """Comprehensive validation suite for time travel implementation."""
     
     def __init__(self, show_queries: bool = False):
         super().__init__()  # Initialize DatabaseMixin
@@ -107,16 +106,16 @@ class TimeTravelValidationSuite(DatabaseMixin):
             print(f"[ERROR] Collection structure validation failed: {str(e)}")
             return False
     
-    def validate_software_refactoring(self) -> bool:
-        """Validate that Software collection is properly refactored."""
-        print(f"\n[ANALYSIS] Validating Software Refactoring...")
+    def validate_software_structure(self) -> bool:
+        """Validate that Software collection uses flattened structure."""
+        print(f"\n[ANALYSIS] Validating Software Structure...")
         
         try:
             software_collection = self.database.collection(self.config_manager.get_collection_name("software"))
             
             # Check sample documents
             samples = software_collection.all(limit=10)
-            refactored_count = 0
+            valid_count = 0
             old_structure_count = 0
             
             for doc in samples:
@@ -124,7 +123,7 @@ class TimeTravelValidationSuite(DatabaseMixin):
                     old_structure_count += 1
                     print(f"   [ERROR] Document {doc['_key']} still has configurationHistory")
                 else:
-                    refactored_count += 1
+                    valid_count += 1
                     # Check for flattened configuration
                     if "portNumber" in doc and "isEnabled" in doc:
                         print(f"   [DONE] Document {doc['_key']} has flattened configuration")
@@ -132,14 +131,14 @@ class TimeTravelValidationSuite(DatabaseMixin):
                         print(f"   [WARNING]  Document {doc['_key']} missing flattened config attributes")
             
             if old_structure_count > 0:
-                print(f"[ERROR] Software refactoring incomplete: {old_structure_count} documents still have old structure")
+                print(f"[ERROR] Software structure invalid: {old_structure_count} documents still have old structure")
                 return False
             
-            print(f"[DONE] Software refactoring validation passed: {refactored_count} documents correctly refactored")
+            print(f"[DONE] Software structure validation passed: {valid_count} documents have correct structure")
             return True
             
         except Exception as e:
-            print(f"[ERROR] Software refactoring validation failed: {str(e)}")
+            print(f"[ERROR] Software structure validation failed: {str(e)}")
             return False
     
     def validate_unified_version_collection(self) -> bool:
@@ -505,7 +504,7 @@ class TimeTravelValidationSuite(DatabaseMixin):
             return False
     
     def validate_performance_improvements(self) -> bool:
-        """Validate performance improvements from refactoring."""
+        """Validate query performance with indexes."""
         print(f"\n[ANALYSIS] Validating Performance Improvements...")
         
         try:
@@ -726,7 +725,7 @@ class TimeTravelValidationSuite(DatabaseMixin):
         # Run all validation tests
         tests = [
             ("Collection Structure", self.validate_collection_structure),
-            ("Software Refactoring", self.validate_software_refactoring),
+            ("Software Structure", self.validate_software_structure),
             ("Unified Version Collection", self.validate_unified_version_collection),
             ("Time Travel Queries", self.validate_time_travel_queries),
             ("Cross-Entity Relationships", self.validate_cross_entity_relationships),

@@ -2,7 +2,6 @@
 .env
 .env.local
 .env.production
-environment_variables
 setup_env.sh
 credentials.py
 secrets.py

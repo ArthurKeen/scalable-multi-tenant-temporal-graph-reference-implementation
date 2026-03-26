@@ -4,7 +4,7 @@
 
 This document outlines the requirements for a comprehensive reference implementation showcasing ArangoDB's capabilities for scalable multi-tenant temporal graph architectures. The reference implementation provides production-ready patterns for tenant isolation, horizontal scale-out, and temporal data lifecycle management, using network asset management as a concrete demonstration domain.
 
-This refactoring of the network asset management demo will support multi-tenant architecture using ArangoDB disjoint smartgraphs, with each tenant having a completely isolated smartgraph containing their network assets, devices, locations, and relationships.
+The network asset management demo supports multi-tenant architecture using ArangoDB SmartGraphs, with each tenant having completely isolated data containing their network assets, devices, locations, and relationships.
 
 ## 2. Project Goals
 
@@ -46,7 +46,7 @@ The primary objective is to create a fully automated, end-to-end demo lifecycle 
 
 ## 3. Key Requirements
 
-### 3.1 Data Generation Refactoring
+### 3.1 Data Generation
 
 The `scalable-multi-tenant-temporal-graph-reference-implementation` repository provides comprehensive reference architecture patterns including data generation, deployment automation, and interactive demonstrations:
 
@@ -304,7 +304,7 @@ Each tenant will have a disjoint smartgraph with:
 
 ### Phase 1: Foundation (Week 1-2)
 1. Design tenant data model and configuration system
-2. Refactor core generator functions to accept tenant context
+2. Core generator functions accept tenant context
 3. Implement tenant-aware collection and file naming
 4. Create tenant metadata management
 
@@ -380,7 +380,7 @@ Each tenant will have a disjoint smartgraph with:
 
 ## Timeline
 
-- **Week 1-2**: Foundation and core refactoring
+- **Week 1-2**: Foundation and core implementation
 - **Week 3-4**: Infrastructure and utilities
 - **Week 5**: Testing and validation
 - **Week 6**: Documentation and final integration

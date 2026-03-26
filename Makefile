@@ -1,4 +1,4 @@
-.PHONY: help setup test validate demo reset lint clean
+.PHONY: help setup test validate demo deploy deploy-demo visualizer reset lint clean
 
 help: ## Show this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -22,6 +22,15 @@ demo: ## Run interactive demo
 
 demo-auto: ## Run auto-advance demo
 	PYTHONPATH=. python3 demos/automated_demo_walkthrough.py --auto-advance --pause-duration 5
+
+deploy: ## Deploy database (production TTL)
+	PYTHONPATH=. python3 src/database/database_deployment.py
+
+deploy-demo: ## Deploy database with demo TTL (5-minute expiry)
+	PYTHONPATH=. python3 src/database/database_deployment.py --demo-mode
+
+visualizer: ## Install/update visualizer assets (theme, queries, actions)
+	PYTHONPATH=. python3 scripts/setup/install_visualizer.py
 
 reset: ## Reset database to clean state
 	PYTHONPATH=. python3 tools/reset_database.py

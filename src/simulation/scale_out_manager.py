@@ -30,8 +30,8 @@ from src.config.centralized_credentials import CredentialsManager
 from src.config.config_management import get_config, NamingConvention
 from src.config.tenant_config import TenantConfig, TenantNamingConvention, SmartGraphDefinition, create_tenant_config
 from src.ttl.ttl_constants import TTLConstants, TTLMessages, DEFAULT_TTL_DAYS
-from src.data_generation.asset_generator import TimeTravelRefactoredGenerator
-from src.database.database_deployment import TimeTravelRefactoredDeployment
+from src.data_generation.asset_generator import AssetGenerator
+from src.database.database_deployment import DatabaseDeployment
 from src.database.oasis_cluster_setup import OasisClusterManager
 
 logger = logging.getLogger(__name__)
@@ -175,7 +175,7 @@ class TenantAdditionManager:
             logger.info(f"   Scale factor: {tenant_config.scale_factor}")
             
             # Create generator for this tenant
-            generator = TimeTravelRefactoredGenerator(
+            generator = AssetGenerator(
                 tenant_config, 
                 environment="production",
                 naming_convention=self.naming_convention
