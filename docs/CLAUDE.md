@@ -6,33 +6,36 @@
 **Goal**: Multi-tenant architecture using ArangoDB SmartGraphs with time travel patterns
 **Date Started**: September 10, 2025  
 
-## Current State (as of November 2025)
+## Current State (as of March 2026)
 
 ### Architecture
 - **Language**: Python 3.9+
-- **Database**: ArangoDB Oasis cluster with disjoint SmartGraphs
+- **Database**: ArangoDB Oasis cluster with unified SmartGraph
 - **Data Generator**: `asset_generator.py` (multi-tenant with time travel)
 - **Demo Orchestration**: `automated_demo_walkthrough.py`
 - **Output**: Tenant-specific JSON files for ArangoDB import
-- **Vertex Collections**: Device, DeviceProxyIn, DeviceProxyOut, Location, Software, SoftwareProxyIn, SoftwareProxyOut
-- **Edge Collections**: hasConnection, hasLocation, hasDeviceSoftware, hasVersion
+- **Vertex Collections**: Device, DeviceProxyIn, DeviceProxyOut, Location, Software, SoftwareProxyIn, SoftwareProxyOut, Alert, Class
+- **Edge Collections**: hasConnection, hasLocation, hasDeviceSoftware, hasVersion, hasAlert, type, subClassOf
+- **Graphs**: `network_assets_smartgraph` (unified SmartGraph, `smart_field="tenantId"`), `taxonomy_satellite_graph` (Class hierarchy)
 - **Pattern**: Proxy pattern with temporal versioning for devices and software
-- **Multi-Tenant**: Shared collections with tenantId-based SmartGraph partitioning
-- **Test Suite**: 30/30 passing (21 unit + 9 database validation)
+- **Multi-Tenant**: Shared collections with `tenantId`-based SmartGraph partitioning
+- **Credentials**: `.env` file loaded via `python-dotenv`
+- **Visualizer**: Themes, saved queries, and canvas actions installed as part of deployment
+- **Test Suite**: 21 unit tests + 9 database validation checks
 
 ## Technical Decisions
 
 ### Enhanced Architecture (Post-PRD Update)
 
-#### Tenant Naming Convention (CORRECTED)
+#### Tenant Naming Convention
 ```
-Database: network_assets_demo (shared by all tenants)
-Collections: devices, locations, software, etc. (shared logical names)
-Tenant Segregation: {tenant_id}_attr field in each document for disjoint partitioning
+Database: multi-tenant-blueprint (shared by all tenants, name configured in .env)
+Collections: Device, Software, Location, etc. (PascalCase vertex), hasConnection, hasVersion, etc. (camelCase edge)
+Tenant Segregation: tenantId field in each document (SmartGraph smart_field)
 Files: data/tenant_{tenant_id}/{Collection}.json (tenant-specific data generation)
-SmartGraphs: tenant_{tenant_id}_network_assets
-SmartGraph Attributes: tenant_{tenant_id}_attr (provides the disjoint partitioning key)
-Device Taxonomy: satellite_device_taxonomy (global)
+SmartGraph: network_assets_smartgraph (single unified graph for all tenants)
+SmartGraph Attribute: tenantId (provides shard-level tenant isolation)
+Taxonomy: Class (satellite collection), taxonomy_satellite_graph (subClassOf edges)
 ```
 
 #### Temporal Data Model (As Implemented)
@@ -64,7 +67,7 @@ TTL: automatic expiration on ttlExpireAt
 ## Implementation Notes
 
 ### Architecture Decisions
-1. **Shared collections with tenantId partitioning**: All tenants share the same collections, isolated by SmartGraph disjoint partitioning
+1. **Shared collections with tenantId partitioning**: All tenants share the same collections, isolated by a unified SmartGraph with `smart_field="tenantId"`
 2. **Proxy pattern**: ProxyIn/ProxyOut entities provide stable references across temporal versions
 3. **Temporal model**: `created`/`expired`/`ttlExpireAt` fields on all documents; MDI-prefixed indexes for range queries
 4. **Demo TTL**: 5-minute TTL for visible aging during demos (production: 30 days)
@@ -132,10 +135,10 @@ FR6: Index Optimization -> [DESIGN COMPLETED]
 
 ## Key Design Constraints
 
-1. **Data isolation**: SmartGraph disjoint partitioning ensures complete tenant isolation
-2. **Temporal integrity**: All documents must include created/expired/ttlExpireAt
-3. **Edge metadata**: All edges must include _fromType/_toType for vertex-centric indexes
-4. **ArangoDB MCP**: Existing MCP service available for automation (set ARANGO_MCP_PATH env var)
+1. **Data isolation**: Unified SmartGraph with `tenantId` shard key ensures complete tenant isolation
+2. **Temporal integrity**: Versioned documents include `created`/`expired`; historical rows also get `ttlExpireAt`
+3. **Proxy pattern**: Topology edges attach to stable proxies (ProxyIn/ProxyOut), not versioned entities
+4. **Satellite collections**: `Class` uses `replication_factor="satellite"` for shared taxonomy data
 
 Master Development Guide
 CRITICAL: NO UNICODE OR EMOJIS ALLOWED

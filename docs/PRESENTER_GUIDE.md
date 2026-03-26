@@ -112,11 +112,11 @@ Ensure your `.env` file exists and has correct credentials:
 ls .env
 ```
 
-**What this does**: 
-- Exports `ARANGO_ENDPOINT` (database URL)
-- Exports `ARANGO_USERNAME` (database user)
-- Exports `ARANGO_PASSWORD` (database password)
-- Exports `ARANGO_DATABASE` (database name)
+**What this provides** (loaded automatically by `python-dotenv`):
+- `ARANGO_ENDPOINT` (database URL)
+- `ARANGO_USERNAME` (database user)
+- `ARANGO_PASSWORD` (database password)
+- `ARANGO_DATABASE` (database name)
 
 **Verification**:
 ```bash

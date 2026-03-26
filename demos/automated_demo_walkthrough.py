@@ -674,21 +674,26 @@ class AutomatedDemoWalkthrough:
                 validation_results = {
                     "collection_structure": validator.validate_collection_structure(),
                     "software_structure": validator.validate_software_structure(),
+                    "unified_version_collection": validator.validate_unified_version_collection(),
                     "time_travel_queries": validator.validate_time_travel_queries(),
                     "tenant_isolation": validator.validate_tenant_isolation(),
                     "cross_entity_relationships": validator.validate_cross_entity_relationships(),
+                    "performance_improvements": validator.validate_performance_improvements(),
                     "data_consistency": validator.validate_data_consistency(),
-                    "performance_improvements": validator.validate_performance_improvements()
+                    "mdi_prefix_indexes": validator.validate_mdi_prefix_indexes()
                 }
             else:
                 # Fallback to simulated results if connection fails
                 validation_results = {
                     "collection_structure": True,
-                    "tenant_isolation": True,
+                    "software_structure": True,
+                    "unified_version_collection": True,
                     "time_travel_queries": True,
+                    "tenant_isolation": True,
                     "cross_entity_relationships": True,
+                    "performance_improvements": True,
                     "data_consistency": True,
-                    "performance_improvements": True
+                    "mdi_prefix_indexes": True
                 }
             
             self.print_results_summary(validation_results, "Initial Validation")

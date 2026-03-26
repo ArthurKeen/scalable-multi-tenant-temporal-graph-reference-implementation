@@ -722,12 +722,13 @@ class TimeTravelValidationSuite(DatabaseMixin):
         if not self.connect_to_database():
             return {"connection": False}
         
-        # Run all validation tests
+        # Run all validation tests (9 checks)
         tests = [
             ("Collection Structure", self.validate_collection_structure),
             ("Software Structure", self.validate_software_structure),
             ("Unified Version Collection", self.validate_unified_version_collection),
             ("Time Travel Queries", self.validate_time_travel_queries),
+            ("Tenant Isolation", self.validate_tenant_isolation),
             ("Cross-Entity Relationships", self.validate_cross_entity_relationships),
             ("Performance Improvements", self.validate_performance_improvements),
             ("Data Consistency", self.validate_data_consistency),
