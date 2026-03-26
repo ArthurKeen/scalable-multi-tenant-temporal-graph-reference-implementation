@@ -341,7 +341,8 @@ FOR proxy IN DeviceProxyIn
             f"""{with_clause}
 FOR proxy IN DeviceProxyIn
   FILTER proxy.tenantId == @tenantId
-  FOR v, e, p IN 1..1 OUTBOUND proxy hasVersion
+  FOR v, e, p IN 1..1 OUTBOUND proxy GRAPH "{graph_name}"
+    FILTER IS_SAME_COLLECTION("hasVersion", e)
     FILTER e.expired == 9223372036854775807
     RETURN p""",
             {"tenantId": sample_tenant}, ts,
