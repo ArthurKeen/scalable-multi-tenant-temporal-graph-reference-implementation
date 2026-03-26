@@ -175,8 +175,8 @@ class AutomatedDemoWalkthrough:
                 try:
                     self.database.delete_graph(graph_name, drop_collections=False)
                     print(f"   [CLEAR] Graph {graph_name} removed")
-                except:
-                    pass  # Graph might not exist
+                except Exception:
+                    pass
             
             # Clear tenant registry files
             registry_file = Path("data/tenant_registry_time_travel.json")
@@ -683,17 +683,17 @@ class AutomatedDemoWalkthrough:
                     "mdi_prefix_indexes": validator.validate_mdi_prefix_indexes()
                 }
             else:
-                # Fallback to simulated results if connection fails
+                print("[WARNING] Database connection failed -- validation skipped")
                 validation_results = {
-                    "collection_structure": True,
-                    "software_structure": True,
-                    "unified_version_collection": True,
-                    "time_travel_queries": True,
-                    "tenant_isolation": True,
-                    "cross_entity_relationships": True,
-                    "performance_improvements": True,
-                    "data_consistency": True,
-                    "mdi_prefix_indexes": True
+                    "collection_structure": False,
+                    "software_structure": False,
+                    "unified_version_collection": False,
+                    "time_travel_queries": False,
+                    "tenant_isolation": False,
+                    "cross_entity_relationships": False,
+                    "performance_improvements": False,
+                    "data_consistency": False,
+                    "mdi_prefix_indexes": False,
                 }
             
             self.print_results_summary(validation_results, "Initial Validation")

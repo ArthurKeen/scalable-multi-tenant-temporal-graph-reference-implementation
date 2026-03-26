@@ -6,8 +6,9 @@
 ## Start Demo
 
 ```bash
-# 1. Go to project and install dependencies
+# 1. Go to project, create venv, and install dependencies
 cd /path/to/network-asset-management-demo
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 # 2. Configure credentials (first time only)

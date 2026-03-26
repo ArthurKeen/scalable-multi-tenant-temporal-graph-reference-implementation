@@ -14,6 +14,7 @@ from typing import Dict, List, Any
 from arango import ArangoClient
 
 from src.config.centralized_credentials import CredentialsManager
+from src.ttl.ttl_config import create_demo_ttl_configuration
 from src.ttl.ttl_constants import TTLConstants
 
 logger = logging.getLogger(__name__)
@@ -25,6 +26,11 @@ class TTLMonitor:
     def __init__(self):
         """Initialize TTL monitor."""
         self.database = None
+        ttl_config = create_demo_ttl_configuration("monitor")
+        self.monitored_collections = list(
+            set(ttl_config.vertex_collections + ttl_config.edge_collections)
+        )
+        self.monitored_collections.sort()
         self.connect_to_database()
         
     def connect_to_database(self) -> bool:
@@ -40,7 +46,7 @@ class TTLMonitor:
     
     def get_document_counts(self) -> Dict[str, Dict[str, int]]:
         """Get counts of current vs historical documents with TTL info."""
-        collections = ["Device", "Software", "hasVersion"]
+        collections = self.monitored_collections
         counts = {}
         
         for collection_name in collections:
@@ -86,7 +92,7 @@ class TTLMonitor:
     
     def get_next_expiry_time(self) -> Dict[str, Any]:
         """Get the next document expiry time across all collections."""
-        collections = ["Device", "Software", "hasVersion"]
+        collections = self.monitored_collections
         next_expiry = None
         next_collection = None
         

@@ -711,7 +711,7 @@ def generate_demo(tenant_count: int = 8, environment: str = "production", naming
                 "tenantName": config.tenant_name,
                 "tenantStatus": config.status.value,
                 "databaseName": config.database_name,
-                "smartGraphName": f"tenant_{config.tenant_id}_network_assets",
+                "smartGraphName": "network_assets_smartgraph",
                 "smartGraphAttribute": config.smartgraph_attribute,
                 "dataDirectory": app_config.paths.get_tenant_data_path(config.tenant_id).as_posix(),
                 "scaleFactor": config.scale_factor,

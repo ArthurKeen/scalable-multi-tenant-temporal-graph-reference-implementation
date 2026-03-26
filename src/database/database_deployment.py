@@ -40,18 +40,10 @@ class DatabaseDeployment:
         
         # Initialize TTL configuration
         if demo_mode:
-            # Use short TTL periods for demo (5 minutes)
-            if naming_convention == NamingConvention.SNAKE_CASE:
-                self.ttl_config = create_demo_snake_case_ttl_configuration("deployment")
-            else:
-                self.ttl_config = create_demo_ttl_configuration("deployment")
+            self.ttl_config = create_demo_ttl_configuration("deployment")
             logger.info(f"[DEMO] Using demo TTL configuration ({TTLConstants.DEMO_TTL_EXPIRE_MINUTES} minutes)")
         else:
-            # Use production TTL periods (30 days)
-            if naming_convention == NamingConvention.SNAKE_CASE:
-                self.ttl_config = create_snake_case_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
-            else:
-                self.ttl_config = create_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
+            self.ttl_config = create_ttl_configuration("deployment", expire_after_days=DEFAULT_TTL_DAYS)
             logger.info(f"[PRODUCTION] Using production TTL configuration (30 days)")
         
         self.ttl_manager = TTLManager(self.ttl_config)
@@ -156,9 +148,9 @@ class DatabaseDeployment:
 
             # All collections that carry temporal created/expired fields
             TEMPORAL_COLLECTIONS = [
-                "Device", "Software", "Alert",
+                "Device", "Software", "Alert", "Class",
                 "hasVersion", "hasConnection", "hasLocation",
-                "hasDeviceSoftware", "hasAlert",
+                "hasDeviceSoftware", "hasAlert", "type", "subClassOf",
             ]
 
             # Index configurations
@@ -577,50 +569,6 @@ class DatabaseDeployment:
             logger.error(f"Visualizer installation failed: {e}")
             return False
 
-    def deploy_all_tenant_data(self) -> bool:
-        """Deploy all tenant data to the database with collections and indexes."""
-        try:
-            logger.info("[DEPLOY] Starting complete deployment with MDI-prefix indexes...")
-            
-            # Step 1: Connect to cluster
-            if not self.connect_to_cluster():
-                return False
-            
-            # Step 2: Create/recreate database
-            if not self.drop_and_recreate_database():
-                return False
-            
-            # Step 3: Create satellite collections
-            if not self.create_collections():
-                return False
-            
-            # Step 4: Create named graphs (auto-creates SmartGraph vertex/edge collections)
-            if not self.create_named_graphs():
-                return False
-            
-            # Step 5: Create indexes (collections now exist from SmartGraph)
-            if not self.create_indexes():
-                return False
-            
-            # Step 6: Load tenant data
-            if not self.load_data():
-                return False
-            
-            # Step 7: Verify deployment
-            if not self.verify_deployment():
-                return False
-            
-            # Step 8: Install visualizer assets
-            if not self.install_visualizer_assets():
-                return False
-            
-            logger.info(f"\n[SUCCESS] Complete deployment with MDI-prefix indexes successful!")
-            return True
-            
-        except Exception as e:
-            logger.error(f"Complete deployment failed: {e}")
-            return False
-    
     def deploy(self) -> bool:
         """Execute complete database deployment."""
         logger.info("[DEPLOY] Multi-Tenant Temporal Graph Deployment")
@@ -671,20 +619,16 @@ def main():
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
     parser = argparse.ArgumentParser(description="Deploy multi-tenant network asset data to ArangoDB")
-    parser.add_argument("--naming", choices=["camelCase"], default="camelCase",
-                       help="Naming convention for collections and properties (camelCase only)")
     parser.add_argument("--demo-mode", action="store_true",
                        help="Use short TTL periods (5 minutes) for demonstration purposes")
 
     args = parser.parse_args()
 
-    naming_convention = NamingConvention.CAMEL_CASE if args.naming == "camelCase" else NamingConvention.SNAKE_CASE
-
-    deployment = DatabaseDeployment(naming_convention, demo_mode=args.demo_mode)
+    deployment = DatabaseDeployment(demo_mode=args.demo_mode)
     success = deployment.deploy()
 
     if success:
-        print(f"\n[DONE] Database updated with {args.naming} naming convention!")
+        print(f"\n[DONE] Database deployed successfully!")
         sys.exit(0)
     else:
         print("\nDeployment failed!")

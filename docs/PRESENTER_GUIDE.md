@@ -88,11 +88,14 @@ Before your demo, verify everything is working:
 ```bash
 cd /path/to/network-asset-management-demo
 
-# Run quick tests (should see 100% passing)
-PYTHONPATH=. python3 src/validation/test_suite.py
+# Run unit tests (21 tests, no database required)
+make test
+
+# Run database validation (9 checks, requires ArangoDB connection)
+make validate
 ```
 
-**Expected Output**: "All tests passed! Code quality verified."
+**Expected Output**: 21/21 unit tests passing, 9/9 database validations passing.
 
 ---
 

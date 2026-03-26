@@ -11,8 +11,6 @@ import json
 import tempfile
 import uuid
 from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
-from dataclasses import dataclass
 from typing import Dict, List, Any
 
 _has_db_env = all(os.getenv(v) for v in ['ARANGO_ENDPOINT', 'ARANGO_USERNAME', 'ARANGO_PASSWORD', 'ARANGO_DATABASE'])
@@ -24,7 +22,7 @@ from src.config.config_management import (
 )
 from src.config.centralized_credentials import CredentialsManager
 from src.config.tenant_config import TenantConfig, TenantNamingConvention, create_tenant_config
-from src.data_generation.data_generation_config import DeviceType, SoftwareType
+from src.data_generation.data_generation_config import DeviceType
 from src.data_generation.data_generation_utils import (
     KeyGenerator, RandomDataGenerator, DocumentEnhancer, FileManager
 )
@@ -215,20 +213,20 @@ class TestDataGeneration(unittest.TestCase):
         """Test document enhancer vertex-centric attributes."""
         edge = DocumentEnhancer.create_edge_document(
             key="test_edge",
-            from_collection="DeviceOut",
+            from_collection="DeviceProxyOut",
             from_key="device1",
-            to_collection="DeviceIn", 
+            to_collection="DeviceProxyIn",
             to_key="device2",
-            from_type="DeviceOut",
-            to_type="DeviceIn",
+            from_type="DeviceProxyOut",
+            to_type="DeviceProxyIn",
             tenant_config=self.tenant_config
         )
         
         # Check edge structure
-        self.assertEqual(edge["_from"], "DeviceOut/device1")
-        self.assertEqual(edge["_to"], "DeviceIn/device2")
-        self.assertEqual(edge["_fromType"], "DeviceOut")
-        self.assertEqual(edge["_toType"], "DeviceIn")
+        self.assertEqual(edge["_from"], "DeviceProxyOut/device1")
+        self.assertEqual(edge["_to"], "DeviceProxyIn/device2")
+        self.assertEqual(edge["_fromType"], "DeviceProxyOut")
+        self.assertEqual(edge["_toType"], "DeviceProxyIn")
 
 
 class TestOWLRDFCompliance(unittest.TestCase):

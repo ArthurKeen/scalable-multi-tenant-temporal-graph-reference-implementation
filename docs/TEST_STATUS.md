@@ -38,10 +38,10 @@ All 9 validations passing:
 2. Software Structure
 3. Unified Version Collection
 4. Time Travel Queries
-5. Cross-Entity Relationships
-6. Performance Improvements
-7. Data Consistency
-8. Database Connection
+5. Tenant Isolation
+6. Cross-Entity Relationships
+7. Performance Improvements
+8. Data Consistency
 9. MDI-Prefix Multi-Dimensional Indexes
 
 ```bash
@@ -65,8 +65,9 @@ simpler configuration and consistent query patterns.
 - MDI-prefixed indexes on `[created, expired]` for temporal range queries
 
 ### MDI Index Details
-Three MDI-prefixed indexes deployed on Device, Software, and hasVersion
-collections. The index type reported by ArangoDB is `mdi-prefixed` (not `mdi`).
+MDI-prefixed indexes deployed on all temporal collections: Device, Software,
+Alert, hasVersion, hasConnection, hasLocation, hasDeviceSoftware, and hasAlert.
+The index type reported by ArangoDB is `mdi-prefixed` (not `mdi`).
 
 ---
 

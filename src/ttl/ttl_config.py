@@ -5,7 +5,6 @@ Implements selective TTL indexes that only affect historical documents
 while preserving current configurations permanently.
 """
 
-import sys
 from dataclasses import dataclass
 from typing import Dict, List, Any, Optional
 from enum import Enum
