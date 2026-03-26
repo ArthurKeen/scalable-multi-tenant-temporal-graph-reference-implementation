@@ -42,6 +42,18 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def _lookup_sample_tenant(db) -> str:
+    """Return one tenantId from DeviceProxyIn, or empty string if unavailable."""
+    try:
+        if db.has_collection("DeviceProxyIn") and db.collection("DeviceProxyIn").count() > 0:
+            row = next(db.aql.execute("FOR p IN DeviceProxyIn LIMIT 1 RETURN p.tenantId"), None)
+            if row:
+                return row
+    except Exception:
+        pass
+    return ""
+
+
 def ensure_collection(db, name: str, *, edge: bool = False) -> None:
     if db.has_collection(name):
         return
@@ -288,6 +300,8 @@ def install_graph_queries(
     ts = now_iso()
     count = 0
 
+    sample_tenant = _lookup_sample_tenant(db)
+
     if graph_name == "network_assets_smartgraph":
         _upsert_graph_query(
             queries_col, vp_q_col, vp_id, graph_name,
@@ -301,7 +315,7 @@ FOR proxy IN DeviceProxyIn
     OPTIONS {{order: "bfs", uniqueVertices: "global"}}
     LIMIT 200
     RETURN p""",
-            {"tenantId": "1b45406a99d9", "limit": 5}, ts,
+            {"tenantId": sample_tenant, "limit": 5}, ts,
         )
         count += 1
 
@@ -316,7 +330,7 @@ FOR proxy IN DeviceProxyIn
     OPTIONS {{order: "bfs", uniqueVertices: "global"}}
     LIMIT 100
     RETURN p""",
-            {"deviceProxy": "1b45406a99d9:device1"}, ts,
+            {"deviceProxy": f"{sample_tenant}:device1"}, ts,
         )
         count += 1
 
@@ -327,10 +341,10 @@ FOR proxy IN DeviceProxyIn
             f"""{with_clause}
 FOR proxy IN DeviceProxyIn
   FILTER proxy.tenantId == @tenantId
-  FOR device, edge IN 1..1 OUTBOUND proxy hasVersion
-    FILTER edge.expired == 9223372036854775807
-    RETURN {{proxy: proxy, device: device, edge: edge}}""",
-            {"tenantId": "1b45406a99d9"}, ts,
+  FOR v, e, p IN 1..1 OUTBOUND proxy hasVersion
+    FILTER e.expired == 9223372036854775807
+    RETURN p""",
+            {"tenantId": sample_tenant}, ts,
         )
         count += 1
 
@@ -341,10 +355,8 @@ FOR proxy IN DeviceProxyIn
             f"""{with_clause}
 FOR conn IN hasConnection
   FILTER conn.tenantId == @tenantId
-  LET fromNode = DOCUMENT(conn._from)
-  LET toNode = DOCUMENT(conn._to)
-  RETURN {{from: fromNode, to: toNode, edge: conn}}""",
-            {"tenantId": "1b45406a99d9"}, ts,
+  RETURN conn""",
+            {"tenantId": sample_tenant}, ts,
         )
         count += 1
 
@@ -450,9 +462,19 @@ def install_all(db, *, database_name: str) -> List[Dict[str, Any]]:
         _ensure_default_theme(theme_col, graph_name, vertex_colls, edge_colls)
 
         # Install editor saved queries (global query editor)
+        # Patch bind variable defaults with a real tenant ID from the database
         queries_path = SAVED_QUERY_FILES.get(graph_name)
         if queries_path and queries_path.exists():
             queries = json.loads(queries_path.read_text(encoding="utf-8"))
+            sample_tid = _lookup_sample_tenant(db)
+            if sample_tid:
+                for q in queries:
+                    bv = q.get("bindVariables", {})
+                    for k, v in list(bv.items()):
+                        if isinstance(v, str) and ":" in v and k != "className":
+                            bv[k] = f"{sample_tid}:{v.split(':', 1)[1]}"
+                        elif k == "tenantId":
+                            bv[k] = sample_tid
             result["editor_query_count"] = install_saved_queries(
                 db, queries=queries, database_name=database_name,
             )
