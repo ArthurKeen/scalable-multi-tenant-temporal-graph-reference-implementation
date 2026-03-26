@@ -273,21 +273,48 @@ class DatabaseDeployment:
             logger.error(f"Error creating indexes: {str(e)}")
             return False
     
+    def _load_json_into_collection(self, file_path: Path, collection_name: str) -> int:
+        """Load a JSON file into a collection. Returns document count."""
+        if not file_path.exists():
+            return 0
+        with open(file_path, "r") as f:
+            data = json.load(f)
+        if not data:
+            return 0
+        self.database.collection(collection_name).insert_many(data, overwrite=True)
+        return len(data)
+
     def load_data(self) -> bool:
-        """Load tenant data into collections."""
+        """Load shared taxonomy once, then per-tenant data."""
         try:
-            logger.info(f"\n[DATA] Loading tenant data...")
-            
-            # Find tenant directories
             data_dir = Path("data")
+            total_loaded = 0
+
+            # --- Shared taxonomy (satellite collections) ---
+            taxonomy_dir = data_dir / "shared_taxonomy"
+            if taxonomy_dir.is_dir():
+                logger.info("\n[DATA] Loading shared taxonomy (satellite collections)...")
+                taxonomy_mappings = {
+                    self.app_config.get_file_name("classes"): self.app_config.get_collection_name("classes"),
+                    self.app_config.get_file_name("subclass_of"): self.app_config.get_collection_name("subclass_of"),
+                }
+                for filename, coll_name in taxonomy_mappings.items():
+                    count = self._load_json_into_collection(taxonomy_dir / filename, coll_name)
+                    if count:
+                        logger.info(f"   [DONE] {coll_name}: {count} documents")
+                        total_loaded += count
+            else:
+                logger.warning("[WARN] No shared_taxonomy directory found — taxonomy will be empty")
+
+            # --- Per-tenant data ---
+            logger.info(f"\n[DATA] Loading tenant data...")
             tenant_dirs = [d for d in data_dir.iterdir() if d.is_dir() and d.name.startswith("tenant_")]
-            
+
             if not tenant_dirs:
                 logger.error(f"No tenant data directories found in {data_dir}")
                 return False
-            
-            # File to collection mappings
-            file_mappings = {
+
+            tenant_file_mappings = {
                 self.app_config.get_file_name("devices"): self.app_config.get_collection_name("devices"),
                 self.app_config.get_file_name("device_ins"): self.app_config.get_collection_name("device_ins"),
                 self.app_config.get_file_name("device_outs"): self.app_config.get_collection_name("device_outs"),
@@ -295,54 +322,32 @@ class DatabaseDeployment:
                 self.app_config.get_file_name("software"): self.app_config.get_collection_name("software"),
                 self.app_config.get_file_name("software_ins"): self.app_config.get_collection_name("software_ins"),
                 self.app_config.get_file_name("software_outs"): self.app_config.get_collection_name("software_outs"),
-                self.app_config.get_file_name("classes"): self.app_config.get_collection_name("classes"),  # TAXONOMY
                 self.app_config.get_file_name("connections"): self.app_config.get_collection_name("connections"),
                 self.app_config.get_file_name("has_locations"): self.app_config.get_collection_name("has_locations"),
                 self.app_config.get_file_name("has_device_software"): self.app_config.get_collection_name("has_device_software"),
-                self.app_config.get_file_name("versions"): self.app_config.get_collection_name("versions"),  # UNIFIED
-                self.app_config.get_file_name("types"): self.app_config.get_collection_name("types"),  # TAXONOMY
-                self.app_config.get_file_name("subclass_of"): self.app_config.get_collection_name("subclass_of"),  # TAXONOMY
+                self.app_config.get_file_name("versions"): self.app_config.get_collection_name("versions"),
+                self.app_config.get_file_name("types"): self.app_config.get_collection_name("types"),
                 self.app_config.get_file_name("alerts"): self.app_config.get_collection_name("alerts"),
                 self.app_config.get_file_name("has_alerts"): self.app_config.get_collection_name("has_alerts"),
             }
-            
-            total_loaded = 0
-            
+
             for tenant_dir in tenant_dirs:
                 tenant_id = tenant_dir.name.replace("tenant_", "")
                 logger.info(f"\n    Loading tenant: {tenant_id}")
-                
                 tenant_total = 0
-                
-                for filename, collection_name in file_mappings.items():
-                    file_path = tenant_dir / filename
-                    if file_path.exists():
-                        # Load JSON data
-                        with open(file_path, 'r') as f:
-                            data = json.load(f)
-                        
-                        if data:  # Only load if data exists
-                            # Insert documents into collection
-                            collection = self.database.collection(collection_name)
-                            result = collection.insert_many(data, overwrite=True)
-                            
-                            doc_count = len(data)
-                            tenant_total += doc_count
-                            total_loaded += doc_count
-                            logger.info(f"      [DONE] {collection_name}: {doc_count} documents")
-                        else:
-                            logger.info(f"      [INFO] {collection_name}: empty file")
-                    else:
-                        if filename in ["SoftwareProxyIn.json", "SoftwareProxyOut.json", "hasDeviceSoftware.json"]:
-                            logger.warning(f"      {filename}: NEW collection - file not found (expected for old data)")
-                        else:
-                            logger.warning(f"      {filename}: file not found")
-                
+
+                for filename, collection_name in tenant_file_mappings.items():
+                    count = self._load_json_into_collection(tenant_dir / filename, collection_name)
+                    if count:
+                        tenant_total += count
+                        total_loaded += count
+                        logger.info(f"      [DONE] {collection_name}: {count} documents")
+
                 logger.info(f"   [DATA] Tenant {tenant_id}: {tenant_total} documents loaded")
-            
+
             logger.info(f"\n[DONE] Total documents loaded: {total_loaded}")
             return True
-            
+
         except Exception as e:
             logger.error(f"Error loading data: {str(e)}")
             return False

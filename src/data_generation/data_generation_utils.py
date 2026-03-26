@@ -335,46 +335,28 @@ class FileManager:
         data_dir = FileManager.ensure_tenant_directory(tenant_config)
         
         # Use app configuration for file names if provided, otherwise fall back to hardcoded names
-        if app_config:
-            file_mapping = {
-                "devices": app_config.get_file_name("devices"),
-                "device_ins": app_config.get_file_name("device_ins"), 
-                "device_outs": app_config.get_file_name("device_outs"),
-                "locations": app_config.get_file_name("locations"),
-                "software": app_config.get_file_name("software"),
-                "software_ins": app_config.get_file_name("software_ins"),
-                "software_outs": app_config.get_file_name("software_outs"),
-                "classes": app_config.get_file_name("classes"),  # FIXED: Use logical name directly
-                "connections": app_config.get_file_name("connections"),
-                "has_locations": app_config.get_file_name("has_locations"),
-                "has_software": app_config.get_file_name("has_software"),
-                "has_device_software": app_config.get_file_name("has_device_software"),
-                "versions": app_config.get_file_name("versions"),
-                "types": app_config.get_file_name("types"),  # FIXED: Use logical name directly
-                "subclass_of": app_config.get_file_name("subclass_of")  # FIXED: Use logical name directly
-            }
-        else:
-            # Use default naming convention (camelCase) when no config provided
+        # Taxonomy (classes, subclass_of) is shared — saved to data/shared_taxonomy/
+        # Only per-tenant data is written here; type edges are per-tenant.
+        cfg = app_config
+        if not cfg:
             from src.config.config_management import get_config, NamingConvention
-            default_config = get_config("production", NamingConvention.CAMEL_CASE)
-            
-            file_mapping = {
-                "devices": default_config.get_file_name("devices"),
-                "device_ins": default_config.get_file_name("device_ins"), 
-                "device_outs": default_config.get_file_name("device_outs"),
-                "locations": default_config.get_file_name("locations"),
-                "software": default_config.get_file_name("software"),
-                "software_ins": default_config.get_file_name("software_ins"),
-                "software_outs": default_config.get_file_name("software_outs"),
-                "classes": default_config.get_file_name("classes"),  # FIXED: Use logical name directly
-                "connections": default_config.get_file_name("connections"),
-                "has_locations": default_config.get_file_name("has_locations"),
-                "has_software": default_config.get_file_name("has_software"),
-                "has_device_software": default_config.get_file_name("has_device_software"),
-                "versions": default_config.get_file_name("versions"),
-                "types": default_config.get_file_name("types"),  # FIXED: Use logical name directly
-                "subclass_of": default_config.get_file_name("subclass_of")  # FIXED: Use logical name directly
-            }
+            cfg = get_config("production", NamingConvention.CAMEL_CASE)
+
+        file_mapping = {
+            "devices": cfg.get_file_name("devices"),
+            "device_ins": cfg.get_file_name("device_ins"),
+            "device_outs": cfg.get_file_name("device_outs"),
+            "locations": cfg.get_file_name("locations"),
+            "software": cfg.get_file_name("software"),
+            "software_ins": cfg.get_file_name("software_ins"),
+            "software_outs": cfg.get_file_name("software_outs"),
+            "connections": cfg.get_file_name("connections"),
+            "has_locations": cfg.get_file_name("has_locations"),
+            "has_software": cfg.get_file_name("has_software"),
+            "has_device_software": cfg.get_file_name("has_device_software"),
+            "versions": cfg.get_file_name("versions"),
+            "types": cfg.get_file_name("types"),
+        }
         
         total_documents = 0
         for collection_type, data in data_collections.items():

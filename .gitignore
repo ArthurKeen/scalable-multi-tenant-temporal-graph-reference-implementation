@@ -81,6 +81,7 @@ logs/
 
 # Generated data and temporary files
 data/tenant_*/
+data/shared_taxonomy/
 data/tenant_registry_time_travel.json
 reports/*.json
 time_travel_validation_results.json

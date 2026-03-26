@@ -352,25 +352,26 @@ FOR conn IN hasConnection
         _upsert_graph_query(
             queries_col, vp_q_col, vp_id, graph_name,
             "Full Taxonomy Tree",
-            "Load the complete class hierarchy",
+            "Load the complete class hierarchy from the Asset root",
             f"""{with_clause}
-FOR cls IN Class
-  FOR v, e, p IN 0..5 OUTBOUND cls subClassOf
-    RETURN p""",
+FOR root IN Class
+  FILTER root.classKey == "asset"
+  FOR v, e, p IN 0..10 INBOUND root subClassOf
+    RETURN DISTINCT p""",
             {}, ts,
         )
         count += 1
 
         _upsert_graph_query(
             queries_col, vp_q_col, vp_id, graph_name,
-            "Device Taxonomy Branch",
-            "Show the device classification hierarchy",
+            "Subtree from Class",
+            "Show a class and all its descendants (change className to explore branches)",
             f"""{with_clause}
-FOR cls IN Class
-  FILTER cls.category == "device"
-  FOR v, e, p IN 0..3 OUTBOUND cls subClassOf
-    RETURN p""",
-            {}, ts,
+FOR root IN Class
+  FILTER root.name == @className
+  FOR v, e, p IN 0..5 INBOUND root subClassOf
+    RETURN DISTINCT p""",
+            {"className": "Device"}, ts,
         )
         count += 1
 

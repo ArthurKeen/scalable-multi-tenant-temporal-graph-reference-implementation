@@ -30,64 +30,104 @@ logger = logging.getLogger(__name__)
 
 
 class TaxonomyGenerator:
-    """Generate taxonomy classes and relationships for multi-tenant system."""
-    
+    """Generate taxonomy classes and relationships for multi-tenant system.
+
+    The taxonomy lives in satellite collections (Class, subClassOf) that are
+    shared across all tenants.  It is generated **once** via
+    ``generate_shared_taxonomy()`` and saved to ``data/shared_taxonomy/``.
+    Per-tenant ``type`` edges reference the shared class document keys.
+    """
+
+    SHARED_TAXONOMY_DIR = Path("data/shared_taxonomy")
+
     def __init__(self, naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
         self.naming_convention = naming_convention
         self.app_config = get_config("production", naming_convention)
-        self.scope = TAXONOMY_CONSTANTS.DEFAULT_SCOPE
-        
-        # Centralized class key mapping to ensure consistency across all taxonomy relationships
-        self.class_key_mapping: Dict[str, str] = {}  # logical_class_key -> actual_document_key
-        
-    def generate_taxonomy_for_tenant(self, tenant_config: TenantConfig) -> Dict[str, List[Dict[str, Any]]]:
+
+        # logical_class_key -> actual_document_key  (populated by generate or load)
+        self.class_key_mapping: Dict[str, str] = {}
+
+    # ------------------------------------------------------------------
+    # Shared taxonomy (generate once, load many)
+    # ------------------------------------------------------------------
+
+    def generate_shared_taxonomy(self) -> Dict[str, List[Dict[str, Any]]]:
+        """Generate the single shared taxonomy (classes + subClassOf edges).
+
+        Populates ``self.class_key_mapping`` so that subsequent calls to
+        ``generate_device_classifications`` / ``generate_software_classifications``
+        can look up the correct class document keys.
+
+        Returns dict with ``classes`` and ``subclass_edges`` lists.
         """
-        Generate complete taxonomy for a tenant.
-        
-        Returns:
-            Dictionary with 'classes', 'type_edges', and 'subclass_edges' lists
-        """
-        result = {
-            "classes": [],
-            "type_edges": [],
-            "subclass_edges": []
-        }
-        
-        # Clear previous mapping for new tenant
         self.class_key_mapping.clear()
-        
-        # Determine taxonomy scope
-        if self.scope == TaxonomyScope.SHARED:
-            tenant_id = TAXONOMY_CONSTANTS.SHARED_TENANT_ID
-        else:
-            tenant_id = tenant_config.tenant_id
-        
-        # Generate class hierarchy and populate key mapping
+        tenant_id = TAXONOMY_CONSTANTS.SHARED_TENANT_ID
+
         device_classes = self._generate_device_classes(tenant_id)
         software_classes = self._generate_software_classes(tenant_id)
-        
-        result["classes"].extend(device_classes)
-        result["classes"].extend(software_classes)
-        
-        # Populate class key mapping from generated documents
-        for class_doc in result["classes"]:
-            logical_key = class_doc.get('classKey', '')  # Original taxonomy key
-            actual_key = class_doc.get('_key', '')       # Generated document key
+
+        all_classes = device_classes + software_classes
+
+        for class_doc in all_classes:
+            logical_key = class_doc.get("classKey", "")
+            actual_key = class_doc.get("_key", "")
             if logical_key and actual_key:
                 self.class_key_mapping[logical_key] = actual_key
-        
-        # Generate subClassOf relationships using actual class keys
-        device_subclass_edges = self._generate_subclass_relationships(
+
+        device_edges = self._generate_subclass_relationships(
             DEVICE_TAXONOMY.get_all_classes(), tenant_id
         )
-        software_subclass_edges = self._generate_subclass_relationships(
+        software_edges = self._generate_subclass_relationships(
             SOFTWARE_TAXONOMY.get_all_classes(), tenant_id
         )
-        
-        result["subclass_edges"].extend(device_subclass_edges)
-        result["subclass_edges"].extend(software_subclass_edges)
-        
-        return result
+
+        return {
+            "classes": all_classes,
+            "subclass_edges": device_edges + software_edges,
+        }
+
+    def save_shared_taxonomy(self, taxonomy_data: Dict[str, List[Dict[str, Any]]]) -> Path:
+        """Persist shared taxonomy to ``data/shared_taxonomy/``."""
+        import json
+
+        out_dir = self.SHARED_TAXONOMY_DIR
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+        classes_file = out_dir / self.app_config.get_file_name("classes")
+        subclass_file = out_dir / self.app_config.get_file_name("subclass_of")
+
+        with open(classes_file, "w") as f:
+            json.dump(taxonomy_data["classes"], f, indent=2)
+        with open(subclass_file, "w") as f:
+            json.dump(taxonomy_data["subclass_edges"], f, indent=2)
+
+        logger.info(f"[TAXONOMY] Saved shared taxonomy: {len(taxonomy_data['classes'])} classes, "
+                     f"{len(taxonomy_data['subclass_edges'])} subClassOf edges -> {out_dir}")
+        return out_dir
+
+    def load_shared_taxonomy(self, taxonomy_dir: Optional[Path] = None) -> None:
+        """Load the shared taxonomy's class_key_mapping from saved JSON.
+
+        This must be called before ``generate_device_classifications`` /
+        ``generate_software_classifications`` when running per-tenant
+        data generation.
+        """
+        import json
+
+        taxonomy_dir = taxonomy_dir or self.SHARED_TAXONOMY_DIR
+        classes_file = taxonomy_dir / self.app_config.get_file_name("classes")
+
+        with open(classes_file, "r") as f:
+            classes = json.load(f)
+
+        self.class_key_mapping.clear()
+        for class_doc in classes:
+            logical_key = class_doc.get("classKey", "")
+            actual_key = class_doc.get("_key", "")
+            if logical_key and actual_key:
+                self.class_key_mapping[logical_key] = actual_key
+
+        logger.info(f"[TAXONOMY] Loaded shared taxonomy mapping: {len(self.class_key_mapping)} classes from {taxonomy_dir}")
     
     def _generate_device_classes(self, tenant_id: str) -> List[Dict[str, Any]]:
         """Generate device taxonomy classes."""
@@ -431,33 +471,26 @@ class TaxonomyGenerator:
         }
 
 
-# Example usage and testing
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     print("=== TAXONOMY GENERATOR TEST ===")
-    
+
     generator = TaxonomyGenerator()
-    
-    # Test taxonomy statistics
+
     stats = generator.get_taxonomy_statistics()
-    print(f"Taxonomy Statistics:")
+    print("Taxonomy Statistics:")
     for key, value in stats.items():
         print(f"  {key}: {value}")
-    
-    # Test class generation for a sample tenant
-    from src.config.tenant_config import create_tenant_config
-    
-    tenant_config = create_tenant_config("Test Taxonomy Corp")
-    taxonomy_data = generator.generate_taxonomy_for_tenant(tenant_config)
-    
-    print(f"\nGenerated taxonomy for tenant {tenant_config.tenant_id}:")
+
+    taxonomy_data = generator.generate_shared_taxonomy()
+    generator.save_shared_taxonomy(taxonomy_data)
+
+    print(f"\nShared taxonomy:")
     print(f"  Classes: {len(taxonomy_data['classes'])}")
     print(f"  SubClass relationships: {len(taxonomy_data['subclass_edges'])}")
-    
-    # Show sample class
-    if taxonomy_data['classes']:
-        sample_class = taxonomy_data['classes'][0]
-        print(f"\nSample class: {sample_class['name']}")
-        print(f"  Description: {sample_class['description']}")
-        print(f"  Category: {sample_class['category']}")
-        print(f"  Properties: {len(sample_class.get('properties', {}))}")
+
+    if taxonomy_data["classes"]:
+        sample = taxonomy_data["classes"][0]
+        print(f"\nSample class: {sample['name']}")
+        print(f"  Category: {sample['category']}")
+        print(f"  classKey: {sample['classKey']}")

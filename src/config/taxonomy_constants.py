@@ -39,6 +39,33 @@ class ClassDefinition:
 class DeviceTaxonomy:
     """Device classification hierarchy."""
     
+    # Universal root (shared across device and software trees)
+    UNIVERSAL_ROOT = {
+        "asset": ClassDefinition(
+            key="asset",
+            name="Asset",
+            description="Universal root class for all managed assets",
+            category="Root",
+            properties={
+                "isManaged": True,
+                "hasLifecycle": True,
+                "isAuditable": True
+            }
+        ),
+        "device": ClassDefinition(
+            key="device",
+            name="Device",
+            description="Base class for all physical and virtual devices",
+            category="Device",
+            parent_class="asset",
+            properties={
+                "hasHardware": True,
+                "requiresPower": True,
+                "hasNetworkPresence": True
+            }
+        ),
+    }
+
     # Root categories
     ROOT_CLASSES = {
         "network_device": ClassDefinition(
@@ -46,6 +73,7 @@ class DeviceTaxonomy:
             name="NetworkDevice", 
             description="Base class for all network devices",
             category="Infrastructure",
+            parent_class="device",
             properties={
                 "hasNetworkInterface": True,
                 "supportsRemoteManagement": True,
@@ -57,6 +85,7 @@ class DeviceTaxonomy:
             name="ComputeDevice",
             description="Base class for computing devices", 
             category="Infrastructure",
+            parent_class="device",
             properties={
                 "hasCPU": True,
                 "hasMemory": True,
@@ -68,6 +97,7 @@ class DeviceTaxonomy:
             name="SecurityDevice",
             description="Base class for security devices",
             category="Security",
+            parent_class="device",
             properties={
                 "providesSecurityFunction": True,
                 "supportsLogging": True,
@@ -242,8 +272,9 @@ class DeviceTaxonomy:
     
     @classmethod
     def get_all_classes(cls) -> Dict[str, ClassDefinition]:
-        """Get all device taxonomy classes."""
+        """Get all device taxonomy classes (including universal root)."""
         all_classes = {}
+        all_classes.update(cls.UNIVERSAL_ROOT)
         all_classes.update(cls.ROOT_CLASSES)
         all_classes.update(cls.NETWORK_CLASSES) 
         all_classes.update(cls.SECURITY_CLASSES)
@@ -260,6 +291,7 @@ class SoftwareTaxonomy:
             name="Software",
             description="Base class for all software",
             category="Software",
+            parent_class="asset",
             properties={
                 "hasVersion": True,
                 "requiresInstallation": True,

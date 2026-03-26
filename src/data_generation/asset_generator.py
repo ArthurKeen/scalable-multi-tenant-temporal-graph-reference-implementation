@@ -36,13 +36,14 @@ logger = logging.getLogger(__name__)
 class AssetGenerator:
     """Multi-tenant generator with consistent time travel patterns."""
     
-    def __init__(self, tenant_config: TenantConfig, environment: str = "production", naming_convention: NamingConvention = NamingConvention.CAMEL_CASE):
+    def __init__(self, tenant_config: TenantConfig, environment: str = "production",
+                 naming_convention: NamingConvention = NamingConvention.CAMEL_CASE,
+                 taxonomy_generator: TaxonomyGenerator = None):
         self.tenant_config = tenant_config
         self.naming_convention = naming_convention
         self.app_config = get_config(environment, naming_convention)
         self.naming = TenantNamingConvention(tenant_config.tenant_id)
         
-        # Initialize data generation components
         from src.data_generation.data_generation_config import NetworkConfig, DataGenerationLimits
         self.network_config = NetworkConfig()
         self.limits = DataGenerationLimits()
@@ -50,11 +51,9 @@ class AssetGenerator:
         self.config_manager = DeviceConfigurationManager(self.random_gen)
         self.location_provider = LocationDataProvider()
         
-        # Setup logging
         initialize_logging()
         
-        # Initialize taxonomy generator
-        self.taxonomy_generator = TaxonomyGenerator(naming_convention)
+        self.taxonomy_generator = taxonomy_generator or TaxonomyGenerator(naming_convention)
         self.logger = logging.getLogger(__name__)
     
     # === LOCATION COLLECTION (unchanged) ===
@@ -572,31 +571,25 @@ class AssetGenerator:
         # Combine all version edges (unified collection)
         all_versions = device_versions + software_versions
         
-        # Generate taxonomy system
-        self.logger.info("Generating taxonomy classes and classifications")
-        taxonomy_data = self.taxonomy_generator.generate_taxonomy_for_tenant(self.tenant_config)
-        
-        # Generate type classifications for devices and software
+        # Generate per-tenant type classifications (referencing the shared taxonomy)
+        self.logger.info("Generating device/software classifications against shared taxonomy")
         device_type_edges = self.taxonomy_generator.generate_device_classifications(devices, self.tenant_config.tenant_id)
         software_type_edges = self.taxonomy_generator.generate_software_classifications(software, self.tenant_config.tenant_id)
         all_type_edges = device_type_edges + software_type_edges
         
-        # Organize data collections using centralized configuration
         data_collections = {
             "devices": devices,
             "device_ins": device_proxy_ins,
             "device_outs": device_proxy_outs,
             "locations": locations,
             "software": software,
-            "software_ins": software_proxy_ins,  # NEW
-            "software_outs": software_proxy_outs,  # NEW
-            "classes": taxonomy_data["classes"],  # TAXONOMY - class hierarchy
+            "software_ins": software_proxy_ins,
+            "software_outs": software_proxy_outs,
             "connections": connections,
             "has_locations": has_locations,
-            "has_device_software": has_device_software,  # NEW (replaces has_software)
-            "versions": all_versions,  # UNIFIED - contains both device and software versions
-            "types": all_type_edges,  # TAXONOMY - device/software classifications
-            "subclass_of": taxonomy_data["subclass_edges"]  # TAXONOMY - class inheritance
+            "has_device_software": has_device_software,
+            "versions": all_versions,
+            "types": all_type_edges,
         }
         
         # Write data files using centralized file management
@@ -615,11 +608,9 @@ class AssetGenerator:
         self.logger.info(f"   Device entities: {len(devices)} devices, {len(device_proxy_ins)} DeviceProxyIn, {len(device_proxy_outs)} DeviceProxyOut")
         self.logger.info(f"   Software entities: {len(software)} software, {len(software_proxy_ins)} SoftwareProxyIn, {len(software_proxy_outs)} SoftwareProxyOut")
         self.logger.info(f"   Location entities: {len(locations)} locations")
-        self.logger.info(f"   Taxonomy entities: {len(taxonomy_data['classes'])} classes, {len(all_type_edges)} type classifications, {len(taxonomy_data['subclass_edges'])} inheritance relationships")
+        self.logger.info(f"   Type classifications: {len(all_type_edges)} (referencing shared taxonomy)")
         self.logger.info(f"   Relationship edges: {len(connections)} hasConnection, {len(has_locations)} hasLocation, {len(has_device_software)} hasDeviceSoftware")
         self.logger.info(f"   Version edges: {len(all_versions)} version (unified - {len(device_versions)} device + {len(software_versions)} software)")
-        self.logger.info(f"   -> Consistent time travel pattern: Generic 'version' collection for all entities")
-        self.logger.info(f"   -> Semantic taxonomy: Device/Software classification with inheritance hierarchies")
         
         return {
             "tenant_config": self.tenant_config,
@@ -675,11 +666,18 @@ def generate_demo(tenant_count: int = 8, environment: str = "production", naming
     results = {}
     total_documents = 0
     
-    # Generate data for each tenant
+    # Generate shared taxonomy ONCE (satellite collections, shared across tenants)
+    taxonomy_gen = TaxonomyGenerator(naming_convention)
+    taxonomy_data = taxonomy_gen.generate_shared_taxonomy()
+    taxonomy_gen.save_shared_taxonomy(taxonomy_data)
+    total_documents += len(taxonomy_data["classes"]) + len(taxonomy_data["subclass_edges"])
+    
+    # Generate per-tenant data (type edges reference the shared taxonomy keys)
     alert_generator = AlertGenerator(naming_convention)
     
     for tenant_config in tenant_configs:
-        generator = AssetGenerator(tenant_config, environment, naming_convention)
+        generator = AssetGenerator(tenant_config, environment, naming_convention,
+                                   taxonomy_generator=taxonomy_gen)
         tenant_result = generator.generate_all_data()
         results[tenant_config.tenant_id] = tenant_result
         total_documents += sum(tenant_result["data_counts"].values())
