@@ -153,129 +153,62 @@ class DatabaseDeployment:
         """Create indexes optimized for temporal queries and graph traversal."""
         try:
             logger.info(f"\n[ANALYSIS] Creating indexes...")
-            
+
+            # All collections that carry temporal created/expired fields
+            TEMPORAL_COLLECTIONS = [
+                "Device", "Software", "Alert",
+                "hasVersion", "hasConnection", "hasLocation",
+                "hasDeviceSoftware", "hasAlert",
+            ]
+
             # Index configurations
             index_configs = [
-                # NOTE: _key fields already have automatic primary indexes, so no hash indexes needed
-                
-                # Vertex-centric indexes for graph performance (EXPANDED for Software)
-                {
-                    "collection": "hasConnection",
-                    "type": "persistent",
-                    "fields": ["_from", "_toType"],
-                    "name": "idx_connections_from_totype"
-                },
-                {
-                    "collection": "hasConnection", 
-                    "type": "persistent",
-                    "fields": ["_to", "_fromType"],
-                    "name": "idx_connections_to_fromtype"
-                },
-                {
-                    "collection": "hasLocation",
-                    "type": "persistent", 
-                    "fields": ["_from", "_toType"],
-                    "name": "idx_locations_from_totype"
-                },
-                {
-                    "collection": "hasDeviceSoftware",  # NEW
-                    "type": "persistent",
-                    "fields": ["_from", "_toType"], 
-                    "name": "idx_device_software_from_totype"
-                },
-                {
-                    "collection": "hasDeviceSoftware",  # NEW
-                    "type": "persistent",
-                    "fields": ["_to", "_fromType"], 
-                    "name": "idx_device_software_to_fromtype"
-                },
-                
-                # UNIFIED version collection indexes (handles Device + Software)
-                {
-                    "collection": "hasVersion",
-                    "type": "persistent",
-                    "fields": ["_from", "_toType"],
-                    "name": "idx_version_from_totype"
-                },
-                {
-                    "collection": "hasVersion",
-                    "type": "persistent",
-                    "fields": ["_to", "_fromType"],
-                    "name": "idx_version_to_fromtype"
-                },
-                
-                # NOTE: Redundant persistent temporal indexes removed - MDI-prefixed indexes below provide superior performance
-                
-                # Multi-dimensional indexes (MDI-prefixed) for optimal temporal range queries
-                {
-                    "collection": "Device",
-                    "type": "mdi",
-                    "fields": ["created", "expired"],
-                    "fieldValueTypes": "double",
-                    "prefixFields": ["created"],
-                    "unique": False,
-                    "sparse": False,
-                    "name": "idx_device_mdi_temporal"
-                },
-                {
-                    "collection": "Software",
-                    "type": "mdi",
-                    "fields": ["created", "expired"],
-                    "fieldValueTypes": "double",
-                    "prefixFields": ["created"],
-                    "unique": False,
-                    "sparse": False,
-                    "name": "idx_software_mdi_temporal"
-                },
-                {
-                    "collection": "hasVersion",
-                    "type": "mdi",
-                    "fields": ["created", "expired"],
-                    "fieldValueTypes": "double",
-                    "prefixFields": ["created"],
-                    "unique": False,
-                    "sparse": False,
-                    "name": "idx_version_mdi_temporal"
-                }
-                # NOTE: Redundant idx_version_temporal removed - idx_version_mdi_temporal provides superior performance
+                # Vertex-centric indexes for graph performance
+                {"collection": "hasConnection", "type": "persistent",
+                 "fields": ["_from", "_toType"], "name": "idx_connections_from_totype"},
+                {"collection": "hasConnection", "type": "persistent",
+                 "fields": ["_to", "_fromType"], "name": "idx_connections_to_fromtype"},
+                {"collection": "hasLocation", "type": "persistent",
+                 "fields": ["_from", "_toType"], "name": "idx_locations_from_totype"},
+                {"collection": "hasDeviceSoftware", "type": "persistent",
+                 "fields": ["_from", "_toType"], "name": "idx_device_software_from_totype"},
+                {"collection": "hasDeviceSoftware", "type": "persistent",
+                 "fields": ["_to", "_fromType"], "name": "idx_device_software_to_fromtype"},
+                {"collection": "hasVersion", "type": "persistent",
+                 "fields": ["_from", "_toType"], "name": "idx_version_from_totype"},
+                {"collection": "hasVersion", "type": "persistent",
+                 "fields": ["_to", "_fromType"], "name": "idx_version_to_fromtype"},
             ]
-            
-            # Add TTL indexes for historical document aging
+
+            # MDI-prefixed indexes on [created, expired] for every temporal collection
+            for coll_name in TEMPORAL_COLLECTIONS:
+                safe = coll_name[0].lower() + coll_name[1:]
+                index_configs.append({
+                    "collection": coll_name,
+                    "type": "mdi",
+                    "fields": ["created", "expired"],
+                    "fieldValueTypes": "double",
+                    "prefixFields": ["created"],
+                    "unique": False,
+                    "sparse": False,
+                    "name": f"idx_{safe}_mdi_temporal",
+                })
+
+            # TTL indexes -- use collection names directly from TTL specs
             ttl_specs = self.ttl_manager.get_arango_index_specs()
             for ttl_spec in ttl_specs:
-                # Extract collection name from TTL spec name (format: ttl_CollectionName_ttlExpireAt)
-                spec_parts = ttl_spec["name"].split("_")
-                if len(spec_parts) >= 3:
-                    base_collection_name = spec_parts[1]  # Get the collection name part (e.g., "Device")
-                    
-                    # Map PascalCase collection names to logical names for config lookup
-                    logical_name_mapping = {
-                        "Device": "devices",
-                        "Software": "software", 
-                        "Location": "locations",
-                        "DeviceProxyIn": "device_ins",
-                        "DeviceProxyOut": "device_outs",
-                        "SoftwareProxyIn": "software_ins",
-                        "SoftwareProxyOut": "software_outs",
-                        "hasConnection": "connections",
-                        "hasLocation": "has_locations",
-                        "hasDeviceSoftware": "has_device_software",
-                        "hasVersion": "versions"
-                    }
-                    
-                    logical_name = logical_name_mapping.get(base_collection_name)
-                    if logical_name:
-                        collection_name = self.app_config.get_collection_name(logical_name)
-                        if collection_name:
-                            index_configs.append({
-                                "collection": collection_name,
-                                "type": "ttl",
-                                "fields": ttl_spec["fields"],
-                                "name": ttl_spec["name"],
-                                "expireAfter": ttl_spec["expireAfter"],
-                                "sparse": ttl_spec["sparse"],
-                                "selectivityEstimate": ttl_spec["selectivityEstimate"]
-                            })
+                parts = ttl_spec["name"].split("_", 2)
+                if len(parts) >= 2:
+                    collection_name = parts[1]
+                    index_configs.append({
+                        "collection": collection_name,
+                        "type": "ttl",
+                        "fields": ttl_spec["fields"],
+                        "name": ttl_spec["name"],
+                        "expireAfter": ttl_spec["expireAfter"],
+                        "sparse": ttl_spec["sparse"],
+                        "selectivityEstimate": ttl_spec["selectivityEstimate"],
+                    })
             
             for index_config in index_configs:
                 collection_name = index_config["collection"]

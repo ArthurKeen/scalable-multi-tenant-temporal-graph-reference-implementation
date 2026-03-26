@@ -184,7 +184,10 @@ FOR node IN @nodes
     return count
 
 
-def install_saved_queries(db, *, queries: List[Dict[str, Any]], database_name: str) -> int:
+def install_saved_queries(
+    db, *, queries: List[Dict[str, Any]], database_name: str,
+) -> int:
+    """Install queries into _editor_saved_queries for the global query editor."""
     ensure_collection(db, "_editor_saved_queries")
     col = db.collection("_editor_saved_queries")
     ts = now_iso()
@@ -194,10 +197,11 @@ def install_saved_queries(db, *, queries: List[Dict[str, Any]], database_name: s
         if "title" not in q and "name" in q:
             q["title"] = q["name"]
         q.setdefault("name", q.get("title") or "Untitled query")
-        # The ArangoDB query editor reads `content`, not `queryText`
-        if "queryText" in q and "content" not in q:
-            q["content"] = q.pop("queryText")
-        q.setdefault("content", "")
+
+        aql_text = q.pop("queryText", None) or q.get("content", "")
+        q["content"] = aql_text
+        q["value"] = aql_text
+
         q.setdefault("bindVariables", {})
         q["updatedAt"] = ts
         q.setdefault("createdAt", ts)
@@ -207,18 +211,170 @@ def install_saved_queries(db, *, queries: List[Dict[str, Any]], database_name: s
         if key:
             q["_key"] = key
             if col.has(key):
-                col.update(q)
+                col.replace(q)
             else:
                 col.insert(q)
         else:
             existing = list(col.find({"title": q["title"]}))
             if existing:
                 q["_key"] = existing[0]["_key"]
-                col.update(q)
+                col.replace(q)
             else:
                 col.insert(q)
         processed += 1
     return processed
+
+
+def _upsert_graph_query(
+    queries_col, vp_q_col, vp_id: str,
+    graph_name: str, name: str, description: str,
+    query_text: str, bind_vars: Dict, ts: str,
+) -> str:
+    """Upsert a stored query into _queries and link to the viewpoint."""
+    existing = list(queries_col.find({"name": name, "graphId": graph_name}))
+    if existing:
+        existing = sorted(existing, key=lambda d: d.get("_key", ""))
+        for extra in existing[1:]:
+            try:
+                queries_col.delete(extra["_key"])
+            except Exception as e:
+                logger.warning(f"Failed to delete duplicate graph query {extra['_key']}: {e}")
+        doc = {
+            "graphId": graph_name,
+            "name": name,
+            "description": description,
+            "queryText": query_text,
+            "bindVariables": bind_vars,
+            "updatedAt": ts,
+            "_key": existing[0]["_key"],
+            "_id": existing[0]["_id"],
+            "createdAt": existing[0].get("createdAt", ts),
+        }
+        queries_col.replace(doc, check_rev=False)
+        query_id = existing[0]["_id"]
+    else:
+        doc = {
+            "graphId": graph_name,
+            "name": name,
+            "description": description,
+            "queryText": query_text,
+            "bindVariables": bind_vars,
+            "createdAt": ts,
+            "updatedAt": ts,
+        }
+        res = queries_col.insert(doc)
+        query_id = res["_id"]
+
+    if not list(vp_q_col.find({"_from": vp_id, "_to": query_id})):
+        vp_q_col.insert({"_from": vp_id, "_to": query_id, "createdAt": ts, "updatedAt": ts})
+    return query_id
+
+
+def install_graph_queries(
+    db, graph_name: str, vertex_colls: Set[str], edge_colls: Set[str],
+) -> int:
+    """Install starter queries into _queries for the Graph Visualizer Queries panel.
+
+    These queries load initial vertices/subgraphs for demo scenarios.
+    Linked to viewpoints via _viewpointQueries edges.
+    """
+    ensure_collection(db, "_queries")
+    ensure_collection(db, "_viewpointQueries", edge=True)
+    queries_col = db.collection("_queries")
+    vp_q_col = db.collection("_viewpointQueries")
+    vp_id = ensure_default_viewpoint(db, graph_name)
+
+    with_clause = "WITH " + ", ".join(sorted(vertex_colls | edge_colls))
+    ts = now_iso()
+    count = 0
+
+    if graph_name == "network_assets_smartgraph":
+        _upsert_graph_query(
+            queries_col, vp_q_col, vp_id, graph_name,
+            "Load Tenant Network",
+            "Load device network topology for a tenant (starting nodes for demo)",
+            f"""{with_clause}
+FOR proxy IN DeviceProxyIn
+  FILTER proxy.tenantId == @tenantId
+  LIMIT @limit
+  FOR v, e, p IN 1..2 OUTBOUND proxy GRAPH "{graph_name}"
+    OPTIONS {{order: "bfs", uniqueVertices: "global"}}
+    LIMIT 200
+    RETURN p""",
+            {"tenantId": "1b45406a99d9", "limit": 5}, ts,
+        )
+        count += 1
+
+        _upsert_graph_query(
+            queries_col, vp_q_col, vp_id, graph_name,
+            "Device with Full Context",
+            "Load a device with its software, location, connections, and classification",
+            f"""{with_clause}
+FOR proxy IN DeviceProxyIn
+  FILTER proxy._key == @deviceProxy
+  FOR v, e, p IN 1..3 OUTBOUND proxy GRAPH "{graph_name}"
+    OPTIONS {{order: "bfs", uniqueVertices: "global"}}
+    LIMIT 100
+    RETURN p""",
+            {"deviceProxy": "1b45406a99d9:device1"}, ts,
+        )
+        count += 1
+
+        _upsert_graph_query(
+            queries_col, vp_q_col, vp_id, graph_name,
+            "Time Travel: Current Device Versions",
+            "Show only current (non-expired) device versions for a tenant",
+            f"""{with_clause}
+FOR proxy IN DeviceProxyIn
+  FILTER proxy.tenantId == @tenantId
+  FOR device, edge IN 1..1 OUTBOUND proxy hasVersion
+    FILTER edge.expired == 9223372036854775807
+    RETURN {{proxy: proxy, device: device, edge: edge}}""",
+            {"tenantId": "1b45406a99d9"}, ts,
+        )
+        count += 1
+
+        _upsert_graph_query(
+            queries_col, vp_q_col, vp_id, graph_name,
+            "Network Connections",
+            "Show device-to-device connections for a tenant",
+            f"""{with_clause}
+FOR conn IN hasConnection
+  FILTER conn.tenantId == @tenantId
+  LET fromNode = DOCUMENT(conn._from)
+  LET toNode = DOCUMENT(conn._to)
+  RETURN {{from: fromNode, to: toNode, edge: conn}}""",
+            {"tenantId": "1b45406a99d9"}, ts,
+        )
+        count += 1
+
+    elif graph_name == "taxonomy_satellite_graph":
+        _upsert_graph_query(
+            queries_col, vp_q_col, vp_id, graph_name,
+            "Full Taxonomy Tree",
+            "Load the complete class hierarchy",
+            f"""{with_clause}
+FOR cls IN Class
+  FOR v, e, p IN 0..5 OUTBOUND cls subClassOf
+    RETURN p""",
+            {}, ts,
+        )
+        count += 1
+
+        _upsert_graph_query(
+            queries_col, vp_q_col, vp_id, graph_name,
+            "Device Taxonomy Branch",
+            "Show the device classification hierarchy",
+            f"""{with_clause}
+FOR cls IN Class
+  FILTER cls.category == "device"
+  FOR v, e, p IN 0..3 OUTBOUND cls subClassOf
+    RETURN p""",
+            {}, ts,
+        )
+        count += 1
+
+    return count
 
 
 def _ensure_default_theme(
@@ -292,15 +448,20 @@ def install_all(db, *, database_name: str) -> List[Dict[str, Any]]:
 
         _ensure_default_theme(theme_col, graph_name, vertex_colls, edge_colls)
 
-        # Install saved queries
+        # Install editor saved queries (global query editor)
         queries_path = SAVED_QUERY_FILES.get(graph_name)
         if queries_path and queries_path.exists():
             queries = json.loads(queries_path.read_text(encoding="utf-8"))
-            result["query_count"] = install_saved_queries(
-                db, queries=queries, database_name=database_name
+            result["editor_query_count"] = install_saved_queries(
+                db, queries=queries, database_name=database_name,
             )
         else:
-            result["query_count"] = 0
+            result["editor_query_count"] = 0
+
+        # Install graph visualizer stored queries (_queries collection)
+        result["graph_query_count"] = install_graph_queries(
+            db, graph_name, vertex_colls, edge_colls,
+        )
 
         # Install canvas actions
         result["action_count"] = install_canvas_actions(db, graph_name, vertex_colls, edge_colls)
@@ -330,9 +491,10 @@ def main() -> None:
             print(f"  [{graph_id}] SKIPPED (graph not found)")
             continue
         print(f"  [{graph_id}]")
-        print(f"    Theme:          {r['theme_name']} (isDefault=true)")
-        print(f"    Saved queries:  {r.get('query_count', 0)}")
-        print(f"    Canvas actions: {r['action_count']}")
+        print(f"    Theme:            {r['theme_name']} (isDefault=true)")
+        print(f"    Editor queries:   {r.get('editor_query_count', 0)}")
+        print(f"    Graph queries:    {r.get('graph_query_count', 0)}")
+        print(f"    Canvas actions:   {r['action_count']}")
         print()
 
     print("Done. Refresh the Visualizer UI:")
