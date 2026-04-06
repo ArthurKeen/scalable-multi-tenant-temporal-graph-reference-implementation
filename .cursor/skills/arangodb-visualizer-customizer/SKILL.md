@@ -49,15 +49,18 @@ Best practice:
 - Treat **saved queries** and **canvas actions** as **system-level** assets by default (install into `_system`) *but* fall back to target DB if `_system` is locked down or the environment clearly uses target DB for those collections.
 - When creating `_`-prefixed collections via `python-arango`, pass `system=True`: `db.create_collection(name, system=True)`.
 
-### Viewpoints and linking canvas actions
+### Viewpoints and linking canvas actions / queries
 
-Canvas actions do **not** show up in Graph Visualizer until they are linked to a graph "viewpoint".
+Canvas actions and graph-specific stored queries do **not** show up in the Graph Visualizer until they are linked to a graph "viewpoint".
 
 - Viewpoints live in: `_viewpoints` (target DB)
-- Links live in: `_viewpointActions` (edge collection, target DB)
-- Edge shape:
+- Canvas action links: `_viewpointActions` (edge collection, target DB)
+- **Stored query links**: `_viewpointQueries` (edge collection, target DB)
+- Edge shape (same for both):
   - `_from`: the viewpoint `_id` (e.g. `_viewpoints/12345`)
-  - `_to`: the action `_id` (commonly `_canvasActions/<action_key>`)
+  - `_to`: the target `_id` (e.g. `_canvasActions/<key>` or `_editor_saved_queries/<key>`)
+
+Without `_viewpointQueries` edges, the Graph Visualizer's "Queries" panel shows "No saved queries found" even if documents exist in `_editor_saved_queries`.
 
 #### Programmatic viewpoint creation
 
@@ -164,11 +167,12 @@ def prune_theme(theme_raw: dict, vertex_colls: set, edge_colls: set) -> dict:
 ```
 
 **Saved query** (`_editor_saved_queries`):
-- **CRITICAL**: Use **`content`** for the AQL query text. The ArangoDB query editor reads this field. Do NOT use `queryText` — that field is only for canvas actions.
+- **CRITICAL**: Set **both `content` and `value`** to the AQL query text. Different ArangoDB UI versions read different fields. Setting both ensures compatibility. Do NOT use `queryText` — that field is only for canvas actions.
 - Use `title` and `name` for display
 - Optionally include: `description`, `bindVariables`
 - If the UI expects database scoping, add a `databaseName` field set to the target DB
 - Upsert key: stable `_key` when possible; otherwise match on `title`/`name`
+- **Link to viewpoint**: create edges in `_viewpointQueries` from the viewpoint to each saved query so they appear in the Graph Visualizer's "Queries" panel
 
 Example saved query document:
 
@@ -179,6 +183,7 @@ Example saved query document:
   "name": "Tenant Overview",
   "description": "Summary of all tenants with device counts",
   "content": "FOR d IN Device\n  COLLECT tenant = d.tenantId WITH COUNT INTO c\n  RETURN {tenant, count: c}",
+  "value": "FOR d IN Device\n  COLLECT tenant = d.tenantId WITH COUNT INTO c\n  RETURN {tenant, count: c}",
   "bindVariables": {},
   "databaseName": "my-database"
 }
@@ -214,10 +219,28 @@ FOR node IN @nodes
 
 ### Field name summary (critical — do not confuse)
 
-| Collection | Field for AQL | Notes |
+| Collection | Field(s) for AQL | Notes |
 |---|---|---|
-| `_editor_saved_queries` | **`content`** | `queryText` is IGNORED by the query editor UI |
-| `_canvasActions` | **`queryText`** | `content` is NOT used for canvas actions |
+| `_editor_saved_queries` | **`content`** + **`value`** | Set both for cross-version compatibility. `queryText` is IGNORED by the query editor UI |
+| `_canvasActions` | **`queryText`** | `content` / `value` are NOT used for canvas actions |
+
+### Graph Visualizer Queries panel vs Global Query Editor
+
+These are **two separate systems** with different storage:
+
+| Feature | Collection | AQL field | Linked via | Purpose |
+|---|---|---|---|---|
+| **Global query editor** (sidebar) | `_editor_saved_queries` | `content` + `value` | none needed | AQL queries accessible from the editor UI |
+| **Graph Visualizer "Queries" panel** | `_queries` | `queryText` | `_viewpointQueries` edges | Starter queries for loading graph data in the visualizer |
+
+The `_viewpointGraph` (auto-created by ArangoDB) defines the relationships:
+
+| Edge collection | `_from` | `_to` | Purpose |
+|---|---|---|---|
+| `_viewpointActions` | `_viewpoints/{id}` | `_canvasActions/{key}` | Canvas actions in right-click menu |
+| `_viewpointQueries` | `_viewpoints/{id}` | `_queries/{key}` | Queries in Graph Visualizer "Queries" panel |
+
+**CRITICAL**: `_viewpointQueries` must point to `_queries`, NOT `_editor_saved_queries`. These are different collections used by different UIs.
 
 ### Idempotency rules (must follow)
 
@@ -279,7 +302,13 @@ For **ontology graphs** (metadata only: classes, properties, domain/range):
 - Missing `_viewpointActions` edge collection or edges not created.
 
 ### Queries appear but are empty in the editor
-- **Wrong field name**: the query editor reads **`content`**, not `queryText`. Check the documents in `_editor_saved_queries` and ensure AQL is in the `content` field.
+- **Wrong field name**: the query editor reads **`content`** and/or **`value`** depending on the ArangoDB version. Set both fields. Do NOT use `queryText` for saved queries.
+- If using `col.update()`, stale fields from previous installs may remain. Prefer `col.replace()` for a clean document.
+
+### Queries don't appear in Graph Visualizer "Queries" panel
+- **Wrong collection**: Graph Visualizer reads from `_queries`, NOT `_editor_saved_queries`. Documents need `queryText`, `name`, `description`, `graphId`, `bindVariables`.
+- **Missing `_viewpointQueries` edges**: create edges from the graph's viewpoint (`_viewpoints/{id}`) to each query (`_queries/{key}`). Without these edges, the panel shows "No saved queries found".
+- **`_viewpointGraph` required**: ArangoDB auto-creates this graph with edge definitions for `_viewpointActions` and `_viewpointQueries`. If missing, the UI cannot discover linked queries/actions.
 
 ### Queries appear but run against wrong DB
 - Ensure query doc includes `databaseName` (if used in your environment).
