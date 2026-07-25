@@ -282,11 +282,17 @@ class AlertGenerator:
                 # Production mode - 30 day TTL
                 alert_doc["ttlExpireAt"] = alert_doc["expired"] + (30 * 24 * 60 * 60)
         
-        # Create hasAlert edge (SmartGraph will auto-generate _key)
+        # Create hasAlert edge (SmartGraph will auto-generate _key).
+        # `_fromType` / `_toType` populate the vertex-centric persistent indexes
+        # so `OUTBOUND` from a proxy and `INBOUND` from an alert can use the
+        # `(_from, _toType)` / `(_to, _fromType)` indexes rather than scanning.
+        from_type = proxy["_id"].split("/", 1)[0]
         hasAlert_edge = {
             # "_key": edge_key,  # REMOVED: Let SmartGraph auto-generate proper edge keys
             "_from": proxy["_id"],
             "_to": alert_id,
+            "_fromType": from_type,
+            "_toType": "Alert",
             "tenantId": proxy["tenantId"],
             "relationshipType": "generated_by",
             "created": created_time,

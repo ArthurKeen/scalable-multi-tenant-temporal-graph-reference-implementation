@@ -52,9 +52,48 @@ Edge documents include:
 
 #### Index Strategy (As Implemented)
 ```
-Vertex-centric: (_from, _toType), (_to, _fromType)
+Vertex-centric (tenant-internal edges): (_from, _toType), (_to, _fromType)
+Vertex-centric (satellite -> SmartGraph): (_to, tenantId), (_from, tenantId)
+   on `type` edges (DeviceProxyOut|SoftwareProxyOut -> Class) so traversals
+   starting at a satellite Class vertex can prune to a single tenant via
+   index seek instead of scanning every shard's edges.
 Temporal: MDI-prefixed indexes on [created, expired]
 TTL: automatic expiration on ttlExpireAt
+```
+
+NOTE: The vertex-centric `(_to, tenantId)` index is only used by a traversal
+when the tenant filter is expressed on the path, not on the edge variable:
+
+```
+// Picks idx_type_to_tenantid:
+FOR v, e, p IN 1..1 INBOUND c type
+  FILTER p.edges[*].tenantId ALL == @tenantId
+
+// Falls back to primary edge index:
+FOR v, e IN 1..1 INBOUND c type
+  FILTER e.tenantId == @tenantId
+```
+
+#### Classifications anchor at the proxy, not the versioned entity
+`type` edges go from `DeviceProxyOut`/`SoftwareProxyOut` -- the stable
+per-entity identity -- to a `Class` in the satellite taxonomy. This means
+a configuration change does not reclassify the device, and historical
+versions being TTL-aged does not orphan the type-edge.
+
+To drill from a `Class` down to the **current** versioned `Device` (or
+`Software`) in 3.12.x cluster mode, do NOT chain two nested traversals
+(`INBOUND ... type` then `INBOUND ... hasVersion`) -- that trips an
+internal `SingleServerEdgeCursor` optimizer bug. Use the single
+multi-edge form:
+
+```
+FOR cls IN Class FILTER cls.name == @name
+  FOR v, e, p IN 2..2 INBOUND cls type, hasVersion
+    FILTER LENGTH(p.edges) == 2
+    FILTER p.edges[0].tenantId == @tenantId      // engages the index
+    FILTER IS_SAME_COLLECTION('Device', v)
+    FILTER v.expired == 9223372036854775807       // current
+    RETURN v
 ```
 
 #### Configuration Strategy

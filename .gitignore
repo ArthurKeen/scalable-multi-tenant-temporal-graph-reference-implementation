@@ -92,4 +92,6 @@ time_travel_validation_results.json
 # Code quality and cleanup reports (historical)
 *QUALITY*REPORT*.md
 *CLEANUP*REPORT*.md
-*IMPLEMENTATION*COMPLETE*.md
+*IMPLEMENTATION*COMPLETE*.md.prd-drift-queue/
+.claude/
+CLAUDE.md

@@ -47,8 +47,8 @@
     "_key": "taxonomy_devices_by_class",
     "title": "Taxonomy: Devices Classified as Type",
     "name": "Taxonomy: Devices Classified as Type",
-    "description": "Find all devices that are classified as a specific taxonomy class",
-    "queryText": "FOR cls IN Class\n  FILTER cls.name == @className\n  FOR device, edge IN 1..1 INBOUND cls type\n    FILTER IS_SAME_COLLECTION('Device', device)\n    RETURN {\n      device: device.name,\n      type: device.type,\n      ip: device.ipAddress,\n      tenant: device.tenantId,\n      confidence: edge.confidence\n    }",
+    "description": "Find all devices classified under a taxonomy class. Type-edges anchor at DeviceProxyOut (stable identity); we walk INBOUND hasVersion to fetch the current Device configuration.",
+    "queryText": "FOR cls IN Class\n  FILTER cls.name == @className\n  // Single multi-edge traversal: hop 1 = type (cls -> DeviceProxyOut), hop 2 = hasVersion (proxy -> Device).\n  // We use this form rather than two nested FORs because chaining `INBOUND ... type` with a separate\n  // `INBOUND ... hasVersion` traversal trips an optimizer bug in 3.12.x cluster mode.\n  FOR v, e, p IN 2..2 INBOUND cls type, hasVersion\n    FILTER LENGTH(p.edges) == 2\n    FILTER IS_SAME_COLLECTION('Device', v)\n    FILTER v.expired == 9223372036854775807\n    RETURN {\n      device: v.name,\n      type: v.type,\n      ip: v.ipAddress,\n      tenant: v.tenantId,\n      confidence: p.edges[0].confidence\n    }",
     "bindVariables": {
       "className": "NetworkDevice"
     }

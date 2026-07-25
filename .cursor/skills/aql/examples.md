@@ -266,7 +266,7 @@ FOR d IN Device
       RETURN { name: loc.name, address: loc.streetAddress }
   )
   LET classes = (
-    FOR cls, e IN 1..1 OUTBOUND d type
+    FOR cls, e IN 1..1 OUTBOUND proxyOut type
       RETURN { className: cls.name, category: cls.category, confidence: e.confidence }
   )
   RETURN {

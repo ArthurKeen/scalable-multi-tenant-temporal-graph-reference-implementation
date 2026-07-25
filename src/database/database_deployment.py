@@ -154,8 +154,21 @@ class DatabaseDeployment:
             ]
 
             # Index configurations
+            #
+            # Vertex-centric indexes:
+            #   `(_from, _toType)` / `(_to, _fromType)` accelerate type-aware
+            #   traversals on tenant-internal edges.
+            #
+            #   On edges that bridge a satellite vertex (Class) to a SmartGraph
+            #   tenant vertex (Device, Software), traversals starting at the
+            #   satellite side cannot leverage tenant sharding -- the engine
+            #   must visit edges across every tenant shard and dereference
+            #   the target vertex to filter by tenant. To avoid that we
+            #   materialize `tenantId` on the edge (already done in ingest)
+            #   AND add `(_to, tenantId)` / `(_from, tenantId)` vertex-centric
+            #   indexes so the tenant filter is a pure index seek.
             index_configs = [
-                # Vertex-centric indexes for graph performance
+                # Tenant-internal edges: standard vertex-centric pair
                 {"collection": "hasConnection", "type": "persistent",
                  "fields": ["_from", "_toType"], "name": "idx_connections_from_totype"},
                 {"collection": "hasConnection", "type": "persistent",
@@ -170,6 +183,35 @@ class DatabaseDeployment:
                  "fields": ["_from", "_toType"], "name": "idx_version_from_totype"},
                 {"collection": "hasVersion", "type": "persistent",
                  "fields": ["_to", "_fromType"], "name": "idx_version_to_fromtype"},
+
+                # `hasAlert` (DeviceProxyOut|SoftwareProxyOut -> Alert) -- both
+                # ends are smart, but type-aware indexes still help the planner.
+                {"collection": "hasAlert", "type": "persistent",
+                 "fields": ["_from", "_toType"], "name": "idx_hasAlert_from_totype"},
+                {"collection": "hasAlert", "type": "persistent",
+                 "fields": ["_to", "_fromType"], "name": "idx_hasAlert_to_fromtype"},
+
+                # `type` (Device|Software -> Class satellite). PRIMARY win:
+                # the `(_to, tenantId)` index turns a multi-shard scan into a
+                # single index seek when traversing INBOUND from a Class
+                # vertex with `FILTER e.tenantId == @tenantId`.
+                {"collection": "type", "type": "persistent",
+                 "fields": ["_to", "tenantId"], "name": "idx_type_to_tenantid"},
+                {"collection": "type", "type": "persistent",
+                 "fields": ["_from", "tenantId"], "name": "idx_type_from_tenantid"},
+                {"collection": "type", "type": "persistent",
+                 "fields": ["_from", "_toType"], "name": "idx_type_from_totype"},
+                {"collection": "type", "type": "persistent",
+                 "fields": ["_to", "_fromType"], "name": "idx_type_to_fromtype"},
+
+                # `subClassOf` (Class -> Class satellite). No tenantId index
+                # needed -- everything carries `tenantId == "shared"` -- but
+                # the standard vertex-centric pair improves type-filtered
+                # taxonomy traversals.
+                {"collection": "subClassOf", "type": "persistent",
+                 "fields": ["_from", "_toType"], "name": "idx_subClassOf_from_totype"},
+                {"collection": "subClassOf", "type": "persistent",
+                 "fields": ["_to", "_fromType"], "name": "idx_subClassOf_to_fromtype"},
             ]
 
             # MDI-prefixed indexes on [created, expired] for every temporal collection
@@ -373,7 +415,7 @@ class DatabaseDeployment:
             #   hasLocation:       DeviceProxyOut → Location
             #   hasDeviceSoftware: DeviceProxyOut → SoftwareProxyIn
             #   hasVersion:        ProxyIn → Entity → ProxyOut (for both Device and Software)
-            #   type:              Device/Software → Class (satellite)
+            #   type:              DeviceProxyOut/SoftwareProxyOut → Class (satellite)
             #   hasAlert:          ProxyOut → Alert
             edge_definitions = [
                 {
@@ -408,9 +450,12 @@ class DatabaseDeployment:
                 },
                 {
                     "edge_collection": self.app_config.get_collection_name("types"),
+                    # Classifications anchor at the proxy (stable per-entity
+                    # identity), not at the versioned Device/Software, so they
+                    # survive version churn and historical-version TTL aging.
                     "from_vertex_collections": [
-                        self.app_config.get_collection_name("devices"),
-                        self.app_config.get_collection_name("software")
+                        self.app_config.get_collection_name("device_outs"),
+                        self.app_config.get_collection_name("software_outs")
                     ],
                     "to_vertex_collections": [
                         self.app_config.get_collection_name("classes")

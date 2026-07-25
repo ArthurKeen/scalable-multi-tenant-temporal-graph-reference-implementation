@@ -197,6 +197,87 @@ FOR d IN Device
   // ... rest of query
 ```
 
+### Satellite -> SmartGraph traversals (tenant-aware vertex-centric index)
+
+Traversals that **start at a satellite vertex** (e.g. a `Class`) and go INTO the
+SmartGraph (e.g. `INBOUND c type` to find tenant entities) **cannot** be pruned
+by SmartGraph sharding -- the start vertex has no `tenantId`. Without help,
+the engine reads every `type` edge that points at the satellite and
+dereferences each target to filter by tenant.
+
+`type` edges anchor at `DeviceProxyOut` / `SoftwareProxyOut` (the stable
+per-entity identities), not at versioned `Device` / `Software` documents.
+This survives version churn -- a configuration change does not reclassify
+the device, and historical-version TTL aging does not orphan the type-edge.
+
+The deployment creates a vertex-centric persistent index `idx_type_to_tenantid`
+on `(_to, tenantId)` for exactly this case. To get the planner to use it, the
+tenant filter must be expressed on the **path**, not on the edge variable:
+
+```aql
+// GOOD -- promotes to idx_type_to_tenantid (single index seek per tenant).
+// The traversal lands at DeviceProxyOut / SoftwareProxyOut.
+WITH Class, DeviceProxyOut, SoftwareProxyOut, type
+FOR c IN Class
+  FILTER c.classKey == @classKey
+  FOR v, e, p IN 1..1 INBOUND c type
+    FILTER p.edges[*].tenantId ALL == @tenantId
+    RETURN v   // proxy; INBOUND hasVersion to fetch the current Device/Software
+```
+
+```aql
+// SUBOPTIMAL -- falls back to the primary edge index, scans every tenant
+FOR v, e IN 1..1 INBOUND c type
+  FILTER e.tenantId == @tenantId
+  RETURN v
+```
+
+If the optimizer doesn't pick the index automatically (older builds, depth > 1),
+hint it explicitly:
+
+```aql
+FOR v, e, p IN 1..1 INBOUND c type
+  OPTIONS { indexHint: { type: { inbound: { base: 'idx_type_to_tenantid' } } } }
+  FILTER p.edges[*].tenantId ALL == @tenantId
+  RETURN v
+```
+
+The matching `(_from, tenantId)` index (`idx_type_from_tenantid`) accelerates
+`OUTBOUND` traversals from a `DeviceProxyOut` / `SoftwareProxyOut` to its
+`Class` (e.g. "what is this device classified as?").
+
+#### Going from `Class` to the live `Device` / `Software` in one step
+
+Because classifications anchor at the proxy, drilling from the satellite all
+the way down to the **current** versioned configuration takes two hops:
+`type` (satellite -> proxy) and then `hasVersion` (proxy -> versioned doc).
+
+In ArangoDB 3.12.x cluster mode, **do not** express this as two nested
+`FOR ... INBOUND` traversals -- the optimizer trips on
+`SingleServerEdgeCursor.cpp:227 index conditions ... should not be empty`.
+Use a single **multi-edge traversal** instead:
+
+```aql
+// GOOD -- one traversal, two edge collections, no chained-FOR bug.
+FOR cls IN Class
+  FILTER cls.name == @className
+  FOR v, e, p IN 2..2 INBOUND cls type, hasVersion
+    FILTER LENGTH(p.edges) == 2
+    FILTER p.edges[0].tenantId == @tenantId      // engages idx_type_to_tenantid
+    FILTER IS_SAME_COLLECTION('Device', v)
+    FILTER v.expired == 9223372036854775807       // current version only
+    RETURN v
+```
+
+```aql
+// BAD -- triggers ArangoDB 3.12.x optimizer bug
+FOR cls IN Class
+  FILTER cls.name == @className
+  FOR proxy IN 1..1 INBOUND cls type
+    FOR device IN 1..1 INBOUND proxy hasVersion   // <-- engine error here
+      RETURN device
+```
+
 ### IS_SAME_COLLECTION (filtering traversal results)
 
 When traversing a graph and you only want results from a specific collection:

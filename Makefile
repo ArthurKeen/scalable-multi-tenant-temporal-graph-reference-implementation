@@ -1,4 +1,4 @@
-.PHONY: help setup setup-dev test validate demo demo-auto deploy deploy-demo visualizer reset lint lint-fix clean aqlize
+.PHONY: help setup setup-dev test validate demo demo-auto deploy deploy-demo visualizer reset lint lint-fix clean aqlize api demo-scaling demo-scaling-clean
 
 help: ## Show this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -43,6 +43,15 @@ lint-fix: ## Run linter with auto-fix
 
 aqlize: ## Natural language → AQL via AQLizer (Q="your question")
 	PYTHONPATH=. python3 scripts/aqlizer_demo.py aqlize "$(Q)"
+
+api: ## Run temporal graph API
+	PYTHONPATH=. uvicorn api.app:app --reload --port 8000
+
+demo-scaling: ## Show per-tenant query stays flat as #tenants grows (multi-tenant blueprint)
+	PYTHONPATH=. python3 tools/benchmark_tenant_scaling.py --steps $${STEPS:-10,100,1000} --no-cleanup
+
+demo-scaling-clean: ## Drop the bench_* collections created by demo-scaling
+	PYTHONPATH=. python3 tools/benchmark_tenant_scaling.py --cleanup-only
 
 clean: ## Remove generated files and caches
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true

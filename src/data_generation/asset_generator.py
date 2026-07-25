@@ -571,10 +571,17 @@ class AssetGenerator:
         # Combine all version edges (unified collection)
         all_versions = device_versions + software_versions
         
-        # Generate per-tenant type classifications (referencing the shared taxonomy)
-        self.logger.info("Generating device/software classifications against shared taxonomy")
-        device_type_edges = self.taxonomy_generator.generate_device_classifications(devices, self.tenant_config.tenant_id)
-        software_type_edges = self.taxonomy_generator.generate_software_classifications(software, self.tenant_config.tenant_id)
+        # Generate per-tenant type classifications (referencing the shared taxonomy).
+        # Classifications anchor at *ProxyOut -- stable across version churn -- so
+        # a single classification survives historical-version TTL aging instead of
+        # producing one orphan type-edge per retired version.
+        self.logger.info("Generating device/software classifications against shared taxonomy (proxy-anchored)")
+        device_type_edges = self.taxonomy_generator.generate_device_classifications(
+            device_proxy_outs, self.tenant_config.tenant_id
+        )
+        software_type_edges = self.taxonomy_generator.generate_software_classifications(
+            software_proxy_outs, self.tenant_config.tenant_id
+        )
         all_type_edges = device_type_edges + software_type_edges
         
         data_collections = {
